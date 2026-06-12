@@ -2,28 +2,80 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Relatórios LS · Marketex</title>
+<title>Marketex · Hub Brito Mídias</title>
 <style>
-body{background:#0a0e17;color:#e2e8f0;font-family:-apple-system,sans-serif;padding:40px;max-width:900px;margin:0 auto}
-h1{background:linear-gradient(135deg,#7c5cff,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:34px}
-.card{background:#11172a;border-radius:12px;padding:18px;margin:12px 0;border-left:3px solid #7c5cff}
-a{color:#22d3ee;text-decoration:none;font-weight:600}
-a:hover{text-decoration:underline}
-.tag{background:rgba(124,92,255,.15);padding:3px 9px;border-radius:6px;font-size:12px;color:#cbd5e1;margin-left:8px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0e17;color:#e2e8f0;font-family:-apple-system,sans-serif;padding:40px 24px;max-width:1000px;margin:0 auto;line-height:1.5}
+h1{background:linear-gradient(135deg,#7c5cff,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:36px;margin-bottom:6px;font-weight:800}
+.sub{color:#94a3b8;font-size:14px;margin-bottom:32px}
+.tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:0}
+.tabs a{padding:10px 18px;color:#94a3b8;text-decoration:none;font-size:14px;font-weight:600;border-bottom:2px solid transparent;transition:all .15s}
+.tabs a:hover{color:#22d3ee}
+.tabs a.active{color:#22d3ee;border-bottom-color:#22d3ee}
+.section{display:none}
+.section.active{display:block}
+h2{font-size:20px;margin:20px 0 12px;color:#f1f5f9;display:flex;align-items:center;gap:10px}
+h2::before{content:"";width:4px;height:22px;background:linear-gradient(180deg,#7c5cff,#22d3ee);border-radius:2px}
+.card{background:#11172a;border-radius:12px;padding:18px 22px;margin:10px 0;border-left:3px solid #7c5cff;transition:all .15s}
+.card:hover{transform:translateX(4px);border-left-color:#22d3ee}
+.card a{color:#22d3ee;text-decoration:none;font-weight:700;font-size:15px;display:block}
+.card a:hover{text-decoration:underline}
+.card p{color:#64748b;font-size:13px;margin-top:6px}
+.tag{display:inline-block;background:rgba(124,92,255,.15);padding:3px 9px;border-radius:6px;font-size:11px;color:#cbd5e1;margin-left:8px;vertical-align:middle}
+.tag.new{background:rgba(34,197,94,.15);color:#4ade80}
+.empty{background:rgba(124,92,255,.03);border:1px dashed rgba(124,92,255,.25);border-radius:12px;padding:32px;text-align:center;color:#64748b;font-size:14px}
 </style>
 </head>
 <body>
-<h1>Relatórios LS · Workshop Especialista com IA</h1>
-<p style="color:#94a3b8">Marketex · Ana Tex · Brito Mídias</p>
 
-<h2 style="margin-top:30px">LS004 — 08–14/06/26</h2>
+<h1>Marketex</h1>
+<div class="sub">Workshop Especialista com IA · Ana Tex · Hub gerido pela Brito Mídias</div>
+
+<div class="tabs">
+<a href="#relatorios" class="tablink active" data-tab="relatorios">📊 Relatórios</a>
+<a href="#planilhas" class="tablink" data-tab="planilhas">📋 Planilhas</a>
+<a href="#criativos" class="tablink" data-tab="criativos">🎨 Criativos</a>
+<a href="#docs" class="tablink" data-tab="docs">📄 Docs</a>
+</div>
+
+<div class="section active" id="relatorios">
+<h2>LS004 · 08–14/06/26</h2>
 <div class="card">
-<a href="./ls004-d5-comp/">📊 Comparativo cross-LS D5 (12/06)</a> <span class="tag">mais recente</span>
-<p style="color:#64748b;font-size:13px;margin-top:6px">Dia-a-dia LS001 × LS002 × LS003 × LS004 com CPM, CTR, Hook, Conv. Pág, CPA, ROAS Tráf, ROAS Camp</p>
+<a href="./relatorios/ls004-d5-comp/">Comparativo cross-LS · D5 (12/06)</a> <span class="tag new">mais recente</span>
+<p>Dia-a-dia LS001 × LS002 × LS003 × LS004 — CPM, CTR, Hook, Conv. Pág, CPA, ROAS Tráfego, ROAS Campanha, Ticket Médio</p>
 </div>
 <div class="card">
-<a href="./ls004-d3/">📊 Relatório D3 (10/06)</a>
-<p style="color:#64748b;font-size:13px;margin-top:6px">Análise completa do D3 com top criativos, A/B páginas, alertas</p>
+<a href="./relatorios/ls004-d3/">Relatório D3 (10/06)</a>
+<p>Análise completa do D3 com top criativos, A/B páginas, alertas de criativos a pausar</p>
 </div>
+</div>
+
+<div class="section" id="planilhas">
+<div class="empty">📋 Em breve — ainda não há planilhas publicadas neste hub.</div>
+</div>
+
+<div class="section" id="criativos">
+<div class="empty">🎨 Em breve — espaço reservado pra dashboards de criativos.</div>
+</div>
+
+<div class="section" id="docs">
+<div class="empty">📄 Em breve — contratos, briefings, registros de decisão.</div>
+</div>
+
+<script>
+document.querySelectorAll('.tablink').forEach(t=>{
+  t.addEventListener('click',e=>{
+    e.preventDefault();
+    document.querySelectorAll('.tablink').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById(t.dataset.tab).classList.add('active');
+  });
+});
+// Open tab from hash
+const h=location.hash.replace('#','');
+if(h){const t=document.querySelector(`.tablink[data-tab="${h}"]`);if(t)t.click();}
+</script>
+
 </body>
 </html>

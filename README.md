@@ -1,5 +1,10 @@
-# planilhas-ls-marketex
+# Marketex — Hub Brito Mídias
 
-Relatórios HTML dos lançamentos LS — Workshop Especialista com IA (Marketex / Ana Tex).
+Repositório com todos os artefatos da Marketex (Workshop Especialista com IA · Ana Tex):
 
-Servidos via GitHub Pages em: https://britomidiascompany-stack.github.io/planilhas-ls-marketex/
+- `/relatorios/` — relatórios HTML dos lançamentos LS
+- `/planilhas/` — planilhas de controle (futuro)
+- `/criativos/` — dashboards de criativos (futuro)
+- `/docs/` — contratos, briefings, registros (futuro)
+
+Hub navegável: https://britomidiascompany-stack.github.io/marketex/
