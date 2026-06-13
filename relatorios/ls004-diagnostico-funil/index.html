@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LS004 · Diagnóstico do Funil + Páginas Teste</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0e17;color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.55;padding:20px;max-width:1400px;margin:0 auto}
+header{background:radial-gradient(circle at top right,rgba(124,92,255,.25),transparent 60%),radial-gradient(circle at bottom left,rgba(34,211,238,.18),transparent 55%),#11172a;border-radius:20px;padding:32px;margin-bottom:28px;border:1px solid rgba(124,92,255,.25)}
+header h1{font-size:32px;background:linear-gradient(135deg,#7c5cff,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;font-weight:800}
+header .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+header .meta span{background:rgba(124,92,255,.12);padding:6px 14px;border-radius:8px;font-size:13px;color:#cbd5e1;border:1px solid rgba(124,92,255,.2)}
+h2{font-size:20px;margin:32px 0 14px;color:#f1f5f9;display:flex;align-items:center;gap:10px}
+h2::before{content:"";width:4px;height:22px;background:linear-gradient(180deg,#7c5cff,#22d3ee);border-radius:2px}
+h3{font-size:15px;margin:16px 0 8px;color:#cbd5e1;font-weight:600}
+.card{background:#11172a;border-radius:14px;padding:18px 22px;border:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;margin-bottom:14px}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#7c5cff,#22d3ee)}
+.card.good::before{background:linear-gradient(90deg,#22c55e,#10b981)}
+.card.bad::before{background:linear-gradient(90deg,#ef4444,#f43f5e)}
+.card.warn::before{background:linear-gradient(90deg,#facc15,#f97316)}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+th,td{padding:8px 6px;text-align:left;border-bottom:1px solid rgba(255,255,255,.05);white-space:nowrap}
+th{color:#94a3b8;font-size:10px;text-transform:uppercase;letter-spacing:.3px;font-weight:600;background:rgba(124,92,255,.04)}
+tr:hover td{background:rgba(124,92,255,.04)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.win{color:#4ade80;font-weight:600}
+.lose{color:#f87171;font-weight:600}
+.warn-txt{color:#facc15;font-weight:600}
+.tot{background:rgba(124,92,255,.08);font-weight:600}
+.kpi{font-size:12px;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px}
+.val{font-size:24px;font-weight:700;color:#f1f5f9;margin:4px 0}
+.sub{font-size:12px;color:#64748b}
+.grid{display:grid;gap:14px}
+.grid-2{grid-template-columns:1fr 1fr}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+.tag{display:inline-block;padding:3px 9px;border-radius:6px;font-size:11px;font-weight:600;margin-left:6px}
+.tag.ok{background:rgba(34,197,94,.15);color:#4ade80}
+.tag.warn{background:rgba(250,204,21,.15);color:#facc15}
+.tag.bad{background:rgba(239,68,68,.15);color:#f87171}
+.alert{background:rgba(239,68,68,.08);border-left:3px solid #ef4444;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;line-height:1.6}
+.alert b{color:#fca5a5}
+.tip{background:rgba(34,211,238,.06);border-left:3px solid #22d3ee;padding:12px 14px;border-radius:8px;margin:10px 0;font-size:13px}
+.good-box{background:rgba(34,197,94,.08);border-left:3px solid #22c55e;padding:12px 14px;border-radius:8px;margin:10px 0;font-size:13px}
+.action-box{background:rgba(124,92,255,.08);border-left:3px solid #7c5cff;padding:14px 16px;border-radius:8px;margin:10px 0;font-size:14px;line-height:1.7}
+a{color:#22d3ee;text-decoration:none}
+a:hover{text-decoration:underline}
+ul{margin-left:18px;font-size:14px;color:#cbd5e1}
+ul li{margin:6px 0}
+.flow{display:grid;gap:8px;margin:14px 0}
+.flow-step{display:grid;grid-template-columns:1fr auto auto auto auto;gap:8px;align-items:center;padding:10px 14px;background:rgba(124,92,255,.04);border-radius:8px;border:1px solid rgba(124,92,255,.1)}
+.flow-step .label{font-size:13px;color:#cbd5e1;font-weight:500}
+.flow-step .num{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;text-align:right;min-width:80px}
+.flow-step.bad{background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.2)}
+.flow-step.good{background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.2)}
+.delta{font-size:12px;padding:2px 8px;border-radius:4px;font-weight:600;font-variant-numeric:tabular-nums}
+.delta.up{background:rgba(239,68,68,.15);color:#f87171}
+.delta.down{background:rgba(239,68,68,.15);color:#f87171}
+.delta.upgood{background:rgba(34,197,94,.15);color:#4ade80}
+.delta.downgood{background:rgba(34,197,94,.15);color:#4ade80}
+.delta.flat{background:rgba(148,163,184,.1);color:#94a3b8}
+footer{margin-top:40px;padding:20px;text-align:center;color:#64748b;font-size:12px;border-top:1px solid rgba(255,255,255,.05)}
+</style>
+</head>
+<body>
+
+<header>
+<h1>LS004 · Diagnóstico do Funil + Páginas Teste</h1>
+<div style="font-size:14px;color:#cbd5e1">Workshop Especialista com IA · Ana Tex / Marketex · Análise comparativa LS001 vs LS002 vs LS003 vs LS004</div>
+<div class="meta">
+<span>📅 Período: 18/05 → 11/06 (parcial LS004)</span>
+<span>📍 Gerado em 12/06/26</span>
+<span>💰 Spend Meta + imposto ×1,1383</span>
+<span>📊 ROAS Meta = vendas pixel × ticket / spend</span>
+<span>📊 ROAS VK = vendas Hotmart × ticket / spend</span>
+</div>
+</header>
+
+<h2>🚨 Conclusão executiva</h2>
+<div class="card bad">
+<div class="alert">
+<b>O LS004 não tem problema de TRÁFEGO — tem problema de CHECKOUT.</b><br><br>
+O <b>LPV → Checkout MELHOROU</b> (14,2% → 16,6%), mas o <b>Checkout → Venda DESPENCOU</b> (30,7% → 22,7%, queda de 26%).<br><br>
+Mais gente está chegando ao checkout. <b>Muito menos está fechando a compra.</b> Isso é incompatível com cansaço de criativo ou público frio — esses problemas atacam o topo do funil, não a ponta.
+</div>
+</div>
+
+<h2>📊 Resultado geral por LS (VK Metrics + Hotmart real)</h2>
+<div class="card">
+<table>
+<thead><tr>
+<th>LS</th>
+<th class="num">Período</th>
+<th class="num">Spend Meta</th>
+<th class="num">Spend c/imp</th>
+<th class="num">Vendas Hotmart</th>
+<th class="num">Receita VK</th>
+<th class="num">Ticket médio</th>
+<th class="num">CPA real</th>
+<th class="num">ROAS VK</th>
+</tr></thead>
+<tbody>
+<tr><td><b>LS001</b></td><td class="num">18-24/mai</td><td class="num">R$ 38.610</td><td class="num">R$ 43.953</td><td class="num">513</td><td class="num">R$ 45.812</td><td class="num">R$ 89,30</td><td class="num">R$ 75</td><td class="num win">1,19</td></tr>
+<tr><td><b>LS002</b></td><td class="num">25-31/mai</td><td class="num">R$ 49.667</td><td class="num">R$ 56.539</td><td class="num">504</td><td class="num">R$ 43.924</td><td class="num">R$ 87,15</td><td class="num">R$ 99</td><td class="num warn-txt">0,88</td></tr>
+<tr><td><b>LS003</b></td><td class="num">1-7/jun</td><td class="num">R$ 43.703</td><td class="num">R$ 49.749</td><td class="num">396</td><td class="num">R$ 35.138</td><td class="num">R$ 88,73</td><td class="num">R$ 110</td><td class="num warn-txt">0,80</td></tr>
+<tr class="tot"><td><b>LS004</b> <span class="tag bad">parcial 4d</span></td><td class="num">8-11/jun</td><td class="num">R$ 10.271</td><td class="num">R$ 11.692</td><td class="num">73</td><td class="num">R$ 5.901</td><td class="num">R$ 80,83</td><td class="num lose">R$ 141</td><td class="num lose">0,57</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>🔍 Funil detalhado por LS — onde está o gargalo</h2>
+
+<h3>Métricas de TOPO (Meta Ads — impressão até página)</h3>
+<div class="card">
+<table>
+<thead><tr>
+<th>Métrica</th>
+<th class="num">LS001</th>
+<th class="num">LS002</th>
+<th class="num">LS003</th>
+<th class="num">LS004</th>
+<th class="num">LS004 vs LS003</th>
+</tr></thead>
+<tbody>
+<tr><td>Impressões</td><td class="num">386.399</td><td class="num">592.030</td><td class="num">486.631</td><td class="num">117.309</td><td class="num">—</td></tr>
+<tr><td>Link clicks</td><td class="num">10.194</td><td class="num">12.647</td><td class="num">9.855</td><td class="num">2.105</td><td class="num">—</td></tr>
+<tr><td><b>CTR</b></td><td class="num">2,64%</td><td class="num">2,14%</td><td class="num">2,03%</td><td class="num lose">1,79%</td><td class="num"><span class="delta down">-12%</span></td></tr>
+<tr><td><b>CPC</b></td><td class="num">R$ 3,79</td><td class="num">R$ 3,93</td><td class="num">R$ 4,43</td><td class="num lose">R$ 4,88</td><td class="num"><span class="delta up">+10%</span></td></tr>
+<tr><td>Click → LPV</td><td class="num">89,7%</td><td class="num">91,3%</td><td class="num">91,9%</td><td class="num">92,0%</td><td class="num"><span class="delta flat">flat</span></td></tr>
+<tr><td><b>Custo / LPV</b></td><td class="num">R$ 4,22</td><td class="num">R$ 4,30</td><td class="num">R$ 4,83</td><td class="num lose">R$ 5,30</td><td class="num"><span class="delta up">+10%</span></td></tr>
+</tbody>
+</table>
+<div class="tip" style="margin-top:14px"><b>Diagnóstico topo:</b> CTR caiu e CPC subiu = sinal CLÁSSICO de fadiga de criativo. Mas é o problema MENOR — mesmo com CTR de LS001, o funil afundaria do mesmo jeito por causa do que vem depois.</div>
+</div>
+
+<h3>Métricas de MEIO (página → checkout)</h3>
+<div class="card">
+<table>
+<thead><tr>
+<th>Métrica</th>
+<th class="num">LS001</th>
+<th class="num">LS002</th>
+<th class="num">LS003</th>
+<th class="num">LS004</th>
+<th class="num">LS004 vs LS003</th>
+</tr></thead>
+<tbody>
+<tr><td>Landing Page Views</td><td class="num">9.144</td><td class="num">11.551</td><td class="num">9.052</td><td class="num">1.936</td><td class="num">—</td></tr>
+<tr><td>Initiate Checkout</td><td class="num">1.366</td><td class="num">1.647</td><td class="num">1.290</td><td class="num">321</td><td class="num">—</td></tr>
+<tr><td><b>LPV → Checkout</b></td><td class="num">14,9%</td><td class="num">14,3%</td><td class="num">14,2%</td><td class="num win">16,6%</td><td class="num"><span class="delta upgood">+17%</span></td></tr>
+</tbody>
+</table>
+<div class="good-box" style="margin-top:14px"><b>👀 Atenção:</b> A conversão página → checkout MELHOROU no LS004. Isso prova que o problema NÃO é fadiga de público nem de criativo no topo. A galera está chegando ao checkout em proporção até maior que antes.</div>
+</div>
+
+<h3>Métricas de FUNDO (checkout → venda) — onde está o problema</h3>
+<div class="card bad">
+<table>
+<thead><tr>
+<th>Métrica</th>
+<th class="num">LS001</th>
+<th class="num">LS002</th>
+<th class="num">LS003</th>
+<th class="num">LS004</th>
+<th class="num">LS004 vs LS003</th>
+</tr></thead>
+<tbody>
+<tr><td>Vendas Meta (pixel)</td><td class="num">359</td><td class="num">410</td><td class="num">324</td><td class="num">60</td><td class="num">—</td></tr>
+<tr><td>Vendas reais (Hotmart/VK)</td><td class="num">513</td><td class="num">504</td><td class="num">396</td><td class="num">73</td><td class="num">—</td></tr>
+<tr><td><b>Checkout → Venda (real)</b></td><td class="num win">37,6%</td><td class="num">30,6%</td><td class="num">30,7%</td><td class="num lose">22,7%</td><td class="num"><span class="delta down">-26%</span></td></tr>
+<tr><td>Checkout → Venda (Meta)</td><td class="num">26,3%</td><td class="num">24,9%</td><td class="num">25,1%</td><td class="num lose">18,7%</td><td class="num"><span class="delta down">-25%</span></td></tr>
+<tr><td><b>Página → Venda (real)</b></td><td class="num">5,61%</td><td class="num">4,36%</td><td class="num">4,37%</td><td class="num lose">3,77%</td><td class="num"><span class="delta down">-14%</span></td></tr>
+<tr><td><b>Ticket médio</b></td><td class="num">R$ 89,30</td><td class="num">R$ 87,15</td><td class="num">R$ 88,73</td><td class="num lose">R$ 80,83</td><td class="num"><span class="delta down">-9%</span></td></tr>
+<tr><td>ROAS Meta (pixel × ticket)</td><td class="num">0,83</td><td class="num">0,72</td><td class="num">0,66</td><td class="num lose">0,47</td><td class="num"><span class="delta down">-29%</span></td></tr>
+<tr><td><b>ROAS VK (real × ticket)</b></td><td class="num win">1,19</td><td class="num warn-txt">0,88</td><td class="num warn-txt">0,80</td><td class="num lose">0,57</td><td class="num"><span class="delta down">-29%</span></td></tr>
+</tbody>
+</table>
+<div class="alert" style="margin-top:14px"><b>É AQUI que está o buraco do LS004.</b> A queda de 26% no Checkout → Venda + queda de 9% no ticket médio explica praticamente todo o gap de ROAS.</div>
+</div>
+
+<h2>🎯 Hipóteses de causa do checkout quebrado</h2>
+<div class="grid grid-2">
+<div class="card bad">
+<h3>🔥 #1 — Order bump da Palestra quebrado</h3>
+<p style="font-size:13px;color:#cbd5e1;margin-top:8px">Take rate Palestra Minutos caiu de <b>18% (LS003)</b> para <b>6,8% (LS004)</b>. Provável bug, alteração ou desativação no order bump da Palestra. Isso explica parte da queda de ticket médio (R$88 → R$80) e contribui pra travada no checkout.</p>
+</div>
+<div class="card bad">
+<h3>🔥 #2 — Mudança na página de checkout (Hotmart)</h3>
+<p style="font-size:13px;color:#cbd5e1;margin-top:8px">Algo mudou entre 7/jun (último dia do LS003) e 8/jun (início LS004): preço, ordem dos produtos, regras de afiliado, layout, bug técnico. Validar pela tela do Hotmart o histórico de versões.</p>
+</div>
+<div class="card warn">
+<h3>🟡 #3 — Pixel disparando incompleto</h3>
+<p style="font-size:13px;color:#cbd5e1;margin-top:8px">Gap Meta pixel (60) vs real (73) = 22%. Gap parecido em todos os LS, então não é a causa principal — mas pode estar mascarando otimização do algoritmo. Conferir Event Manager.</p>
+</div>
+<div class="card warn">
+<h3>🟡 #4 — Cansaço de criativo (real, mas secundário)</h3>
+<p style="font-size:13px;color:#cbd5e1;margin-top:8px">CTR caindo (-12%) e CPC subindo (+10%) confirmam fadiga. Já há criativos novos em produção — vamos precisar dos vídeos, imagens e carrosséis novos. Mesmo que CTR voltasse ao nível LS001, o fundo do funil continuaria afundando.</p>
+</div>
+</div>
+
+<h2>🆚 Teste A/B de páginas — qual converteu melhor (agregado LS001-LS004)</h2>
+<div class="card">
+<p style="font-size:13px;color:#94a3b8;margin-bottom:14px">Comparativo das 4 versões da landing page usadas em diferentes campanhas (V1-2 é a principal com volume gigante; V1-3/V1-4/V1-5 são testes menores).</p>
+<table>
+<thead><tr>
+<th>Página</th>
+<th class="num">Spend</th>
+<th class="num">LPV</th>
+<th class="num">Checkout</th>
+<th class="num">Vendas Meta</th>
+<th class="num">LPV → Checkout</th>
+<th class="num">Checkout → Venda</th>
+<th class="num">LPV → Venda</th>
+<th class="num">CPA Meta</th>
+</tr></thead>
+<tbody>
+<tr><td><b>V1-2</b> <span class="tag ok">principal</span></td><td class="num">R$ 134.128</td><td class="num">30.004</td><td class="num">4.365</td><td class="num">1.095</td><td class="num">14,55%</td><td class="num">25,1%</td><td class="num">3,65%</td><td class="num">R$ 122</td></tr>
+<tr><td><b>V1-3</b></td><td class="num">R$ 3.388</td><td class="num">694</td><td class="num">92</td><td class="num">26</td><td class="num">13,3%</td><td class="num win">28,3%</td><td class="num win">3,75%</td><td class="num">R$ 130</td></tr>
+<tr><td><b>V1-4</b></td><td class="num">R$ 4.162</td><td class="num">856</td><td class="num">154</td><td class="num">29</td><td class="num win">18,0%</td><td class="num lose">18,8%</td><td class="num">3,39%</td><td class="num">R$ 143</td></tr>
+<tr><td><b>V1-5</b></td><td class="num">R$ 573</td><td class="num">129</td><td class="num">13</td><td class="num">3</td><td class="num lose">10,1%</td><td class="num">23,1%</td><td class="num lose">2,33%</td><td class="num lose">R$ 191</td></tr>
+</tbody>
+</table>
+<div class="tip" style="margin-top:14px"><b>Leitura:</b> nenhuma página é dramaticamente melhor. <b>V1-3 ganhou marginalmente</b> em LPV → Venda (3,75% vs 3,65% da V1-2), mas com volume pequeno. <b>V1-4</b> teve a melhor conversão LPV → Checkout (18%), porém a pior conversão final. <b>V1-5</b> é a pior em quase todas as métricas. A diferença entre páginas é de até 10% — não é onde estamos perdendo dinheiro.</div>
+</div>
+
+<h2>🧪 Campanha [44] — split de páginas (já criada, pausada)</h2>
+<div class="card warn">
+<p style="font-size:14px;color:#cbd5e1">Criamos hoje a campanha <b>[44] CBO Advantage Puro SPLIT VK METRICS</b> (ID <code>120246685109240109</code>) com link de split <code>split.vkdigital.com.br/rules/86bbf04d-...</code> que distribui o tráfego entre V1-2, V1-3, V1-4 e V1-5 dinamicamente.</p>
+<ul style="margin-top:10px">
+<li><b>Status:</b> PAUSED · CBO R$500/dia</li>
+<li><b>Criativos:</b> 5 vídeos + 5 imagens + 5 carrosséis (mesmos vencedores em volume da [40])</li>
+<li><b>Público:</b> Advantage+ puro, sem lookalike, sem exclusões</li>
+<li><b>Sem dados ainda</b> — vai ativar com budget pequeno e crescer aos poucos</li>
+</ul>
+<div class="action-box" style="margin-top:12px"><b>📌 Plano de ativação:</b> ativar com R$200/dia primeiro (não R$500), validar 3 dias, se mostrar uma página com conversão claramente melhor que as outras, aí escala. Não jogar verba grossa em teste estatístico ruim.</div>
+</div>
+
+<h2>📌 Ações pra rodar AGORA (priorizado)</h2>
+<div class="grid grid-2">
+<div class="card bad">
+<h3>1️⃣ Teste manual do checkout (urgente)</h3>
+<p style="font-size:13px;color:#cbd5e1;margin-top:6px">Entrar como cliente, comprar 1 ingresso do Workshop, verificar:</p>
+<ul style="font-size:13px;margin-top:6px">
+<li>Order bumps aparecem? (Palestra Minutos, Fotos IA, Fotos IA Acesso)</li>
+<li>Take rate da Palestra está visível?</li>
+<li>Pagamento conclui sem erro?</li>
+<li>Pixel dispara evento Purchase?</li>
+</ul>
+</div>
+<div class="card bad">
+<h3>2️⃣ Conferir histórico do checkout no Hotmart</h3>
+<p style="font-size:13px;color:#cbd5e1;margin-top:6px">Olhar o que mudou entre 7/jun (LS003) e 8/jun (LS004): preço, ordem de produtos, regras de afiliado, bumps. <b>Algo mudou nessa virada.</b></p>
+</div>
+<div class="card warn">
+<h3>3️⃣ Conferir o Pixel Events Manager</h3>
+<p style="font-size:13px;color:#cbd5e1;margin-top:6px">Eventos Purchase / InitiateCheckout estão sendo recebidos? Tem alertas vermelhos? Há eventos "duplicates" ou "missing parameters" recentes?</p>
+</div>
+<div class="card warn">
+<h3>4️⃣ Subir criativos novos (em produção)</h3>
+<p style="font-size:13px;color:#cbd5e1;margin-top:6px"><b>Precisamos de criativos novos em todos os formatos:</b> vídeo, imagem e carrossel. O CTR caiu e CPC subiu — sinal claro de cansaço. Mesmo que o checkout volte, sem renovação o CPA continua subindo. Já sabemos que está em produção, mas reforçando: prioridade alta.</p>
+</div>
+</div>
+
+<h2>💡 Recomendações sobre verba</h2>
+<div class="card">
+<div class="action-box">
+<b>Verba LS005 (próxima semana) — abordagem em estágios:</b><br><br>
+1. <b>NÃO repetir o erro do LS002</b> de subir 28% o investimento. Antes de escalar, garantir que o checkout está OK.<br>
+2. <b>Campanha [44] com R$200/dia</b> (não R$500) pra validar split de páginas com risco baixo. Se a página vencedora se confirmar, aí escala pra R$500-1000/dia.<br>
+3. <b>Manter [40]/[42] (LK 1% Compradores) em volume modesto</b> (R$300-500/dia) enquanto valida.<br>
+4. <b>Aumentar verba só DEPOIS de ver o Checkout → Venda voltar pra 30%+.</b>
+</div>
+</div>
+
+<footer>
+LS004 · Diagnóstico do Funil + Páginas Teste · Gerado em 12/06/2026 · Workshop Especialista com IA · Marketex / Ana Tex
+</footer>
+
+</body>
+</html>
