@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LS004 D7 12h · Relatório Completo Final</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0e17;color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.55;padding:20px;max-width:1400px;margin:0 auto}
+header{background:radial-gradient(circle at top right,rgba(124,92,255,.25),transparent 60%),radial-gradient(circle at bottom left,rgba(34,211,238,.18),transparent 55%),#11172a;border-radius:20px;padding:32px;margin-bottom:28px;border:1px solid rgba(124,92,255,.25)}
+header h1{font-size:32px;background:linear-gradient(135deg,#7c5cff,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;font-weight:800}
+header .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+header .meta span{background:rgba(124,92,255,.12);padding:6px 14px;border-radius:8px;font-size:13px;color:#cbd5e1;border:1px solid rgba(124,92,255,.2)}
+h2{font-size:20px;margin:32px 0 14px;color:#f1f5f9;display:flex;align-items:center;gap:10px}
+h2::before{content:"";width:4px;height:22px;background:linear-gradient(180deg,#7c5cff,#22d3ee);border-radius:2px}
+h3{font-size:15px;margin:16px 0 8px;color:#cbd5e1;font-weight:600}
+.card{background:#11172a;border-radius:14px;padding:18px 22px;border:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;margin-bottom:14px}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#7c5cff,#22d3ee)}
+.card.good::before{background:linear-gradient(90deg,#22c55e,#10b981)}
+.card.bad::before{background:linear-gradient(90deg,#ef4444,#f43f5e)}
+.card.warn::before{background:linear-gradient(90deg,#facc15,#f97316)}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+th,td{padding:8px 6px;text-align:left;border-bottom:1px solid rgba(255,255,255,.05);white-space:nowrap}
+th{color:#94a3b8;font-size:10px;text-transform:uppercase;letter-spacing:.3px;font-weight:600;background:rgba(124,92,255,.04)}
+tr:hover td{background:rgba(124,92,255,.04)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.win{color:#4ade80;font-weight:600}
+.lose{color:#f87171;font-weight:600}
+.warn-txt{color:#facc15;font-weight:600}
+.tot{background:rgba(124,92,255,.08);font-weight:600}
+.kpi{font-size:12px;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px}
+.val{font-size:24px;font-weight:700;color:#f1f5f9;margin:4px 0}
+.sub{font-size:12px;color:#64748b}
+.grid{display:grid;gap:14px}
+.grid-2{grid-template-columns:1fr 1fr}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+.tag{display:inline-block;padding:3px 9px;border-radius:6px;font-size:11px;font-weight:600;margin-left:6px}
+.tag.ok{background:rgba(34,197,94,.15);color:#4ade80}
+.tag.warn{background:rgba(250,204,21,.15);color:#facc15}
+.tag.bad{background:rgba(239,68,68,.15);color:#f87171}
+.alert{background:rgba(239,68,68,.08);border-left:3px solid #ef4444;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;line-height:1.6}
+.alert b{color:#fca5a5}
+.tip{background:rgba(34,211,238,.06);border-left:3px solid #22d3ee;padding:12px 14px;border-radius:8px;margin:10px 0;font-size:13px}
+.good-box{background:rgba(34,197,94,.08);border-left:3px solid #22c55e;padding:12px 14px;border-radius:8px;margin:10px 0;font-size:13px}
+.action-box{background:rgba(124,92,255,.08);border-left:3px solid #7c5cff;padding:14px 16px;border-radius:8px;margin:10px 0;font-size:14px;line-height:1.7}
+a{color:#22d3ee;text-decoration:none}
+a:hover{text-decoration:underline}
+ul{margin-left:18px;font-size:14px;color:#cbd5e1}
+ul li{margin:6px 0}
+.delta{font-size:12px;padding:2px 8px;border-radius:4px;font-weight:600;font-variant-numeric:tabular-nums}
+.delta.up{background:rgba(239,68,68,.15);color:#f87171}
+.delta.down{background:rgba(239,68,68,.15);color:#f87171}
+.delta.upgood{background:rgba(34,197,94,.15);color:#4ade80}
+.delta.downgood{background:rgba(34,197,94,.15);color:#4ade80}
+.delta.flat{background:rgba(148,163,184,.1);color:#94a3b8}
+footer{margin-top:40px;padding:20px;text-align:center;color:#64748b;font-size:12px;border-top:1px solid rgba(255,255,255,.05)}
+</style>
+</head>
+<body>
+
+<header>
+<h1>LS004 · Relatório Completo D7 (14/06 · 12h)</h1>
+<div style="font-size:14px;color:#cbd5e1">Workshop Especialista com IA · Ana Tex / Marketex · Último dia LS004 (sales 15-16/jun)</div>
+<div class="meta">
+<span>📅 LS004: 08–14/06/26</span>
+<span>📍 D7 · 14/06 · 12h (último dia)</span>
+<span>💰 Spend Meta + imposto ×1,1383</span>
+<span>📊 ROAS Meta = vendas pixel × ticket / spend</span>
+<span>📊 ROAS VK = vendas Hotmart × ticket / spend</span>
+</div>
+</header>
+
+<h2>📊 Resultado geral LS004 (7 dias · D7 parcial)</h2>
+<div class="grid grid-4">
+<div class="card bad">
+<div class="kpi">Investimento</div>
+<div class="val">R$ 17.984</div>
+<div class="sub">c/imp: <b style="color:#f87171">R$ 20.475</b></div>
+</div>
+<div class="card">
+<div class="kpi">Receita bruta total</div>
+<div class="val">R$ 11.170</div>
+<div class="sub">171 vendas · 3 produtos</div>
+</div>
+<div class="card warn">
+<div class="kpi">CPA real (workshop)</div>
+<div class="val warn-txt">R$ 135</div>
+<div class="sub">Meta pixel: R$ 182 · meta R$ 120</div>
+</div>
+<div class="card bad">
+<div class="kpi">ROAS VK / Meta</div>
+<div class="val lose">0,62 / 0,46</div>
+<div class="sub">Líquido c/imp: <b>0,51</b></div>
+</div>
+</div>
+
+<div class="card" style="margin-top:8px">
+<div class="kpi">🏆 Vendas front · 7 dias</div>
+<div class="val">133 ingressos · R$ 8.946,24</div>
+<div class="sub">Ticket bruto workshop R$ 67,26 · com bumps R$ 83,98 (-5% vs LS003) · Bumps Fotos 22 (16,5%) · Palestra 16 (12,0%) · Fotos Acesso 0</div>
+</div>
+
+<h2>🚨 Diagnóstico — fechamento LS004</h2>
+<div class="card bad">
+<div class="alert">
+<b>LS004 fecha confirmando o pior cenário desde o início do funil.</b><br><br>
+Checkout → Venda real fechou em <b>25,0%</b> (recuperou parcialmente de 22,7% mas continua MUITO abaixo dos 30,7% do LS003).<br><br>
+Take rate da <b>Palestra Minutos</b> caiu de 17,9% (LS003) → <b>12,0%</b> (LS004). Take rate de <b>Fotos IA Acesso</b> ficou em <b>ZERO</b> (LS003 era 0,3%, LS002 era 0,6%).<br><br>
+Tudo isso confirma: <b>algo está quebrado no fluxo de checkout/order bumps.</b> O sales day é 15-16/jun — a venda do produto principal depende desse pool de 133 ingressos.
+</div>
+</div>
+
+<h2>📅 Dia-a-dia LS004</h2>
+<div class="card">
+<table>
+<thead><tr>
+<th>Dia</th>
+<th class="num">Spend</th>
+<th class="num">Clicks</th>
+<th class="num">LPV</th>
+<th class="num">Checkout</th>
+<th class="num">Vendas Meta</th>
+<th class="num">CPC</th>
+<th class="num">Click→LPV</th>
+<th class="num">LPV→Chk</th>
+<th class="num">Chk→Venda Meta</th>
+</tr></thead>
+<tbody>
+<tr><td><b>D1</b> 08/jun</td><td class="num">R$ 4.906</td><td class="num">888</td><td class="num">798</td><td class="num">125</td><td class="num">26</td><td class="num">R$ 5,52</td><td class="num">89,9%</td><td class="num">15,7%</td><td class="num">20,8%</td></tr>
+<tr><td><b>D2</b> 09/jun</td><td class="num">R$ 2.082</td><td class="num">434</td><td class="num">413</td><td class="num">69</td><td class="num">11</td><td class="num">R$ 4,80</td><td class="num">95,2%</td><td class="num">16,7%</td><td class="num">15,9%</td></tr>
+<tr><td><b>D3</b> 10/jun</td><td class="num">R$ 2.184</td><td class="num">444</td><td class="num">409</td><td class="num">81</td><td class="num">16</td><td class="num">R$ 4,92</td><td class="num">92,1%</td><td class="num">19,8%</td><td class="num">19,8%</td></tr>
+<tr><td><b>D4</b> 11/jun</td><td class="num">R$ 1.099</td><td class="num">339</td><td class="num">316</td><td class="num">46</td><td class="num">7</td><td class="num">R$ 3,24</td><td class="num">93,2%</td><td class="num">14,6%</td><td class="num">15,2%</td></tr>
+<tr><td><b>D5</b> 12/jun</td><td class="num">R$ 2.940</td><td class="num">668</td><td class="num">593</td><td class="num">83</td><td class="num">13</td><td class="num">R$ 4,40</td><td class="num">88,8%</td><td class="num">14,0%</td><td class="num">15,7%</td></tr>
+<tr><td><b>D6</b> 13/jun</td><td class="num">R$ 3.716</td><td class="num">659</td><td class="num">595</td><td class="num">95</td><td class="num">18</td><td class="num">R$ 5,64</td><td class="num">90,3%</td><td class="num">16,0%</td><td class="num">18,9%</td></tr>
+<tr><td><b>D7</b> 14/jun *12h*</td><td class="num">R$ 1.057</td><td class="num">249</td><td class="num">222</td><td class="num">33</td><td class="num">8</td><td class="num">R$ 4,25</td><td class="num">89,2%</td><td class="num">14,9%</td><td class="num">24,2%</td></tr>
+<tr class="tot"><td><b>TOTAL</b></td><td class="num">R$ 17.984</td><td class="num">3.681</td><td class="num">3.346</td><td class="num">532</td><td class="num">99</td><td class="num">R$ 4,89</td><td class="num">90,9%</td><td class="num">15,9%</td><td class="num">18,6%</td></tr>
+</tbody>
+</table>
+<div class="tip" style="margin-top:14px"><b>Leitura D7 (último dia):</b> spend caiu pra R$1.057 (sábado costuma render menos). Chk→Venda subiu pra 24,2%, melhor que a média. Mas é volume pequeno (8 vendas Meta) e ainda não fechou o dia.</div>
+</div>
+
+<h2>🏆 Top 5 criativos por vendas LS004 (atribuição paid_metaads)</h2>
+<div class="card">
+<table>
+<thead><tr>
+<th>#</th>
+<th>Criativo</th>
+<th class="num">Vendas</th>
+<th class="num">Receita</th>
+<th class="num">Spend</th>
+<th class="num">CPA</th>
+<th class="num">ROAS bruto</th>
+</tr></thead>
+<tbody>
+<tr><td>1</td><td>ADC001 POSTA SEM APARECER <span class="tag ok">carrossel</span></td><td class="num win">28</td><td class="num">R$ 1.810</td><td class="num">R$ 3.104</td><td class="num">R$ 111</td><td class="num warn-txt">0,58</td></tr>
+<tr><td>2</td><td>ADV291 PROSPECCAO H16_B10 <span class="tag ok">vídeo</span></td><td class="num win">18</td><td class="num">R$ 1.174</td><td class="num">R$ 3.098</td><td class="num">R$ 172</td><td class="num lose">0,38</td></tr>
+<tr><td>3</td><td>ADV290 PROSPECCAO H15_B11 <span class="tag ok">vídeo</span></td><td class="num">12</td><td class="num">R$ 738</td><td class="num">R$ 1.701</td><td class="num">R$ 142</td><td class="num lose">0,43</td></tr>
+<tr><td>4</td><td>ADC004 EQUIPE CONTEUDO ROBO <span class="tag ok">carrossel</span></td><td class="num">7</td><td class="num">R$ 452</td><td class="num">R$ 631</td><td class="num">R$ 90</td><td class="num warn-txt">0,72</td></tr>
+<tr><td>5</td><td>ADV266 MAQUINA CONTEUDO H09 <span class="tag ok">vídeo</span></td><td class="num">4</td><td class="num">R$ 263</td><td class="num">R$ 517</td><td class="num">R$ 129</td><td class="num warn-txt">0,51</td></tr>
+</tbody>
+</table>
+<div class="tip" style="margin-top:14px"><b>Confirmação:</b> Carrosséis (ADC001 e ADC004) têm o MELHOR ROAS do LS004 (0,58 e 0,72). <b>Carrossel está performando melhor que vídeo</b> nesse final de funil — formato a explorar nos próximos LS.</div>
+</div>
+
+<h2>💰 Top 5 criativos por spend LS004</h2>
+<div class="card">
+<table>
+<thead><tr>
+<th>#</th>
+<th>Criativo</th>
+<th class="num">Spend</th>
+<th class="num">Impressões</th>
+<th class="num">Clicks</th>
+<th class="num">CPC</th>
+</tr></thead>
+<tbody>
+<tr><td>1</td><td>ADC001 POSTA SEM APARECER</td><td class="num">R$ 3.104</td><td class="num">28.345</td><td class="num">576</td><td class="num">R$ 5,39</td></tr>
+<tr><td>2</td><td>ADV291 PROSPECCAO H16_B10</td><td class="num">R$ 3.098</td><td class="num">46.256</td><td class="num">801</td><td class="num">R$ 3,87</td></tr>
+<tr><td>3</td><td>ADV290 PROSPECCAO H15_B11</td><td class="num">R$ 1.701</td><td class="num">24.794</td><td class="num">463</td><td class="num">R$ 3,67</td></tr>
+<tr><td>4</td><td>ADV271 NOVIDADE CLAUDE H10</td><td class="num">R$ 893</td><td class="num">8.134</td><td class="num">183</td><td class="num">R$ 4,88</td></tr>
+<tr><td>5</td><td>ADV273 NOVIDADE CLAUDE H09</td><td class="num">R$ 879</td><td class="num">9.111</td><td class="num">113</td><td class="num lose">R$ 7,78</td></tr>
+</tbody>
+</table>
+<div class="alert" style="margin-top:14px"><b>Sangrias confirmadas:</b> ADV273 (CPC R$7,78, R$879 sem aparecer no top vendas) e ADV271 (R$893, só 2 vendas). Já não vão rodar mais hoje, mas ficam de aviso pra LS005.</div>
+</div>
+
+<h2>📈 Comparativo cross-LS (LS001-LS004 fechamento)</h2>
+<div class="card">
+<table>
+<thead><tr>
+<th>Métrica</th>
+<th class="num">LS001</th>
+<th class="num">LS002</th>
+<th class="num">LS003</th>
+<th class="num">LS004 *7d*</th>
+<th class="num">LS004 vs LS003</th>
+</tr></thead>
+<tbody>
+<tr><td>Spend Meta</td><td class="num">R$ 38.610</td><td class="num">R$ 49.667</td><td class="num">R$ 43.703</td><td class="num">R$ 17.984</td><td class="num">—</td></tr>
+<tr><td>Vendas Hotmart</td><td class="num">513</td><td class="num">504</td><td class="num">396</td><td class="num">133</td><td class="num">—</td></tr>
+<tr><td>Receita VK</td><td class="num">R$ 45.812</td><td class="num">R$ 43.924</td><td class="num">R$ 35.138</td><td class="num">R$ 11.170</td><td class="num">—</td></tr>
+<tr><td><b>CTR</b></td><td class="num">2,64%</td><td class="num">2,14%</td><td class="num">2,03%</td><td class="num lose">1,77%</td><td class="num"><span class="delta down">-13%</span></td></tr>
+<tr><td><b>CPC</b></td><td class="num">R$ 3,79</td><td class="num">R$ 3,93</td><td class="num">R$ 4,43</td><td class="num lose">R$ 4,89</td><td class="num"><span class="delta up">+10%</span></td></tr>
+<tr><td>Custo/LPV</td><td class="num">R$ 4,22</td><td class="num">R$ 4,30</td><td class="num">R$ 4,83</td><td class="num lose">R$ 5,38</td><td class="num"><span class="delta up">+11%</span></td></tr>
+<tr><td><b>LPV → Checkout</b></td><td class="num">14,9%</td><td class="num">14,3%</td><td class="num">14,2%</td><td class="num win">15,9%</td><td class="num"><span class="delta upgood">+12%</span></td></tr>
+<tr><td><b>Checkout → Venda real</b></td><td class="num win">37,6%</td><td class="num">30,6%</td><td class="num">30,7%</td><td class="num lose">25,0%</td><td class="num"><span class="delta down">-19%</span></td></tr>
+<tr><td><b>Take rate Palestra</b></td><td class="num">18,9%</td><td class="num">19,6%</td><td class="num">17,9%</td><td class="num lose">12,0%</td><td class="num"><span class="delta down">-33%</span></td></tr>
+<tr><td><b>Take rate Fotos IA</b></td><td class="num">20,0%</td><td class="num">16,1%</td><td class="num">20,2%</td><td class="num">16,5%</td><td class="num"><span class="delta down">-18%</span></td></tr>
+<tr><td>Take rate Fotos Acesso</td><td class="num">3,1%</td><td class="num">0,6%</td><td class="num">0,3%</td><td class="num lose">0%</td><td class="num"><span class="delta down">-100%</span></td></tr>
+<tr><td><b>Ticket médio</b></td><td class="num">R$ 89,30</td><td class="num">R$ 87,15</td><td class="num">R$ 88,73</td><td class="num lose">R$ 83,98</td><td class="num"><span class="delta down">-5%</span></td></tr>
+<tr><td><b>CPA real</b></td><td class="num">R$ 75</td><td class="num">R$ 99</td><td class="num">R$ 110</td><td class="num lose">R$ 135</td><td class="num"><span class="delta up">+23%</span></td></tr>
+<tr class="tot"><td><b>ROAS VK</b></td><td class="num win">1,19</td><td class="num warn-txt">0,88</td><td class="num warn-txt">0,80</td><td class="num lose">0,62</td><td class="num"><span class="delta down">-23%</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>📌 Ações pra rodar HOJE e amanhã</h2>
+<div class="grid grid-2">
+<div class="card bad">
+<h3>1️⃣ Testar checkout manualmente AINDA HOJE</h3>
+<p style="font-size:13px;color:#cbd5e1;margin-top:6px">Take rate Palestra 12,0% vs 17,9% LS003. Take rate Fotos Acesso = ZERO. Comprar 1 ingresso pelo link de produção e validar bumps antes do sales day (15-16/jun).</p>
+</div>
+<div class="card bad">
+<h3>2️⃣ Hotmart — checar histórico do checkout</h3>
+<p style="font-size:13px;color:#cbd5e1;margin-top:6px">Algo mudou entre 7/jun e 8/jun. Ver versionamento da página de checkout, regras de afiliado, oferta dos bumps.</p>
+</div>
+<div class="card warn">
+<h3>3️⃣ Conferir Pixel + Events Manager</h3>
+<p style="font-size:13px;color:#cbd5e1;margin-top:6px">Gap Meta pixel (99) vs Hotmart real (133) = -25%. Verificar se Purchase está disparando 100%.</p>
+</div>
+<div class="card warn">
+<h3>4️⃣ Sales day 15-16/jun</h3>
+<p style="font-size:13px;color:#cbd5e1;margin-top:6px">Pool de 133 ingressos vai pra venda do produto principal. Se a conversão lead→venda repetir LS003 (1,1%), são ~1-2 vendas. Se acordo com LS001 (0,84%), 1 venda. <b>Esperar receita baixa do produto principal.</b></p>
+</div>
+</div>
+
+<h2>🧪 Status campanha [44] split de páginas</h2>
+<div class="card">
+<p style="font-size:13px;color:#cbd5e1">Campanha [44] CBO Advantage Puro SPLIT VK METRICS (ID <code>120246685109240109</code>) ainda <b>PAUSED</b>.</p>
+<div class="action-box" style="margin-top:10px">
+<b>Plano para LS005:</b><br>
+• Ativar com R$200/dia já no D1 do LS005<br>
+• Acompanhar conversão por página via tracking split.vkdigital<br>
+• Se uma página vencer clara em 3-4 dias, padronizar pra resto do LS005<br>
+• Se diferenças se mantiverem pequenas (~10%), focar em CRIATIVO NOVO e não em página
+</div>
+</div>
+
+<h2>💰 Recomendação LS005</h2>
+<div class="card">
+<div class="action-box">
+<b>Plano LS005 (16-22/jun):</b><br>
+• <b>NÃO escalar</b> enquanto Checkout→Venda real não voltar pros 30%+<br>
+• Verba sugerida: <b>R$2.500-3.000/dia</b> (vs ~R$5.000 que seria o normal)<br>
+• <b>PRIORIDADE MÁXIMA: criativos NOVOS</b> — vídeo, imagem e <b>carrossel</b> (carrossel performou melhor no LS004)<br>
+• Manter [40]/[42] LK 1% Compradores em volume modesto (R$500/dia cada)<br>
+• Ativar [44] com R$200/dia pra split-test páginas<br>
+• <b>Antes de qualquer escala: confirmar que o checkout/order bumps voltaram ao normal</b>
+</div>
+</div>
+
+<footer>
+LS004 D7 12h · Relatório Completo Final · Gerado em 14/06/2026 às 12:00 · Workshop Especialista com IA · Marketex / Ana Tex
+</footer>
+
+</body>
+</html>
