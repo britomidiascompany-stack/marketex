@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LS004 · Fechamento Semana · Pré-Hotmart</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0e17;color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.55;padding:20px;max-width:1500px;margin:0 auto}
+header{background:radial-gradient(circle at top right,rgba(124,92,255,.25),transparent 60%),radial-gradient(circle at bottom left,rgba(34,211,238,.18),transparent 55%),#11172a;border-radius:20px;padding:32px;margin-bottom:28px;border:1px solid rgba(124,92,255,.25)}
+header h1{font-size:32px;background:linear-gradient(135deg,#7c5cff,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;font-weight:800}
+header .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+header .meta span{background:rgba(124,92,255,.12);padding:6px 14px;border-radius:8px;font-size:13px;color:#cbd5e1;border:1px solid rgba(124,92,255,.2)}
+h2{font-size:20px;margin:32px 0 14px;color:#f1f5f9;display:flex;align-items:center;gap:10px}
+h2::before{content:"";width:4px;height:22px;background:linear-gradient(180deg,#7c5cff,#22d3ee);border-radius:2px}
+h3{font-size:15px;margin:14px 0 8px;color:#cbd5e1;font-weight:600}
+.card{background:#11172a;border-radius:14px;padding:18px 22px;border:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;margin-bottom:14px}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#7c5cff,#22d3ee)}
+.card.good::before{background:linear-gradient(90deg,#22c55e,#10b981)}
+.card.bad::before{background:linear-gradient(90deg,#ef4444,#f43f5e)}
+.card.warn::before{background:linear-gradient(90deg,#facc15,#f97316)}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+th,td{padding:8px 6px;text-align:left;border-bottom:1px solid rgba(255,255,255,.05);white-space:nowrap}
+th{color:#94a3b8;font-size:10px;text-transform:uppercase;letter-spacing:.3px;font-weight:600;background:rgba(124,92,255,.04)}
+tr:hover td{background:rgba(124,92,255,.04)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.win{color:#4ade80;font-weight:600}
+.lose{color:#f87171;font-weight:600}
+.warn{color:#facc15;font-weight:600}
+.tot{background:rgba(124,92,255,.08);font-weight:600}
+.kpi{font-size:12px;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px}
+.val{font-size:26px;font-weight:700;color:#f1f5f9;margin:4px 0}
+.sub{font-size:12px;color:#64748b}
+.grid{display:grid;gap:14px}
+.grid-2{grid-template-columns:1fr 1fr}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+.alert{background:rgba(239,68,68,.08);border-left:3px solid #ef4444;padding:12px 14px;border-radius:8px;margin:10px 0;font-size:13px}
+.tip{background:rgba(34,211,238,.06);border-left:3px solid #22d3ee;padding:12px 14px;border-radius:8px;margin:10px 0;font-size:13px}
+.good-box{background:rgba(34,197,94,.08);border-left:3px solid #22c55e;padding:12px 14px;border-radius:8px;margin:10px 0;font-size:13px}
+.note{background:rgba(250,204,21,.06);border-left:3px solid #facc15;padding:14px 16px;border-radius:8px;margin:10px 0;font-size:14px;line-height:1.65}
+ul{margin-left:18px;font-size:14px;color:#cbd5e1}
+ul li{margin:6px 0}
+</style>
+</head>
+<body>
+
+<header>
+<h1>LS004 · Fechamento da Semana</h1>
+<div style="font-size:14px;color:#cbd5e1">Workshop Especialista com IA · Ana Tex / Marketex · 08–14/06/26</div>
+<div class="meta">
+<span>📅 7 dias completos</span>
+<span>📊 Fonte: VK Metrics</span>
+<span>💰 Imposto Meta: +13,83% (×1,1383)</span>
+<span>📍 15/06 manhã</span>
+</div>
+</header>
+
+<div class="note"><b>⚠️ Pré-Hotmart:</b> este relatório usa dados de VK Metrics (vendas + receita registradas). Em ~1h saímos com a revisão batendo com a planilha Hotmart de receita líquida real, que tipicamente altera <b>entre 2% e 4% do valor líquido</b> — não muda significativamente as métricas estruturais (CPM, CTR, Hook, Conv, CPA, ROAS).</div>
+
+<h2>📊 Resumo Geral LS004</h2>
+<div class="grid grid-4">
+<div class="card bad">
+<div class="kpi">Investimento</div>
+<div class="val">R$ 20.022</div>
+<div class="sub">c/imp (+13,83%): <b style="color:#f87171">R$ 22.791</b></div>
+</div>
+<div class="card warn">
+<div class="kpi">Vendas Workshop (ingresso)</div>
+<div class="val warn">170</div>
+<div class="sub">meta 500 · <b>34% da meta</b></div>
+</div>
+<div class="card">
+<div class="kpi">Receita total (VK)</div>
+<div class="val">R$ 14.470</div>
+<div class="sub">workshop + bumps · 223 itens</div>
+</div>
+<div class="card bad">
+<div class="kpi">ROAS Tráfego / Campanha</div>
+<div class="val lose">0,37 / 0,63</div>
+<div class="sub">CPA Meta R$ 178 · meta R$ 120</div>
+</div>
+</div>
+
+<h2>🛒 Vendas + Conversão de Order Bumps</h2>
+<div class="grid grid-2">
+<div class="card">
+<h3>Receita por produto</h3>
+<table>
+<tr><th>Produto</th><th class="num">Qtd</th><th class="num">Receita</th><th class="num">% s/ Workshop</th></tr>
+<tr><td>🏆 <b>Workshop Especialista com IA</b> <span style="background:rgba(124,92,255,.2);padding:2px 6px;border-radius:4px;font-size:10px">INGRESSO</span></td><td class="num"><b>170</b></td><td class="num"><b>R$ 11.425</b></td><td class="num">—</td></tr>
+<tr><td>Fotos com IA <span style="background:rgba(34,197,94,.15);color:#4ade80;padding:2px 6px;border-radius:4px;font-size:10px">bump</span></td><td class="num">28</td><td class="num">R$ 1.795</td><td class="num">16,5%</td></tr>
+<tr><td>Palestra em Minutos <span style="background:rgba(34,197,94,.15);color:#4ade80;padding:2px 6px;border-radius:4px;font-size:10px">bump</span></td><td class="num">24</td><td class="num">R$ 1.200</td><td class="num">14,1%</td></tr>
+<tr><td>Fotos Acesso estendido <span style="background:rgba(34,197,94,.15);color:#4ade80;padding:2px 6px;border-radius:4px;font-size:10px">bump</span></td><td class="num">1</td><td class="num">R$ 50</td><td class="num">0,6%</td></tr>
+<tr class="tot"><td><b>TOTAL bumps</b></td><td class="num"><b>53</b></td><td class="num"><b>R$ 3.045</b></td><td class="num win">31,2%</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>Origem das vendas (pago × orgânico)</h3>
+<table>
+<tr><th>Origem</th><th class="num">Vendas</th><th class="num">Receita</th><th class="num">%</th></tr>
+<tr><td><b>Pago (Meta)</b></td><td class="num"><b>132</b></td><td class="num"><b>R$ 8.492</b></td><td class="num">58,7%</td></tr>
+<tr><td><b>Orgânico (total)</b></td><td class="num"><b>87</b></td><td class="num"><b>R$ 5.978</b></td><td class="num">41,3%</td></tr>
+<tr><td style="padding-left:24px;color:#94a3b8;font-size:11px">↳ IG bio</td><td class="num">45</td><td class="num">R$ 2.880</td><td class="num">19,9%</td></tr>
+<tr><td style="padding-left:24px;color:#94a3b8;font-size:11px">↳ Zoom-chat 10/06</td><td class="num">12</td><td class="num">R$ 819</td><td class="num">5,7%</td></tr>
+<tr><td style="padding-left:24px;color:#94a3b8;font-size:11px">↳ Unnichat agente-ia</td><td class="num">9</td><td class="num">R$ 581</td><td class="num">4,0%</td></tr>
+<tr><td style="padding-left:24px;color:#94a3b8;font-size:11px">↳ ManyChat anatex</td><td class="num">10</td><td class="num">R$ 667</td><td class="num">4,6%</td></tr>
+<tr><td style="padding-left:24px;color:#94a3b8;font-size:11px">↳ Não atribuído + outros</td><td class="num">11</td><td class="num">R$ 1.031</td><td class="num">7,1%</td></tr>
+</table>
+<div class="tip"><b>Ticket médio paid:</b> R$ 64,33 · <b>Ticket médio geral:</b> R$ 64,90</div>
+</div>
+</div>
+
+<h2>📈 Dia a Dia LS004 Completo (D1–D7)</h2>
+<div class="card">
+<table>
+<thead>
+<tr><th>Dia</th><th>Data</th><th class="num">Inv brt</th><th class="num">Inv c/i</th><th class="num">CPM</th><th class="num">CPC</th><th class="num">CTR</th><th class="num">Hook</th><th class="num">LPV</th><th class="num">IC</th><th class="num">Vd Meta</th><th class="num">ConvPgV</th><th class="num">ConvPgCk</th><th class="num">ConvCk</th><th class="num">CPA</th><th class="num">RoTr</th><th class="num">RoCp</th></tr>
+</thead>
+<tbody>
+<tr><td>D1</td><td>08/06 seg</td><td class="num">R$ 4.906</td><td class="num">R$ 5.584</td><td class="num">108,6</td><td class="num">6,29</td><td class="num lose">1,73%</td><td class="num">21,4%</td><td class="num">798</td><td class="num">125</td><td class="num">26</td><td class="num">3,26%</td><td class="num">15,66%</td><td class="num">20,80%</td><td class="num lose">R$ 215</td><td class="num lose">0,23</td><td class="num lose">0,43</td></tr>
+<tr><td>D2</td><td>09/06 ter</td><td class="num">R$ 2.082</td><td class="num">R$ 2.370</td><td class="num">98,6</td><td class="num">5,46</td><td class="num">1,80%</td><td class="num">18,1%</td><td class="num">413</td><td class="num">69</td><td class="num">11</td><td class="num">2,66%</td><td class="num">16,71%</td><td class="num">15,94%</td><td class="num lose">R$ 215</td><td class="num">0,33</td><td class="num">0,58</td></tr>
+<tr><td>D3</td><td>10/06 qua</td><td class="num">R$ 2.184</td><td class="num">R$ 2.486</td><td class="num">98,4</td><td class="num">5,60</td><td class="num">1,76%</td><td class="num lose">15,5%</td><td class="num">409</td><td class="num">81</td><td class="num">16</td><td class="num">3,91%</td><td class="num win">19,80%</td><td class="num">19,75%</td><td class="num">R$ 155</td><td class="num">0,27</td><td class="num">0,77</td></tr>
+<tr><td>D4</td><td>11/06 qui</td><td class="num">R$ 1.099</td><td class="num">R$ 1.251</td><td class="num win">75,5</td><td class="num win">3,69</td><td class="num">2,05%</td><td class="num">18,1%</td><td class="num">316</td><td class="num">46</td><td class="num">7</td><td class="num lose">2,22%</td><td class="num">14,56%</td><td class="num lose">15,22%</td><td class="num">R$ 179</td><td class="num">0,45</td><td class="num">0,86</td></tr>
+<tr><td>D5</td><td>12/06 sex</td><td class="num">R$ 2.940</td><td class="num">R$ 3.346</td><td class="num win">74,4</td><td class="num">5,01</td><td class="num lose">1,49%</td><td class="num">16,0%</td><td class="num">593</td><td class="num">83</td><td class="num">13</td><td class="num lose">2,19%</td><td class="num">14,00%</td><td class="num">15,66%</td><td class="num lose">R$ 257</td><td class="num">0,29</td><td class="num">0,49</td></tr>
+<tr><td>D6</td><td>13/06 sáb</td><td class="num">R$ 3.717</td><td class="num">R$ 4.231</td><td class="num lose">116,2</td><td class="num lose">6,42</td><td class="num">1,81%</td><td class="num lose">12,4%</td><td class="num">595</td><td class="num">95</td><td class="num">18</td><td class="num">3,03%</td><td class="num">15,97%</td><td class="num">18,95%</td><td class="num lose">R$ 235</td><td class="num">0,30</td><td class="num">0,44</td></tr>
+<tr style="background:rgba(34,197,94,.08)"><td><b>D7 🎉</b></td><td><b>14/06 dom</b></td><td class="num">R$ 3.095</td><td class="num">R$ 3.523</td><td class="num">102,5</td><td class="num">4,32</td><td class="num win">2,37%</td><td class="num lose">5,4%</td><td class="num">757</td><td class="num">137</td><td class="num">37</td><td class="num win">4,89%</td><td class="num">18,10%</td><td class="num win">27,01%</td><td class="num win"><b>R$ 95</b></td><td class="num win"><b>0,83</b></td><td class="num win"><b>1,19</b></td></tr>
+<tr class="tot"><td colspan="2"><b>TOTAL LS004</b></td><td class="num">R$ 20.022</td><td class="num">R$ 22.791</td><td class="num">97,8</td><td class="num">5,37</td><td class="num">1,82%</td><td class="num">15,4%</td><td class="num">3.881</td><td class="num">636</td><td class="num">128</td><td class="num">3,30%</td><td class="num">16,39%</td><td class="num lose">20,13%</td><td class="num lose">R$ 178</td><td class="num">0,37</td><td class="num">0,63</td></tr>
+</tbody>
+</table>
+<div class="good-box"><b>D7 (domingo 14/06):</b> melhor dia do LS004 — CPA R$ 95 (perto da meta R$ 120), ROAS Tráfego 0,83 e Campanha 1,19, Conv. página → venda 4,89% (a maior do LS), Conv. checkout 27%. <b>Hook caiu pra 5,4% mas Meta direcionou tráfego mais qualificado.</b></div>
+</div>
+
+<h2>🔄 Comparativo Cross-LS Dia-a-Dia (D1–D7)</h2>
+<p style="font-size:13px;color:#94a3b8;margin-bottom:14px">Comparando os mesmos dias do lançamento (D1 = primeiro dia do funil pago, D7 = último). Métricas vêm do VK Metrics.</p>
+
+<div class="grid grid-2">
+<div class="card">
+<h3>CPM (R$)</h3>
+<table>
+<tr><th>Dia</th><th class="num">LS001</th><th class="num">LS002</th><th class="num">LS003</th><th class="num">LS004</th></tr>
+<tr><td>D1</td><td class="num">148,2</td><td class="num win">74,6</td><td class="num">79,3</td><td class="num">108,6</td></tr>
+<tr><td>D2</td><td class="num">115,5</td><td class="num win">75,9</td><td class="num">88,7</td><td class="num">98,6</td></tr>
+<tr><td>D3</td><td class="num">106,3</td><td class="num win">77,3</td><td class="num">84,4</td><td class="num">98,4</td></tr>
+<tr><td>D4</td><td class="num">99,8</td><td class="num">87,2</td><td class="num">82,7</td><td class="num win">75,5</td></tr>
+<tr><td>D5</td><td class="num">102,6</td><td class="num">94,0</td><td class="num">85,2</td><td class="num win">74,4</td></tr>
+<tr><td>D6</td><td class="num">97,5</td><td class="num">88,8</td><td class="num">103,7</td><td class="num lose">116,2</td></tr>
+<tr><td>D7</td><td class="num">92,7</td><td class="num">94,7</td><td class="num">101,9</td><td class="num">102,5</td></tr>
+<tr class="tot"><td>TOT</td><td class="num">113,7</td><td class="num">95,5</td><td class="num">102,2</td><td class="num">97,8</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>CPC c/imp (R$ por clique)</h3>
+<table>
+<tr><th>Dia</th><th class="num">LS001</th><th class="num">LS002</th><th class="num">LS003</th><th class="num">LS004</th></tr>
+<tr><td>D1</td><td class="num">6,75</td><td class="num">4,42</td><td class="num win">4,40</td><td class="num lose">6,29</td></tr>
+<tr><td>D2</td><td class="num">4,96</td><td class="num win">3,86</td><td class="num">4,78</td><td class="num">5,46</td></tr>
+<tr><td>D3</td><td class="num">4,25</td><td class="num win">3,89</td><td class="num">4,12</td><td class="num">5,60</td></tr>
+<tr><td>D4</td><td class="num">4,41</td><td class="num">4,79</td><td class="num">4,74</td><td class="num win">3,69</td></tr>
+<tr><td>D5</td><td class="num">4,38</td><td class="num">5,17</td><td class="num">5,35</td><td class="num">5,01</td></tr>
+<tr><td>D6</td><td class="num win">4,14</td><td class="num">4,64</td><td class="num">5,96</td><td class="num lose">6,42</td></tr>
+<tr><td>D7</td><td class="num">4,26</td><td class="num">4,55</td><td class="num">5,84</td><td class="num win">4,32</td></tr>
+<tr class="tot"><td>TOT</td><td class="num win">4,31</td><td class="num">4,47</td><td class="num">5,05</td><td class="num">5,37</td></tr>
+</table>
+</div>
+</div>
+
+<div class="grid grid-2">
+<div class="card">
+<h3>CTR (%)</h3>
+<table>
+<tr><th>Dia</th><th class="num">LS001</th><th class="num">LS002</th><th class="num">LS003</th><th class="num">LS004</th></tr>
+<tr><td>D1</td><td class="num">2,50</td><td class="num">1,92</td><td class="num">2,05</td><td class="num lose">1,73</td></tr>
+<tr><td>D2</td><td class="num">2,65</td><td class="num">2,24</td><td class="num">2,11</td><td class="num lose">1,80</td></tr>
+<tr><td>D3</td><td class="num win">2,85</td><td class="num">2,27</td><td class="num">2,33</td><td class="num lose">1,76</td></tr>
+<tr><td>D4</td><td class="num">2,58</td><td class="num">2,07</td><td class="num">1,98</td><td class="num">2,05</td></tr>
+<tr><td>D5</td><td class="num">2,67</td><td class="num">2,07</td><td class="num">1,82</td><td class="num lose">1,49</td></tr>
+<tr><td>D6</td><td class="num">2,68</td><td class="num">2,18</td><td class="num">1,98</td><td class="num">1,81</td></tr>
+<tr><td>D7</td><td class="num">2,48</td><td class="num">2,37</td><td class="num">1,99</td><td class="num">2,37</td></tr>
+<tr class="tot"><td>TOT</td><td class="num win">2,64</td><td class="num">2,14</td><td class="num">2,03</td><td class="num lose">1,82</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>Hook Rate (3s / impressões)</h3>
+<table>
+<tr><th>Dia</th><th class="num">LS001</th><th class="num">LS002</th><th class="num">LS003</th><th class="num">LS004</th></tr>
+<tr><td>D1</td><td class="num">28,3%</td><td class="num">21,5%</td><td class="num">21,0%</td><td class="num">21,4%</td></tr>
+<tr><td>D2</td><td class="num">21,2%</td><td class="num">21,0%</td><td class="num">20,1%</td><td class="num">18,1%</td></tr>
+<tr><td>D3</td><td class="num">28,1%</td><td class="num">20,4%</td><td class="num lose">16,3%</td><td class="num lose">15,5%</td></tr>
+<tr><td>D4</td><td class="num win">29,5%</td><td class="num">20,3%</td><td class="num lose">16,7%</td><td class="num">18,1%</td></tr>
+<tr><td>D5</td><td class="num win">30,7%</td><td class="num">20,8%</td><td class="num lose">15,6%</td><td class="num lose">16,0%</td></tr>
+<tr><td>D6</td><td class="num">28,9%</td><td class="num">23,6%</td><td class="num">22,3%</td><td class="num lose">12,4%</td></tr>
+<tr><td>D7</td><td class="num">23,1%</td><td class="num">20,1%</td><td class="num">17,6%</td><td class="num lose">5,4%</td></tr>
+<tr class="tot"><td>TOT</td><td class="num win">28,1%</td><td class="num">21,1%</td><td class="num">18,5%</td><td class="num lose">15,4%</td></tr>
+</table>
+</div>
+</div>
+
+<div class="grid grid-2">
+<div class="card">
+<h3>Conv. Página → Venda (vendas/LPV)</h3>
+<table>
+<tr><th>Dia</th><th class="num">LS001</th><th class="num">LS002</th><th class="num">LS003</th><th class="num">LS004</th></tr>
+<tr><td>D1</td><td class="num">3,28%</td><td class="num">3,12%</td><td class="num">3,54%</td><td class="num">3,26%</td></tr>
+<tr><td>D2</td><td class="num">4,10%</td><td class="num">2,80%</td><td class="num">3,23%</td><td class="num lose">2,66%</td></tr>
+<tr><td>D3</td><td class="num">4,57%</td><td class="num">3,19%</td><td class="num">4,14%</td><td class="num">3,91%</td></tr>
+<tr><td>D4</td><td class="num win">5,07%</td><td class="num">3,83%</td><td class="num">3,55%</td><td class="num lose">2,22%</td></tr>
+<tr><td>D5</td><td class="num">2,89%</td><td class="num">3,69%</td><td class="num">3,38%</td><td class="num lose">2,19%</td></tr>
+<tr><td>D6</td><td class="num">2,84%</td><td class="num">4,07%</td><td class="num">3,17%</td><td class="num">3,03%</td></tr>
+<tr><td>D7</td><td class="num win">6,06%</td><td class="num">4,28%</td><td class="num">3,93%</td><td class="num">4,89%</td></tr>
+<tr class="tot"><td>TOT</td><td class="num win">3,93%</td><td class="num">3,55%</td><td class="num">3,58%</td><td class="num lose">3,30%</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>Conv. Página → Checkout (IC/LPV)</h3>
+<table>
+<tr><th>Dia</th><th class="num">LS001</th><th class="num">LS002</th><th class="num">LS003</th><th class="num">LS004</th></tr>
+<tr><td>D1</td><td class="num win">32,79%</td><td class="num">13,52%</td><td class="num">15,95%</td><td class="num">15,66%</td></tr>
+<tr><td>D2</td><td class="num">16,72%</td><td class="num lose">12,61%</td><td class="num">15,27%</td><td class="num">16,71%</td></tr>
+<tr><td>D3</td><td class="num">18,51%</td><td class="num">14,74%</td><td class="num lose">12,90%</td><td class="num win">19,80%</td></tr>
+<tr><td>D4</td><td class="num">17,01%</td><td class="num lose">12,97%</td><td class="num">15,28%</td><td class="num">14,56%</td></tr>
+<tr><td>D5</td><td class="num lose">13,06%</td><td class="num">13,32%</td><td class="num">11,97%</td><td class="num">14,00%</td></tr>
+<tr><td>D6</td><td class="num lose">11,96%</td><td class="num win">16,93%</td><td class="num">12,76%</td><td class="num">15,97%</td></tr>
+<tr><td>D7</td><td class="num">18,45%</td><td class="num">16,08%</td><td class="num">15,24%</td><td class="num">18,10%</td></tr>
+<tr class="tot"><td>TOT</td><td class="num">14,94%</td><td class="num">14,26%</td><td class="num">14,25%</td><td class="num win">16,39%</td></tr>
+</table>
+</div>
+</div>
+
+<div class="grid grid-2">
+<div class="card">
+<h3>Conv. Checkout → Venda (vendas/IC)</h3>
+<table>
+<tr><th>Dia</th><th class="num">LS001</th><th class="num">LS002</th><th class="num">LS003</th><th class="num">LS004</th></tr>
+<tr><td>D1</td><td class="num lose">10,00%</td><td class="num">23,08%</td><td class="num">22,17%</td><td class="num">20,80%</td></tr>
+<tr><td>D2</td><td class="num">24,49%</td><td class="num">22,16%</td><td class="num">21,14%</td><td class="num lose">15,94%</td></tr>
+<tr><td>D3</td><td class="num">24,68%</td><td class="num">21,62%</td><td class="num win">32,05%</td><td class="num">19,75%</td></tr>
+<tr><td>D4</td><td class="num win">29,82%</td><td class="num">29,55%</td><td class="num">23,26%</td><td class="num lose">15,22%</td></tr>
+<tr><td>D5</td><td class="num">22,14%</td><td class="num">27,69%</td><td class="num">28,21%</td><td class="num lose">15,66%</td></tr>
+<tr><td>D6</td><td class="num">23,74%</td><td class="num">24,02%</td><td class="num">24,84%</td><td class="num lose">18,95%</td></tr>
+<tr><td>D7</td><td class="num win">32,87%</td><td class="num">26,62%</td><td class="num">25,81%</td><td class="num">27,01%</td></tr>
+<tr class="tot"><td>TOT</td><td class="num win">26,28%</td><td class="num">24,89%</td><td class="num">25,12%</td><td class="num lose">20,13%</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>Custo por Venda — CPA pago (R$) · meta R$ 120</h3>
+<table>
+<tr><th>Dia</th><th class="num">LS001</th><th class="num">LS002</th><th class="num">LS003</th><th class="num">LS004</th></tr>
+<tr><td>D1</td><td class="num lose">R$ 256</td><td class="num">R$ 155</td><td class="num">R$ 135</td><td class="num lose">R$ 215</td></tr>
+<tr><td>D2</td><td class="num">R$ 140</td><td class="num">R$ 151</td><td class="num">R$ 162</td><td class="num lose">R$ 215</td></tr>
+<tr><td>D3</td><td class="num win">R$ 106</td><td class="num">R$ 136</td><td class="num">R$ 112</td><td class="num">R$ 155</td></tr>
+<tr><td>D4</td><td class="num win">R$ 101</td><td class="num">R$ 136</td><td class="num">R$ 146</td><td class="num">R$ 179</td></tr>
+<tr><td>D5</td><td class="num">R$ 170</td><td class="num">R$ 153</td><td class="num">R$ 170</td><td class="num lose">R$ 257</td></tr>
+<tr><td>D6</td><td class="num">R$ 159</td><td class="num">R$ 125</td><td class="num lose">R$ 205</td><td class="num lose">R$ 235</td></tr>
+<tr><td>D7</td><td class="num win">R$ 76</td><td class="num win">R$ 116</td><td class="num">R$ 159</td><td class="num win">R$ 95</td></tr>
+<tr class="tot"><td>TOT</td><td class="num win">R$ 122</td><td class="num">R$ 138</td><td class="num">R$ 154</td><td class="num lose">R$ 178</td></tr>
+</table>
+</div>
+</div>
+
+<div class="grid grid-2">
+<div class="card">
+<h3>ROAS Tráfego (receita paid / spend c/imp)</h3>
+<table>
+<tr><th>Dia</th><th class="num">LS001</th><th class="num">LS002</th><th class="num">LS003</th><th class="num">LS004</th></tr>
+<tr><td>D1</td><td class="num lose">0,13</td><td class="num">0,43</td><td class="num">0,49</td><td class="num lose">0,23</td></tr>
+<tr><td>D2</td><td class="num">0,54</td><td class="num">0,54</td><td class="num">0,64</td><td class="num lose">0,33</td></tr>
+<tr><td>D3</td><td class="num">0,54</td><td class="num">0,68</td><td class="num win">0,79</td><td class="num lose">0,27</td></tr>
+<tr><td>D4</td><td class="num">0,72</td><td class="num">0,55</td><td class="num">0,55</td><td class="num">0,45</td></tr>
+<tr><td>D5</td><td class="num">0,39</td><td class="num">0,48</td><td class="num">0,45</td><td class="num lose">0,29</td></tr>
+<tr><td>D6</td><td class="num">0,51</td><td class="num">0,66</td><td class="num">0,47</td><td class="num lose">0,30</td></tr>
+<tr><td>D7</td><td class="num win">0,80</td><td class="num">0,57</td><td class="num">0,52</td><td class="num win">0,83</td></tr>
+<tr class="tot"><td>TOT</td><td class="num win">0,56</td><td class="num">0,55</td><td class="num">0,55</td><td class="num lose">0,37</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>ROAS Campanha (receita total / spend c/imp)</h3>
+<table>
+<tr><th>Dia</th><th class="num">LS001</th><th class="num">LS002</th><th class="num">LS003</th><th class="num">LS004</th></tr>
+<tr><td>D1</td><td class="num">0,84</td><td class="num">0,79</td><td class="num">0,74</td><td class="num lose">0,43</td></tr>
+<tr><td>D2</td><td class="num">0,83</td><td class="num">0,62</td><td class="num">0,74</td><td class="num">0,58</td></tr>
+<tr><td>D3</td><td class="num win">1,21</td><td class="num">0,86</td><td class="num">0,93</td><td class="num">0,77</td></tr>
+<tr><td>D4</td><td class="num">1,03</td><td class="num">0,80</td><td class="num">0,72</td><td class="num">0,86</td></tr>
+<tr><td>D5</td><td class="num">0,91</td><td class="num">0,63</td><td class="num">0,59</td><td class="num lose">0,49</td></tr>
+<tr><td>D6</td><td class="num">0,74</td><td class="num">0,82</td><td class="num">0,60</td><td class="num lose">0,44</td></tr>
+<tr><td>D7</td><td class="num win">1,79</td><td class="num">0,90</td><td class="num">0,71</td><td class="num win">1,19</td></tr>
+<tr class="tot"><td>TOT</td><td class="num win">1,04</td><td class="num">0,78</td><td class="num">0,71</td><td class="num lose">0,63</td></tr>
+</table>
+</div>
+</div>
+
+<h2>🎨 Top Criativos LS004 (7 dias)</h2>
+
+<h3>🚀 Top 5 por quantidade de vendas (ingressos · pixel Meta)</h3>
+<div class="card">
+<table>
+<tr><th>#</th><th>Criativo</th><th class="num">Vendas</th><th class="num">Spend bruto</th><th class="num">CPA c/imp</th><th class="num">CTR</th><th class="num">Hook</th></tr>
+<tr><td>1</td><td><b>ADC001 POSTA SEM APARECER</b> <span style="background:rgba(34,197,94,.15);color:#4ade80;padding:2px 6px;border-radius:4px;font-size:10px">carrossel</span></td><td class="num"><b>36</b></td><td class="num">R$ 4.046</td><td class="num">R$ 128</td><td class="num">2,12%</td><td class="num">—</td></tr>
+<tr><td>2</td><td><b>ADC004 EQUIPE DE CONTEUDO ROBO</b> <span style="background:rgba(34,197,94,.15);color:#4ade80;padding:2px 6px;border-radius:4px;font-size:10px">carrossel</span></td><td class="num">21</td><td class="num">R$ 1.346</td><td class="num win">R$ 73</td><td class="num">1,96%</td><td class="num">—</td></tr>
+<tr><td>3</td><td><b>ADV291 PROSPECCAO HOOK16</b></td><td class="num">20</td><td class="num">R$ 3.212</td><td class="num">R$ 183</td><td class="num">1,72%</td><td class="num">18,4%</td></tr>
+<tr><td>4</td><td>ADV290 PROSPECCAO HOOK15</td><td class="num">8</td><td class="num">R$ 1.811</td><td class="num lose">R$ 258</td><td class="num">1,94%</td><td class="num">20,7%</td></tr>
+<tr><td>5</td><td><b>ADV266 MAQUINA CONTEUDO HOOK09</b> 🏆</td><td class="num">7</td><td class="num">R$ 531</td><td class="num win">R$ 86</td><td class="num">2,05%</td><td class="num">31,9%</td></tr>
+</table>
+</div>
+
+<h3>💸 Top 5 por menor CPA (mín. 3 vendas)</h3>
+<div class="card good">
+<table>
+<tr><th>#</th><th>Criativo</th><th class="num">CPA c/imp</th><th class="num">Vendas</th><th class="num">Spend bruto</th><th>Status</th></tr>
+<tr><td>🥇</td><td><b>ADV293 PROSPECCAO HOOK18</b></td><td class="num win"><b>R$ 35</b></td><td class="num">4</td><td class="num">R$ 122</td><td>Algoritmo ainda escalando</td></tr>
+<tr><td>🥈</td><td><b>ADC004 EQUIPE DE CONTEUDO ROBO</b> <span style="background:rgba(34,197,94,.15);color:#4ade80;padding:2px 6px;border-radius:4px;font-size:10px">carrossel</span></td><td class="num win"><b>R$ 73</b></td><td class="num">21</td><td class="num">R$ 1.346</td><td>Replicar formato</td></tr>
+<tr><td>🥉</td><td><b>ADI159 ACORDOU SEM ENERGIA</b> <span style="background:rgba(124,92,255,.15);padding:2px 6px;border-radius:4px;font-size:10px">imagem</span></td><td class="num">R$ 75</td><td class="num">4</td><td class="num">R$ 265</td><td>Boa imagem</td></tr>
+<tr><td>4</td><td><b>ADV266 MAQUINA CONTEUDO HOOK09</b></td><td class="num">R$ 86</td><td class="num">7</td><td class="num">R$ 531</td><td>Replicar variações</td></tr>
+<tr><td>5</td><td><b>ADC001 POSTA SEM APARECER</b></td><td class="num win">R$ 128</td><td class="num">36</td><td class="num">R$ 4.046</td><td>Bateu meta R$ 120 (chegou perto)</td></tr>
+</table>
+</div>
+
+<h3>💎 Top 5 por ROAS (vendas × ticket R$ 64,33 ÷ spend c/imp)</h3>
+<div class="card">
+<table>
+<tr><th>#</th><th>Criativo</th><th class="num">ROAS</th><th class="num">Receita imp.</th><th class="num">Spend c/i</th></tr>
+<tr><td>🏆</td><td><b>ADV293 PROSPECCAO HOOK18</b></td><td class="num win"><b>1,85</b></td><td class="num">R$ 257</td><td class="num">R$ 139</td></tr>
+<tr><td>2</td><td><b>ADC004 EQUIPE DE CONTEUDO ROBO</b></td><td class="num win"><b>0,88</b></td><td class="num">R$ 1.351</td><td class="num">R$ 1.532</td></tr>
+<tr><td>3</td><td><b>ADI159 ACORDOU SEM ENERGIA</b></td><td class="num">0,85</td><td class="num">R$ 257</td><td class="num">R$ 301</td></tr>
+<tr><td>4</td><td><b>ADV266 MAQUINA CONTEUDO HOOK09</b></td><td class="num">0,75</td><td class="num">R$ 450</td><td class="num">R$ 604</td></tr>
+<tr><td>5</td><td><b>ADC001 POSTA SEM APARECER</b></td><td class="num">0,50</td><td class="num">R$ 2.316</td><td class="num">R$ 4.606</td></tr>
+</table>
+</div>
+
+<div class="tip"><b>📌 Padrão claro:</b> 3 dos top 5 em vendas são carrosséis (ADC001 + ADC004). Reforça a hipótese de que carrossel está sendo o formato vencedor do LS004. ADV293 e ADV266 (Máquina de Conteúdo HOOK09/18) seguem como os criativos de vídeo mais eficientes.</div>
+
+<h2>🧠 Avaliação (fala do Rafael)</h2>
+
+<div class="card warn">
+<h3>O que aconteceu nessa semana</h3>
+<ul>
+<li><b>Queda brusca no Hook Rate</b> — caiu de 21% no D1 pra 5,4% no D7. Saturação criativa acelerada.</li>
+<li><b>CPM oscilou muito</b> porque a gente teve que ficar ativando e retirando campanha. Muitas campanhas <b>pararam de performar por conta de CTR e Hook Rate</b>, então tivemos que reiniciar novas.</li>
+<li><b>Novas campanhas:</b> teve algumas que performaram bem, outras que performaram mal.</li>
+<li><b>Desde sexta-feira</b> a gente vem melhorando nas campanhas. <b>Sábado bateu um picozinho ruim</b> porque tivemos que fazer uma escala. <b>Mas ontem, no domingo, performou bem melhor</b> do que nos últimos dias.</li>
+<li>Acredito que agora a gente deve manter uma estabilidade.</li>
+<li><b>Tivemos pouquíssimas vendas — 170 ingressos workshop, muito abaixo da meta de 500.</b> Porém foi uma <b>semana muito ruim, muito ruim</b>.</li>
+<li>Acredito que com os <b>novos carrosséis, novos criativos em imagem e novos criativos em vídeo</b>, vamos conseguir melhorar os resultados dessa campanha.</li>
+<li><b>Resultados das páginas vêm separados mais tarde</b> — fizemos o split de páginas, vamos fazer outras pra testar ainda mais.</li>
+<li>Foi muito ruim a semana, <b>mas já tô vendo um início de campanha melhor</b> (D7 com CPA R$ 95 e ROAS Tráfego 0,83).</li>
+</ul>
+</div>
+
+<div class="card good">
+<h3>🟢 O que validou no LS004 (replicar)</h3>
+<ul>
+<li><b>Carrosséis dominaram:</b> ADC001 (36 vendas) + ADC004 (21 vendas) = 57 das 128 vendas pixel (44,5%).</li>
+<li><b>D7 mostrou o caminho:</b> CPA R$ 95, ROAS Tráfego 0,83, ROAS Campanha 1,19, Conv. checkout 27%. Quando o tráfego é qualificado, conv. está alta.</li>
+<li><b>ADV266 HOOK09 e ADV293 HOOK18:</b> os dois melhores vídeos. Replicar com 3-5 variações de cada hook no LS005.</li>
+<li><b>Ticket subiu pra R$ 64,33</b> (vs R$ 63-64 nos outros LS) — formato de oferta + bumps está ganhando força.</li>
+<li><b>Order bumps em 31,2% da receita do Workshop</b> — Fotos com IA (16,5%) + Palestra (14,1%). Bump funcional.</li>
+<li><b>Orgânico em 41,3%</b> (87 vendas) — IG bio + Unnichat + ManyChat saudáveis.</li>
+</ul>
+</div>
+
+<div class="card bad">
+<h3>🔴 O que ficou ruim (atacar no LS005)</h3>
+<ul>
+<li><b>Hook Rate em queda livre:</b> 15,4% no agregado vs 28,1% LS001 — saturação criativa virou crônica.</li>
+<li><b>CTR 1,82% (vs 2,64% LS001):</b> criativos não estão segurando atenção.</li>
+<li><b>Conv. Página → Venda 3,30% (vs 3,93% LS001):</b> página V1-2 fadigada — split com V1-3/4/5 ainda inconclusivo, esperar nova rodada.</li>
+<li><b>Conv. Checkout → Venda 20,13% (vs 26,28% LS001):</b> queda de 6pp = ~30 vendas a menos com mesmo tráfego. Investigar checkout (bumps confusos? Pix demorando?).</li>
+<li><b>CPA pago R$ 178 — 48% acima da meta R$ 120.</b> Só atinge meta com renovação de criativo + página nova.</li>
+<li><b>170 ingressos vs meta 500:</b> 34% da meta. Semana muito ruim.</li>
+</ul>
+</div>
+
+<h2>🛠️ Próximos passos (LS005)</h2>
+<div class="card">
+<ul>
+<li><b>5 novas campanhas com estrutura Léo</b> (5 vídeos + 5 imagens + 5 carrosséis cada) — em rodagem desde sexta, monitorar resultado isolado.</li>
+<li><b>Novos carrosséis</b> seguindo padrão ADC001/ADC004 (campeões do LS004).</li>
+<li><b>Novos vídeos</b> com variações de ADV266 HOOK09 e ADV293 HOOK18.</li>
+<li><b>Novas imagens</b> testando padrão ADI159 (que entregou 4 vendas com CPA R$ 75).</li>
+<li><b>Orgânico:</b> liberado carrosséis com CTA no final dos conteúdos que performaram bem.</li>
+<li><b>Página A/B:</b> split rodando — resultados isolados virão em relatório separado mais tarde.</li>
+<li><b>Estrutura padronizada de Hooks/Body/CTAs</b> em construção pra acelerar próximas baterias de criativo.</li>
+</ul>
+</div>
+
+<div style="text-align:center;margin-top:40px;color:#475569;font-size:12px">
+Gerado 15/06/26 manhã · Dados: VK Metrics · Revisão Hotmart em ~1h (variação esperada 2–4% no líquido)
+</div>
+
+</body>
+</html>
