@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MPD · Junho 08–14 · Relatório Semanal</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0c11;--bg2:#10131c;--card:#161a24;--line:#262b3a;--txt:#e8ecf3;--mute:#8b94a8;--accent:#7c5cff;--accent2:#22d3ee;--good:#22c55e;--warn:#f59e0b;--bad:#ef4444;--gold:#fbbf24;--orange:#fb923c}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'Inter',system-ui,sans-serif;background:radial-gradient(ellipse at top,#1a1f2e 0%,var(--bg) 65%);color:var(--txt);overflow:hidden;-webkit-font-smoothing:antialiased}
+.deck{position:relative;width:100vw;height:100vh;overflow:hidden}
+.slide{position:absolute;inset:0;padding:54px 76px 80px;display:flex;flex-direction:column;opacity:0;transform:translateX(40px);transition:opacity .35s,transform .35s;pointer-events:none;overflow-y:auto}
+.slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+.slide.prev{transform:translateX(-40px)}
+.hud{position:fixed;bottom:18px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:14px;z-index:20;font-size:13px;color:var(--mute)}
+.hud button{background:var(--card);border:1px solid var(--line);color:var(--txt);width:36px;height:36px;border-radius:10px;font-size:18px;cursor:pointer;display:grid;place-items:center;transition:all .15s}
+.hud button:hover{border-color:var(--accent);color:var(--accent)}
+.hud .counter{font-variant-numeric:tabular-nums;min-width:54px;text-align:center}
+.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .35s;z-index:21}
+.brand{position:fixed;top:18px;left:24px;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--mute);z-index:10}
+.brand b{color:var(--accent2);font-weight:700}
+h1{font-size:60px;font-weight:800;letter-spacing:-.02em;line-height:1.05;margin-bottom:18px}
+h1 .grad{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 .orange-grad{background:linear-gradient(135deg,#fb923c 0%,#fbbf24 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 .green-grad{background:linear-gradient(135deg,#22c55e 0%,#86efac 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:36px;font-weight:700;letter-spacing:-.01em;line-height:1.15;margin-bottom:8px}
+h2 .kbd{font-size:13px;color:var(--mute);font-weight:500;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:10px}
+h3{font-size:16px;font-weight:600;color:var(--mute);margin-bottom:12px;letter-spacing:.02em;text-transform:uppercase}
+.lead{font-size:18px;color:var(--mute);max-width:920px;line-height:1.55}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g5{grid-template-columns:repeat(5,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;display:flex;flex-direction:column;gap:6px}
+.card.elev{box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.card .label{font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:.12em;font-weight:600}
+.card .value{font-size:36px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.05}
+.card .value.sm{font-size:26px}
+.card .sub{font-size:12.5px;color:var(--mute);line-height:1.45}
+.card.accent{background:linear-gradient(135deg,rgba(124,92,255,.18),rgba(34,211,238,.08));border-color:rgba(124,92,255,.35)}
+.card.good{background:linear-gradient(135deg,rgba(34,197,94,.16),rgba(34,197,94,.04));border-color:rgba(34,197,94,.35)}
+.card.bad{background:linear-gradient(135deg,rgba(239,68,68,.16),rgba(239,68,68,.04));border-color:rgba(239,68,68,.35)}
+.card.warn{background:linear-gradient(135deg,rgba(245,158,11,.16),rgba(245,158,11,.04));border-color:rgba(245,158,11,.35)}
+.card.gold{background:linear-gradient(135deg,rgba(251,191,36,.18),rgba(251,191,36,.05));border-color:rgba(251,191,36,.4)}
+.card.orange{background:linear-gradient(135deg,rgba(251,146,60,.16),rgba(251,191,36,.05));border-color:rgba(251,146,60,.4)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-weight:600;color:var(--mute);text-transform:uppercase;letter-spacing:.08em;font-size:11px;padding:9px 11px;border-bottom:1px solid var(--line)}
+td{padding:10px 11px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:none}
+tr.hl td{background:rgba(124,92,255,.08)}
+tr.total td{background:rgba(34,211,238,.06);font-weight:700;border-top:2px solid var(--line)}
+.pill{display:inline-block;padding:3px 9px;border-radius:99px;font-size:11px;font-weight:600;letter-spacing:.04em}
+.pill.good{background:rgba(34,197,94,.15);color:#86efac}
+.pill.bad{background:rgba(239,68,68,.15);color:#fca5a5}
+.pill.warn{background:rgba(245,158,11,.15);color:#fcd34d}
+.pill.gold{background:rgba(251,191,36,.15);color:#fde047}
+.pill.orange{background:rgba(251,146,60,.15);color:#fed7aa}
+.bullets{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.bullet{display:flex;gap:14px;align-items:flex-start;padding:12px 15px;border:1px solid var(--line);border-radius:11px;background:var(--bg2)}
+.bullet .num{flex:0 0 28px;height:28px;border-radius:7px;background:var(--accent);color:white;display:grid;place-items:center;font-weight:700;font-size:13px}
+.bullet .t{font-size:14px;color:var(--txt);line-height:1.5}
+.bullet .t b{color:var(--accent2)}
+.bullet.good .num{background:var(--good)}
+.bullet.bad .num{background:var(--bad)}
+.bullet.warn .num{background:var(--warn)}
+.bullet.gold .num{background:var(--gold);color:#1a1a1a}
+.bullet.orange .num{background:var(--orange);color:#fff}
+a{color:var(--accent2);text-decoration:none;border-bottom:1px solid rgba(34,211,238,.4)}
+a:hover{border-color:var(--accent2)}
+.cta{padding:24px 28px;border-radius:14px;background:linear-gradient(135deg,#fb923c,#ea580c);color:white;display:flex;justify-content:space-between;align-items:center}
+.cta .big{font-size:26px;font-weight:800}
+.meta{display:flex;gap:22px;align-items:center;font-size:13px;color:var(--mute);margin-top:22px;flex-wrap:wrap}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--accent2);display:inline-block;margin:0 6px}
+.tag{display:inline-block;padding:5px 12px;border:1px solid var(--line);border-radius:99px;font-size:12px;color:var(--mute);margin-bottom:18px;letter-spacing:.04em}
+.tag.orange{border-color:rgba(251,146,60,.5);color:#fed7aa;background:rgba(251,146,60,.08)}
+.tag.green{border-color:rgba(34,197,94,.5);color:#86efac;background:rgba(34,197,94,.08)}
+.income-row{display:flex;align-items:center;gap:14px;padding:11px 14px;background:var(--bg2);border-radius:10px;border:1px solid var(--line)}
+.income-row .label{flex:0 0 240px;font-size:13px;color:var(--mute)}
+.income-row .bar{flex:1;height:22px;background:var(--line);border-radius:5px;overflow:hidden;position:relative}
+.income-row .bar > i{display:block;height:100%;border-radius:5px}
+.income-row .val{flex:0 0 85px;text-align:right;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+.creative-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:14px}
+.creative-card.top{background:linear-gradient(90deg,rgba(251,191,36,.12),transparent);border-color:rgba(251,191,36,.3)}
+.creative-card .name{font-size:14px;font-weight:600;line-height:1.4}
+.creative-card .qual{font-size:24px;font-weight:800;color:var(--accent2);font-variant-numeric:tabular-nums;flex:0 0 80px;text-align:right}
+.creative-card .meta-sm{font-size:11px;color:var(--mute);margin-top:3px}
+.creative-card a{font-size:12px}
+@media (max-width:1100px){.slide{padding:48px 30px 80px}h1{font-size:44px}h2{font-size:28px}.card .value{font-size:28px}.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:1fr 1fr}.g5{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="progress" id="prog"></div>
+<div class="brand">MARKETEX · <b>MPD / JUNHO 08–14</b></div>
+<div class="deck" id="deck">
+
+<!-- 1. COVER -->
+<section class="slide active">
+  <span class="tag orange">Relatório · 8 a 14 de Junho 2026 · Semana cheia (Dom→Sáb)</span>
+  <h1>R$ 1.840,98 → 61 aplicações<br><span class="orange-grad">→ 25 qualificadas</span></h1>
+  <p class="lead">Semana com investimento concentrado em 2 criativos (ADV78 ANOS 80 + ADV81 SEU CLIENTES) que entregaram 96% das aplicações qualificadas via tráfego pago. Público P-ADVANTAGE concentrou 60% dos qualificados.</p>
+  <div class="meta">
+    <span>📊 Conta Meta · MTADS-MPD-TPLIA</span><span class="dot"></span>
+    <span>🎯 Funil de Aplicação MPD</span><span class="dot"></span>
+    <span>📅 7 dias · Dom 08 a Sáb 14</span>
+  </div>
+</section>
+
+<!-- 2. NÚMEROS PRINCIPAIS -->
+<section class="slide">
+  <h2><span class="kbd">Slide 2 · Números da semana</span>Headline</h2>
+  <div class="grid g4" style="margin-top:18px">
+    <div class="card accent elev">
+      <div class="label">Investimento Meta</div>
+      <div class="value">R$ 1.841</div>
+      <div class="sub">~R$ 263/dia · 2 criativos concentram 99%</div>
+    </div>
+    <div class="card elev">
+      <div class="label">Aplicações YAY Forms</div>
+      <div class="value">61</div>
+      <div class="sub">Todas com Status=completed</div>
+    </div>
+    <div class="card orange elev">
+      <div class="label">Qualificadas (Comercial)</div>
+      <div class="value">25</div>
+      <div class="sub">41% de taxa de qualificação</div>
+    </div>
+    <div class="card good elev">
+      <div class="label">CPL Qualificado</div>
+      <div class="value">R$ 74</div>
+      <div class="sub">R$ 30 por aplicação total</div>
+    </div>
+  </div>
+  <div class="grid g3" style="margin-top:14px">
+    <div class="card">
+      <div class="label">Leads tracked Meta (col R)</div>
+      <div class="value sm">15</div>
+      <div class="sub">Pixel só dispara para ≥ R$ 8k. Diferença vs 25 = leads offline/sem pixel.</div>
+    </div>
+    <div class="card">
+      <div class="label">Cliques no link</div>
+      <div class="value sm">239</div>
+      <div class="sub">CTR ~ 2,2% · CPC ~ R$ 7,70</div>
+    </div>
+    <div class="card">
+      <div class="label">Vendas no período (Hotmart)</div>
+      <div class="value sm">13</div>
+      <div class="sub">1 atribuída a tráfego pago (R$ 11.930)</div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. QUEBRA QUALIFICADAS -->
+<section class="slide">
+  <h2><span class="kbd">Slide 3 · Quebra das 25 qualificadas</span>Por faixa de faturamento</h2>
+  <p class="lead">Critério Comercial: <b>acima R$ 10k</b> = automático · <b>R$ 8–10k</b> e <b>R$ 5–8k</b> = só com urgência <b>Alta</b> ou <b>Pra ontem</b>.</p>
+  <div class="grid g3" style="margin-top:24px">
+    <div class="card gold elev">
+      <div class="label">🟡 Acima de R$ 10.000</div>
+      <div class="value">13</div>
+      <div class="sub">Todas qualificam automaticamente. Top tier ICP.</div>
+    </div>
+    <div class="card accent elev">
+      <div class="label">🔵 R$ 8.000 a R$ 10.000</div>
+      <div class="value">5</div>
+      <div class="sub">Qualificadas com urgência Alta/Pra ontem (de 10 aplicações na faixa).</div>
+    </div>
+    <div class="card orange elev">
+      <div class="label">🟠 R$ 5.000 a R$ 8.000</div>
+      <div class="value">7</div>
+      <div class="sub">Qualificadas com urgência Alta/Pra ontem (de 10 aplicações na faixa).</div>
+    </div>
+  </div>
+  <div style="margin-top:30px">
+    <h3>Distribuição por dia da semana</h3>
+    <table style="margin-top:8px">
+      <thead><tr><th>Dia</th><th>Aplicações</th><th>10k+</th><th>8-10k</th><th>5-8k</th><th>Total qualificadas</th></tr></thead>
+      <tbody>
+        <tr><td>Dom 08</td><td>9</td><td>1</td><td>1</td><td>0</td><td>2</td></tr>
+        <tr><td>Seg 09</td><td>9</td><td>1</td><td>1</td><td>2</td><td>4</td></tr>
+        <tr><td>Ter 10</td><td>8</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+        <tr class="hl"><td>Qua 11</td><td>13</td><td>5</td><td>1</td><td>2</td><td>8</td></tr>
+        <tr><td>Qui 12</td><td>9</td><td>1</td><td>1</td><td>1</td><td>3</td></tr>
+        <tr><td>Sex 13</td><td>7</td><td>2</td><td>1</td><td>0</td><td>3</td></tr>
+        <tr><td>Sáb 14</td><td>6</td><td>3</td><td>1</td><td>1</td><td>4</td></tr>
+        <tr class="total"><td>TOTAL</td><td>61</td><td>13</td><td>5</td><td>7</td><td>25</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 4. TOP CRIATIVOS META -->
+<section class="slide">
+  <h2><span class="kbd">Slide 4 · Criativos via Meta Ads</span>Captação (investimento + col R)</h2>
+  <p class="lead">Apenas 2 criativos ativos com investimento significativo. ADV78 (ANOS 80) é o líder absoluto da semana.</p>
+  <table style="margin-top:18px">
+    <thead><tr><th>Anúncio</th><th>Investimento</th><th>Impressões</th><th>Cliques</th><th>CTR</th><th>Col R (≥8k)</th><th>CPL ≥8k</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><b>ADV78</b> · ANOS 80 · 1.17</td><td>R$ 1.135,20</td><td>6.467</td><td>154</td><td>2,38%</td><td>13</td><td>R$ 87,32</td></tr>
+      <tr><td><b>ADV81</b> · SEUS CLIENTES TE INDICAM · 1.08</td><td>R$ 676,61</td><td>4.161</td><td>75</td><td>1,80%</td><td>2</td><td>R$ 338,30</td></tr>
+      <tr><td>ADV76 · ESPECIALISTA · 1.12</td><td>R$ 12,81</td><td>84</td><td>4</td><td>4,76%</td><td>0</td><td>—</td></tr>
+      <tr><td>ADV79 · TAREFA DE 32 HORAS · 0.44</td><td>R$ 8,81</td><td>94</td><td>1</td><td>1,06%</td><td>0</td><td>—</td></tr>
+      <tr><td>ADV77 · TRABALHA MUITO · 1.24</td><td>R$ 7,14</td><td>91</td><td>4</td><td>4,40%</td><td>0</td><td>—</td></tr>
+      <tr><td>ADV80 · SEGREDO PRA ESCALAR · 1.12</td><td>R$ 0,41</td><td>8</td><td>1</td><td>12,5%</td><td>0</td><td>—</td></tr>
+      <tr class="total"><td>TOTAL</td><td>R$ 1.840,98</td><td>10.905</td><td>239</td><td>2,19%</td><td>15</td><td>R$ 122,73</td></tr>
+    </tbody>
+  </table>
+  <div class="bullets" style="margin-top:18px">
+    <div class="bullet good"><div class="num">1</div><div class="t"><b>ADV78 ANOS 80</b> é o claro vencedor — entregou <b>13 dos 15 leads ≥8k</b> registrados no pixel Meta, com CPL ≥8k de <b>R$ 87,32</b>.</div></div>
+    <div class="bullet warn"><div class="num">2</div><div class="t"><b>ADV81 SEUS CLIENTES</b> consumiu R$ 677 mas converteu só <b>2 leads pixel</b> — CPL ≥8k de <b>R$ 338</b>, 4x mais caro que ADV78.</div></div>
+  </div>
+</section>
+
+<!-- 5. TOP CRIATIVOS UTM YAY -->
+<section class="slide">
+  <h2><span class="kbd">Slide 5 · Criativos via UTM (YAY Forms)</span>Quem trouxe os qualificados</h2>
+  <p class="lead">Atribuição via utm_content (criativo) das aplicações qualificadas que entraram no YAY Forms.</p>
+  <div class="grid g2" style="margin-top:18px;gap:18px">
+    <div>
+      <h3>Top criativos por qualificados</h3>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px">
+        <div class="creative-card top">
+          <div>
+            <div class="name">🥇 ADV78 · ANOS 80 · 1.17</div>
+            <div class="meta-sm">29 aplicações · 14 qualificadas (48% taxa)</div>
+          </div>
+          <div class="qual">14</div>
+        </div>
+        <div class="creative-card">
+          <div>
+            <div class="name">🥈 ADV81 · SEUS CLIENTES TE INDICAM · 1.08</div>
+            <div class="meta-sm">15 aplicações · 4 qualificadas (27% taxa)</div>
+          </div>
+          <div class="qual">4</div>
+        </div>
+        <div class="creative-card">
+          <div>
+            <div class="name">🥉 Orgânico / sem criativo identificado</div>
+            <div class="meta-sm">5 aplicações · 3 qualificadas</div>
+          </div>
+          <div class="qual">3</div>
+        </div>
+        <div class="creative-card">
+          <div>
+            <div class="name">aulafinal-fmia</div>
+            <div class="meta-sm">1 aplicação · 1 qualificada (orgânico interno)</div>
+          </div>
+          <div class="qual">1</div>
+        </div>
+        <div class="creative-card">
+          <div>
+            <div class="name">ADV76 · ESPECIALISTA · 1.12</div>
+            <div class="meta-sm">1 aplicação · 1 qualificada</div>
+          </div>
+          <div class="qual">1</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3>Top públicos (utm_medium) por qualificados</h3>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px">
+        <div class="creative-card top">
+          <div>
+            <div class="name">🎯 P-ADVANTAGE · M 30-55 · CBO · Página A</div>
+            <div class="meta-sm">31 aplicações · 15 qualificadas · MPD LEAD QUALIFICADO 2</div>
+          </div>
+          <div class="qual">15</div>
+        </div>
+        <div class="creative-card">
+          <div>
+            <div class="name">Envolvimento Geral IG 365D + VV 95 + Seguidores</div>
+            <div class="meta-sm">17 aplicações · 4 qualificadas · MPD LEAD QUALIFICADO 2</div>
+          </div>
+          <div class="qual">4</div>
+        </div>
+        <div class="creative-card">
+          <div>
+            <div class="name">Quente Orgânico (sem ads)</div>
+            <div class="meta-sm">2 aplicações · 2 qualificadas (100%)</div>
+          </div>
+          <div class="qual">2</div>
+        </div>
+        <div class="creative-card">
+          <div>
+            <div class="name">CursEduca / outros</div>
+            <div class="meta-sm">2 aplicações · 2 qualificadas</div>
+          </div>
+          <div class="qual">2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. CPL POR CRIATIVO -->
+<section class="slide">
+  <h2><span class="kbd">Slide 6 · CPL por criativo</span>Eficiência real</h2>
+  <p class="lead">Combinando investimento Meta + qualificadas YAY (UTM) para cada criativo ativo na semana.</p>
+  <table style="margin-top:18px">
+    <thead><tr><th>Anúncio</th><th>Investimento</th><th>Aplicações YAY</th><th>Qualificadas</th><th>Taxa Qualif</th><th>CPA Aplicação</th><th>CPA Qualificada</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><b>ADV78 ANOS 80</b></td><td>R$ 1.135,20</td><td>29</td><td>14</td><td>48%</td><td>R$ 39,14</td><td><b>R$ 81,09</b></td></tr>
+      <tr><td><b>ADV81 SEUS CLIENTES</b></td><td>R$ 676,61</td><td>15</td><td>4</td><td>27%</td><td>R$ 45,11</td><td>R$ 169,15</td></tr>
+      <tr><td>ADV76 ESPECIALISTA</td><td>R$ 12,81</td><td>1</td><td>1</td><td>100%</td><td>R$ 12,81</td><td>R$ 12,81</td></tr>
+      <tr><td>ADV79 TAREFA DE 32 HORAS</td><td>R$ 8,81</td><td>1</td><td>0</td><td>0%</td><td>R$ 8,81</td><td>—</td></tr>
+      <tr><td>ADV77 TRABALHA MUITO</td><td>R$ 7,14</td><td>1</td><td>0</td><td>0%</td><td>R$ 7,14</td><td>—</td></tr>
+      <tr><td>Orgânico (sem UTM)</td><td>R$ 0,00</td><td>10</td><td>5</td><td>50%</td><td>—</td><td>—</td></tr>
+      <tr class="total"><td>TOTAL semana</td><td>R$ 1.840,98</td><td>57</td><td>24</td><td>42%</td><td>R$ 32,30</td><td>R$ 76,71</td></tr>
+    </tbody>
+  </table>
+  <p class="lead" style="margin-top:14px;font-size:14px">Obs: 4 das 25 qualificadas vieram de leads orgânicos (sem investimento Meta) — ajustando, CPA qualificada real do tráfego pago = R$ 87/qualif.</p>
+</section>
+
+<!-- 7. VENDAS DA SEMANA -->
+<section class="slide">
+  <h2><span class="kbd">Slide 7 · Vendas Hotmart 08–14/06</span>Atribuição de receita</h2>
+  <p class="lead">13 vendas no período (Mentoria Paraíso Digital e variantes). Atribuição via cruzamento de email YAY × Hotmart.</p>
+  <div class="grid g4" style="margin-top:18px">
+    <div class="card good elev">
+      <div class="label">🚦 Tráfego pago (matched YAY+mtads)</div>
+      <div class="value sm">1</div>
+      <div class="sub">R$ 11.930,81 · Priscilla Lopes (vendida 10/06 · criativo ADV78)</div>
+    </div>
+    <div class="card accent elev">
+      <div class="label">🌱 Orgânico</div>
+      <div class="value sm">10</div>
+      <div class="sub">9 do checkout (TP series) + 1 matched YAY-org</div>
+    </div>
+    <div class="card warn elev">
+      <div class="label">💬 Manychat</div>
+      <div class="value sm">0</div>
+      <div class="sub">Nenhuma venda na semana (2 na quinzena de junho)</div>
+    </div>
+    <div class="card bad elev">
+      <div class="label">❓ Não traqueada</div>
+      <div class="value sm">2</div>
+      <div class="sub">Sem Origem hotmart nem match no YAY</div>
+    </div>
+  </div>
+  <div style="margin-top:24px">
+    <h3>Detalhe das vendas matched YAY (junho 01-15)</h3>
+    <table style="margin-top:8px">
+      <thead><tr><th>Data venda</th><th>Cliente</th><th>Aplicação YAY</th><th>Origem UTM</th><th>Criativo</th><th>Valor</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td>10/06</td><td>Priscilla Lopes</td><td>27/04</td><td>MTADS-MPD-TPLIA</td><td>ADV78 ANOS 80</td><td><b>R$ 11.930,81</b></td></tr>
+        <tr><td>12/06</td><td>Carla Ivonete Silva Campo</td><td>10/12/2025</td><td>org</td><td>—</td><td>R$ 673,89</td></tr>
+        <tr><td>01/06</td><td>Timane Pavelkonski Silva</td><td>—</td><td>org</td><td>anatex</td><td>R$ 12.299,80</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="bullets" style="margin-top:14px">
+    <div class="bullet good"><div class="num">1</div><div class="t"><b>ADV78 ANOS 80</b> gerou venda direta de <b>R$ 11.930,81</b> rastreada via UTM (Priscilla Lopes aplicou em abril e fechou agora — ciclo de ~6 semanas).</div></div>
+    <div class="bullet"><div class="num">2</div><div class="t">9 vendas no checkout origem <b>org_wpp_tp009/008/007</b> são de lançamentos antigos (TP series) — não cabem nesta janela de atribuição da semana.</div></div>
+  </div>
+</section>
+
+<!-- 8. ALERTAS + PRÓXIMOS PASSOS -->
+<section class="slide">
+  <h2><span class="kbd">Slide 8 · Alertas e ações</span>Pontos de atenção</h2>
+  <div class="bullets" style="margin-top:18px">
+    <div class="bullet bad"><div class="num">!</div><div class="t"><b>4 aplicações faltando na planilha "APLICAÇÕES YAY FORMS"</b> (junho/26): Lety Mizzi (01/06), Carina (01/06), Gisele (01/06), CARLA ANDRADE (06/06). Recomendo sincronizar a aba com o export atualizado.</div></div>
+    <div class="bullet warn"><div class="num">!</div><div class="t"><b>Linhas antigas (maio/25)</b> da aba "APLICAÇÕES YAY FORMS" estão com colunas desalinhadas em relação aos cabeçalhos. Junho/26 em diante está alinhado — afeta análises históricas.</div></div>
+    <div class="bullet warn"><div class="num">!</div><div class="t"><b>Coluna R (MPDAplicacaoQualificada2)</b> registrou só 15 dos 25 qualificados — pixel só fira para ≥R$ 8k, então 10 qualificados da faixa 5-8k+Alta/Ontem ficam fora do tracking Meta.</div></div>
+    <div class="bullet good"><div class="num">✓</div><div class="t"><b>Concentrar no ADV78 ANOS 80</b>: 14 qualificadas (56% das 25) com CPA de R$ 81. Vale escalar verba e produzir variações similares.</div></div>
+    <div class="bullet warn"><div class="num">?</div><div class="t"><b>ADV81 SEUS CLIENTES</b>: CPA de R$ 169 está 2x acima do ADV78. Avaliar pausar ou testar nova hook/oferta.</div></div>
+    <div class="bullet"><div class="num">→</div><div class="t"><b>Ciclo aplicação → venda</b>: a venda de tráfego rastreada esta semana veio de uma aplicação de 27/04 (Priscilla, ADV78). Ou seja, ROI real dos criativos atuais só aparece daqui ~4-6 semanas.</div></div>
+  </div>
+</section>
+
+<!-- 9. ENCERRAMENTO -->
+<section class="slide">
+  <h2><span class="kbd">Slide 9 · Resumo executivo</span>Fechamento da semana</h2>
+  <div class="grid g2" style="margin-top:18px;gap:18px">
+    <div class="card accent elev">
+      <h3 style="color:var(--accent2)">O que funcionou</h3>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;font-size:14px">
+        <div>🎯 <b>ADV78 ANOS 80</b> · 14 qualif / R$ 1.135 · CPA R$ 81</div>
+        <div>👥 <b>Público P-ADVANTAGE</b> · 60% das qualificadas</div>
+        <div>💰 <b>1 venda rastreada</b> · R$ 11.930 (via ADV78)</div>
+        <div>📈 Taxa de qualificação <b>41%</b> (25/61)</div>
+      </div>
+    </div>
+    <div class="card warn elev">
+      <h3 style="color:#fcd34d">O que precisa ajustar</h3>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;font-size:14px">
+        <div>⚠️ <b>ADV81</b> · CPA R$ 169 (2x mais caro)</div>
+        <div>📋 <b>Planilha</b> · 4 leads de junho faltando + colunas antigas desalinhadas</div>
+        <div>🔍 <b>Pixel Meta</b> · só captura 60% dos qualificados</div>
+        <div>📊 <b>Atribuição</b> · 86% das vendas Hotmart não cruzam com YAY</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta" style="margin-top:24px">
+    <div>
+      <div style="font-size:13px;opacity:.9;text-transform:uppercase;letter-spacing:.1em;font-weight:600">Próxima semana (15–21/06)</div>
+      <div class="big">Escalar ADV78 ANOS 80 · Pausar ADV81 · Sincronizar planilha YAY</div>
+    </div>
+  </div>
+  <div class="meta">
+    <span>Marketex · Brito Mídias</span><span class="dot"></span>
+    <span>Mentoria Paraíso Digital</span><span class="dot"></span>
+    <span>Gerado em 15/06/2026</span>
+  </div>
+</section>
+
+</div>
+
+<div class="hud">
+  <button onclick="go(-1)">‹</button>
+  <span class="counter" id="cnt">1 / 9</span>
+  <button onclick="go(1)">›</button>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+let cur = 0;
+function show(i){
+  cur = (i + slides.length) % slides.length;
+  slides.forEach((s,j)=>{
+    s.classList.remove('active','prev');
+    if(j===cur) s.classList.add('active');
+    else if(j<cur) s.classList.add('prev');
+  });
+  document.getElementById('cnt').textContent = (cur+1)+' / '+slides.length;
+  document.getElementById('prog').style.width = ((cur+1)/slides.length*100)+'%';
+}
+function go(d){ show(cur+d); }
+document.addEventListener('keydown', e => {
+  if(e.key==='ArrowRight'||e.key===' ') go(1);
+  else if(e.key==='ArrowLeft') go(-1);
+  else if(e.key==='Home') show(0);
+  else if(e.key==='End') show(slides.length-1);
+});
+show(0);
+</script>
+</body>
+</html>
