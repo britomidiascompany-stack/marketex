@@ -13,6 +13,7 @@ header .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 header .meta span{background:rgba(124,92,255,.12);padding:6px 14px;border-radius:8px;font-size:13px;color:#cbd5e1;border:1px solid rgba(124,92,255,.2)}
 h2{font-size:20px;margin:32px 0 14px;color:#f1f5f9;display:flex;align-items:center;gap:10px}
 h2::before{content:"";width:4px;height:22px;background:linear-gradient(180deg,#7c5cff,#22d3ee);border-radius:2px}
+h3{font-size:14px;color:#cbd5e1;margin-bottom:6px}
 .card{background:#11172a;border-radius:14px;padding:18px 22px;border:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;margin-bottom:14px}
 .card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#7c5cff,#22d3ee)}
 .card.good::before{background:linear-gradient(90deg,#22c55e,#10b981)}
@@ -28,6 +29,9 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 .tag.video{background:rgba(124,92,255,.15);color:#a78bfa}
 .tag.carrossel{background:rgba(34,197,94,.15);color:#4ade80}
 .tag.imagem{background:rgba(250,204,21,.15);color:#facc15}
+.cr{color:#22d3ee;text-decoration:none;font-weight:600;border-bottom:1px dotted rgba(34,211,238,.45)}
+.cr:hover{text-decoration:none;border-bottom-color:#22d3ee;color:#67e8f9}
+.cr::after{content:" ↗";font-size:10px;color:#64748b}
 .tip{background:rgba(34,211,238,.06);border-left:3px solid #22d3ee;padding:12px 14px;border-radius:8px;margin:10px 0;font-size:13px}
 .good-box{background:rgba(34,197,94,.08);border-left:3px solid #22c55e;padding:12px 14px;border-radius:8px;margin:10px 0;font-size:13px}
 .grid{display:grid;gap:14px}
@@ -48,6 +52,7 @@ footer{margin-top:40px;padding:20px;text-align:center;color:#64748b;font-size:12
 <span>💰 Fonte investimento/vendas Meta: ANEX03 + ANEX07</span>
 <span>📊 Vendas/ROAS VK: VK Metrics</span>
 <span>🎟️ Ticket médio: R$ 88,24</span>
+<span>🔗 Nomes são clicáveis → abrem o criativo no Drive</span>
 </div>
 </header>
 
@@ -60,6 +65,7 @@ footer{margin-top:40px;padding:20px;text-align:center;color:#64748b;font-size:12
 <li><b>ROAS</b> = vendas × ticket médio ÷ spend · <b>CPA</b> = spend ÷ vendas.</li>
 <li><b>Ranking de CPA</b> com piso de <b>5 vendas</b> (evita "CPA barato" de fluke de 1 venda).</li>
 <li>Agregação por criativo (código ADV/ADC/ADI), somando todos os anúncios/conjuntos das duas contas.</li>
+<li>🔗 <b>Cada nome de criativo é um link</b> pro arquivo no Drive (ADC001 abre a pasta do carrossel).</li>
 </ul>
 </div>
 
@@ -68,16 +74,16 @@ footer{margin-top:40px;padding:20px;text-align:center;color:#64748b;font-size:12
 <table>
 <thead><tr><th>#</th><th>Criativo</th><th class="num">Vendas</th><th class="num">Spend</th><th class="num">CPA</th><th class="num">ROAS</th></tr></thead>
 <tbody>
-<tr><td>1</td><td>ADV290 Máq. Prospecção H15/B11 <span class="tag video">vídeo</span></td><td class="num win">149</td><td class="num">R$ 16.861</td><td class="num">R$ 113</td><td class="num warn-txt">0,78</td></tr>
-<tr><td>2</td><td>ADV266 Máq. Conteúdo H09/B14 <span class="tag video">vídeo</span></td><td class="num win">135</td><td class="num">R$ 11.947</td><td class="num">R$ 88</td><td class="num win">1,00</td></tr>
-<tr><td>3</td><td>ADC001 Posta Sem Aparecer <span class="tag carrossel">carrossel</span></td><td class="num win">106</td><td class="num">R$ 10.284</td><td class="num">R$ 97</td><td class="num warn-txt">0,91</td></tr>
-<tr><td>4</td><td>ADV291 Máq. Prospecção H16/B10 <span class="tag video">vídeo</span></td><td class="num">99</td><td class="num">R$ 12.182</td><td class="num">R$ 123</td><td class="num lose">0,72</td></tr>
-<tr><td>5</td><td>ADV255 Clone de Festa H03/B06 <span class="tag video">vídeo</span></td><td class="num">81</td><td class="num">R$ 9.299</td><td class="num">R$ 115</td><td class="num warn-txt">0,77</td></tr>
-<tr><td>6</td><td>ADV253 Clone Zero Tempo H02/B04 <span class="tag video">vídeo</span></td><td class="num">26</td><td class="num">R$ 3.653</td><td class="num">R$ 140</td><td class="num lose">0,63</td></tr>
-<tr><td>7</td><td>ADV293 Máq. Prospecção H18/B12 <span class="tag video">vídeo</span></td><td class="num">25</td><td class="num">R$ 3.596</td><td class="num">R$ 144</td><td class="num lose">0,61</td></tr>
-<tr><td>8</td><td>ADV267 Máq. Conteúdo H10/B14 <span class="tag video">vídeo</span></td><td class="num">19</td><td class="num">R$ 1.948</td><td class="num">R$ 103</td><td class="num warn-txt">0,86</td></tr>
-<tr><td>9</td><td>ADV289 Grok H14/B12 <span class="tag video">vídeo</span></td><td class="num">13</td><td class="num">R$ 2.327</td><td class="num">R$ 179</td><td class="num lose">0,49</td></tr>
-<tr><td>10</td><td>ADV271 Novidade Claude H10/B15 <span class="tag video">vídeo</span></td><td class="num">13</td><td class="num">R$ 1.057</td><td class="num">R$ 81</td><td class="num win">1,09</td></tr>
+<tr><td>1</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1BBbB-1BU59vHgSUFxS2XFYWQOvZ-XSiD/view">ADV290 Máq. Prospecção H15/B11</a> <span class="tag video">vídeo</span></td><td class="num win">149</td><td class="num">R$ 16.861</td><td class="num">R$ 113</td><td class="num warn-txt">0,78</td></tr>
+<tr><td>2</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1rmHLS6K5OuHaZaYZGrh1RhjIN9FxJtt_/view">ADV266 Máq. Conteúdo H09/B14</a> <span class="tag video">vídeo</span></td><td class="num win">135</td><td class="num">R$ 11.947</td><td class="num">R$ 88</td><td class="num win">1,00</td></tr>
+<tr><td>3</td><td><a class="cr" target="_blank" href="https://drive.google.com/drive/folders/1hHMZVwudDeCKvF8O2_t090k_N2Y4wQrt">ADC001 Posta Sem Aparecer</a> <span class="tag carrossel">carrossel</span></td><td class="num win">106</td><td class="num">R$ 10.284</td><td class="num">R$ 97</td><td class="num warn-txt">0,91</td></tr>
+<tr><td>4</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/14UCpiBmwYlHC7s0KI75OGfRB4i-U-Lea/view">ADV291 Máq. Prospecção H16/B10</a> <span class="tag video">vídeo</span></td><td class="num">99</td><td class="num">R$ 12.182</td><td class="num">R$ 123</td><td class="num lose">0,72</td></tr>
+<tr><td>5</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1r7p5SmN2NjIbQsVA6Wy3CERQ7aORN24C/view">ADV255 Clone de Festa H03/B06</a> <span class="tag video">vídeo</span></td><td class="num">81</td><td class="num">R$ 9.299</td><td class="num">R$ 115</td><td class="num warn-txt">0,77</td></tr>
+<tr><td>6</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1hjkamwMxE8XChNIpTY9gGvFI0gSATc8v/view">ADV253 Clone Zero Tempo H02/B04</a> <span class="tag video">vídeo</span></td><td class="num">26</td><td class="num">R$ 3.653</td><td class="num">R$ 140</td><td class="num lose">0,63</td></tr>
+<tr><td>7</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1vjTnto4WMgEoJFKxNRwsOhAXWVlDBNBW/view">ADV293 Máq. Prospecção H18/B12</a> <span class="tag video">vídeo</span></td><td class="num">25</td><td class="num">R$ 3.596</td><td class="num">R$ 144</td><td class="num lose">0,61</td></tr>
+<tr><td>8</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1D0nxCxRSWqgLNPuMK0vSjNeULkkAk20W/view">ADV267 Máq. Conteúdo H10/B14</a> <span class="tag video">vídeo</span></td><td class="num">19</td><td class="num">R$ 1.948</td><td class="num">R$ 103</td><td class="num warn-txt">0,86</td></tr>
+<tr><td>9</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1iASjvRy3zGmpHwEKBocx5IR2-SIyfFYZ/view">ADV289 Grok H14/B12</a> <span class="tag video">vídeo</span></td><td class="num">13</td><td class="num">R$ 2.327</td><td class="num">R$ 179</td><td class="num lose">0,49</td></tr>
+<tr><td>10</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1wmrjpHCMiJonqJXpmo9CXiZtlb9M_0JJ/view">ADV271 Novidade Claude H10/B15</a> <span class="tag video">vídeo</span></td><td class="num">13</td><td class="num">R$ 1.057</td><td class="num">R$ 81</td><td class="num win">1,09</td></tr>
 </tbody>
 </table>
 </div>
@@ -87,16 +93,16 @@ footer{margin-top:40px;padding:20px;text-align:center;color:#64748b;font-size:12
 <table>
 <thead><tr><th>#</th><th>Criativo</th><th class="num">Vendas VK</th><th class="num">Spend</th><th class="num">CPA VK</th><th class="num">ROAS VK</th></tr></thead>
 <tbody>
-<tr><td>1</td><td>ADV290 Máq. Prospecção H15/B11 <span class="tag video">vídeo</span></td><td class="num win">149</td><td class="num">R$ 17.370</td><td class="num">R$ 117</td><td class="num warn-txt">0,76</td></tr>
-<tr><td>2</td><td>ADV266 Máq. Conteúdo H09/B14 <span class="tag video">vídeo</span></td><td class="num win">135</td><td class="num">R$ 12.140</td><td class="num">R$ 90</td><td class="num win">0,98</td></tr>
-<tr><td>3</td><td>ADC001 Posta Sem Aparecer <span class="tag carrossel">carrossel</span></td><td class="num win">107</td><td class="num">R$ 10.557</td><td class="num">R$ 99</td><td class="num warn-txt">0,89</td></tr>
-<tr><td>4</td><td>ADV291 Máq. Prospecção H16/B10 <span class="tag video">vídeo</span></td><td class="num">99</td><td class="num">R$ 12.200</td><td class="num">R$ 123</td><td class="num lose">0,72</td></tr>
-<tr><td>5</td><td>ADV255 Clone de Festa H03/B06 <span class="tag video">vídeo</span></td><td class="num">82</td><td class="num">R$ 9.502</td><td class="num">R$ 116</td><td class="num warn-txt">0,76</td></tr>
-<tr><td>6</td><td>ADV253 Clone Zero Tempo H02/B04 <span class="tag video">vídeo</span></td><td class="num">26</td><td class="num">R$ 3.904</td><td class="num">R$ 150</td><td class="num lose">0,59</td></tr>
-<tr><td>7</td><td>ADV293 Máq. Prospecção H18/B12 <span class="tag video">vídeo</span></td><td class="num">25</td><td class="num">R$ 3.733</td><td class="num">R$ 149</td><td class="num lose">0,59</td></tr>
-<tr><td>8</td><td>ADV267 Máq. Conteúdo H10/B14 <span class="tag video">vídeo</span></td><td class="num">19</td><td class="num">R$ 2.127</td><td class="num">R$ 112</td><td class="num warn-txt">0,79</td></tr>
-<tr><td>9</td><td>ADV289 Grok H14/B12 <span class="tag video">vídeo</span></td><td class="num">13</td><td class="num">R$ 2.565</td><td class="num">R$ 197</td><td class="num lose">0,45</td></tr>
-<tr><td>10</td><td>ADV271 Novidade Claude H10/B15 <span class="tag video">vídeo</span></td><td class="num">13</td><td class="num">R$ 1.285</td><td class="num">R$ 99</td><td class="num warn-txt">0,89</td></tr>
+<tr><td>1</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1BBbB-1BU59vHgSUFxS2XFYWQOvZ-XSiD/view">ADV290 Máq. Prospecção H15/B11</a> <span class="tag video">vídeo</span></td><td class="num win">149</td><td class="num">R$ 17.370</td><td class="num">R$ 117</td><td class="num warn-txt">0,76</td></tr>
+<tr><td>2</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1rmHLS6K5OuHaZaYZGrh1RhjIN9FxJtt_/view">ADV266 Máq. Conteúdo H09/B14</a> <span class="tag video">vídeo</span></td><td class="num win">135</td><td class="num">R$ 12.140</td><td class="num">R$ 90</td><td class="num win">0,98</td></tr>
+<tr><td>3</td><td><a class="cr" target="_blank" href="https://drive.google.com/drive/folders/1hHMZVwudDeCKvF8O2_t090k_N2Y4wQrt">ADC001 Posta Sem Aparecer</a> <span class="tag carrossel">carrossel</span></td><td class="num win">107</td><td class="num">R$ 10.557</td><td class="num">R$ 99</td><td class="num warn-txt">0,89</td></tr>
+<tr><td>4</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/14UCpiBmwYlHC7s0KI75OGfRB4i-U-Lea/view">ADV291 Máq. Prospecção H16/B10</a> <span class="tag video">vídeo</span></td><td class="num">99</td><td class="num">R$ 12.200</td><td class="num">R$ 123</td><td class="num lose">0,72</td></tr>
+<tr><td>5</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1r7p5SmN2NjIbQsVA6Wy3CERQ7aORN24C/view">ADV255 Clone de Festa H03/B06</a> <span class="tag video">vídeo</span></td><td class="num">82</td><td class="num">R$ 9.502</td><td class="num">R$ 116</td><td class="num warn-txt">0,76</td></tr>
+<tr><td>6</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1hjkamwMxE8XChNIpTY9gGvFI0gSATc8v/view">ADV253 Clone Zero Tempo H02/B04</a> <span class="tag video">vídeo</span></td><td class="num">26</td><td class="num">R$ 3.904</td><td class="num">R$ 150</td><td class="num lose">0,59</td></tr>
+<tr><td>7</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1vjTnto4WMgEoJFKxNRwsOhAXWVlDBNBW/view">ADV293 Máq. Prospecção H18/B12</a> <span class="tag video">vídeo</span></td><td class="num">25</td><td class="num">R$ 3.733</td><td class="num">R$ 149</td><td class="num lose">0,59</td></tr>
+<tr><td>8</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1D0nxCxRSWqgLNPuMK0vSjNeULkkAk20W/view">ADV267 Máq. Conteúdo H10/B14</a> <span class="tag video">vídeo</span></td><td class="num">19</td><td class="num">R$ 2.127</td><td class="num">R$ 112</td><td class="num warn-txt">0,79</td></tr>
+<tr><td>9</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1iASjvRy3zGmpHwEKBocx5IR2-SIyfFYZ/view">ADV289 Grok H14/B12</a> <span class="tag video">vídeo</span></td><td class="num">13</td><td class="num">R$ 2.565</td><td class="num">R$ 197</td><td class="num lose">0,45</td></tr>
+<tr><td>10</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1wmrjpHCMiJonqJXpmo9CXiZtlb9M_0JJ/view">ADV271 Novidade Claude H10/B15</a> <span class="tag video">vídeo</span></td><td class="num">13</td><td class="num">R$ 1.285</td><td class="num">R$ 99</td><td class="num warn-txt">0,89</td></tr>
 </tbody>
 </table>
 <div class="tip" style="margin-top:14px"><b>Meta × VK batem:</b> as duas fontes apontam os mesmos 5 criativos no topo, com diferença mínima de contagem — confiança alta na atribuição.</div>
@@ -105,38 +111,38 @@ footer{margin-top:40px;padding:20px;text-align:center;color:#64748b;font-size:12
 <h2>3️⃣ Top 10 — Melhor CPA (mín. 5 vendas)</h2>
 <div class="grid grid-2">
 <div class="card">
-<h3 style="font-size:14px;color:#cbd5e1;margin-bottom:6px">🎯 Melhor CPA no Meta</h3>
+<h3>🎯 Melhor CPA no Meta</h3>
 <table>
 <thead><tr><th>#</th><th>Criativo</th><th class="num">CPA</th><th class="num">Vendas</th><th class="num">ROAS</th></tr></thead>
 <tbody>
-<tr><td>1</td><td>ADI156 Você Produz <span class="tag imagem">imagem</span></td><td class="num win">R$ 19</td><td class="num">5</td><td class="num win">4,71</td></tr>
-<tr><td>2</td><td>ADV272 Novidade Claude H12</td><td class="num win">R$ 72</td><td class="num">5</td><td class="num win">1,22</td></tr>
-<tr><td>3</td><td>ADV259 Clone c/ 1 Foto H05</td><td class="num win">R$ 73</td><td class="num">8</td><td class="num win">1,21</td></tr>
-<tr><td>4</td><td>ADV271 Novidade Claude H10</td><td class="num">R$ 81</td><td class="num">13</td><td class="num win">1,09</td></tr>
-<tr><td>5</td><td>ADV266 Máq. Conteúdo</td><td class="num">R$ 88</td><td class="num">135</td><td class="num win">1,00</td></tr>
-<tr><td>6</td><td>ADC001 Posta Sem Aparecer</td><td class="num">R$ 97</td><td class="num">106</td><td class="num warn-txt">0,91</td></tr>
-<tr><td>7</td><td>ADV273 Novidade Claude H09</td><td class="num">R$ 100</td><td class="num">10</td><td class="num warn-txt">0,89</td></tr>
-<tr><td>8</td><td>ADV267 Máq. Conteúdo</td><td class="num">R$ 103</td><td class="num">19</td><td class="num warn-txt">0,86</td></tr>
-<tr><td>9</td><td>ADV290 Máq. Prospecção</td><td class="num">R$ 113</td><td class="num">149</td><td class="num warn-txt">0,78</td></tr>
-<tr><td>10</td><td>ADV255 Clone de Festa</td><td class="num">R$ 115</td><td class="num">81</td><td class="num warn-txt">0,77</td></tr>
+<tr><td>1</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1hOf7Nf2kdIZQbA4aQFgj3mwtb5OQ_klx/view">ADI156 Você Produz</a> <span class="tag imagem">imagem</span></td><td class="num win">R$ 19</td><td class="num">5</td><td class="num win">4,71</td></tr>
+<tr><td>2</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1B4KPDhY_mQeD9RP9x3Wzh2w42Crxpcoi/view">ADV272 Novidade Claude H12</a></td><td class="num win">R$ 72</td><td class="num">5</td><td class="num win">1,22</td></tr>
+<tr><td>3</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1fQILVUhlPtl8San6Q3Dk46aRRGPZ9Tcw/view">ADV259 Clone c/ 1 Foto H05</a></td><td class="num win">R$ 73</td><td class="num">8</td><td class="num win">1,21</td></tr>
+<tr><td>4</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1wmrjpHCMiJonqJXpmo9CXiZtlb9M_0JJ/view">ADV271 Novidade Claude H10</a></td><td class="num">R$ 81</td><td class="num">13</td><td class="num win">1,09</td></tr>
+<tr><td>5</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1rmHLS6K5OuHaZaYZGrh1RhjIN9FxJtt_/view">ADV266 Máq. Conteúdo</a></td><td class="num">R$ 88</td><td class="num">135</td><td class="num win">1,00</td></tr>
+<tr><td>6</td><td><a class="cr" target="_blank" href="https://drive.google.com/drive/folders/1hHMZVwudDeCKvF8O2_t090k_N2Y4wQrt">ADC001 Posta Sem Aparecer</a></td><td class="num">R$ 97</td><td class="num">106</td><td class="num warn-txt">0,91</td></tr>
+<tr><td>7</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1tXe4FZE2i-DyxgHJx2WbXX7JqU42zU4N/view">ADV273 Novidade Claude H09</a></td><td class="num">R$ 100</td><td class="num">10</td><td class="num warn-txt">0,89</td></tr>
+<tr><td>8</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1D0nxCxRSWqgLNPuMK0vSjNeULkkAk20W/view">ADV267 Máq. Conteúdo</a></td><td class="num">R$ 103</td><td class="num">19</td><td class="num warn-txt">0,86</td></tr>
+<tr><td>9</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1BBbB-1BU59vHgSUFxS2XFYWQOvZ-XSiD/view">ADV290 Máq. Prospecção</a></td><td class="num">R$ 113</td><td class="num">149</td><td class="num warn-txt">0,78</td></tr>
+<tr><td>10</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1r7p5SmN2NjIbQsVA6Wy3CERQ7aORN24C/view">ADV255 Clone de Festa</a></td><td class="num">R$ 115</td><td class="num">81</td><td class="num warn-txt">0,77</td></tr>
 </tbody>
 </table>
 </div>
 <div class="card">
-<h3 style="font-size:14px;color:#cbd5e1;margin-bottom:6px">🎯 Melhor CPA no VK</h3>
+<h3>🎯 Melhor CPA no VK</h3>
 <table>
 <thead><tr><th>#</th><th>Criativo</th><th class="num">CPA</th><th class="num">Vendas</th><th class="num">ROAS</th></tr></thead>
 <tbody>
-<tr><td>1</td><td>ADI156 Você Produz <span class="tag imagem">imagem</span></td><td class="num win">R$ 32</td><td class="num">5</td><td class="num win">2,80</td></tr>
-<tr><td>2</td><td>ADV272 Novidade Claude H12</td><td class="num win">R$ 85</td><td class="num">5</td><td class="num win">1,04</td></tr>
-<tr><td>3</td><td>ADV259 Clone c/ 1 Foto H05</td><td class="num win">R$ 86</td><td class="num">9</td><td class="num win">1,03</td></tr>
-<tr><td>4</td><td>ADV265 Clone Academia H08</td><td class="num">R$ 88</td><td class="num">5</td><td class="num win">1,00</td></tr>
-<tr><td>5</td><td>ADV266 Máq. Conteúdo</td><td class="num">R$ 90</td><td class="num">135</td><td class="num win">0,98</td></tr>
-<tr><td>6</td><td>ADC001 Posta Sem Aparecer</td><td class="num">R$ 99</td><td class="num">107</td><td class="num warn-txt">0,89</td></tr>
-<tr><td>7</td><td>ADV271 Novidade Claude H10</td><td class="num">R$ 99</td><td class="num">13</td><td class="num warn-txt">0,89</td></tr>
-<tr><td>8</td><td>ADV267 Máq. Conteúdo</td><td class="num">R$ 112</td><td class="num">19</td><td class="num warn-txt">0,79</td></tr>
-<tr><td>9</td><td>ADV254 Clone Festa H03/B05</td><td class="num">R$ 116</td><td class="num">5</td><td class="num warn-txt">0,76</td></tr>
-<tr><td>10</td><td>ADV255 Clone de Festa</td><td class="num">R$ 116</td><td class="num">82</td><td class="num warn-txt">0,76</td></tr>
+<tr><td>1</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1hOf7Nf2kdIZQbA4aQFgj3mwtb5OQ_klx/view">ADI156 Você Produz</a> <span class="tag imagem">imagem</span></td><td class="num win">R$ 32</td><td class="num">5</td><td class="num win">2,80</td></tr>
+<tr><td>2</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1B4KPDhY_mQeD9RP9x3Wzh2w42Crxpcoi/view">ADV272 Novidade Claude H12</a></td><td class="num win">R$ 85</td><td class="num">5</td><td class="num win">1,04</td></tr>
+<tr><td>3</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1fQILVUhlPtl8San6Q3Dk46aRRGPZ9Tcw/view">ADV259 Clone c/ 1 Foto H05</a></td><td class="num win">R$ 86</td><td class="num">9</td><td class="num win">1,03</td></tr>
+<tr><td>4</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/178EIlmdXEVQB0TAqDQS-Er9q6H-kOJDr/view">ADV265 Clone Academia H08</a></td><td class="num">R$ 88</td><td class="num">5</td><td class="num win">1,00</td></tr>
+<tr><td>5</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1rmHLS6K5OuHaZaYZGrh1RhjIN9FxJtt_/view">ADV266 Máq. Conteúdo</a></td><td class="num">R$ 90</td><td class="num">135</td><td class="num win">0,98</td></tr>
+<tr><td>6</td><td><a class="cr" target="_blank" href="https://drive.google.com/drive/folders/1hHMZVwudDeCKvF8O2_t090k_N2Y4wQrt">ADC001 Posta Sem Aparecer</a></td><td class="num">R$ 99</td><td class="num">107</td><td class="num warn-txt">0,89</td></tr>
+<tr><td>7</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1wmrjpHCMiJonqJXpmo9CXiZtlb9M_0JJ/view">ADV271 Novidade Claude H10</a></td><td class="num">R$ 99</td><td class="num">13</td><td class="num warn-txt">0,89</td></tr>
+<tr><td>8</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1D0nxCxRSWqgLNPuMK0vSjNeULkkAk20W/view">ADV267 Máq. Conteúdo</a></td><td class="num">R$ 112</td><td class="num">19</td><td class="num warn-txt">0,79</td></tr>
+<tr><td>9</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1HR6pvSmi_5qmiAgYR_tvkA_848Hz0Emw/view">ADV254 Clone Festa H03/B05</a></td><td class="num">R$ 116</td><td class="num">5</td><td class="num warn-txt">0,76</td></tr>
+<tr><td>10</td><td><a class="cr" target="_blank" href="https://drive.google.com/file/d/1r7p5SmN2NjIbQsVA6Wy3CERQ7aORN24C/view">ADV255 Clone de Festa</a></td><td class="num">R$ 116</td><td class="num">82</td><td class="num warn-txt">0,76</td></tr>
 </tbody>
 </table>
 </div>
@@ -145,21 +151,21 @@ footer{margin-top:40px;padding:20px;text-align:center;color:#64748b;font-size:12
 <h2>🧠 Leituras</h2>
 <div class="card good">
 <div class="good-box">
-🏆 <b>ADV266 (Máquina de Conteúdo H09/B14)</b> é o melhor criativo de <b>volume + eficiência</b> combinados: 135 vendas com ROAS 1,00 e CPA ~R$ 88. É o que escalou bonito.
+🏆 <b><a class="cr" target="_blank" href="https://drive.google.com/file/d/1rmHLS6K5OuHaZaYZGrh1RhjIN9FxJtt_/view">ADV266 (Máquina de Conteúdo H09/B14)</a></b> é o melhor criativo de <b>volume + eficiência</b> combinados: 135 vendas com ROAS 1,00 e CPA ~R$ 88. É o que escalou bonito.
 </div>
 <div class="good-box">
-💎 <b>ADI156 (imagem "Você Produz Você Responde")</b> é o <b>CPA campeão absoluto</b> (R$ 19 Meta / R$ 32 VK · ROAS 4,71). Só 5 vendas e baixo spend — vale <b>escalar pra testar se o CPA aguenta volume</b>.
+💎 <b><a class="cr" target="_blank" href="https://drive.google.com/file/d/1hOf7Nf2kdIZQbA4aQFgj3mwtb5OQ_klx/view">ADI156 (imagem "Você Produz Você Responde")</a></b> é o <b>CPA campeão absoluto</b> (R$ 19 Meta / R$ 32 VK · ROAS 4,71). Só 5 vendas e baixo spend — vale <b>escalar pra testar se o CPA aguenta volume</b>.
 </div>
 <div class="good-box">
-🎠 <b>ADC001 (carrossel "Posta Sem Aparecer")</b> sustentou 106-107 vendas com ROAS ~0,90 — confirma o padrão de carrossel forte que reapareceu no LS004.
+🎠 <b><a class="cr" target="_blank" href="https://drive.google.com/drive/folders/1hHMZVwudDeCKvF8O2_t090k_N2Y4wQrt">ADC001 (carrossel "Posta Sem Aparecer")</a></b> sustentou 106-107 vendas com ROAS ~0,90 — confirma o padrão de carrossel forte que reapareceu no LS004.
 </div>
 <div class="tip">
-⚠️ Os "máquina de prospecção" de maior spend (<b>ADV290 / ADV291</b>) puxam volume, mas com ROAS abaixo de 0,78 — bons pra topo de funil, fracos em eficiência. Usar com teto de verba.
+⚠️ Os "máquina de prospecção" de maior spend (<b><a class="cr" target="_blank" href="https://drive.google.com/file/d/1BBbB-1BU59vHgSUFxS2XFYWQOvZ-XSiD/view">ADV290</a> / <a class="cr" target="_blank" href="https://drive.google.com/file/d/14UCpiBmwYlHC7s0KI75OGfRB4i-U-Lea/view">ADV291</a></b>) puxam volume, mas com ROAS abaixo de 0,78 — bons pra topo de funil, fracos em eficiência. Usar com teto de verba.
 </div>
 </div>
 
 <footer>
-LS001 + LS002 · Melhores Criativos · Gerado em 14/06/2026 · Workshop Especialista com IA · Marketex / Ana Tex · Brito Mídias
+LS001 + LS002 · Melhores Criativos · Gerado em 14/06/2026 · Links dos criativos no Drive · Workshop Especialista com IA · Marketex / Ana Tex · Brito Mídias
 </footer>
 
 </body>
