@@ -53,9 +53,42 @@ a{color:#22d3ee;text-decoration:none}a:hover{text-decoration:underline}footer{ma
 <thead><tr><th>Dia</th><th class="num">Spend</th><th class="num">Impressões</th><th class="num">LPV</th><th class="num">Checkout</th><th class="num">Vendas</th><th class="num">CPA</th></tr></thead>
 <tbody><tr><td>13/06</td><td class="num">R$ 422,43</td><td class="num">4.142</td><td class="num">85</td><td class="num">20</td><td class="num">5</td><td class="num">R$ 84</td></tr><tr><td>14/06</td><td class="num">R$ 875,60</td><td class="num">7.939</td><td class="num">198</td><td class="num">52</td><td class="num">11</td><td class="num">R$ 80</td></tr><tr><td>15/06</td><td class="num">R$ 518,93</td><td class="num">4.801</td><td class="num">132</td><td class="num">24</td><td class="num">5</td><td class="num">R$ 104</td></tr></tbody></table></div>
 
+<h2>🔍 O que mudou em cada página (e o que influenciou)</h2>
+<div class="card"><table>
+<thead><tr><th>Página</th><th>Headline (H1)</th><th>CTA</th><th>Urgência / escassez</th><th class="num">Conv.</th></tr></thead>
+<tbody>
+<tr><td><b>V1-2</b> 🏆</td><td>"Em uma semana, domine ChatGPT, Claude para <b>deixar de ser refém da agenda</b>" — foca na DOR concreta (tempo/agenda)</td><td>"QUERO MEU INGRESSO POR R$67"</td><td>"Ingressos limitados" (sem countdown)</td><td class="num win">3,59%</td></tr>
+<tr><td><b>V1-3</b></td><td><b>Igual à V1-2</b> (mesma headline e sub)</td><td><b>Igual</b> "QUERO MEU INGRESSO POR R$67"</td><td>+ <b>countdown ZERADO</b> "00:00:00:00"</td><td class="num lose">1,63%</td></tr>
+<tr><td><b>V1-4</b></td><td><b>Nova:</b> "Em 7 dias, você monta o <b>time de IA</b> que trabalha enquanto você vive" — aspiracional</td><td><b>Mudou:</b> "GARANTIR MINHA VAGA POR R$67" (azul)</td><td>countdown ativo + <b>"87% das vagas preenchidas"</b></td><td class="num warn-txt">2,63%</td></tr>
+<tr><td><b>V1-5</b></td><td><b>Nova:</b> "Você sabe mais que seus concorrentes. E mesmo assim está crescendo menos" — <b>provocação, não cita IA/benefício no H1</b></td><td>"GARANTIR MINHA VAGA POR R$67"</td><td>countdown ativo + "87% das vagas" (3×); <b>bio da Ana Tex movida pra cima</b></td><td class="num lose">1,30%</td></tr>
+</tbody></table></div>
+
+<h2>🧠 Análise — o que provavelmente influenciou o resultado</h2>
+<div class="card bad">
+<div class="alert" style="background:rgba(239,68,68,.08);border-left:3px solid #ef4444;padding:14px 16px;border-radius:8px;font-size:13px;line-height:1.6">
+<b>1. V1-3 isolou um achado forte: countdown zerado destrói conversão.</b> A V1-3 é praticamente <b>idêntica à V1-2</b> — a única mudança relevante é o contador "O EVENTO INICIA EM: <b>00:00:00:00</b>" no topo. Resultado: a conversão despencou de 3,59% → <b>1,63% (-55%)</b>. Um countdown zerado passa a impressão de <b>evento já encerrado / página com bug</b>, e o visitante frio abandona. É o aprendizado mais acionável do teste: contador só entra se estiver funcionando.
+</div>
+</div>
+<div class="card warn">
+<div class="tip" style="margin:0">
+<b>2. V1-4 (2,63%): headline aspiracional + escassez "87%" segura, mas perde da dor concreta.</b> Trocou o H1 para o conceito "time de IA que trabalha por você" e o CTA para "GARANTIR MINHA VAGA", além de adicionar a prova de escassez "87% das vagas preenchidas". Foi a <b>única que chegou perto da V1-2</b> (e até superou na janela recente do LS004). Hipótese: a escassez ajuda, mas a headline conceitual converte um pouco menos que a da V1-2, que ataca uma <b>dor imediata e específica</b> (ser refém da agenda) — tráfego frio responde mais a dor tangível que a conceito.
+</div>
+</div>
+<div class="card bad">
+<div class="tip" style="margin:0">
+<b>3. V1-5 (1,30%, pior de todas): headline provocativa que não entrega a oferta no primeiro impacto.</b> O H1 "você sabe mais que seus concorrentes e cresce menos" é uma <b>provocação/comparação abstrata</b> que <b>não menciona IA, benefício nem o workshop</b> — exige o visitante ler mais pra entender o que está sendo vendido. Somado à reordenação (bio da instrutora antes da estrutura), aumentou o atrito de entendimento. Para tráfego pago frio, headline que não diz "o que é + pra quê" no primeiro segundo derruba a conversão.
+</div>
+</div>
+<div class="card">
+<div class="tip" style="margin:0">⚙️ <b>Variáveis isoladas vs. combinadas:</b> a V1-3 mudou <b>uma coisa só</b> (countdown) → leitura limpa. As V1-4 e V1-5 mudaram <b>3 coisas ao mesmo tempo</b> (headline + CTA + escassez/ordem), então não dá pra creditar o resultado a um único elemento — só à combinação. Por isso o próximo teste [002] (V1-2 vs 4 variações da V1-4) é o caminho certo pra isolar o que na V1-4 funciona.</div>
+</div>
+<div class="card">
+<div class="tip" style="margin:0">📐 <b>Ressalva de leitura:</b> a V1-2 acumula 39k visitas (recebe tráfego de TODAS as campanhas, não só do split [44]), enquanto V1-3/4/5 têm 462–1.255 visitas (só split). A diferença de qualidade de tráfego existe, mas (a) a V1-3 ser quase igual à V1-2 e ainda cair 55% aponta o countdown como causa real, e (b) V1-3/V1-5 estão tão abaixo que o sinal de "piores" é confiável mesmo com amostra menor.</div>
+</div>
+
 <h2>✅ Conclusão e recomendação</h2>
 <div class="card good">
-<div class="good-box">🟢 <b>Manter a V1-2 como página principal.</b> É a que mais converte (3,59%) e com o maior volume validado.</div>
+<div class="good-box">🟢 <b>Manter a V1-2 como página principal.</b> É a que mais converte (3,59%) e com o maior volume validado. Headline de dor concreta + CTA "ingresso" + sem countdown quebrado.</div>
 <div class="tip">🟡 <b>V1-4 merece um round dedicado:</b> empatou/superou a V1-2 na janela recente, mas em amostra pequena. Rodar a [44] com R$200/dia só V1-2 vs V1-4 por 4-5 dias pra ter significância.</div>
 <div class="tip">🔴 <b>Descartar V1-3 e V1-5:</b> 1,63% e 1,30% de conversão, claramente inferiores ao controle. Tirar do split.</div>
 <div class="tip">ℹ️ Já existe um <b>novo teste [002]</b> (criado 10/06): V1-2 vs V1-4-1/4-2/4-3/4-4 — é a evolução correta (foca na variação que ameaçou o controle). Acompanhar esse a seguir.</div>
