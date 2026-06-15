@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MPD · Vendas × UTMs · Out/25 → Jun/26</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0c11;--bg2:#10131c;--card:#161a24;--line:#262b3a;--txt:#e8ecf3;--mute:#8b94a8;--accent:#7c5cff;--accent2:#22d3ee;--good:#22c55e;--warn:#f59e0b;--bad:#ef4444;--gold:#fbbf24;--orange:#fb923c}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'Inter',system-ui,sans-serif;background:radial-gradient(ellipse at top,#1a1f2e 0%,var(--bg) 65%);color:var(--txt);overflow:hidden;-webkit-font-smoothing:antialiased}
+.deck{position:relative;width:100vw;height:100vh;overflow:hidden}
+.slide{position:absolute;inset:0;padding:54px 76px 80px;display:flex;flex-direction:column;opacity:0;transform:translateX(40px);transition:opacity .35s,transform .35s;pointer-events:none;overflow-y:auto}
+.slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+.slide.prev{transform:translateX(-40px)}
+.hud{position:fixed;bottom:18px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:14px;z-index:20;font-size:13px;color:var(--mute)}
+.hud button{background:var(--card);border:1px solid var(--line);color:var(--txt);width:36px;height:36px;border-radius:10px;font-size:18px;cursor:pointer;display:grid;place-items:center;transition:all .15s}
+.hud button:hover{border-color:var(--accent);color:var(--accent)}
+.hud .counter{font-variant-numeric:tabular-nums;min-width:54px;text-align:center}
+.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .35s;z-index:21}
+.brand{position:fixed;top:18px;left:24px;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--mute);z-index:10}
+.brand b{color:var(--accent2);font-weight:700}
+h1{font-size:54px;font-weight:800;letter-spacing:-.02em;line-height:1.05;margin-bottom:18px}
+h1 .grad{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 .orange-grad{background:linear-gradient(135deg,#fb923c 0%,#fbbf24 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 .green-grad{background:linear-gradient(135deg,#22c55e 0%,#86efac 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:34px;font-weight:700;letter-spacing:-.01em;line-height:1.15;margin-bottom:8px}
+h2 .kbd{font-size:13px;color:var(--mute);font-weight:500;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:10px}
+h3{font-size:16px;font-weight:600;color:var(--mute);margin-bottom:12px;letter-spacing:.02em;text-transform:uppercase}
+.lead{font-size:17px;color:var(--mute);max-width:920px;line-height:1.55}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g5{grid-template-columns:repeat(5,1fr)}
+.g6{grid-template-columns:repeat(6,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;display:flex;flex-direction:column;gap:6px}
+.card.elev{box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.card .label{font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:.12em;font-weight:600}
+.card .value{font-size:34px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.05}
+.card .value.sm{font-size:24px}
+.card .sub{font-size:12px;color:var(--mute);line-height:1.4}
+.card.accent{background:linear-gradient(135deg,rgba(124,92,255,.18),rgba(34,211,238,.08));border-color:rgba(124,92,255,.35)}
+.card.good{background:linear-gradient(135deg,rgba(34,197,94,.16),rgba(34,197,94,.04));border-color:rgba(34,197,94,.35)}
+.card.bad{background:linear-gradient(135deg,rgba(239,68,68,.16),rgba(239,68,68,.04));border-color:rgba(239,68,68,.35)}
+.card.warn{background:linear-gradient(135deg,rgba(245,158,11,.16),rgba(245,158,11,.04));border-color:rgba(245,158,11,.35)}
+.card.gold{background:linear-gradient(135deg,rgba(251,191,36,.18),rgba(251,191,36,.05));border-color:rgba(251,191,36,.4)}
+.card.orange{background:linear-gradient(135deg,rgba(251,146,60,.16),rgba(251,191,36,.05));border-color:rgba(251,146,60,.4)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-weight:600;color:var(--mute);text-transform:uppercase;letter-spacing:.08em;font-size:11px;padding:9px 11px;border-bottom:1px solid var(--line)}
+td{padding:10px 11px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums;font-size:13px}
+tr:last-child td{border-bottom:none}
+tr.hl td{background:rgba(124,92,255,.08)}
+tr.gold td{background:rgba(251,191,36,.06)}
+tr.total td{background:rgba(34,211,238,.06);font-weight:700;border-top:2px solid var(--line)}
+.pill{display:inline-block;padding:3px 9px;border-radius:99px;font-size:11px;font-weight:600;letter-spacing:.04em}
+.pill.good{background:rgba(34,197,94,.15);color:#86efac}
+.pill.bad{background:rgba(239,68,68,.15);color:#fca5a5}
+.pill.warn{background:rgba(245,158,11,.15);color:#fcd34d}
+.pill.gold{background:rgba(251,191,36,.15);color:#fde047}
+.pill.orange{background:rgba(251,146,60,.15);color:#fed7aa}
+.bullets{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.bullet{display:flex;gap:14px;align-items:flex-start;padding:11px 14px;border:1px solid var(--line);border-radius:11px;background:var(--bg2)}
+.bullet .num{flex:0 0 28px;height:28px;border-radius:7px;background:var(--accent);color:white;display:grid;place-items:center;font-weight:700;font-size:13px}
+.bullet .t{font-size:13.5px;color:var(--txt);line-height:1.5}
+.bullet .t b{color:var(--accent2)}
+.bullet.good .num{background:var(--good)}
+.bullet.bad .num{background:var(--bad)}
+.bullet.warn .num{background:var(--warn)}
+.bullet.gold .num{background:var(--gold);color:#1a1a1a}
+.bullet.orange .num{background:var(--orange);color:#fff}
+a{color:var(--accent2);text-decoration:none;border-bottom:1px solid rgba(34,211,238,.4)}
+a:hover{border-color:var(--accent2)}
+.play{display:inline-block;width:20px;height:20px;border-radius:6px;background:rgba(34,211,238,.15);color:var(--accent2);font-size:11px;text-align:center;line-height:20px;margin-left:6px;text-decoration:none;border:0;vertical-align:middle}
+.play:hover{background:rgba(34,211,238,.3)}
+.tag{display:inline-block;padding:5px 12px;border:1px solid var(--line);border-radius:99px;font-size:12px;color:var(--mute);margin-bottom:18px;letter-spacing:.04em}
+.tag.orange{border-color:rgba(251,146,60,.5);color:#fed7aa;background:rgba(251,146,60,.08)}
+.tag.green{border-color:rgba(34,197,94,.5);color:#86efac;background:rgba(34,197,94,.08)}
+.meta{display:flex;gap:22px;align-items:center;font-size:13px;color:var(--mute);margin-top:22px;flex-wrap:wrap}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--accent2);display:inline-block;margin:0 6px}
+.bar{display:flex;align-items:center;gap:14px;padding:9px 12px;background:var(--bg2);border-radius:10px;border:1px solid var(--line)}
+.bar .label{flex:0 0 260px;font-size:13px;color:var(--mute)}
+.bar .track{flex:1;height:20px;background:var(--line);border-radius:5px;overflow:hidden;position:relative}
+.bar .track > i{display:block;height:100%;border-radius:5px}
+.bar .val{flex:0 0 110px;text-align:right;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+@media (max-width:1100px){.slide{padding:48px 30px 80px}h1{font-size:40px}h2{font-size:26px}.card .value{font-size:26px}.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:1fr 1fr}.g5,.g6{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="progress" id="prog"></div>
+<div class="brand">MARKETEX · <b>MPD · VENDAS × UTMs</b></div>
+<div class="deck" id="deck">
+
+<!-- 1. COVER -->
+<section class="slide active">
+  <span class="tag orange">Out/25 → Jun/26 · 9 meses · Mentoria Paraíso Digital</span>
+  <h1>397 vendas → R$ 2,22 mi líq.<br><span class="orange-grad">→ 14 vendas atribuídas a tráfego/Manychat via UTM</span></h1>
+  <p class="lead">Cruzamento por email entre vendas Hotmart e aplicações YAY Forms. <b>80% da receita Mentoria veio de canais orgânicos</b> (TP series, zoom ao vivo, indicação). Funil de aplicação MPD com tráfego pago representa <b>4,3% das vendas</b>, mas com casos de ROAS muito alto (ADV50 com 13,87x).</p>
+  <div class="meta">
+    <span>📊 397 vendas Hotmart × 3.609 emails YAY</span><span class="dot"></span>
+    <span>💰 R$ 63.126 invest Meta no período</span><span class="dot"></span>
+    <span>📅 01/10/2025 → 15/06/2026</span>
+  </div>
+</section>
+
+<!-- 2. NÚMEROS PRINCIPAIS -->
+<section class="slide">
+  <h2><span class="kbd">Slide 2 · Big numbers</span>O período em 6 indicadores</h2>
+  <div class="grid g3" style="margin-top:18px">
+    <div class="card accent elev">
+      <div class="label">Vendas totais</div>
+      <div class="value">397</div>
+      <div class="sub">Status Completo + Aprovado</div>
+    </div>
+    <div class="card good elev">
+      <div class="label">Receita líquida total</div>
+      <div class="value">R$ 2,22 mi</div>
+      <div class="sub">Ticket médio R$ 5.594</div>
+    </div>
+    <div class="card warn elev">
+      <div class="label">Investimento Meta</div>
+      <div class="value">R$ 63 mil</div>
+      <div class="sub">Funil de Aplicação MPD</div>
+    </div>
+  </div>
+  <div class="grid g3" style="margin-top:14px">
+    <div class="card elev">
+      <div class="label">Vendas tráfego pago (matched UTM)</div>
+      <div class="value sm">10</div>
+      <div class="sub">R$ 95.450 · 4,3% das vendas · ROAS direto 1,51x</div>
+    </div>
+    <div class="card elev">
+      <div class="label">Vendas orgânicas</div>
+      <div class="value sm">318</div>
+      <div class="sub">R$ 1,74 mi · 80% da receita · TP + zoom + indicação</div>
+    </div>
+    <div class="card bad elev">
+      <div class="label">Vendas sem tracking</div>
+      <div class="value sm">37</div>
+      <div class="sub">R$ 223 mil · 10% da receita sem origem identificável</div>
+    </div>
+  </div>
+  <p class="lead" style="margin-top:18px;font-size:14px">⚠️ A maior parte das vendas tem <b>Origem hotmart vazia</b> mas <b>Origem de Checkout preenchida</b> com TP series (lançamentos antigos do Workshop). Isso indica que MPD é o produto back-end vendido após o TP front-end — o tráfego pago do funil de aplicação serve a uma minoria.</p>
+</section>
+
+<!-- 3. ATRIBUIÇÃO COMPLETA -->
+<section class="slide">
+  <h2><span class="kbd">Slide 3 · Atribuição completa</span>Por origem (matched YAY ou Hotmart)</h2>
+  <p class="lead">Como cada venda foi atribuída: prioridade pra UTM do YAY Forms (se email bateu), fallback pro campo Origem/Origem de Checkout do Hotmart.</p>
+  <table style="margin-top:18px">
+    <thead><tr><th>Origem</th><th>Sub-origem</th><th>Vendas</th><th>%</th><th>Receita líquida</th><th>% receita</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><b>🌱 Orgânico</b></td><td>Checkout TP series (sem YAY)</td><td>284</td><td>71,5%</td><td>R$ 1.637.918</td><td>73,8%</td></tr>
+      <tr><td><b>🌱 Orgânico</b></td><td>YAY (UTM org)</td><td>34</td><td>8,6%</td><td>R$ 106.502</td><td>4,8%</td></tr>
+      <tr><td><b>❓ Sem tracking</b></td><td>Sem UTM e sem checkout</td><td>37</td><td>9,3%</td><td>R$ 222.893</td><td>10,0%</td></tr>
+      <tr><td><b>🛒 Hotmart Product Page</b></td><td>Checkout direto na Hotmart</td><td>26</td><td>6,5%</td><td>R$ 100.709</td><td>4,5%</td></tr>
+      <tr><td><b>🚦 Tráfego pago</b></td><td>YAY (UTM mtads)</td><td>10</td><td>2,5%</td><td>R$ 95.450</td><td>4,3%</td></tr>
+      <tr><td><b>💬 Manychat</b></td><td>Checkout unnichat</td><td>4</td><td>1,0%</td><td>R$ 39.007</td><td>1,8%</td></tr>
+      <tr><td>YAY sem source</td><td>YAY sem UTM</td><td>2</td><td>0,5%</td><td>R$ 18.175</td><td>0,8%</td></tr>
+      <tr class="total"><td colspan="2">TOTAL</td><td>397</td><td>100%</td><td>R$ 2.220.654</td><td>100%</td></tr>
+    </tbody>
+  </table>
+  <div style="margin-top:22px">
+    <h3>Distribuição visual</h3>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">
+      <div class="bar"><div class="label">🌱 Orgânico (TP series + YAY)</div><div class="track"><i style="width:80%;background:#22c55e"></i></div><div class="val">318 · 80,1%</div></div>
+      <div class="bar"><div class="label">❓ Sem tracking</div><div class="track"><i style="width:9.3%;background:#ef4444"></i></div><div class="val">37 · 9,3%</div></div>
+      <div class="bar"><div class="label">🛒 Hotmart Product Page</div><div class="track"><i style="width:6.5%;background:#22d3ee"></i></div><div class="val">26 · 6,5%</div></div>
+      <div class="bar"><div class="label">🚦 Tráfego pago (Meta)</div><div class="track"><i style="width:2.5%;background:#7c5cff"></i></div><div class="val">10 · 2,5%</div></div>
+      <div class="bar"><div class="label">💬 Manychat</div><div class="track"><i style="width:1%;background:#fb923c"></i></div><div class="val">4 · 1,0%</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. EVOLUÇÃO MENSAL -->
+<section class="slide">
+  <h2><span class="kbd">Slide 4 · Evolução mensal</span>Vendas e receita mês a mês</h2>
+  <p class="lead">Janeiro/26 e Abril/26 foram os picos — provavelmente coincidem com janelas de lançamento TP. Tráfego pago só começa a aparecer em janeiro (3 vendas).</p>
+  <table style="margin-top:18px">
+    <thead><tr><th>Mês</th><th>Vendas</th><th>Receita líq.</th><th>Tráfego</th><th>Orgânico</th><th>Manychat</th><th>HPP</th><th>Sem tracking</th></tr></thead>
+    <tbody>
+      <tr><td>Out/25</td><td>40</td><td>R$ 290.157</td><td>0</td><td>39</td><td>0</td><td>0</td><td>1</td></tr>
+      <tr><td>Nov/25</td><td>25</td><td>R$ 75.927</td><td>0</td><td>23</td><td>0</td><td>1</td><td>1</td></tr>
+      <tr><td>Dez/25</td><td>13</td><td>R$ 39.005</td><td>0</td><td>11</td><td>0</td><td>1</td><td>1</td></tr>
+      <tr class="gold"><td><b>Jan/26</b> 🏆</td><td><b>97</b></td><td><b>R$ 706.321</b></td><td>3</td><td>77</td><td>2</td><td>6</td><td>8</td></tr>
+      <tr><td>Fev/26</td><td>41</td><td>R$ 122.716</td><td>3</td><td>28</td><td>0</td><td>6</td><td>4</td></tr>
+      <tr><td>Mar/26</td><td>37</td><td>R$ 65.507</td><td>0</td><td>28</td><td>0</td><td>4</td><td>5</td></tr>
+      <tr class="hl"><td>Abr/26</td><td>79</td><td>R$ 524.506</td><td>1</td><td>64</td><td>0</td><td>4</td><td>10</td></tr>
+      <tr><td>Mai/26</td><td>36</td><td>R$ 162.110</td><td>1</td><td>26</td><td>0</td><td>3</td><td>5</td></tr>
+      <tr><td>Jun/26 (parcial)</td><td>29</td><td>R$ 234.406</td><td>2</td><td>22</td><td>2</td><td>1</td><td>2</td></tr>
+      <tr class="total"><td>TOTAL</td><td>397</td><td>R$ 2.220.654</td><td>10</td><td>318</td><td>4</td><td>26</td><td>37</td></tr>
+    </tbody>
+  </table>
+  <div class="bullets" style="margin-top:14px">
+    <div class="bullet good"><div class="num">📈</div><div class="t"><b>Jan/26</b> foi o melhor mês: 97 vendas / R$ 706k — coincide com janela pós-lançamento Workshop. Tráfego pago já contribuiu com 3 vendas no mês.</div></div>
+    <div class="bullet"><div class="num">📊</div><div class="t"><b>Abr/26</b> com 79 vendas / R$ 524k — segunda janela forte (provável renovação TP).</div></div>
+  </div>
+</section>
+
+<!-- 5. CRIATIVOS QUE VENDERAM (TRÁFEGO) -->
+<section class="slide">
+  <h2><span class="kbd">Slide 5 · Criativos via tráfego pago</span>5 criativos geraram 10 vendas</h2>
+  <p class="lead">Cruzamento por utm_content (criativo) das 10 vendas atribuídas ao tráfego pago. Investimento Meta da coluna E da aba APLIC LEMBRETE CERTO no período completo.</p>
+  <table style="margin-top:18px">
+    <thead><tr><th>Criativo</th><th>Vendas</th><th>Clientes únicos</th><th>Receita líq.</th><th>Investido</th><th>ROAS</th></tr></thead>
+    <tbody>
+      <tr class="gold"><td><b>ADV50</b> · 40 MAIS PROFISSIONAL EXPERIENCIA IA · 1.30 <a href="https://drive.google.com/file/d/1M7NSQT2Jqaft5RtaYyVPYT_3AlkGisls/view" target="_blank" class="play" title="Ver no Drive">▶</a></td><td>6</td><td>4</td><td>R$ 47.925,42</td><td>R$ 3.454,64</td><td><span class="pill good">13,87x</span></td></tr>
+      <tr><td><b>ADV47</b> · CRIAR COM IA · 0.48 <a href="https://drive.google.com/file/d/1cJ4hkysx2jwdjAAcvpfZelHQ7v1l6Zno/view" target="_blank" class="play">▶</a></td><td>1</td><td>1</td><td>R$ 12.011,50</td><td>R$ 10.838,01</td><td><span class="pill warn">1,11x</span></td></tr>
+      <tr><td><b>ADV77</b> · TRABALHA MUITO · 1.24 <a href="https://drive.google.com/file/d/1ft6zWucE4964NPNlt6kqKWJYciD0JoDE/view" target="_blank" class="play">▶</a></td><td>1</td><td>1</td><td>R$ 11.930,81</td><td>R$ 1.857,52</td><td><span class="pill good">6,42x</span></td></tr>
+      <tr><td><b>ADV78</b> · ANOS 80 · 1.17 <a href="https://drive.google.com/file/d/12qt-bO2m_g76wofzVmMlslegGyDpaLc9/view" target="_blank" class="play">▶</a></td><td>1</td><td>1</td><td>R$ 11.930,81</td><td>R$ 10.935,33</td><td><span class="pill warn">1,09x</span></td></tr>
+      <tr><td><b>ADV58</b> · DEPOIMENTO TATA · 1.07 <a href="https://drive.google.com/file/d/1NOg5X2bfbrIAZPYYBB23GKUL12wQAb_Y/view" target="_blank" class="play">▶</a></td><td>1</td><td>1</td><td>R$ 11.651,15</td><td>R$ 2.572,38</td><td><span class="pill good">4,53x</span></td></tr>
+      <tr class="total"><td>TOTAL · 5 criativos</td><td>10</td><td>8</td><td>R$ 95.449,69</td><td>R$ 29.657,88</td><td><b>3,22x</b></td></tr>
+    </tbody>
+  </table>
+  <div class="bullets" style="margin-top:14px">
+    <div class="bullet good"><div class="num">🏆</div><div class="t"><b>ADV50 "40 MAIS PROFISSIONAL EXPERIENCIA IA"</b> é o campeão histórico: 6 transações de 4 clientes únicos (uma delas, Simone Fassarella, parcelou em 3x). ROAS 13,87x — o melhor da carteira.</div></div>
+    <div class="bullet warn"><div class="num">⚠️</div><div class="t"><b>ADV47</b> e <b>ADV78</b>: ROAS ≈ 1,1x. Investimento R$ 10k+ cada com só 1 venda atribuída direta — alto volume de captação mas conversão fraca em receita rastreável.</div></div>
+    <div class="bullet"><div class="num">💡</div><div class="t">Os outros 53 criativos do período (que investiram R$ 33k somados) não geraram vendas matched. Provavelmente trazem leads que convertem por outros canais (orgânico, indireto) ou ciclos mais longos.</div></div>
+  </div>
+</section>
+
+<!-- 6. DETALHE DAS 10 VENDAS TRÁFEGO -->
+<section class="slide">
+  <h2><span class="kbd">Slide 6 · Detalhe das 10 vendas tráfego</span>Quem comprou via UTM mtads</h2>
+  <table style="margin-top:18px">
+    <thead><tr><th>Data venda</th><th>Cliente</th><th>Produto</th><th>Receita líq.</th><th>Criativo</th><th>Público</th></tr></thead>
+    <tbody>
+      <tr><td>25/01/26</td><td>Simone Renata Mendes B.</td><td>MPD</td><td>R$ 12.011,50</td><td>ADV50</td><td>P-ADVANTAGE · Página B</td></tr>
+      <tr><td>25/01/26</td><td>Sulana Mara da Silva</td><td>MPD</td><td>R$ 12.011,50</td><td>ADV47</td><td>P-ADVANTAGE · Página B</td></tr>
+      <tr><td>25/01/26</td><td>Simone Fassarella (1/3)</td><td>MPD</td><td>R$ 3.867,54</td><td>ADV50</td><td>RETARGETING [TP] · Página YAY</td></tr>
+      <tr><td>03/02/26</td><td>Simone Fassarella (2/3)</td><td>MPD</td><td>R$ 3.867,54</td><td>ADV50</td><td>RETARGETING [TP] · Página YAY</td></tr>
+      <tr><td>11/02/26</td><td>Ana Paula Juliatto</td><td>MPD</td><td>R$ 11.651,15</td><td>ADV58</td><td>P-ADVANTAGE · Página B</td></tr>
+      <tr><td>14/02/26</td><td>Simone Fassarella (3/3)</td><td>MPD</td><td>R$ 3.867,54</td><td>ADV50</td><td>RETARGETING [TP] · Página YAY</td></tr>
+      <tr><td>24/04/26</td><td>Maise Patelli</td><td>MPD</td><td>R$ 12.011,50</td><td>ADV50</td><td>P-ADVANTAGE · Página A</td></tr>
+      <tr><td>28/05/26</td><td>Adriana Fonseca</td><td>MPD</td><td>R$ 11.930,81</td><td>ADV78</td><td>ENVOLVIMENTO GERAL · Página A</td></tr>
+      <tr><td>01/06/26</td><td>Timane Pavelkonski</td><td>MPD</td><td>R$ 12.299,80</td><td>ADV50</td><td>P-ADVANTAGE · Página YAY</td></tr>
+      <tr><td>10/06/26</td><td>Priscilla Lopes</td><td>MPD</td><td>R$ 11.930,81</td><td>ADV77</td><td>P-ADVANTAGE · Página A</td></tr>
+      <tr class="total"><td colspan="3">TOTAL · 8 clientes únicos</td><td>R$ 95.449,69</td><td colspan="2">7 P-ADVANTAGE · 3 RETARG · 1 ENV</td></tr>
+    </tbody>
+  </table>
+  <p class="lead" style="margin-top:14px;font-size:13px">📌 <b>Simone Fassarella</b> parcelou em 3x (R$ 3.867 cada). Mesmo lead, mesmo criativo (ADV50). Por isso o ADV50 contabiliza 6 transações de 4 clientes únicos.</p>
+</section>
+
+<!-- 7. CONJUNTOS E CAMPANHAS -->
+<section class="slide">
+  <h2><span class="kbd">Slide 7 · Conjuntos × Campanhas</span>Estrutura que mais vende</h2>
+  <div class="grid g2" style="margin-top:18px;gap:18px">
+    <div>
+      <h3>🎯 Top conjuntos (utm_medium)</h3>
+      <table style="margin-top:8px">
+        <thead><tr><th>Conjunto</th><th>V</th><th>Receita</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td>P-ADVANTAGE · Página B · LEAD GERAL</td><td>2</td><td>R$ 24.023</td></tr>
+          <tr><td>RETARGETING [COMPRADORES TP] · Página YAY</td><td>3</td><td>R$ 11.603</td></tr>
+          <tr><td>P-ADVANTAGE · Página YAY · LEAD GERAL</td><td>1</td><td>R$ 12.300</td></tr>
+          <tr><td>P-ADVANTAGE · Página A · LEAD LEMBRETE CERTO</td><td>1</td><td>R$ 12.012</td></tr>
+          <tr><td>P-ADVANTAGE · Página A</td><td>1</td><td>R$ 11.931</td></tr>
+          <tr><td>ENVOLVIMENTO GERAL IG 365D · Página A</td><td>1</td><td>R$ 11.931</td></tr>
+          <tr><td>P-ADVANTAGE · Página B · LEAD LEMBRETE CERTO</td><td>1</td><td>R$ 11.651</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>🚀 Top campanhas (utm_campaign)</h3>
+      <table style="margin-top:8px">
+        <thead><tr><th>Campanha</th><th>V</th><th>Receita</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td>[15] RETARGETING · LEAD GERAL · CBO</td><td>3</td><td>R$ 11.603</td></tr>
+          <tr><td>[14] P-ADVANTAGE · LEAD GERAL · CBO</td><td>1</td><td>R$ 12.300</td></tr>
+          <tr><td>[16] P-ADVANTAGE · LEAD GERAL</td><td>1</td><td>R$ 12.012</td></tr>
+          <tr><td>[30] P-ADVANTAGE · LEAD LEMBRETE CERTO</td><td>1</td><td>R$ 12.012</td></tr>
+          <tr><td>[37] P-ADVANTAGE · Página A</td><td>1</td><td>R$ 11.931</td></tr>
+          <tr><td>[44] QUENTE · MPD LEAD QUAL 2</td><td>1</td><td>R$ 11.931</td></tr>
+          <tr><td>[18] P-ADVANTAGE · LEAD LEMBRETE CERTO</td><td>1</td><td>R$ 11.651</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="bullets" style="margin-top:18px">
+    <div class="bullet good"><div class="num">🏆</div><div class="t"><b>Público P-ADVANTAGE</b> domina absoluto: 7 das 10 vendas tráfego vieram dele (R$ 71k). Diferenciador claro do funil de aplicação MPD.</div></div>
+    <div class="bullet"><div class="num">🎯</div><div class="t"><b>RETARGETING [COMPRADORES TP]</b> entregou 3 transações da Simone Fassarella (1 cliente parcelando). Sinaliza que retargeting de compradores TP é eficaz pra mentoria.</div></div>
+    <div class="bullet warn"><div class="num">📄</div><div class="t"><b>Página B</b> teve a maior receita por conjunto (R$ 24k em 2 vendas), seguida de Página A (3 vendas / R$ 35k). Página YAY também aparece (3 vendas).</div></div>
+  </div>
+</section>
+
+<!-- 8. VENDAS ORGÂNICAS VIA YAY (34) -->
+<section class="slide">
+  <h2><span class="kbd">Slide 8 · Vendas orgânicas via YAY</span>34 vendas com UTM org</h2>
+  <p class="lead">Vendas cujo email bateu com aplicação YAY tagueada como utm_source=org. Aqui aparecem os canais orgânicos mais fortes: zoom ao vivo, manychat, ig bio.</p>
+  <div class="grid g2" style="margin-top:18px;gap:18px">
+    <div>
+      <h3>🌱 Top utm_medium orgânico</h3>
+      <table style="margin-top:8px">
+        <thead><tr><th>Medium</th><th>V</th><th>Receita</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td>zoom-chat</td><td>11</td><td>R$ 31.461</td></tr>
+          <tr><td>zoom</td><td>10</td><td>R$ 34.159</td></tr>
+          <tr><td>manychat</td><td>9</td><td>R$ 19.972</td></tr>
+          <tr><td>ig-bio</td><td>4</td><td>R$ 20.910</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>🎨 Top criativos orgânicos</h3>
+      <table style="margin-top:8px">
+        <thead><tr><th>Criativo</th><th>V</th><th>Receita</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td>ss-jan260701 (Sala Secreta)</td><td>11</td><td>R$ 31.461</td></tr>
+          <tr><td>salasecreta0041</td><td>9</td><td>R$ 22.974</td></tr>
+          <tr><td>x1 (manychat)</td><td>9</td><td>R$ 19.972</td></tr>
+          <tr><td>anatex (bio)</td><td>4</td><td>R$ 20.910</td></tr>
+          <tr><td>salasecreta0042</td><td>1</td><td>R$ 11.185</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="bullets" style="margin-top:18px">
+    <div class="bullet good"><div class="num">🎙️</div><div class="t"><b>Zoom ao vivo</b> é o canal orgânico mais forte: zoom-chat + zoom puro somam 21 vendas / R$ 65k. Provavelmente conversões durante eventos de lançamento TP.</div></div>
+    <div class="bullet"><div class="num">💬</div><div class="t"><b>Manychat com criativo "x1"</b>: 9 vendas / R$ 19.972 — fluxo automatizado de mensagens entrega ticket médio R$ 2.219.</div></div>
+    <div class="bullet"><div class="num">📷</div><div class="t"><b>"anatex" no IG bio</b>: 4 vendas com ticket médio R$ 5.227 — link na bio do perfil principal converte bem em alta consideração.</div></div>
+  </div>
+</section>
+
+<!-- 9. VENDAS NÃO RASTREADAS + DESAFIOS -->
+<section class="slide">
+  <h2><span class="kbd">Slide 9 · O que escapou da atribuição</span>Sem tracking e Manychat puro</h2>
+  <div class="grid g2" style="margin-top:18px;gap:18px">
+    <div class="card bad elev">
+      <div class="label">❓ Vendas sem tracking</div>
+      <div class="value sm">37 vendas</div>
+      <div class="sub">R$ 222.893 · 10% da receita total. Sem UTM, sem origem checkout, sem match no YAY. Pode incluir vendas via WhatsApp direto, indicação boca-a-boca, link compartilhado fora dos canais oficiais.</div>
+    </div>
+    <div class="card warn elev">
+      <div class="label">💬 Vendas Manychat (sem YAY)</div>
+      <div class="value sm">4 vendas</div>
+      <div class="sub">R$ 39.007 · Detectadas via origem checkout "org_unnichat_*". 2 em jan/26 (abandono e compra cancelada recuperada), 2 em jun/26 (x1-abertura-prioridade).</div>
+    </div>
+  </div>
+  <h3 style="margin-top:24px">Detalhe das 4 vendas Manychat</h3>
+  <table style="margin-top:8px">
+    <thead><tr><th>Data</th><th>Cliente</th><th>Receita</th><th>Origem checkout</th></tr></thead>
+    <tbody>
+      <tr><td>25/01/26</td><td>Giovana Lippi</td><td>R$ 2.396</td><td>org_unnichat_abandono_tp009</td></tr>
+      <tr><td>29/01/26</td><td>EDILAMAR FRANC RUMÇAO</td><td>R$ 12.012</td><td>org_unnichat_compra-cancelada_tp009</td></tr>
+      <tr><td>15/06/26</td><td>Jéssica Christina Zucco</td><td>R$ 12.300</td><td>x1-abertura-prioridade · ls03</td></tr>
+      <tr><td>15/06/26</td><td>Cintia Moiana</td><td>R$ 12.300</td><td>x1-abertura-prioridade · ls03</td></tr>
+    </tbody>
+  </table>
+  <div class="bullets" style="margin-top:18px">
+    <div class="bullet good"><div class="num">♻️</div><div class="t"><b>Unnichat recuperando abandono</b>: 2 vendas em jan/26 que tinham abandonado/cancelado. ROAS infinito — receita resgatada sem custo extra de mídia.</div></div>
+    <div class="bullet"><div class="num">🔥</div><div class="t"><b>x1-abertura-prioridade</b>: 2 vendas em 15/06 mostram que esse fluxo automatizado de abertura prioritária na sala secreta converte alto ticket.</div></div>
+  </div>
+</section>
+
+<!-- 10. INSIGHTS + RECOMENDAÇÕES -->
+<section class="slide">
+  <h2><span class="kbd">Slide 10 · Insights e recomendações</span>O que extrair desse cruzamento</h2>
+  <div class="bullets" style="margin-top:18px">
+    <div class="bullet good"><div class="num">1</div><div class="t"><b>ADV50 é um asset valioso — manter no ar</b>. 13,87x ROAS é raríssimo. Investiu R$ 3,5k, retornou R$ 48k em 9 meses. Vale produzir variações similares ("40 MAIS PROFISSIONAL EXPERIENCIA IA").</div></div>
+    <div class="bullet warn"><div class="num">2</div><div class="t"><b>ADV47 e ADV78 são caros pra venda direta</b>. R$ 21k investidos somados, 2 vendas atribuíveis (R$ 24k). Avaliar se entregam captação de qualidade pra ciclo longo OU se devem ser pausados.</div></div>
+    <div class="bullet"><div class="num">3</div><div class="t"><b>Público P-ADVANTAGE é o ICP do funil de aplicação</b>. 70% das vendas tráfego vieram dele. Concentrar verba aqui.</div></div>
+    <div class="bullet"><div class="num">4</div><div class="t"><b>RETARGETING [COMPRADORES TP]</b> com criativo ADV50 fechou 3 transações da Simone Fassarella. Continuar fazendo retarget de compradores TP — perfil quente pra mentoria.</div></div>
+    <div class="bullet warn"><div class="num">5</div><div class="t"><b>10% da receita (R$ 223k) sem tracking</b>. Vale auditar: investigar se PIX direto, WhatsApp comercial e indicações estão sendo tagueados.</div></div>
+    <div class="bullet"><div class="num">6</div><div class="t"><b>Zoom ao vivo é o maior canal orgânico</b> (R$ 65k em 21 vendas). Próximo evento, garantir UTM padrão (zoom-chat / zoom-qrcode) em todos os links partilhados.</div></div>
+    <div class="bullet good"><div class="num">7</div><div class="t"><b>Unnichat recuperou ~R$ 14k em abandonos/cancelados</b>. Manter e expandir fluxos de "abertura prioridade" e "compra-cancelada" — receita extra praticamente sem custo.</div></div>
+  </div>
+</section>
+
+<!-- 11. RESUMO EXECUTIVO -->
+<section class="slide">
+  <h2><span class="kbd">Slide 11 · Resumo executivo</span>O período em uma página</h2>
+  <div class="grid g2" style="margin-top:18px;gap:18px">
+    <div class="card accent elev">
+      <h3 style="color:var(--accent2)">O que funcionou</h3>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;font-size:14px">
+        <div>🏆 <b>ADV50</b> · ROAS 13,87x (6 vendas / R$ 48k)</div>
+        <div>🎙️ <b>Zoom ao vivo</b> · R$ 65k em 21 vendas orgânicas</div>
+        <div>♻️ <b>Manychat (unnichat)</b> · R$ 39k recuperando abandonos</div>
+        <div>🎯 <b>Público P-ADVANTAGE</b> · 70% das vendas tráfego</div>
+        <div>📈 <b>Jan/26</b> · 97 vendas / R$ 706k (pico do período)</div>
+      </div>
+    </div>
+    <div class="card warn elev">
+      <h3 style="color:#fcd34d">O que precisa atenção</h3>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;font-size:14px">
+        <div>⚠️ <b>ADV47 + ADV78</b> · R$ 21k invest / 2 vendas direct</div>
+        <div>❓ <b>37 vendas (R$ 223k)</b> sem tracking nenhum</div>
+        <div>📋 <b>53 criativos</b> investidos sem venda atribuída</div>
+        <div>🔍 <b>ROAS direto</b> 1,51x subestima por ciclo longo aplicação → venda</div>
+        <div>📊 <b>Funil de aplicação MPD</b> é só 4,3% da receita Mentoria total</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:24px;padding:22px 28px;border-radius:14px;background:linear-gradient(135deg,#7c5cff,#22d3ee);color:white;display:flex;justify-content:space-between;align-items:center">
+    <div>
+      <div style="font-size:13px;opacity:.9;text-transform:uppercase;letter-spacing:.1em;font-weight:600">Decisão principal</div>
+      <div style="font-size:22px;font-weight:800;line-height:1.2;margin-top:4px">Escalar ADV50 · Repensar ADV47/78 · Auditar 37 vendas sem tracking</div>
+    </div>
+  </div>
+  <div class="meta">
+    <span>Marketex · Brito Mídias</span><span class="dot"></span>
+    <span>Mentoria Paraíso Digital</span><span class="dot"></span>
+    <span>Período Out/25 → Jun/26</span><span class="dot"></span>
+    <span>Gerado em 15/06/2026</span>
+  </div>
+</section>
+
+</div>
+
+<div class="hud">
+  <button onclick="go(-1)">‹</button>
+  <span class="counter" id="cnt">1 / 11</span>
+  <button onclick="go(1)">›</button>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+let cur = 0;
+function show(i){
+  cur = (i + slides.length) % slides.length;
+  slides.forEach((s,j)=>{
+    s.classList.remove('active','prev');
+    if(j===cur) s.classList.add('active');
+    else if(j<cur) s.classList.add('prev');
+  });
+  document.getElementById('cnt').textContent = (cur+1)+' / '+slides.length;
+  document.getElementById('prog').style.width = ((cur+1)/slides.length*100)+'%';
+}
+function go(d){ show(cur+d); }
+document.addEventListener('keydown', e => {
+  if(e.key==='ArrowRight'||e.key===' ') go(1);
+  else if(e.key==='ArrowLeft') go(-1);
+  else if(e.key==='Home') show(0);
+  else if(e.key==='End') show(slides.length-1);
+});
+show(0);
+</script>
+</body>
+</html>
