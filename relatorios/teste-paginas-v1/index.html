@@ -21,19 +21,35 @@ a{color:#22d3ee;text-decoration:none}a:hover{text-decoration:underline}footer{ma
 <div style="font-size:14px;color:#cbd5e1">Workshop Especialista com IA · Ana Tex / Marketex · Fonte: VK Metrics (teste A/B + campanha)</div>
 <div class="meta"><span>🧪 Teste: LP | V1-2 ≫ V1-3 ≫ V1-4 ≫ V1-5</span><span>📅 21/05 → 15/06/26</span><span>🎯 Conversão = venda (ingresso)</span><span>🆔 testId oUV9kxSpERupoqCRldOR</span></div></header>
 
-<div class="good-box">🏆 <b>Veredito: a V1-2 é a página vencedora.</b> Com 39.305 visitas converteu a <b>3,59%</b> — acima de todas as alternativas. V1-3 (1,63%) e V1-5 (1,30%) ficaram bem abaixo e devem ser descartadas. A V1-4 (2,63%) é a única que merece um novo teste com volume.</div>
+<div class="good-box">🎯 <b>Veredito (com dados isolados):</b> no <b>período completo</b> a V1-2 parece vencer (3,59%), mas isso é <b>efeito de contaminação</b> — ela recebe o tráfego de TODAS as campanhas, enquanto V1-3/V1-4/V1-5 só recebem o split da [44]. Quando se isola no <b>tráfego pago + janela balanceada (13–15/06)</b>, onde cada página teve ~125 visitas iguais, a ordem se inverte: <b>V1-4 lidera com 4,00%</b>, seguida de V1-5 3,20%, V1-3 3,15% e V1-2 2,88%. Amostra ainda pequena (4–5 vendas/página) → direcional, não conclusivo, mas <b>as variações NÃO são piores que o controle</b> — ao contrário do que o dado bruto sugeria.</div>
 
 <h2>🧪 Resultado do teste A/B — período completo (21/05–15/06)</h2>
 <div class="card"><table>
 <thead><tr><th>Página</th><th class="num">Visitas únicas</th><th class="num">Vendas</th><th class="num">Conversão</th><th>Status</th></tr></thead>
 <tbody><tr><td><b>V1-2</b></td><td class="num">39.305</td><td class="num">1413</td><td class="num win">3.59%</td><td>🏆 vencedora</td></tr><tr><td><b>V1-4</b></td><td class="num">1.255</td><td class="num">33</td><td class="num warn-txt">2.63%</td><td>2º lugar</td></tr><tr><td><b>V1-3</b></td><td class="num">796</td><td class="num">13</td><td class="num lose">1.63%</td><td>fraca</td></tr><tr><td><b>V1-5</b></td><td class="num">462</td><td class="num">6</td><td class="num lose">1.30%</td><td>pior</td></tr></tbody></table>
-<div class="tip">A V1-2 recebe muito mais tráfego porque é a página padrão de <b>todas</b> as campanhas; V1-3/V1-4/V1-5 só recebem o split da campanha [44]. Mesmo assim, em taxa de conversão a V1-2 lidera — as variações não superaram o controle.</div></div>
+<div class="tip">⚠️ <b>Esta tabela é enganosa</b> (todo o tráfego): a V1-2 recebe o tráfego de <b>todas</b> as campanhas + orgânico, enquanto V1-3/V1-4/V1-5 só recebem o split da [44]. Comparar 39k visitas contra 462–1.255 não é justo. Veja abaixo o recorte isolado.</div></div>
 
-<h2>📊 Mesmo teste, só na janela do LS004 (08–15/06)</h2>
+<h2>🎯 Isolado no tráfego pago (vk_source = paid_metaads) — período completo</h2>
 <div class="card"><table>
 <thead><tr><th>Página</th><th class="num">Visitas únicas</th><th class="num">Vendas</th><th class="num">Conversão</th></tr></thead>
-<tbody><tr><td><b>V1-2</b></td><td class="num">5.370</td><td class="num">168</td><td class="num">3.13%</td></tr><tr><td><b>V1-4</b></td><td class="num">145</td><td class="num">5</td><td class="num">3.45%</td></tr><tr><td><b>V1-5</b></td><td class="num">135</td><td class="num">4</td><td class="num">2.96%</td></tr><tr><td><b>V1-3</b></td><td class="num">139</td><td class="num">4</td><td class="num">2.88%</td></tr></tbody></table>
-<div class="tip">Na janela recente as taxas ficam próximas (V1-4 3,45% > V1-2 3,13%), mas as variações têm amostra pequena (135–145 visitas) — diferença ainda <b>sem significância estatística</b>. Não dá pra coroar a V1-4 com esse volume.</div></div>
+<tbody>
+<tr><td><b>V1-2</b></td><td class="num">32.148</td><td class="num">969</td><td class="num win">3,01%</td></tr>
+<tr><td><b>V1-4</b></td><td class="num">1.113</td><td class="num">32</td><td class="num warn-txt">2,88%</td></tr>
+<tr><td><b>V1-3</b></td><td class="num">550</td><td class="num">13</td><td class="num">2,36%</td></tr>
+<tr><td><b>V1-5</b></td><td class="num">302</td><td class="num">6</td><td class="num lose">1,99%</td></tr>
+</tbody></table>
+<div class="tip">Removendo o orgânico, a V1-2 cai de 3,59% → 3,01% e a <b>V1-4 quase encosta (2,88%)</b>. Mas a V1-2 ainda acumula 32k visitas (recebe o tráfego pago de todas as outras campanhas que apontam direto pra ela), então o volume continua desbalanceado.</div></div>
+
+<h2>⚖️ Recorte JUSTO — pago, janela do split balanceado (13–15/06)</h2>
+<div class="card good"><table>
+<thead><tr><th>Página</th><th class="num">Visitas únicas</th><th class="num">Vendas</th><th class="num">Conversão</th><th>—</th></tr></thead>
+<tbody>
+<tr><td><b>V1-4</b></td><td class="num">125</td><td class="num">5</td><td class="num win">4,00%</td><td>🏆 melhor</td></tr>
+<tr><td><b>V1-5</b></td><td class="num">125</td><td class="num">4</td><td class="num win">3,20%</td><td>2º</td></tr>
+<tr><td><b>V1-3</b></td><td class="num">127</td><td class="num">4</td><td class="num win">3,15%</td><td>3º</td></tr>
+<tr><td><b>V1-2</b></td><td class="num">1.562</td><td class="num">45</td><td class="num warn-txt">2,88%</td><td>controle</td></tr>
+</tbody></table>
+<div class="tip">✅ <b>Este é o único comparativo apples-to-apples:</b> só tráfego pago, só os dias em que a [44] distribuiu o split de forma equilibrada (V1-3/4/5 com ~125 visitas cada). Aqui <b>todas as variações superaram a V1-2</b>, com a V1-4 na frente (4,00%). <b>Ressalva forte:</b> 4–5 vendas por página é amostra minúscula — o resultado é <b>direcional</b>, indica "vale escalar o teste", não "a V1-4 venceu".</div></div>
 
 <h2>🚀 Campanha [44] — Split de Páginas (VK Metrics)</h2>
 <div class="card"><table>
@@ -55,43 +71,45 @@ a{color:#22d3ee;text-decoration:none}a:hover{text-decoration:underline}footer{ma
 
 <h2>🔍 O que mudou em cada página (e o que influenciou)</h2>
 <div class="card"><table>
-<thead><tr><th>Página</th><th>Headline (H1)</th><th>CTA</th><th>Urgência / escassez</th><th class="num">Conv.</th></tr></thead>
+<thead><tr><th>Página</th><th>Headline (H1)</th><th>CTA</th><th>Urgência / escassez</th><th class="num">Conv. bruto</th><th class="num">Conv. pago balanc.</th></tr></thead>
 <tbody>
-<tr><td><b>V1-2</b> 🏆</td><td>"Em uma semana, domine ChatGPT, Claude para <b>deixar de ser refém da agenda</b>" — foca na DOR concreta (tempo/agenda)</td><td>"QUERO MEU INGRESSO POR R$67"</td><td>"Ingressos limitados" (sem countdown)</td><td class="num win">3,59%</td></tr>
-<tr><td><b>V1-3</b></td><td><b>Igual à V1-2</b> (mesma headline e sub)</td><td><b>Igual</b> "QUERO MEU INGRESSO POR R$67"</td><td>+ <b>countdown ZERADO</b> "00:00:00:00"</td><td class="num lose">1,63%</td></tr>
-<tr><td><b>V1-4</b></td><td><b>Nova:</b> "Em 7 dias, você monta o <b>time de IA</b> que trabalha enquanto você vive" — aspiracional</td><td><b>Mudou:</b> "GARANTIR MINHA VAGA POR R$67" (azul)</td><td>countdown ativo + <b>"87% das vagas preenchidas"</b></td><td class="num warn-txt">2,63%</td></tr>
-<tr><td><b>V1-5</b></td><td><b>Nova:</b> "Você sabe mais que seus concorrentes. E mesmo assim está crescendo menos" — <b>provocação, não cita IA/benefício no H1</b></td><td>"GARANTIR MINHA VAGA POR R$67"</td><td>countdown ativo + "87% das vagas" (3×); <b>bio da Ana Tex movida pra cima</b></td><td class="num lose">1,30%</td></tr>
-</tbody></table></div>
+<tr><td><b>V1-2</b></td><td>"Em uma semana, domine ChatGPT, Claude para <b>deixar de ser refém da agenda</b>" — foca na DOR concreta (tempo/agenda)</td><td>"QUERO MEU INGRESSO POR R$67"</td><td>"Ingressos limitados" (sem countdown)</td><td class="num">3,59%</td><td class="num warn-txt">2,88%</td></tr>
+<tr><td><b>V1-3</b></td><td><b>Igual à V1-2</b> (mesma headline e sub)</td><td><b>Igual</b> "QUERO MEU INGRESSO POR R$67"</td><td>+ <b>countdown ZERADO</b> "00:00:00:00"</td><td class="num lose">1,63%</td><td class="num win">3,15%</td></tr>
+<tr><td><b>V1-4</b> 🏆</td><td><b>Nova:</b> "Em 7 dias, você monta o <b>time de IA</b> que trabalha enquanto você vive" — aspiracional</td><td><b>Mudou:</b> "GARANTIR MINHA VAGA POR R$67" (azul)</td><td>countdown ativo + <b>"87% das vagas preenchidas"</b></td><td class="num warn-txt">2,63%</td><td class="num win">4,00%</td></tr>
+<tr><td><b>V1-5</b></td><td><b>Nova:</b> "Você sabe mais que seus concorrentes. E mesmo assim está crescendo menos" — <b>provocação, não cita IA/benefício no H1</b></td><td>"GARANTIR MINHA VAGA POR R$67"</td><td>countdown ativo + "87% das vagas" (3×); <b>bio da Ana Tex movida pra cima</b></td><td class="num lose">1,30%</td><td class="num win">3,20%</td></tr>
+</tbody></table>
+<div class="tip"><b>Conv. bruto</b> = todo o tráfego (contaminado, V1-2 inflada). <b>Conv. pago balanceado</b> = só pago, janela 13–15/06 com split equilibrado (~125 visitas/página) — a leitura justa. Note como a ordem muda completamente entre as duas colunas.</div></div>
 
 <h2>🧠 Análise — o que provavelmente influenciou o resultado</h2>
 <div class="card bad">
 <div class="alert" style="background:rgba(239,68,68,.08);border-left:3px solid #ef4444;padding:14px 16px;border-radius:8px;font-size:13px;line-height:1.6">
-<b>1. V1-3 isolou um achado forte: countdown zerado destrói conversão.</b> A V1-3 é praticamente <b>idêntica à V1-2</b> — a única mudança relevante é o contador "O EVENTO INICIA EM: <b>00:00:00:00</b>" no topo. Resultado: a conversão despencou de 3,59% → <b>1,63% (-55%)</b>. Um countdown zerado passa a impressão de <b>evento já encerrado / página com bug</b>, e o visitante frio abandona. É o aprendizado mais acionável do teste: contador só entra se estiver funcionando.
+<b>1. Atenção: a hipótese do "countdown zerado mata a conversão" NÃO se confirma no dado isolado.</b> No bruto a V1-3 parecia despencar (1,63%), mas isolando no pago balanceado ela converteu <b>3,15%</b> — acima da V1-2 (2,88%). Ou seja, o 1,63% era <b>artefato de tráfego</b> (visitas de baixa qualidade fora da janela do split), não da página. O countdown zerado pode até atrapalhar, mas <b>os dados não provam isso</b>. Fica como ponto de atenção visual a corrigir, não como causa comprovada.
 </div>
 </div>
 <div class="card warn">
 <div class="tip" style="margin:0">
-<b>2. V1-4 (2,63%): headline aspiracional + escassez "87%" segura, mas perde da dor concreta.</b> Trocou o H1 para o conceito "time de IA que trabalha por você" e o CTA para "GARANTIR MINHA VAGA", além de adicionar a prova de escassez "87% das vagas preenchidas". Foi a <b>única que chegou perto da V1-2</b> (e até superou na janela recente do LS004). Hipótese: a escassez ajuda, mas a headline conceitual converte um pouco menos que a da V1-2, que ataca uma <b>dor imediata e específica</b> (ser refém da agenda) — tráfego frio responde mais a dor tangível que a conceito.
+<b>2. V1-4 é a que mais promete: headline "time de IA" + escassez "87% das vagas" lideraram o recorte justo (4,00%).</b> Trocou o H1 para o conceito "time de IA que trabalha por você", o CTA para "GARANTIR MINHA VAGA" e adicionou a prova de escassez "87% das vagas preenchidas". No pago balanceado foi a <b>melhor de todas</b> (4,00% vs 2,88% da V1-2). A escassez explícita é a hipótese mais provável do ganho — mas com 5 vendas em 125 visitas, é sinal pra <b>escalar o teste</b>, não veredito.
 </div>
 </div>
 <div class="card bad">
 <div class="tip" style="margin:0">
-<b>3. V1-5 (1,30%, pior de todas): headline provocativa que não entrega a oferta no primeiro impacto.</b> O H1 "você sabe mais que seus concorrentes e cresce menos" é uma <b>provocação/comparação abstrata</b> que <b>não menciona IA, benefício nem o workshop</b> — exige o visitante ler mais pra entender o que está sendo vendido. Somado à reordenação (bio da instrutora antes da estrutura), aumentou o atrito de entendimento. Para tráfego pago frio, headline que não diz "o que é + pra quê" no primeiro segundo derruba a conversão.
+<b>3. V1-5: a headline mais arriscada, mas no recorte justo segurou (3,20%).</b> O H1 "você sabe mais que seus concorrentes e cresce menos" é uma <b>provocação/comparação abstrata</b> que <b>não menciona IA nem o workshop</b> no primeiro impacto — risco real de atrito pra tráfego frio. No bruto despencou (1,30%), mas no pago balanceado fez 3,20% (acima da V1-2). Veredito: a hipótese de "headline abstrata atrapalha" <b>não se sustentou</b> nos dados isolados; segue valendo um teste maior antes de descartar.
 </div>
 </div>
 <div class="card">
-<div class="tip" style="margin:0">⚙️ <b>Variáveis isoladas vs. combinadas:</b> a V1-3 mudou <b>uma coisa só</b> (countdown) → leitura limpa. As V1-4 e V1-5 mudaram <b>3 coisas ao mesmo tempo</b> (headline + CTA + escassez/ordem), então não dá pra creditar o resultado a um único elemento — só à combinação. Por isso o próximo teste [002] (V1-2 vs 4 variações da V1-4) é o caminho certo pra isolar o que na V1-4 funciona.</div>
+<div class="tip" style="margin:0">⚙️ <b>Variáveis isoladas vs. combinadas:</b> a V1-3 mudou <b>uma coisa só</b> (countdown); V1-4 e V1-5 mudaram <b>3 ao mesmo tempo</b> (headline + CTA + escassez/ordem). Com a amostra atual (4–5 vendas/página) não dá pra creditar nada a um elemento isolado. Por isso o teste [002] (V1-2 vs 4 variações da V1-4) é o caminho certo pra isolar o que na V1-4 funciona.</div>
 </div>
 <div class="card">
-<div class="tip" style="margin:0">📐 <b>Ressalva de leitura:</b> a V1-2 acumula 39k visitas (recebe tráfego de TODAS as campanhas, não só do split [44]), enquanto V1-3/4/5 têm 462–1.255 visitas (só split). A diferença de qualidade de tráfego existe, mas (a) a V1-3 ser quase igual à V1-2 e ainda cair 55% aponta o countdown como causa real, e (b) V1-3/V1-5 estão tão abaixo que o sinal de "piores" é confiável mesmo com amostra menor.</div>
+<div class="tip" style="margin:0">📐 <b>O grande aprendizado deste relatório é metodológico:</b> o dado bruto do teste A/B do VK <b>engana</b> quando uma das páginas é o destino padrão de todas as campanhas. Sempre isolar por <b>fonte (pago) + janela de split balanceado</b> antes de concluir. A coluna "bruto" e a "pago balanceado" deram <b>rankings opostos</b>.</div>
 </div>
 
 <h2>✅ Conclusão e recomendação</h2>
 <div class="card good">
-<div class="good-box">🟢 <b>Manter a V1-2 como página principal.</b> É a que mais converte (3,59%) e com o maior volume validado. Headline de dor concreta + CTA "ingresso" + sem countdown quebrado.</div>
-<div class="tip">🟡 <b>V1-4 merece um round dedicado:</b> empatou/superou a V1-2 na janela recente, mas em amostra pequena. Rodar a [44] com R$200/dia só V1-2 vs V1-4 por 4-5 dias pra ter significância.</div>
-<div class="tip">🔴 <b>Descartar V1-3 e V1-5:</b> 1,63% e 1,30% de conversão, claramente inferiores ao controle. Tirar do split.</div>
-<div class="tip">ℹ️ Já existe um <b>novo teste [002]</b> (criado 10/06): V1-2 vs V1-4-1/4-2/4-3/4-4 — é a evolução correta (foca na variação que ameaçou o controle). Acompanhar esse a seguir.</div>
+<div class="good-box">🟢 <b>No recorte justo (pago, split balanceado), a V1-4 lidera (4,00%) e as 3 variações superaram a V1-2 (2,88%).</b> Mas com 4–5 vendas por página, é sinal <b>direcional</b> — manter a V1-2 como padrão por enquanto e <b>escalar o teste antes de trocar</b>.</div>
+<div class="tip">🟡 <b>Prioridade: escalar a [44] com volume.</b> Rodar V1-2 vs V1-4 (e talvez V1-3/V1-5) com R$300–400/dia por ~7 dias pra cada página acumular 800–1.000 visitas e dar significância estatística.</div>
+<div class="tip">🧪 <b>Hipótese a confirmar:</b> a escassez explícita ("87% das vagas") da V1-4/V1-5 parece ser o ganho — vale testar adicioná-la também à V1-2.</div>
+<div class="tip">🔵 <b>Não descartar V1-3/V1-5 ainda</b> — a queda delas era artefato de tráfego, não da página. Manter no split até ter volume.</div>
+<div class="tip">ℹ️ Já existe o <b>novo teste [002]</b> (criado 10/06): V1-2 vs V1-4-1/4-2/4-3/4-4 — é a evolução correta (foca na V1-4, a vencedora direcional). Acompanhar esse a seguir, sempre lendo no recorte pago.</div>
 </div>
 <footer>Teste de páginas V1-2→V1-5 + Campanha [44] · Gerado em 15/06/2026 · Fonte VK Metrics (teste A/B oUV9kxSpERupoqCRldOR + campanha [44]) · Marketex / Ana Tex · Brito Mídias</footer>
 </body></html>
