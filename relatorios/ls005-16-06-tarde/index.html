@@ -99,7 +99,7 @@ ul li{margin:6px 0}
 
 <div class="card" style="background:rgba(250,204,21,.06);border-color:rgba(250,204,21,.3);margin-bottom:18px">
 <h3 style="color:#facc15;margin:0 0 6px 0">⚙️ Definição de "vendas" usada neste relatório</h3>
-<p style="font-size:13px;color:#cbd5e1;margin:0">Todas as métricas usam <b>vendas = ingresso Workshop</b> (não inclui bumps). No funil VK, os "Vendas paid" são <b>ingressos Workshop atribuídos ao Meta</b> (62), não a soma de todos os produtos paid (91). No funil Meta (pixel) o valor mostrado é o número de transações atribuídas, que é o que o Meta Ads Manager mostra. Bumps (Acesso Premium, Fotos, Palestra) aparecem separados no bloco "Vendas + Order Bumps".</p>
+<p style="font-size:13px;color:#cbd5e1;margin:0"><b>Vendas / CPA = ingresso Workshop</b> (não inclui bumps). <b>Ticket médio e ROAS = consideram receita total paid</b> (ingresso + bumps que vieram junto). Vendas paid VK = só Workshop (62 ingressos, não a soma de todos os produtos paid). Pixel Meta = transações atribuídas (Meta Ads Manager). Bumps aparecem separados em "Vendas + Order Bumps".</p>
 </div>
 
 <h2>📊 Quadro Geral</h2>
@@ -190,8 +190,8 @@ ul li{margin:6px 0}
 <div class="rfblock-metrics">
 <div class="rfmetric"><span class="l">Transações pixel</span><span class="v">74</span></div>
 <div class="rfmetric"><span class="l">CPA Meta</span><span class="v">R$ 109</span></div>
-<div class="rfmetric"><span class="l">ROAS estim.</span><span class="v">0,94</span></div>
-<div class="rfmetric"><span class="l">Ticket transação</span><span class="v">R$ 102,45</span></div>
+<div class="rfmetric"><span class="l">ROAS Tráfego</span><span class="v">0,78</span></div>
+<div class="rfmetric"><span class="l">Ticket médio</span><span class="v">R$ 102,45</span></div>
 </div>
 </div>
 
@@ -251,7 +251,7 @@ ul li{margin:6px 0}
 <div class="rfmetric"><span class="l">Ingressos paid</span><span class="v">62</span></div>
 <div class="rfmetric"><span class="l">CPA Ingresso</span><span class="v">R$ 131</span></div>
 <div class="rfmetric"><span class="l">ROAS Tráfego</span><span class="v">0,78</span></div>
-<div class="rfmetric"><span class="l">Ticket ingresso</span><span class="v">R$ 67,00</span></div>
+<div class="rfmetric"><span class="l">Ticket médio</span><span class="v">R$ 102,45</span></div>
 </div>
 </div>
 
@@ -313,7 +313,7 @@ ul li{margin:6px 0}
 </table>
 </div>
 
-<h3>💎 Top por ROAS estimado (vendas pixel × ticket transação R$ 102,45 ÷ spend c/imp)</h3>
+<h3>💎 Top por ROAS estimado (vendas pixel × ticket médio R$ 102,45 ÷ spend c/imp)</h3>
 <div class="card">
 <table>
 <tr><th>#</th><th>Criativo</th><th class="num">ROAS estim.</th><th class="num">Receita imp.</th><th class="num">Spend c/i</th><th>Drive</th></tr>
@@ -322,7 +322,7 @@ ul li{margin:6px 0}
 <tr><td>3</td><td>ADC001 POSTA SEM APARECER</td><td class="num">0,83</td><td class="num">R$ 3.074</td><td class="num">R$ 3.696</td><td><a href="https://drive.google.com/drive/folders/1FaPinScATsxhgJ9hTSxpb1LZvfLqmioP" target="_blank" class="drive-btn">📁</a></td></tr>
 <tr><td>4</td><td>ADV291 PROSPECCAO HOOK16</td><td class="num">0,31</td><td class="num">R$ 205</td><td class="num">R$ 671</td><td><a href="https://drive.google.com/file/d/14UCpiBmwYlHC7s0KI75OGfRB4i-U-Lea/view" target="_blank" class="drive-btn">🎬</a></td></tr>
 </table>
-<div style="background:rgba(34,211,238,.06);border-left:3px solid #22d3ee;padding:10px 12px;border-radius:6px;margin-top:8px;font-size:12px">⚙️ Ticket de R$ 102,45 = receita TOTAL paid (R$ 6.352) ÷ ingressos paid (62). Captura ingresso + bumps que vieram junto na mesma transação. ADC004 com ROAS 1,37 = único criativo positivo do LS005.</div>
+<div style="background:rgba(34,211,238,.06);border-left:3px solid #22d3ee;padding:10px 12px;border-radius:6px;margin-top:8px;font-size:12px">⚙️ <b>Ticket médio = R$ 102,45</b> = receita TOTAL paid (R$ 6.352, ingresso + bumps Acesso Premium/Fotos/Palestra) ÷ ingressos paid (62). É um só ticket médio — sempre considera receita gerada pelo Meta (incluindo bumps), por ingresso vendido. ADC004 com ROAS 1,37 = único criativo positivo do LS005.</div>
 </div>
 
 <h2>🧪 Páginas A/B (V1-2 → V1-5)</h2>
@@ -362,7 +362,7 @@ ul li{margin:6px 0}
 <li><b>D2 CPA ingresso R$ 109</b> — primeiro dia do LS005 abaixo da meta R$ 120.</li>
 <li><b>Carrosséis 67 das 74 transações pixel (90,5%)</b>.</li>
 <li><b>Conv. bumps sobre Workshop = 53,16%</b> — mais da metade compra ao menos 1 bump.</li>
-<li><b>Acesso Premium puxando ticket transação pra R$ 102,45</b> (vs R$ 67 só ingresso).</li>
+<li><b>Ticket médio R$ 102,45</b> — receita total paid (ingresso + bumps) ÷ ingressos paid. Acesso Premium puxando muito.</li>
 </ul>
 </div>
 
