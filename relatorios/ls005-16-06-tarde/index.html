@@ -49,7 +49,6 @@ a:hover{text-decoration:underline}
 ul{margin-left:18px;font-size:14px;color:#cbd5e1}
 ul li{margin:6px 0}
 
-/* === FUNIL VISUAL REAL (largura decrescente) === */
 .funnel-cols{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 @media(max-width:1100px){.funnel-cols{grid-template-columns:1fr}}
 .funnel-col{display:flex;flex-direction:column;align-items:center;gap:0}
@@ -65,8 +64,6 @@ ul li{margin:6px 0}
 .rfmetric.star{background:linear-gradient(135deg,rgba(34,197,94,.18),rgba(34,211,238,.12));border:1px solid rgba(34,197,94,.3)}
 .rfmetric.star .v{color:#4ade80;font-size:14px}
 .rfarrow{font-size:24px;color:rgba(124,92,255,.45);margin:6px 0;line-height:1}
-
-/* Larguras decrescentes simulando funil */
 .rfblock.b1{width:100%}
 .rfblock.b2{width:88%}
 .rfblock.b3{width:74%}
@@ -75,7 +72,6 @@ ul li{margin:6px 0}
 @media(max-width:1100px){
   .rfblock.b1{width:100%}.rfblock.b2{width:92%}.rfblock.b3{width:84%}.rfblock.b4{width:76%}.rfblock.b5{width:68%}
 }
-
 .rfblock.public{border-top:3px solid #7c5cff}
 .rfblock.ad{border-top:3px solid #22d3ee}
 .rfblock.page{border-top:3px solid #facc15}
@@ -92,11 +88,16 @@ ul li{margin:6px 0}
 <div class="meta">
 <span>📅 LS005: 15–21/06/26</span>
 <span>📍 D2 · 16/06 tarde</span>
-<span>🕘 Atualizado 16/06 às 18:35</span>
+<span>🕘 Atualizado 16/06 às 18:50</span>
 <span>📊 Fonte: VK Metrics</span>
 <span>💰 Imposto Meta +13,83%</span>
 </div>
 </header>
+
+<div class="card" style="background:rgba(250,204,21,.06);border-color:rgba(250,204,21,.3);margin-bottom:18px">
+<h3 style="color:#facc15;margin:0 0 6px 0">⚙️ Definição de "vendas" usada neste relatório</h3>
+<p style="font-size:13px;color:#cbd5e1;margin:0">Todas as métricas usam <b>vendas = ingresso Workshop</b> (não inclui bumps). No funil VK, os "Vendas paid" são <b>ingressos Workshop atribuídos ao Meta</b> (62), não a soma de todos os produtos paid (91). No funil Meta (pixel) o valor mostrado é o número de transações atribuídas, que é o que o Meta Ads Manager mostra. Bumps (Acesso Premium, Fotos, Palestra) aparecem separados no bloco "Vendas + Order Bumps".</p>
+</div>
 
 <h2>📊 Quadro Geral</h2>
 <div class="grid grid-4">
@@ -123,19 +124,19 @@ ul li{margin:6px 0}
 </div>
 
 <div class="card good" style="margin-top:14px">
-<div class="kpi">🏆 Vendas Workshop (ingresso)</div>
+<div class="kpi">🏆 Vendas Workshop (ingresso · todas as origens)</div>
 <div class="val" style="color:#4ade80">79</div>
-<div class="sub">15,8% da meta · faltam <b style="color:#f1f5f9">421</b> ingressos pra bater 500</div>
+<div class="sub">15,8% da meta · faltam <b style="color:#f1f5f9">421</b> ingressos pra bater 500 · <b>62 vieram do Meta</b> (paid_metaads) · 17 do orgânico</div>
 </div>
 
 <h2>🌊 Funil Visual</h2>
-<p style="font-size:13px;color:#94a3b8;margin-bottom:14px">Funil em formato real — largura decrescente representa o afunilamento da jornada. Métricas correlacionadas agrupadas em cada bloco.</p>
+<p style="font-size:13px;color:#94a3b8;margin-bottom:14px">Funil com largura decrescente. Métricas correlacionadas agrupadas por etapa. <b>Vendas no funil VK = só Workshop (ingresso)</b>, não inclui bumps.</p>
 
 <div class="funnel-cols">
 
 <!-- COLUNA META -->
 <div class="funnel-col">
-<div class="funnel-col-title">📊 Funil Meta (vendas via pixel)</div>
+<div class="funnel-col-title">📊 Funil Meta (vendas via pixel · transações)</div>
 
 <div class="rfblock public b1">
 <div class="rfblock-head"><span class="ico">🎯</span><span class="title">Público</span></div>
@@ -182,12 +183,12 @@ ul li{margin:6px 0}
 <div class="rfarrow">▼</div>
 
 <div class="rfblock sales b5">
-<div class="rfblock-head"><span class="ico">🎫</span><span class="title">Vendas Ingresso</span></div>
+<div class="rfblock-head"><span class="ico">🎫</span><span class="title">Vendas (pixel)</span></div>
 <div class="rfblock-metrics">
-<div class="rfmetric"><span class="l">Vendas pixel</span><span class="v">74</span></div>
+<div class="rfmetric"><span class="l">Transações pixel</span><span class="v">74</span></div>
 <div class="rfmetric"><span class="l">CPA Meta</span><span class="v">R$ 109</span></div>
-<div class="rfmetric"><span class="l">ROAS estim.</span><span class="v">0,64</span></div>
-<div class="rfmetric"><span class="l">Ticket</span><span class="v">R$ 69,80</span></div>
+<div class="rfmetric"><span class="l">ROAS estim.</span><span class="v">0,94</span></div>
+<div class="rfmetric"><span class="l">Ticket transação</span><span class="v">R$ 102,45</span></div>
 </div>
 </div>
 
@@ -195,7 +196,7 @@ ul li{margin:6px 0}
 
 <!-- COLUNA VK -->
 <div class="funnel-col">
-<div class="funnel-col-title">📊 Funil VK Metrics (atribuído)</div>
+<div class="funnel-col-title">📊 Funil VK Metrics (só INGRESSO Workshop)</div>
 
 <div class="rfblock public b1">
 <div class="rfblock-head"><span class="ico">🎯</span><span class="title">Público</span></div>
@@ -225,7 +226,7 @@ ul li{margin:6px 0}
 <div class="rfblock-metrics">
 <div class="rfmetric"><span class="l">LPV</span><span class="v">1.553</span></div>
 <div class="rfmetric"><span class="l">Custo / LPV</span><span class="v">R$ 5,21</span></div>
-<div class="rfmetric star"><span class="l">Conv. página → venda</span><span class="v">5,86%</span></div>
+<div class="rfmetric star"><span class="l">Conv. página → venda</span><span class="v">3,99%</span></div>
 </div>
 </div>
 <div class="rfarrow">▼</div>
@@ -235,19 +236,19 @@ ul li{margin:6px 0}
 <div class="rfblock-metrics">
 <div class="rfmetric"><span class="l">Checkouts</span><span class="v">320</span></div>
 <div class="rfmetric"><span class="l">Custo / IC</span><span class="v">R$ 25,29</span></div>
-<div class="rfmetric"><span class="l">Conv. check → venda</span><span class="v">28,44%</span></div>
+<div class="rfmetric"><span class="l">Conv. check → venda</span><span class="v">19,38%</span></div>
 <div class="rfmetric"><span class="l">Conv. bumps</span><span class="v">53,16%</span></div>
 </div>
 </div>
 <div class="rfarrow">▼</div>
 
 <div class="rfblock sales b5">
-<div class="rfblock-head"><span class="ico">🎫</span><span class="title">Vendas Ingresso</span></div>
+<div class="rfblock-head"><span class="ico">🎫</span><span class="title">Ingresso WS</span></div>
 <div class="rfblock-metrics">
-<div class="rfmetric"><span class="l">Vendas paid</span><span class="v">91</span></div>
-<div class="rfmetric"><span class="l">CPA VK</span><span class="v">R$ 89</span></div>
-<div class="rfmetric"><span class="l">ROAS Tráf.</span><span class="v">0,78</span></div>
-<div class="rfmetric"><span class="l">Ticket</span><span class="v">R$ 69,80</span></div>
+<div class="rfmetric"><span class="l">Ingressos paid</span><span class="v">62</span></div>
+<div class="rfmetric"><span class="l">CPA Ingresso</span><span class="v">R$ 131</span></div>
+<div class="rfmetric"><span class="l">ROAS Tráfego</span><span class="v">0,78</span></div>
+<div class="rfmetric"><span class="l">Ticket ingresso</span><span class="v">R$ 67,00</span></div>
 </div>
 </div>
 
@@ -260,34 +261,35 @@ ul li{margin:6px 0}
 <table>
 <tr><th>Produto</th><th class="num">ID</th><th class="num">Qtd</th><th class="num">Receita</th><th class="num">% s/ ingresso WS</th></tr>
 <tr><td>🏆 <b>Workshop Especialista com IA</b> <span class="tag">INGRESSO</span></td><td class="num" style="font-size:10px">7689363</td><td class="num"><b>79</b></td><td class="num"><b>R$ 5.297</b></td><td class="num">—</td></tr>
-<tr style="background:rgba(34,197,94,.05)"><td><b>Acesso Premium Especialista com IA</b> <span class="tag good">bump premium ★ novo</span></td><td class="num" style="font-size:10px">7909367</td><td class="num">17</td><td class="num win">R$ 2.159</td><td class="num">21,5%</td></tr>
+<tr style="background:rgba(34,197,94,.05)"><td><b>Acesso Premium Especialista com IA</b> <span class="tag good">bump premium</span></td><td class="num" style="font-size:10px">7909367</td><td class="num">17</td><td class="num win">R$ 2.159</td><td class="num">21,5%</td></tr>
 <tr><td>Fotos com IA <span class="tag good">bump</span></td><td class="num" style="font-size:10px">6148609</td><td class="num">14</td><td class="num">R$ 868</td><td class="num">17,7%</td></tr>
 <tr><td>Palestra em Minutos <span class="tag good">bump</span></td><td class="num" style="font-size:10px">7690167</td><td class="num">10</td><td class="num">R$ 500</td><td class="num">12,7%</td></tr>
 <tr><td>Fotos Acesso estendido <span class="tag good">bump</span></td><td class="num" style="font-size:10px">6662362</td><td class="num">1</td><td class="num">R$ 50</td><td class="num">1,3%</td></tr>
 <tr class="tot"><td colspan="2"><b>TOTAL bumps</b></td><td class="num"><b>42</b></td><td class="num"><b>R$ 3.577</b></td><td class="num win"><b>53,16%</b></td></tr>
 </table>
-<div style="background:rgba(34,197,94,.08);border-left:3px solid #22c55e;padding:10px 12px;border-radius:6px;margin-top:8px;font-size:13px">🎉 <b>Acesso Premium descoberto e contabilizado!</b> 17 vendas a R$ 127 cada = R$ 2.159. Sobe o ticket médio de R$ 64,24 → <b>R$ 69,80</b> e leva ROAS Geral pra <b>1,10</b> (exposição vira POSITIVA: +R$ 164).</div>
+<div style="background:rgba(34,197,94,.08);border-left:3px solid #22c55e;padding:10px 12px;border-radius:6px;margin-top:8px;font-size:13px">🎉 <b>Acesso Premium contabilizado.</b> 17 vendas a R$ 127 cada = R$ 2.159. Puxa receita total pra R$ 8.874 e leva ROAS Geral pra <b>1,10</b> (exposição POSITIVA +R$ 164).</div>
 </div>
 
-<h2>🌍 Vendas por Origem (VK Metrics)</h2>
+<h2>🌍 Vendas por Origem (INGRESSO Workshop)</h2>
 <div class="card">
 <table>
-<tr><th>Origem</th><th class="num">Vendas</th><th class="num">Receita</th><th class="num">%</th></tr>
-<tr><td><b>Pago (Meta)</b></td><td class="num"><b>91</b></td><td class="num"><b>R$ 6.352</b></td><td class="num">71,6%</td></tr>
-<tr><td><b>Orgânico (total)</b></td><td class="num"><b>30</b></td><td class="num"><b>R$ 2.522</b></td><td class="num">28,4%</td></tr>
-<tr><td style="padding-left:24px;color:#94a3b8;font-size:11px">↳ IG bio</td><td class="num">11</td><td class="num">R$ 736</td><td class="num">8,3%</td></tr>
-<tr><td style="padding-left:24px;color:#94a3b8;font-size:11px">↳ Não atribuído (null)</td><td class="num">14</td><td class="num">R$ 1.456</td><td class="num">16,4%</td></tr>
-<tr><td style="padding-left:24px;color:#94a3b8;font-size:11px">↳ Unnichat agente-ia</td><td class="num">4</td><td class="num">R$ 263</td><td class="num">3,0%</td></tr>
-<tr><td style="padding-left:24px;color:#94a3b8;font-size:11px">↳ ManyChat anatex</td><td class="num">1</td><td class="num">R$ 67</td><td class="num">0,8%</td></tr>
+<tr><th>Origem</th><th class="num">Ingressos</th><th class="num">Receita ingresso</th><th class="num">% ingressos</th></tr>
+<tr><td><b>Pago (Meta paid_metaads)</b></td><td class="num"><b>62</b></td><td class="num"><b>R$ 4.154</b></td><td class="num">78,5%</td></tr>
+<tr><td><b>Orgânico (total)</b></td><td class="num"><b>17</b></td><td class="num"><b>R$ 1.143</b></td><td class="num">21,5%</td></tr>
+<tr><td style="padding-left:24px;color:#94a3b8;font-size:11px">↳ IG bio</td><td class="num">10</td><td class="num">R$ 674</td><td class="num">12,7%</td></tr>
+<tr><td style="padding-left:24px;color:#94a3b8;font-size:11px">↳ Unnichat agente-ia</td><td class="num">3</td><td class="num">R$ 201</td><td class="num">3,8%</td></tr>
+<tr><td style="padding-left:24px;color:#94a3b8;font-size:11px">↳ Não atribuído (null)</td><td class="num">3</td><td class="num">R$ 201</td><td class="num">3,8%</td></tr>
+<tr><td style="padding-left:24px;color:#94a3b8;font-size:11px">↳ ManyChat anatex</td><td class="num">1</td><td class="num">R$ 67</td><td class="num">1,3%</td></tr>
 </table>
+<div style="background:rgba(34,211,238,.06);border-left:3px solid #22d3ee;padding:10px 12px;border-radius:6px;margin-top:8px;font-size:12px">Receita TOTAL paid_metaads (ingresso + bumps): R$ 6.352 = R$ 4.154 ingresso + R$ 1.016 Acesso Premium + R$ 682 Fotos + R$ 500 Palestra. Esse é o número que entra no ROAS Tráfego (0,78).</div>
 </div>
 
-<h2>🎨 Top Criativos LS005 (D1–D2 18:35)</h2>
+<h2>🎨 Top Criativos LS005 (D1–D2 18:50)</h2>
 
-<h3>🚀 Top por vendas de ingresso (pixel Meta)</h3>
+<h3>🚀 Top por vendas (transações pixel)</h3>
 <div class="card">
 <table>
-<tr><th>#</th><th>Criativo</th><th class="num">Vendas</th><th class="num">Spend</th><th class="num">CPA c/imp</th><th class="num">CTR</th><th class="num">Hook</th><th>Drive</th></tr>
+<tr><th>#</th><th>Criativo</th><th class="num">Vendas pixel</th><th class="num">Spend</th><th class="num">CPA c/imp</th><th class="num">CTR</th><th class="num">Hook</th><th>Drive</th></tr>
 <tr style="background:rgba(34,197,94,.08)"><td>1</td><td><b>ADC004 EQUIPE DE CONTEUDO ROBO</b> <span class="tag good">carrossel</span></td><td class="num"><b>37</b></td><td class="num">R$ 2.437</td><td class="num win"><b>R$ 74,98</b></td><td class="num">1,54%</td><td class="num">—</td><td><a href="https://drive.google.com/drive/folders/1LJBOoIhiARA2ooRjTFe74oGhnaHM8pCD" target="_blank" class="drive-btn">📁 abrir</a></td></tr>
 <tr><td>2</td><td><b>ADC001 POSTA SEM APARECER</b> <span class="tag good">carrossel</span></td><td class="num">30</td><td class="num">R$ 3.247</td><td class="num">R$ 123,21</td><td class="num">2,22%</td><td class="num">—</td><td><a href="https://drive.google.com/drive/folders/1FaPinScATsxhgJ9hTSxpb1LZvfLqmioP" target="_blank" class="drive-btn">📁 abrir</a></td></tr>
 <tr><td>3</td><td>ADV290 PROSPECCAO HOOK15</td><td class="num win">4</td><td class="num">R$ 376</td><td class="num win"><b>R$ 107,00</b></td><td class="num">1,76%</td><td class="num">16,5%</td><td><a href="https://drive.google.com/file/d/1BBbB-1BU59vHgSUFxS2XFYWQOvZ-XSiD/view" target="_blank" class="drive-btn">🎬 abrir</a></td></tr>
@@ -299,22 +301,23 @@ ul li{margin:6px 0}
 <h3>💸 Top por menor CPA (mín. 3 vendas)</h3>
 <div class="card good">
 <table>
-<tr><th>#</th><th>Criativo</th><th class="num">CPA c/imp</th><th class="num">Vendas</th><th class="num">Spend</th><th>Drive</th><th>Status</th></tr>
+<tr><th>#</th><th>Criativo</th><th class="num">CPA c/imp</th><th class="num">Vendas pixel</th><th class="num">Spend</th><th>Drive</th><th>Status</th></tr>
 <tr><td>🥇</td><td><b>ADC004 EQUIPE DE CONTEUDO ROBO</b> <span class="tag good">carrossel</span></td><td class="num win"><b>R$ 75</b></td><td class="num">37</td><td class="num">R$ 2.437</td><td><a href="https://drive.google.com/drive/folders/1LJBOoIhiARA2ooRjTFe74oGhnaHM8pCD" target="_blank" class="drive-btn">📁</a></td><td>Abaixo da meta · escalar</td></tr>
 <tr><td>🥈</td><td><b>ADV290 PROSPECCAO HOOK15</b> <span class="tag good">vídeo</span></td><td class="num win"><b>R$ 107</b></td><td class="num">4</td><td class="num">R$ 376</td><td><a href="https://drive.google.com/file/d/1BBbB-1BU59vHgSUFxS2XFYWQOvZ-XSiD/view" target="_blank" class="drive-btn">🎬</a></td><td>Abaixo da meta · monitorar</td></tr>
-<tr><td>🥉</td><td><b>ADC001 POSTA SEM APARECER</b> <span class="tag good">carrossel</span></td><td class="num">R$ 123</td><td class="num">30</td><td class="num">R$ 3.247</td><td><a href="https://drive.google.com/drive/folders/1FaPinScATsxhgJ9hTSxpb1LZvfLqmioP" target="_blank" class="drive-btn">📁</a></td><td>3% acima da meta · manter</td></tr>
+<tr><td>🥉</td><td><b>ADC001 POSTA SEM APARECER</b> <span class="tag good">carrossel</span></td><td class="num">R$ 123</td><td class="num">30</td><td class="num">R$ 3.247</td><td><a href="https://drive.google.com/drive/folders/1FaPinScATsxhgJ9hTSxpb1LZvfLqmioP" target="_blank" class="drive-btn">📁</a></td><td>3% acima · manter</td></tr>
 </table>
 </div>
 
-<h3>💎 Top por ROAS estimado (vendas × ticket R$ 69,80 ÷ spend c/imp)</h3>
+<h3>💎 Top por ROAS estimado (vendas pixel × ticket transação R$ 102,45 ÷ spend c/imp)</h3>
 <div class="card">
 <table>
 <tr><th>#</th><th>Criativo</th><th class="num">ROAS estim.</th><th class="num">Receita imp.</th><th class="num">Spend c/i</th><th>Drive</th></tr>
-<tr><td>🏆</td><td><b>ADC004 EQUIPE DE CONTEUDO ROBO</b></td><td class="num win"><b>0,93</b></td><td class="num">R$ 2.583</td><td class="num">R$ 2.774</td><td><a href="https://drive.google.com/drive/folders/1LJBOoIhiARA2ooRjTFe74oGhnaHM8pCD" target="_blank" class="drive-btn">📁</a></td></tr>
-<tr><td>2</td><td><b>ADV290 PROSPECCAO HOOK15</b></td><td class="num win"><b>0,65</b></td><td class="num">R$ 279</td><td class="num">R$ 428</td><td><a href="https://drive.google.com/file/d/1BBbB-1BU59vHgSUFxS2XFYWQOvZ-XSiD/view" target="_blank" class="drive-btn">🎬</a></td></tr>
-<tr><td>3</td><td>ADC001 POSTA SEM APARECER</td><td class="num">0,57</td><td class="num">R$ 2.094</td><td class="num">R$ 3.696</td><td><a href="https://drive.google.com/drive/folders/1FaPinScATsxhgJ9hTSxpb1LZvfLqmioP" target="_blank" class="drive-btn">📁</a></td></tr>
-<tr><td>4</td><td>ADV291 PROSPECCAO HOOK16</td><td class="num">0,21</td><td class="num">R$ 140</td><td class="num">R$ 671</td><td><a href="https://drive.google.com/file/d/14UCpiBmwYlHC7s0KI75OGfRB4i-U-Lea/view" target="_blank" class="drive-btn">🎬</a></td></tr>
+<tr><td>🏆</td><td><b>ADC004 EQUIPE DE CONTEUDO ROBO</b></td><td class="num win"><b>1,37</b></td><td class="num">R$ 3.791</td><td class="num">R$ 2.774</td><td><a href="https://drive.google.com/drive/folders/1LJBOoIhiARA2ooRjTFe74oGhnaHM8pCD" target="_blank" class="drive-btn">📁</a></td></tr>
+<tr><td>2</td><td><b>ADV290 PROSPECCAO HOOK15</b></td><td class="num win"><b>0,96</b></td><td class="num">R$ 410</td><td class="num">R$ 428</td><td><a href="https://drive.google.com/file/d/1BBbB-1BU59vHgSUFxS2XFYWQOvZ-XSiD/view" target="_blank" class="drive-btn">🎬</a></td></tr>
+<tr><td>3</td><td>ADC001 POSTA SEM APARECER</td><td class="num">0,83</td><td class="num">R$ 3.074</td><td class="num">R$ 3.696</td><td><a href="https://drive.google.com/drive/folders/1FaPinScATsxhgJ9hTSxpb1LZvfLqmioP" target="_blank" class="drive-btn">📁</a></td></tr>
+<tr><td>4</td><td>ADV291 PROSPECCAO HOOK16</td><td class="num">0,31</td><td class="num">R$ 205</td><td class="num">R$ 671</td><td><a href="https://drive.google.com/file/d/14UCpiBmwYlHC7s0KI75OGfRB4i-U-Lea/view" target="_blank" class="drive-btn">🎬</a></td></tr>
 </table>
+<div style="background:rgba(34,211,238,.06);border-left:3px solid #22d3ee;padding:10px 12px;border-radius:6px;margin-top:8px;font-size:12px">⚙️ Ticket de R$ 102,45 = receita TOTAL paid (R$ 6.352) ÷ ingressos paid (62). Captura ingresso + bumps que vieram junto na mesma transação. ADC004 com ROAS 1,37 = único criativo positivo do LS005.</div>
 </div>
 
 <h2>🧪 Páginas A/B (V1-2 → V1-5)</h2>
@@ -326,22 +329,21 @@ ul li{margin:6px 0}
 <tr><td>V1-5</td><td class="num">131</td><td class="num">4</td><td class="num">3,05%</td><td><a href="https://lp.lucrocomia.com.br/ws-especialista-com-ia/v1-5" target="_blank">v1-5 ↗</a></td></tr>
 <tr><td>V1-3</td><td class="num lose">115</td><td class="num lose">0</td><td class="num lose">0%</td><td><a href="https://lp.lucrocomia.com.br/ws-especialista-com-ia/v1-3" target="_blank">v1-3 ↗</a></td></tr>
 </table>
-<div style="background:rgba(34,211,238,.06);border-left:3px solid #22d3ee;padding:10px 12px;border-radius:6px;margin-top:8px;font-size:12px">⚠️ Dados agregados (todas as campanhas). Pra leitura limpa do split, filtrar pelo nome `[XX] TESTE A/B` quando Rafael informar a campanha do LS005.</div>
 </div>
 
-<h2>📈 Comparativo Dia-a-Dia</h2>
+<h2>📈 Comparativo Dia-a-Dia (vendas = ingresso Workshop paid_metaads)</h2>
 <div class="card scroll-x">
 <table>
 <thead>
-<tr><th>Dia</th><th>Data</th><th class="num">CPM</th><th class="num">CTR</th><th class="num">Hook vídeo</th><th class="num">Conv. pág→venda</th><th class="num">Conv. check→venda</th><th class="num">Vendas pixel</th><th class="num">CPA</th><th class="num">ROAS Tráfego</th></tr>
+<tr><th>Dia</th><th>Data</th><th class="num">CPM</th><th class="num">CTR</th><th class="num">Hook vídeo</th><th class="num">Conv. pág→venda</th><th class="num">Conv. check→venda</th><th class="num">Ingressos paid</th><th class="num">CPA ingresso</th><th class="num">ROAS Tráfego</th></tr>
 </thead>
 <tbody>
-<tr><td>D1</td><td>15/06 dom</td><td class="num">R$ 75,20</td><td class="num">1,95%</td><td class="num">15,9%</td><td class="num">4,53%</td><td class="num">23,16%</td><td class="num">41</td><td class="num">R$ 104</td><td class="num">0,62</td></tr>
-<tr><td>D2 <span class="tag warn">parcial 18:35</span></td><td>16/06 seg</td><td class="num">R$ 78,35</td><td class="num">1,72%</td><td class="num">15,0%</td><td class="num win">5,09%</td><td class="num">23,08%</td><td class="num">33</td><td class="num win">R$ 116</td><td class="num win">0,97</td></tr>
-<tr class="tot"><td colspan="2"><b>Total LS005</b></td><td class="num">R$ 87,25</td><td class="num">1,85%</td><td class="num">15,5%</td><td class="num">4,76%</td><td class="num">23,13%</td><td class="num">74</td><td class="num">R$ 109</td><td class="num">0,78</td></tr>
+<tr><td>D1</td><td>15/06 dom</td><td class="num">R$ 75,20</td><td class="num">1,95%</td><td class="num">15,9%</td><td class="num">2,98%</td><td class="num">15,25%</td><td class="num">27</td><td class="num lose">R$ 158</td><td class="num">0,62</td></tr>
+<tr><td>D2 <span class="tag warn">parcial 18:50</span></td><td>16/06 seg</td><td class="num">R$ 78,35</td><td class="num">1,72%</td><td class="num">15,0%</td><td class="num win">5,40%</td><td class="num win">24,48%</td><td class="num">35</td><td class="num win">R$ 109</td><td class="num win">0,97</td></tr>
+<tr class="tot"><td colspan="2"><b>Total LS005</b></td><td class="num">R$ 87,25</td><td class="num">1,85%</td><td class="num">15,5%</td><td class="num">3,99%</td><td class="num">19,38%</td><td class="num">62</td><td class="num">R$ 131</td><td class="num">0,78</td></tr>
 </tbody>
 </table>
-<div style="background:rgba(34,197,94,.08);border-left:3px solid #22c55e;padding:10px 12px;border-radius:6px;margin-top:8px;font-size:12px">✅ D2 escalou: 33 vendas pixel · ROAS Tráfego 0,97 (vs 0,62 D1) · CPA R$ 116 (abaixo da meta R$ 120) · Conv. página 5,09%. <b>Acesso Premium adicionado:</b> 17 vendas / R$ 2.159 puxam ROAS Geral pra 1,10 (exposição POSITIVA).</div>
+<div style="background:rgba(34,197,94,.08);border-left:3px solid #22c55e;padding:10px 12px;border-radius:6px;margin-top:8px;font-size:12px">✅ <b>D2 explodiu:</b> 35 ingressos paid (vs 27 D1) · CPA R$ 109 (abaixo da meta R$ 120!) · ROAS Tráfego 0,97 (vs 0,62 D1). Curva subindo bem.</div>
 </div>
 
 <h2>🧠 Análises</h2>
@@ -349,13 +351,13 @@ ul li{margin:6px 0}
 <div class="card good">
 <h3>🟢 MUITO BOM (replicar)</h3>
 <ul>
-<li><b>🎉 EXPOSIÇÃO POSITIVA +R$ 164</b> — graças à descoberta do Acesso Premium (17 vendas · R$ 2.159 · ticket R$ 127). ROAS Geral 1,10.</li>
-<li><b>🏆 ADC004 EQUIPE DE CONTEUDO ROBO</b>: 37 vendas com CPA R$ 75 (37% abaixo da meta). <b>Escalar 2-3× amanhã</b>.</li>
-<li><b>ADV290 HOOK15</b>: 4 vendas com CPA R$ 107 (vídeo finalmente saindo do zero). Manter rodando + variar hook.</li>
-<li><b>ADC001 POSTA SEM APARECER</b>: 30 vendas, CPA R$ 123 (3% acima da meta). Volume forte — manter.</li>
-<li><b>D2 com CPA R$ 116 (abaixo da meta R$ 120)</b> — primeiro dia do LS005 batendo.</li>
-<li><b>Carrosséis 67 das 74 vendas pixel (90,5%)</b> — formato vencedor reconfirmado.</li>
-<li><b>Conv. bumps SOBRE Workshop = 53,16%</b> — mais da metade dos compradores leva pelo menos 1 order bump. Excelente.</li>
+<li><b>🎉 EXPOSIÇÃO POSITIVA +R$ 164</b> — Acesso Premium puxando 17 vendas / R$ 2.159. ROAS Geral 1,10.</li>
+<li><b>🏆 ADC004 EQUIPE DE CONTEUDO ROBO</b>: 37 vendas pixel · CPA R$ 75 · ROAS estim. 1,37. <b>Escalar 2-3× amanhã</b>.</li>
+<li><b>ADV290 HOOK15</b>: 4 vendas · CPA R$ 107 · ROAS 0,96. Primeiro vídeo do LS005 funcionando. Manter e variar hooks.</li>
+<li><b>D2 CPA ingresso R$ 109</b> — primeiro dia do LS005 abaixo da meta R$ 120.</li>
+<li><b>Carrosséis 67 das 74 transações pixel (90,5%)</b>.</li>
+<li><b>Conv. bumps sobre Workshop = 53,16%</b> — mais da metade compra ao menos 1 bump.</li>
+<li><b>Acesso Premium puxando ticket transação pra R$ 102,45</b> (vs R$ 67 só ingresso).</li>
 </ul>
 </div>
 
@@ -363,36 +365,37 @@ ul li{margin:6px 0}
 <h3>🟡 NÃO MEXER</h3>
 <ul>
 <li>Página V1-2 (4,35% conv) — dominante, manter split.</li>
-<li>ADC001 (CPA R$ 123, 3% acima meta) — volume importante, segue.</li>
-<li>ADV290 HOOK15 funcionando agora — não mexer, deixar Meta aprender.</li>
-<li>Estratégia "todos os bumps no checkout" — confirmado eficiente (53% adesão).</li>
+<li>ADC001 (CPA R$ 123, 3% acima da meta) — volume importante, manter.</li>
+<li>ADV290 funcionando agora — não mexer, deixar Meta aprender.</li>
+<li>Estratégia "todos os bumps no checkout" — funciona (53% adesão).</li>
 </ul>
 </div>
 
 <div class="card bad">
 <h3>🔴 RUIM + como melhorar</h3>
 <ul>
-<li><b>ROAS Tráfego 0,78</b> — abaixo de 1,0. Caminho: escalar carrosséis ADC004 + ADC001.</li>
-<li><b>ADV291 HOOK16 CPA R$ 335</b> — vídeo caro. <b>Reduzir budget 60%</b>.</li>
-<li><b>ADV293 HOOK18 ainda com 0 vendas em R$ 64 spend</b> — era campeão do LS004. Pode ser problema de atribuição. Investigar.</li>
-<li><b>Hook vídeo 15,5%</b> — ainda saturado. Precisa de variações HOOK09 e novos temas.</li>
-<li><b>Página V1-3 com 0 conversões em 115 visitas</b> — tirar do split.</li>
+<li><b>CPA ingresso D1 R$ 158 e total R$ 131</b> — acima da meta R$ 120. Caminho: continuar escalando carrosséis vencedores.</li>
+<li><b>ADV291 HOOK16 CPA R$ 335</b> — vídeo caro, reduzir budget 60%.</li>
+<li><b>ADV293 HOOK18 0 vendas em R$ 64 spend</b> — era campeão do LS004. Investigar atribuição.</li>
+<li><b>Hook vídeo 15,5%</b> ainda saturado. Precisa de variações HOOK09/novos temas.</li>
+<li><b>Conv. página → venda só 3,99%</b> (era 4,35% LS001). Página V1-2 cansada. V2 urgente pro LS006.</li>
+<li><b>V1-3 com 0 conversões em 115 visitas</b> — tirar do split.</li>
 </ul>
 </div>
 
 <div class="card">
-<h3>🛠️ Ações tomadas (em rastreamento)</h3>
+<h3>🛠️ Ações tomadas</h3>
 <ul>
-<li>5 campanhas estrutura Léo rodando desde sexta.</li>
+<li>5 campanhas estrutura Léo rodando.</li>
 <li>Carrosséis ADC001 + ADC004 ativos e escalando.</li>
-<li>Split de páginas V1-2/3/4/5 ativo.</li>
-<li>Padrão Hooks/Body/CTAs em construção.</li>
-<li><b>★ Produto Acesso Premium (ID 7909367) agora considerado como bump</b> em todos os relatórios.</li>
+<li>Split V1-2/3/4/5 ativo.</li>
+<li>Acesso Premium (ID 7909367) agora incluído nos relatórios.</li>
+<li><b>★ Correção: vendas paid VK agora filtra produto Workshop (ID 7689363)</b> — não soma mais bumps.</li>
 </ul>
 </div>
 
 <div style="text-align:center;margin-top:40px;color:#475569;font-size:12px">
-Gerado em 16/06/26 às 18:35 · Fonte VK Metrics · 5 produtos considerados: Workshop + Acesso Premium + Fotos + Palestra + Fotos Acesso
+Gerado em 16/06/26 às 18:50 · Fonte VK Metrics · Vendas = ingresso Workshop · Bumps separados
 </div>
 
 </body>
