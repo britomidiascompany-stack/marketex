@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sala Secreta — Relatório Completo · Abr × Mai × Jun 2026 (atualizado 24/06)</title>
+<style>
+  :root {
+    --bg: #0b0f17;
+    --card: #131a24;
+    --card-2: #1a2332;
+    --border: #243044;
+    --text: #e8edf3;
+    --muted: #8b96a8;
+    --accent: #00d4a8;
+    --accent-2: #6ea8ff;
+    --warn: #ffb84d;
+    --bad: #ff6e6e;
+    --good: #4ade80;
+    --purple: #a78bfa;
+    --abr: #6ea8ff;
+    --mai: #00d4a8;
+    --jun: #a78bfa;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.55; font-size: 15px; }
+  a { color: var(--accent-2); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 32px 24px 80px; }
+  .back { display:inline-block;color:var(--muted);font-size:13px;margin-bottom:16px;text-decoration:none; }
+  .back:hover { color: var(--accent); }
+
+  header { background: linear-gradient(135deg, #2d0f1b 0%, #401a27 60%, #1a0e16 100%); border-radius: 18px; padding: 36px 32px; margin-bottom: 32px; border: 1px solid var(--border); }
+  header .eyebrow { color: var(--bad); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
+  header h1 { margin: 8px 0 6px; font-size: 32px; font-weight: 700; letter-spacing: -0.5px; }
+  header .sub { color: var(--muted); font-size: 15px; }
+  header .summary { margin-top: 18px; padding-top: 18px; border-top: 1px solid #243044; color: #cdd5e0; font-size: 14.5px; }
+  header .summary strong { color: var(--bad); }
+  header .stamp { display: inline-block; background: rgba(255,110,110,0.15); color: var(--bad); font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px; letter-spacing: 1px; margin-top: 12px; margin-right:8px; }
+  header .stamp.warn { background: rgba(255,184,77,0.12); color: var(--warn); }
+  header .stamp.green { background: rgba(74,222,128,0.12); color: var(--good); }
+
+  h2 { margin: 44px 0 16px; font-size: 22px; font-weight: 700; letter-spacing: -0.3px; }
+  h2 .pill { display: inline-block; background: var(--card-2); color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: 1px; padding: 4px 10px; border-radius: 999px; vertical-align: middle; margin-left: 10px; }
+  h3 { font-size: 16px; margin: 0 0 12px; color: var(--text); }
+  h4 { font-size: 13.5px; margin: 16px 0 8px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 900px) { .grid-3, .grid-2 { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 620px) { .grid-3, .grid-2 { grid-template-columns: 1fr; } }
+
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 22px; }
+  .card.abr { border-top: 3px solid var(--abr); }
+  .card.mai { border-top: 3px solid var(--mai); }
+  .card.jun { border-top: 3px solid var(--bad); }
+  .card.brasil { border-top: 3px solid var(--accent); }
+  .card.portugal { border-top: 3px solid var(--warn); }
+
+  .month-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 16px; }
+  .month-head .label { font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; }
+  .month-head .label.abr { color: var(--abr); }
+  .month-head .label.mai { color: var(--mai); }
+  .month-head .label.jun { color: var(--bad); }
+  .month-head .note { font-size: 11px; color: var(--muted); }
+
+  .mini-kpi-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .mini-kpi { background: var(--card-2); border: 1px solid #1f2a3d; border-radius: 8px; padding: 10px 12px; }
+  .mini-kpi .lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
+  .mini-kpi .val { font-size: 18px; font-weight: 700; margin-top: 2px; }
+
+  .tw { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 720px; }
+  thead th { background: var(--card-2); color: var(--muted); font-weight: 600; text-transform: uppercase; font-size: 10.5px; letter-spacing: 0.8px; padding: 12px 10px; text-align: right; border-bottom: 1px solid var(--border); }
+  thead th:first-child { text-align: left; }
+  tbody td { padding: 11px 10px; text-align: right; border-bottom: 1px solid #1a2332; }
+  tbody td:first-child { text-align: left; font-weight: 600; }
+  tbody tr.tot td { background: #14202e; font-weight: 700; }
+  tbody tr.tot td:first-child { color: var(--accent); }
+  tbody tr.alert td { background: rgba(255,110,110,0.08); }
+  tbody tr.alert td:first-child { color: var(--bad); }
+  tbody tr.section-head td { background: #0e1726; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; text-align: left; padding: 8px 10px; font-weight: 700; }
+  .good { color: var(--good); }
+  .bad { color: var(--bad); }
+  .warn-col { color: var(--warn); }
+
+  .obs { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; padding: 20px 22px; margin-bottom: 14px; }
+  .obs h3 { color: var(--accent); margin-bottom: 8px; }
+  .obs.warn { border-left-color: var(--warn); }
+  .obs.warn h3 { color: var(--warn); }
+  .obs.bad { border-left-color: var(--bad); }
+  .obs.bad h3 { color: var(--bad); }
+  .obs.blue { border-left-color: var(--accent-2); }
+  .obs.blue h3 { color: var(--accent-2); }
+  .obs.purple { border-left-color: var(--purple); }
+  .obs.purple h3 { color: var(--purple); }
+  .obs.green { border-left-color: var(--good); }
+  .obs.green h3 { color: var(--good); }
+  .obs p { margin: 6px 0; color: #cdd5e0; }
+  .obs ul, .obs ol { margin: 8px 0 0; padding-left: 20px; color: #cdd5e0; }
+  .obs li { margin-bottom: 8px; }
+  .obs strong { color: var(--text); }
+
+  .creat-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 22px; }
+  .creat-card.hero { border-top: 3px solid var(--accent); }
+  .creat-card .name { font-size: 17px; font-weight: 700; }
+  .creat-card .name .badge { display: inline-block; background: var(--accent); color: #0b0f17; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 6px; margin-left: 8px; vertical-align: middle; letter-spacing: 1px; }
+  .creat-card .meta { color: var(--muted); font-size: 12px; margin-top: 2px; }
+
+  .footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--muted); font-size: 12px; text-align: center; }
+  .toc { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .toc a { background: var(--card-2); color: var(--muted); padding: 6px 12px; border-radius: 999px; font-size: 12px; border: 1px solid var(--border); }
+  .toc a:hover { color: var(--text); background: var(--card); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a href="../../" class="back">← Voltar ao hub Marketex</a>
+
+<header>
+  <div class="eyebrow">Brito Mídias · Tráfego Pago · Sala Secreta</div>
+  <h1>Relatório Completo — Abril × Maio × Junho 2026</h1>
+  <div class="sub">Tráfego + Criativos detalhados · 3 meses lado a lado · gerado em 24/06/2026</div>
+  <div>
+    <span class="stamp">📊 ATUALIZADO 24/06 · JUNHO FECHADO</span>
+    <span class="stamp warn">⚠️ SEM 24/06 ANÔMALA — INVESTIGAR</span>
+  </div>
+  <div class="summary">
+    Junho fechou em <strong>R$ 3.263 / 1.219 leads / CPA R$ 2,68</strong> — quebra de patamar vs Mai (R$ 1,91) e Abr (R$ 1,97).
+    A causa: a <strong>semana 24/06 disparou orçamento +120% no ABO Portugal</strong> (R$ 137→R$ 932), CTR caiu de 4% para 1,86% e Conv. página de 60% para 45%.
+    CBO Brasil e ADV14 seguem saudáveis.
+  </div>
+</header>
+
+<!-- ====================== ALERTA EXECUTIVO ====================== -->
+<div class="obs bad" style="margin-bottom:24px;">
+  <h3>🚨 Manchete do mês — sem 24/06 quebrou a sequência</h3>
+  <p>Junho vinha em ritmo bom (sem 03/06 fechou em CPA R$ 1,80, sem 17/06 em R$ 2,13). A semana de 24/06 foi a primeira a estourar todos os parâmetros: investimento <strong>R$ 1.380 (2,2x as outras)</strong>, CPA <strong>R$ 4,60</strong>, CTR <strong>1,86%</strong> (vs ~4% nas anteriores) e Conv. página <strong>44,8%</strong> (vs ~60%).</p>
+  <p>Duas mudanças aconteceram nessa semana:</p>
+  <ol>
+    <li><strong>ABO Portugal escalou +578% de verba</strong> (R$ 137 → R$ 932) com CPA pulando de R$ 5,08 para <strong>R$ 14,12</strong>. CPM caiu para R$ 20 (sinal de pegar audiência mais barata mas pouco qualificada) — CTR despencou para 1,25%.</li>
+    <li><strong>Reativaram criativos antigos</strong> (AD01_GERAL, ADV01_STORIES, ADV08_QUER DIZER) com CPA entre R$ 9,91 e R$ 22,46. Não foram os novos criativos do clone que estavam previstos para 15/06.</li>
+  </ol>
+  <p style="margin-top:10px;"><strong>CBO Brasil + ADV14 continuam saudáveis</strong> — o problema foi cirúrgico no Portugal e nos criativos reativados.</p>
+</div>
+
+<div class="toc">
+  <a href="#resumo">1. Resumo dos 3 meses</a>
+  <a href="#kpis">2. KPIs comparados</a>
+  <a href="#semanas">3. Evolução semanal</a>
+  <a href="#campanha">4. CBO Brasil × ABO Portugal</a>
+  <a href="#criativos">5. Criativos por mês</a>
+  <a href="#adv14">6. ADV14 em detalhe</a>
+  <a href="#leitura">7. Leitura estratégica</a>
+  <a href="#recomendacao">8. Recomendação</a>
+</div>
+
+<!-- ====================== 1. RESUMO 3 MESES ====================== -->
+<h2 id="resumo">1. Resumo dos 3 meses <span class="pill">VISÃO GERAL</span></h2>
+<div class="grid-3">
+
+  <div class="card abr">
+    <div class="month-head"><span class="label abr">Abril · fechado</span><span class="note">01/04 → 29/04 · 5 sem</span></div>
+    <div class="mini-kpi-row">
+      <div class="mini-kpi"><div class="lbl">Investido</div><div class="val">R$ 3.130</div></div>
+      <div class="mini-kpi"><div class="lbl">Leads</div><div class="val">1.591</div></div>
+      <div class="mini-kpi"><div class="lbl">CPA</div><div class="val">R$ 1,97</div></div>
+      <div class="mini-kpi"><div class="lbl">CPM</div><div class="val">R$ 35,19</div></div>
+      <div class="mini-kpi"><div class="lbl">CTR</div><div class="val">3,52%</div></div>
+      <div class="mini-kpi"><div class="lbl">Conv. página</div><div class="val">61,5%</div></div>
+    </div>
+  </div>
+
+  <div class="card mai">
+    <div class="month-head"><span class="label mai">Maio · fechado</span><span class="note">06/05 → 27/05 · 4 sem</span></div>
+    <div class="mini-kpi-row">
+      <div class="mini-kpi"><div class="lbl">Investido</div><div class="val">R$ 2.519</div></div>
+      <div class="mini-kpi"><div class="lbl">Leads</div><div class="val">1.319</div></div>
+      <div class="mini-kpi"><div class="lbl">CPA</div><div class="val"><span class="good">R$ 1,91</span></div></div>
+      <div class="mini-kpi"><div class="lbl">CPM</div><div class="val">R$ 40,72</div></div>
+      <div class="mini-kpi"><div class="lbl">CTR</div><div class="val"><span class="good">4,01%</span></div></div>
+      <div class="mini-kpi"><div class="lbl">Conv. página</div><div class="val"><span class="good">64,0%</span></div></div>
+    </div>
+  </div>
+
+  <div class="card jun">
+    <div class="month-head"><span class="label jun">Junho · fechado</span><span class="note">03/06 → 24/06 · 4 sem</span></div>
+    <div class="mini-kpi-row">
+      <div class="mini-kpi"><div class="lbl">Investido</div><div class="val">R$ 3.263</div></div>
+      <div class="mini-kpi"><div class="lbl">Leads</div><div class="val">1.219</div></div>
+      <div class="mini-kpi"><div class="lbl">CPA</div><div class="val"><span class="bad">R$ 2,68</span></div></div>
+      <div class="mini-kpi"><div class="lbl">CPM</div><div class="val"><span class="good">R$ 32,12</span></div></div>
+      <div class="mini-kpi"><div class="lbl">CTR</div><div class="val"><span class="bad">2,86%</span></div></div>
+      <div class="mini-kpi"><div class="lbl">Conv. página</div><div class="val"><span class="bad">56,1%</span></div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ====================== 2. KPIs COMPARADOS ====================== -->
+<h2 id="kpis">2. KPIs comparados <span class="pill">3 MESES</span></h2>
+<div class="card">
+<div class="tw">
+<table>
+  <thead>
+    <tr>
+      <th>Métrica</th>
+      <th style="color:var(--abr);">Abril</th>
+      <th style="color:var(--mai);">Maio</th>
+      <th style="color:var(--bad);">Junho</th>
+      <th>Tendência</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Investimento</td><td>R$ 3.130</td><td>R$ 2.519</td><td>R$ 3.263</td><td>Voltou a Abril, mas concentrado em 1 semana</td></tr>
+    <tr><td>Leads</td><td>1.591</td><td>1.319</td><td>1.219</td><td>Volume seguiu caindo apesar de +30% verba vs Mai</td></tr>
+    <tr><td>CPA</td><td>R$ 1,97</td><td>R$ 1,91</td><td>R$ 2,68</td><td class="bad">+40% vs Mai · estouro na sem 24/06</td></tr>
+    <tr><td>CPM</td><td>R$ 35,19</td><td>R$ 40,72</td><td>R$ 32,12</td><td>CPM caiu mas qualidade despencou junto</td></tr>
+    <tr><td>CPC</td><td>R$ 1,00</td><td>R$ 1,01</td><td>R$ 1,12</td><td>Subiu na sem 24/06 (R$ 1,36)</td></tr>
+    <tr><td>CTR</td><td>3,52%</td><td>4,01%</td><td>2,86%</td><td class="bad">Caiu por causa da sem 24/06 (1,86%)</td></tr>
+    <tr><td>Conv. página</td><td>61,5%</td><td>64,0%</td><td>56,1%</td><td class="bad">Caiu — sem 24/06 fechou em 44,8%</td></tr>
+    <tr><td>Connect Rate</td><td>82,7%</td><td>83,0%</td><td>74,9%</td><td class="bad">Caiu — sem 24/06 65,8%</td></tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+<!-- ====================== 3. EVOLUÇÃO SEMANAL ====================== -->
+<h2 id="semanas">3. Evolução semana a semana <span class="pill">13 SEMANAS</span></h2>
+<div class="card">
+<div class="tw">
+<table>
+  <thead>
+    <tr>
+      <th>Semana</th>
+      <th>Invest.</th>
+      <th>Impressões</th>
+      <th>CPM</th>
+      <th>Cliques</th>
+      <th>CTR</th>
+      <th>Conv. pág.</th>
+      <th>Leads</th>
+      <th>CPA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="section-head"><td colspan="9">Abril · 5 semanas (fechado)</td></tr>
+    <tr><td>Sem 01/04</td><td>R$ 611,79</td><td>17.757</td><td>R$ 34,45</td><td>606</td><td>3,41%</td><td>59,7%</td><td>298</td><td>R$ 2,05</td></tr>
+    <tr><td>Sem 08/04</td><td>R$ 650,59</td><td>19.117</td><td>R$ 34,03</td><td>624</td><td>3,26%</td><td>59,7%</td><td>316</td><td>R$ 2,06</td></tr>
+    <tr><td>Sem 15/04</td><td>R$ 617,05</td><td>16.859</td><td>R$ 36,60</td><td>583</td><td>3,46%</td><td>61,8%</td><td>294</td><td>R$ 2,10</td></tr>
+    <tr><td>Sem 22/04</td><td>R$ 640,07</td><td>18.239</td><td>R$ 35,09</td><td>647</td><td>3,55%</td><td>65,6%</td><td>345</td><td>R$ 1,86</td></tr>
+    <tr><td>Sem 29/04</td><td>R$ 610,61</td><td>16.989</td><td>R$ 35,94</td><td>670</td><td>3,94%</td><td>60,7%</td><td>338</td><td>R$ 1,81</td></tr>
+    <tr class="tot"><td>ABRIL</td><td>R$ 3.130,11</td><td>88.961</td><td>R$ 35,19</td><td>3.130</td><td>3,52%</td><td>61,5%</td><td>1.591</td><td>R$ 1,97</td></tr>
+
+    <tr class="section-head"><td colspan="9">Maio · 4 semanas (fechado)</td></tr>
+    <tr><td>Sem 06/05</td><td>R$ 662,61</td><td>16.493</td><td>R$ 40,18</td><td>623</td><td>3,78%</td><td>61,2%</td><td>306</td><td>R$ 2,17</td></tr>
+    <tr><td>Sem 13/05</td><td>R$ 608,35</td><td>14.648</td><td>R$ 41,53</td><td>571</td><td>3,90%</td><td>63,0%</td><td>296</td><td>R$ 2,06</td></tr>
+    <tr><td>Sem 20/05</td><td>R$ 642,19</td><td>14.305</td><td>R$ 44,89</td><td>595</td><td>4,16%</td><td>68,9%</td><td>350</td><td><span class="good">R$ 1,83</span></td></tr>
+    <tr><td>Sem 27/05</td><td>R$ 606,14</td><td>16.422</td><td>R$ 36,91</td><td>694</td><td>4,23%</td><td>63,0%</td><td>367</td><td><span class="good">R$ 1,65</span></td></tr>
+    <tr class="tot"><td>MAIO</td><td>R$ 2.519,29</td><td>61.868</td><td>R$ 40,72</td><td>2.483</td><td>4,01%</td><td>64,0%</td><td>1.319</td><td>R$ 1,91</td></tr>
+
+    <tr class="section-head"><td colspan="9">Junho · 4 semanas (fechado)</td></tr>
+    <tr><td>Sem 03/06</td><td>R$ 630,58</td><td>17.198</td><td>R$ 36,67</td><td>694</td><td>4,04%</td><td>63,3%</td><td>350</td><td><span class="good">R$ 1,80</span></td></tr>
+    <tr><td>Sem 10/06</td><td>R$ 631,20</td><td>15.789</td><td>R$ 39,98</td><td>593</td><td>3,76%</td><td>60,0%</td><td>277</td><td>R$ 2,28</td></tr>
+    <tr><td>Sem 17/06</td><td>R$ 621,34</td><td>13.855</td><td>R$ 44,85</td><td>597</td><td>4,31%</td><td>59,7%</td><td>292</td><td>R$ 2,13</td></tr>
+    <tr class="alert"><td>Sem 24/06 ⚠️</td><td>R$ 1.379,92</td><td>54.743</td><td><span class="good">R$ 25,21</span></td><td>1.018</td><td><span class="bad">1,86%</span></td><td><span class="bad">44,8%</span></td><td>300</td><td><span class="bad">R$ 4,60</span></td></tr>
+    <tr class="tot"><td>JUNHO</td><td>R$ 3.263,04</td><td>101.585</td><td>R$ 32,12</td><td>2.902</td><td>2,86%</td><td>56,1%</td><td>1.219</td><td>R$ 2,68</td></tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+<div class="obs warn" style="margin-top:16px;">
+  <h3>O que aconteceu na sem 24/06 — análise do funil</h3>
+  <ul>
+    <li><strong>Investimento +122% vs semana anterior</strong> (R$ 621 → R$ 1.380). Impressões 4x (13.855 → 54.743) — escala grande de uma só vez.</li>
+    <li><strong>CPM despencou 44%</strong> (R$ 44,85 → R$ 25,21) — sinal clássico de pegar audiência mais barata, mas:</li>
+    <li><strong>CTR 1,86%</strong> (vs 4,31% da semana anterior) — caiu pela METADE. A audiência nova não engajou.</li>
+    <li><strong>Connect Rate 65,8%</strong> (vs 82%+ histórico) — quem clicou nem terminou de carregar a página.</li>
+    <li><strong>Conv. página 44,8%</strong> (vs 60%+ histórico) — quem chegou na página não converteu.</li>
+    <li>Toda a cadeia de qualidade do funil quebrou em uníssono — diagnóstico claro de <strong>audiência fora do perfil</strong>.</li>
+  </ul>
+</div>
+
+<!-- ====================== 4. ESTRUTURA POR CAMPANHA ====================== -->
+<h2 id="campanha">4. CBO Brasil × ABO Portugal <span class="pill">EVOLUÇÃO</span></h2>
+
+<div class="grid-2">
+  <div class="card brasil">
+    <h3 style="color:var(--accent);">CBO Brasil · Advantage Vídeo (HM 30-50)</h3>
+    <p class="meta" style="font-size:13px;color:var(--muted);">Motor da conta · CPA seguiu estável</p>
+    <div class="tw" style="margin-top:8px;">
+      <table style="min-width:auto;font-size:12.5px;">
+        <thead><tr><th>Mês</th><th>Inv.</th><th>Leads</th><th>CPA</th><th>CPM</th><th>CTR</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--abr);">Abril</td><td>R$ 2.425</td><td>1.490</td><td>R$ 1,63</td><td>R$ 31,41</td><td>3,70%</td></tr>
+          <tr><td style="color:var(--mai);">Maio</td><td>R$ 1.959</td><td>1.181</td><td>R$ 1,66</td><td>R$ 38,36</td><td>4,29%</td></tr>
+          <tr><td style="color:var(--bad);">Junho</td><td>R$ 1.915</td><td>1.067</td><td>R$ 1,79</td><td>R$ 41,33</td><td>4,52%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-top:8px;">CPA <strong>continua estável</strong> em R$ 1,63–1,79. CTR até subiu para 4,52% em Jun. <strong>O problema não está aqui.</strong></p>
+  </div>
+
+  <div class="card portugal">
+    <h3 style="color:var(--bad);">ABO Portugal · Frio Internacional 🚨</h3>
+    <p class="meta" style="font-size:13px;color:var(--bad);">Causa principal do CPA alto em Junho</p>
+    <div class="tw" style="margin-top:8px;">
+      <table style="min-width:auto;font-size:12.5px;">
+        <thead><tr><th>Mês</th><th>Inv.</th><th>Leads</th><th>CPA</th><th>CPM</th><th>CTR</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--abr);">Abril</td><td>R$ 705</td><td>101</td><td>R$ 6,98</td><td>R$ 59,98</td><td>2,31%</td></tr>
+          <tr><td style="color:var(--mai);">Maio</td><td>R$ 561</td><td>138</td><td>R$ 4,06</td><td>R$ 51,86</td><td>2,70%</td></tr>
+          <tr><td style="color:var(--bad);">Junho</td><td>R$ 1.348</td><td>152</td><td><span class="bad">R$ 8,87</span></td><td>R$ 26,79</td><td>1,96%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13px;color:var(--bad);margin-top:8px;">Verba <strong>+140% vs Mai</strong>, mas leads só +10% e CPA dobrou. Sem 24/06 sozinha gastou R$ 932 (69% do mês).</p>
+  </div>
+</div>
+
+<!-- ====================== 5. CRIATIVOS POR MÊS ====================== -->
+<h2 id="criativos">5. Criativos por mês <span class="pill">RANKING</span></h2>
+
+<div class="grid-3">
+  <div class="card abr">
+    <div class="month-head"><span class="label abr">Abril</span><span class="note">6 com leads</span></div>
+    <table style="font-size:12.5px;min-width:auto;">
+      <thead><tr><th>Criativo</th><th>Leads</th><th>CPA</th></tr></thead>
+      <tbody>
+        <tr><td>ADV14 Clone</td><td>1.557</td><td>R$ 1,71</td></tr>
+        <tr><td>ADV01 Stories</td><td>11</td><td>R$ 14,63</td></tr>
+        <tr><td>ADV12 30MM</td><td>11</td><td>R$ 20,51</td></tr>
+        <tr><td>AD01 Geral</td><td>8</td><td>R$ 7,14</td></tr>
+        <tr><td>ADV16 Sem Tempo</td><td>3</td><td>R$ 2,65</td></tr>
+        <tr><td>ADV15 IA</td><td>1</td><td>R$ 2,51</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:var(--muted);margin-top:8px;">ADV14 = <strong>97,9%</strong></p>
+  </div>
+
+  <div class="card mai">
+    <div class="month-head"><span class="label mai">Maio</span><span class="note">3 com leads</span></div>
+    <table style="font-size:12.5px;min-width:auto;">
+      <thead><tr><th>Criativo</th><th>Leads</th><th>CPA</th></tr></thead>
+      <tbody>
+        <tr><td>ADV14 Clone</td><td>1.306</td><td>R$ 1,89</td></tr>
+        <tr><td>ADV16 Sem Tempo</td><td>11</td><td>R$ 3,34</td></tr>
+        <tr><td>ADV15 IA</td><td>2</td><td>R$ 2,08</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:var(--muted);margin-top:8px;">ADV14 = <strong>99,0%</strong></p>
+  </div>
+
+  <div class="card jun">
+    <div class="month-head"><span class="label jun">Junho</span><span class="note">6 com leads (sem 24/06)</span></div>
+    <table style="font-size:12.5px;min-width:auto;">
+      <thead><tr><th>Criativo</th><th>Leads</th><th>CPA</th></tr></thead>
+      <tbody>
+        <tr><td>ADV14 Clone</td><td>1.178</td><td>R$ 2,08</td></tr>
+        <tr><td>AD01 Geral 🔴</td><td>26</td><td>R$ 22,46</td></tr>
+        <tr><td>ADV01 Stories 🔴</td><td>12</td><td>R$ 9,91</td></tr>
+        <tr><td>ADV16 Sem Tempo</td><td>1</td><td>R$ 5,90</td></tr>
+        <tr><td>ADV15 IA</td><td>1</td><td>R$ 4,38</td></tr>
+        <tr><td>ADV08 Quer Dizer 🔴</td><td>1</td><td>R$ 21,85</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:var(--muted);margin-top:8px;">ADV14 = 96,6% · 🔴 = reativados sem 24/06 com CPA alto</p>
+  </div>
+</div>
+
+<div class="obs warn" style="margin-top:16px;">
+  <h3>Criativos da sem 24/06 — reativação sem resultado</h3>
+  <p>Em vez dos novos criativos do clone (que estavam previstos para subir 15/06), foram reativados <strong>3 criativos históricos</strong> que não rodavam há meses:</p>
+  <ul>
+    <li><strong>AD01_SST_CAP_GERAL</strong> — R$ 584 investidos · 26 leads · CPA <span class="bad">R$ 22,46</span></li>
+    <li><strong>ADV01_SST_CAP_STORIES DO DIA</strong> — R$ 119 · 12 leads · CPA <span class="bad">R$ 9,91</span></li>
+    <li><strong>ADV08_SS_CAP_QUER DIZER</strong> — R$ 22 · 1 lead · CPA <span class="bad">R$ 21,85</span></li>
+  </ul>
+  <p>Esses 3 consumiram R$ 725 (mais que o investimento de qualquer semana isolada de Mai) e geraram 39 leads ao CPA médio de R$ 18,59 — <strong>10x o CPA do ADV14</strong>. Os novos criativos do clone que foram prometidos para 15/06 ainda não apareceram no MTADS.</p>
+</div>
+
+<!-- ====================== 6. ADV14 EM DETALHE ====================== -->
+<h2 id="adv14">6. ADV14 em detalhe <span class="pill">SEGUE FIRME</span></h2>
+
+<div class="creat-card hero">
+  <div class="name">ADV14_SST_CAP_CLONE EM VÍDEO E EM FOTO_0.45 <span class="badge">WINNER</span></div>
+  <div class="meta">Rodando desde meados de Março · 4.041 leads acumulados Abr+Mai+Jun</div>
+  <div class="meta" style="margin-top:6px;">
+    <a href="https://drive.google.com/open?id=1zMS8i6wmktRp1QzoXqiiyvcyPdHjZpzc&usp=drive_copy" target="_blank">📁 Abrir criativo no Drive</a>
+  </div>
+
+  <h4 style="margin-top:18px;">Performance por mês</h4>
+  <div class="tw">
+    <table style="font-size:13px;">
+      <thead><tr><th>Mês</th><th>Investido</th><th>Leads</th><th>CPA</th><th>% da conta</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--abr);">Abril</td><td>R$ 2.658</td><td>1.557</td><td>R$ 1,71</td><td>97,9%</td></tr>
+        <tr><td style="color:var(--mai);">Maio</td><td>R$ 2.474</td><td>1.306</td><td>R$ 1,89</td><td>99,0%</td></tr>
+        <tr><td style="color:var(--bad);">Junho</td><td>R$ 2.448</td><td>1.178</td><td>R$ 2,08</td><td>96,6%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4 style="margin-top:18px;">Evolução semanal (Mai + Jun)</h4>
+  <div class="tw">
+    <table style="font-size:12.5px;">
+      <thead><tr><th>Semana</th><th>Investido</th><th>Leads</th><th>CPA</th></tr></thead>
+      <tbody>
+        <tr><td>06/05</td><td>R$ 633</td><td>297</td><td>R$ 2,13</td></tr>
+        <tr><td>13/05</td><td>R$ 604</td><td>293</td><td>R$ 2,06</td></tr>
+        <tr><td>20/05</td><td>R$ 636</td><td>349</td><td><span class="good">R$ 1,82</span></td></tr>
+        <tr><td>27/05</td><td>R$ 602</td><td>367</td><td><span class="good">R$ 1,64</span></td></tr>
+        <tr><td>03/06</td><td>R$ 624</td><td>350</td><td><span class="good">R$ 1,78</span></td></tr>
+        <tr><td>10/06</td><td>R$ 627</td><td>276</td><td>R$ 2,27</td></tr>
+        <tr><td>17/06</td><td>R$ 618</td><td>291</td><td>R$ 2,12</td></tr>
+        <tr><td>24/06</td><td>R$ 579</td><td>261</td><td>R$ 2,22</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="obs green" style="margin-top:18px;">
+    <h3>ADV14 segue saudável</h3>
+    <p>Apesar do estouro geral do mês, o ADV14 entregou <strong>261 leads na sem 24/06 com CPA R$ 2,22</strong> — em linha com a média do trimestre (R$ 1,89-2,08). Não é o ADV14 que está falhando: ele continua entregando o patamar normal. O problema veio das outras frentes (ABO Portugal escalado + criativos antigos reativados).</p>
+  </div>
+</div>
+
+<!-- ====================== 7. LEITURA ESTRATÉGICA ====================== -->
+<h2 id="leitura">7. Leitura estratégica <span class="pill">SÍNTESE</span></h2>
+
+<div class="obs bad">
+  <h3>O que quebrou em Junho</h3>
+  <ul>
+    <li><strong>ABO Portugal escalado prematuramente:</strong> +140% verba, mas só +10% leads — CPA dobrou (R$ 4,06 → R$ 8,87). Sem 24/06 sozinha gastou R$ 932 lá.</li>
+    <li><strong>Reativação de criativos velhos sem teste estruturado:</strong> AD01, ADV01, ADV08 voltaram com CPA entre R$ 9,91 e R$ 22,46. Consumiram R$ 725 a CPA médio R$ 18,59.</li>
+    <li><strong>Promessa de novos criativos do clone (15/06) não foi cumprida</strong> no MTADS — ainda não apareceram rodando.</li>
+    <li><strong>Audiência fora do perfil:</strong> sem 24/06 teve CPM despencando + CTR caindo + Connect/Conv. página despencando em cascata — todos os elos do funil quebraram juntos.</li>
+  </ul>
+</div>
+
+<div class="obs blue">
+  <h3>O que continuou funcionando</h3>
+  <ul>
+    <li><strong>CBO Brasil sustentou CPA em R$ 1,79</strong> em Jun (vs R$ 1,66 em Mai) — desgaste mínimo apesar de tudo.</li>
+    <li><strong>ADV14 entregou normalmente</strong> nas 4 semanas de Jun (CPA R$ 1,78-2,27). Sem 24/06 nele: 261 leads · R$ 2,22.</li>
+    <li><strong>3 semanas de Jun (03, 10, 17)</strong> foram em linha com o trimestre — só a sem 24/06 quebrou.</li>
+  </ul>
+</div>
+
+<!-- ====================== 8. RECOMENDAÇÃO ====================== -->
+<h2 id="recomendacao">8. Recomendação <span class="pill">AÇÕES URGENTES</span></h2>
+
+<div class="obs bad">
+  <h3>1. Pausar a escala do ABO Portugal imediatamente</h3>
+  <p>Voltar para o patamar de Mai (~R$ 140/sem) e manter rodando só pra base de leads internacional. Escalar Portugal não funciona — testado em Jun com CPA R$ 8,87 (vs R$ 4,06 em Mai).</p>
+</div>
+
+<div class="obs warn">
+  <h3>2. Pausar os criativos reativados (AD01_GERAL, ADV01_STORIES, ADV08)</h3>
+  <p>CPA acima de R$ 10 quando o ADV14 entrega a R$ 2. Não há racional pra mantê-los rodando.</p>
+</div>
+
+<div class="obs purple">
+  <h3>3. Subir os novos criativos do clone (em atraso desde 15/06)</h3>
+  <p>Reforçar com o cliente — a bateria foi prometida para 15/06 à tarde mas não apareceu no MTADS até 24/06. Diversificação de criativo continua sendo a recomendação central com ADV14 ainda em 96,6% do volume.</p>
+</div>
+
+<div class="obs blue">
+  <h3>4. Manter CBO Brasil + ADV14 como motor</h3>
+  <p>Esse é o eixo que funciona. Voltar verba semanal pra ~R$ 500 nele, com CPA esperado R$ 1,70-2,00.</p>
+</div>
+
+<div class="obs green">
+  <h3>5. Reescalar a operação com base saudável</h3>
+  <p>Voltando aos parâmetros de Mai (R$ 2,5k/mês, CPA R$ 1,91) + subindo novos criativos clone, abre espaço seguro para crescer para R$ 4-5k/mês. <strong>O caminho não é escalar Portugal — é diversificar criativo no CBO Brasil.</strong></p>
+</div>
+
+<div class="footer">
+  Brito Mídias · Dados extraídos da planilha Sala Secreta (Tráfego Pago SS · MTADS) em 24/06/2026 · dados Meta até 24/06
+</div>
+
+</div>
+</body>
+</html>
