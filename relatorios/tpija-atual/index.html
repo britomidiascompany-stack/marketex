@@ -11,7 +11,7 @@ header{background:radial-gradient(circle at top right,rgba(124,92,255,.25),trans
 header h1{font-size:32px;background:linear-gradient(135deg,#7c5cff,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;font-weight:800}
 header .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 header .meta span{background:rgba(124,92,255,.12);padding:6px 14px;border-radius:8px;font-size:13px;color:#cbd5e1;border:1px solid rgba(124,92,255,.2)}
-header .status-pill{position:absolute;top:32px;right:32px;background:rgba(239,68,68,.15);color:#f87171;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid rgba(239,68,68,.3)}
+header .status-pill{position:absolute;top:32px;right:32px;background:rgba(250,204,21,.12);color:#facc15;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid rgba(250,204,21,.3)}
 h2{font-size:20px;margin:36px 0 14px;color:#f1f5f9;display:flex;align-items:center;gap:10px}
 h2::before{content:"";width:4px;height:22px;background:linear-gradient(180deg,#7c5cff,#22d3ee);border-radius:2px}
 h3{font-size:15px;margin:14px 0 8px;color:#cbd5e1;font-weight:600}
@@ -71,7 +71,9 @@ ul li{margin:6px 0}
 .rfblock.page{border-top:3px solid #facc15}
 .rfblock.sales{border-top:3px solid #22c55e;background:linear-gradient(135deg,#11172a,rgba(34,197,94,.08))}
 .action-box{background:rgba(250,204,21,.06);border:1px solid rgba(250,204,21,.3);border-radius:12px;padding:16px 20px;margin-bottom:14px}
+.action-box.info{background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.3)}
 .action-box h4{color:#facc15;font-size:13px;font-weight:700;margin-bottom:8px}
+.action-box.info h4{color:#22d3ee}
 .action-box li{font-size:13px;color:#cbd5e1;margin:5px 0}
 .progress-bar{background:rgba(255,255,255,.06);border-radius:8px;height:8px;margin-top:6px;overflow:hidden}
 .progress-bar-fill{height:100%;border-radius:8px;transition:width .3s}
@@ -86,33 +88,33 @@ ul li{margin:6px 0}
 .analysis-card.yellow h4{color:#facc15}
 .analysis-card.red h4{color:#f87171}
 .analysis-card li{font-size:12px;color:#cbd5e1;margin:5px 0}
+td.sep{background:rgba(124,92,255,.08);color:#94a3b8;font-size:10px;text-transform:uppercase;letter-spacing:.4px;font-weight:700;padding-top:10px}
 </style>
 </head>
 <body>
 
 <header>
-<span class="status-pill">🔴 EM CAPTAÇÃO · D15 · URGENTE</span>
+<span class="status-pill">🟡 EM CAPTAÇÃO · D15 · 23 PARA META</span>
 <h1>TPIJA008 · D15 · 24/06/26</h1>
 <div style="font-size:14px;color:#cbd5e1;margin-top:4px">Imersão Jornada da Autoridade · Tamara Damares (C4)</div>
 <div class="meta">
 <span>📅 10/06 (D1) → em curso</span>
 <span>⏱ Gerado 24/06/26</span>
 <span>📊 Dados: Meta Ads</span>
-<span>💰 Imposto Meta +13,83%</span>
-<span>🎯 Meta: 120 ingressos / R$8.000 exposição</span>
+<span>🎯 Meta: 120 ingressos / R$8.000 exposição líquida</span>
 <span>⚠️ Sem VK Metrics — pixel Meta como referência</span>
 </div>
 </header>
 
 <!-- ALERTA ESTRATÉGICO -->
 <div class="action-box" style="margin-bottom:24px">
-<h4>⚡ ALERTA D15 — BUDGET CRÍTICO</h4>
+<h4>🎯 STATUS D15 — META DE INGRESSOS EM FOCO</h4>
 <ul>
-<li>🔴 <b>Budget quase esgotado:</b> R$7.535 de exposição já consumidos de R$8.000 (94,2%) — restam apenas R$465</li>
-<li>🎯 <b>Faltam 23 ingressos para meta:</b> ao CPA atual de R$84 por ingresso, o budget restante cobre no máximo 5–6 ingressos</li>
-<li>✅ <b>Saída possível:</b> ADC02 (CPA R$20) e ADI27 (CPA R$18) são os únicos criativos que poderiam fechar a meta com o budget restante → concentrar TUDO neles</li>
-<li>🚫 <b>Pausar imediatamente:</b> ADV09 (ROAS 0,26×), ADV26 (0 compras, R$289 gastos), ADC08 (0 compras)</li>
-<li>💡 <b>Alternativa:</b> solicitar ampliação de budget (+R$1.500) para manter ADC05 e ADI48 que já testaram escalabilidade</li>
+<li>📊 <b>Exposição líquida OK:</b> R$1.231 de R$8.000 (15,4%) — sobram R$6.769 de headroom. Ainda há muito espaço para investir.</li>
+<li>🎯 <b>Faltam 23 ingressos para meta:</b> ao CPA atual de R$68/ingresso → precisam de ~R$1.564 adicionais → exposure total estimado: ~R$2.175 (27% do limite)</li>
+<li>✅ <b>Saída rápida:</b> ADC02 (CPA R$21) e ADI27 (CPA R$18) podem gerar 23+ ingressos com apenas ~R$450 → escalar agora</li>
+<li>🚫 <b>Pausar imediatamente:</b> ADV09 (ROAS 0,26×), ADV26 (0 compras, R$289), ADC08 (0 compras), ADV25 (CPA R$156)</li>
+<li>💡 <b>ROAS abaixo do breakeven (0,81×):</b> cada ingresso a R$27 custa R$68 em mídia — o produto cobre 40% do investimento. Próximo lançamento precisa ticket maior ou CPA menor.</li>
 </ul>
 </div>
 
@@ -123,27 +125,27 @@ ul li{margin:6px 0}
 <div class="card warn">
 <div class="kpi">Investimento Meta</div>
 <div class="val">R$ 6.620</div>
-<div class="sub">Bruto: R$6.619,68 · sem imposto</div>
+<div class="sub">Bruto: R$6.619,68 · confirmado</div>
 </div>
 
-<div class="card bad">
-<div class="kpi">Exposição c/ imposto (13,83%)</div>
-<div class="val" style="color:#f87171">R$ 7.535</div>
-<div class="sub">Meta: R$8.000 · restam R$465 (5,8%)</div>
-<div class="progress-bar" style="margin-top:8px"><div class="progress-bar-fill" style="width:94.2%;background:linear-gradient(90deg,#ef4444,#f43f5e)"></div></div>
+<div class="card good">
+<div class="kpi">Exposição Líquida (Invest − Receita)</div>
+<div class="val" style="color:#4ade80">R$ 1.231</div>
+<div class="sub">Meta: R$8.000 · restam R$6.769 (84,6%)</div>
+<div class="progress-bar" style="margin-top:8px"><div class="progress-bar-fill" style="width:15.4%;background:linear-gradient(90deg,#22c55e,#10b981)"></div></div>
 </div>
 
 <div class="card warn">
 <div class="kpi">Ingressos totais</div>
 <div class="val" style="color:#facc15">97 <span style="font-size:14px;color:#64748b">/ 120</span></div>
-<div class="sub">90 pagos · 7 orgânicos · faltam 23</div>
+<div class="sub">90 pixel Meta · 7 orgânico · faltam 23</div>
 <div class="progress-bar" style="margin-top:8px"><div class="progress-bar-fill" style="width:80.8%;background:linear-gradient(90deg,#facc15,#f97316)"></div></div>
 </div>
 
-<div class="card bad">
-<div class="kpi">CPA por ingresso (pago)</div>
-<div class="val" style="color:#f87171">R$ 84</div>
-<div class="sub">c/ imposto · meta ideal: R$67 · pixel Meta: R$74</div>
+<div class="card warn">
+<div class="kpi">CPA por ingresso</div>
+<div class="val" style="color:#facc15">R$ 68</div>
+<div class="sub">R$6.620 ÷ 97 · meta ideal: R$67 · pixel: R$74</div>
 </div>
 
 </div>
@@ -157,15 +159,15 @@ ul li{margin:6px 0}
 </div>
 
 <div class="card bad">
-<div class="kpi">ROAS Bruto</div>
+<div class="kpi">ROAS (Receita ÷ Invest)</div>
 <div class="val" style="color:#f87171">0,81×</div>
 <div class="sub">R$5.389 ÷ R$6.620 · breakeven = 1,00×</div>
 </div>
 
-<div class="card bad">
-<div class="kpi">ROAS c/ Imposto</div>
-<div class="val" style="color:#f87171">0,72×</div>
-<div class="sub">R$5.389 ÷ R$7.535 · abaixo do breakeven</div>
+<div class="card">
+<div class="kpi">Ticket Médio por Ingresso</div>
+<div class="val">R$ 55,56</div>
+<div class="sub">R$27 ingresso + R$4,56 pitch + R$24,00 gravação</div>
 </div>
 
 </div>
@@ -177,11 +179,11 @@ ul li{margin:6px 0}
 <div class="rfblock b1 public">
 <div class="rfblock-head"><span class="ico">📢</span><span class="title">Público Alcançado</span></div>
 <div class="rfblock-metrics">
-<div class="rfmetric"><span class="l">Invest. c/imp</span><span class="v">R$ 7.535</span></div>
+<div class="rfmetric"><span class="l">Investimento</span><span class="v">R$ 6.620</span></div>
 <div class="rfmetric"><span class="l">Impressões</span><span class="v">64.725</span></div>
 <div class="rfmetric"><span class="l">Alcance</span><span class="v">42.531</span></div>
 <div class="rfmetric"><span class="l">Frequência</span><span class="v">1,52×</span></div>
-<div class="rfmetric"><span class="l">CPM c/imp</span><span class="v">R$ 116</span></div>
+<div class="rfmetric"><span class="l">CPM</span><span class="v">R$ 102</span></div>
 </div>
 </div>
 <div class="rfarrow">▼</div>
@@ -190,8 +192,9 @@ ul li{margin:6px 0}
 <div class="rfblock-head"><span class="ico">🎯</span><span class="title">Engajamento</span></div>
 <div class="rfblock-metrics">
 <div class="rfmetric"><span class="l">CTR médio</span><span class="v">4,09%</span></div>
-<div class="rfmetric"><span class="l">Cliques LP</span><span class="v">2.644</span></div>
-<div class="rfmetric"><span class="l">CPC c/imp</span><span class="v">R$ 2,85</span></div>
+<div class="rfmetric"><span class="l">Cliques Totais</span><span class="v">2.644</span></div>
+<div class="rfmetric"><span class="l">Cliques LP</span><span class="v">1.476</span></div>
+<div class="rfmetric"><span class="l">CPC</span><span class="v">R$ 2,50</span></div>
 </div>
 </div>
 <div class="rfarrow">▼</div>
@@ -199,9 +202,9 @@ ul li{margin:6px 0}
 <div class="rfblock b3 page">
 <div class="rfblock-head"><span class="ico">🌐</span><span class="title">Página de Vendas</span></div>
 <div class="rfblock-metrics">
-<div class="rfmetric"><span class="l">Cliques para LP</span><span class="v">2.644</span></div>
-<div class="rfmetric star"><span class="l">Conv. LP→venda (pixel)</span><span class="v">3,40%</span></div>
-<div class="rfmetric"><span class="l">Custo/clique</span><span class="v">R$ 2,50</span></div>
+<div class="rfmetric"><span class="l">Cliques LP</span><span class="v">1.476</span></div>
+<div class="rfmetric star"><span class="l">Conv. LP→Venda</span><span class="v">6,1%</span></div>
+<div class="rfmetric"><span class="l">Conv. LP (clique→LP)</span><span class="v">55,8%</span></div>
 </div>
 </div>
 <div class="rfarrow">▼</div>
@@ -211,14 +214,14 @@ ul li{margin:6px 0}
 <div class="rfblock-metrics">
 <div class="rfmetric"><span class="l">Compras pixel</span><span class="v">90</span></div>
 <div class="rfmetric"><span class="l">CPA pixel</span><span class="v">R$ 73,55</span></div>
-<div class="rfmetric"><span class="l">CPA c/imp</span><span class="v">R$ 83,73</span></div>
+<div class="rfmetric"><span class="l">CPA total</span><span class="v">R$ 68,24</span></div>
 <div class="rfmetric"><span class="l">+Orgânico</span><span class="v">+7 vendas</span></div>
 <div class="rfmetric star"><span class="l">Total ingressos</span><span class="v">97</span></div>
 </div>
 </div>
 
 </div>
-<p style="font-size:11px;color:#64748b;margin-bottom:24px;text-align:center">⚠️ Sem acesso a VK Metrics para este lançamento. CPM, alcance e cliques são estimativas via dados account-level Meta Ads. Receita bruta calculada com preços informados × volumes de venda declarados.</p>
+<p style="font-size:11px;color:#64748b;margin-bottom:24px;text-align:center">⚠️ Sem VK Metrics para este lançamento. Dados via Meta Ads API (account level). "Cliques LP" = actions:link_click. Conv. LP = link_clicks ÷ todos cliques. Conv. LP→Venda = compras pixel ÷ link_clicks. Receita bruta calculada com preços declarados × volumes de venda.</p>
 
 <!-- COMPARATIVO DIA A DIA -->
 <h2>📅 Comparativo Dia-a-Dia · D1→D15</h2>
@@ -242,10 +245,13 @@ ul li{margin:6px 0}
 <th class="num">D12 · 21/06</th>
 <th class="num">D13 · 22/06</th>
 <th class="num">D14 · 23/06</th>
-<th class="num">D15 · 24/06</th>
+<th class="num">D15 · 24/06 ★</th>
 </tr>
 </thead>
 <tbody>
+
+<!-- TRÁFEGO -->
+<tr><td class="sep" colspan="16">📡 Tráfego</td></tr>
 <tr>
 <td>Investimento</td>
 <td class="num">R$ 16</td>
@@ -262,7 +268,7 @@ ul li{margin:6px 0}
 <td class="num">R$ 835</td>
 <td class="num win">R$ 1.134 ↑</td>
 <td class="num">R$ 1.086</td>
-<td class="num">R$ 822</td>
+<td class="num">R$ 851 ★</td>
 </tr>
 <tr>
 <td>Impressões</td>
@@ -280,25 +286,7 @@ ul li{margin:6px 0}
 <td class="num">8.024</td>
 <td class="num win">11.023 ↑</td>
 <td class="num">10.085</td>
-<td class="num">8.338</td>
-</tr>
-<tr>
-<td>Alcance</td>
-<td class="num">168</td>
-<td class="num">987</td>
-<td class="num">711</td>
-<td class="num">30</td>
-<td class="num">0</td>
-<td class="num">776</td>
-<td class="num">1.108</td>
-<td class="num">943</td>
-<td class="num">1.406</td>
-<td class="num">2.426</td>
-<td class="num">3.389</td>
-<td class="num">5.829</td>
-<td class="num">6.520</td>
-<td class="num">5.994</td>
-<td class="num">5.628</td>
+<td class="num">8.636 ★</td>
 </tr>
 <tr>
 <td>CPM</td>
@@ -318,12 +306,15 @@ ul li{margin:6px 0}
 <td class="num warn-txt">R$ 108 ↑</td>
 <td class="num win">R$ 99 ↓</td>
 </tr>
+
+<!-- CLIQUES E CONVERSÃO NA PÁGINA -->
+<tr><td class="sep" colspan="16">🖱️ Cliques &amp; Conversão na Página</td></tr>
 <tr>
 <td>CTR</td>
 <td class="num win">5,91%</td>
 <td class="num">4,61%</td>
 <td class="num lose">2,67% ↓</td>
-<td class="num lose">0,00% ↓</td>
+<td class="num lose">—</td>
 <td class="num">—</td>
 <td class="num">2,90%</td>
 <td class="num win">4,66% ↑</td>
@@ -334,48 +325,145 @@ ul li{margin:6px 0}
 <td class="num">3,78%</td>
 <td class="num">4,08%</td>
 <td class="num">4,22%</td>
-<td class="num">4,27%</td>
+<td class="num">4,24%</td>
 </tr>
 <tr>
-<td>Cliques</td>
+<td>Cliques LP</td>
 <td class="num">12</td>
-<td class="num">61</td>
-<td class="num">25</td>
-<td class="num">0</td>
-<td class="num">0</td>
-<td class="num">26</td>
-<td class="num">71</td>
 <td class="num">41</td>
-<td class="num">93</td>
-<td class="num">175</td>
-<td class="num">218</td>
-<td class="num">303</td>
-<td class="num win">450 ↑</td>
-<td class="num">426</td>
-<td class="num">356</td>
+<td class="num">17</td>
+<td class="num">0</td>
+<td class="num lose">0</td>
+<td class="num">13</td>
+<td class="num">40</td>
+<td class="num">26</td>
+<td class="num">59</td>
+<td class="num">108</td>
+<td class="num">131</td>
+<td class="num">151</td>
+<td class="num win">250 ↑</td>
+<td class="num">223</td>
+<td class="num">159 ★</td>
 </tr>
 <tr>
-<td>CPC</td>
-<td class="num win">R$ 1,36</td>
-<td class="num">R$ 2,58</td>
-<td class="num lose">R$ 4,82 ↑</td>
+<td title="link_clicks ÷ todos cliques — % dos cliques que foram direto para a LP">Conv. LP <span style="font-size:10px;color:#64748b">(link÷clicks)</span></td>
+<td class="num win">100%</td>
+<td class="num">67,2%</td>
+<td class="num">68,0%</td>
 <td class="num">—</td>
 <td class="num">—</td>
-<td class="num">R$ 4,07</td>
-<td class="num win">R$ 2,63 ↓</td>
-<td class="num">R$ 3,50</td>
-<td class="num win">R$ 1,99 ↓</td>
-<td class="num">R$ 2,51</td>
-<td class="num">R$ 2,50</td>
-<td class="num">R$ 2,75</td>
-<td class="num">R$ 2,52</td>
-<td class="num">R$ 2,55</td>
-<td class="num win">R$ 2,31 ↓</td>
+<td class="num warn-txt">50,0%</td>
+<td class="num warn-txt">56,3%</td>
+<td class="num">63,4%</td>
+<td class="num">63,4%</td>
+<td class="num">61,7%</td>
+<td class="num">60,1%</td>
+<td class="num lose">49,8% ↓</td>
+<td class="num">55,6%</td>
+<td class="num">52,3%</td>
+<td class="num lose">43,4% ↓</td>
 </tr>
+
+<!-- CONVERSÃO FUNIL -->
+<tr><td class="sep" colspan="16">💰 Conversão Funil</td></tr>
+<tr>
+<td title="compras pixel ÷ cliques LP — % dos visitantes que compraram">Conv. Pág→Venda <span style="font-size:10px;color:#64748b">(compras÷LP)</span></td>
+<td class="num win">8,3%</td>
+<td class="num win">7,3%</td>
+<td class="num">—</td>
+<td class="num">—</td>
+<td class="num">—</td>
+<td class="num win">30,8% ★</td>
+<td class="num win">12,5%</td>
+<td class="num">—</td>
+<td class="num">8,5%</td>
+<td class="num warn-txt">5,6%</td>
+<td class="num">9,9%</td>
+<td class="num warn-txt">5,3%</td>
+<td class="num warn-txt">5,2%</td>
+<td class="num">7,2%</td>
+<td class="num">6,9%</td>
+</tr>
+<tr>
+<td title="N/D — Meta Ads account level não expõe initiate_checkout separadamente">Conv. Checkout <span style="font-size:10px;color:#475569">(N/D)</span></td>
+<td class="num" style="color:#475569">N/D</td>
+<td class="num" style="color:#475569">N/D</td>
+<td class="num" style="color:#475569">N/D</td>
+<td class="num" style="color:#475569">N/D</td>
+<td class="num" style="color:#475569">N/D</td>
+<td class="num" style="color:#475569">N/D</td>
+<td class="num" style="color:#475569">N/D</td>
+<td class="num" style="color:#475569">N/D</td>
+<td class="num" style="color:#475569">N/D</td>
+<td class="num" style="color:#475569">N/D</td>
+<td class="num" style="color:#475569">N/D</td>
+<td class="num" style="color:#475569">N/D</td>
+<td class="num" style="color:#475569">N/D</td>
+<td class="num" style="color:#475569">N/D</td>
+<td class="num" style="color:#475569">N/D</td>
+</tr>
+
+<!-- RESULTADO -->
+<tr><td class="sep" colspan="16">🛒 Resultado</td></tr>
+<tr>
+<td>Custo/Venda <span style="font-size:10px;color:#64748b">(pixel)</span></td>
+<td class="num win">R$ 16</td>
+<td class="num win">R$ 53</td>
+<td class="num">—</td>
+<td class="num">—</td>
+<td class="num">—</td>
+<td class="num win">R$ 26 ★</td>
+<td class="num win">R$ 37</td>
+<td class="num">—</td>
+<td class="num win">R$ 37</td>
+<td class="num warn-txt">R$ 73</td>
+<td class="num win">R$ 42</td>
+<td class="num lose">R$ 104 ↑</td>
+<td class="num warn-txt">R$ 87</td>
+<td class="num">R$ 68</td>
+<td class="num warn-txt">R$ 77</td>
+</tr>
+<tr>
+<td>Qtd Vendas <span style="font-size:10px;color:#64748b">(pixel est.)</span></td>
+<td class="num">1</td>
+<td class="num">3</td>
+<td class="num">—</td>
+<td class="num">—</td>
+<td class="num lose">0</td>
+<td class="num">5</td>
+<td class="num">6</td>
+<td class="num">—</td>
+<td class="num">6</td>
+<td class="num">7</td>
+<td class="num win">15 ↑</td>
+<td class="num">9</td>
+<td class="num">15</td>
+<td class="num win">18 ★</td>
+<td class="num">13 ★</td>
+</tr>
+<tr>
+<td>Ticket Médio <span style="font-size:10px;color:#64748b">(est.)</span></td>
+<td class="num">R$ 55,56</td>
+<td class="num">R$ 55,56</td>
+<td class="num">—</td>
+<td class="num">—</td>
+<td class="num">—</td>
+<td class="num">R$ 55,56</td>
+<td class="num">R$ 55,56</td>
+<td class="num">—</td>
+<td class="num">R$ 55,56</td>
+<td class="num">R$ 55,56</td>
+<td class="num">R$ 55,56</td>
+<td class="num">R$ 55,56</td>
+<td class="num">R$ 55,56</td>
+<td class="num">R$ 55,56</td>
+<td class="num">R$ 55,56 ★</td>
+</tr>
+
 </tbody>
 </table>
 </div>
-<p style="font-size:11px;color:#64748b;margin-top:8px">D4 (R$4) e D5 (R$0): campanha pausada ou com problema técnico. D13-D15: dados account-level, incluem todas as campanhas TPIJA. Início da campanha: 10/06 = D1 (apenas R$16 gastos, dia de entrada). Escala aconteceu a partir de D10 (19/06).</p>
+<p style="font-size:11px;color:#64748b;margin-top:8px">★ D15 = dia em curso (dados parciais). D4 (R$4) e D5 (R$0): campanha pausada/problema técnico 13–14/jun. "Qtd Vendas est." = compras pixel × 1,14 (fator de correção: 97 confirmados ÷ 85 pixel = 1,14). "Ticket Médio est." = R$5.389 ÷ 97 ingressos = R$55,56 (inclui pitch 26,8% e gravação 24,7%). Conv. Checkout indisponível no Meta API account level — não expõe initiate_checkout isolado.</p>
 </div>
 
 <!-- RANKING DE CRIATIVOS -->
@@ -730,34 +818,34 @@ ul li{margin:6px 0}
 <div class="analysis-card green">
 <h4>✅ REPLICAR</h4>
 <ul>
-<li><b>ADC02 (Stories Lindo):</b> ROAS 6,60× e CPA R$21 — o criativo mais eficiente do lançamento. Com apenas R$62 gastos e 3 compras, tem muito potencial de escala.</li>
-<li><b>ADI27 (Plugar Modelo Americano):</b> ROAS 3,85× e CPA R$18 — o menor CPA do lançamento. Pouco investimento (R$55), grande potencial.</li>
-<li><b>ADC05 (Cris Jantar 21 Pessoas):</b> volume líder (20 compras) com CPA R$41 e ROAS 1,28× — único acima do breakeven com volume relevante. Provado em escala.</li>
-<li><b>ADV02 (7 Países em 6 Meses):</b> ROAS 1,61× e CPA R$39 com 6 compras — bom custo-benefício, testar mais verba.</li>
-<li>Escalada a partir de D10 (19/06) foi bem executada: CTR se manteve 3,8–4,3% com CPM estável ~R$100.</li>
+<li><b>ADC02 (Stories Lindo):</b> ROAS 6,60× e CPA R$21 — criativo mais eficiente. Com apenas R$62 gastos e 3 compras, tem potencial enorme de escala.</li>
+<li><b>ADI27 (Plugar Modelo Vermelho):</b> ROAS 3,85× e CPA R$18 — menor CPA do lançamento. Testar com R$200-300 para validar escala.</li>
+<li><b>ADC05 (Cris Jantar 21):</b> líder em volume (20 compras) com CPA R$41 e ROAS 1,28× — único acima do breakeven com escala. Já testado, seguro ampliar.</li>
+<li><b>ADV02 (7 Países em 6 Meses):</b> ROAS 1,61× e CPA R$39 com 6 compras — boa eficiência, ampliar budget.</li>
+<li><b>Exposição líquida confortável:</b> R$1.231 de R$8.000 usados (15%). Há R$6.769 de headroom para continuar investindo sem ultrapassar o limite.</li>
 </ul>
 </div>
 
 <div class="analysis-card yellow">
 <h4>⚠️ MONITORAR</h4>
 <ul>
-<li><b>Budget crítico:</b> 94,2% do limite de exposição consumido. Apenas R$465 restantes. Cada real deve ir para os melhores criativos.</li>
-<li><b>ADI48 (Do Zero ao Lucro):</b> maior gasto (R$1.084) com 15 compras — CPA R$72, ROAS 0,70×. Volume bom mas abaixo do breakeven. Manter só se CPA melhorar com ajuste de audiência.</li>
-<li><b>ADV22 (Evento Presencial Pocket):</b> 6 compras, CPA R$78, ROAS 0,84× — próximo do breakeven, aguardar 2–3 compras mais antes de escalar.</li>
-<li><b>D4/D5 com zero investimento:</b> indica problema técnico ou pausa manual em 13/14 de junho. Investigar causa para evitar nas próximas campanhas.</li>
-<li>Fase pré-lançamento (1–9/jun): R$1.255 gastos em teste antes do D1 — não contabilizados nas metas mas fazem parte do gasto total.</li>
+<li><b>23 ingressos para meta:</b> ao CPA de R$68 → precisam de ~R$1.564 adicionais. Exposure final estimada: ~R$2.175 (27% do limite). Meta alcançável.</li>
+<li><b>Conv. Pág→Venda caindo:</b> D6 teve 30,8%, D9 8,5%, D12-D15 cai para 5-7%. Escala aumentou volume mas reduziu qualidade de público.</li>
+<li><b>Conv. LP (clique→LP) em queda:</b> D1 100% → D15 43,4%. Meta está misturando tipos de clique ou exibindo para públicos menos qualificados.</li>
+<li><b>ADI48 (Do Zero ao Lucro):</b> maior gasto (R$1.084) com ROAS 0,70×. Manter apenas se CPA melhorar com ajuste de audiência.</li>
+<li><b>D4/D5 zero investimento:</b> indicam pausa técnica ou manual em 13/14 de junho. Investigar para evitar em próximas campanhas.</li>
 </ul>
 </div>
 
 <div class="analysis-card red">
 <h4>🔴 CORRIGIR / PAUSAR</h4>
 <ul>
-<li><b>ADV09 (Identidade) — PAUSAR JÁ:</b> maior gasto individual (R$1.209 somado) com ROAS 0,26×. Queimou budget com retorno mínimo.</li>
-<li><b>ADV26 (Jantar California) — PAUSAR JÁ:</b> R$289 gastos, 0 compras. Budget desperdiçado.</li>
-<li><b>ADC08 (Não Está Estagnado) — PAUSAR JÁ:</b> R$64 gastos, 0 compras. Sem conversão.</li>
-<li><b>ADV25 (Evento na Europa) — PAUSAR:</b> R$625 gastos, apenas 4 compras, CPA R$156 — pior custo por ingresso do grupo com dados.</li>
-<li><b>ADV02 TPJAS (Você que Faz) — REDUZIR:</b> CPA R$91, ROAS 0,55×. Abaixo do breakeven com orçamento alto.</li>
-<li><b>Meta de 120 ingressos não é atingível com budget atual</b> ao CPA médio de R$84. Solicitação de budget adicional (+R$1.500) ou concentração total em ADC02+ADI27 (CPA ~R$19) são as únicas saídas.</li>
+<li><b>ADV09 (Identidade) — PAUSAR JÁ:</b> R$1.209 gastos, ROAS 0,26×. Maior desperdício individual do lançamento.</li>
+<li><b>ADV26 (Jantar California) — PAUSAR JÁ:</b> R$289 gastos, 0 compras. Sem retorno algum.</li>
+<li><b>ADC08 (Não Está Estagnado) — PAUSAR JÁ:</b> R$64 gastos, 0 compras.</li>
+<li><b>ADV25 (Evento na Europa) — PAUSAR:</b> CPA R$156 — pior custo-benefício do grupo com dados.</li>
+<li><b>D12 (21/06) — custo/venda mais alto:</b> R$104/venda com conversão de apenas 5,3%. Identificar qual criativo/conjunto puxou esse dia negativo.</li>
+<li><b>ROAS geral abaixo do breakeven (0,81×):</b> o produto de front (R$27) é muito baixo para cobrir o CAC. Próximo lançamento: aumentar ticket do front ou usar CPA máximo de R$27 (100% breakeven).</li>
 </ul>
 </div>
 
@@ -767,17 +855,18 @@ ul li{margin:6px 0}
 <h2>⚡ Ações Imediatas</h2>
 <div class="card warn" style="border-left: 3px solid #facc15">
 <ol style="margin-left:20px;color:#cbd5e1;font-size:14px">
-<li style="margin:10px 0"><b>🔴 PAUSAR agora:</b> ADV09 (R$1.209 · ROAS 0,26×), ADV26 (R$289 · 0 compras), ADC08 (R$64 · 0 compras), ADV25 (R$625 · CPA R$156)</li>
-<li style="margin:10px 0"><b>✅ CONCENTRAR budget restante (R$465) em:</b> ADC02 (Stories Lindo · ROAS 6,60×) + ADI27 (Plugar Modelo Americano · ROAS 3,85×). Ao CPA médio de R$19, seria possível fechar até 24 compras — o suficiente para atingir a meta de 120.</li>
-<li style="margin:10px 0"><b>📊 Manter ADC05 (Cris Jantar 21):</b> único criativo com volume alto E ROAS positivo (1,28×). Reduzir verba dos demais e priorizar ele na ampliação de budget.</li>
-<li style="margin:10px 0"><b>💰 Solicitar budget adicional:</b> para fechar as 23 vendas restantes ao CPA atual de R$84 = R$1.932 necessários. Ao CPA dos top 2 criativos (R$19) = R$437 suficientes — muito provável com ADC02+ADI27 escalados.</li>
-<li style="margin:10px 0"><b>🎯 Resultado mínimo esperado:</b> com o budget restante + top 2 criativos: +5 a +24 ingressos → total projetado: 102–121 (meta possivelmente atingível).</li>
+<li style="margin:10px 0"><b>🔴 PAUSAR agora:</b> ADV09 (R$1.209 · ROAS 0,26×), ADV26 (R$289 · 0 compras), ADC08 (R$64 · 0 compras), ADV25 (R$625 · CPA R$156). Total liberado: ~R$2.187 de spend diário potencial.</li>
+<li style="margin:10px 0"><b>✅ ESCALAR com o budget restante + liberado:</b> concentrar em ADC02 (ROAS 6,60×) + ADI27 (ROAS 3,85×) + ADC05 (ROAS 1,28×). Ao CPA médio de R$25 nesses 3, conseguem fechar 23 ingressos com ~R$575 adicionais.</li>
+<li style="margin:10px 0"><b>📊 Exposição confortável — podem investir mais:</b> headroom de R$6.769. Para fechar 23 ingressos ao CPA atual de R$68 → investem R$1.564 → exposure aumenta ~R$944 (cada ingresso cobre R$27 de custo) → exposure total final: ~R$2.175 (27% do limite).</li>
+<li style="margin:10px 0"><b>🔍 Investigar queda de Conv. LP:</b> Conv. LP→Venda caiu de 30,8% (D6) para 5-7% (D12-D15). Possíveis causas: público saturado, criativos errados nas fases de escala, ou descasamento entre criativo e LP. Revisar combinações criativo/conjunto.</li>
+<li style="margin:10px 0"><b>📈 Resultado projetado:</b> pausar perdedores + escalar ADC02/ADI27/ADC05 → projeção: 120 ingressos até fechamento do lançamento. Exposição final estimada: R$2.000–R$2.500 (bem abaixo do limite de R$8.000).</li>
 </ol>
 </div>
 
 <footer style="margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,.05);font-size:11px;color:#475569;text-align:center">
 TPIJA008 · Imersão Jornada da Autoridade · Tamara Damares (C4) · Gerado em 24/06/26 via Claude Code + Meta Ads API ·
-Dados de compra via pixel Meta (purchase_roas) · Total investment = R$6.619,68 conforme declarado
+Exposição Líquida = Investimento − Receita Bruta (R$6.620 − R$5.389 = R$1.231) · Investment total = R$6.619,68 confirmado ·
+Ticket médio est. = R$55,56 (ingresso R$27 + pitch 26,8% + gravação 24,7%)
 </footer>
 
 </body>
