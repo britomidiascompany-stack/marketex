@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MPD · Junho 2026 · Mês Completo (01–24)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0c11;--bg2:#10131c;--card:#161a24;--line:#262b3a;--txt:#e8ecf3;--mute:#8b94a8;--accent:#7c5cff;--accent2:#22d3ee;--good:#22c55e;--warn:#f59e0b;--bad:#ef4444;--gold:#fbbf24;--orange:#fb923c}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'Inter',system-ui,sans-serif;background:radial-gradient(ellipse at top,#1a1f2e 0%,var(--bg) 65%);color:var(--txt);overflow:hidden;-webkit-font-smoothing:antialiased}
+.deck{position:relative;width:100vw;height:100vh;overflow:hidden}
+.slide{position:absolute;inset:0;padding:54px 76px 80px;display:flex;flex-direction:column;opacity:0;transform:translateX(40px);transition:opacity .35s,transform .35s;pointer-events:none;overflow-y:auto}
+.slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+.slide.prev{transform:translateX(-40px)}
+.hud{position:fixed;bottom:18px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:14px;z-index:20;font-size:13px;color:var(--mute)}
+.hud button{background:var(--card);border:1px solid var(--line);color:var(--txt);width:36px;height:36px;border-radius:10px;font-size:18px;cursor:pointer;display:grid;place-items:center;transition:all .15s}
+.hud button:hover{border-color:var(--accent);color:var(--accent)}
+.hud .counter{font-variant-numeric:tabular-nums;min-width:54px;text-align:center}
+.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .35s;z-index:21}
+.brand{position:fixed;top:18px;left:24px;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--mute);z-index:10}
+.brand b{color:var(--accent2);font-weight:700}
+h1{font-size:58px;font-weight:800;letter-spacing:-.02em;line-height:1.05;margin-bottom:18px}
+h1 .grad{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 .green-grad{background:linear-gradient(135deg,#22c55e 0%,#86efac 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 .orange-grad{background:linear-gradient(135deg,#fb923c 0%,#fbbf24 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:34px;font-weight:700;letter-spacing:-.01em;line-height:1.15;margin-bottom:8px}
+h2 .kbd{font-size:13px;color:var(--mute);font-weight:500;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:10px}
+h3{font-size:15px;font-weight:600;color:var(--mute);margin-bottom:10px;letter-spacing:.02em;text-transform:uppercase}
+.lead{font-size:17px;color:var(--mute);max-width:960px;line-height:1.55}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g5{grid-template-columns:repeat(5,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;display:flex;flex-direction:column;gap:6px}
+.card.elev{box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.card .label{font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:.12em;font-weight:600}
+.card .value{font-size:36px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.05}
+.card .value.sm{font-size:26px}
+.card .sub{font-size:12.5px;color:var(--mute);line-height:1.45}
+.card.accent{background:linear-gradient(135deg,rgba(124,92,255,.18),rgba(34,211,238,.08));border-color:rgba(124,92,255,.35)}
+.card.good{background:linear-gradient(135deg,rgba(34,197,94,.16),rgba(34,197,94,.04));border-color:rgba(34,197,94,.35)}
+.card.bad{background:linear-gradient(135deg,rgba(239,68,68,.16),rgba(239,68,68,.04));border-color:rgba(239,68,68,.35)}
+.card.warn{background:linear-gradient(135deg,rgba(245,158,11,.16),rgba(245,158,11,.04));border-color:rgba(245,158,11,.35)}
+.card.gold{background:linear-gradient(135deg,rgba(251,191,36,.18),rgba(251,191,36,.05));border-color:rgba(251,191,36,.4)}
+.card.orange{background:linear-gradient(135deg,rgba(251,146,60,.16),rgba(251,191,36,.05));border-color:rgba(251,146,60,.4)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-weight:600;color:var(--mute);text-transform:uppercase;letter-spacing:.08em;font-size:11px;padding:9px 11px;border-bottom:1px solid var(--line)}
+td{padding:9px 11px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:none}
+tr.hl td{background:rgba(124,92,255,.08)}
+tr.hl2 td{background:rgba(34,211,238,.06)}
+tr.total td{background:rgba(34,211,238,.06);font-weight:700;border-top:2px solid var(--line)}
+.pill{display:inline-block;padding:3px 9px;border-radius:99px;font-size:11px;font-weight:600;letter-spacing:.04em}
+.pill.good{background:rgba(34,197,94,.15);color:#86efac}
+.pill.bad{background:rgba(239,68,68,.15);color:#fca5a5}
+.pill.warn{background:rgba(245,158,11,.15);color:#fcd34d}
+.pill.gold{background:rgba(251,191,36,.15);color:#fde047}
+.pill.orange{background:rgba(251,146,60,.15);color:#fed7aa}
+.pill.accent{background:rgba(124,92,255,.2);color:#c4b5fd}
+.pill.new{background:rgba(34,211,238,.15);color:#67e8f9}
+.bullets{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.bullet{display:flex;gap:14px;align-items:flex-start;padding:12px 15px;border:1px solid var(--line);border-radius:11px;background:var(--bg2)}
+.bullet .num{flex:0 0 28px;height:28px;border-radius:7px;background:var(--accent);color:white;display:grid;place-items:center;font-weight:700;font-size:13px}
+.bullet .t{font-size:14px;color:var(--txt);line-height:1.5}
+.bullet .t b{color:var(--accent2)}
+.bullet.good .num{background:var(--good)}
+.bullet.bad .num{background:var(--bad)}
+.bullet.warn .num{background:var(--warn)}
+.bullet.gold .num{background:var(--gold);color:#1a1a1a}
+.bullet.orange .num{background:var(--orange);color:#fff}
+a{color:var(--accent2);text-decoration:none;border-bottom:1px solid rgba(34,211,238,.4)}
+a:hover{border-color:var(--accent2)}
+.cta{padding:22px 26px;border-radius:14px;background:linear-gradient(135deg,#7c5cff,#22d3ee);color:white;display:flex;justify-content:space-between;align-items:center}
+.cta .big{font-size:22px;font-weight:800}
+.meta{display:flex;gap:22px;align-items:center;font-size:13px;color:var(--mute);margin-top:22px;flex-wrap:wrap}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--accent2);display:inline-block;margin:0 6px}
+.tag{display:inline-block;padding:5px 12px;border:1px solid var(--line);border-radius:99px;font-size:12px;color:var(--mute);margin-bottom:18px;letter-spacing:.04em}
+.tag.green{border-color:rgba(34,197,94,.5);color:#86efac;background:rgba(34,197,94,.08)}
+.income-row{display:flex;align-items:center;gap:14px;padding:10px 13px;background:var(--bg2);border-radius:9px;border:1px solid var(--line)}
+.income-row .label{flex:0 0 220px;font-size:13px;color:var(--mute)}
+.income-row .bar{flex:1;height:20px;background:var(--line);border-radius:4px;overflow:hidden;position:relative}
+.income-row .bar > i{display:block;height:100%;border-radius:4px}
+.income-row .val{flex:0 0 90px;text-align:right;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+.creative-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:14px}
+.creative-card.top{background:linear-gradient(90deg,rgba(251,191,36,.12),transparent);border-color:rgba(251,191,36,.3)}
+.creative-card.new{background:linear-gradient(90deg,rgba(34,211,238,.1),transparent);border-color:rgba(34,211,238,.3)}
+.creative-card .name{font-size:14px;font-weight:600;line-height:1.4}
+.creative-card .qual{font-size:24px;font-weight:800;color:var(--accent2);font-variant-numeric:tabular-nums;flex:0 0 64px;text-align:right}
+.creative-card .meta-sm{font-size:11px;color:var(--mute);margin-top:3px}
+.week-bar{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg2);border-radius:9px;border:1px solid var(--line)}
+.week-bar .wk{flex:0 0 60px;font-size:12px;font-weight:700;color:var(--mute)}
+.week-bar .bar-wrap{flex:1;height:24px;background:var(--line);border-radius:5px;overflow:hidden;position:relative;display:flex}
+.week-bar .bar-traf{height:100%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:white}
+.week-bar .bar-org{height:100%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:rgba(0,0,0,.7)}
+.week-bar .meta-r{flex:0 0 160px;text-align:right;font-size:12px;color:var(--mute);font-variant-numeric:tabular-nums}
+@media (max-width:1100px){.slide{padding:44px 28px 80px}h1{font-size:40px}h2{font-size:26px}.card .value{font-size:26px}.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:1fr 1fr}.g5{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="progress" id="prog"></div>
+<div class="brand">MARKETEX · <b>MPD / JUNHO 2026</b></div>
+<div class="deck" id="deck">
+
+<!-- 1. COVER -->
+<section class="slide active">
+  <span class="tag green">Relatório Mensal · Junho 2026 · 01 a 24/06 · 3½ semanas</span>
+  <h1>R$ 7.334 investidos<br><span class="grad">→ 276 aplicações · 122 qualificadas</span><br><span class="green-grad">CPA real R$ 83 · 44% qualif</span></h1>
+  <p class="lead">Quatro semanas (S4 parcial) com ADV78 ANOS 80 carregando 75% das qualificadas via tráfego e ADC006 estreando em S4 com 5 qualif em 3 dias. Orgânico representou 26% das qualif totais — ig-bio e quente-orgânico como principais canais.</p>
+  <div class="meta">
+    <span><b style="color:var(--txt)">Período:</b> 01–24/jun/2026</span><span class="dot"></span>
+    <span><b style="color:var(--txt)">Semanas:</b> S1 · S2 · S3 · S4 (parcial)</span><span class="dot"></span>
+    <span><b style="color:var(--txt)">Regra:</b> ≥ R$ 8k auto · R$ 5–8k Alta/Pra ontem</span>
+  </div>
+  <div style="flex:1"></div>
+  <p style="font-size:11px;color:var(--mute);letter-spacing:.1em;text-transform:uppercase">← → para navegar · 6 slides</p>
+</section>
+
+<!-- 2. KPIs + SEMANA A SEMANA -->
+<section class="slide">
+  <h2><span class="kbd">visão geral do mês</span>6 números e evolução semanal</h2>
+  <div class="grid g3" style="margin-top:18px">
+    <div class="card accent">
+      <div class="label">Investimento total</div>
+      <div class="value">R$ 7.334</div>
+      <div class="sub">S1 R$2.988 · S2 R$1.841 · S3 R$1.347 · S4 R$1.157</div>
+    </div>
+    <div class="card gold">
+      <div class="label">Aplicações únicas recebidas</div>
+      <div class="value">276</div>
+      <div class="sub">Após deduplicação por WhatsApp</div>
+    </div>
+    <div class="card good">
+      <div class="label">Qualificadas (todas fontes)</div>
+      <div class="value">122</div>
+      <div class="sub">44,2% de qualificação no mês</div>
+    </div>
+    <div class="card good">
+      <div class="label">Qualif. via tráfego pago</div>
+      <div class="value">88</div>
+      <div class="sub">72% das qualif · CPA R$ 83</div>
+    </div>
+    <div class="card accent">
+      <div class="label">Qualif. via orgânico</div>
+      <div class="value">32</div>
+      <div class="sub">26% — ig-bio + quente-organico</div>
+    </div>
+    <div class="card orange">
+      <div class="label">Melhor semana</div>
+      <div class="value sm">S4 · 52,4%</div>
+      <div class="sub">22 qualif em apenas 3 dias · ADC006 estreia</div>
+    </div>
+  </div>
+
+  <div class="card elev" style="margin-top:18px">
+    <h3>Evolução semanal</h3>
+    <table>
+      <thead><tr><th>Semana</th><th>Invest.</th><th>Total apps</th><th>Qualif.</th><th>% qualif.</th><th>Tráfego Q</th><th>Orgân. Q</th><th>CPA real</th></tr></thead>
+      <tbody>
+        <tr><td><b>S1</b> 01–07/06</td><td>R$ 2.988</td><td>116</td><td>46</td><td>39,7%</td><td>36</td><td>10</td><td>R$ 83</td></tr>
+        <tr><td><b>S2</b> 08–14/06</td><td>R$ 1.841</td><td>59</td><td>30</td><td>50,8%</td><td>24</td><td>5</td><td>R$ 77</td></tr>
+        <tr><td><b>S3</b> 15–21/06</td><td>R$ 1.347</td><td>59</td><td>24</td><td>40,7%</td><td>16</td><td>7</td><td>R$ 84</td></tr>
+        <tr class="hl2"><td><b>S4</b> 22–24/06 <span class="pill accent">parcial</span></td><td>R$ 1.157</td><td>42</td><td>22</td><td><b style="color:#86efac">52,4%</b></td><td>12</td><td>10</td><td>R$ 96</td></tr>
+        <tr class="total"><td><b>JUNHO</b></td><td><b>R$ 7.334</b></td><td><b>276</b></td><td><b>122</b></td><td><b>44,2%</b></td><td><b>88</b></td><td><b>32</b></td><td><b>R$ 83</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 3. QUALIDADE DAS QUALIFICADAS -->
+<section class="slide">
+  <h2><span class="kbd">qualidade das qualificadas</span>Mix saudável — 67% acima de R$ 8k</h2>
+  <div class="grid g3" style="margin-top:18px">
+    <div class="card gold">
+      <div class="label">Acima de R$ 10k</div>
+      <div class="value">45</div>
+      <div class="sub">37% das 122 qualificadas</div>
+    </div>
+    <div class="card good">
+      <div class="label">R$ 8k – 10k  <span class="pill good" style="font-size:10px">AUTO</span></div>
+      <div class="value">36</div>
+      <div class="sub">30% — qualificam sem urgência</div>
+    </div>
+    <div class="card accent">
+      <div class="label">R$ 5–8k  <span class="pill accent" style="font-size:10px">Alta / Pra ontem</span></div>
+      <div class="value">40</div>
+      <div class="sub">33% — com urgência confirmada</div>
+    </div>
+  </div>
+
+  <div class="card elev" style="margin-top:18px">
+    <h3>Distribuição visual das 122 qualificadas</h3>
+    <div style="display:flex;flex-direction:column;gap:9px;margin-top:8px">
+      <div class="income-row">
+        <span class="label">Acima de R$ 10k</span>
+        <div class="bar"><i style="width:100%;background:linear-gradient(90deg,#fbbf24,#fde047)"></i></div>
+        <span class="val">45 (37%)</span>
+      </div>
+      <div class="income-row">
+        <span class="label">R$ 8k – 10k (auto)</span>
+        <div class="bar"><i style="width:80%;background:linear-gradient(90deg,#22c55e,#86efac)"></i></div>
+        <span class="val">36 (30%)</span>
+      </div>
+      <div class="income-row">
+        <span class="label">R$ 5–8k (Alta/Pra ontem)</span>
+        <div class="bar"><i style="width:89%;background:linear-gradient(90deg,#7c5cff,#22d3ee)"></i></div>
+        <span class="val">40 (33%)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid g2" style="margin-top:14px">
+    <div class="bullet good"><span class="num">✓</span><div class="t"><b>67% das qualificadas ganham acima de R$ 8k</b> (81 de 122). Regra ≥8k auto passou a capturar esse grupo integral — resultado mais consistente.</div></div>
+    <div class="bullet warn"><span class="num">!</span><div class="t"><b>S4 mostrou pico de 10% de orgânico qualif</b> (10 de 22). ig-bio em alta — consistência do conteúdo orgânico está convertendo acima da média do mês.</div></div>
+  </div>
+</section>
+
+<!-- 4. TOP CRIATIVOS + ORGÂNICO -->
+<section class="slide">
+  <h2><span class="kbd">criativos e origens</span>ADV78 domina · ADC006 estreia forte · orgânico cresce</h2>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card elev">
+      <h3>Top criativos — tráfego qualif (88)</h3>
+      <div class="creative-card top" style="margin-top:6px">
+        <div style="flex:1">
+          <div class="name">🏆 <b>ADV78 ANOS 80 (1.17)</b></div>
+          <div class="meta-sm">75% das qualif pagas · dominante em S1–S3</div>
+        </div>
+        <div class="qual">66</div>
+      </div>
+      <div class="creative-card" style="margin-top:6px">
+        <div style="flex:1">
+          <div class="name">ADV81 SEU CLIENTES TE INDICAM (1.08)</div>
+          <div class="meta-sm">2º colocado · consistente</div>
+        </div>
+        <div class="qual">9</div>
+      </div>
+      <div class="creative-card new" style="margin-top:6px">
+        <div style="flex:1">
+          <div class="name">🆕 <b>ADC006 O JEITO DE COBRAR ESTÁ ERRADO</b> <span class="pill new">carousel</span></div>
+          <div class="meta-sm">Entrou S4 · 5 qualif em 3 dias · promissor</div>
+        </div>
+        <div class="qual">5</div>
+      </div>
+      <div class="creative-card" style="margin-top:6px">
+        <div style="flex:1">
+          <div class="name">ADI27 MAPEAMENTO · ADV76 ESPECIALISTA (1.12)</div>
+          <div class="meta-sm">2 qualif cada</div>
+        </div>
+        <div class="qual">2+2</div>
+      </div>
+    </div>
+    <div>
+      <div class="card elev">
+        <h3>Orgânico qualif por medium (32)</h3>
+        <table style="margin-top:6px">
+          <thead><tr><th>Canal</th><th>Qualif.</th><th>%</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td><b>quente-organico</b></td><td>15</td><td>47%</td></tr>
+            <tr><td>ig-bio</td><td>13</td><td>41%</td></tr>
+            <tr><td>curseduca</td><td>1</td><td>3%</td></tr>
+            <tr><td>outros / NR</td><td>3</td><td>9%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card elev" style="margin-top:14px">
+        <h3>Qualificadas por semana × origem</h3>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+          <div class="week-bar">
+            <span class="wk">S1</span>
+            <div class="bar-wrap">
+              <div class="bar-traf" style="width:78%;background:linear-gradient(90deg,#7c5cff,#5b21b6)">36 pago</div>
+              <div class="bar-org" style="width:22%;background:linear-gradient(90deg,#22c55e,#86efac)">10 org</div>
+            </div>
+            <span class="meta-r">46 total · 39,7%</span>
+          </div>
+          <div class="week-bar">
+            <span class="wk">S2</span>
+            <div class="bar-wrap">
+              <div class="bar-traf" style="width:80%;background:linear-gradient(90deg,#7c5cff,#5b21b6)">24 pago</div>
+              <div class="bar-org" style="width:20%;background:linear-gradient(90deg,#22c55e,#86efac)">6 org</div>
+            </div>
+            <span class="meta-r">30 total · 50,8%</span>
+          </div>
+          <div class="week-bar">
+            <span class="wk">S3</span>
+            <div class="bar-wrap">
+              <div class="bar-traf" style="width:70%;background:linear-gradient(90deg,#7c5cff,#5b21b6)">16 pago</div>
+              <div class="bar-org" style="width:30%;background:linear-gradient(90deg,#22c55e,#86efac)">8 org</div>
+            </div>
+            <span class="meta-r">24 total · 40,7%</span>
+          </div>
+          <div class="week-bar">
+            <span class="wk">S4 <span class="pill accent" style="font-size:9px">3d</span></span>
+            <div class="bar-wrap">
+              <div class="bar-traf" style="width:55%;background:linear-gradient(90deg,#7c5cff,#5b21b6)">12 pago</div>
+              <div class="bar-org" style="width:45%;background:linear-gradient(90deg,#22c55e,#86efac)">10 org</div>
+            </div>
+            <span class="meta-r">22 total · 52,4%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. ADV78 DESTAQUE + ADC006 -->
+<section class="slide">
+  <h2><span class="kbd">análise de criativos</span>ADV78 é o motor — ADC006 é a nova aposta</h2>
+  <div class="grid g2" style="margin-top:18px">
+    <div>
+      <div class="card gold">
+        <div class="label">🏆 ADV78 ANOS 80 (1.17)</div>
+        <div class="value">66 qualif</div>
+        <div class="sub">75% das 88 qualif via tráfego no mês inteiro</div>
+      </div>
+      <div class="bullets" style="margin-top:14px">
+        <div class="bullet gold"><span class="num">★</span><div class="t"><b>Vídeo mais consistente do funil:</b> performou em todas as 4 semanas sem cansar. S1: 26 qualif · S2: 19 · S3: 16 · S4: 5.</div></div>
+        <div class="bullet warn"><span class="num">!</span><div class="t"><b>Dependência crítica:</b> 75% do funil depende de 1 criativo. Se cansar ou CPM subir, o funil cai. <b>Produzir variações do ANOS 80</b> é a prioridade imediata.</div></div>
+        <div class="bullet good"><span class="num">✓</span><div class="t"><b>ADV81 segura o 2º lugar</b> com 9 qualif — não é expressivo mas é consistente como backup. Pode receber mais budget na ausência de variações do ADV78.</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="card accent" style="background:linear-gradient(135deg,rgba(34,211,238,.2),rgba(34,211,238,.05));border-color:rgba(34,211,238,.4)">
+        <div class="label">🆕 ADC006 JEITO DE COBRAR — ESTREIA S4</div>
+        <div class="value">5 qualif</div>
+        <div class="sub">em apenas 3 dias de veiculação · carousel</div>
+      </div>
+      <div class="bullets" style="margin-top:14px">
+        <div class="bullet good"><span class="num">1</span><div class="t"><b>ADC006 gerou 5 qualif em 3 dias</b> na conta ANEX 08 — superou ADV78 em S4 (5 × 5 empate). Para um carousel novo, é sinal muito positivo.</div></div>
+        <div class="bullet good"><span class="num">2</span><div class="t"><b>ADC004 e ADC005</b> também estão rodando — aguardar dados completos da S4 (semana ainda em andamento) para comparar os 3 carrosséis entre si.</div></div>
+        <div class="bullet orange"><span class="num">3</span><div class="t"><b>Próximo passo:</b> Se ADC006 mantiver ritmo ao final da S4, duplicar budget na S5 e testar como substituto ou complemento do ADV78.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta" style="margin-top:20px">
+    <div>
+      <div class="big">Diagnóstico do criativo</div>
+      <p style="color:rgba(255,255,255,.95);margin-top:6px;font-size:14px">ADV78 carrega o mês. ADC006 é a única novidade que provou qualificação em 3 dias. Há urgência em produzir variações do ANOS 80 <b>antes que ele canse</b> e o ADC006 ainda não está escalado o suficiente para substituir.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6. PRÓXIMOS PASSOS -->
+<section class="slide">
+  <h2><span class="kbd">próximos passos</span>Fechar junho forte e preparar julho</h2>
+  <div class="grid g2" style="margin-top:18px">
+    <div class="card good">
+      <div class="label">🚀 ESCALAR AGORA</div>
+      <div class="bullets" style="margin-top:8px">
+        <div class="bullet good"><span class="num">1</span><div class="t"><b>Registros S3 e S4 atualizados na planilha:</b> S3 = 59 apps · 24 qualif (40,7%) · 16 tráfego · 25 orgânico. S4 parcial = 42 apps · 22 qualif (52,4%) · 12 tráfego · 16 orgânico.</div></div>
+        <div class="bullet good"><span class="num">2</span><div class="t"><b>Escalar ADC006 na ANEX 08</b> — 5 qualif em 3 dias com investimento ainda baixo. Dobrar budget e aguardar mais 4–5 dias para comparar CPA com ADV78.</div></div>
+        <div class="bullet good"><span class="num">3</span><div class="t"><b>Monitorar ADC004 e ADC005</b> — foram criados junto com ADC006. Comparar os 3 ao final da semana para identificar qual carousel performou melhor.</div></div>
+      </div>
+    </div>
+    <div class="card bad">
+      <div class="label">🛠️ CORRIGIR / PRODUZIR</div>
+      <div class="bullets" style="margin-top:8px">
+        <div class="bullet bad"><span class="num">1</span><div class="t"><b>Produzir variações do ADV78 ANOS 80 agora.</b> 75% do funil em 1 criativo é risco inaceitável. Ao menos 3 variações (ângulo diferente, mesmo hook visual).</div></div>
+        <div class="bullet warn"><span class="num">2</span><div class="t"><b>S3 teve queda na qualif (40,7%).</b> Coinciniu com redução de budget e ADV78 sendo o único criativo. Diversificação de criativo = estabilidade de qualificação.</div></div>
+        <div class="bullet warn"><span class="num">3</span><div class="t"><b>Orgânico cresceu em S4</b> (10 de 22 qualif, 45%). Avaliar se conteúdo específico no ig-bio ou quente-organico gerou esse pico para replicar em julho.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px;background:linear-gradient(135deg,rgba(124,92,255,.1),rgba(34,211,238,.05));border-color:rgba(124,92,255,.3)">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px">
+      <div>
+        <div style="font-size:11px;color:var(--mute);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Resumo do mês em 1 frase</div>
+        <div style="font-size:16px;font-weight:700;line-height:1.5">R$ 7.334 → 122 qualif em 3½ semanas · CPA R$ 83 · ADV78 carrega 75% · ADC006 promete. <span style="color:var(--accent2)">Prioridade: variações do ADV78 + escalar ADC006.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+<div class="hud"><button id="prev">←</button><span class="counter"><span id="cur">1</span> / <span id="tot">6</span></span><button id="next">→</button></div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];const cur=document.getElementById('cur');const tot=document.getElementById('tot');const prog=document.getElementById('prog');tot.textContent=slides.length;let i=0;
+function go(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,k)=>{s.classList.remove('active','prev');if(k===i)s.classList.add('active');else if(k<i)s.classList.add('prev');});cur.textContent=i+1;prog.style.width=((i+1)/slides.length*100)+'%'}
+document.getElementById('prev').onclick=()=>go(i-1);document.getElementById('next').onclick=()=>go(i+1);
+window.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown')go(i+1);if(e.key==='ArrowLeft'||e.key==='PageUp')go(i-1);if(e.key==='Home')go(0);if(e.key==='End')go(slides.length-1);});
+go(0);
+</script>
+</body>
+</html>
