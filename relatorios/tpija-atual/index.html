@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TPIJA008 · D15 · 24/06/26</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0e17;color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.55;padding:20px;max-width:1500px;margin:0 auto}
+header{background:radial-gradient(circle at top right,rgba(124,92,255,.25),transparent 60%),radial-gradient(circle at bottom left,rgba(34,211,238,.18),transparent 55%),#11172a;border-radius:20px;padding:32px;margin-bottom:28px;border:1px solid rgba(124,92,255,.25);position:relative}
+header h1{font-size:32px;background:linear-gradient(135deg,#7c5cff,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;font-weight:800}
+header .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+header .meta span{background:rgba(124,92,255,.12);padding:6px 14px;border-radius:8px;font-size:13px;color:#cbd5e1;border:1px solid rgba(124,92,255,.2)}
+header .status-pill{position:absolute;top:32px;right:32px;background:rgba(239,68,68,.15);color:#f87171;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid rgba(239,68,68,.3)}
+h2{font-size:20px;margin:36px 0 14px;color:#f1f5f9;display:flex;align-items:center;gap:10px}
+h2::before{content:"";width:4px;height:22px;background:linear-gradient(180deg,#7c5cff,#22d3ee);border-radius:2px}
+h3{font-size:15px;margin:14px 0 8px;color:#cbd5e1;font-weight:600}
+.card{background:#11172a;border-radius:14px;padding:18px 22px;border:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;margin-bottom:14px}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#7c5cff,#22d3ee)}
+.card.good::before{background:linear-gradient(90deg,#22c55e,#10b981)}
+.card.bad::before{background:linear-gradient(90deg,#ef4444,#f43f5e)}
+.card.warn::before{background:linear-gradient(90deg,#facc15,#f97316)}
+.scroll-x{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+th,td{padding:8px 6px;text-align:left;border-bottom:1px solid rgba(255,255,255,.05);white-space:nowrap}
+th{color:#94a3b8;font-size:10px;text-transform:uppercase;letter-spacing:.3px;font-weight:600;background:rgba(124,92,255,.04)}
+tr:hover td{background:rgba(124,92,255,.04)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.win{color:#4ade80;font-weight:600}
+.lose{color:#f87171;font-weight:600}
+.warn-txt{color:#facc15;font-weight:600}
+.tot{background:rgba(124,92,255,.08);font-weight:600}
+.kpi{font-size:12px;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px}
+.val{font-size:26px;font-weight:700;color:#f1f5f9;margin:4px 0}
+.sub{font-size:12px;color:#64748b}
+.grid{display:grid;gap:14px}
+.grid-2{grid-template-columns:1fr 1fr}
+.grid-3{grid-template-columns:1fr 1fr 1fr}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:1100px){.grid-3{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){.grid-2,.grid-4,.grid-3{grid-template-columns:1fr}}
+.tag{display:inline-block;background:rgba(124,92,255,.15);padding:3px 9px;border-radius:6px;font-size:11px;color:#cbd5e1;margin-left:6px;vertical-align:middle}
+.tag.good{background:rgba(34,197,94,.15);color:#4ade80}
+.tag.warn{background:rgba(250,204,21,.15);color:#facc15}
+.tag.bad{background:rgba(239,68,68,.15);color:#f87171}
+a{color:#22d3ee;text-decoration:none}
+a:hover{text-decoration:underline}
+.drive-btn{display:inline-block;background:rgba(34,211,238,.12);padding:2px 8px;border-radius:6px;font-size:10px;font-weight:600;color:#22d3ee;margin-left:4px;border:1px solid rgba(34,211,238,.25)}
+.drive-btn:hover{background:rgba(34,211,238,.2);text-decoration:none}
+ul{margin-left:18px;font-size:14px;color:#cbd5e1}
+ul li{margin:6px 0}
+.funnel-col{display:flex;flex-direction:column;align-items:center;gap:0;max-width:700px;margin:0 auto}
+.rfblock{position:relative;border-radius:14px;padding:14px 18px;background:#11172a;border:1px solid rgba(255,255,255,.05);box-shadow:0 4px 12px rgba(0,0,0,.3);margin:0 auto;width:100%}
+.rfblock-head{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.08)}
+.rfblock-head .ico{font-size:18px}
+.rfblock-head .title{font-size:12px;font-weight:800;color:#f1f5f9;text-transform:uppercase;letter-spacing:.6px}
+.rfblock-metrics{display:flex;justify-content:space-around;gap:8px;flex-wrap:wrap}
+.rfmetric{flex:1;min-width:60px;padding:6px 4px;text-align:center;background:rgba(124,92,255,.05);border-radius:6px}
+.rfmetric .l{display:block;font-size:8px;color:#94a3b8;text-transform:uppercase;letter-spacing:.3px;margin-bottom:3px;font-weight:600;line-height:1.2}
+.rfmetric .v{font-size:13px;font-weight:700;color:#f1f5f9;font-variant-numeric:tabular-nums}
+.rfmetric.star{background:linear-gradient(135deg,rgba(34,197,94,.18),rgba(34,211,238,.12));border:1px solid rgba(34,197,94,.3)}
+.rfmetric.star .v{color:#4ade80;font-size:14px}
+.rfarrow{font-size:24px;color:rgba(124,92,255,.45);margin:6px 0;line-height:1;text-align:center}
+.rfblock.b1{width:100%}
+.rfblock.b2{width:88%}
+.rfblock.b3{width:74%}
+.rfblock.b4{width:60%}
+.rfblock.b5{width:48%}
+.rfblock.public{border-top:3px solid #7c5cff}
+.rfblock.ad{border-top:3px solid #22d3ee}
+.rfblock.page{border-top:3px solid #facc15}
+.rfblock.sales{border-top:3px solid #22c55e;background:linear-gradient(135deg,#11172a,rgba(34,197,94,.08))}
+.action-box{background:rgba(250,204,21,.06);border:1px solid rgba(250,204,21,.3);border-radius:12px;padding:16px 20px;margin-bottom:14px}
+.action-box h4{color:#facc15;font-size:13px;font-weight:700;margin-bottom:8px}
+.action-box li{font-size:13px;color:#cbd5e1;margin:5px 0}
+.progress-bar{background:rgba(255,255,255,.06);border-radius:8px;height:8px;margin-top:6px;overflow:hidden}
+.progress-bar-fill{height:100%;border-radius:8px;transition:width .3s}
+.analysis-section{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:8px}
+@media(max-width:900px){.analysis-section{grid-template-columns:1fr}}
+.analysis-card{border-radius:12px;padding:16px 18px}
+.analysis-card.green{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.25)}
+.analysis-card.yellow{background:rgba(250,204,21,.07);border:1px solid rgba(250,204,21,.25)}
+.analysis-card.red{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.25)}
+.analysis-card h4{font-size:13px;font-weight:700;margin-bottom:8px}
+.analysis-card.green h4{color:#4ade80}
+.analysis-card.yellow h4{color:#facc15}
+.analysis-card.red h4{color:#f87171}
+.analysis-card li{font-size:12px;color:#cbd5e1;margin:5px 0}
+</style>
+</head>
+<body>
+
+<header>
+<span class="status-pill">🔴 EM CAPTAÇÃO · D15 · URGENTE</span>
+<h1>TPIJA008 · D15 · 24/06/26</h1>
+<div style="font-size:14px;color:#cbd5e1;margin-top:4px">Imersão Jornada da Autoridade · Tamara Damares (C4)</div>
+<div class="meta">
+<span>📅 10/06 (D1) → em curso</span>
+<span>⏱ Gerado 24/06/26</span>
+<span>📊 Dados: Meta Ads</span>
+<span>💰 Imposto Meta +13,83%</span>
+<span>🎯 Meta: 120 ingressos / R$8.000 exposição</span>
+<span>⚠️ Sem VK Metrics — pixel Meta como referência</span>
+</div>
+</header>
+
+<!-- ALERTA ESTRATÉGICO -->
+<div class="action-box" style="margin-bottom:24px">
+<h4>⚡ ALERTA D15 — BUDGET CRÍTICO</h4>
+<ul>
+<li>🔴 <b>Budget quase esgotado:</b> R$7.535 de exposição já consumidos de R$8.000 (94,2%) — restam apenas R$465</li>
+<li>🎯 <b>Faltam 23 ingressos para meta:</b> ao CPA atual de R$84 por ingresso, o budget restante cobre no máximo 5–6 ingressos</li>
+<li>✅ <b>Saída possível:</b> ADC02 (CPA R$20) e ADI27 (CPA R$18) são os únicos criativos que poderiam fechar a meta com o budget restante → concentrar TUDO neles</li>
+<li>🚫 <b>Pausar imediatamente:</b> ADV09 (ROAS 0,26×), ADV26 (0 compras, R$289 gastos), ADC08 (0 compras)</li>
+<li>💡 <b>Alternativa:</b> solicitar ampliação de budget (+R$1.500) para manter ADC05 e ADI48 que já testaram escalabilidade</li>
+</ul>
+</div>
+
+<!-- QUADRO GERAL -->
+<h2>📊 Quadro Geral · D1→D15 (10/06 a 24/06)</h2>
+<div class="grid grid-4">
+
+<div class="card warn">
+<div class="kpi">Investimento Meta</div>
+<div class="val">R$ 6.620</div>
+<div class="sub">Bruto: R$6.619,68 · sem imposto</div>
+</div>
+
+<div class="card bad">
+<div class="kpi">Exposição c/ imposto (13,83%)</div>
+<div class="val" style="color:#f87171">R$ 7.535</div>
+<div class="sub">Meta: R$8.000 · restam R$465 (5,8%)</div>
+<div class="progress-bar" style="margin-top:8px"><div class="progress-bar-fill" style="width:94.2%;background:linear-gradient(90deg,#ef4444,#f43f5e)"></div></div>
+</div>
+
+<div class="card warn">
+<div class="kpi">Ingressos totais</div>
+<div class="val" style="color:#facc15">97 <span style="font-size:14px;color:#64748b">/ 120</span></div>
+<div class="sub">90 pagos · 7 orgânicos · faltam 23</div>
+<div class="progress-bar" style="margin-top:8px"><div class="progress-bar-fill" style="width:80.8%;background:linear-gradient(90deg,#facc15,#f97316)"></div></div>
+</div>
+
+<div class="card bad">
+<div class="kpi">CPA por ingresso (pago)</div>
+<div class="val" style="color:#f87171">R$ 84</div>
+<div class="sub">c/ imposto · meta ideal: R$67 · pixel Meta: R$74</div>
+</div>
+
+</div>
+
+<div class="grid grid-3" style="margin-bottom:14px">
+
+<div class="card">
+<div class="kpi">Receita Bruta Total</div>
+<div class="val">R$ 5.389</div>
+<div class="sub">97×R$27 + 26×R$17 + 24×R$97</div>
+</div>
+
+<div class="card bad">
+<div class="kpi">ROAS Bruto</div>
+<div class="val" style="color:#f87171">0,81×</div>
+<div class="sub">R$5.389 ÷ R$6.620 · breakeven = 1,00×</div>
+</div>
+
+<div class="card bad">
+<div class="kpi">ROAS c/ Imposto</div>
+<div class="val" style="color:#f87171">0,72×</div>
+<div class="sub">R$5.389 ÷ R$7.535 · abaixo do breakeven</div>
+</div>
+
+</div>
+
+<!-- FUNIL META -->
+<h2>🌊 Funil · Meta Ads (acumulado D1–D15)</h2>
+<div class="funnel-col" style="margin-bottom:24px">
+
+<div class="rfblock b1 public">
+<div class="rfblock-head"><span class="ico">📢</span><span class="title">Público Alcançado</span></div>
+<div class="rfblock-metrics">
+<div class="rfmetric"><span class="l">Invest. c/imp</span><span class="v">R$ 7.535</span></div>
+<div class="rfmetric"><span class="l">Impressões</span><span class="v">64.725</span></div>
+<div class="rfmetric"><span class="l">Alcance</span><span class="v">42.531</span></div>
+<div class="rfmetric"><span class="l">Frequência</span><span class="v">1,52×</span></div>
+<div class="rfmetric"><span class="l">CPM c/imp</span><span class="v">R$ 116</span></div>
+</div>
+</div>
+<div class="rfarrow">▼</div>
+
+<div class="rfblock b2 ad">
+<div class="rfblock-head"><span class="ico">🎯</span><span class="title">Engajamento</span></div>
+<div class="rfblock-metrics">
+<div class="rfmetric"><span class="l">CTR médio</span><span class="v">4,09%</span></div>
+<div class="rfmetric"><span class="l">Cliques LP</span><span class="v">2.644</span></div>
+<div class="rfmetric"><span class="l">CPC c/imp</span><span class="v">R$ 2,85</span></div>
+</div>
+</div>
+<div class="rfarrow">▼</div>
+
+<div class="rfblock b3 page">
+<div class="rfblock-head"><span class="ico">🌐</span><span class="title">Página de Vendas</span></div>
+<div class="rfblock-metrics">
+<div class="rfmetric"><span class="l">Cliques para LP</span><span class="v">2.644</span></div>
+<div class="rfmetric star"><span class="l">Conv. LP→venda (pixel)</span><span class="v">3,40%</span></div>
+<div class="rfmetric"><span class="l">Custo/clique</span><span class="v">R$ 2,50</span></div>
+</div>
+</div>
+<div class="rfarrow">▼</div>
+
+<div class="rfblock b5 sales">
+<div class="rfblock-head"><span class="ico">💰</span><span class="title">Vendas (pixel Meta)</span></div>
+<div class="rfblock-metrics">
+<div class="rfmetric"><span class="l">Compras pixel</span><span class="v">90</span></div>
+<div class="rfmetric"><span class="l">CPA pixel</span><span class="v">R$ 73,55</span></div>
+<div class="rfmetric"><span class="l">CPA c/imp</span><span class="v">R$ 83,73</span></div>
+<div class="rfmetric"><span class="l">+Orgânico</span><span class="v">+7 vendas</span></div>
+<div class="rfmetric star"><span class="l">Total ingressos</span><span class="v">97</span></div>
+</div>
+</div>
+
+</div>
+<p style="font-size:11px;color:#64748b;margin-bottom:24px;text-align:center">⚠️ Sem acesso a VK Metrics para este lançamento. CPM, alcance e cliques são estimativas via dados account-level Meta Ads. Receita bruta calculada com preços informados × volumes de venda declarados.</p>
+
+<!-- COMPARATIVO DIA A DIA -->
+<h2>📅 Comparativo Dia-a-Dia · D1→D15</h2>
+<div class="card">
+<div class="scroll-x">
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th class="num">D1 · 10/06</th>
+<th class="num">D2 · 11/06</th>
+<th class="num">D3 · 12/06</th>
+<th class="num">D4 · 13/06</th>
+<th class="num">D5 · 14/06</th>
+<th class="num">D6 · 15/06</th>
+<th class="num">D7 · 16/06</th>
+<th class="num">D8 · 17/06</th>
+<th class="num">D9 · 18/06</th>
+<th class="num">D10 · 19/06</th>
+<th class="num">D11 · 20/06</th>
+<th class="num">D12 · 21/06</th>
+<th class="num">D13 · 22/06</th>
+<th class="num">D14 · 23/06</th>
+<th class="num">D15 · 24/06</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Investimento</td>
+<td class="num">R$ 16</td>
+<td class="num">R$ 158</td>
+<td class="num">R$ 120</td>
+<td class="num warn-txt">R$ 4 ⚠️</td>
+<td class="num lose">R$ 0 🔴</td>
+<td class="num">R$ 106</td>
+<td class="num">R$ 187</td>
+<td class="num">R$ 144</td>
+<td class="num">R$ 185</td>
+<td class="num">R$ 438</td>
+<td class="num">R$ 545</td>
+<td class="num">R$ 835</td>
+<td class="num win">R$ 1.134 ↑</td>
+<td class="num">R$ 1.086</td>
+<td class="num">R$ 822</td>
+</tr>
+<tr>
+<td>Impressões</td>
+<td class="num">203</td>
+<td class="num">1.322</td>
+<td class="num">938</td>
+<td class="num">32</td>
+<td class="num lose">0</td>
+<td class="num">896</td>
+<td class="num">1.523</td>
+<td class="num">1.203</td>
+<td class="num">2.112</td>
+<td class="num">4.455</td>
+<td class="num">5.291</td>
+<td class="num">8.024</td>
+<td class="num win">11.023 ↑</td>
+<td class="num">10.085</td>
+<td class="num">8.338</td>
+</tr>
+<tr>
+<td>Alcance</td>
+<td class="num">168</td>
+<td class="num">987</td>
+<td class="num">711</td>
+<td class="num">30</td>
+<td class="num">0</td>
+<td class="num">776</td>
+<td class="num">1.108</td>
+<td class="num">943</td>
+<td class="num">1.406</td>
+<td class="num">2.426</td>
+<td class="num">3.389</td>
+<td class="num">5.829</td>
+<td class="num">6.520</td>
+<td class="num">5.994</td>
+<td class="num">5.628</td>
+</tr>
+<tr>
+<td>CPM</td>
+<td class="num win">R$ 80 ↓</td>
+<td class="num">R$ 119</td>
+<td class="num lose">R$ 128 ↑</td>
+<td class="num">R$ 125</td>
+<td class="num">—</td>
+<td class="num">R$ 118</td>
+<td class="num">R$ 123</td>
+<td class="num">R$ 119</td>
+<td class="num win">R$ 88 ↓</td>
+<td class="num win">R$ 98 ↓</td>
+<td class="num">R$ 103</td>
+<td class="num">R$ 104</td>
+<td class="num">R$ 103</td>
+<td class="num warn-txt">R$ 108 ↑</td>
+<td class="num win">R$ 99 ↓</td>
+</tr>
+<tr>
+<td>CTR</td>
+<td class="num win">5,91%</td>
+<td class="num">4,61%</td>
+<td class="num lose">2,67% ↓</td>
+<td class="num lose">0,00% ↓</td>
+<td class="num">—</td>
+<td class="num">2,90%</td>
+<td class="num win">4,66% ↑</td>
+<td class="num">3,41%</td>
+<td class="num">4,40%</td>
+<td class="num">3,93%</td>
+<td class="num">4,12%</td>
+<td class="num">3,78%</td>
+<td class="num">4,08%</td>
+<td class="num">4,22%</td>
+<td class="num">4,27%</td>
+</tr>
+<tr>
+<td>Cliques</td>
+<td class="num">12</td>
+<td class="num">61</td>
+<td class="num">25</td>
+<td class="num">0</td>
+<td class="num">0</td>
+<td class="num">26</td>
+<td class="num">71</td>
+<td class="num">41</td>
+<td class="num">93</td>
+<td class="num">175</td>
+<td class="num">218</td>
+<td class="num">303</td>
+<td class="num win">450 ↑</td>
+<td class="num">426</td>
+<td class="num">356</td>
+</tr>
+<tr>
+<td>CPC</td>
+<td class="num win">R$ 1,36</td>
+<td class="num">R$ 2,58</td>
+<td class="num lose">R$ 4,82 ↑</td>
+<td class="num">—</td>
+<td class="num">—</td>
+<td class="num">R$ 4,07</td>
+<td class="num win">R$ 2,63 ↓</td>
+<td class="num">R$ 3,50</td>
+<td class="num win">R$ 1,99 ↓</td>
+<td class="num">R$ 2,51</td>
+<td class="num">R$ 2,50</td>
+<td class="num">R$ 2,75</td>
+<td class="num">R$ 2,52</td>
+<td class="num">R$ 2,55</td>
+<td class="num win">R$ 2,31 ↓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p style="font-size:11px;color:#64748b;margin-top:8px">D4 (R$4) e D5 (R$0): campanha pausada ou com problema técnico. D13-D15: dados account-level, incluem todas as campanhas TPIJA. Início da campanha: 10/06 = D1 (apenas R$16 gastos, dia de entrada). Escala aconteceu a partir de D10 (19/06).</p>
+</div>
+
+<!-- RANKING DE CRIATIVOS -->
+<h2>🎨 Top Criativos · D1→D15 (pixel Meta)</h2>
+<p style="font-size:12px;color:#94a3b8;margin-bottom:16px">Dados de compra via pixel Meta. Mínimo 2 conversões para ranking de CPA/ROAS. Criativos com mesmo nome em diferentes conjuntos são somados.</p>
+
+<div class="grid grid-3">
+
+<!-- VOLUME -->
+<div class="card">
+<h3>🚀 Por Volume de Compras</h3>
+<div class="scroll-x">
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Criativo</th>
+<th class="num">Compras</th>
+<th class="num">Invest.</th>
+<th class="num">CPA</th>
+<th class="num">ROAS</th>
+<th>Drive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="win">1</td>
+<td>ADC05<br><span class="tag">CRIS JANTAR 21</span></td>
+<td class="num win">20</td>
+<td class="num">R$ 819</td>
+<td class="num win">R$ 41</td>
+<td class="num win">1,28×</td>
+<td>—</td>
+</tr>
+<tr>
+<td class="win">2</td>
+<td>ADI48<br><span class="tag">DO ZERO AO LUCRO AO VIVO</span></td>
+<td class="num win">15</td>
+<td class="num">R$ 1.084</td>
+<td class="num warn-txt">R$ 72</td>
+<td class="num">0,70×</td>
+<td><a class="drive-btn" href="https://drive.google.com/file/d/18m1Ye5ZJUA1nNcX3ZC_IS-pBPzOx0Vc8/view" target="_blank">▶ Drive</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>ADV09<br><span class="tag">IDENTIDADE</span></td>
+<td class="num">11</td>
+<td class="num lose">R$ 1.209</td>
+<td class="num lose">R$ 110</td>
+<td class="num lose">0,26×</td>
+<td><a class="drive-btn" href="https://drive.google.com/file/d/1bqnEFdYA4fwTR89mM2QSOP_Wuztw3w_H/view" target="_blank">▶ Drive</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>ADI38<br><span class="tag">VAGAS ACABANDO AO VIVO</span></td>
+<td class="num">10</td>
+<td class="num">R$ 628</td>
+<td class="num warn-txt">R$ 63</td>
+<td class="num lose">0,46×</td>
+<td>—</td>
+</tr>
+<tr>
+<td>5</td>
+<td>ADV22<br><span class="tag">EVENTO PRESENCIAL POCKET</span></td>
+<td class="num">6</td>
+<td class="num">R$ 466</td>
+<td class="num warn-txt">R$ 78</td>
+<td class="num">0,84×</td>
+<td><a class="drive-btn" href="https://drive.google.com/file/d/1D8emJlCHm7Zy2uXx_H_Eb5poc0y69W8y/view" target="_blank">▶ Drive</a></td>
+</tr>
+<tr>
+<td class="win">6</td>
+<td>ADV02<br><span class="tag">7 PAÍSES EM 6 MESES</span></td>
+<td class="num">6</td>
+<td class="num win">R$ 231</td>
+<td class="num win">R$ 39</td>
+<td class="num win">1,61×</td>
+<td><a class="drive-btn" href="https://drive.google.com/file/d/1m45Dye9u8gTET7Bp-B2elhI9g-XtSOpT/view" target="_blank">▶ Drive</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>ADV02 TPJAS<br><span class="tag">VOCÊ QUE FAZ</span></td>
+<td class="num">5</td>
+<td class="num">R$ 457</td>
+<td class="num lose">R$ 91</td>
+<td class="num lose">0,55×</td>
+<td><a class="drive-btn" href="https://drive.google.com/file/d/14wI9bZ1Zj5Xaq3Rxu5IqFtSYU8UUeir7/view" target="_blank">▶ Drive</a></td>
+</tr>
+<tr>
+<td class="win">8</td>
+<td>ADI27<br><span class="tag">PLUGAR MODELO VERMELHO</span></td>
+<td class="num">3</td>
+<td class="num win">R$ 55</td>
+<td class="num win">R$ 18</td>
+<td class="num win">3,85×</td>
+<td><a class="drive-btn" href="https://drive.google.com/file/d/1JVppsk3zgW8CtwnC2A1rk11ubVWq74Db/view" target="_blank">▶ Drive</a></td>
+</tr>
+<tr>
+<td class="win">9</td>
+<td>ADC02<br><span class="tag">EVENTO STORIES LINDO</span></td>
+<td class="num">3</td>
+<td class="num win">R$ 62</td>
+<td class="num win">R$ 21</td>
+<td class="num win">6,60×</td>
+<td>—</td>
+</tr>
+<tr>
+<td>10</td>
+<td>ADV25<br><span class="tag">EVENTO NA EUROPA</span></td>
+<td class="num">4</td>
+<td class="num lose">R$ 625</td>
+<td class="num lose">R$ 156</td>
+<td class="num lose">0,50×</td>
+<td><a class="drive-btn" href="https://drive.google.com/file/d/1i4QA-Z0Hw6CSgro9zEYhWF09coGAI9Ts/view" target="_blank">▶ Drive</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- CPA -->
+<div class="card">
+<h3>💰 Por Menor CPA (mín. 2 compras)</h3>
+<div class="scroll-x">
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Criativo</th>
+<th class="num">CPA</th>
+<th class="num">Compras</th>
+<th class="num">Invest.</th>
+<th class="num">ROAS</th>
+<th>Drive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="win">1</td>
+<td>ADI27<br><span class="tag good">PLUGAR MODELO VERMELHO</span></td>
+<td class="num win">R$ 18,34</td>
+<td class="num">3</td>
+<td class="num win">R$ 55</td>
+<td class="num win">3,85×</td>
+<td><a class="drive-btn" href="https://drive.google.com/file/d/1JVppsk3zgW8CtwnC2A1rk11ubVWq74Db/view" target="_blank">▶ Drive</a></td>
+</tr>
+<tr>
+<td class="win">2</td>
+<td>ADC02<br><span class="tag good">EVENTO STORIES LINDO</span></td>
+<td class="num win">R$ 20,52</td>
+<td class="num">3</td>
+<td class="num win">R$ 62</td>
+<td class="num win">6,60×</td>
+<td>—</td>
+</tr>
+<tr>
+<td class="win">3</td>
+<td>ADV02<br><span class="tag good">7 PAÍSES EM 6 MESES</span></td>
+<td class="num win">R$ 38,53</td>
+<td class="num">6</td>
+<td class="num">R$ 231</td>
+<td class="num win">1,61×</td>
+<td><a class="drive-btn" href="https://drive.google.com/file/d/1m45Dye9u8gTET7Bp-B2elhI9g-XtSOpT/view" target="_blank">▶ Drive</a></td>
+</tr>
+<tr>
+<td class="win">4</td>
+<td>ADC05<br><span class="tag good">CRIS JANTAR 21 PESSOAS</span></td>
+<td class="num win">R$ 40,97</td>
+<td class="num win">20</td>
+<td class="num">R$ 819</td>
+<td class="num win">1,28×</td>
+<td>—</td>
+</tr>
+<tr>
+<td>5</td>
+<td>ADI38<br><span class="tag warn">VAGAS ACABANDO AO VIVO</span></td>
+<td class="num">R$ 62,78</td>
+<td class="num">10</td>
+<td class="num">R$ 628</td>
+<td class="num lose">0,46×</td>
+<td>—</td>
+</tr>
+<tr>
+<td>6</td>
+<td>ADI48<br><span class="tag warn">DO ZERO AO LUCRO AO VIVO</span></td>
+<td class="num warn-txt">R$ 72,28</td>
+<td class="num">15</td>
+<td class="num">R$ 1.084</td>
+<td class="num">0,70×</td>
+<td><a class="drive-btn" href="https://drive.google.com/file/d/18m1Ye5ZJUA1nNcX3ZC_IS-pBPzOx0Vc8/view" target="_blank">▶ Drive</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>ADV10<br><span class="tag warn">PREPARAÇÃO PARA O EVENTO</span></td>
+<td class="num warn-txt">R$ 74,05</td>
+<td class="num">2</td>
+<td class="num">R$ 148</td>
+<td class="num win">1,13×</td>
+<td><a class="drive-btn" href="https://drive.google.com/file/d/1-17arRcAcU24eGjMMqOf6dLEdZIYxmzn/view" target="_blank">▶ Drive</a></td>
+</tr>
+<tr>
+<td>8</td>
+<td>ADV22<br><span class="tag warn">EVENTO PRESENCIAL POCKET</span></td>
+<td class="num warn-txt">R$ 77,59</td>
+<td class="num">6</td>
+<td class="num">R$ 466</td>
+<td class="num">0,84×</td>
+<td><a class="drive-btn" href="https://drive.google.com/file/d/1D8emJlCHm7Zy2uXx_H_Eb5poc0y69W8y/view" target="_blank">▶ Drive</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td>ADV02 TPJAS<br><span class="tag bad">VOCÊ QUE FAZ</span></td>
+<td class="num lose">R$ 91,35</td>
+<td class="num">5</td>
+<td class="num">R$ 457</td>
+<td class="num lose">0,55×</td>
+<td><a class="drive-btn" href="https://drive.google.com/file/d/14wI9bZ1Zj5Xaq3Rxu5IqFtSYU8UUeir7/view" target="_blank">▶ Drive</a></td>
+</tr>
+<tr>
+<td>10</td>
+<td>ADV09<br><span class="tag bad">IDENTIDADE</span></td>
+<td class="num lose">R$ 109,90</td>
+<td class="num">11</td>
+<td class="num lose">R$ 1.209</td>
+<td class="num lose">0,26×</td>
+<td><a class="drive-btn" href="https://drive.google.com/file/d/1bqnEFdYA4fwTR89mM2QSOP_Wuztw3w_H/view" target="_blank">▶ Drive</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- ROAS -->
+<div class="card">
+<h3>📈 Por ROAS (mín. 2 compras · pixel Meta)</h3>
+<div class="scroll-x">
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Criativo</th>
+<th class="num">ROAS</th>
+<th class="num">Compras</th>
+<th class="num">Invest.</th>
+<th class="num">CPA</th>
+<th>Drive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="win">1</td>
+<td>ADC02<br><span class="tag good">EVENTO STORIES LINDO</span></td>
+<td class="num win">6,60×</td>
+<td class="num">3</td>
+<td class="num win">R$ 62</td>
+<td class="num win">R$ 21</td>
+<td>—</td>
+</tr>
+<tr>
+<td class="win">2</td>
+<td>ADI27<br><span class="tag good">PLUGAR MODELO VERMELHO</span></td>
+<td class="num win">3,85×</td>
+<td class="num">3</td>
+<td class="num win">R$ 55</td>
+<td class="num win">R$ 18</td>
+<td><a class="drive-btn" href="https://drive.google.com/file/d/1JVppsk3zgW8CtwnC2A1rk11ubVWq74Db/view" target="_blank">▶ Drive</a></td>
+</tr>
+<tr>
+<td class="win">3</td>
+<td>ADV02<br><span class="tag good">7 PAÍSES EM 6 MESES</span></td>
+<td class="num win">1,61×</td>
+<td class="num">6</td>
+<td class="num">R$ 231</td>
+<td class="num win">R$ 39</td>
+<td><a class="drive-btn" href="https://drive.google.com/file/d/1m45Dye9u8gTET7Bp-B2elhI9g-XtSOpT/view" target="_blank">▶ Drive</a></td>
+</tr>
+<tr>
+<td class="win">4</td>
+<td>ADC05<br><span class="tag good">CRIS JANTAR 21 PESSOAS</span></td>
+<td class="num win">1,28×</td>
+<td class="num win">20</td>
+<td class="num">R$ 819</td>
+<td class="num win">R$ 41</td>
+<td>—</td>
+</tr>
+<tr>
+<td>5</td>
+<td>ADV10<br><span class="tag warn">PREPARAÇÃO PARA O EVENTO</span></td>
+<td class="num">1,13×</td>
+<td class="num">2</td>
+<td class="num">R$ 148</td>
+<td class="num warn-txt">R$ 74</td>
+<td><a class="drive-btn" href="https://drive.google.com/file/d/1-17arRcAcU24eGjMMqOf6dLEdZIYxmzn/view" target="_blank">▶ Drive</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td>ADV22<br><span class="tag warn">EVENTO PRESENCIAL POCKET</span></td>
+<td class="num">0,84×</td>
+<td class="num">6</td>
+<td class="num">R$ 466</td>
+<td class="num warn-txt">R$ 78</td>
+<td><a class="drive-btn" href="https://drive.google.com/file/d/1D8emJlCHm7Zy2uXx_H_Eb5poc0y69W8y/view" target="_blank">▶ Drive</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>ADI48<br><span class="tag warn">DO ZERO AO LUCRO AO VIVO</span></td>
+<td class="num warn-txt">0,70×</td>
+<td class="num">15</td>
+<td class="num">R$ 1.084</td>
+<td class="num warn-txt">R$ 72</td>
+<td><a class="drive-btn" href="https://drive.google.com/file/d/18m1Ye5ZJUA1nNcX3ZC_IS-pBPzOx0Vc8/view" target="_blank">▶ Drive</a></td>
+</tr>
+<tr>
+<td>8</td>
+<td>ADV02 TPJAS<br><span class="tag bad">VOCÊ QUE FAZ</span></td>
+<td class="num lose">0,55×</td>
+<td class="num">5</td>
+<td class="num">R$ 457</td>
+<td class="num lose">R$ 91</td>
+<td><a class="drive-btn" href="https://drive.google.com/file/d/14wI9bZ1Zj5Xaq3Rxu5IqFtSYU8UUeir7/view" target="_blank">▶ Drive</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td>ADV25<br><span class="tag bad">EVENTO NA EUROPA</span></td>
+<td class="num lose">0,50×</td>
+<td class="num">4</td>
+<td class="num lose">R$ 625</td>
+<td class="num lose">R$ 156</td>
+<td><a class="drive-btn" href="https://drive.google.com/file/d/1i4QA-Z0Hw6CSgro9zEYhWF09coGAI9Ts/view" target="_blank">▶ Drive</a></td>
+</tr>
+<tr>
+<td>10</td>
+<td>ADV09<br><span class="tag bad">IDENTIDADE</span></td>
+<td class="num lose">0,26×</td>
+<td class="num">11</td>
+<td class="num lose">R$ 1.209</td>
+<td class="num lose">R$ 110</td>
+<td><a class="drive-btn" href="https://drive.google.com/file/d/1bqnEFdYA4fwTR89mM2QSOP_Wuztw3w_H/view" target="_blank">▶ Drive</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p style="font-size:11px;color:#64748b;margin-top:8px">ROAS via pixel Meta (purchase_roas). Inclui valor dos order bumps atribuídos pelo pixel. ADV09 combinado = 3 instâncias em diferentes conjuntos, somadas.</p>
+</div>
+
+</div>
+
+<!-- ANÁLISE ESTRATÉGICA -->
+<h2>📋 Análise Estratégica · D15</h2>
+<div class="analysis-section">
+
+<div class="analysis-card green">
+<h4>✅ REPLICAR</h4>
+<ul>
+<li><b>ADC02 (Stories Lindo):</b> ROAS 6,60× e CPA R$21 — o criativo mais eficiente do lançamento. Com apenas R$62 gastos e 3 compras, tem muito potencial de escala.</li>
+<li><b>ADI27 (Plugar Modelo Americano):</b> ROAS 3,85× e CPA R$18 — o menor CPA do lançamento. Pouco investimento (R$55), grande potencial.</li>
+<li><b>ADC05 (Cris Jantar 21 Pessoas):</b> volume líder (20 compras) com CPA R$41 e ROAS 1,28× — único acima do breakeven com volume relevante. Provado em escala.</li>
+<li><b>ADV02 (7 Países em 6 Meses):</b> ROAS 1,61× e CPA R$39 com 6 compras — bom custo-benefício, testar mais verba.</li>
+<li>Escalada a partir de D10 (19/06) foi bem executada: CTR se manteve 3,8–4,3% com CPM estável ~R$100.</li>
+</ul>
+</div>
+
+<div class="analysis-card yellow">
+<h4>⚠️ MONITORAR</h4>
+<ul>
+<li><b>Budget crítico:</b> 94,2% do limite de exposição consumido. Apenas R$465 restantes. Cada real deve ir para os melhores criativos.</li>
+<li><b>ADI48 (Do Zero ao Lucro):</b> maior gasto (R$1.084) com 15 compras — CPA R$72, ROAS 0,70×. Volume bom mas abaixo do breakeven. Manter só se CPA melhorar com ajuste de audiência.</li>
+<li><b>ADV22 (Evento Presencial Pocket):</b> 6 compras, CPA R$78, ROAS 0,84× — próximo do breakeven, aguardar 2–3 compras mais antes de escalar.</li>
+<li><b>D4/D5 com zero investimento:</b> indica problema técnico ou pausa manual em 13/14 de junho. Investigar causa para evitar nas próximas campanhas.</li>
+<li>Fase pré-lançamento (1–9/jun): R$1.255 gastos em teste antes do D1 — não contabilizados nas metas mas fazem parte do gasto total.</li>
+</ul>
+</div>
+
+<div class="analysis-card red">
+<h4>🔴 CORRIGIR / PAUSAR</h4>
+<ul>
+<li><b>ADV09 (Identidade) — PAUSAR JÁ:</b> maior gasto individual (R$1.209 somado) com ROAS 0,26×. Queimou budget com retorno mínimo.</li>
+<li><b>ADV26 (Jantar California) — PAUSAR JÁ:</b> R$289 gastos, 0 compras. Budget desperdiçado.</li>
+<li><b>ADC08 (Não Está Estagnado) — PAUSAR JÁ:</b> R$64 gastos, 0 compras. Sem conversão.</li>
+<li><b>ADV25 (Evento na Europa) — PAUSAR:</b> R$625 gastos, apenas 4 compras, CPA R$156 — pior custo por ingresso do grupo com dados.</li>
+<li><b>ADV02 TPJAS (Você que Faz) — REDUZIR:</b> CPA R$91, ROAS 0,55×. Abaixo do breakeven com orçamento alto.</li>
+<li><b>Meta de 120 ingressos não é atingível com budget atual</b> ao CPA médio de R$84. Solicitação de budget adicional (+R$1.500) ou concentração total em ADC02+ADI27 (CPA ~R$19) são as únicas saídas.</li>
+</ul>
+</div>
+
+</div>
+
+<!-- AÇÕES RECOMENDADAS -->
+<h2>⚡ Ações Imediatas</h2>
+<div class="card warn" style="border-left: 3px solid #facc15">
+<ol style="margin-left:20px;color:#cbd5e1;font-size:14px">
+<li style="margin:10px 0"><b>🔴 PAUSAR agora:</b> ADV09 (R$1.209 · ROAS 0,26×), ADV26 (R$289 · 0 compras), ADC08 (R$64 · 0 compras), ADV25 (R$625 · CPA R$156)</li>
+<li style="margin:10px 0"><b>✅ CONCENTRAR budget restante (R$465) em:</b> ADC02 (Stories Lindo · ROAS 6,60×) + ADI27 (Plugar Modelo Americano · ROAS 3,85×). Ao CPA médio de R$19, seria possível fechar até 24 compras — o suficiente para atingir a meta de 120.</li>
+<li style="margin:10px 0"><b>📊 Manter ADC05 (Cris Jantar 21):</b> único criativo com volume alto E ROAS positivo (1,28×). Reduzir verba dos demais e priorizar ele na ampliação de budget.</li>
+<li style="margin:10px 0"><b>💰 Solicitar budget adicional:</b> para fechar as 23 vendas restantes ao CPA atual de R$84 = R$1.932 necessários. Ao CPA dos top 2 criativos (R$19) = R$437 suficientes — muito provável com ADC02+ADI27 escalados.</li>
+<li style="margin:10px 0"><b>🎯 Resultado mínimo esperado:</b> com o budget restante + top 2 criativos: +5 a +24 ingressos → total projetado: 102–121 (meta possivelmente atingível).</li>
+</ol>
+</div>
+
+<footer style="margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,.05);font-size:11px;color:#475569;text-align:center">
+TPIJA008 · Imersão Jornada da Autoridade · Tamara Damares (C4) · Gerado em 24/06/26 via Claude Code + Meta Ads API ·
+Dados de compra via pixel Meta (purchase_roas) · Total investment = R$6.619,68 conforme declarado
+</footer>
+
+</body>
+</html>
