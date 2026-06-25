@@ -110,11 +110,11 @@ td.sep{background:rgba(124,92,255,.08);color:#94a3b8;font-size:10px;text-transfo
 <div class="action-box" style="margin-bottom:24px">
 <h4>🎯 STATUS D15 — META DE INGRESSOS EM FOCO</h4>
 <ul>
-<li>📊 <b>Exposição líquida OK:</b> R$1.231 de R$8.000 (15,4%) — sobram R$6.769 de headroom. Ainda há muito espaço para investir.</li>
-<li>🎯 <b>Faltam 23 ingressos para meta:</b> ao CPA atual de R$68/ingresso → precisam de ~R$1.564 adicionais → exposure total estimado: ~R$2.175 (27% do limite)</li>
-<li>✅ <b>Saída rápida:</b> ADC02 (CPA R$21) e ADI27 (CPA R$18) podem gerar 23+ ingressos com apenas ~R$450 → escalar agora</li>
+<li>📉 <b>Exposição atual: −R$2.146</b> (receita R$5.389 − invest c/imp R$7.535). Limite de perda: R$8.000 → sobram R$5.854 de headroom (73,2%).</li>
+<li>🎯 <b>Faltam 23 ingressos para meta:</b> ao CPA c/imp de R$78/ingresso → mais ~R$1.785 de spend c/imp → cada ingresso recupera R$55,56 → perda adicional por ingresso: ~R$22 → exposure final estimada: ~R$2.650 (33% do limite)</li>
+<li>✅ <b>Saída rápida:</b> ADC02 (CPA R$21) e ADI27 (CPA R$18) podem gerar 23+ ingressos com ~R$450 em spend → exposição adicional muito menor ao CPA atual</li>
 <li>🚫 <b>Pausar imediatamente:</b> ADV09 (ROAS 0,26×), ADV26 (0 compras, R$289), ADC08 (0 compras), ADV25 (CPA R$156)</li>
-<li>💡 <b>ROAS abaixo do breakeven (0,81×):</b> cada ingresso a R$27 custa R$68 em mídia — o produto cobre 40% do investimento. Próximo lançamento precisa ticket maior ou CPA menor.</li>
+<li>💡 <b>ROAS c/imp abaixo do breakeven (0,72×):</b> cada ingresso a R$27 custa R$78 em mídia c/ imposto — produto cobre 35% do custo real. Próximo lançamento: aumentar ticket ou reduzir CPA.</li>
 </ul>
 </div>
 
@@ -123,16 +123,15 @@ td.sep{background:rgba(124,92,255,.08);color:#94a3b8;font-size:10px;text-transfo
 <div class="grid grid-4">
 
 <div class="card warn">
-<div class="kpi">Investimento Meta</div>
+<div class="kpi">Investimento Meta (sem imposto)</div>
 <div class="val">R$ 6.620</div>
 <div class="sub">Bruto: R$6.619,68 · confirmado</div>
 </div>
 
-<div class="card good">
-<div class="kpi">Exposição Líquida (Invest − Receita)</div>
-<div class="val" style="color:#4ade80">R$ 1.231</div>
-<div class="sub">Meta: R$8.000 · restam R$6.769 (84,6%)</div>
-<div class="progress-bar" style="margin-top:8px"><div class="progress-bar-fill" style="width:15.4%;background:linear-gradient(90deg,#22c55e,#10b981)"></div></div>
+<div class="card">
+<div class="kpi">Investimento c/ Imposto (13,83%)</div>
+<div class="val">R$ 7.535</div>
+<div class="sub">R$6.620 × 1,1383 · custo real da mídia</div>
 </div>
 
 <div class="card warn">
@@ -143,11 +142,27 @@ td.sep{background:rgba(124,92,255,.08);color:#94a3b8;font-size:10px;text-transfo
 </div>
 
 <div class="card warn">
-<div class="kpi">CPA por ingresso</div>
-<div class="val" style="color:#facc15">R$ 68</div>
-<div class="sub">R$6.620 ÷ 97 · meta ideal: R$67 · pixel: R$74</div>
+<div class="kpi">CPA por ingresso (c/ imposto)</div>
+<div class="val" style="color:#facc15">R$ 78</div>
+<div class="sub">R$7.535 ÷ 97 · sem imp: R$68 · pixel: R$74</div>
 </div>
 
+</div>
+
+<!-- Exposição em destaque -->
+<div class="card bad" style="margin-bottom:14px;border:1px solid rgba(239,68,68,.3)">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+<div>
+<div class="kpi">Exposição = Receita − Investimento c/ Imposto</div>
+<div class="val" style="color:#f87171;font-size:34px">−R$ 2.146</div>
+<div class="sub">R$5.389 receita − R$7.535 invest c/imp · perda atual · limite: R$8.000</div>
+</div>
+<div style="min-width:220px;flex:1;max-width:380px">
+<div style="font-size:11px;color:#94a3b8;margin-bottom:4px">Perda consumida do limite de R$8.000: 26,8%</div>
+<div class="progress-bar"><div class="progress-bar-fill" style="width:26.8%;background:linear-gradient(90deg,#facc15,#f97316)"></div></div>
+<div style="font-size:12px;color:#64748b;margin-top:4px">Restam R$5.854 de headroom antes de atingir o limite</div>
+</div>
+</div>
 </div>
 
 <div class="grid grid-3" style="margin-bottom:14px">
@@ -159,9 +174,9 @@ td.sep{background:rgba(124,92,255,.08);color:#94a3b8;font-size:10px;text-transfo
 </div>
 
 <div class="card bad">
-<div class="kpi">ROAS (Receita ÷ Invest)</div>
-<div class="val" style="color:#f87171">0,81×</div>
-<div class="sub">R$5.389 ÷ R$6.620 · breakeven = 1,00×</div>
+<div class="kpi">ROAS c/ Imposto</div>
+<div class="val" style="color:#f87171">0,72×</div>
+<div class="sub">R$5.389 ÷ R$7.535 · sem imp: 0,81× · breakeven = 1,00×</div>
 </div>
 
 <div class="card">
@@ -179,7 +194,7 @@ td.sep{background:rgba(124,92,255,.08);color:#94a3b8;font-size:10px;text-transfo
 <div class="rfblock b1 public">
 <div class="rfblock-head"><span class="ico">📢</span><span class="title">Público Alcançado</span></div>
 <div class="rfblock-metrics">
-<div class="rfmetric"><span class="l">Investimento</span><span class="v">R$ 6.620</span></div>
+<div class="rfmetric"><span class="l">Invest c/imp</span><span class="v">R$ 7.535</span></div>
 <div class="rfmetric"><span class="l">Impressões</span><span class="v">64.725</span></div>
 <div class="rfmetric"><span class="l">Alcance</span><span class="v">42.531</span></div>
 <div class="rfmetric"><span class="l">Frequência</span><span class="v">1,52×</span></div>
@@ -822,14 +837,14 @@ td.sep{background:rgba(124,92,255,.08);color:#94a3b8;font-size:10px;text-transfo
 <li><b>ADI27 (Plugar Modelo Vermelho):</b> ROAS 3,85× e CPA R$18 — menor CPA do lançamento. Testar com R$200-300 para validar escala.</li>
 <li><b>ADC05 (Cris Jantar 21):</b> líder em volume (20 compras) com CPA R$41 e ROAS 1,28× — único acima do breakeven com escala. Já testado, seguro ampliar.</li>
 <li><b>ADV02 (7 Países em 6 Meses):</b> ROAS 1,61× e CPA R$39 com 6 compras — boa eficiência, ampliar budget.</li>
-<li><b>Exposição líquida confortável:</b> R$1.231 de R$8.000 usados (15%). Há R$6.769 de headroom para continuar investindo sem ultrapassar o limite.</li>
+<li><b>Exposição dentro do limite:</b> −R$2.146 de perda vs. limite de −R$8.000 (26,8%). Há R$5.854 de headroom — pode continuar investindo com tranquilidade.</li>
 </ul>
 </div>
 
 <div class="analysis-card yellow">
 <h4>⚠️ MONITORAR</h4>
 <ul>
-<li><b>23 ingressos para meta:</b> ao CPA de R$68 → precisam de ~R$1.564 adicionais. Exposure final estimada: ~R$2.175 (27% do limite). Meta alcançável.</li>
+<li><b>23 ingressos para meta:</b> ao CPA c/imp de R$78 → ~R$1.785 adicionais (c/imp) → cada ingresso recupera R$55,56 → perda adicional estimada: ~R$507 → exposição final: ~−R$2.653 (33% do limite). Meta alcançável.</li>
 <li><b>Conv. Pág→Venda caindo:</b> D6 teve 30,8%, D9 8,5%, D12-D15 cai para 5-7%. Escala aumentou volume mas reduziu qualidade de público.</li>
 <li><b>Conv. LP (clique→LP) em queda:</b> D1 100% → D15 43,4%. Meta está misturando tipos de clique ou exibindo para públicos menos qualificados.</li>
 <li><b>ADI48 (Do Zero ao Lucro):</b> maior gasto (R$1.084) com ROAS 0,70×. Manter apenas se CPA melhorar com ajuste de audiência.</li>
@@ -845,7 +860,7 @@ td.sep{background:rgba(124,92,255,.08);color:#94a3b8;font-size:10px;text-transfo
 <li><b>ADC08 (Não Está Estagnado) — PAUSAR JÁ:</b> R$64 gastos, 0 compras.</li>
 <li><b>ADV25 (Evento na Europa) — PAUSAR:</b> CPA R$156 — pior custo-benefício do grupo com dados.</li>
 <li><b>D12 (21/06) — custo/venda mais alto:</b> R$104/venda com conversão de apenas 5,3%. Identificar qual criativo/conjunto puxou esse dia negativo.</li>
-<li><b>ROAS geral abaixo do breakeven (0,81×):</b> o produto de front (R$27) é muito baixo para cobrir o CAC. Próximo lançamento: aumentar ticket do front ou usar CPA máximo de R$27 (100% breakeven).</li>
+<li><b>ROAS c/imp abaixo do breakeven (0,72×):</b> R$7.535 de custo real vs R$5.389 de receita — prejuízo de R$2.146. Próximo lançamento: ticket do front precisa ser ≥R$78 para cobrir o CAC, ou CPA precisa cair para ≤R$55,56 (ticket médio atual).</li>
 </ul>
 </div>
 
@@ -857,7 +872,7 @@ td.sep{background:rgba(124,92,255,.08);color:#94a3b8;font-size:10px;text-transfo
 <ol style="margin-left:20px;color:#cbd5e1;font-size:14px">
 <li style="margin:10px 0"><b>🔴 PAUSAR agora:</b> ADV09 (R$1.209 · ROAS 0,26×), ADV26 (R$289 · 0 compras), ADC08 (R$64 · 0 compras), ADV25 (R$625 · CPA R$156). Total liberado: ~R$2.187 de spend diário potencial.</li>
 <li style="margin:10px 0"><b>✅ ESCALAR com o budget restante + liberado:</b> concentrar em ADC02 (ROAS 6,60×) + ADI27 (ROAS 3,85×) + ADC05 (ROAS 1,28×). Ao CPA médio de R$25 nesses 3, conseguem fechar 23 ingressos com ~R$575 adicionais.</li>
-<li style="margin:10px 0"><b>📊 Exposição confortável — podem investir mais:</b> headroom de R$6.769. Para fechar 23 ingressos ao CPA atual de R$68 → investem R$1.564 → exposure aumenta ~R$944 (cada ingresso cobre R$27 de custo) → exposure total final: ~R$2.175 (27% do limite).</li>
+<li style="margin:10px 0"><b>📊 Exposição dentro do limite — podem investir mais:</b> headroom de R$5.854. Para 23 ingressos ao CPA c/imp de R$78 → R$1.785 de spend c/imp → cada ingresso recupera R$55,56 em receita → perda adicional: ~R$507 → exposição final: ~−R$2.653 (33% do limite de R$8.000).</li>
 <li style="margin:10px 0"><b>🔍 Investigar queda de Conv. LP:</b> Conv. LP→Venda caiu de 30,8% (D6) para 5-7% (D12-D15). Possíveis causas: público saturado, criativos errados nas fases de escala, ou descasamento entre criativo e LP. Revisar combinações criativo/conjunto.</li>
 <li style="margin:10px 0"><b>📈 Resultado projetado:</b> pausar perdedores + escalar ADC02/ADI27/ADC05 → projeção: 120 ingressos até fechamento do lançamento. Exposição final estimada: R$2.000–R$2.500 (bem abaixo do limite de R$8.000).</li>
 </ol>
@@ -865,7 +880,7 @@ td.sep{background:rgba(124,92,255,.08);color:#94a3b8;font-size:10px;text-transfo
 
 <footer style="margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,.05);font-size:11px;color:#475569;text-align:center">
 TPIJA008 · Imersão Jornada da Autoridade · Tamara Damares (C4) · Gerado em 24/06/26 via Claude Code + Meta Ads API ·
-Exposição Líquida = Investimento − Receita Bruta (R$6.620 − R$5.389 = R$1.231) · Investment total = R$6.619,68 confirmado ·
+Exposição = Receita − Invest c/imp (R$5.389 − R$7.535 = −R$2.146) · Limite de perda: R$8.000 · Invest sem imp = R$6.619,68 confirmado ·
 Ticket médio est. = R$55,56 (ingresso R$27 + pitch 26,8% + gravação 24,7%)
 </footer>
 
