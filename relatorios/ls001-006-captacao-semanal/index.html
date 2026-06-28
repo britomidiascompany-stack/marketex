@@ -7,16 +7,19 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#0a0e17;color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.55;padding:20px;max-width:1400px;margin:0 auto}
-header{background:radial-gradient(circle at top right,rgba(124,92,255,.25),transparent 60%),radial-gradient(circle at bottom left,rgba(34,211,238,.18),transparent 55%),#11172a;border-radius:20px;padding:32px;margin-bottom:28px;border:1px solid rgba(124,92,255,.25);position:relative}
+header{background:radial-gradient(circle at top right,rgba(124,92,255,.25),transparent 60%),radial-gradient(circle at bottom left,rgba(34,211,238,.18),transparent 55%),#11172a;border-radius:20px;padding:32px;margin-bottom:28px;border:1px solid rgba(124,92,255,.25)}
 header h1{font-size:32px;background:linear-gradient(135deg,#7c5cff,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;font-weight:800}
 header .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 header .meta span{background:rgba(124,92,255,.12);padding:6px 14px;border-radius:8px;font-size:13px;color:#cbd5e1;border:1px solid rgba(124,92,255,.2)}
 h2{font-size:20px;margin:36px 0 14px;color:#f1f5f9;display:flex;align-items:center;gap:10px}
 h2::before{content:"";width:4px;height:22px;background:linear-gradient(180deg,#7c5cff,#22d3ee);border-radius:2px}
+h2.green::before{background:linear-gradient(180deg,#22c55e,#10b981)}
+h2.orange::before{background:linear-gradient(180deg,#f97316,#f59e0b)}
 .card{background:#11172a;border-radius:14px;padding:18px 22px;border:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;margin-bottom:14px}
 .card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#7c5cff,#22d3ee)}
 .card.good::before{background:linear-gradient(90deg,#22c55e,#10b981)}
 .card.bad::before{background:linear-gradient(90deg,#ef4444,#f43f5e)}
+.card.warn::before{background:linear-gradient(90deg,#f97316,#f59e0b)}
 .scroll-x{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
 th,td{padding:10px 8px;text-align:left;border-bottom:1px solid rgba(255,255,255,.05);white-space:nowrap}
@@ -28,6 +31,7 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 .warn-txt{color:#facc15;font-weight:600}
 .neu{color:#e2e8f0}
 .tot{background:rgba(124,92,255,.08);font-weight:700;border-top:1px solid rgba(124,92,255,.3)!important}
+.month-row{background:rgba(34,211,238,.06);font-weight:700;border-top:2px solid rgba(34,211,238,.25)!important}
 .kpi{font-size:12px;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px}
 .val{font-size:26px;font-weight:700;color:#f1f5f9;margin:4px 0}
 .sub{font-size:12px;color:#64748b}
@@ -35,275 +39,644 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 .grid-2{grid-template-columns:1fr 1fr}
 .grid-3{grid-template-columns:repeat(3,1fr)}
 .grid-4{grid-template-columns:repeat(4,1fr)}
-@media(max-width:900px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+.grid-5{grid-template-columns:repeat(5,1fr)}
+@media(max-width:900px){.grid-2,.grid-3,.grid-4,.grid-5{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.grid-2,.grid-3,.grid-4,.grid-5{grid-template-columns:1fr}}
 .tag{display:inline-block;padding:3px 9px;border-radius:6px;font-size:11px;margin-left:6px;vertical-align:middle}
 .tag.pend{background:rgba(250,204,21,.15);color:#facc15}
-.note{background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.25);border-radius:10px;padding:12px 16px;font-size:13px;color:#94a3b8;margin-bottom:24px}
-.note b{color:#22d3ee}
-.ls-badge{display:inline-block;background:linear-gradient(135deg,rgba(124,92,255,.3),rgba(34,211,238,.2));padding:4px 12px;border-radius:8px;font-size:12px;font-weight:700;color:#e2e8f0;border:1px solid rgba(124,92,255,.3);margin-right:6px}
+.tag.ok{background:rgba(34,197,94,.15);color:#4ade80}
+.note{background:rgba(250,204,21,.06);border:1px solid rgba(250,204,21,.2);border-radius:10px;padding:14px 18px;font-size:13px;color:#cbd5e1;margin-bottom:14px;line-height:1.7}
+.note strong{color:#facc15}
+.section-divider{border:none;border-top:1px solid rgba(255,255,255,.07);margin:32px 0}
+.month-header{background:linear-gradient(135deg,rgba(34,211,238,.12),rgba(124,92,255,.08));border-radius:12px;padding:14px 20px;margin:24px 0 12px;border:1px solid rgba(34,211,238,.18);display:flex;align-items:center;gap:12px}
+.month-header .month-title{font-size:16px;font-weight:700;color:#22d3ee}
+.month-header .month-period{font-size:13px;color:#64748b}
 </style>
 </head>
 <body>
 
 <header>
-<h1>LS001–LS006 · Resumo Semanal de Captação</h1>
-<div style="font-size:14px;color:#cbd5e1;margin-top:6px">Workshop Especialista com IA · Ana Tex / Marketex · 18/05 → 28/06/26</div>
-<div class="meta">
-  <span>📅 6 semanas · 42 dias</span>
-  <span>⏱ Gerado 28/06/26</span>
-  <span>📊 Fonte: Planilha Unificada Geral · Aba Captação Diária</span>
-  <span>💰 Investimento já com imposto Meta +13,83%</span>
-</div>
+  <h1>LS001–006 · Resumo Semanal de Captação</h1>
+  <p style="color:#94a3b8;font-size:14px">Workshop Especialista com IA — Ana Tex / Marketex</p>
+  <div class="meta">
+    <span>📅 18/05/26 → 28/06/26</span>
+    <span>⏱ 42 dias · 6 lançamentos</span>
+    <span>🔄 Atualizado 28/06/26</span>
+    <span>📊 Captação Diária — Planilha Unificada</span>
+  </div>
 </header>
 
+<!-- ═══════════════════════════════════════════════════
+     SEÇÃO 1 — VENDAS POR LANÇAMENTO (SEMANAL)
+     ═══════════════════════════════════════════════════ -->
+<h2>Vendas por Lançamento (Semana)</h2>
+
 <div class="note">
-  <b>Como ler:</b> Cada semana = 1 lançamento (LS). <b>Mentoria</b> tem offset de +2 semanas — as vendas de mentoria do LS001 aparecem fisicamente na semana do LS003, e assim sucessivamente. As colunas de mentoria nesta tabela já refletem essa atribuição correta. LS005 e LS006 estão com mentoria <b>pendente</b> (semanas futuras sem dados ainda).
+  <strong>⚠️ Regra de Mentoria:</strong> As vendas de mentoria de cada LS aparecem com deslocamento de 2 semanas.
+  LS001 (S1) → mentoria registrada em S3 · LS002 (S2) → em S4 · LS003 (S3) → em S5 · LS004 (S4) → em S6 · LS005–006 → pendente (S7–S8 ainda sem dados).
 </div>
 
-<!-- TABELA PRINCIPAL -->
-<h2>📋 Vendas por Lançamento (Semanal)</h2>
 <div class="card">
 <div class="scroll-x">
 <table>
-<thead>
-<tr>
-  <th>Lançamento</th>
-  <th>Semana</th>
-  <th>Período</th>
-  <th class="num">WS</th>
-  <th class="num">Mentoria</th>
-  <th class="num">Ment. 3m</th>
-  <th class="num">Total Ment.</th>
-  <th class="num">Palestra</th>
-  <th class="num">Fotos IA</th>
-  <th class="num">Fotos Ext.</th>
-  <th class="num">Outros</th>
-  <th class="num">Invest. c/Imp.</th>
-  <th class="num">Exposição</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td><span class="ls-badge">LS001</span></td>
-  <td>S1-26</td>
-  <td>18/05 – 24/05</td>
-  <td class="num">513</td>
-  <td class="num">6</td>
-  <td class="num">0</td>
-  <td class="num win">6</td>
-  <td class="num">97</td>
-  <td class="num">83</td>
-  <td class="num">16</td>
-  <td class="num">5</td>
-  <td class="num">R$ 43.950</td>
-  <td class="num lose">–R$ 2.370</td>
-</tr>
-<tr>
-  <td><span class="ls-badge">LS002</span></td>
-  <td>S2-26</td>
-  <td>25/05 – 31/05</td>
-  <td class="num">504</td>
-  <td class="num">7</td>
-  <td class="num">1</td>
-  <td class="num win">8</td>
-  <td class="num">99</td>
-  <td class="num">76</td>
-  <td class="num">3</td>
-  <td class="num">4</td>
-  <td class="num">R$ 56.536</td>
-  <td class="num lose">–R$ 16.205</td>
-</tr>
-<tr>
-  <td><span class="ls-badge">LS003</span></td>
-  <td>S3-26</td>
-  <td>01/06 – 07/06</td>
-  <td class="num">397</td>
-  <td class="num">7</td>
-  <td class="num">1</td>
-  <td class="num win">8</td>
-  <td class="num">71</td>
-  <td class="num">78</td>
-  <td class="num">1</td>
-  <td class="num">26</td>
-  <td class="num">R$ 49.747</td>
-  <td class="num lose">–R$ 17.335</td>
-</tr>
-<tr>
-  <td><span class="ls-badge">LS004</span></td>
-  <td>S4-26</td>
-  <td>08/06 – 14/06</td>
-  <td class="num">170</td>
-  <td class="num">5</td>
-  <td class="num">1</td>
-  <td class="num win">6</td>
-  <td class="num">24</td>
-  <td class="num">27</td>
-  <td class="num">1</td>
-  <td class="num">32</td>
-  <td class="num">R$ 22.794</td>
-  <td class="num lose">–R$ 7.229</td>
-</tr>
-<tr>
-  <td><span class="ls-badge">LS005</span></td>
-  <td>S5-26</td>
-  <td>15/06 – 21/06</td>
-  <td class="num">419</td>
-  <td class="num warn-txt">—</td>
-  <td class="num warn-txt">—</td>
-  <td class="num"><span class="tag pend">pendente</span></td>
-  <td class="num">52</td>
-  <td class="num">51</td>
-  <td class="num">4</td>
-  <td class="num">72</td>
-  <td class="num">R$ 49.129</td>
-  <td class="num lose">–R$ 9.815</td>
-</tr>
-<tr>
-  <td><span class="ls-badge">LS006</span></td>
-  <td>S6-26</td>
-  <td>22/06 – 28/06</td>
-  <td class="num">489</td>
-  <td class="num warn-txt">—</td>
-  <td class="num warn-txt">—</td>
-  <td class="num"><span class="tag pend">pendente</span></td>
-  <td class="num">65</td>
-  <td class="num">70</td>
-  <td class="num">4</td>
-  <td class="num">88</td>
-  <td class="num">R$ 72.735</td>
-  <td class="num lose">–R$ 25.446</td>
-</tr>
-<tr class="tot">
-  <td colspan="3">TOTAL GERAL · 18/05 → 28/06</td>
-  <td class="num">2.492</td>
-  <td class="num">25</td>
-  <td class="num">3</td>
-  <td class="num win">28 *</td>
-  <td class="num">408</td>
-  <td class="num">385</td>
-  <td class="num">29</td>
-  <td class="num">227</td>
-  <td class="num">R$ 294.891</td>
-  <td class="num lose">–R$ 78.399</td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th>Lançamento</th>
+      <th>Período</th>
+      <th class="num">WS</th>
+      <th class="num">Mentoria</th>
+      <th class="num">Ment. 3m</th>
+      <th class="num">Palestra</th>
+      <th class="num">Fotos IA</th>
+      <th class="num">Fotos Ext.</th>
+      <th class="num">Outros¹</th>
+      <th class="num">Invest. c/ Imp.</th>
+      <th class="num">Exposição²</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>LS001</strong> <small style="color:#64748b">S1-26</small></td>
+      <td style="color:#64748b">18/05 – 24/05</td>
+      <td class="num neu">513</td>
+      <td class="num warn-txt">7 <small class="tag pend">+S3</small></td>
+      <td class="num warn-txt">1 <small class="tag pend">+S2</small></td>
+      <td class="num">97</td>
+      <td class="num">83</td>
+      <td class="num">16</td>
+      <td class="num">5</td>
+      <td class="num lose">R$ 43.949,83</td>
+      <td class="num win">R$ 4.379,64</td>
+    </tr>
+    <tr>
+      <td><strong>LS002</strong> <small style="color:#64748b">S2-26</small></td>
+      <td style="color:#64748b">25/05 – 31/05</td>
+      <td class="num neu">504</td>
+      <td class="num warn-txt">7 <small class="tag pend">+S4</small></td>
+      <td class="num warn-txt">1 <small class="tag pend">+S4</small></td>
+      <td class="num">99</td>
+      <td class="num">76</td>
+      <td class="num">3</td>
+      <td class="num">4</td>
+      <td class="num lose">R$ 56.535,81</td>
+      <td class="num lose">R$ -1.449,48</td>
+    </tr>
+    <tr>
+      <td><strong>LS003</strong> <small style="color:#64748b">S3-26</small></td>
+      <td style="color:#64748b">01/06 – 07/06</td>
+      <td class="num neu">397</td>
+      <td class="num warn-txt">7 <small class="tag pend">+S5</small></td>
+      <td class="num warn-txt">1 <small class="tag pend">+S5</small></td>
+      <td class="num">71</td>
+      <td class="num">78</td>
+      <td class="num">1</td>
+      <td class="num">26</td>
+      <td class="num lose">R$ 49.747,01</td>
+      <td class="num lose">R$ -3.490,16</td>
+    </tr>
+    <tr>
+      <td><strong>LS004</strong> <small style="color:#64748b">S4-26</small></td>
+      <td style="color:#64748b">08/06 – 14/06</td>
+      <td class="num neu">170</td>
+      <td class="num warn-txt">5 <small class="tag pend">+S6</small></td>
+      <td class="num warn-txt">1 <small class="tag pend">+S6</small></td>
+      <td class="num">24</td>
+      <td class="num">27</td>
+      <td class="num">1</td>
+      <td class="num">32</td>
+      <td class="num lose">R$ 22.794,18</td>
+      <td class="num win">R$ 1.082,09</td>
+    </tr>
+    <tr>
+      <td><strong>LS005</strong> <small style="color:#64748b">S5-26</small></td>
+      <td style="color:#64748b">15/06 – 21/06</td>
+      <td class="num neu">419</td>
+      <td class="num" style="color:#64748b">— <small class="tag pend">S7 pend.</small></td>
+      <td class="num" style="color:#64748b">— <small class="tag pend">S7 pend.</small></td>
+      <td class="num">52</td>
+      <td class="num">51</td>
+      <td class="num">4</td>
+      <td class="num">72</td>
+      <td class="num lose">R$ 49.128,79</td>
+      <td class="num lose">R$ -2.073,78</td>
+    </tr>
+    <tr>
+      <td><strong>LS006</strong> <small style="color:#64748b">S6-26</small></td>
+      <td style="color:#64748b">22/06 – 28/06</td>
+      <td class="num neu">489</td>
+      <td class="num" style="color:#64748b">— <small class="tag pend">S8 pend.</small></td>
+      <td class="num" style="color:#64748b">— <small class="tag pend">S8 pend.</small></td>
+      <td class="num">65</td>
+      <td class="num">70</td>
+      <td class="num">4</td>
+      <td class="num">88</td>
+      <td class="num lose">R$ 72.735,29</td>
+      <td class="num win">R$ 1.908,12</td>
+    </tr>
+    <tr class="tot">
+      <td colspan="2"><strong>TOTAL GERAL</strong></td>
+      <td class="num">2.492</td>
+      <td class="num">26</td>
+      <td class="num">4</td>
+      <td class="num">408</td>
+      <td class="num">385</td>
+      <td class="num">29</td>
+      <td class="num">227</td>
+      <td class="num lose">R$ 294.890,91</td>
+      <td class="num">—</td>
+    </tr>
+  </tbody>
 </table>
 </div>
-<div style="font-size:11px;color:#64748b;margin-top:10px">* 28 vendas de mentoria confirmadas (LS001–LS004). LS005 e LS006 pendentes — semanas S7 e S8 ainda sem dados.</div>
+<p style="font-size:11px;color:#475569;margin-top:10px">
+  ¹ Outros = Acesso Estendido do Workshop &nbsp;|&nbsp;
+  ² Exposição = Saldo Captação Líq. no último dia da semana (Col Z da planilha).<br>
+  Mentoria LS001 inclui 1 venda antecipada registrada em S2 (28/05) + 6 vendas em S3. Total: 7 ment + 1 ment.3m.
+</p>
 </div>
 
-<!-- EXPOSIÇÃO POR SEMANA -->
-<h2>📉 Exposição Semanal (Saldo Capt. Líq. — Coluna Z)</h2>
-<div class="note" style="margin-bottom:14px">
-  <b>Exposição</b> = Faturamento de Captação Líquido menos Investimento com Imposto, acumulado na semana. Valor negativo = semana ainda com saldo devedor de captação (mentoria não entra aqui).
-</div>
+<!-- ═══════════════════════════════════════════════════
+     SEÇÃO 2 — MENTORIA (MAPEAMENTO)
+     ═══════════════════════════════════════════════════ -->
+<h2>Mentoria — Mapeamento Real por LS</h2>
 <div class="card">
 <div class="scroll-x">
 <table>
-<thead>
-<tr>
-  <th>Lançamento</th>
-  <th>Semana</th>
-  <th>Período</th>
-  <th class="num">Invest. c/Imp.</th>
-  <th class="num">Exposição (Saldo Capt. Líq.)</th>
-  <th class="num">Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td><span class="ls-badge">LS001</span></td><td>S1-26</td><td>18/05–24/05</td>
-  <td class="num">R$ 43.950</td><td class="num lose">–R$ 2.370</td><td>🔴</td>
-</tr>
-<tr>
-  <td><span class="ls-badge">LS002</span></td><td>S2-26</td><td>25/05–31/05</td>
-  <td class="num">R$ 56.536</td><td class="num lose">–R$ 16.205</td><td>🔴</td>
-</tr>
-<tr>
-  <td><span class="ls-badge">LS003</span></td><td>S3-26</td><td>01/06–07/06</td>
-  <td class="num">R$ 49.747</td><td class="num lose">–R$ 17.335</td><td>🔴</td>
-</tr>
-<tr>
-  <td><span class="ls-badge">LS004</span></td><td>S4-26</td><td>08/06–14/06</td>
-  <td class="num">R$ 22.794</td><td class="num lose">–R$ 7.229</td><td>🔴</td>
-</tr>
-<tr>
-  <td><span class="ls-badge">LS005</span></td><td>S5-26</td><td>15/06–21/06</td>
-  <td class="num">R$ 49.129</td><td class="num lose">–R$ 9.815</td><td>🔴</td>
-</tr>
-<tr>
-  <td><span class="ls-badge">LS006</span></td><td>S6-26</td><td>22/06–28/06</td>
-  <td class="num">R$ 72.735</td><td class="num lose">–R$ 25.446</td><td>🔴</td>
-</tr>
-<tr class="tot">
-  <td colspan="3">TOTAL · 18/05 → 28/06</td>
-  <td class="num">R$ 294.891</td>
-  <td class="num lose">–R$ 78.399</td>
-  <td>🔴</td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th>LS Origem</th>
+      <th>Semana Registro</th>
+      <th class="num">Mentoria Confirmada</th>
+      <th class="num">Mentoria 3 Meses</th>
+      <th class="num">Total Mentoria</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>LS001</strong></td>
+      <td style="color:#64748b">S2 (28/05) + S3 (01–07/06)</td>
+      <td class="num">7</td>
+      <td class="num">1</td>
+      <td class="num warn-txt">8</td>
+      <td><span class="tag ok">Confirmado</span></td>
+    </tr>
+    <tr>
+      <td><strong>LS002</strong></td>
+      <td style="color:#64748b">S4 (08–14/06)</td>
+      <td class="num">7</td>
+      <td class="num">1</td>
+      <td class="num warn-txt">8</td>
+      <td><span class="tag ok">Confirmado</span></td>
+    </tr>
+    <tr>
+      <td><strong>LS003</strong></td>
+      <td style="color:#64748b">S5 (15–21/06)</td>
+      <td class="num">7</td>
+      <td class="num">1</td>
+      <td class="num warn-txt">8</td>
+      <td><span class="tag ok">Confirmado</span></td>
+    </tr>
+    <tr>
+      <td><strong>LS004</strong></td>
+      <td style="color:#64748b">S6 (22–28/06)</td>
+      <td class="num">5</td>
+      <td class="num">1</td>
+      <td class="num warn-txt">6</td>
+      <td><span class="tag ok">Confirmado</span></td>
+    </tr>
+    <tr>
+      <td><strong>LS005</strong></td>
+      <td style="color:#64748b">S7 (29/06–05/07)</td>
+      <td class="num" style="color:#64748b">—</td>
+      <td class="num" style="color:#64748b">—</td>
+      <td class="num" style="color:#64748b">—</td>
+      <td><span class="tag pend">Pendente</span></td>
+    </tr>
+    <tr>
+      <td><strong>LS006</strong></td>
+      <td style="color:#64748b">S8 (06/07–12/07)</td>
+      <td class="num" style="color:#64748b">—</td>
+      <td class="num" style="color:#64748b">—</td>
+      <td class="num" style="color:#64748b">—</td>
+      <td><span class="tag pend">Pendente</span></td>
+    </tr>
+    <tr class="tot">
+      <td colspan="2"><strong>TOTAL CONFIRMADO</strong></td>
+      <td class="num">26</td>
+      <td class="num">4</td>
+      <td class="num">30</td>
+      <td></td>
+    </tr>
+  </tbody>
 </table>
 </div>
 </div>
 
-<!-- SALDOS GERAIS -->
-<h2>💼 Saldos Gerais · 18/05 → 28/06/26</h2>
-<div class="grid grid-2">
+<!-- ═══════════════════════════════════════════════════
+     SEÇÃO 3 — EXPOSIÇÃO SEMANAL
+     ═══════════════════════════════════════════════════ -->
+<h2>Exposição Semanal (Saldo Captação — Último Dia)</h2>
+<div class="grid grid-3">
+  <div class="card good">
+    <div class="kpi">LS001 — S1-26 · 18–24/05</div>
+    <div class="val win">+ R$ 4.379,64</div>
+    <div class="sub">Semana positiva</div>
+  </div>
   <div class="card bad">
-    <div class="kpi">Saldo Captação Líq.</div>
-    <div class="val lose">–R$ 78.399</div>
-    <div class="sub">Captação (WS + OBs) menos investimento c/imposto · sem mentoria</div>
+    <div class="kpi">LS002 — S2-26 · 25–31/05</div>
+    <div class="val lose">− R$ 1.449,48</div>
+    <div class="sub">Exposição ao fim da semana</div>
+  </div>
+  <div class="card bad">
+    <div class="kpi">LS003 — S3-26 · 01–07/06</div>
+    <div class="val lose">− R$ 3.490,16</div>
+    <div class="sub">Exposição ao fim da semana</div>
   </div>
   <div class="card good">
-    <div class="kpi">Saldo Geral Líq.</div>
-    <div class="val win">+R$ 177.379</div>
-    <div class="sub">Captação + Mentoria + Outros produtos · desde 18/05</div>
+    <div class="kpi">LS004 — S4-26 · 08–14/06</div>
+    <div class="val win">+ R$ 1.082,09</div>
+    <div class="sub">Semana positiva</div>
+  </div>
+  <div class="card bad">
+    <div class="kpi">LS005 — S5-26 · 15–21/06</div>
+    <div class="val lose">− R$ 2.073,78</div>
+    <div class="sub">Exposição ao fim da semana</div>
+  </div>
+  <div class="card good">
+    <div class="kpi">LS006 — S6-26 · 22–28/06</div>
+    <div class="val win">+ R$ 1.908,12</div>
+    <div class="sub">Semana positiva (em curso)</div>
   </div>
 </div>
 
-<!-- RESUMO WS -->
-<h2>🎓 Resumo por Produto · Total Acumulado</h2>
+<hr class="section-divider">
+
+<!-- ═══════════════════════════════════════════════════
+     SEÇÃO 4 — FECHAMENTO MAIO
+     ═══════════════════════════════════════════════════ -->
+<h2 class="orange">Maio 2026 — Fechado</h2>
+
+<div class="month-header">
+  <span class="month-title">📅 Maio 2026</span>
+  <span class="month-period">18/05 a 31/05 · LS001 (S1) + LS002 (S2 parcial)</span>
+  <span class="tag ok" style="margin-left:auto">Fechado</span>
+</div>
+
 <div class="grid grid-4">
+  <div class="card">
+    <div class="kpi">Vendas WS</div>
+    <div class="val">1.017</div>
+    <div class="sub">Workshop tickets</div>
+  </div>
+  <div class="card">
+    <div class="kpi">Palestra</div>
+    <div class="val">196</div>
+    <div class="sub">Vendas palestra</div>
+  </div>
+  <div class="card">
+    <div class="kpi">Fotos IA</div>
+    <div class="val">159</div>
+    <div class="sub">Vendas fotos IA</div>
+  </div>
+  <div class="card">
+    <div class="kpi">Fotos Ext.</div>
+    <div class="val">19</div>
+    <div class="sub">Fotos extensão</div>
+  </div>
+</div>
+<div class="grid grid-4">
+  <div class="card">
+    <div class="kpi">Outros (Ac. Estendido)</div>
+    <div class="val">9</div>
+    <div class="sub">Outros produtos</div>
+  </div>
+  <div class="card">
+    <div class="kpi">Mentoria</div>
+    <div class="val warn-txt">1</div>
+    <div class="sub">+ 1 Ment. 3m <span class="tag pend">Desfasagem</span></div>
+  </div>
+  <div class="card bad">
+    <div class="kpi">Investimento c/ Imposto</div>
+    <div class="val lose">R$ 100.485,64</div>
+    <div class="sub">Meta Ads + 13,83% imposto</div>
+  </div>
+  <div class="card bad">
+    <div class="kpi">Saldo Captação</div>
+    <div class="val lose">− R$ 18.574,71</div>
+    <div class="sub">Captação líq. acum. (soma diária)</div>
+  </div>
+</div>
+
+<div class="card">
+<div class="scroll-x">
+<table>
+  <thead>
+    <tr>
+      <th>Lançamento</th>
+      <th>Período</th>
+      <th class="num">WS</th>
+      <th class="num">Palestra</th>
+      <th class="num">Fotos IA</th>
+      <th class="num">Fotos Ext.</th>
+      <th class="num">Outros</th>
+      <th class="num">Mentoria¹</th>
+      <th class="num">Invest. c/ Imp.</th>
+      <th class="num">Saldo Capt. (soma diária)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>LS001</strong></td>
+      <td style="color:#64748b">18/05 – 24/05</td>
+      <td class="num">513</td>
+      <td class="num">97</td>
+      <td class="num">83</td>
+      <td class="num">16</td>
+      <td class="num">5</td>
+      <td class="num" style="color:#64748b">0²</td>
+      <td class="num lose">R$ 43.949,83</td>
+      <td class="num lose">R$ -2.369,88</td>
+    </tr>
+    <tr>
+      <td><strong>LS002</strong></td>
+      <td style="color:#64748b">25/05 – 31/05</td>
+      <td class="num">504</td>
+      <td class="num">99</td>
+      <td class="num">76</td>
+      <td class="num">3</td>
+      <td class="num">4</td>
+      <td class="num warn-txt">1+1</td>
+      <td class="num lose">R$ 56.535,81</td>
+      <td class="num lose">R$ -16.204,83</td>
+    </tr>
+    <tr class="month-row">
+      <td colspan="2"><strong>TOTAL MAIO</strong></td>
+      <td class="num">1.017</td>
+      <td class="num">196</td>
+      <td class="num">159</td>
+      <td class="num">19</td>
+      <td class="num">9</td>
+      <td class="num">2</td>
+      <td class="num lose">R$ 100.485,64</td>
+      <td class="num lose">R$ -18.574,71</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p style="font-size:11px;color:#475569;margin-top:10px">
+  ¹ Mentoria em S2 (28/05): 1 ment. + 1 ment.3m (pertence ao LS001 com desfasagem antecipada). &nbsp;|&nbsp;
+  ² LS001 mentoria real (S3): 6 ment. · mostrada em Junho.
+</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- ═══════════════════════════════════════════════════
+     SEÇÃO 5 — FECHAMENTO JUNHO
+     ═══════════════════════════════════════════════════ -->
+<h2 class="green">Junho 2026 — Fechado</h2>
+
+<div class="month-header" style="background:linear-gradient(135deg,rgba(34,197,94,.12),rgba(124,92,255,.08));border-color:rgba(34,197,94,.18)">
+  <span class="month-title" style="color:#4ade80">📅 Junho 2026</span>
+  <span class="month-period">01/06 a 28/06 · LS003 (S3), LS004 (S4), LS005 (S5), LS006 (S6) + mentoria LS001–004</span>
+  <span class="tag ok" style="margin-left:auto">Fechado</span>
+</div>
+
+<div class="grid grid-4">
+  <div class="card">
+    <div class="kpi">Vendas WS</div>
+    <div class="val">1.475</div>
+    <div class="sub">Workshop tickets</div>
+  </div>
+  <div class="card">
+    <div class="kpi">Palestra</div>
+    <div class="val">212</div>
+    <div class="sub">Vendas palestra</div>
+  </div>
+  <div class="card">
+    <div class="kpi">Fotos IA</div>
+    <div class="val">226</div>
+    <div class="sub">Vendas fotos IA</div>
+  </div>
+  <div class="card">
+    <div class="kpi">Fotos Ext.</div>
+    <div class="val">10</div>
+    <div class="sub">Fotos extensão</div>
+  </div>
+</div>
+<div class="grid grid-4">
+  <div class="card">
+    <div class="kpi">Outros (Ac. Estendido)</div>
+    <div class="val">218</div>
+    <div class="sub">Outros produtos</div>
+  </div>
+  <div class="card">
+    <div class="kpi">Mentoria (4 LS)</div>
+    <div class="val win">25 + 3 ment.3m</div>
+    <div class="sub">LS001–004 confirmadas</div>
+  </div>
+  <div class="card bad">
+    <div class="kpi">Investimento c/ Imposto</div>
+    <div class="val lose">R$ 194.405,27</div>
+    <div class="sub">Meta Ads + 13,83% imposto</div>
+  </div>
+  <div class="card bad">
+    <div class="kpi">Saldo Captação</div>
+    <div class="val lose">− R$ 59.824,68</div>
+    <div class="sub">Captação líq. acum. (soma diária)</div>
+  </div>
+</div>
+
+<div class="card">
+<div class="scroll-x">
+<table>
+  <thead>
+    <tr>
+      <th>Lançamento</th>
+      <th>Período</th>
+      <th class="num">WS</th>
+      <th class="num">Palestra</th>
+      <th class="num">Fotos IA</th>
+      <th class="num">Fotos Ext.</th>
+      <th class="num">Outros</th>
+      <th class="num">Mentoria¹</th>
+      <th class="num">Invest. c/ Imp.</th>
+      <th class="num">Saldo Capt. (soma diária)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>LS003</strong></td>
+      <td style="color:#64748b">01/06 – 07/06</td>
+      <td class="num">397</td>
+      <td class="num">71</td>
+      <td class="num">78</td>
+      <td class="num">1</td>
+      <td class="num">26</td>
+      <td class="num warn-txt">6+0 (LS001)</td>
+      <td class="num lose">R$ 49.747,01</td>
+      <td class="num lose">R$ -17.334,51</td>
+    </tr>
+    <tr>
+      <td><strong>LS004</strong></td>
+      <td style="color:#64748b">08/06 – 14/06</td>
+      <td class="num">170</td>
+      <td class="num">24</td>
+      <td class="num">27</td>
+      <td class="num">1</td>
+      <td class="num">32</td>
+      <td class="num warn-txt">7+1 (LS002)</td>
+      <td class="num lose">R$ 22.794,18</td>
+      <td class="num lose">R$ -7.229,42</td>
+    </tr>
+    <tr>
+      <td><strong>LS005</strong></td>
+      <td style="color:#64748b">15/06 – 21/06</td>
+      <td class="num">419</td>
+      <td class="num">52</td>
+      <td class="num">51</td>
+      <td class="num">4</td>
+      <td class="num">72</td>
+      <td class="num warn-txt">7+1 (LS003)</td>
+      <td class="num lose">R$ 49.128,79</td>
+      <td class="num lose">R$ -9.815,09</td>
+    </tr>
+    <tr>
+      <td><strong>LS006</strong></td>
+      <td style="color:#64748b">22/06 – 28/06</td>
+      <td class="num">489</td>
+      <td class="num">65</td>
+      <td class="num">70</td>
+      <td class="num">4</td>
+      <td class="num">88</td>
+      <td class="num warn-txt">5+1 (LS004)</td>
+      <td class="num lose">R$ 72.735,29</td>
+      <td class="num lose">R$ -25.445,66</td>
+    </tr>
+    <tr class="month-row">
+      <td colspan="2"><strong>TOTAL JUNHO</strong></td>
+      <td class="num">1.475</td>
+      <td class="num">212</td>
+      <td class="num">226</td>
+      <td class="num">10</td>
+      <td class="num">218</td>
+      <td class="num">25 + 3</td>
+      <td class="num lose">R$ 194.405,27</td>
+      <td class="num lose">R$ -59.824,68</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p style="font-size:11px;color:#475569;margin-top:10px">
+  ¹ Mentoria: número indica vendas registradas nesta semana + entre parênteses o LS de origem real (com desfasagem). Ment.3m separado por "+".
+</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- ═══════════════════════════════════════════════════
+     SEÇÃO 6 — SALDOS GERAIS
+     ═══════════════════════════════════════════════════ -->
+<h2>Saldos Gerais — 18/05 a 28/06</h2>
+
+<div class="grid grid-3">
+  <div class="card bad">
+    <div class="kpi">Saldo Captação (WS + OBs)</div>
+    <div class="val lose">− R$ 78.399,39</div>
+    <div class="sub">Soma diária saldo capt. líq. · 42 dias</div>
+  </div>
+  <div class="card good">
+    <div class="kpi">Saldo Geral (c/ Mentoria + Outros)</div>
+    <div class="val win">+ R$ 163.138,71</div>
+    <div class="sub">Inclui receita mentoria e outros produtos</div>
+  </div>
+  <div class="card">
+    <div class="kpi">Investimento Total c/ Imposto</div>
+    <div class="val lose">R$ 294.890,91</div>
+    <div class="sub">Meta Ads · 13,83% imposto incluído</div>
+  </div>
+</div>
+
+<div class="grid grid-2">
+  <div class="card">
+    <div class="kpi">📅 Maio Fechado — Saldo Captação</div>
+    <div class="val lose">− R$ 18.574,71</div>
+    <div class="sub">18/05 – 31/05 · LS001 + LS002</div>
+  </div>
+  <div class="card">
+    <div class="kpi">📅 Maio Fechado — Saldo Geral</div>
+    <div class="val lose">− R$ 11.080,45</div>
+    <div class="sub">18/05 – 31/05 · inclui mentoria/outros</div>
+  </div>
+</div>
+
+<div class="grid grid-2">
+  <div class="card">
+    <div class="kpi">📅 Junho Fechado — Saldo Captação</div>
+    <div class="val lose">− R$ 59.824,68</div>
+    <div class="sub">01/06 – 28/06 · LS003–006 + mentorias LS001–004</div>
+  </div>
+  <div class="card good">
+    <div class="kpi">📅 Junho Fechado — Saldo Geral</div>
+    <div class="val win">+ R$ 174.219,16</div>
+    <div class="sub">01/06 – 28/06 · inclui mentoria/outros</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SEÇÃO 7 — RESUMO POR PRODUTO
+     ═══════════════════════════════════════════════════ -->
+<h2>Resumo por Produto — Total Acumulado</h2>
+
+<div class="grid grid-5">
   <div class="card">
     <div class="kpi">Workshop (WS)</div>
     <div class="val">2.492</div>
-    <div class="sub">ingressos pagos</div>
-  </div>
-  <div class="card">
-    <div class="kpi">Mentoria (confirm.)</div>
-    <div class="val">25 <span style="font-size:16px;color:#64748b">/ 3m</span></div>
-    <div class="val" style="font-size:18px">Total: 28</div>
-    <div class="sub">LS001–LS004 · LS005/006 pendentes</div>
+    <div class="sub">tickets totais</div>
   </div>
   <div class="card">
     <div class="kpi">Palestra</div>
     <div class="val">408</div>
-    <div class="sub">vendas</div>
+    <div class="sub">vendas totais</div>
   </div>
   <div class="card">
     <div class="kpi">Fotos IA</div>
     <div class="val">385</div>
-    <div class="sub">vendas</div>
+    <div class="sub">vendas totais</div>
   </div>
   <div class="card">
     <div class="kpi">Fotos Extensão</div>
     <div class="val">29</div>
-    <div class="sub">vendas</div>
+    <div class="sub">vendas totais</div>
   </div>
   <div class="card">
     <div class="kpi">Outros (Ac. Estendido)</div>
     <div class="val">227</div>
-    <div class="sub">vendas</div>
-  </div>
-  <div class="card">
-    <div class="kpi">Invest. Total c/Imp.</div>
-    <div class="val" style="font-size:22px">R$ 294.891</div>
-    <div class="sub">Meta Ads com imposto 13,83%</div>
+    <div class="sub">vendas totais</div>
   </div>
 </div>
 
-<div style="text-align:center;padding:24px 0;font-size:12px;color:#475569">
-  Gerado automaticamente · Claude Code · Brito Mídias / Marketex · 28/06/26
+<div class="grid grid-3">
+  <div class="card">
+    <div class="kpi">Mentoria Confirmada</div>
+    <div class="val">26</div>
+    <div class="sub">LS001–004 · LS005–006 pendentes</div>
+  </div>
+  <div class="card">
+    <div class="kpi">Mentoria 3 Meses</div>
+    <div class="val">4</div>
+    <div class="sub">LS001–004 confirmadas</div>
+  </div>
+  <div class="card">
+    <div class="kpi">Total Mentorias</div>
+    <div class="val warn-txt">30</div>
+    <div class="sub">26 ment. + 4 ment.3m</div>
+  </div>
+</div>
+
+<div style="margin-top:32px;padding:16px 20px;background:#0d1220;border-radius:10px;font-size:12px;color:#475569;border:1px solid rgba(255,255,255,.04)">
+  Gerado automaticamente por Claude Code · Brito Mídias Company · 28/06/2026 · Fonte: Planilha Unificada Geral LS (aba Captação Diária)
 </div>
 
 </body>
