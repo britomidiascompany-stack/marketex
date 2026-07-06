@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LS007 FECHAMENTO CAPTAÇÃO 01 · 06/07/26</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0e17;color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.55;padding:20px;max-width:1500px;margin:0 auto}
+header{background:radial-gradient(circle at top right,rgba(124,92,255,.25),transparent 60%),radial-gradient(circle at bottom left,rgba(34,211,238,.18),transparent 55%),#11172a;border-radius:20px;padding:32px;margin-bottom:28px;border:1px solid rgba(124,92,255,.25);position:relative}
+header h1{font-size:32px;background:linear-gradient(135deg,#7c5cff,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;font-weight:800}
+header .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+header .meta span{background:rgba(124,92,255,.12);padding:6px 14px;border-radius:8px;font-size:13px;color:#cbd5e1;border:1px solid rgba(124,92,255,.2)}
+header .status-pill{position:absolute;top:32px;right:32px;background:rgba(34,197,94,.25);color:#4ade80;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;border:1px solid rgba(34,197,94,.5)}
+h2{font-size:20px;margin:36px 0 14px;color:#f1f5f9;display:flex;align-items:center;gap:10px}
+h2::before{content:"";width:4px;height:22px;background:linear-gradient(180deg,#7c5cff,#22d3ee);border-radius:2px}
+h3{font-size:15px;margin:14px 0 8px;color:#cbd5e1;font-weight:600}
+.card{background:#11172a;border-radius:14px;padding:18px 22px;border:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;margin-bottom:14px}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#7c5cff,#22d3ee)}
+.card.good::before{background:linear-gradient(90deg,#22c55e,#10b981)}
+.card.bad::before{background:linear-gradient(90deg,#ef4444,#f43f5e)}
+.card.warn::before{background:linear-gradient(90deg,#facc15,#f97316)}
+.scroll-x{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+th,td{padding:8px 6px;text-align:left;border-bottom:1px solid rgba(255,255,255,.05);white-space:nowrap}
+th{color:#94a3b8;font-size:10px;text-transform:uppercase;letter-spacing:.3px;font-weight:600;background:rgba(124,92,255,.04)}
+tr:hover td{background:rgba(124,92,255,.04)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.win{color:#4ade80;font-weight:600}
+.lose{color:#f87171;font-weight:600}
+.warn-txt{color:#facc15;font-weight:600}
+.tot{background:rgba(124,92,255,.08);font-weight:600}
+.kpi{font-size:12px;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px}
+.val{font-size:26px;font-weight:700;color:#f1f5f9;margin:4px 0}
+.sub{font-size:12px;color:#64748b}
+.grid{display:grid;gap:14px}
+.grid-2{grid-template-columns:1fr 1fr}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.grid-2,.grid-4{grid-template-columns:1fr}}
+.tag{display:inline-block;background:rgba(124,92,255,.15);padding:3px 9px;border-radius:6px;font-size:11px;color:#cbd5e1;margin-left:6px;vertical-align:middle}
+.tag.good{background:rgba(34,197,94,.15);color:#4ade80}
+.tag.warn{background:rgba(250,204,21,.15);color:#facc15}
+.tag.bad{background:rgba(239,68,68,.15);color:#f87171}
+.tag.new{background:rgba(124,92,255,.20);color:#a78bfa}
+a{color:#22d3ee;text-decoration:none}
+a:hover{text-decoration:underline}
+ul{margin-left:18px;font-size:14px;color:#cbd5e1}
+ul li{margin:6px 0}
+.funnel-cols{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:1100px){.funnel-cols{grid-template-columns:1fr}}
+.funnel-col{display:flex;flex-direction:column;align-items:center;gap:0}
+.funnel-col-title{font-size:14px;color:#cbd5e1;text-align:center;padding:10px 18px;background:linear-gradient(135deg,rgba(124,92,255,.18),rgba(34,211,238,.12));border-radius:10px;margin-bottom:14px;font-weight:700;width:100%}
+.rfblock{position:relative;border-radius:14px;padding:14px 18px;background:#11172a;border:1px solid rgba(255,255,255,.05);box-shadow:0 4px 12px rgba(0,0,0,.3);margin:0 auto}
+.rfblock-head{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.08)}
+.rfblock-head .ico{font-size:18px}
+.rfblock-head .title{font-size:12px;font-weight:800;color:#f1f5f9;text-transform:uppercase;letter-spacing:.6px}
+.rfblock-metrics{display:flex;justify-content:space-around;gap:8px;flex-wrap:wrap}
+.rfmetric{flex:1;min-width:60px;padding:6px 4px;text-align:center;background:rgba(124,92,255,.05);border-radius:6px}
+.rfmetric .l{display:block;font-size:8px;color:#94a3b8;text-transform:uppercase;letter-spacing:.3px;margin-bottom:3px;font-weight:600;line-height:1.2}
+.rfmetric .v{font-size:13px;font-weight:700;color:#f1f5f9;font-variant-numeric:tabular-nums}
+.rfmetric.star{background:linear-gradient(135deg,rgba(34,197,94,.18),rgba(34,211,238,.12));border:1px solid rgba(34,197,94,.3)}
+.rfmetric.star .v{color:#4ade80;font-size:14px}
+.rfarrow{font-size:24px;color:rgba(124,92,255,.45);margin:6px 0;line-height:1}
+.rfblock.b1{width:100%}
+.rfblock.b2{width:88%}
+.rfblock.b3{width:74%}
+.rfblock.b4{width:60%}
+.rfblock.b5{width:48%}
+@media(max-width:1100px){
+  .rfblock.b1{width:100%}.rfblock.b2{width:92%}.rfblock.b3{width:84%}.rfblock.b4{width:76%}.rfblock.b5{width:68%}
+}
+.rfblock.public{border-top:3px solid #7c5cff}
+.rfblock.ad{border-top:3px solid #22d3ee}
+.rfblock.page{border-top:3px solid #facc15}
+.rfblock.checkout{border-top:3px solid #f97316}
+.rfblock.sales{border-top:3px solid #22c55e;background:linear-gradient(135deg,#11172a,rgba(34,197,94,.08))}
+.compact-section{max-width:1080px;margin-left:auto;margin-right:auto}
+.action-box{background:rgba(250,204,21,.06);border:1px solid rgba(250,204,21,.3);border-radius:12px;padding:16px 20px;margin-bottom:14px}
+.action-box h4{color:#facc15;font-size:13px;font-weight:700;margin-bottom:8px}
+.action-box ul{margin-left:14px}
+.action-box li{font-size:13px;color:#cbd5e1;margin:5px 0}
+.alert-box{background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.3);border-radius:12px;padding:14px 18px;margin-bottom:24px;font-size:13px;color:#cbd5e1}
+.alert-box b{color:#22d3ee}
+.celebration{background:linear-gradient(135deg,rgba(34,197,94,.2),rgba(34,211,238,.15));border:2px solid rgba(34,197,94,.5);border-radius:14px;padding:20px 24px;margin-bottom:20px;text-align:center}
+.celebration h3{color:#4ade80;font-size:22px;margin-bottom:6px;font-weight:800}
+.celebration p{color:#e2e8f0;font-size:14px}
+.info-box{background:rgba(124,92,255,.08);border:1px solid rgba(124,92,255,.3);border-radius:10px;padding:12px 16px;margin-bottom:14px;font-size:12px;color:#cbd5e1}
+.info-box b{color:#a78bfa}
+</style>
+</head>
+<body>
+
+<header>
+<span class="status-pill">🎯 CAPTAÇÃO ENCERRADA</span>
+<h1>LS007 FECHAMENTO CAPTAÇÃO 01</h1>
+<div style="font-size:14px;color:#cbd5e1">Workshop Especialista com IA · Ana Tex / Marketex</div>
+<div class="meta">
+<span>📅 29/06 (D1) → 05/07/26 (D7) — 7 dias</span>
+<span>⏱ Gerado 06/07 · Fechamento 01 de 2</span>
+<span>📊 Meta Ads (spend) + Hotmart (receita líquida real)</span>
+<span>💰 Imposto Meta +13,83%</span>
+<span>💵 Fechamento 02 daqui a 7 dias (13/07) pra checar reembolsos</span>
+</div>
+</header>
+
+<div class="celebration">
+<h3>🎯🎯🎯 650 INGRESSOS · 130% DA META · +150 ACIMA 🎯🎯🎯</h3>
+<p>Fechamento oficial via Hotmart (líquido real) · Meta 500 batida com 30% de folga · maior superação de meta do ano.</p>
+</div>
+
+<div class="info-box">
+🧾 <b>Sobre este relatório:</b> Receita usada = <b>Hotmart líquido</b> (regra M="BRL"→AX · senão K · só status Aprovado). Diferente dos relatórios diários que usavam VK real-time bruto. Ingresso oficial = Hotmart Workshop 7689363 (650 vs 603 do VK — 47 vendas atribuídas a outros funis/orgânicos não marcados como LS007 no VK).
+</div>
+
+<div class="action-box" style="margin-bottom:24px">
+<h4>⚡ SÍNTESE FINAL DA CAPTAÇÃO</h4>
+<ul>
+<li>🎯 <b>650 ingressos WS Hotmart (130% da meta 500)</b> · +150 acima · maior superação do ano.</li>
+<li>🔥 <b>D7 fechou o melhor dia:</b> 130 vendas pixel · CPA R$ 79 · ROAS ~1,4× — colheita do aprendizado Advantage.</li>
+<li>🔥🔥 <b>ADV320 MOTOR ABSOLUTO da semana:</b> 63 vendas · CPA R$ 49 · ROAS 2,00×.</li>
+<li>🔥🔥🔥 <b>ADV325 ROAS 3,61×</b> (CPA R$ 27) mas com spend congelado — Advantage nunca escalou · lição LS008.</li>
+<li>🔥 <b>ADC018 explodiu (25 vendas · CPA R$ 68 · ROAS 1,43×)</b> — carrossel novo descobriu.</li>
+<li>🔥 <b>Remessa 6 validou:</b> ADV333 (3 conv · CPA R$ 77 · ROAS 1,28×) · ADI179 (8 conv · CPA R$ 50 · ROAS 1,95×) · ADI180 (3 conv · ROAS 1,20×).</li>
+<li>💎 <b>Novo bump: Acesso Premium 12 meses</b> — 4 vendas · R$ 1.092 · ticket R$ 273 · será o próximo motor de LTV.</li>
+<li>📊 <b>ROAS Geral líquido 0,88×</b> · Exposição só −R$ 8k (10% do investimento).</li>
+</ul>
+</div>
+
+<h2>📊 Quadro Geral · Fechamento Oficial (Hotmart)</h2>
+<div class="grid grid-4">
+<div class="card warn">
+<div class="kpi">Investimento c/imposto</div>
+<div class="val">R$ 71.658</div>
+<div class="sub">(bruto Meta: R$ 62.951)</div>
+</div>
+<div class="card good">
+<div class="kpi">Receita líquida Hotmart</div>
+<div class="val" style="color:#4ade80">R$ 63.341</div>
+<div class="sub">Workshop R$ 40.465 + Bumps R$ 22.876</div>
+</div>
+<div class="card warn">
+<div class="kpi">Exposição (captação)</div>
+<div class="val" style="color:#facc15">−R$ 8.317</div>
+<div class="sub">~10% do investimento (menor do ano)</div>
+</div>
+<div class="card good">
+<div class="kpi">ROAS Geral (líquido)</div>
+<div class="val" style="color:#4ade80">0,88×</div>
+<div class="sub">Ticket transação líquido: R$ 97,45</div>
+</div>
+</div>
+
+<div class="card good" style="margin-top:-4px">
+<div class="kpi">Ingressos Workshop Especialista com IA (Hotmart · oficial)</div>
+<div class="val" style="color:#4ade80">650 <span style="font-size:16px;color:#94a3b8">· 130% da meta 500 · +150 acima</span></div>
+<div class="sub">Pixel Meta: 565 · VK paid workshop: 503 · Orgânico + direto (VK): 100 · <b>Hotmart oficial 650</b> (47 vendas adicionais atribuídas a canais fora do escopo VK/LS007). CPA WS c/imp: <b>R$ 110,24</b>.</div>
+</div>
+
+<h2>🌊 Funil Consolidado · D1-D7 Fechado</h2>
+<div class="funnel-cols">
+
+<div class="funnel-col">
+<div class="funnel-col-title">📊 Meta Ads (pixel) — atribuídos ao ads</div>
+
+<div class="rfblock b1 public">
+<div class="rfblock-head"><span class="ico">📢</span><span class="title">Público alcançado</span></div>
+<div class="rfblock-metrics">
+<div class="rfmetric"><span class="l">Invest. c/imp</span><span class="v">R$ 71.658</span></div>
+<div class="rfmetric"><span class="l">Impressões</span><span class="v">729.555</span></div>
+<div class="rfmetric"><span class="l">Alcance</span><span class="v">622.520</span></div>
+<div class="rfmetric"><span class="l">Frequência</span><span class="v">1,17×</span></div>
+<div class="rfmetric"><span class="l">CPM c/imp</span><span class="v">R$ 98,22</span></div>
+</div>
+</div>
+<div class="rfarrow">▼</div>
+
+<div class="rfblock b2 ad">
+<div class="rfblock-head"><span class="ico">🎯</span><span class="title">Engajamento</span></div>
+<div class="rfblock-metrics">
+<div class="rfmetric"><span class="l">CTR link</span><span class="v">2,00%</span></div>
+<div class="rfmetric star"><span class="l">Hook (vídeo) 🔥</span><span class="v">20,7%</span></div>
+<div class="rfmetric"><span class="l">Cliques link</span><span class="v">14.586</span></div>
+<div class="rfmetric"><span class="l">CPC c/imp</span><span class="v">R$ 4,91</span></div>
+</div>
+</div>
+<div class="rfarrow">▼</div>
+
+<div class="rfblock b3 page">
+<div class="rfblock-head"><span class="ico">🌐</span><span class="title">Página de Vendas</span></div>
+<div class="rfblock-metrics">
+<div class="rfmetric"><span class="l">LPV</span><span class="v">13.166</span></div>
+<div class="rfmetric"><span class="l">Custo/LPV</span><span class="v">R$ 5,44</span></div>
+<div class="rfmetric star"><span class="l">Conv. pág → venda</span><span class="v">4,29%</span></div>
+<div class="rfmetric"><span class="l">Conv. pág → chk</span><span class="v">18,30%</span></div>
+</div>
+</div>
+<div class="rfarrow">▼</div>
+
+<div class="rfblock b4 checkout">
+<div class="rfblock-head"><span class="ico">🛒</span><span class="title">Checkout</span></div>
+<div class="rfblock-metrics">
+<div class="rfmetric"><span class="l">Checkouts (IC)</span><span class="v">2.410</span></div>
+<div class="rfmetric"><span class="l">Custo/IC</span><span class="v">R$ 29,73</span></div>
+<div class="rfmetric"><span class="l">Conv. chk → venda</span><span class="v">23,44%</span></div>
+<div class="rfmetric"><span class="l">Conv. bumps</span><span class="v">43,2%</span></div>
+</div>
+</div>
+<div class="rfarrow">▼</div>
+
+<div class="rfblock b5 sales">
+<div class="rfblock-head"><span class="ico">🎫</span><span class="title">Vendas Pixel</span></div>
+<div class="rfblock-metrics">
+<div class="rfmetric"><span class="l">Ingressos WS (pixel)</span><span class="v">565</span></div>
+<div class="rfmetric"><span class="l">CPA pixel c/imp</span><span class="v">R$ 126,82 🔥🔥</span></div>
+<div class="rfmetric"><span class="l">Ticket líq. Hotmart</span><span class="v">R$ 97,45</span></div>
+</div>
+</div>
+</div>
+
+<div class="funnel-col">
+<div class="funnel-col-title">🎫 Hotmart — FONTE OFICIAL do fechamento</div>
+
+<div class="rfblock b1 public">
+<div class="rfblock-head"><span class="ico">📢</span><span class="title">Público alcançado</span></div>
+<div class="rfblock-metrics">
+<div class="rfmetric"><span class="l">Invest. c/imp</span><span class="v">R$ 71.658</span></div>
+<div class="rfmetric"><span class="l">Impressões</span><span class="v">729.555</span></div>
+<div class="rfmetric"><span class="l">Alcance</span><span class="v">622.520</span></div>
+<div class="rfmetric"><span class="l">Frequência</span><span class="v">1,17×</span></div>
+<div class="rfmetric"><span class="l">CPM c/imp</span><span class="v">R$ 98,22</span></div>
+</div>
+</div>
+<div class="rfarrow">▼</div>
+
+<div class="rfblock b2 ad">
+<div class="rfblock-head"><span class="ico">🎯</span><span class="title">Engajamento</span></div>
+<div class="rfblock-metrics">
+<div class="rfmetric"><span class="l">CTR link</span><span class="v">2,00%</span></div>
+<div class="rfmetric star"><span class="l">Hook (vídeo) 🔥</span><span class="v">20,7%</span></div>
+<div class="rfmetric"><span class="l">Cliques link</span><span class="v">14.586</span></div>
+<div class="rfmetric"><span class="l">CPC c/imp</span><span class="v">R$ 4,91</span></div>
+</div>
+</div>
+<div class="rfarrow">▼</div>
+
+<div class="rfblock b3 page">
+<div class="rfblock-head"><span class="ico">🌐</span><span class="title">Página de Vendas</span></div>
+<div class="rfblock-metrics">
+<div class="rfmetric"><span class="l">LPV</span><span class="v">13.166</span></div>
+<div class="rfmetric"><span class="l">Custo/LPV</span><span class="v">R$ 5,44</span></div>
+<div class="rfmetric star"><span class="l">Conv. pág → ingresso</span><span class="v">4,94%</span></div>
+<div class="rfmetric"><span class="l">Conv. pág → chk</span><span class="v">18,30%</span></div>
+</div>
+</div>
+<div class="rfarrow">▼</div>
+
+<div class="rfblock b4 checkout">
+<div class="rfblock-head"><span class="ico">🛒</span><span class="title">Checkout</span></div>
+<div class="rfblock-metrics">
+<div class="rfmetric"><span class="l">Checkouts (IC)</span><span class="v">2.410</span></div>
+<div class="rfmetric"><span class="l">Custo/IC</span><span class="v">R$ 29,73</span></div>
+<div class="rfmetric"><span class="l">Conv. chk → venda</span><span class="v">26,97%</span></div>
+<div class="rfmetric"><span class="l">Conv. bumps</span><span class="v">43,2%</span></div>
+</div>
+</div>
+<div class="rfarrow">▼</div>
+
+<div class="rfblock b5 sales">
+<div class="rfblock-head"><span class="ico">🎫</span><span class="title">Ingressos Hotmart · OFICIAL</span></div>
+<div class="rfblock-metrics">
+<div class="rfmetric"><span class="l">Ingressos WS</span><span class="v">650</span></div>
+<div class="rfmetric"><span class="l">CPA WS c/imp</span><span class="v">R$ 110,24</span></div>
+<div class="rfmetric"><span class="l">Ticket líquido</span><span class="v">R$ 97,45</span></div>
+<div class="rfmetric"><span class="l">ROAS Geral</span><span class="v">0,88×</span></div>
+</div>
+</div>
+</div>
+
+</div>
+<p style="font-size:11px;color:#64748b;margin-top:8px">Hotmart (650) &gt; Pixel Meta (565) &gt; VK paid (503) — Hotmart pega tudo (incluindo tráfego direto/marca não atribuído). <b>CPA WS oficial: R$ 110,24 c/imp</b> · <b>Ticket líquido R$ 97,45</b>.</p>
+
+<div class="compact-section">
+
+<h2>💰 Vendas + Order Bumps · Hotmart LÍQUIDO REAL</h2>
+<div class="card">
+<div class="scroll-x">
+<table>
+<thead>
+<tr>
+<th>Produto</th>
+<th>ID</th>
+<th class="num">Qtd Hotmart</th>
+<th class="num">Receita líquida</th>
+<th class="num">Ticket líq.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="tot"><td>🎫 <b>Workshop Especialista com IA</b> (ingresso)</td><td>7689363</td><td class="num"><b>650</b></td><td class="num"><b>R$ 40.464,78</b></td><td class="num">R$ 62,25</td></tr>
+<tr><td>💎 Acesso Premium Especialista com IA <span class="tag warn">bump R$127</span></td><td>7909367</td><td class="num">108</td><td class="num">R$ 12.845,62</td><td class="num">R$ 118,94</td></tr>
+<tr style="background:rgba(124,92,255,.10)"><td>🆕 <b>Acesso Premium Especialista com IA — 12 meses</b> <span class="tag new">NOVO PRODUTO</span></td><td>—</td><td class="num"><b>4</b></td><td class="num"><b>R$ 1.092,34</b></td><td class="num"><b>R$ 273,09</b></td></tr>
+<tr><td>Fotos com Inteligência Artificial</td><td>6148609</td><td class="num">91</td><td class="num">R$ 5.334,35</td><td class="num">R$ 58,62</td></tr>
+<tr><td>Palestra em Minutos</td><td>7690167</td><td class="num">76</td><td class="num">R$ 3.511,20</td><td class="num">R$ 46,20</td></tr>
+<tr><td>Fotos com IA — Acesso estendido</td><td>6662362</td><td class="num">2</td><td class="num">R$ 92,40</td><td class="num">R$ 46,20</td></tr>
+<tr class="tot"><td colspan="2"><b>TOTAL bumps</b> (4 tipos + 1 novo)</td><td class="num"><b>281</b></td><td class="num"><b>R$ 22.875,91</b></td><td class="num">R$ 81,41</td></tr>
+<tr class="tot" style="background:rgba(34,197,94,.12)"><td colspan="2"><b>TOTAL LS007 (WS + Bumps)</b></td><td class="num"><b>931</b></td><td class="num win"><b>R$ 63.340,69</b></td><td class="num">R$ 97,45</td></tr>
+</tbody>
+</table>
+</div>
+<p style="font-size:11px;color:#64748b;margin-top:8px">Conv. bumps: 281 / 650 = <b>43,2%</b> · Acesso Premium (R$127) = 56,2% dos bumps. <b>Novo produto Acesso Premium 12 meses R$273</b> teve 4 vendas na estreia (4,3% dos compradores do Premium mensal migraram) — potencial de escala futuro.</p>
+</div>
+
+<h2>📅 Comparativo Dia-a-Dia · FECHADO</h2>
+<div class="card">
+<div class="scroll-x">
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th class="num">D1 · 29/06</th>
+<th class="num">D2 · 30/06</th>
+<th class="num">D3 · 01/07</th>
+<th class="num">D4 · 02/07</th>
+<th class="num">D5 · 03/07</th>
+<th class="num">D6 · 04/07</th>
+<th class="num">D7 · 05/07</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Invest. c/imp</td><td class="num">R$ 11.268</td><td class="num">R$ 10.665</td><td class="num">R$ 7.250</td><td class="num">R$ 14.090</td><td class="num">R$ 10.161</td><td class="num">R$ 7.968</td><td class="num">R$ 10.256</td></tr>
+<tr><td>Impressões</td><td class="num">107.802</td><td class="num">121.598</td><td class="num">74.188</td><td class="num">133.881</td><td class="num">103.806</td><td class="num">83.184</td><td class="num">105.096</td></tr>
+<tr><td>CPM c/imp</td><td class="num warn-txt">R$ 104,53</td><td class="num win">R$ 87,71</td><td class="num">R$ 97,72</td><td class="num warn-txt">R$ 105,24</td><td class="num">R$ 97,89</td><td class="num win">R$ 95,79</td><td class="num">R$ 97,60</td></tr>
+<tr><td>CTR link</td><td class="num">1,96%</td><td class="num win">2,09%</td><td class="num">1,86%</td><td class="num">2,08%</td><td class="num">1,96%</td><td class="num">2,02%</td><td class="num">1,93%</td></tr>
+<tr><td>Hook vídeo</td><td class="num win">23,76%</td><td class="num win">25,50%</td><td class="num lose">14,38%</td><td class="num">19,99%</td><td class="num">22,26%</td><td class="num">20,84%</td><td class="num lose">15,86%</td></tr>
+<tr><td>Link clicks</td><td class="num">2.118</td><td class="num">2.543</td><td class="num">1.383</td><td class="num">2.787</td><td class="num">2.039</td><td class="num">1.683</td><td class="num">2.033</td></tr>
+<tr><td>LPV</td><td class="num">1.934</td><td class="num">2.303</td><td class="num">1.241</td><td class="num">2.460</td><td class="num">1.816</td><td class="num">1.578</td><td class="num">1.834</td></tr>
+<tr><td>IC</td><td class="num">338</td><td class="num">330</td><td class="num">242</td><td class="num">437</td><td class="num">354</td><td class="num">292</td><td class="num">417</td></tr>
+<tr class="tot"><td><b>Vendas pixel</b></td><td class="num"><b>69</b></td><td class="num"><b>65</b></td><td class="num"><b>55</b></td><td class="num"><b>87</b></td><td class="num"><b>83</b></td><td class="num"><b>76</b></td><td class="num win"><b>130</b> 🔥🔥🔥</td></tr>
+<tr class="tot"><td><b>CPA pixel c/imp</b></td><td class="num"><b>R$ 163</b></td><td class="num"><b>R$ 164</b></td><td class="num"><b>R$ 132</b></td><td class="num warn-txt"><b>R$ 162</b></td><td class="num warn-txt"><b>R$ 122</b></td><td class="num win"><b>R$ 105</b></td><td class="num win"><b>R$ 79</b> 🔥🔥🔥</td></tr>
+</tbody>
+</table>
+</div>
+<p style="font-size:11px;color:#64748b;margin-top:8px"><b>D7 fechou como o MELHOR dia do LS por ampla margem:</b> 130 vendas pixel · CPA R$ 79 · Advantage aprendeu no último dia e colheu forte. <b>D3 foi o vale</b> (hook 14,4% · CPA R$132). Semana escalou consistentemente D5 → D6 → D7 (CPA 122 → 105 → 79).</p>
+</div>
+
+<h2>🎨 Ranking Final de Criativos · D1-D7 Fechado</h2>
+
+<h3>🚀 Por volume de ingressos (pixel Meta)</h3>
+<div class="card">
+<div class="scroll-x">
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Criativo</th>
+<th>Tipo</th>
+<th class="num">Spend c/imp</th>
+<th class="num">Conv.</th>
+<th class="num">CPA c/imp</th>
+<th class="num">ROAS líq.</th>
+<th class="num">CTR</th>
+<th class="num">Hook</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🥇</td>
+<td><b>ADV322</b> CHAT AJUDA A CRIAR SLIDES</td>
+<td><span class="tag">Vídeo</span></td>
+<td class="num">R$ 20.854</td>
+<td class="num win"><b>124</b></td>
+<td class="num warn-txt">R$ 168,18</td>
+<td class="num warn-txt">0,58×</td>
+<td class="num">2,15%</td>
+<td class="num win">29,1%</td>
+</tr>
+<tr>
+<td>🥈</td>
+<td><b>ADV309</b> OTM V9 MÁQ. CONTEÚDO HOOK31 <span class="tag good">estrela</span></td>
+<td><span class="tag">Vídeo</span></td>
+<td class="num">R$ 13.441</td>
+<td class="num win"><b>96</b></td>
+<td class="num warn-txt">R$ 140,01</td>
+<td class="num">0,70×</td>
+<td class="num win">2,19%</td>
+<td class="num win">32,3%</td>
+</tr>
+<tr style="background:rgba(34,197,94,.20)">
+<td>🥉</td>
+<td><b>ADV320</b> CHAT CRIA ID VISUAL CLONE <span class="tag good">🔥🔥 MOTOR ABSOLUTO</span></td>
+<td><span class="tag">Vídeo</span></td>
+<td class="num">R$ 3.073</td>
+<td class="num win"><b>63</b> 🔥</td>
+<td class="num win"><b>R$ 48,77</b> 🔥🔥</td>
+<td class="num win"><b>2,00×</b></td>
+<td class="num win">2,68%</td>
+<td class="num">22,5%</td>
+</tr>
+<tr>
+<td>4º</td>
+<td><b>ADV324</b> CHAT PARA POST HOOK48 <span class="tag warn">saturado</span></td>
+<td><span class="tag">Vídeo</span></td>
+<td class="num">R$ 4.867</td>
+<td class="num">35</td>
+<td class="num warn-txt">R$ 139,04</td>
+<td class="num">0,70×</td>
+<td class="num">1,64%</td>
+<td class="num">22,4%</td>
+</tr>
+<tr>
+<td>5º</td>
+<td><b>ADC004</b> EQUIPE DE CONTEÚDO ROBÔ 💀</td>
+<td><span class="tag">Carrossel</span></td>
+<td class="num">R$ 5.419</td>
+<td class="num">34</td>
+<td class="num warn-txt">R$ 159,37</td>
+<td class="num warn-txt">0,61×</td>
+<td class="num">1,34%</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td>6º</td>
+<td><b>ADV291</b> MÁQ. PROSPECÇÃO HOOK16 <span class="tag good">LS006</span></td>
+<td><span class="tag">Vídeo</span></td>
+<td class="num">R$ 2.777</td>
+<td class="num win"><b>32</b></td>
+<td class="num win"><b>R$ 86,80</b> 🔥</td>
+<td class="num win"><b>1,12×</b></td>
+<td class="num win">2,28%</td>
+<td class="num">20,4%</td>
+</tr>
+<tr>
+<td>7º</td>
+<td><b>ADC001</b> POSTA SEM APARECER 🔥</td>
+<td><span class="tag">Carrossel</span></td>
+<td class="num">R$ 2.753</td>
+<td class="num win"><b>27</b></td>
+<td class="num win"><b>R$ 101,95</b> 🔥</td>
+<td class="num">0,96×</td>
+<td class="num win">2,28%</td>
+<td class="num">—</td>
+</tr>
+<tr style="background:rgba(34,197,94,.10)">
+<td>8º</td>
+<td><b>ADC018</b> ACORDOU COM PIQUE <span class="tag good">🔥 EXPLODIU (4→25)</span></td>
+<td><span class="tag">Carrossel</span></td>
+<td class="num">R$ 1.700</td>
+<td class="num win"><b>25</b></td>
+<td class="num win"><b>R$ 67,99</b> 🔥</td>
+<td class="num win"><b>1,43×</b></td>
+<td class="num">1,91%</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td>9º</td>
+<td><b>ADC003</b> VILA DO CHAVES 💀</td>
+<td><span class="tag">Carrossel</span></td>
+<td class="num">R$ 3.497</td>
+<td class="num">23</td>
+<td class="num lose">R$ 152,04</td>
+<td class="num lose">0,64×</td>
+<td class="num">1,60%</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td>10º</td>
+<td><b>ADV291</b> SE VOCE USA CHATGPT COMO GOOGLE</td>
+<td><span class="tag">Vídeo</span></td>
+<td class="num">R$ 2.359</td>
+<td class="num">20</td>
+<td class="num warn-txt">R$ 117,95</td>
+<td class="num">0,83×</td>
+<td class="num">2,15%</td>
+<td class="num">19,9%</td>
+</tr>
+<tr>
+<td>11º</td>
+<td><b>ADV321</b> CHAT FAZ SUA ID VISUAL <span class="tag good">LS006</span></td>
+<td><span class="tag">Vídeo</span></td>
+<td class="num">R$ 1.642</td>
+<td class="num">14</td>
+<td class="num warn-txt">R$ 117,25</td>
+<td class="num">0,83×</td>
+<td class="num">1,90%</td>
+<td class="num win">29,5%</td>
+</tr>
+<tr>
+<td>12º</td>
+<td><b>ADC002</b> SUAS CORRENTES 💀</td>
+<td><span class="tag">Carrossel</span></td>
+<td class="num">R$ 1.886</td>
+<td class="num">11</td>
+<td class="num lose">R$ 171,45</td>
+<td class="num lose">0,57×</td>
+<td class="num">1,20%</td>
+<td class="num">—</td>
+</tr>
+<tr style="background:rgba(124,92,255,.10)">
+<td>13º</td>
+<td><b>ADI179</b> 30 POSTS PRONTOS <span class="tag good">🎯 ACORDOU FORTE</span></td>
+<td><span class="tag">Imagem</span></td>
+<td class="num">R$ 400</td>
+<td class="num win"><b>8</b></td>
+<td class="num win"><b>R$ 49,97</b> 🔥</td>
+<td class="num win"><b>1,95×</b></td>
+<td class="num win">2,17%</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td>14º</td>
+<td><b>ADV290</b> MÁQ. PROSPECÇÃO HOOK15</td>
+<td><span class="tag">Vídeo</span></td>
+<td class="num">R$ 691</td>
+<td class="num">7</td>
+<td class="num win"><b>R$ 98,72</b> 🔥</td>
+<td class="num">0,99×</td>
+<td class="num">2,23%</td>
+<td class="num">18,9%</td>
+</tr>
+<tr style="background:rgba(34,197,94,.10)">
+<td>15º</td>
+<td><b>ADV325</b> CHAT FAZ SITE ID <span class="tag bad">⚠️ nunca escalou</span></td>
+<td><span class="tag">Vídeo</span></td>
+<td class="num warn-txt">R$ 162</td>
+<td class="num">6</td>
+<td class="num win"><b>R$ 26,94</b> 🔥🔥</td>
+<td class="num win"><b>3,61×</b></td>
+<td class="num win">2,85%</td>
+<td class="num win">25,0%</td>
+</tr>
+<tr style="background:rgba(34,197,94,.10)">
+<td>16º</td>
+<td><b>ADV327</b> WORKSHOP PÁGINA PRONTA <span class="tag good">sustentado 5 dias</span></td>
+<td><span class="tag">Vídeo</span></td>
+<td class="num">R$ 256</td>
+<td class="num">4</td>
+<td class="num win"><b>R$ 63,89</b> 🔥</td>
+<td class="num win"><b>1,52×</b></td>
+<td class="num win">2,55%</td>
+<td class="num win">29,4%</td>
+</tr>
+<tr style="background:rgba(124,92,255,.10)">
+<td>17º</td>
+<td><b>ADV333</b> COMO DOMINAR IA <span class="tag good">🎬 REMESSA 6</span></td>
+<td><span class="tag">Vídeo</span></td>
+<td class="num">R$ 230</td>
+<td class="num">3</td>
+<td class="num win"><b>R$ 76,50</b> 🔥</td>
+<td class="num win"><b>1,28×</b></td>
+<td class="num">1,49%</td>
+<td class="num">20,0%</td>
+</tr>
+<tr style="background:rgba(124,92,255,.10)">
+<td>18º</td>
+<td><b>ADI180</b> NUM ENSAIO TODA VEZ <span class="tag good">🎯 ACORDOU</span></td>
+<td><span class="tag">Imagem</span></td>
+<td class="num">R$ 243</td>
+<td class="num">3</td>
+<td class="num win"><b>R$ 81,00</b></td>
+<td class="num win"><b>1,20×</b></td>
+<td class="num">1,51%</td>
+<td class="num">—</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p style="font-size:11px;color:#64748b;margin-top:8px">ROAS líquido = conv × R$ 97,45 (ticket líquido Hotmart) ÷ spend c/imp. <b>Top 6 ROAS &gt;1×:</b> ADV325 · ADV320 · ADI179 · ADV327 · ADC018 · ADV333 — todos vão pro LS008 D1. Motores volume ADV322/ADV309 pesaram 55% do spend mas necessários pra bater a meta.</p>
+</div>
+
+<h3>💸 Ranking por menor CPA (mín. 4 conversões)</h3>
+<div class="card">
+<div class="scroll-x">
+<table>
+<thead>
+<tr><th>#</th><th>Criativo</th><th class="num">CPA c/imp</th><th class="num">ROAS líq</th><th class="num">Conv.</th><th class="num">Spend</th><th>Status LS008</th></tr>
+</thead>
+<tbody>
+<tr style="background:rgba(34,197,94,.10)"><td>🏆</td><td><b>ADV325</b> CHAT FAZ SITE ID 🔥🔥🔥</td><td class="num win"><b>R$ 27</b> 🔥🔥</td><td class="num win">3,61×</td><td class="num">6</td><td class="num">R$ 162</td><td><span class="tag good">🚀 escalar CBO D1</span></td></tr>
+<tr style="background:rgba(34,197,94,.20)"><td>🥇</td><td><b>ADV320</b> CHAT CRIA ID VISUAL 🔥🔥 MOTOR</td><td class="num win"><b>R$ 49</b> 🔥🔥</td><td class="num win">2,00×</td><td class="num">63</td><td class="num">R$ 3.073</td><td><span class="tag good">🚀 top-shelf D1</span></td></tr>
+<tr style="background:rgba(124,92,255,.10)"><td>🥈</td><td><b>ADI179</b> 30 POSTS PRONTOS 🎯</td><td class="num win"><b>R$ 50</b> 🔥</td><td class="num win">1,95×</td><td class="num">8</td><td class="num">R$ 400</td><td><span class="tag good">🚀 escalar D1</span></td></tr>
+<tr style="background:rgba(34,197,94,.10)"><td>🥉</td><td><b>ADV327</b> WORKSHOP PÁGINA PRONTA</td><td class="num win"><b>R$ 64</b> 🔥</td><td class="num win">1,52×</td><td class="num">4</td><td class="num">R$ 256</td><td><span class="tag good">🚀 usar D1</span></td></tr>
+<tr><td>4º</td><td><b>ADC018</b> ACORDOU COM PIQUE 🔥</td><td class="num win"><b>R$ 68</b> 🔥</td><td class="num win">1,43×</td><td class="num">25</td><td class="num">R$ 1.700</td><td><span class="tag good">🚀 usar D1</span></td></tr>
+<tr style="background:rgba(124,92,255,.10)"><td>5º</td><td><b>ADV333</b> COMO DOMINAR IA 🎬 rem6</td><td class="num win"><b>R$ 77</b></td><td class="num win">1,28×</td><td class="num">3</td><td class="num">R$ 230</td><td><span class="tag good">🚀 usar D1</span></td></tr>
+<tr style="background:rgba(124,92,255,.10)"><td>6º</td><td><b>ADI180</b> NUM ENSAIO 🎯</td><td class="num win"><b>R$ 81</b></td><td class="num win">1,20×</td><td class="num">3</td><td class="num">R$ 243</td><td><span class="tag good">testar mais</span></td></tr>
+<tr><td>7º</td><td><b>ADV291</b> MÁQ. PROSPECÇÃO H16</td><td class="num win"><b>R$ 87</b> 🔥</td><td class="num win">1,12×</td><td class="num">32</td><td class="num">R$ 2.777</td><td><span class="tag good">escalar D1</span></td></tr>
+<tr><td>8º</td><td><b>ADV290</b> MÁQ. PROSPECÇÃO H15</td><td class="num win"><b>R$ 99</b></td><td class="num">0,99×</td><td class="num">7</td><td class="num">R$ 691</td><td><span class="tag good">manter D1</span></td></tr>
+<tr><td>9º</td><td><b>ADC001</b> POSTA SEM APARECER</td><td class="num win"><b>R$ 102</b> 🔥</td><td class="num">0,96×</td><td class="num">27</td><td class="num">R$ 2.753</td><td><span class="tag good">manter D1</span></td></tr>
+<tr><td>10º</td><td><b>ADV321</b> CHAT FAZ SUA ID VISUAL</td><td class="num warn-txt">R$ 117</td><td class="num">0,83×</td><td class="num">14</td><td class="num">R$ 1.642</td><td><span class="tag">manter D1</span></td></tr>
+<tr><td>11º</td><td><b>ADV291</b> SE VOCE USA CHATGPT</td><td class="num warn-txt">R$ 118</td><td class="num">0,83×</td><td class="num">20</td><td class="num">R$ 2.359</td><td><span class="tag warn">borderline · cortar</span></td></tr>
+<tr><td>12º</td><td><b>ADV324</b> CHAT PARA POST HOOK48</td><td class="num warn-txt">R$ 139</td><td class="num">0,70×</td><td class="num">35</td><td class="num">R$ 4.867</td><td><span class="tag warn">saturou · cortar</span></td></tr>
+<tr><td>13º</td><td><b>ADV309</b> OTM V9 MÁQ. CONTEÚDO</td><td class="num warn-txt">R$ 140</td><td class="num">0,70×</td><td class="num">96</td><td class="num">R$ 13.441</td><td><span class="tag warn">motor volume · substituir</span></td></tr>
+<tr><td>14º</td><td><b>ADC003</b> VILA DO CHAVES 💀</td><td class="num lose">R$ 152</td><td class="num lose">0,64×</td><td class="num">23</td><td class="num">R$ 3.497</td><td><span class="tag bad">cortar</span></td></tr>
+<tr><td>15º</td><td><b>ADC004</b> EQUIPE CONTEÚDO ROBÔ 💀</td><td class="num warn-txt">R$ 159</td><td class="num warn-txt">0,61×</td><td class="num">34</td><td class="num">R$ 5.419</td><td><span class="tag bad">cortar</span></td></tr>
+<tr><td>16º</td><td><b>ADV322</b> CHAT AJUDA A CRIAR SLIDES</td><td class="num warn-txt">R$ 168</td><td class="num warn-txt">0,58×</td><td class="num">124</td><td class="num">R$ 20.854</td><td><span class="tag warn">motor volume · substituir</span></td></tr>
+<tr><td>17º</td><td><b>ADC002</b> SUAS CORRENTES 💀</td><td class="num lose">R$ 171</td><td class="num lose">0,57×</td><td class="num">11</td><td class="num">R$ 1.886</td><td><span class="tag bad">cortar</span></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<h2>🧠 Análise Consolidada · Fechamento 01</h2>
+
+<div class="card good">
+<h3 style="color:#4ade80">🟢 O QUE FUNCIONOU (levar pro LS008)</h3>
+<ul>
+<li>🎯 <b>META BATIDA COM 130% (650/500)</b> · +150 acima do objetivo — <b>maior superação do ano</b>.</li>
+<li>🔥🔥 <b>ADV320 foi o MOTOR ABSOLUTO da semana</b> · 63 vendas · CPA R$49 · ROAS 2,00× · escalou naturalmente sem intervenção.</li>
+<li>🔥🔥🔥 <b>ADV325 provou conceito com ROAS 3,61×</b> (mesmo com spend congelado em R$162 · Advantage não escalou).</li>
+<li>🔥 <b>ADC018 novo carrossel explodiu:</b> 4→25 vendas nos últimos 2 dias · CPA R$68 · ROAS 1,43×.</li>
+<li>🎯 <b>ADIs acordaram no fim:</b> ADI179 (8 conv · ROAS 1,95×) e ADI180 (3 conv · ROAS 1,20×) — imagens estáticas competitivas.</li>
+<li>🎬 <b>Remessa 6 validou:</b> ADV333 (3 conv · CPA R$77 · ROAS 1,28×) pronto pro LS008.</li>
+<li>✅ <b>ADV291 H16 (LS006 reaproveitado)</b> confirmou consistência · 32 conv · CPA R$87 · ROAS 1,12×.</li>
+<li>✅ <b>Curva ROAS D5→D6→D7:</b> 0,87× → 1,00× → 1,40× — <b>Advantage aprendeu e maximizou no último dia</b>.</li>
+<li>💎 <b>Novo produto Acesso Premium 12 meses:</b> 4 vendas em soft-launch · ticket R$273 · potencial de escala.</li>
+</ul>
+</div>
+
+<div class="card warn">
+<h3 style="color:#facc15">🟡 LIÇÕES PRO LS008</h3>
+<ul>
+<li><b>⚠️ ADV325 spend congelado em R$162 apesar de ROAS 3,61×</b> · Advantage não distribui pra criativos-teste de baixo volume. <b>Solução:</b> CBO manual dedicado pra criativos-teste alto ROAS.</li>
+<li><b>V1-2 dominou 89% do tráfego A/B</b> apesar de V1-5 (5,48%) e V1-3 (4,84%) terem 40-50% mais conversão. <b>Solução:</b> forçar split 25/25/25/25 desde D1 · ou usar V1-5 direto como principal.</li>
+<li><b>ADV322 (R$20k · 30% do spend) e ADV309 (R$13k · 21%)</b> pesaram muito mas foram essenciais pra volume. <b>Solução:</b> testar substitutos desde o D1 do LS008 pra reduzir dependência.</li>
+<li><b>Ticket líquido caiu de R$103 (VK bruto) → R$97 (Hotmart real)</b> — taxa Hotmart pesou. Considerar isso no cálculo de meta ROAS futuras.</li>
+</ul>
+</div>
+
+<div class="card bad">
+<h3 style="color:#f87171">🔴 NÃO USAR NO LS008</h3>
+<ul>
+<li>⛔ <b>ADC002 SUAS CORRENTES</b> · R$1.886 · CPA R$171 · ROAS 0,57×.</li>
+<li>⛔ <b>ADC003 VILA DO CHAVES</b> · R$3.497 · CPA R$152 · ROAS 0,64×.</li>
+<li>⛔ <b>ADC004 EQUIPE CONTEÚDO ROBÔ</b> · R$5.419 · CPA R$159 · ROAS 0,61× — o mais caro dos ruins (34 vendas com spend alto e ROAS pior).</li>
+<li>⛔ <b>ADV324 CHAT PARA POST</b> · saturou · CPA R$139 · ROAS 0,70×.</li>
+<li>⛔ <b>ADV291 CHATGPT COMO GOOGLE</b> · CPA R$118 · ROAS 0,83× (borderline · não vale escalar).</li>
+<li>⛔ <b>ADC008 · ADI176 · ADC020 · lote ADIs (162/164/169)</b> · 0-2 conv em 7 dias · spend acumulado &gt;R$1.000 desperdiçado.</li>
+</ul>
+</div>
+
+<div class="action-box" style="margin-top:24px">
+<h4>🛠️ PLANO ESTRUTURADO PARA LS008</h4>
+
+<h3 style="color:#facc15;margin-top:12px">🏆 Top-shelf ROAS &gt;1× (usar D1)</h3>
+<ul>
+<li>🚀 <b>ADV325</b> (ROAS 3,61×) → CBO manual dedicado com R$300-500/dia</li>
+<li>🚀 <b>ADV320</b> (ROAS 2,00×) → motor top, escalar 3-5×</li>
+<li>🚀 <b>ADI179</b> (ROAS 1,95×) → imagem que virou tarde · dar espaço</li>
+<li>🚀 <b>ADV327</b> (ROAS 1,52×) → sustentado 5 dias, escalar</li>
+<li>🚀 <b>ADC018</b> (ROAS 1,43×) → carrossel novo, escalar</li>
+<li>🚀 <b>ADV333</b> (ROAS 1,28× · remessa 6) → estreou bem, escalar</li>
+<li>🚀 <b>ADI180</b> (ROAS 1,20×) → testar mais</li>
+<li>🚀 <b>ADV291 H16</b> (ROAS 1,12× · 32 conv) → LS006 confirmado, escalar</li>
+</ul>
+
+<h3 style="color:#facc15;margin-top:12px">🏭 Motores de volume (necessários mas ROAS &lt;1)</h3>
+<ul>
+<li>ADV322 (124 conv · ROAS 0,58×) — manter mas <b>testar substitutos</b></li>
+<li>ADV309 (96 conv · ROAS 0,70×) — congelar volume atual</li>
+<li>ADC001 (27 conv · ROAS 0,96×) — carrossel campeão, manter</li>
+<li>ADV321 (14 conv · hook 29,5%) — manter</li>
+<li>ADV290 (7 conv · ROAS 0,99×) — manter</li>
+</ul>
+
+<h3 style="color:#facc15;margin-top:12px">🔧 Estratégia LS008</h3>
+<ul>
+<li>🧪 <b>A/B páginas:</b> forçar split 25/25/25/25 desde D1 · ou usar V1-5 direto como principal (5,48% no LS007)</li>
+<li>🔧 <b>Advantage vs CBO:</b> CBO manual pra criativos-teste alto ROAS (ADV325 lição principal)</li>
+<li>🎬 <b>Remessa 7 nova:</b> preparar 5-8 criativos novos até o D1 pra testar em paralelo</li>
+<li>💎 <b>Acesso Premium 12 meses no order bump principal:</b> 4 vendas na estreia · escalar oferta</li>
+<li>📊 <b>Meta LS008:</b> proposta pra Ana → 600-700 ingressos (mais 20-40% acima do LS007) mantendo CPA médio &lt;R$120</li>
+</ul>
+
+<h3 style="color:#facc15;margin-top:12px">📅 Próximos passos</h3>
+<ul>
+<li>Hoje/segunda: pausar em lote os criativos "não usar"</li>
+<li>Segunda-feira 06/07: começar semana de aulas (D8-D14)</li>
+<li>Manter criativos vencedores rodando durante aulas (aprendizado)</li>
+<li><b>Fechamento 02 em 13/07:</b> checar reembolsos Hotmart · ajustar ROAS final</li>
+<li>Preparar setup LS008 durante semana de aulas</li>
+</ul>
+</div>
+
+</div>
+
+<div style="font-size:11px;color:#475569;text-align:center;margin-top:40px;padding:14px 0;border-top:1px solid rgba(255,255,255,.05)">
+LS007 FECHAMENTO CAPTAÇÃO 01 · gerado 06/07/2026 · Meta Ads (oficial) + Hotmart (receita líquida real) · Marketex / Brito Mídias · <b>próximo fechamento 13/07</b>
+</div>
+
+</body></html>
