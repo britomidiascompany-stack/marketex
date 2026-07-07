@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TPIJA · DEBRIEFING · 01–27/JUN/26</title>
+<style>
+  :root {
+    --bg: #0d0f14;
+    --bg2: #161920;
+    --bg3: #1e2230;
+    --border: #2a2f3e;
+    --txt: #e8eaf0;
+    --muted: #7a8099;
+    --accent: #5b8af5;
+    --green: #3ec97a;
+    --red: #f05252;
+    --yellow: #f5a623;
+    --purple: #a87af5;
+    --teal: #3ecfc7;
+    --card-pad: 1.5rem;
+    --radius: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--txt);
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 2rem 1.5rem 3rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #fff;
+    margin-bottom: 0.35rem;
+  }
+  .header .sub {
+    color: var(--muted);
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.3rem 1rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: #c0c4d4;
+    margin-top: 0.75rem;
+  }
+  .pill.ended { border-color: var(--teal); color: var(--teal); }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin: 2rem 0 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── CARD GRID ── */
+  .grid { display: grid; gap: 1rem; }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--card-pad);
+  }
+  .card-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  .card-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .card-value.red { color: var(--red); }
+  .card-value.green { color: var(--green); }
+  .card-value.yellow { color: var(--yellow); }
+  .card-value.accent { color: var(--accent); }
+  .card-sub {
+    font-size: 0.75rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .card-sub b { color: #c8cad8; font-weight: 600; }
+
+  /* ── EXPOSIÇÃO BLOCK ── */
+  .expo-block {
+    background: var(--bg2);
+    border: 1px solid var(--red);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .expo-main {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .expo-value {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--red);
+    line-height: 1;
+  }
+  .expo-pct {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--red);
+    opacity: 0.75;
+  }
+  .expo-detail {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .expo-detail b { color: #c8cad8; }
+
+  /* ── MÉTRICAS GRID ── */
+  .metric-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    text-align: center;
+  }
+  .metric-card .m-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+  .metric-card .m-val {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+  }
+  .metric-card .m-sub {
+    font-size: 0.68rem;
+    color: var(--muted);
+    margin-top: 0.25rem;
+  }
+  .metric-card.win { border-color: rgba(62,201,122,0.4); }
+  .metric-card.warn { border-color: rgba(245,166,35,0.4); }
+  .metric-card.nd { opacity: 0.6; }
+
+  /* ── FUNIL ── */
+  .funil {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-top: 1rem;
+  }
+  .funil-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 120px;
+    align-items: center;
+    padding: 0.65rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    gap: 1rem;
+  }
+  .funil-row:last-child { border-bottom: none; }
+  .funil-row:nth-child(even) { background: rgba(255,255,255,0.02); }
+  .funil-stage { font-size: 0.76rem; font-weight: 600; color: var(--muted); }
+  .funil-bar-wrap { height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
+  .funil-bar { height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.4s; }
+  .funil-num { font-size: 0.85rem; font-weight: 700; text-align: right; white-space: nowrap; }
+  .funil-conv { font-size: 0.68rem; color: var(--muted); text-align: right; }
+
+  /* ── VENDAS TABLE ── */
+  .vendas-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+  }
+  .vendas-table th {
+    text-align: left;
+    font-size: 0.67rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    padding: 0.5rem 0.75rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .vendas-table th.r { text-align: right; }
+  .vendas-table td {
+    padding: 0.65rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--txt);
+  }
+  .vendas-table td.r { text-align: right; font-variant-numeric: tabular-nums; }
+  .vendas-table tr:last-child td { border-bottom: none; }
+  .vendas-table .total-row td {
+    font-weight: 700;
+    color: #fff;
+    border-top: 2px solid var(--border);
+    border-bottom: none;
+    background: rgba(255,255,255,0.03);
+  }
+  .tag {
+    display: inline-block;
+    background: rgba(91,138,245,0.15);
+    color: var(--accent);
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 0.1rem 0.4rem;
+    text-transform: uppercase;
+    margin-left: 0.4rem;
+  }
+  .tag.bump { background: rgba(62,201,122,0.1); color: var(--green); }
+  .tag.front { background: rgba(91,138,245,0.15); color: var(--accent); }
+
+  /* ── MENTORIA BOX ── */
+  .mentoria-box {
+    background: rgba(168,122,245,0.08);
+    border: 1px solid rgba(168,122,245,0.3);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 0.75rem;
+  }
+  .mentoria-box .m-left { font-size: 0.82rem; color: var(--txt); }
+  .mentoria-box .m-left b { color: var(--purple); }
+  .mentoria-box .m-right {
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ── NOTAS ── */
+  .note {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.6rem 0.85rem;
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+  }
+  .note b { color: #a0a4b8; }
+
+  /* ── FOOTER ── */
+  footer {
+    margin-top: 3rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 640px) {
+    .grid-3 { grid-template-columns: 1fr 1fr; }
+    .grid-4 { grid-template-columns: 1fr 1fr; }
+    .funil-row { grid-template-columns: 140px 1fr 100px; }
+    .card-value { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>TPIJA · DEBRIEFING</h1>
+  <div class="sub">Imersão Jornada da Autoridade · Lançamento Pago Captação · Meta Ads</div>
+  <span class="pill ended">✓ CAPTAÇÃO ENCERRADA · 01/06/26 – 27/06/26</span>
+</div>
+
+<!-- INVESTIMENTO -->
+<div class="section-title">Investimento</div>
+<div class="grid grid-3">
+  <div class="card">
+    <div class="card-label">Invest bruto</div>
+    <div class="card-value">R$ 11.833</div>
+    <div class="card-sub">R$11.833,20 · campanhas TPIJA<br><b>01/06 → 27/06/26</b></div>
+  </div>
+  <div class="card">
+    <div class="card-label">Invest c/ imposto</div>
+    <div class="card-value accent">R$ 13.470</div>
+    <div class="card-sub">R$11.833 × 1,1383<br><b>+R$1.636 de imposto Meta (13,83%)</b></div>
+  </div>
+  <div class="card">
+    <div class="card-label">CPA (invest c/imp ÷ ingressos)</div>
+    <div class="card-value yellow">R$ 102</div>
+    <div class="card-sub">R$13.470 ÷ 132 ingressos<br><b>Sem imp: R$90 · Pixel: R$99</b></div>
+  </div>
+</div>
+
+<!-- RECEITA -->
+<div class="section-title">Receita</div>
+<div class="grid grid-3">
+  <div class="card">
+    <div class="card-label">Receita bruta</div>
+    <div class="card-value green">R$ 7.761</div>
+    <div class="card-sub">R$7.761,35 · Hotmart bruta<br><b>3 produtos TPIJA · sem MED</b></div>
+  </div>
+  <div class="card">
+    <div class="card-label">Receita líquida</div>
+    <div class="card-value green">R$ 7.161</div>
+    <div class="card-sub">R$7.161,49 após taxa Hotmart<br><b>−R$491,55 taxa plataforma</b></div>
+  </div>
+  <div class="card">
+    <div class="card-label">ROAS</div>
+    <div class="card-value red">0,58×</div>
+    <div class="card-sub">R$7.761 ÷ R$13.470 c/imp<br><b>Sem imp: 0,66× · Líq: 0,53×</b></div>
+  </div>
+</div>
+
+<!-- EXPOSIÇÃO -->
+<div class="section-title">Exposição</div>
+<div class="expo-block">
+  <div>
+    <div class="expo-main">
+      <span class="expo-value">−R$ 5.708</span>
+      <span class="expo-pct">−42,4%</span>
+    </div>
+    <div class="expo-detail" style="margin-top:0.5rem">
+      Receita bruta <b>R$7.761</b> − Invest c/imp <b>R$13.470</b> = <b>−R$5.708,38</b>
+    </div>
+  </div>
+  <div style="text-align:right">
+    <div class="expo-detail">Ticket médio bruto</div>
+    <div style="font-size:1.4rem;font-weight:700;color:#c8cad8">R$ 58,80</div>
+    <div class="expo-detail">R$7.761 ÷ 132 ingressos</div>
+  </div>
+</div>
+
+<!-- MÉTRICAS META -->
+<div class="section-title">Métricas Meta Ads · 01–27/Jun/26</div>
+<div class="grid grid-4">
+  <div class="metric-card">
+    <div class="m-label">Impressões</div>
+    <div class="m-val">106.756</div>
+    <div class="m-sub">Reach 52.607 · Freq 2,03×</div>
+  </div>
+  <div class="metric-card warn">
+    <div class="m-label">CPM</div>
+    <div class="m-val">R$ 111</div>
+    <div class="m-sub">R$110,84 por mil impressões</div>
+  </div>
+  <div class="metric-card win">
+    <div class="m-label">CTR</div>
+    <div class="m-val">4,17%</div>
+    <div class="m-sub">4.450 cliques totais</div>
+  </div>
+  <div class="metric-card">
+    <div class="m-label">Cliques LP</div>
+    <div class="m-val">2.418</div>
+    <div class="m-sub">Link clicks · Conv. 54,3%</div>
+  </div>
+</div>
+
+<div class="grid grid-4" style="margin-top:1rem">
+  <div class="metric-card nd">
+    <div class="m-label">Connect Rate</div>
+    <div class="m-val" style="color:var(--muted)">N/D</div>
+    <div class="m-sub">LP Views indisponível<br>nível campanha</div>
+  </div>
+  <div class="metric-card win">
+    <div class="m-label">Conv. Pág → Venda</div>
+    <div class="m-val">5,62%</div>
+    <div class="m-sub">136 compras pixel ÷ 2.418 LC</div>
+  </div>
+  <div class="metric-card nd">
+    <div class="m-label">Conv. Checkout → Venda</div>
+    <div class="m-val" style="color:var(--muted)">N/D</div>
+    <div class="m-sub">Dados de checkout<br>não rastreados</div>
+  </div>
+  <div class="metric-card">
+    <div class="m-label">Pixel Purchases</div>
+    <div class="m-val">136</div>
+    <div class="m-sub">Compras atribuídas Meta<br>vs 132 Hotmart confirmadas</div>
+  </div>
+</div>
+
+<!-- FUNIL -->
+<div class="section-title">Funil de Conversão</div>
+<div class="funil">
+  <div class="funil-row">
+    <div class="funil-stage">Invest c/ imposto</div>
+    <div class="funil-bar-wrap"><div class="funil-bar" style="width:100%;background:var(--accent)"></div></div>
+    <div>
+      <div class="funil-num" style="color:var(--accent)">R$ 13.470</div>
+    </div>
+  </div>
+  <div class="funil-row">
+    <div class="funil-stage">Impressões</div>
+    <div class="funil-bar-wrap"><div class="funil-bar" style="width:100%;background:var(--muted)"></div></div>
+    <div>
+      <div class="funil-num">106.756</div>
+      <div class="funil-conv">CPM R$111</div>
+    </div>
+  </div>
+  <div class="funil-row">
+    <div class="funil-stage">Cliques totais</div>
+    <div class="funil-bar-wrap"><div class="funil-bar" style="width:72%;background:var(--accent)"></div></div>
+    <div>
+      <div class="funil-num">4.450</div>
+      <div class="funil-conv">CTR 4,17%</div>
+    </div>
+  </div>
+  <div class="funil-row">
+    <div class="funil-stage">Cliques LP (Link)</div>
+    <div class="funil-bar-wrap"><div class="funil-bar" style="width:60%;background:var(--accent)"></div></div>
+    <div>
+      <div class="funil-num">2.418</div>
+      <div class="funil-conv">Conv. LP 54,3%</div>
+    </div>
+  </div>
+  <div class="funil-row">
+    <div class="funil-stage">Compras pixel</div>
+    <div class="funil-bar-wrap"><div class="funil-bar" style="width:20%;background:var(--green)"></div></div>
+    <div>
+      <div class="funil-num" style="color:var(--green)">136</div>
+      <div class="funil-conv">Conv. 5,62%</div>
+    </div>
+  </div>
+  <div class="funil-row">
+    <div class="funil-stage">Ingressos Hotmart</div>
+    <div class="funil-bar-wrap"><div class="funil-bar" style="width:19%;background:var(--green)"></div></div>
+    <div>
+      <div class="funil-num" style="color:var(--green)">132</div>
+      <div class="funil-conv">Confirmados PAID</div>
+    </div>
+  </div>
+</div>
+
+<!-- VENDAS POR PRODUTO -->
+<div class="section-title">Vendas por Produto · Hotmart PAID (01–27/Jun/26)</div>
+<div class="card">
+  <table class="vendas-table">
+    <thead>
+      <tr>
+        <th>Produto</th>
+        <th class="r">Compradores</th>
+        <th class="r">Preço</th>
+        <th class="r">Receita Bruta</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Imersão Jornada da Autoridade
+          <span class="tag front">FRONT</span>
+        </td>
+        <td class="r">132</td>
+        <td class="r">R$ 27,00</td>
+        <td class="r">R$ 3.564,00*</td>
+      </tr>
+      <tr>
+        <td>
+          Gravação 1 Ano da Jornada
+          <span class="tag bump">ORDER BUMP</span>
+        </td>
+        <td class="r">36</td>
+        <td class="r">R$ 97,00</td>
+        <td class="r">R$ 3.492,00*</td>
+      </tr>
+      <tr>
+        <td>
+          Pitch Implacável
+          <span class="tag bump">ORDER BUMP</span>
+        </td>
+        <td class="r">36</td>
+        <td class="r">R$ 17,00</td>
+        <td class="r">R$ 612,00*</td>
+      </tr>
+      <tr class="total-row">
+        <td>TOTAL</td>
+        <td class="r">132 ingressos</td>
+        <td class="r"></td>
+        <td class="r">R$ 7.761,35</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note" style="margin-top:0.75rem">
+    * Receita estimada por preço fixo. <b>Bruta real Hotmart: R$7.761,35</b> (inclui variações de preço).
+    Taxa Hotmart: R$491,55 → Líquida: <b>R$7.161,49</b>.
+    Contagem por compradores únicos: cada ingresso conta como 1 independente dos order bumps.
+    Excluídos 4 pedidos "MED" (produto diferente).
+  </div>
+</div>
+
+<!-- MENTORIA -->
+<div class="mentoria-box">
+  <div class="m-left">
+    <b>14 vendas de Mentoria</b> (AIM START) · R$8.000 cada
+  </div>
+  <div class="m-right">
+    Receita da mentoria não incluída no retorno de captação.<br>
+    Vendas orgânicas / relacionamento gerado pelo evento.
+  </div>
+</div>
+
+<!-- NOTAS FINAIS -->
+<div class="section-title">Observações</div>
+<div class="note">
+  <b>Connect Rate:</b> Landing Page Views não está disponível no nível campanha via API Meta. Aproximação via thruplay:
+  4.907 thruplays ÷ 106.756 impressões = <b>4,6% thruplay rate</b> (apenas campanhas com vídeo ativo).
+  3-second plays: 16.706 (15,6% das impressões).
+</div>
+<div class="note" style="margin-top:0.5rem">
+  <b>Pixel vs Hotmart:</b> Meta atribuiu 136 compras (pixel omni_purchase). Hotmart registrou 136 pedidos PAID totais (132 sem MED).
+  Diferença de 4 pode ser atribuição cruzada ou pedidos MED.
+</div>
+<div class="note" style="margin-top:0.5rem">
+  <b>Conv. Pág→Venda:</b> 136 pixel purchases ÷ 2.418 link clicks = 5,62%.
+  <b>Conv. LP:</b> 2.418 link clicks ÷ 4.450 cliques totais = 54,3%.
+  <b>Conv. Checkout→Venda:</b> N/D — dados de inicialização de checkout não rastreados.
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    Gerado 07/07/26 · Período 01/06/26–27/06/26
+  </div>
+  <div>
+    Exposição: R$7.761,35 − R$13.469,73 = −R$5.708,38
+  </div>
+  <div>
+    Invest bruto: R$11.833,20 · Campanhas TPIJA (C4 TAMARA DAMARES)
+  </div>
+</footer>
+
+</body>
+</html>
