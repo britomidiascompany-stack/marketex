@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini Relatório — Criativos Aplicação | Julho 2026</title>
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #e2e5ea;
+    --text-primary: #0d1117;
+    --text-secondary: #5b6470;
+    --text-muted: #8e96a3;
+    --accent: #1a56db;
+    --accent-light: #e8effe;
+    --green: #0a7c5a;
+    --green-light: #d1fae5;
+    --amber: #b45309;
+    --amber-light: #fef3c7;
+    --red: #be123c;
+    --red-light: #fee2e2;
+    --c1: #2563eb;
+    --c2: #16a34a;
+    --c3: #ca8a04;
+    --bar-radius: 4px;
+    --radius: 12px;
+    --shadow: 0 1px 4px rgba(0,0,0,.07), 0 4px 16px rgba(0,0,0,.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --surface2: #21262d;
+      --border: #30363d;
+      --text-primary: #e6edf3;
+      --text-secondary: #8b949e;
+      --text-muted: #6e7681;
+      --accent: #58a6ff;
+      --accent-light: #0d2044;
+      --green: #3fb950;
+      --green-light: #0d2a1a;
+      --amber: #f0b429;
+      --amber-light: #2d2000;
+      --red: #f85149;
+      --red-light: #2d0f0f;
+      --c1: #60a5fa;
+      --c2: #4ade80;
+      --c3: #fbbf24;
+      --shadow: 0 1px 4px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0d1117; --surface: #161b22; --surface2: #21262d; --border: #30363d;
+    --text-primary: #e6edf3; --text-secondary: #8b949e; --text-muted: #6e7681;
+    --accent: #58a6ff; --accent-light: #0d2044; --green: #3fb950; --green-light: #0d2a1a;
+    --amber: #f0b429; --amber-light: #2d2000; --red: #f85149; --red-light: #2d0f0f;
+    --c1: #60a5fa; --c2: #4ade80; --c3: #fbbf24;
+    --shadow: 0 1px 4px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
+  }
+  :root[data-theme="light"] {
+    --bg: #f7f8fa; --surface: #ffffff; --surface2: #f0f2f5; --border: #e2e5ea;
+    --text-primary: #0d1117; --text-secondary: #5b6470; --text-muted: #8e96a3;
+    --accent: #1a56db; --accent-light: #e8effe; --green: #0a7c5a; --green-light: #d1fae5;
+    --amber: #b45309; --amber-light: #fef3c7; --red: #be123c; --red-light: #fee2e2;
+    --c1: #2563eb; --c2: #16a34a; --c3: #ca8a04;
+    --shadow: 0 1px 4px rgba(0,0,0,.07), 0 4px 16px rgba(0,0,0,.05);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text-primary); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.5; }
+  .page { max-width: 860px; margin: 0 auto; padding: 32px 20px 60px; }
+
+  /* Header */
+  .header { margin-bottom: 32px; }
+  .header-tag { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .header h1 { font-size: 22px; font-weight: 700; color: var(--text-primary); line-height: 1.2; }
+  .header-meta { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+
+  /* Stat row */
+  .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
+  .stat-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); margin-bottom: 6px; }
+  .stat-value { font-size: 26px; font-weight: 700; color: var(--text-primary); line-height: 1; }
+  .stat-sub { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+  /* Section */
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+
+  /* Creative cards */
+  .creative-grid { display: flex; flex-direction: column; gap: 14px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+  .card.winner { border-color: var(--green); }
+  .card.winner::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--green); }
+  .card.secondary::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--c3); }
+  .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+  .card-name { font-size: 13px; font-weight: 700; color: var(--text-primary); word-break: break-word; flex: 1; }
+  .badge { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; }
+  .badge-winner { background: var(--green-light); color: var(--green); }
+  .badge-ativo { background: var(--accent-light); color: var(--accent); }
+  .badge-watch { background: var(--amber-light); color: var(--amber); }
+
+  .card-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+  .metric { background: var(--surface2); border-radius: 8px; padding: 10px 12px; }
+  .metric-label { font-size: 10px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 3px; }
+  .metric-value { font-size: 17px; font-weight: 700; color: var(--text-primary); }
+  .metric-sub { font-size: 10px; color: var(--text-muted); margin-top: 1px; }
+  .metric-value.good { color: var(--green); }
+  .metric-value.warn { color: var(--amber); }
+
+  /* Bar chart */
+  .bar-section { background: var(--surface2); border-radius: 8px; padding: 12px 14px; margin-bottom: 12px; }
+  .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .bar-row:last-child { margin-bottom: 0; }
+  .bar-label { font-size: 11px; color: var(--text-secondary); width: 90px; flex-shrink: 0; text-align: right; }
+  .bar-track { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; transition: width .4s ease; }
+  .bar-val { font-size: 11px; font-weight: 600; color: var(--text-primary); width: 42px; text-align: right; }
+
+  /* Lead quality pills */
+  .quality-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; border: 1px solid var(--border); color: var(--text-secondary); }
+  .pill.pra-ontem { background: var(--red-light); color: var(--red); border-color: var(--red); }
+  .pill.alta { background: var(--amber-light); color: var(--amber); border-color: var(--amber); }
+  .pill.renda { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
+  .pill.score { background: var(--green-light); color: var(--green); border-color: var(--green); }
+
+  .card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1px solid var(--border); margin-top: 4px; }
+  .acum-info { font-size: 11px; color: var(--text-muted); }
+  .acum-info strong { color: var(--text-secondary); }
+  .drive-link { font-size: 11px; font-weight: 600; color: var(--accent); text-decoration: none; display: flex; align-items: center; gap: 4px; }
+  .drive-link:hover { text-decoration: underline; }
+
+  /* Hook rate bar */
+  .hook-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+  .hook-label { font-size: 10px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; }
+  .hook-track { flex: 1; height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .hook-fill { height: 100%; border-radius: 3px; background: var(--c3); }
+  .hook-val { font-size: 10px; font-weight: 700; color: var(--text-secondary); white-space: nowrap; }
+
+  /* Insight box */
+  .insight { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 20px; box-shadow: var(--shadow); }
+  .insight-icon { font-size: 18px; margin-bottom: 8px; }
+  .insight p { font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+  .insight strong { color: var(--text-primary); }
+
+  @media (max-width: 600px) {
+    .stat-row { grid-template-columns: repeat(2, 1fr); }
+    .card-metrics { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-tag">MPD — Tráfego Pago · Aplicação</div>
+    <h1>Mini Relatório de Criativos</h1>
+    <div class="header-meta">Período do funil: 6–12 Jul 2026 &nbsp;·&nbsp; Leads YAY Forms: julho/2026 (tráfego pago) &nbsp;·&nbsp; Gerado em 08/07/2026</div>
+  </div>
+
+  <!-- KPIs globais -->
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-label">Invest. Período</div>
+      <div class="stat-value">R$873</div>
+      <div class="stat-sub">ADC006 + ADV78 ativos</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Agend. Período</div>
+      <div class="stat-value">5</div>
+      <div class="stat-sub">4 ADC006 · 1 ADV78</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">CPA Melhor</div>
+      <div class="stat-value" style="color:var(--green)">R$95</div>
+      <div class="stat-sub">ADC006 — O Jeito de Cobrar</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Leads Qualif.</div>
+      <div class="stat-value">63</div>
+      <div class="stat-sub">completed · tráf. pago · julho</div>
+    </div>
+  </div>
+
+  <!-- Insight -->
+  <div class="insight">
+    <div class="insight-icon">💡</div>
+    <p>
+      <strong>ADC006 — "O Jeito de Cobrar Está Errado"</strong> domina o período em todos os critérios:
+      menor CPA (R$95 vs R$478 do ADV78), mais leads qualificados (34 vs 27), e melhor score médio por lead (3.2 vs 2.8).
+      Mesmo sendo um criativo recente (R$2.4k investido acumulado), já entrega o <strong>mesmo CPA acumulado do ADV78</strong>,
+      que tem R$15.5k investidos. O ADV78 segue relevante pelo histórico de 110 agendamentos, mas precisa de atenção no período atual.
+    </p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Criativos com investimento ativo no período</div>
+    <div class="creative-grid">
+
+      <!-- ADC006 — WINNER -->
+      <div class="card winner">
+        <div class="card-header">
+          <div class="card-name">ADC006 — O JEITO DE COBRAR ESTÁ ERRADO</div>
+          <span class="badge badge-winner">⭐ Melhor CPA</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric">
+            <div class="metric-label">CPA Período</div>
+            <div class="metric-value good">R$95</div>
+            <div class="metric-sub">4 agend. / R$381 invest.</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Leads Julho</div>
+            <div class="metric-value">34</div>
+            <div class="metric-sub">tráfego pago · completed</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Score Médio</div>
+            <div class="metric-value good">3.2</div>
+            <div class="metric-sub">renda + urgência</div>
+          </div>
+        </div>
+
+        <div class="bar-section">
+          <div class="bar-row">
+            <span class="bar-label">Pra ontem</span>
+            <div class="bar-track"><div class="bar-fill" style="width:6%; background:var(--red)"></div></div>
+            <span class="bar-val">2</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Alta urgência</span>
+            <div class="bar-track"><div class="bar-fill" style="width:59%; background:var(--c3)"></div></div>
+            <span class="bar-val">20</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Renda ≥5k</span>
+            <div class="bar-track"><div class="bar-fill" style="width:74%; background:var(--c1)"></div></div>
+            <span class="bar-val">25</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Renda ≥8k</span>
+            <div class="bar-track"><div class="bar-fill" style="width:44%; background:var(--c2)"></div></div>
+            <span class="bar-val">15</span>
+          </div>
+        </div>
+
+        <div class="quality-row">
+          <span class="pill pra-ontem">2× Pra ontem</span>
+          <span class="pill alta">20× Alta urgência</span>
+          <span class="pill renda">25 com renda ok</span>
+          <span class="pill score">Score 3.2 / 6</span>
+        </div>
+
+        <div class="card-footer">
+          <div class="acum-info">Acumulado: <strong>R$2.441</strong> invest · <strong>25</strong> agend · <strong>R$97</strong> CPA</div>
+          <a class="drive-link" href="https://drive.google.com/drive/folders/1jVBbLlZlMtylmRa91y0yFSAj3hvRcWXx" target="_blank">
+            📁 Abrir no Drive →
+          </a>
+        </div>
+      </div>
+
+      <!-- ADV78 -->
+      <div class="card secondary">
+        <div class="card-header">
+          <div class="card-name">ADV78 — ANOS 80 <span style="font-weight:400;color:var(--text-muted)">_1.17</span></div>
+          <span class="badge badge-ativo">ATIVO</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric">
+            <div class="metric-label">CPA Período</div>
+            <div class="metric-value warn">R$478</div>
+            <div class="metric-sub">1 agend. / R$478 invest.</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Leads Julho</div>
+            <div class="metric-value">27</div>
+            <div class="metric-sub">tráfego pago · completed</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Score Médio</div>
+            <div class="metric-value">2.8</div>
+            <div class="metric-sub">renda + urgência</div>
+          </div>
+        </div>
+
+        <div class="bar-section">
+          <div class="bar-row">
+            <span class="bar-label">Pra ontem</span>
+            <div class="bar-track"><div class="bar-fill" style="width:22%; background:var(--red)"></div></div>
+            <span class="bar-val">6</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Alta urgência</span>
+            <div class="bar-track"><div class="bar-fill" style="width:30%; background:var(--c3)"></div></div>
+            <span class="bar-val">8</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Renda ≥5k</span>
+            <div class="bar-track"><div class="bar-fill" style="width:59%; background:var(--c1)"></div></div>
+            <span class="bar-val">16</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Renda ≥8k</span>
+            <div class="bar-track"><div class="bar-fill" style="width:33%; background:var(--c2)"></div></div>
+            <span class="bar-val">9</span>
+          </div>
+        </div>
+
+        <div class="hook-row">
+          <span class="hook-label">Hook Rate</span>
+          <div class="hook-track"><div class="hook-fill" style="width:31%"></div></div>
+          <span class="hook-val">31.0%</span>
+        </div>
+
+        <div class="card-footer">
+          <div class="acum-info">Acumulado: <strong>R$15.551</strong> invest · <strong>110</strong> agend · <strong>R$141</strong> CPA</div>
+          <a class="drive-link" href="https://drive.google.com/open?id=12qt-bO2m_g76wofzVmMlslegGyDpaLc9&usp=drive_copy" target="_blank">
+            🎬 Abrir no Drive →
+          </a>
+        </div>
+      </div>
+
+      <!-- ADV81 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-name">ADV81 — SEU CLIENTES TE INDICAM <span style="font-weight:400;color:var(--text-muted)">_1.08</span></div>
+          <span class="badge badge-watch">⚠️ Sem agend. no período</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric">
+            <div class="metric-label">CPA Período</div>
+            <div class="metric-value" style="color:var(--text-muted)">—</div>
+            <div class="metric-sub">0 agend. / R$13,95 invest.</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">CPA Acumulado</div>
+            <div class="metric-value">R$205</div>
+            <div class="metric-sub">8 agend. histórico</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Hook Rate</div>
+            <div class="metric-value">17,8%</div>
+            <div class="metric-sub">baixo vs benchmark</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="acum-info">Invest acum: <strong>R$1.644</strong> · Pouco orçamento no período atual</div>
+          <a class="drive-link" href="https://drive.google.com/open?id=1B4T8THlGra_6oLpmAaVbXzDmfIP8sPNt&usp=drive_copy" target="_blank">
+            🎬 Abrir no Drive →
+          </a>
+        </div>
+      </div>
+
+      <!-- ADV77 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-name">ADV77 — TRABALHA MUITO <span style="font-weight:400;color:var(--text-muted)">_1.24</span></div>
+          <span class="badge badge-ativo">ATIVO</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric">
+            <div class="metric-label">Invest Período</div>
+            <div class="metric-value" style="color:var(--text-muted)">R$0,12</div>
+            <div class="metric-sub">sem entrega relevante</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Hook Rate</div>
+            <div class="metric-value good">40,4%</div>
+            <div class="metric-sub">melhor hook do portfólio</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Agend. Acum.</div>
+            <div class="metric-value" style="color:var(--text-muted)">0</div>
+            <div class="metric-sub">sem conversão histórica</div>
+          </div>
+        </div>
+        <div class="hook-row">
+          <span class="hook-label">Hook Rate</span>
+          <div class="hook-track"><div class="hook-fill" style="width:40%"></div></div>
+          <span class="hook-val">40,4%</span>
+        </div>
+        <div class="card-footer">
+          <div class="acum-info">Invest acum: <strong>R$1.883</strong> · Hook alto mas sem conversão — requer revisão de CTA</div>
+          <a class="drive-link" href="https://drive.google.com/open?id=1ft6zWucE4964NPNlt6kqKWJYciD0JoDE&usp=drive_copy" target="_blank">
+            🎬 Abrir no Drive →
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Recomendações -->
+  <div class="section">
+    <div class="section-title">Recomendações rápidas</div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="insight" style="padding:14px 16px;">
+        <p>🟢 <strong>ADC006 — escalar.</strong> CPA de R$95 com qualidade de lead acima da média. Aumentar budget gradual (20–30%) e testar novas variações desse ângulo.</p>
+      </div>
+      <div class="insight" style="padding:14px 16px;">
+        <p>🟡 <strong>ADV78 — monitorar.</strong> Historicamente o melhor criativo (110 agend, CPA acum R$141), mas o período atual está com CPA inflado (R$478). Pode ser problema de audiência saturando. Avaliar nova variação do mesmo conceito.</p>
+      </div>
+      <div class="insight" style="padding:14px 16px;">
+        <p>🔴 <strong>ADV77 — investigar.</strong> Hook rate de 40% (melhor do portfólio) mas zero conversão acumulada. Há uma quebra entre gancho e oferta — revisar CTA e landing page.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="font-size:11px;color:var(--text-muted);text-align:center;padding-top:20px;border-top:1px solid var(--border);">
+    Fonte: Funil de Aplicação 2026 - OFICIAL.xlsx · YAY Forms responses 08/07/2026 · Período funil: 06–12 Jul 2026
+  </div>
+
+</div>
+</body>
+</html>
