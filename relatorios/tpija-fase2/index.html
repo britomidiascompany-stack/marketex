@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TPIJA008 · FASE 2 · 27/JUN–14/JUL/26</title>
+<style>
+  :root {
+    --bg: #0d0f14;
+    --bg2: #161920;
+    --bg3: #1e2230;
+    --border: #2a2f3e;
+    --txt: #e8eaf0;
+    --muted: #7a8099;
+    --accent: #5b8af5;
+    --green: #3ec97a;
+    --red: #f05252;
+    --yellow: #f5a623;
+    --purple: #a87af5;
+    --teal: #3ecfc7;
+    --radius: 10px;
+    --card-pad: 1.5rem;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--txt);
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 2rem 1.5rem 3rem;
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .header { text-align: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+  .header h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: 0.08em; color: #fff; margin-bottom: 0.35rem; }
+  .header .sub { color: var(--muted); font-size: 0.82rem; letter-spacing: 0.04em; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    border: 1px solid var(--border); border-radius: 999px;
+    padding: 0.3rem 1rem; font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.06em; color: #c0c4d4; margin-top: 0.75rem;
+    background: rgba(255,255,255,0.05);
+  }
+  .pill.active { border-color: var(--yellow); color: var(--yellow); }
+
+  /* SECTION */
+  .section-title {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em;
+    color: var(--muted); text-transform: uppercase;
+    margin: 2rem 0 0.75rem;
+    padding-bottom: 0.4rem; border-bottom: 1px solid var(--border);
+  }
+
+  /* CARDS */
+  .grid { display: grid; gap: 1rem; }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+  .card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: var(--card-pad);
+  }
+  .card-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+  .card-value { font-size: 2rem; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 0.3rem; }
+  .card-value.red { color: var(--red); }
+  .card-value.green { color: var(--green); }
+  .card-value.yellow { color: var(--yellow); }
+  .card-value.accent { color: var(--accent); }
+  .card-sub { font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+  .card-sub b { color: #c8cad8; font-weight: 600; }
+
+  /* EXPOSIÇÃO */
+  .expo-block {
+    background: var(--bg2); border: 1px solid var(--red);
+    border-radius: var(--radius); padding: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem; margin-top: 1rem;
+  }
+  .expo-value { font-size: 2.4rem; font-weight: 800; color: var(--red); line-height: 1; }
+  .expo-pct { font-size: 1.1rem; font-weight: 600; color: var(--red); opacity: 0.75; }
+  .expo-detail { font-size: 0.78rem; color: var(--muted); margin-top: 0.4rem; }
+  .expo-detail b { color: #c8cad8; }
+
+  /* MÉTRICAS */
+  .metric-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1rem 1.25rem; text-align: center;
+  }
+  .metric-card .m-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.4rem; }
+  .metric-card .m-val { font-size: 1.4rem; font-weight: 700; color: #fff; line-height: 1; }
+  .metric-card .m-sub { font-size: 0.68rem; color: var(--muted); margin-top: 0.25rem; }
+  .metric-card.win { border-color: rgba(62,201,122,0.4); }
+  .metric-card.warn { border-color: rgba(245,166,35,0.4); }
+
+  /* FUNIL */
+  .funil { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-top: 1rem; }
+  .funil-row { display: grid; grid-template-columns: 180px 1fr 120px; align-items: center; padding: 0.65rem 1.25rem; border-bottom: 1px solid var(--border); gap: 1rem; }
+  .funil-row:last-child { border-bottom: none; }
+  .funil-row:nth-child(even) { background: rgba(255,255,255,0.02); }
+  .funil-stage { font-size: 0.76rem; font-weight: 600; color: var(--muted); }
+  .funil-bar-wrap { height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
+  .funil-bar { height: 100%; border-radius: 3px; }
+  .funil-num { font-size: 0.85rem; font-weight: 700; text-align: right; white-space: nowrap; }
+  .funil-conv { font-size: 0.68rem; color: var(--muted); text-align: right; }
+
+  /* TABLE DAY BY DAY */
+  .table-wrap { overflow-x: auto; margin-top: 1rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.78rem; white-space: nowrap; }
+  thead th {
+    font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--muted); padding: 0.5rem 0.75rem;
+    border-bottom: 2px solid var(--border); background: var(--bg2); text-align: right;
+  }
+  thead th:first-child { text-align: left; }
+  thead th.sep { border-left: 2px solid var(--border); }
+  tbody td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); color: var(--txt); text-align: right; }
+  tbody td:first-child { text-align: left; font-weight: 600; color: #c8cad8; }
+  tbody td.sep { border-left: 2px solid var(--border); }
+  tbody tr:hover { background: rgba(255,255,255,0.03); }
+  tbody tr:last-child td { border-bottom: none; }
+  .num { font-variant-numeric: tabular-nums; }
+  .win-txt { color: var(--green); }
+  .warn-txt { color: var(--yellow); }
+  .lose-txt { color: var(--red); }
+  .muted-txt { color: var(--muted); }
+  tfoot td { font-weight: 700; color: #fff; border-top: 2px solid var(--border); background: rgba(255,255,255,0.03); padding: 0.6rem 0.75rem; text-align: right; }
+  tfoot td:first-child { text-align: left; }
+
+  /* PRODUTOS */
+  .prod-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  .prod-table th { text-align: left; font-size: 0.67rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); padding: 0.5rem 0.75rem; border-bottom: 2px solid var(--border); }
+  .prod-table th.r { text-align: right; }
+  .prod-table td { padding: 0.65rem 0.75rem; border-bottom: 1px solid var(--border); }
+  .prod-table td.r { text-align: right; }
+  .prod-table tr:last-child td { border-bottom: none; }
+  .prod-table .total-row td { font-weight: 700; color: #fff; border-top: 2px solid var(--border); border-bottom: none; background: rgba(255,255,255,0.03); }
+  .tag { display: inline-block; border-radius: 4px; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.06em; padding: 0.1rem 0.4rem; text-transform: uppercase; margin-left: 0.4rem; }
+  .tag.bump { background: rgba(62,201,122,0.1); color: var(--green); }
+  .tag.front { background: rgba(91,138,245,0.15); color: var(--accent); }
+
+  .note { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 6px; padding: 0.6rem 0.85rem; font-size: 0.72rem; color: var(--muted); margin-top: 0.5rem; }
+  .note b { color: #a0a4b8; }
+
+  footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; font-size: 0.7rem; color: var(--muted); }
+
+  @media (max-width: 680px) {
+    .grid-3 { grid-template-columns: 1fr 1fr; }
+    .grid-4 { grid-template-columns: 1fr 1fr; }
+    .card-value { font-size: 1.6rem; }
+    .funil-row { grid-template-columns: 130px 1fr 90px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>TPIJA008 · FASE 2</h1>
+  <div class="sub">Imersão Jornada da Autoridade · Meta Ads · Hotmart</div>
+  <span class="pill active">⚡ 27/JUN/26 – 14/JUL/26</span>
+</div>
+
+<!-- INVESTIMENTO -->
+<div class="section-title">Investimento</div>
+<div class="grid grid-3">
+  <div class="card">
+    <div class="card-label">Invest bruto</div>
+    <div class="card-value">R$ 11.952</div>
+    <div class="card-sub">R$11.951,86 · campanhas TPIJA<br><b>4 campanhas ativas · 18 dias</b></div>
+  </div>
+  <div class="card">
+    <div class="card-label">Invest c/ imposto</div>
+    <div class="card-value accent">R$ 13.605</div>
+    <div class="card-sub">R$11.952 × 1,1383<br><b>+R$1.653 imposto Meta (13,83%)</b></div>
+  </div>
+  <div class="card">
+    <div class="card-label">CPA (inv c/imp ÷ ingressos)</div>
+    <div class="card-value yellow">R$ 91</div>
+    <div class="card-sub">R$13.605 ÷ 149 ingressos<br><b>Sem imp: R$80 · Pixel: R$97</b></div>
+  </div>
+</div>
+
+<!-- RECEITA -->
+<div class="section-title">Receita</div>
+<div class="grid grid-3">
+  <div class="card">
+    <div class="card-label">Receita bruta</div>
+    <div class="card-value green">R$ 8.537</div>
+    <div class="card-sub">R$8.536,95 · Hotmart bruta<br><b>149 ingressos + order bumps</b></div>
+  </div>
+  <div class="card">
+    <div class="card-label">Receita líquida</div>
+    <div class="card-value green">R$ 7.843</div>
+    <div class="card-sub">R$7.842,95 após taxa Hotmart<br><b>−R$547,36 taxa plataforma</b></div>
+  </div>
+  <div class="card">
+    <div class="card-label">ROAS</div>
+    <div class="card-value red">0,63×</div>
+    <div class="card-sub">R$8.537 ÷ R$13.605 c/imp<br><b>Sem imp: 0,71× · Líq: 0,58×</b></div>
+  </div>
+</div>
+
+<!-- EXPOSIÇÃO -->
+<div class="section-title">Exposição</div>
+<div class="expo-block">
+  <div>
+    <div style="display:flex;align-items:baseline;gap:0.75rem;flex-wrap:wrap">
+      <span class="expo-value">−R$ 5.068</span>
+      <span class="expo-pct">−37,2%</span>
+    </div>
+    <div class="expo-detail">
+      Receita bruta <b>R$8.537</b> − Invest c/imp <b>R$13.605</b> = <b>−R$5.067,85</b>
+    </div>
+  </div>
+  <div style="text-align:right">
+    <div style="font-size:0.7rem;color:var(--muted)">Ticket médio bruto</div>
+    <div style="font-size:1.4rem;font-weight:700;color:#c8cad8">R$ 57,29</div>
+    <div style="font-size:0.7rem;color:var(--muted)">R$8.537 ÷ 149 ingressos</div>
+  </div>
+</div>
+
+<!-- MÉTRICAS META -->
+<div class="section-title">Métricas Meta Ads · 27/Jun–14/Jul/26</div>
+<div class="grid grid-4">
+  <div class="metric-card">
+    <div class="m-label">Impressões</div>
+    <div class="m-val">117.970</div>
+    <div class="m-sub">Reach 102.413 · Freq 1,15×</div>
+  </div>
+  <div class="metric-card win">
+    <div class="m-label">CPM</div>
+    <div class="m-val">R$ 101</div>
+    <div class="m-sub">R$101,31 por mil imp</div>
+  </div>
+  <div class="metric-card">
+    <div class="m-label">CTR (link)</div>
+    <div class="m-val">2,33%</div>
+    <div class="m-sub">2.751 clicks no link</div>
+  </div>
+  <div class="metric-card win">
+    <div class="m-label">Connect Rate</div>
+    <div class="m-val">83,2%</div>
+    <div class="m-sub">2.289 VP ÷ 2.751 LC</div>
+  </div>
+</div>
+
+<div class="grid grid-4" style="margin-top:1rem">
+  <div class="metric-card">
+    <div class="m-label">Viz. de Página</div>
+    <div class="m-val">2.289</div>
+    <div class="m-sub">LP views rastreadas</div>
+  </div>
+  <div class="metric-card">
+    <div class="m-label">Initiate Checkout</div>
+    <div class="m-val">495</div>
+    <div class="m-sub">21,6% das VP (IC/VP)</div>
+  </div>
+  <div class="metric-card win">
+    <div class="m-label">Conv. Pág → Venda</div>
+    <div class="m-val">6,12%</div>
+    <div class="m-sub">140 compras ÷ 2.289 VP</div>
+  </div>
+  <div class="metric-card win">
+    <div class="m-label">Conv. Checkout → Venda</div>
+    <div class="m-val">28,3%</div>
+    <div class="m-sub">140 compras ÷ 495 IC</div>
+  </div>
+</div>
+
+<!-- FUNIL -->
+<div class="section-title">Funil de Conversão</div>
+<div class="funil">
+  <div class="funil-row">
+    <div class="funil-stage">Invest c/ imposto</div>
+    <div class="funil-bar-wrap"><div class="funil-bar" style="width:100%;background:var(--accent)"></div></div>
+    <div><div class="funil-num" style="color:var(--accent)">R$ 13.605</div></div>
+  </div>
+  <div class="funil-row">
+    <div class="funil-stage">Impressões</div>
+    <div class="funil-bar-wrap"><div class="funil-bar" style="width:100%;background:var(--muted)"></div></div>
+    <div><div class="funil-num">117.970</div><div class="funil-conv">CPM R$101</div></div>
+  </div>
+  <div class="funil-row">
+    <div class="funil-stage">Clicks no Link</div>
+    <div class="funil-bar-wrap"><div class="funil-bar" style="width:75%;background:var(--accent)"></div></div>
+    <div><div class="funil-num">2.751</div><div class="funil-conv">CTR 2,33%</div></div>
+  </div>
+  <div class="funil-row">
+    <div class="funil-stage">Viz. de Página</div>
+    <div class="funil-bar-wrap"><div class="funil-bar" style="width:65%;background:var(--accent)"></div></div>
+    <div><div class="funil-num">2.289</div><div class="funil-conv">Connect 83,2%</div></div>
+  </div>
+  <div class="funil-row">
+    <div class="funil-stage">Initiate Checkout</div>
+    <div class="funil-bar-wrap"><div class="funil-bar" style="width:30%;background:var(--yellow)"></div></div>
+    <div><div class="funil-num" style="color:var(--yellow)">495</div><div class="funil-conv">21,6% das VP</div></div>
+  </div>
+  <div class="funil-row">
+    <div class="funil-stage">Compras pixel</div>
+    <div class="funil-bar-wrap"><div class="funil-bar" style="width:18%;background:var(--green)"></div></div>
+    <div><div class="funil-num" style="color:var(--green)">140</div><div class="funil-conv">Conv. 6,12% VP · 28,3% IC</div></div>
+  </div>
+  <div class="funil-row">
+    <div class="funil-stage">Ingressos Hotmart</div>
+    <div class="funil-bar-wrap"><div class="funil-bar" style="width:20%;background:var(--green)"></div></div>
+    <div><div class="funil-num" style="color:var(--green)">149</div><div class="funil-conv">Confirmados PAID</div></div>
+  </div>
+</div>
+
+<!-- DIA A DIA -->
+<div class="section-title">Dia a Dia · Tráfego + Vendas</div>
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Dia</th>
+        <th>Invest</th>
+        <th>Impressões</th>
+        <th>CPM</th>
+        <th>Clicks LP</th>
+        <th>Viz. Página</th>
+        <th>Connect</th>
+        <th class="sep">Pixel</th>
+        <th class="sep">Vendas</th>
+        <th>Receita</th>
+        <th>CPV</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>27/jun</td>
+        <td class="num">R$ 1.425</td>
+        <td class="num">10.724</td>
+        <td class="num warn-txt">R$ 133</td>
+        <td class="num">298</td>
+        <td class="num">240</td>
+        <td class="num">80,5%</td>
+        <td class="num sep win-txt">21</td>
+        <td class="num sep win-txt">14</td>
+        <td class="num">R$ 1.297</td>
+        <td class="num">R$ 102</td>
+      </tr>
+      <tr>
+        <td class="muted-txt">28/jun</td>
+        <td class="muted-txt">—</td>
+        <td class="muted-txt">—</td>
+        <td class="muted-txt">—</td>
+        <td class="muted-txt">—</td>
+        <td class="muted-txt">—</td>
+        <td class="muted-txt">—</td>
+        <td class="muted-txt sep">—</td>
+        <td class="num sep">1</td>
+        <td class="num">R$ 97</td>
+        <td class="muted-txt">—</td>
+      </tr>
+      <tr>
+        <td class="muted-txt">29/jun</td>
+        <td class="muted-txt">—</td>
+        <td class="muted-txt">—</td>
+        <td class="muted-txt">—</td>
+        <td class="muted-txt">—</td>
+        <td class="muted-txt">—</td>
+        <td class="muted-txt">—</td>
+        <td class="muted-txt sep">—</td>
+        <td class="num sep">1</td>
+        <td class="num">R$ 97</td>
+        <td class="muted-txt">—</td>
+      </tr>
+      <tr>
+        <td>01/jul</td>
+        <td class="num">R$ 719</td>
+        <td class="num">7.281</td>
+        <td class="num win-txt">R$ 99</td>
+        <td class="num">180</td>
+        <td class="num">143</td>
+        <td class="num">79,4%</td>
+        <td class="num sep">7</td>
+        <td class="num sep">12</td>
+        <td class="num">R$ 809</td>
+        <td class="num warn-txt">R$ 60</td>
+      </tr>
+      <tr>
+        <td>02/jul</td>
+        <td class="num">R$ 811</td>
+        <td class="num">7.919</td>
+        <td class="num win-txt">R$ 102</td>
+        <td class="num">203</td>
+        <td class="num">171</td>
+        <td class="num">84,2%</td>
+        <td class="num sep">11</td>
+        <td class="num sep">13</td>
+        <td class="num">R$ 817</td>
+        <td class="num warn-txt">R$ 62</td>
+      </tr>
+      <tr>
+        <td>03/jul</td>
+        <td class="num">R$ 666</td>
+        <td class="num">7.854</td>
+        <td class="num win-txt">R$ 85</td>
+        <td class="num">171</td>
+        <td class="num">151</td>
+        <td class="num win-txt">88,3%</td>
+        <td class="num sep">5</td>
+        <td class="num sep">6</td>
+        <td class="num">R$ 487</td>
+        <td class="num lose-txt">R$ 111</td>
+      </tr>
+      <tr>
+        <td>04/jul</td>
+        <td class="num">R$ 569</td>
+        <td class="num">5.429</td>
+        <td class="num warn-txt">R$ 105</td>
+        <td class="num">160</td>
+        <td class="num">125</td>
+        <td class="num">78,1%</td>
+        <td class="num sep">7</td>
+        <td class="num sep">9</td>
+        <td class="num">R$ 294</td>
+        <td class="num warn-txt">R$ 63</td>
+      </tr>
+      <tr>
+        <td>05/jul</td>
+        <td class="num">R$ 181</td>
+        <td class="num">2.639</td>
+        <td class="num win-txt">R$ 69</td>
+        <td class="num">50</td>
+        <td class="num">40</td>
+        <td class="num">80,0%</td>
+        <td class="num sep">3</td>
+        <td class="num sep">4</td>
+        <td class="num">R$ 266</td>
+        <td class="num win-txt">R$ 45</td>
+      </tr>
+      <tr>
+        <td>06/jul</td>
+        <td class="num">R$ 1.070</td>
+        <td class="num">11.533</td>
+        <td class="num win-txt">R$ 93</td>
+        <td class="num">270</td>
+        <td class="num">228</td>
+        <td class="num win-txt">84,4%</td>
+        <td class="num sep">14</td>
+        <td class="num sep win-txt">16</td>
+        <td class="num">R$ 614</td>
+        <td class="num warn-txt">R$ 67</td>
+      </tr>
+      <tr>
+        <td>07/jul</td>
+        <td class="num">R$ 1.043</td>
+        <td class="num">10.745</td>
+        <td class="num win-txt">R$ 97</td>
+        <td class="num">228</td>
+        <td class="num">196</td>
+        <td class="num win-txt">86,0%</td>
+        <td class="num sep">10</td>
+        <td class="num sep">7</td>
+        <td class="num">R$ 320</td>
+        <td class="num lose-txt">R$ 149</td>
+      </tr>
+      <tr>
+        <td>08/jul</td>
+        <td class="num">R$ 714</td>
+        <td class="num">6.967</td>
+        <td class="num warn-txt">R$ 103</td>
+        <td class="num">174</td>
+        <td class="num">150</td>
+        <td class="num win-txt">86,2%</td>
+        <td class="num sep">9</td>
+        <td class="num sep">10</td>
+        <td class="num">R$ 435</td>
+        <td class="num warn-txt">R$ 71</td>
+      </tr>
+      <tr>
+        <td>09/jul</td>
+        <td class="num">R$ 246</td>
+        <td class="num">3.541</td>
+        <td class="num win-txt">R$ 69</td>
+        <td class="num">65</td>
+        <td class="num">55</td>
+        <td class="num win-txt">84,6%</td>
+        <td class="num sep">4</td>
+        <td class="num sep">4</td>
+        <td class="num">R$ 142</td>
+        <td class="num warn-txt">R$ 61</td>
+      </tr>
+      <tr>
+        <td>10/jul</td>
+        <td class="num">R$ 1.453</td>
+        <td class="num">16.921</td>
+        <td class="num win-txt">R$ 86</td>
+        <td class="num">328</td>
+        <td class="num">287</td>
+        <td class="num win-txt">87,5%</td>
+        <td class="num sep">11</td>
+        <td class="num sep">12</td>
+        <td class="num">R$ 763</td>
+        <td class="num lose-txt">R$ 132</td>
+      </tr>
+      <tr>
+        <td>11/jul</td>
+        <td class="num">R$ 1.318</td>
+        <td class="num">11.934</td>
+        <td class="num warn-txt">R$ 110</td>
+        <td class="num">262</td>
+        <td class="num">215</td>
+        <td class="num win-txt">82,1%</td>
+        <td class="num sep">14</td>
+        <td class="num sep win-txt">15</td>
+        <td class="num">R$ 785</td>
+        <td class="num warn-txt">R$ 88</td>
+      </tr>
+      <tr>
+        <td>12/jul</td>
+        <td class="num">R$ 115</td>
+        <td class="num">1.236</td>
+        <td class="num win-txt">R$ 93</td>
+        <td class="num">29</td>
+        <td class="num">19</td>
+        <td class="num">65,5%</td>
+        <td class="num sep">2</td>
+        <td class="num sep">2</td>
+        <td class="num">R$ 54</td>
+        <td class="num warn-txt">R$ 57</td>
+      </tr>
+      <tr>
+        <td>13/jul</td>
+        <td class="num">R$ 1.088</td>
+        <td class="num">9.303</td>
+        <td class="num warn-txt">R$ 117</td>
+        <td class="num">228</td>
+        <td class="num">187</td>
+        <td class="num">82,0%</td>
+        <td class="num sep">14</td>
+        <td class="num sep win-txt">15</td>
+        <td class="num">R$ 810</td>
+        <td class="num warn-txt">R$ 73</td>
+      </tr>
+      <tr>
+        <td>14/jul</td>
+        <td class="num">R$ 535</td>
+        <td class="num">3.944</td>
+        <td class="num lose-txt">R$ 136</td>
+        <td class="num">105</td>
+        <td class="num">82</td>
+        <td class="num">78,1%</td>
+        <td class="num sep">8</td>
+        <td class="num sep">8</td>
+        <td class="num">R$ 450</td>
+        <td class="num warn-txt">R$ 67</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>TOTAL</td>
+        <td class="num">R$ 11.952</td>
+        <td class="num">117.970</td>
+        <td class="num">R$ 101</td>
+        <td class="num">2.751</td>
+        <td class="num">2.289</td>
+        <td class="num">83,2%</td>
+        <td class="num sep">140</td>
+        <td class="num sep">149</td>
+        <td class="num">R$ 8.537</td>
+        <td class="num">R$ 91*</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+<div class="note">* CPV = Custo por Venda (invest bruto ÷ vendas Hotmart do dia). — = campanhas pausadas (sem tráfego nesse dia).</div>
+
+<!-- VENDAS POR PRODUTO -->
+<div class="section-title">Vendas por Produto · Hotmart PAID (27/Jun–14/Jul/26)</div>
+<div class="card">
+  <table class="prod-table">
+    <thead>
+      <tr>
+        <th>Produto</th>
+        <th class="r">Compradores</th>
+        <th class="r">Preço</th>
+        <th class="r">Receita Estimada</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Imersão Jornada da Autoridade <span class="tag front">FRONT</span></td>
+        <td class="r">149</td>
+        <td class="r">R$ 27,00</td>
+        <td class="r">R$ 4.023,00*</td>
+      </tr>
+      <tr>
+        <td>Gravação 1 Ano da Jornada <span class="tag bump">ORDER BUMP</span></td>
+        <td class="r">37</td>
+        <td class="r">R$ 97,00</td>
+        <td class="r">R$ 3.589,00*</td>
+      </tr>
+      <tr>
+        <td>Pitch Implacável <span class="tag bump">ORDER BUMP</span></td>
+        <td class="r">48</td>
+        <td class="r">R$ 17,00</td>
+        <td class="r">R$ 816,00*</td>
+      </tr>
+      <tr class="total-row">
+        <td>TOTAL</td>
+        <td class="r">149 ingressos</td>
+        <td class="r"></td>
+        <td class="r">R$ 8.536,95</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note" style="margin-top:0.75rem">
+    * Estimativa por preço fixo. <b>Bruta real Hotmart: R$8.536,95</b>.
+    Taxa: R$547,36 → Líquida: <b>R$7.842,95</b>.
+    Pitch teve maior adesão que a Fase 1 (48 vs 36 · 32,2% bump rate vs 27,3%).
+    Gravação: 37 compradores (24,8% bump rate vs 27,3% na Fase 1).
+  </div>
+</div>
+
+<footer>
+  <div>Gerado 14/07/26 · Período 27/06/26–14/07/26</div>
+  <div>Exposição: R$8.537 − R$13.605 = −R$5.068</div>
+  <div>Invest bruto: R$11.951,86 · Campanhas TPIJA (C4 TAMARA DAMARES)</div>
+</footer>
+
+</body>
+</html>
