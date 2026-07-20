@@ -112,22 +112,33 @@
   .month-card .m-kpi .k-val { font-size: 22px; font-weight: 700; color: var(--ink); }
   .month-card .m-kpi .k-val.roxo { color: var(--roxo); }
 
-  /* CURRENT MONTH WEEKS */
-  .weeks-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-  @media (max-width: 900px) { .weeks-grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 560px) { .weeks-grid { grid-template-columns: 1fr; } }
-  .week-card {
+  /* CURRENT MONTH WEEKS - formato em linha */
+  .week-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 1fr 1fr 1fr 1fr;
+    gap: 0;
+    align-items: center;
     background: #fff;
     border: 1px solid var(--linha);
     border-radius: 14px;
-    padding: 18px 20px;
+    padding: 20px 24px;
+    margin-bottom: 12px;
   }
-  .week-card.win { border-color: var(--roxo-light); background: linear-gradient(180deg, #fff, var(--roxo-xlight) 250%); }
-  .week-card.alert { border-color: #FDE68A; background: #FFFBEB; }
-  .week-card .w-date { font-weight: 600; font-size: 14px; color: var(--roxo); margin-bottom: 2px; }
-  .week-card .w-cpa { font-size: 28px; font-weight: 700; color: var(--ink); margin: 4px 0 8px; }
-  .week-card .w-meta { font-size: 12px; color: var(--cinza); }
-  .week-card .w-meta b { color: var(--ink); font-weight: 600; }
+  .week-row.win { border-color: var(--roxo-light); background: linear-gradient(90deg, var(--roxo-xlight) 0%, #fff 40%); }
+  .week-row.alert { border-color: #FDE68A; background: linear-gradient(90deg, #FFFBEB 0%, #fff 40%); }
+  .week-row .wr-date { font-weight: 700; font-size: 15px; color: var(--roxo); }
+  .week-row .wr-date .wr-tag { display: block; font-size: 10px; color: var(--cinza); text-transform: uppercase; letter-spacing: .1em; margin-top: 2px; font-weight: 500; }
+  .week-row .wr-kpi { padding: 0 12px; border-left: 1px solid var(--linha); }
+  .week-row .wr-kpi small { display: block; font-size: 10.5px; color: var(--cinza); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 4px; font-weight: 500; }
+  .week-row .wr-kpi b { display: block; font-size: 17px; font-weight: 700; color: var(--ink); }
+  .week-row .wr-kpi b.roxo { color: var(--roxo); }
+  .week-row .wr-kpi b.good { color: var(--good); }
+  .week-row .wr-kpi b.bad { color: var(--bad); }
+  @media (max-width: 900px) {
+    .week-row { grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .week-row .wr-date { grid-column: 1 / -1; padding-bottom: 8px; border-bottom: 1px solid var(--linha); margin-bottom: 8px; }
+    .week-row .wr-kpi { border-left: none; padding: 0; }
+  }
 
   /* KPI ROW / GENERIC */
   .kpi-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
@@ -263,30 +274,43 @@
 <section class="soft">
 <div class="wrap">
   <div class="section-label">Mês Atual · Julho</div>
-  <h2>Semana a semana — custo por lead</h2>
+  <h2>Semana a semana — desempenho completo</h2>
   <p class="lead">Julho começou complicado (sem 01/07 com CPA R$ 3,73) e vem recuperando forte. As 3 últimas semanas todas abaixo de R$ 2,40 — as duas últimas em nível de Maio (R$ 1,91).</p>
 
-  <div class="weeks-grid">
-    <div class="week-card alert">
-      <div class="w-date">Sem 01/07</div>
-      <div class="w-cpa"><span class="bad">R$ 3,73</span></div>
-      <div class="w-meta"><b>514</b> leads · <b>R$ 1.916</b> invest · CTR 2,27%</div>
-    </div>
-    <div class="week-card">
-      <div class="w-date">Sem 08/07</div>
-      <div class="w-cpa">R$ 2,37</div>
-      <div class="w-meta"><b>376</b> leads · <b>R$ 891</b> invest · CTR 4,03%</div>
-    </div>
-    <div class="week-card win">
-      <div class="w-date">Sem 15/07</div>
-      <div class="w-cpa"><span class="good">R$ 1,80</span></div>
-      <div class="w-meta"><b>569</b> leads · <b>R$ 1.022</b> invest · CTR 4,16%</div>
-    </div>
-    <div class="week-card win">
-      <div class="w-date">Sem 22/07 · parcial</div>
-      <div class="w-cpa"><span class="good">R$ 1,88</span></div>
-      <div class="w-meta"><b>390</b> leads · <b>R$ 735</b> invest · CTR 4,17%</div>
-    </div>
+  <div class="week-row alert">
+    <div class="wr-date">Sem 01/07 <span class="wr-tag">fechada</span></div>
+    <div class="wr-kpi"><small>Investimento</small><b>R$ 1.916</b></div>
+    <div class="wr-kpi"><small>Custo por lead</small><b class="bad">R$ 3,73</b></div>
+    <div class="wr-kpi"><small>CTR</small><b class="bad">2,27%</b></div>
+    <div class="wr-kpi"><small>CPM</small><b>R$ 28,43</b></div>
+    <div class="wr-kpi"><small>Conv. página</small><b class="bad">45,3%</b></div>
+  </div>
+
+  <div class="week-row">
+    <div class="wr-date">Sem 08/07 <span class="wr-tag">fechada</span></div>
+    <div class="wr-kpi"><small>Investimento</small><b>R$ 891</b></div>
+    <div class="wr-kpi"><small>Custo por lead</small><b>R$ 2,37</b></div>
+    <div class="wr-kpi"><small>CTR</small><b>4,03%</b></div>
+    <div class="wr-kpi"><small>CPM</small><b>R$ 43,20</b></div>
+    <div class="wr-kpi"><small>Conv. página</small><b>57,9%</b></div>
+  </div>
+
+  <div class="week-row win">
+    <div class="wr-date">Sem 15/07 <span class="wr-tag">fechada</span></div>
+    <div class="wr-kpi"><small>Investimento</small><b>R$ 1.022</b></div>
+    <div class="wr-kpi"><small>Custo por lead</small><b class="good">R$ 1,80</b></div>
+    <div class="wr-kpi"><small>CTR</small><b class="good">4,16%</b></div>
+    <div class="wr-kpi"><small>CPM</small><b>R$ 34,54</b></div>
+    <div class="wr-kpi"><small>Conv. página</small><b class="good">58,2%</b></div>
+  </div>
+
+  <div class="week-row win">
+    <div class="wr-date">Sem 22/07 <span class="wr-tag">parcial</span></div>
+    <div class="wr-kpi"><small>Investimento</small><b>R$ 735</b></div>
+    <div class="wr-kpi"><small>Custo por lead</small><b class="good">R$ 1,88</b></div>
+    <div class="wr-kpi"><small>CTR</small><b class="good">4,17%</b></div>
+    <div class="wr-kpi"><small>CPM</small><b>R$ 36,83</b></div>
+    <div class="wr-kpi"><small>Conv. página</small><b class="good">58,2%</b></div>
   </div>
 </div>
 </section>
@@ -305,12 +329,12 @@
       <table style="min-width:auto;">
         <thead><tr><th>Criativo</th><th>Leads</th><th>CPL</th></tr></thead>
         <tbody>
-          <tr class="hero-row"><td>ADV14 Clone Vídeo e Foto</td><td>5.543</td><td>R$ 1,83</td></tr>
-          <tr><td>ADV12 Mais de 30MM</td><td>2.442</td><td>R$ 6,14</td></tr>
-          <tr><td>ADV04 Possível Criar</td><td>1.650</td><td>R$ 4,34</td></tr>
-          <tr><td>ADV01 Stories do Dia</td><td>1.062</td><td>R$ 6,96</td></tr>
-          <tr><td>AD01 Geral</td><td>552</td><td>R$ 10,10</td></tr>
-          <tr><td>ADV40 Especialista</td><td>300</td><td class="good">R$ 1,76</td></tr>
+          <tr class="hero-row"><td><a href="https://drive.google.com/open?id=1zMS8i6wmktRp1QzoXqiiyvcyPdHjZpzc&usp=drive_copy" target="_blank" style="font-size:12px;">ADV14_SST_CAP_CLONE EM VIDEO E EM FOTO_0.45</a></td><td>5.543</td><td>R$ 1,83</td></tr>
+          <tr><td style="font-size:12px;">ADV12_SS_CAP_MAIS DE 30 MM</td><td>2.442</td><td>R$ 6,14</td></tr>
+          <tr><td style="font-size:12px;">ADV04_SS_CAP_POSSIVEL CRIAR</td><td>1.650</td><td>R$ 4,34</td></tr>
+          <tr><td style="font-size:12px;">ADV01_SST_CAP_STORIES DO DIA</td><td>1.062</td><td>R$ 6,96</td></tr>
+          <tr><td style="font-size:12px;">AD01_SST_CAP_GERAL</td><td>552</td><td>R$ 10,10</td></tr>
+          <tr><td style="font-size:12px;">ADV40_SST_CAP_ESPECIALISTA_0.37</td><td>300</td><td class="good">R$ 1,76</td></tr>
         </tbody>
       </table>
       </div>
@@ -323,16 +347,17 @@
       <table style="min-width:auto;">
         <thead><tr><th>Criativo</th><th>Leads</th><th>CPL</th></tr></thead>
         <tbody>
-          <tr class="hero-row"><td>ADV14 Clone Vídeo e Foto</td><td>1.046</td><td class="good">R$ 1,79</td></tr>
-          <tr class="new-row"><td>ADV40 Especialista</td><td>300</td><td class="good">R$ 1,76</td></tr>
-          <tr class="new-row"><td>ADC03 Carrossel 7 Tarefas</td><td>119</td><td>R$ 2,86</td></tr>
-          <tr class="new-row"><td>ADV30 Claude Live Artifacts 02</td><td>102</td><td>R$ 2,71</td></tr>
-          <tr class="new-row"><td>ADV29 Claude Live Artifacts 01</td><td>93</td><td>R$ 2,87</td></tr>
-          <tr class="new-row"><td>ADV43 Tudo Muito Complicado</td><td>35</td><td class="good">R$ 2,15</td></tr>
+          <tr class="hero-row"><td><a href="https://drive.google.com/open?id=1zMS8i6wmktRp1QzoXqiiyvcyPdHjZpzc&usp=drive_copy" target="_blank" style="font-size:12px;">ADV14_SST_CAP_CLONE EM VIDEO E EM FOTO_0.45</a></td><td>1.046</td><td class="good">R$ 1,79</td></tr>
+          <tr class="new-row"><td style="font-size:12px;">ADV40_SST_CAP_ESPECIALISTA_0.37</td><td>300</td><td class="good">R$ 1,76</td></tr>
+          <tr class="new-row"><td style="font-size:12px;">ADC03_SST_CARROSSEL_CAP_7 TAREFAS QUE EMPRESAS PAGAM_25</td><td>119</td><td>R$ 2,86</td></tr>
+          <tr class="new-row"><td style="font-size:12px;">ADV30_SST_CAP_CLAUDE LIVE ARTIFACTS 02_1.18</td><td>102</td><td>R$ 2,71</td></tr>
+          <tr class="new-row"><td style="font-size:12px;">ADV29_SST_CAP_CLAUDE LIVE ARTIFACTS 01_1.25</td><td>93</td><td>R$ 2,87</td></tr>
+          <tr class="new-row"><td style="font-size:12px;">ADV43_SST_CAP_TUDO MUITO COMPLICADO_0.37</td><td>35</td><td class="good">R$ 2,15</td></tr>
         </tbody>
       </table>
       </div>
       <p style="font-size:13px;margin-top:10px;">Em Julho o ADV14 divide o topo com o <strong>ADV40 (Especialista)</strong> — CPL empatado tecnicamente (R$ 1,79 vs R$ 1,76). Vários outros criativos novos entregando abaixo de R$ 3.</p>
+      <p style="font-size:12px;color:var(--cinza);margin-top:8px;">🔒 Links do Drive dos criativos novos serão adicionados quando a planilha `1PrxhTlo...` (RC SST) for liberada com acesso público.</p>
     </div>
   </div>
 </div>
@@ -357,16 +382,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="hero-row"><td>ADV40 Especialista</td><td>Vídeo</td><td>300</td><td class="good">R$ 1,76</td><td>🚀 Escalar (CPL igual ao ADV14)</td></tr>
-        <tr><td>ADC03 Carrossel 7 Tarefas Empresas Pagam</td><td>Carrossel</td><td>119</td><td>R$ 2,86</td><td>✅ Manter (primeiro carrossel funcionando)</td></tr>
-        <tr><td>ADV30 Claude Live Artifacts 02</td><td>Vídeo</td><td>102</td><td>R$ 2,71</td><td>✅ Manter</td></tr>
-        <tr><td>ADV29 Claude Live Artifacts 01</td><td>Vídeo</td><td>93</td><td>R$ 2,87</td><td>✅ Manter</td></tr>
-        <tr><td>ADV43 Tudo Muito Complicado</td><td>Vídeo</td><td>35</td><td class="good">R$ 2,15</td><td>🚀 Escalar (CPL bom em pouca amostra)</td></tr>
-        <tr><td>ADV41 Automatizou</td><td>Vídeo</td><td>15</td><td class="good">R$ 2,16</td><td>✅ Testar mais verba</td></tr>
-        <tr><td>ADV44 E hoje Sala Secreta</td><td>Vídeo</td><td>10</td><td class="good">R$ 2,23</td><td>✅ Testar mais verba</td></tr>
-        <tr><td>ADV42 A inteligência nova</td><td>Vídeo</td><td>9</td><td class="good">R$ 2,01</td><td>✅ Testar mais verba</td></tr>
-        <tr><td>ADV21 Claude DNA Marca</td><td>Vídeo</td><td>5</td><td>R$ 4,74</td><td>🟡 Amostra baixa · observar</td></tr>
-        <tr><td>ADV18 Claude Skills</td><td>Vídeo</td><td>2</td><td>R$ 7,18</td><td>🟡 Amostra baixa · observar</td></tr>
+        <tr class="hero-row"><td style="font-size:12px;">ADV40_SST_CAP_ESPECIALISTA_0.37</td><td>Vídeo</td><td>300</td><td class="good">R$ 1,76</td><td>🚀 Escalar (CPL igual ao ADV14)</td></tr>
+        <tr><td style="font-size:12px;">ADC03_SST_CARROSSEL_CAP_7 TAREFAS QUE EMPRESAS PAGAM_25</td><td>Carrossel</td><td>119</td><td>R$ 2,86</td><td>✅ Manter (primeiro carrossel funcionando)</td></tr>
+        <tr><td style="font-size:12px;">ADV30_SST_CAP_CLAUDE LIVE ARTIFACTS 02_1.18</td><td>Vídeo</td><td>102</td><td>R$ 2,71</td><td>✅ Manter</td></tr>
+        <tr><td style="font-size:12px;">ADV29_SST_CAP_CLAUDE LIVE ARTIFACTS 01_1.25</td><td>Vídeo</td><td>93</td><td>R$ 2,87</td><td>✅ Manter</td></tr>
+        <tr><td style="font-size:12px;">ADV43_SST_CAP_TUDO MUITO COMPLICADO_0.37</td><td>Vídeo</td><td>35</td><td class="good">R$ 2,15</td><td>🚀 Escalar (CPL bom em pouca amostra)</td></tr>
+        <tr><td style="font-size:12px;">ADV41_SST_CAP_AUTOMATIZOU_0.31</td><td>Vídeo</td><td>15</td><td class="good">R$ 2,16</td><td>✅ Testar mais verba</td></tr>
+        <tr><td style="font-size:12px;">ADV44_SST_CAP_E HOJE SALA SECRETA_0.35</td><td>Vídeo</td><td>10</td><td class="good">R$ 2,23</td><td>✅ Testar mais verba</td></tr>
+        <tr><td style="font-size:12px;">ADV42_SST_CAP_A INTELIGENCIA NOVA_0.39</td><td>Vídeo</td><td>9</td><td class="good">R$ 2,01</td><td>✅ Testar mais verba</td></tr>
+        <tr><td style="font-size:12px;">ADV21_SST_CAP_CLAUDE DNA MARCA 01_1.27</td><td>Vídeo</td><td>5</td><td>R$ 4,74</td><td>🟡 Amostra baixa · observar</td></tr>
+        <tr><td style="font-size:12px;">ADV18_SST_CAP_CLAUDE SKILS 01_2.26</td><td>Vídeo</td><td>2</td><td>R$ 7,18</td><td>🟡 Amostra baixa · observar</td></tr>
       </tbody>
     </table>
   </div>
