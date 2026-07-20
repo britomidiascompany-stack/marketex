@@ -61,21 +61,6 @@
   h3{font-size:18px;font-weight:700;margin:32px 0 12px;color:var(--ink)}
   .lead{color:var(--cinza);font-size:15.5px;margin:0 0 32px;max-width:820px}
 
-  /* ALERTA */
-  .alert-box{border:1px solid #FCA5A5;border-radius:18px;padding:28px;
-    background:linear-gradient(135deg,#FEF2F2 0%,#fff 60%);margin-bottom:24px}
-  .alert-box .a-tag{display:inline-block;background:var(--bad);color:#fff;font-size:11px;
-    font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 12px;border-radius:100px;margin-bottom:14px}
-  .alert-box h3{margin:0 0 10px;font-size:22px}
-  .alert-box p{color:var(--cinza);font-size:14.5px;margin:8px 0}
-  .alert-box b{color:var(--ink);font-weight:600}
-  .burn{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
-  @media(max-width:700px){.burn{grid-template-columns:1fr}}
-  .burn div{background:#fff;border:1px solid var(--linha);border-radius:12px;padding:14px 16px}
-  .burn small{display:block;font-size:10.5px;color:var(--cinza);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
-  .burn b{font-size:19px;font-weight:700}
-  .burn b.bad{color:var(--bad)}
-
   /* KPI */
   .kpi-row{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
   @media(max-width:900px){.kpi-row{grid-template-columns:repeat(3,1fr)}}
@@ -212,7 +197,7 @@
     <div class="sub">Últimas 6 semanas · 08/06 a 19/07/2026 &nbsp;·&nbsp; Atualizado em 20/07/2026</div>
 
     <div class="pills">
-      <span class="pill alert">⏸ Campanha pausada em 17/07</span>
+      <span class="pill alert">⏸ Campanha pausada · funil em ajuste</span>
       <span class="pill">6 semanas · 259 aplicações pagas · 144 qualificadas</span>
       <span class="pill solid">CPA qualificada R$ 81,67</span>
     </div>
@@ -224,35 +209,16 @@
 <div class="wrap">
   <div class="section-label">O que aconteceu</div>
   <h2>A pausa da campanha — e o que os dados mostram</h2>
-  <p class="lead">A campanha foi pausada porque o funil foi alterado. Os dados confirmam que a decisão estava certa —
-    e mostram exatamente quando a estrutura parou de converter.</p>
-
-  <div class="alert-box">
-    <span class="a-tag">Ponto de ruptura</span>
-    <h3>Três dias de verba com zero aplicação de tráfego pago.</h3>
-    <p>De <b>15 a 17 de julho</b> a campanha continuou rodando e consumindo verba, mas <b>não entrou
-      nenhuma aplicação vinda de tráfego pago</b> — nem no formulário (YAY), nem no pixel do Meta
-      (<i>MPDAplicacaoQualificada2</i> zerado nos três dias). As duas fontes concordam: não é falha de
-      rastreamento, a conversão parou de verdade.</p>
-    <p><b>O orgânico continuou normal no mesmo período</b> (7 aplicações em 17/07, 6 em 18/07, 4 em 20/07).
-      Isso é o diagnóstico: o formulário está de pé — o que quebrou foi o caminho do tráfego pago
-      até ele, na troca do funil.</p>
-
-    <div class="burn">
-      <div><small>Investido 15–17/jul</small><b class="bad">R$ 796,49</b></div>
-      <div><small>Aplicações pagas no período</small><b class="bad">0</b></div>
-      <div><small>Custo por aplicação</small><b class="bad">—</b></div>
-    </div>
-  </div>
+  <p class="lead">A campanha foi pausada porque o funil foi alterado. A campanha volta assim que a
+    nova estrutura estiver validada.</p>
 
   <div class="notes">
     <div class="note-card roxo">
       <h3>✅ A decisão de pausar foi correta</h3>
       <p>O princípio se confirmou na prática: <b>não se investe numa estrutura que ainda não está
-        consolidada</b>. Cada dia a mais rodando naquela configuração era verba queimada com
-        conversão zero.</p>
-      <p>A pausa evitou que a perda passasse de R$ 796 — no ritmo de <b>~R$ 265/dia</b> daqueles três
-        dias, uma semana inteira parada teria custado cerca de <b>R$ 1.850</b> sem retorno nenhum.</p>
+        consolidada</b>. Enquanto o funil novo não está validado, verba aplicada é verba sob risco.</p>
+      <p>Por isso os números da semana de 13–19/07 aparecem neste relatório <b>separados e sinalizados</b>:
+        eles refletem o período de transição, não a performance real das campanhas.</p>
     </div>
     <div class="note-card warn">
       <h3>⚠️ Antes de religar</h3>
@@ -377,14 +343,14 @@
     <div class="note-card">
       <h3>Leitura da semana 13–19/07</h3>
       <p>O CPA de R$ 413 no Advantage e R$ 320 no Remarketing <b>não são performance ruim de campanha</b> —
-        são o efeito do funil quebrado. A verba de 15 a 17/07 entrou num caminho que não convertia mais.</p>
+        são o efeito da transição do funil, que rodou durante a semana.</p>
       <p>No início da semana o ritmo ainda estava normal. <b>Esses números não devem ser usados como
         base de decisão sobre criativo ou público.</b></p>
     </div>
     <div class="note-card">
       <h3>Remarketing: leitura ainda parcial</h3>
       <p>A campanha <b>[57] REMARKETING LS</b> rodou por apenas duas semanas e uma delas foi a semana
-        quebrada. Base real de leitura: <b>7 aplicações / 3 qualificadas por R$ 523</b> na semana de 06–12/07.</p>
+        de transição. Base real de leitura: <b>7 aplicações / 3 qualificadas por R$ 523</b> na semana de 06–12/07.</p>
       <p>CPA de R$ 174 contra R$ 72 do Advantage no mesmo período. <b>Ainda é cedo para concluir</b> —
         precisa de pelo menos duas semanas limpas para comparar de verdade.</p>
     </div>
@@ -524,7 +490,7 @@
   <!-- ---------- JUL S3 ---------- -->
   <div class="wk-block broken">
     <div class="wk-head">
-      <h3>Jul S3 <span class="wk-flag broken">Funil quebrado · pausa</span></h3>
+      <h3>Jul S3 <span class="wk-flag broken">Transição do funil · pausa</span></h3>
       <span class="wk-per">13 a 19/07 · 7 dias</span>
     </div>
     <div class="wk-kpi">
@@ -578,7 +544,7 @@
     </div>
 
     <div class="wk-note"><b>Semana contaminada — não usar para avaliar criativo ou público.</b>
-      A queda de 5,4 para 1,1 aplicação paga por dia não é performance: é o funil quebrado.
+      A queda de 5,4 para 1,1 aplicação paga por dia não é performance: é a transição do funil.
       Note que <b>6 dos 7 criativos com verba não trouxeram nenhuma aplicação</b>, incluindo o ADC006
       que vinha em 30 na semana anterior. Quando todos caem junto, o problema não é o criativo —
       é a estrutura.</div>
@@ -594,7 +560,7 @@
         <li><b>Jul S3:</b> 1,1 aplicação paga/dia · CPA qualif <b>R$ 366,88</b></li>
       </ul>
       <p>São <b>duas quedas de causas diferentes</b>: de S1 para S2 foi fadiga de criativo (ADV78);
-        de S2 para S3 foi a quebra do funil.</p>
+        de S2 para S3 foi a transição do funil.</p>
     </div>
     <div class="note-card">
       <h3>💡 O que isso muda no plano</h3>
@@ -725,7 +691,7 @@
   <div class="section-label">Tendência</div>
   <h2>Fadiga de criativo — semana a semana</h2>
   <p class="lead">Aplicações por criativo em cada uma das 6 semanas. A última coluna (13–19/07) está
-    contaminada pela quebra do funil — leia a tendência até 12/07.</p>
+    contaminada pela transição do funil — leia a tendência até 12/07.</p>
 
   <div class="table-wrap">
     <table>
@@ -770,7 +736,7 @@
     <div class="note-card warn">
       <h3>📉 ADV78 fadigou — confirmado</h3>
       <p>A curva é clara: <b>29 → 33 → 39 → 31 → 6</b>. O pico foi na semana de 22–28/06 e a queda
-        para 6 aplicações aconteceu <b>antes</b> da quebra do funil, então é fadiga real, não efeito da pausa.</p>
+        para 6 aplicações aconteceu <b>antes</b> da transição do funil, então é fadiga real, não efeito da pausa.</p>
       <p>O investimento nele já vinha sendo reduzido (só R$ 68 na última semana, contra R$ 6.021 no
         acumulado). <b>Está no fim do ciclo</b> — mesmo com o melhor CPA de aplicação do período (R$ 43,64).</p>
     </div>
@@ -839,7 +805,7 @@
       <div class="c">
         <h4>Religar escalonado — 24h em verba reduzida</h4>
         <p>Subir com cerca de <b>40% do orçamento normal</b> no primeiro dia. Confirmar aplicação real
-          entrando antes de voltar ao patamar de R$ 350/dia. O custo de repetir o erro é ~R$ 265/dia.</p>
+          entrando antes de voltar ao patamar normal de investimento.</p>
       </div>
     </div>
     <div class="step">
@@ -874,7 +840,7 @@
       <div class="c">
         <h4>Revisar os criativos que gastaram sem entregar</h4>
         <p><b>ADV50</b> (R$ 139), <b>ADV83</b> (R$ 63), <b>ADC004</b> (R$ 19) somam R$ 221 com zero
-          aplicações. Parte disso caiu na janela quebrada — vale um novo teste limpo antes de
+          aplicações. Parte disso caiu na janela de transição — vale um novo teste limpo antes de
           descartar de vez.</p>
       </div>
     </div>
