@@ -1,0 +1,912 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Distribuição de Conteúdos · Julho 2026 · Brito Mídias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --roxo:#7C3AED; --roxo-dark:#5B21B6; --roxo-deep:#3B0F73;
+    --roxo-light:#A78BFA; --roxo-xlight:#EDE9FE;
+    --preto:#0A0A0A; --ink:#141018; --cinza:#5B5566;
+    --linha:#E7E3EE; --bg:#FFFFFF; --bg-soft:#FAF9FC;
+    --verde:#16A34A; --amarelo:#D97706; --vermelho:#DC2626;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Poppins',system-ui,-apple-system,sans-serif;
+    font-weight:300;font-size:16px;line-height:1.6;
+    color:var(--ink);background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1100px;margin:0 auto;padding:0 28px}
+
+  /* ─────────── HERO ─────────── */
+  .hero{
+    position:relative;overflow:hidden;color:#fff;
+    background:
+      radial-gradient(1100px 500px at 78% -10%, rgba(124,58,237,.55), transparent 60%),
+      linear-gradient(150deg,#0A0A0A 0%,#17111F 45%,#3B0F73 100%);
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.14) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.14) 1px,transparent 1px);
+    background-size:44px 44px;
+    -webkit-mask-image:radial-gradient(circle at 50% 30%,#000 25%,transparent 72%);
+    mask-image:radial-gradient(circle at 50% 30%,#000 25%,transparent 72%);
+    pointer-events:none;
+  }
+  .hero-in{position:relative;padding:44px 0 56px}
+
+  .brand{display:flex;align-items:center;gap:16px}
+  .brand svg{width:52px;height:52px;flex-shrink:0}
+  .brand .word{display:flex;align-items:center;gap:14px;font-weight:300}
+  .brand .word b{font-weight:800;font-size:22px}
+  .brand .word .bar{width:2px;height:34px;background:rgba(255,255,255,.55)}
+  .brand .word span{font-size:22px;letter-spacing:.22em}
+
+  .hero h1{
+    font-weight:800;font-size:clamp(32px,5vw,52px);
+    letter-spacing:-.02em;line-height:1.1;margin-top:38px;
+    text-wrap:balance;
+  }
+  .hero .sub{
+    font-weight:300;font-size:17px;color:rgba(255,255,255,.72);
+    margin-top:14px;max-width:62ch;
+  }
+  .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .pill{
+    border:1px solid var(--roxo-light);color:#fff;border-radius:100px;
+    padding:8px 16px;font-size:12px;font-weight:600;
+    letter-spacing:.12em;text-transform:uppercase;
+  }
+  .pill.solid{background:linear-gradient(90deg,#7C3AED,#5B21B6);border-color:transparent}
+
+  .hero-kpis{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    margin-top:40px;background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.14);border-radius:16px;overflow:hidden;
+  }
+  .hk{background:rgba(10,10,10,.42);padding:20px 22px}
+  .hk small{
+    display:block;color:var(--roxo-light);font-size:11px;font-weight:600;
+    letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;
+  }
+  .hk b{display:block;font-size:26px;font-weight:700;letter-spacing:-.02em;
+    font-variant-numeric:tabular-nums;line-height:1.1}
+  .hk i{display:block;font-style:normal;font-size:12px;
+    color:rgba(255,255,255,.55);margin-top:5px}
+
+  /* ─────────── SEÇÕES ─────────── */
+  .sec{padding:64px 0}
+  .sec.soft{background:var(--bg-soft);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
+  .section-label{
+    display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--roxo);
+  }
+  .section-label::before{content:"";width:34px;height:2px;background:var(--roxo);border-radius:2px}
+  .sec h2{font-weight:700;font-size:clamp(24px,3vw,32px);letter-spacing:-.01em;
+    margin-top:14px;text-wrap:balance}
+  .sec h3.sub-h{font-weight:600;font-size:19px;margin-top:44px}
+  .sec .intro{color:var(--cinza);margin-top:12px;max-width:70ch}
+
+  /* ─────────── BLOCO DE CAMPANHA ─────────── */
+  .camp{
+    border:1px solid var(--linha);border-radius:20px;background:#fff;
+    overflow:hidden;margin-top:22px;
+  }
+  .camp-head{
+    display:flex;align-items:center;justify-content:space-between;gap:18px;
+    padding:22px 26px;background:linear-gradient(90deg,#7C3AED,#5B21B6);color:#fff;
+    flex-wrap:wrap;
+  }
+  .camp-head.alt{background:linear-gradient(135deg,#5B21B6 0%,#A78BFA 100%)}
+  .camp-head .ttl{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+  .camp-head .cod{font-weight:800;font-size:24px;letter-spacing:-.01em}
+  .camp-head .desc{font-weight:300;font-size:15px;color:rgba(255,255,255,.85)}
+  .camp-head .inv{text-align:right}
+  .camp-head .inv small{display:block;font-size:11px;font-weight:600;
+    letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+  .camp-head .inv b{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums}
+
+  .grid{display:grid;gap:1px;background:var(--linha)}
+  .grid.g4{grid-template-columns:repeat(4,1fr)}
+  .grid.g5{grid-template-columns:repeat(5,1fr)}
+  .cell{background:#fff;padding:20px 22px}
+  .cell small{
+    display:block;color:var(--roxo);font-size:11px;font-weight:600;
+    letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;line-height:1.35;
+  }
+  .cell b{display:block;font-size:23px;font-weight:700;letter-spacing:-.02em;
+    font-variant-numeric:tabular-nums;line-height:1.15}
+  .cell i{display:block;font-style:normal;font-size:12px;color:var(--cinza);margin-top:5px}
+  .cell.warn b{color:var(--vermelho)}
+  .cell.good b{color:var(--verde)}
+  .cell.hero-cell{background:#F5F1FE}
+  .cell.hero-cell b{font-size:27px;color:var(--roxo-dark)}
+
+  /* ─────────── TABELAS ─────────── */
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--linha);border-radius:16px;margin-top:22px;background:#fff}
+  table{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+  th{
+    text-align:left;font-size:11px;font-weight:600;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--roxo);padding:16px 18px;
+    border-bottom:1px solid var(--linha);white-space:nowrap;background:var(--bg-soft);
+  }
+  th:not(:first-child),td:not(:first-child){text-align:right}
+  td{padding:15px 18px;border-bottom:1px solid var(--linha);font-weight:400}
+  tr:last-child td{border-bottom:none}
+  tr.best td{background:#F5F1FE}
+  tr.best td:first-child{box-shadow:inset 3px 0 0 var(--roxo)}
+  tr.tot td{background:var(--bg-soft);font-weight:600}
+  .cre{display:flex;flex-direction:column;gap:4px;min-width:230px}
+  .cre a{color:var(--ink);font-weight:500;text-decoration:none;border-bottom:1.5px solid var(--roxo-light)}
+  .cre a:hover{color:var(--roxo);border-bottom-color:var(--roxo)}
+  .cre a:focus-visible{outline:2px solid var(--roxo);outline-offset:3px;border-radius:3px}
+  .cre span.nolink{font-weight:500;color:var(--ink)}
+  .cre em{font-style:normal;font-size:11.5px;color:var(--cinza)}
+  .tag{
+    display:inline-block;font-size:10px;font-weight:600;letter-spacing:.1em;
+    text-transform:uppercase;padding:3px 9px;border-radius:100px;
+    background:var(--roxo-xlight);color:var(--roxo-dark);
+  }
+  .tag.video{background:#DBEAFE;color:#1D4ED8}
+  .tag.carr{background:#FEF3C7;color:#92400E}
+
+  /* ─────────── CALLOUT ─────────── */
+  .callout{
+    border:1px solid var(--linha);border-left:4px solid var(--roxo);
+    border-radius:12px;padding:22px 26px;margin-top:22px;background:#fff;
+  }
+  .callout.red{border-left-color:var(--vermelho);background:#FEF2F2}
+  .callout.amber{border-left-color:var(--amarelo);background:#FFFBEB}
+  .callout.green{border-left-color:var(--verde);background:#F0FDF4}
+  .callout h3{font-size:15px;font-weight:700;margin-bottom:8px}
+  .callout.red h3{color:var(--vermelho)}
+  .callout.amber h3{color:var(--amarelo)}
+  .callout.green h3{color:var(--verde)}
+  .callout p{color:var(--cinza);font-size:14.5px}
+  .callout p + p{margin-top:10px}
+  .callout strong{color:var(--ink);font-weight:600}
+  .callout ul{margin:10px 0 0 20px;color:var(--cinza);font-size:14.5px}
+  .callout li{margin-top:6px}
+
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.62);padding:44px 0}
+  footer .brand svg{width:38px;height:38px}
+  footer .brand .word b{font-size:17px}
+  footer .brand .word span{font-size:17px}
+  footer .brand .word .bar{height:26px}
+  footer .fnote{margin-top:20px;font-size:13px;max-width:76ch;line-height:1.7}
+  footer a{color:var(--roxo-light);text-decoration:none;border-bottom:1px solid rgba(167,139,250,.4)}
+
+  @media (max-width:860px){
+    .hero-kpis{grid-template-columns:repeat(2,1fr)}
+    .grid.g4,.grid.g5{grid-template-columns:repeat(2,1fr)}
+    .duo{grid-template-columns:1fr}
+    .camp-head{flex-direction:column;align-items:flex-start}
+    .camp-head .inv{text-align:left}
+  }
+  @media (max-width:520px){
+    .hero-kpis{grid-template-columns:1fr}
+    .grid.g4,.grid.g5{grid-template-columns:1fr}
+    .brand .word span{font-size:17px;letter-spacing:.16em}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<!-- ══════════ HERO ══════════ -->
+<header class="hero">
+  <div class="wrap hero-in">
+    <div class="brand">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4"
+           stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+        <polygon points="50,33 65,59 35,59"></polygon>
+        <line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line>
+        <line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line>
+        <line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line>
+        <line x1="10" y1="27" x2="50" y2="33"></line>
+      </svg>
+      <span class="word"><b>BM</b><i class="bar"></i><span>MÍDIAS</span></span>
+    </div>
+
+    <h1>Distribuição de Conteúdos<br>Julho 2026</h1>
+    <p class="sub">Desempenho das três frentes de distribuição da Ana Tex —
+      seguidores, conteúdo e depoimentos — na conta ANEX 05.</p>
+
+    <div class="pills">
+      <span class="pill solid">01 – 20 JUL 2026</span>
+      <span class="pill">Conta ANEX 05</span>
+      <span class="pill">Meta Ads</span>
+    </div>
+
+    <div class="hero-kpis">
+      <div class="hk">
+        <small>Investimento total</small>
+        <b>R$ 4.774,19</b>
+        <i>estrutura C1/C2/C3 + impulsionamentos</i>
+      </div>
+      <div class="hk">
+        <small>Seguidores ganhos</small>
+        <b>2.195</b>
+        <i>atribuídos aos anúncios</i>
+      </div>
+      <div class="hk">
+        <small>Custo por seguidor</small>
+        <b>R$ 1,45</b>
+        <i>abaixo da média de R$ 1,50</i>
+      </div>
+      <div class="hk">
+        <small>Visitas ao perfil</small>
+        <b>9.289</b>
+        <i>R$ 0,51 por visita</i>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════ C1 ══════════ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="section-label">Campanha 1</div>
+    <h2>C1 — Seguidores</h2>
+    <p class="intro">Impulsionamento de publicações para trazer visitas ao perfil e converter em
+      seguidores. Três campanhas nomeadas rodando em julho, todas em carrossel, mais seis
+      impulsionamentos feitos direto pelo app.</p>
+
+    <div class="camp">
+      <div class="camp-head">
+        <div class="ttl">
+          <span class="cod">C1</span>
+          <span class="desc">Promover · Seguidores · 3 campanhas nomeadas</span>
+        </div>
+        <div class="inv">
+          <small>Investido em julho</small>
+          <b>R$ 1.970,92</b>
+        </div>
+      </div>
+      <div class="grid g4">
+        <div class="cell hero-cell">
+          <small>Seguidores</small>
+          <b>1.484</b>
+          <i>ganhos no período</i>
+        </div>
+        <div class="cell hero-cell">
+          <small>Custo por seguidor</small>
+          <b>R$ 1,33</b>
+          <i>meta de referência: R$ 1,50</i>
+        </div>
+        <div class="cell">
+          <small>Visitas no perfil</small>
+          <b>5.685</b>
+        </div>
+        <div class="cell good">
+          <small>Custo por visita</small>
+          <b>R$ 0,35</b>
+        </div>
+      </div>
+      <div class="grid g4">
+        <div class="cell">
+          <small>Conversão visita → seguidor</small>
+          <b>26,1%</b>
+          <i>1 a cada 4 visitas segue</i>
+        </div>
+        <div class="cell">
+          <small>Alcance</small>
+          <b>122.947</b>
+        </div>
+        <div class="cell good">
+          <small>Frequência</small>
+          <b>1,41</b>
+          <i>público fresco</i>
+        </div>
+        <div class="cell">
+          <small>Interações</small>
+          <b>10.139</b>
+          <i>R$ 0,19 cada</i>
+        </div>
+      </div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Criativo</th>
+            <th>Formato</th>
+            <th>Investimento</th>
+            <th>Seguidores</th>
+            <th>Custo/seguidor</th>
+            <th>Visitas perfil</th>
+            <th>Custo/visita</th>
+            <th>Freq.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="best">
+            <td><div class="cre"><span class="nolink">POST077_ADC017</span><em>"Pensa nas reuniões que você…" · 21.05.2026</em></div></td>
+            <td><span class="tag carr">Carrossel</span></td>
+            <td>R$ 698,61</td>
+            <td>654</td>
+            <td><strong>R$ 1,07</strong></td>
+            <td>1.730</td>
+            <td>R$ 0,40</td>
+            <td>1,45</td>
+          </tr>
+          <tr>
+            <td><div class="cre"><span class="nolink">POST082_ADC020</span><em>"Eu já perdi a conta de quantas…" · 27.05.2026</em></div></td>
+            <td><span class="tag carr">Carrossel</span></td>
+            <td>R$ 636,32</td>
+            <td>468</td>
+            <td>R$ 1,36</td>
+            <td>2.349</td>
+            <td><strong>R$ 0,27</strong></td>
+            <td>1,36</td>
+          </tr>
+          <tr>
+            <td><div class="cre"><span class="nolink">POST079_ADC019</span><em>"A maioria conhece o Claude…" · 16.05.2026</em></div></td>
+            <td><span class="tag carr">Carrossel</span></td>
+            <td>R$ 635,99</td>
+            <td>362</td>
+            <td>R$ 1,76</td>
+            <td>1.606</td>
+            <td>R$ 0,40</td>
+            <td>1,44</td>
+          </tr>
+          <tr class="tot">
+            <td>Total C1 nomeado</td>
+            <td>—</td>
+            <td>R$ 1.970,92</td>
+            <td>1.484</td>
+            <td>R$ 1,33</td>
+            <td>5.685</td>
+            <td>R$ 0,35</td>
+            <td>1,41</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout green">
+      <h3>Melhor criativo do C1 — POST077_ADC017</h3>
+      <p>Traz seguidor a <strong>R$ 1,07</strong>, contra R$ 1,36 e R$ 1,76 dos outros dois.
+        Também é o que mais gera salvamento (679) e comentário (106) — conteúdo que a pessoa
+        guarda é conteúdo que faz seguir.</p>
+      <p>Curiosidade útil: o <strong>POST082</strong> traz visita ao perfil mais barata (R$ 0,27),
+        mas converte pior — 19,9% das visitas viram seguidor, contra <strong>37,8% do POST077</strong>.
+        Trazer gente ao perfil é fácil; trazer a gente certa é o que o POST077 faz melhor.</p>
+      <p><strong>Próximo passo:</strong> escalar o POST077 e usar o ângulo dele ("reuniões / tempo perdido")
+        como base dos próximos carrosséis.</p>
+    </div>
+
+    <h3 class="sub-h">Impulsionamentos diretos pelo app</h3>
+    <p class="intro">Seis posts impulsionados fora da estrutura nomeada. Não entram na planilha de
+      distribuição porque não seguem a nomenclatura, mas geram seguidor e concorrem pelo mesmo orçamento.</p>
+
+    <div class="camp">
+      <div class="camp-head alt">
+        <div class="ttl">
+          <span class="cod">+6</span>
+          <span class="desc">Impulsionamentos via app do Instagram</span>
+        </div>
+        <div class="inv">
+          <small>Investido em julho</small>
+          <b>R$ 1.202,68</b>
+        </div>
+      </div>
+      <div class="grid g4">
+        <div class="cell"><small>Seguidores</small><b>711</b></div>
+        <div class="cell"><small>Custo por seguidor</small><b>R$ 1,69</b><i>27% acima do C1 nomeado</i></div>
+        <div class="cell"><small>Visitas no perfil</small><b>2.797</b></div>
+        <div class="cell"><small>Custo por visita</small><b>R$ 0,43</b></div>
+      </div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Post impulsionado</th>
+            <th>Investimento</th>
+            <th>Seguidores</th>
+            <th>Custo/seguidor</th>
+            <th>Visitas perfil</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="best">
+            <td><div class="cre"><span class="nolink">"Toda especialista tem aquele…"</span></div></td>
+            <td>R$ 535,62</td>
+            <td>527</td>
+            <td><strong>R$ 1,02</strong></td>
+            <td>1.220</td>
+          </tr>
+          <tr>
+            <td><div class="cre"><span class="nolink">"Você também tinha desistido de…"</span></div></td>
+            <td>R$ 128,32</td>
+            <td>53</td>
+            <td>R$ 2,42</td>
+            <td>297</td>
+          </tr>
+          <tr>
+            <td><div class="cre"><span class="nolink">"Eu pedi para o Claude Cowork…"</span></div></td>
+            <td>R$ 132,97</td>
+            <td>49</td>
+            <td>R$ 2,71</td>
+            <td>144</td>
+          </tr>
+          <tr>
+            <td><div class="cre"><span class="nolink">"Eu não tenho carro chique pra…"</span></div></td>
+            <td>R$ 134,46</td>
+            <td>45</td>
+            <td>R$ 2,99</td>
+            <td>235</td>
+          </tr>
+          <tr>
+            <td><div class="cre"><span class="nolink">"Esse é o maior problema de…"</span></div></td>
+            <td>R$ 135,33</td>
+            <td>35</td>
+            <td>R$ 3,87</td>
+            <td>133</td>
+          </tr>
+          <tr>
+            <td><div class="cre"><span class="nolink">"Toda semana sai uma ferramenta…"</span></div></td>
+            <td>R$ 135,98</td>
+            <td>2</td>
+            <td>R$ 67,99</td>
+            <td>768</td>
+          </tr>
+          <tr class="tot">
+            <td>Total impulsionamentos</td>
+            <td>R$ 1.202,68</td>
+            <td>711</td>
+            <td>R$ 1,69</td>
+            <td>2.797</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout amber">
+      <h3>Dois pontos de atenção aqui</h3>
+      <p><strong>"Toda especialista tem aquele…" é o melhor criativo de seguidor da conta inteira</strong> —
+        R$ 1,02, melhor até que o POST077. Está fora da estrutura nomeada, então não aparece na planilha
+        nem entra na análise do C1. Vale trazer pra estrutura.</p>
+      <p><strong>"Toda semana sai uma ferramenta…" queimou R$ 135,98 para 2 seguidores</strong> (R$ 67,99 cada),
+        mesmo trazendo 768 visitas ao perfil — o segundo maior volume de visitas do grupo. Traz gente,
+        mas a gente errada. Recomendo pausar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ C2 ══════════ -->
+<section class="sec soft">
+  <div class="wrap">
+    <div class="section-label">Campanha 2</div>
+    <h2>C2 — Conteúdo</h2>
+    <p class="intro">Duas campanhas em paralelo: uma de visualização de vídeo e outra de engajamento
+      com a publicação. Sete criativos ativos entre vídeos e carrosséis.</p>
+
+    <div class="camp">
+      <div class="camp-head">
+        <div class="ttl">
+          <span class="cod">C2</span>
+          <span class="desc">Engajamento · VideoView + Engajamento c/ post</span>
+        </div>
+        <div class="inv">
+          <small>Investido em julho</small>
+          <b>R$ 1.052,71</b>
+        </div>
+      </div>
+      <div class="grid g5">
+        <div class="cell">
+          <small>Reproduções 25%</small>
+          <b>5.931</b>
+        </div>
+        <div class="cell good">
+          <small>Custo por 25%</small>
+          <b>R$ 0,18</b>
+        </div>
+        <div class="cell">
+          <small>Retenção 25% → 95%</small>
+          <b>18,5%</b>
+          <i>1.099 chegaram a 95%</i>
+        </div>
+        <div class="cell good">
+          <small>Custo por engajamento</small>
+          <b>R$ 0,03</b>
+          <i>37.338 interações</i>
+        </div>
+        <div class="cell good">
+          <small>Frequência</small>
+          <b>2,91</b>
+          <i>dentro do aceitável</i>
+        </div>
+      </div>
+      <div class="grid g4">
+        <div class="cell"><small>Alcance</small><b>45.360</b></div>
+        <div class="cell"><small>Impressões</small><b>132.036</b></div>
+        <div class="cell"><small>Reproduções 3s</small><b>35.982</b></div>
+        <div class="cell"><small>Visitas no perfil</small><b>747</b><i>efeito secundário</i></div>
+      </div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Criativo</th>
+            <th>Formato</th>
+            <th>Investimento</th>
+            <th>Repr. 25%</th>
+            <th>Custo/25%</th>
+            <th>Retenção 25→95</th>
+            <th>Custo/engaj.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="best">
+            <td><div class="cre"><a href="https://www.instagram.com/p/DTIh9HKjj4M/" target="_blank" rel="noopener">POST050_IGANEX</a><em>"Robô de 30 mil reais…" · 05.01.2026</em></div></td>
+            <td><span class="tag video">Vídeo</span></td>
+            <td>R$ 435,57</td>
+            <td>5.114</td>
+            <td><strong>R$ 0,09</strong></td>
+            <td>17,4%</td>
+            <td><strong>R$ 0,01</strong></td>
+          </tr>
+          <tr class="best">
+            <td><div class="cre"><a href="https://www.instagram.com/p/DY-K06TjhAy/" target="_blank" rel="noopener">POST088_ADC025</a><em>"Comenta ESPECIALISTA que eu te mando…" · 30.05.2026</em></div></td>
+            <td><span class="tag carr">Carrossel</span></td>
+            <td>R$ 370,43</td>
+            <td>689</td>
+            <td>R$ 0,54</td>
+            <td>22,4%</td>
+            <td><strong>R$ 0,28</strong></td>
+          </tr>
+          <tr>
+            <td><div class="cre"><a href="https://www.instagram.com/p/DYkGalPjt4P/" target="_blank" rel="noopener">POST083_ADC021</a><em>"Toda vez que eu pergunto pra uma especialista…" · 20.05.2026</em></div></td>
+            <td><span class="tag carr">Carrossel</span></td>
+            <td>R$ 53,55</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td>R$ 0,30</td>
+          </tr>
+          <tr>
+            <td><div class="cre"><a href="https://www.instagram.com/p/DYZ8yb2uDgv/" target="_blank" rel="noopener">POST084_ADV007</a><em>"Se você é mentora e não tá usando IA…" · 17.05.2026</em></div></td>
+            <td><span class="tag video">Vídeo</span></td>
+            <td>R$ 15,61</td>
+            <td>25</td>
+            <td>R$ 0,62</td>
+            <td><strong>60,0%</strong></td>
+            <td>R$ 0,03</td>
+          </tr>
+          <tr>
+            <td><div class="cre"><a href="https://www.instagram.com/p/DZDtKAvmTQF/" target="_blank" rel="noopener">POST089_ADC026</a><em>"Tem uma cena que se repete entre as especialistas…" · 01.06.2026</em></div></td>
+            <td><span class="tag carr">Carrossel</span></td>
+            <td>R$ 161,91</td>
+            <td>100</td>
+            <td>R$ 1,62</td>
+            <td>38,0%</td>
+            <td>R$ 0,41</td>
+          </tr>
+          <tr>
+            <td><div class="cre"><a href="https://www.instagram.com/p/DYxrfb0mS1N/" target="_blank" rel="noopener">POST087_ADC024</a><em>"Faz a conta: 5 tarefas que você mais repetiu…" · 25.05.2026</em></div></td>
+            <td><span class="tag carr">Carrossel</span></td>
+            <td>R$ 15,43</td>
+            <td>3</td>
+            <td>—</td>
+            <td>—</td>
+            <td>R$ 0,48</td>
+          </tr>
+          <tr>
+            <td><div class="cre"><a href="https://www.instagram.com/p/DYhkbrrjik6/" target="_blank" rel="noopener">POST090_ADC027</a><em>"Você viu os números, agora vamos à parte que importa…" · 19.05.2026</em></div></td>
+            <td><span class="tag carr">Carrossel</span></td>
+            <td>R$ 2,69</td>
+            <td>1</td>
+            <td>—</td>
+            <td>—</td>
+            <td>R$ 0,90</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="duo">
+      <div class="callout green">
+        <h3>Melhor vídeo — POST050_IGANEX</h3>
+        <p>Reprodução de 25% a <strong>R$ 0,09</strong> e engajamento a <strong>R$ 0,01</strong>.
+          Sozinho concentra 34.457 das 35.982 reproduções de 3s do C2 — é o motor da campanha.</p>
+        <p>Retenção até 95% de 17,4% é o ponto fraco: prende no início, perde no meio.
+          <strong>Testar um corte mais curto</strong> desse mesmo criativo.</p>
+      </div>
+      <div class="callout green">
+        <h3>Melhor carrossel — POST088_ADC025</h3>
+        <p>Engajamento a <strong>R$ 0,28</strong>, o menor entre os carrosséis com volume relevante,
+          e a melhor retenção da faixa com investimento alto (22,4%).</p>
+        <p>É um criativo de CTA direto ("comenta ESPECIALISTA") — vale testar o mesmo mecanismo
+          nos outros carrosséis.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <h3>Leitura de retenção</h3>
+      <p>O <strong>POST084_ADV007</strong> tem retenção de <strong>60%</strong> — de longe a melhor —
+        mas rodou com só R$ 15,61 e 25 reproduções. Volume baixo demais pra concluir, e ao mesmo tempo
+        bom demais pra ignorar. <strong>Recomendo subir a verba dele</strong> pra validar se a retenção se sustenta.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ C3 ══════════ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="section-label">Campanha 3</div>
+    <h2>C3 — Depoimentos</h2>
+    <p class="intro">Prova social em vídeo. Uma campanha ativa, dois criativos — e o principal
+      ponto de atenção do mês.</p>
+
+    <div class="camp">
+      <div class="camp-head">
+        <div class="ttl">
+          <span class="cod">C3</span>
+          <span class="desc">Engajamento c/ post · Depoimentos</span>
+        </div>
+        <div class="inv">
+          <small>Investido em julho</small>
+          <b>R$ 547,88</b>
+        </div>
+      </div>
+      <div class="grid g5">
+        <div class="cell">
+          <small>Reproduções 25%</small>
+          <b>93</b>
+        </div>
+        <div class="cell warn">
+          <small>Custo por 25%</small>
+          <b>R$ 5,89</b>
+          <i>33× o custo do C2</i>
+        </div>
+        <div class="cell">
+          <small>Retenção 25% → 95%</small>
+          <b>17,2%</b>
+          <i>16 chegaram a 95%</i>
+        </div>
+        <div class="cell">
+          <small>Custo por engajamento</small>
+          <b>R$ 0,77</b>
+          <i>710 interações</i>
+        </div>
+        <div class="cell warn">
+          <small>Frequência</small>
+          <b>13,16</b>
+          <i>crítico — ver alerta</i>
+        </div>
+      </div>
+      <div class="grid g4">
+        <div class="cell warn"><small>Alcance</small><b>5.173</b><i>público muito pequeno</i></div>
+        <div class="cell"><small>Impressões</small><b>68.100</b></div>
+        <div class="cell"><small>Reproduções 3s</small><b>244</b></div>
+        <div class="cell warn"><small>Visitas no perfil</small><b>57</b><i>R$ 9,61 cada</i></div>
+      </div>
+    </div>
+
+    <div class="callout red">
+      <h3>Alerta crítico — frequência 13,16</h3>
+      <p>O C3 entregou <strong>68.100 impressões para apenas 5.173 pessoas</strong>. Cada pessoa viu
+        o anúncio, em média, <strong>13 vezes</strong> em 20 dias. Isso é saturação de público, não distribuição.</p>
+      <p>É o que explica o custo por reprodução de 25% em <strong>R$ 5,89</strong> — 33 vezes o valor do C2
+        (R$ 0,18) — e a visita ao perfil a R$ 9,61, contra R$ 0,35 no C1. A verba está sendo queimada
+        remostrando o mesmo vídeo pra mesma gente.</p>
+      <p><strong>O que fazer agora:</strong></p>
+      <ul>
+        <li>Abrir o público — o segmento atual é estreito demais pro orçamento que está entrando.</li>
+        <li>Se o público precisa continuar restrito, <strong>cortar a verba diária</strong> pela metade.</li>
+        <li>Subir criativos novos de depoimento: com frequência 13, o problema também é falta de variação.</li>
+      </ul>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Criativo</th>
+            <th>Formato</th>
+            <th>Investimento</th>
+            <th>Repr. 25%</th>
+            <th>Custo/25%</th>
+            <th>Retenção 25→95</th>
+            <th>Custo/engaj.</th>
+            <th>Freq.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="best">
+            <td><div class="cre"><span class="nolink">POST092_ADC029</span><em>"Dá o play e…" · 22.06.2026</em></div></td>
+            <td><span class="tag carr">Carrossel</span></td>
+            <td>R$ 291,14</td>
+            <td>86</td>
+            <td><strong>R$ 3,39</strong></td>
+            <td>18,6%</td>
+            <td><strong>R$ 0,62</strong></td>
+            <td>8,15</td>
+          </tr>
+          <tr>
+            <td><div class="cre"><span class="nolink">POST091_ADC028</span><em>"A especialista que me…" · 18.06.2026</em></div></td>
+            <td><span class="tag carr">Carrossel</span></td>
+            <td>R$ 253,92</td>
+            <td>6</td>
+            <td>R$ 42,32</td>
+            <td>—</td>
+            <td>R$ 1,06</td>
+            <td>6,98</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout green">
+      <h3>Melhor criativo do C3 — POST092_ADC029</h3>
+      <p>Ganha nas duas métricas: reprodução de 25% a <strong>R$ 3,39</strong> contra R$ 42,32 do POST091
+        (12× mais barato), e engajamento a <strong>R$ 0,62</strong> contra R$ 1,06.</p>
+      <p>O POST091 praticamente não gera reprodução de vídeo — 6 no mês inteiro, com R$ 253,92 investidos.
+        <strong>Recomendo pausar o POST091</strong> e realocar essa verba.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CONSOLIDADO ══════════ -->
+<section class="sec soft">
+  <div class="wrap">
+    <div class="section-label">Visão consolidada</div>
+    <h2>As frentes lado a lado</h2>
+    <p class="intro">Objetivos diferentes, então as métricas de eficiência não se comparam
+      diretamente entre C1 e C2/C3. O que se compara é a saúde da entrega e o preço da atenção.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Frente</th>
+            <th>Investimento</th>
+            <th>% verba</th>
+            <th>Alcance</th>
+            <th>Freq.</th>
+            <th>Seguidores</th>
+            <th>Custo/seguidor</th>
+            <th>Interações</th>
+            <th>Custo/interação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>C1</strong> — Seguidores</td>
+            <td>R$ 1.970,92</td>
+            <td>41,3%</td>
+            <td>122.947</td>
+            <td>1,41</td>
+            <td>1.484</td>
+            <td>R$ 1,33</td>
+            <td>10.139</td>
+            <td>R$ 0,19</td>
+          </tr>
+          <tr>
+            <td><strong>+6</strong> — Impulsionamentos</td>
+            <td>R$ 1.202,68</td>
+            <td>25,2%</td>
+            <td>—</td>
+            <td>—</td>
+            <td>711</td>
+            <td>R$ 1,69</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><strong>C2</strong> — Conteúdo</td>
+            <td>R$ 1.052,71</td>
+            <td>22,0%</td>
+            <td>45.360</td>
+            <td>2,91</td>
+            <td>18</td>
+            <td>—</td>
+            <td>37.338</td>
+            <td>R$ 0,03</td>
+          </tr>
+          <tr>
+            <td><strong>C3</strong> — Depoimentos</td>
+            <td>R$ 547,88</td>
+            <td>11,5%</td>
+            <td>5.173</td>
+            <td>13,16</td>
+            <td>—</td>
+            <td>—</td>
+            <td>710</td>
+            <td>R$ 0,77</td>
+          </tr>
+          <tr class="tot">
+            <td><strong>Total distribuição</strong></td>
+            <td><strong>R$ 4.774,19</strong></td>
+            <td>100%</td>
+            <td>—</td>
+            <td>—</td>
+            <td><strong>2.195</strong></td>
+            <td><strong>R$ 1,45</strong></td>
+            <td>48.187</td>
+            <td>R$ 0,10</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="duo">
+      <div class="callout green">
+        <h3>O que está bom</h3>
+        <p><strong>O custo por seguidor fechou em R$ 1,45</strong> — abaixo da média de referência de
+          R$ 1,50, com 2.195 seguidores no mês. E o C1 mantém frequência 1,41: quase todo mundo vendo
+          pela primeira vez, exatamente o que uma campanha de seguidores precisa.</p>
+        <p>O <strong>C2 é a frente mais eficiente em atenção</strong>: 22% da verba gerando 77% de
+          todas as interações, a R$ 0,03 cada.</p>
+      </div>
+      <div class="callout red">
+        <h3>O que precisa mudar</h3>
+        <p>O <strong>C3 consome 11,5% da verba entregando 1,5% das interações</strong>, com frequência
+          9× maior que o C1. É a maior oportunidade de correção do mês — e é correção de
+          segmentação, não de criativo.</p>
+        <p>Os <strong>impulsionamentos diretos custam 27% mais caro por seguidor</strong> que a
+          estrutura nomeada, e um deles (R$ 67,99 por seguidor) está claramente queimando verba.</p>
+      </div>
+    </div>
+
+    <div class="callout amber">
+      <h3>Próximos passos recomendados</h3>
+      <ul>
+        <li><strong>Escalar POST077_ADC017</strong> — melhor conversão visita → seguidor (37,8%) da estrutura.</li>
+        <li><strong>Trazer "Toda especialista tem aquele…" pra estrutura nomeada</strong> — é o melhor custo por seguidor da conta (R$ 1,02) e está fora do controle da planilha.</li>
+        <li><strong>Pausar "Toda semana sai uma ferramenta…"</strong> — R$ 67,99 por seguidor.</li>
+        <li><strong>Pausar POST091_ADC028</strong> no C3 — R$ 253,92 para 6 reproduções.</li>
+        <li><strong>Abrir o público do C3</strong> ou cortar a verba diária pela metade.</li>
+        <li><strong>Subir a verba do POST084_ADV007</strong> pra validar a retenção de 60%.</li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <h3>Pendências de cadastro</h3>
+      <p>Faltam <strong>5 links de criativo</strong> na planilha CRIATIVOS LINKS: POST077, POST079 e
+        POST082 (C1) e POST091, POST092 (C3). A API do Meta não devolve o permalink do Instagram
+        nesta conta, então esses precisam ser preenchidos manualmente. Os 7 criativos do C2 já estão clicáveis acima.</p>
+      <p>A <strong>renomeação dos criativos</strong> também segue pendente — quando concluída, entram os
+        nomes completos no lugar dos códigos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="wrap">
+    <div class="brand">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4"
+           stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+        <polygon points="50,33 65,59 35,59"></polygon>
+        <line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line>
+        <line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line>
+        <line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line>
+        <line x1="10" y1="27" x2="50" y2="33"></line>
+      </svg>
+      <span class="word"><b>BM</b><i class="bar"></i><span>MÍDIAS</span></span>
+    </div>
+    <p class="fnote">
+      Relatório de Distribuição de Conteúdos · Marketex (Ana Tex) · conta ANEX 05 · 01 a 20 de julho de 2026.<br>
+      Investimento, alcance, frequência e métricas de vídeo via API do Meta Ads. Seguidores e visitas ao perfil
+      via Gerenciador de Anúncios — essas duas métricas não são expostas pela API. Valores brutos, sem imposto.<br>
+      Central de Estratégia e Resultados · <a href="mailto:rafael@britomidias.com.br">rafael@britomidias.com.br</a>
+    </p>
+  </div>
+</footer>
