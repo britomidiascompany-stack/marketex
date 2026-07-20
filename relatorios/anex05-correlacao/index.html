@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANEX05 × Vendas — Correlação Semanal | Brito Mídias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body {
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: #060612;
+  color: #e2e8f0;
+  min-height: 100vh;
+}
+
+/* ── HERO ─────────────────────────────────────────── */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, #0d0824 0%, #13072e 40%, #06121f 100%);
+  padding: 56px 24px 48px;
+  text-align: center;
+  border-bottom: 1px solid rgba(124,58,237,0.25);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 47px, rgba(124,58,237,0.07) 48px),
+    repeating-linear-gradient(90deg, transparent, transparent 47px, rgba(124,58,237,0.07) 48px);
+  pointer-events: none;
+}
+.hero-glow {
+  position: absolute;
+  top: -60px; left: 50%;
+  transform: translateX(-50%);
+  width: 500px; height: 300px;
+  background: radial-gradient(ellipse, rgba(124,58,237,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(124,58,237,0.12);
+  border: 1px solid rgba(124,58,237,0.35);
+  color: #a78bfa;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 16px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+}
+.hero h1 {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 14px;
+  background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 60%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: 14px;
+  color: #94a3b8;
+  line-height: 1.6;
+  max-width: 560px;
+  margin: 0 auto 24px;
+}
+.hero-meta {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 12px;
+  color: #475569;
+}
+.hero-meta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.hero-meta span::before { content: '▸'; color: #7c3aed; }
+
+/* ── STATS ────────────────────────────────────────── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.stat-item {
+  background: rgba(6,6,18,0.95);
+  padding: 24px 20px;
+  text-align: center;
+  transition: background .2s;
+}
+.stat-item:hover { background: rgba(124,58,237,0.06); }
+.stat-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #475569;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.stat-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-value.green { color: #34d399; }
+.stat-value.purple { color: #a78bfa; }
+.stat-sub {
+  font-size: 11px;
+  color: #64748b;
+}
+
+/* ── LAYOUT ──────────────────────────────────────── */
+.page { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 36px 0 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: #7c3aed;
+}
+.section-header::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(124,58,237,0.4), transparent);
+}
+
+/* ── CHART BOX ───────────────────────────────────── */
+.chart-box {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 12px;
+}
+.chart-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.chart-title { font-size: 15px; font-weight: 700; color: #fff; }
+.chart-desc { font-size: 12px; color: #64748b; margin-top: 3px; }
+.legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.leg-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+.leg-bar { width: 12px; height: 12px; border-radius: 3px; }
+.leg-line { width: 22px; height: 3px; border-radius: 2px; }
+
+#mainChart { width: 100%; display: block; overflow: visible; }
+
+/* ── TABLE ───────────────────────────────────────── */
+.table-box {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  overflow: hidden;
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 580px;
+}
+thead th {
+  padding: 12px 14px;
+  text-align: right;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #475569;
+  background: rgba(0,0,0,0.2);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  white-space: nowrap;
+}
+thead th:first-child { text-align: left; }
+tbody tr {
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background .15s;
+}
+tbody tr:hover { background: rgba(255,255,255,0.03); }
+tbody tr.anomaly-row { background: rgba(249,115,22,0.04); }
+tbody tr.anomaly-row:hover { background: rgba(249,115,22,0.07); }
+tbody tr.peak-row { background: rgba(16,185,129,0.04); }
+tbody td {
+  padding: 13px 14px;
+  text-align: right;
+  color: #cbd5e1;
+  white-space: nowrap;
+}
+tbody td:first-child { text-align: left; font-weight: 700; }
+.week-label { color: #a78bfa; }
+.badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+.badge-warn { background: rgba(249,115,22,0.15); color: #fb923c; }
+.badge-peak { background: rgba(16,185,129,0.15); color: #34d399; }
+.anex-val { color: #34d399; font-weight: 600; }
+.pct-val { color: #64748b; font-size: 12px; }
+.conv-val { color: #fff; font-weight: 600; }
+.anomaly-row .conv-val { color: #fb923c; }
+.peak-row .conv-val { color: #34d399; }
+
+/* ── INSIGHT CARDS ───────────────────────────────── */
+.insights {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 4px;
+}
+.ins-card {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 20px;
+}
+.ins-card.purple { border-color: rgba(124,58,237,0.3); background: rgba(124,58,237,0.05); }
+.ins-card.green { border-color: rgba(16,185,129,0.25); background: rgba(16,185,129,0.04); }
+.ins-card.orange { border-color: rgba(249,115,22,0.25); background: rgba(249,115,22,0.04); }
+.ins-title {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.ins-card.purple .ins-title { color: #a78bfa; }
+.ins-card.green .ins-title { color: #34d399; }
+.ins-card.orange .ins-title { color: #fb923c; }
+.ins-card:not(.purple):not(.green):not(.orange) .ins-title { color: #94a3b8; }
+.ins-text {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #94a3b8;
+}
+.ins-text strong { color: #e2e8f0; }
+
+/* ── FOOTER ──────────────────────────────────────── */
+footer {
+  margin-top: 48px;
+  padding: 24px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  text-align: center;
+  font-size: 11px;
+  color: #334155;
+  background: rgba(0,0,0,0.25);
+}
+footer strong { color: #7c3aed; }
+footer a { color: #475569; text-decoration: none; }
+
+@media (max-width: 640px) {
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .hero h1 { font-size: 26px; }
+  .insights { grid-template-columns: 1fr; }
+  .chart-top { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">Análise de Correlação · ANEX05</div>
+    <h1>Distribuição × Vendas<br>Correlação Semanal</h1>
+    <p class="hero-sub">
+      Quanto investimos por semana na conta de distribuição (ANEX05 — Posts, C1, C2, C3) versus as conversões totais naquela semana — 9 semanas de lançamento.
+    </p>
+    <div class="hero-meta">
+      <span>18 Mai – 19 Jul 2026</span>
+      <span>LS001 → LS009</span>
+      <span>ANEX05 · Distribuição & Leads</span>
+      <span>20/07/2026</span>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat-item">
+    <div class="stat-label">Total Investido ANEX05</div>
+    <div class="stat-value purple">R$6.879</div>
+    <div class="stat-sub">em 9 semanas · R$765/sem média</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-label">Crescimento ANEX05</div>
+    <div class="stat-value green">38×</div>
+    <div class="stat-sub">R$60 → R$2.259 / semana</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-label">Total Conversões</div>
+    <div class="stat-value">3.249</div>
+    <div class="stat-sub">pixel · todas as semanas</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-label">Semana Pico</div>
+    <div class="stat-value green">567</div>
+    <div class="stat-sub">LS007 · 29/06–05/07</div>
+  </div>
+</div>
+
+<!-- CHART -->
+<div class="page">
+  <div class="section-header">Correlação semanal</div>
+  <div class="chart-box">
+    <div class="chart-top">
+      <div>
+        <div class="chart-title">Invest. ANEX05 vs. Conversões por Semana</div>
+        <div class="chart-desc">Barras = Conversões pixel (eixo esq.) &nbsp;·&nbsp; Linha = Invest. ANEX05 (eixo dir.)</div>
+      </div>
+      <div class="legend">
+        <div class="leg-item"><div class="leg-bar" style="background:#7c3aed;opacity:.7"></div> Conversões</div>
+        <div class="leg-item"><div class="leg-bar" style="background:#f97316;opacity:.5"></div> Anomalia</div>
+        <div class="leg-item"><div class="leg-bar" style="background:#34d399;opacity:.7"></div> Pico</div>
+        <div class="leg-item"><div class="leg-line" style="background:#10b981"></div> Invest. ANEX05</div>
+      </div>
+    </div>
+    <svg id="mainChart" viewBox="0 0 740 330"></svg>
+  </div>
+
+  <!-- TABLE -->
+  <div class="section-header">Dados semana a semana</div>
+  <div class="table-box">
+    <table>
+      <thead>
+        <tr>
+          <th>Semana</th>
+          <th>Período</th>
+          <th>Invest. ANEX05</th>
+          <th>% do Total</th>
+          <th>LPV</th>
+          <th>Conversões</th>
+          <th>Conv. Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="week-label">LS001</span></td>
+          <td>18–24 Mai</td>
+          <td class="anex-val">R$59,63</td>
+          <td class="pct-val">0,14%</td>
+          <td>10.070</td>
+          <td class="conv-val">373</td>
+          <td>3,70%</td>
+        </tr>
+        <tr>
+          <td><span class="week-label">LS002</span></td>
+          <td>25–31 Mai</td>
+          <td class="anex-val">R$257,51</td>
+          <td class="pct-val">0,47%</td>
+          <td>12.826</td>
+          <td class="conv-val">418</td>
+          <td>3,26%</td>
+        </tr>
+        <tr>
+          <td><span class="week-label">LS003</span></td>
+          <td>01–07 Jun</td>
+          <td class="anex-val">R$252,01</td>
+          <td class="pct-val">0,52%</td>
+          <td>9.943</td>
+          <td class="conv-val">328</td>
+          <td>3,30%</td>
+        </tr>
+        <tr class="anomaly-row">
+          <td><span class="week-label">LS004</span><span class="badge badge-warn">anomalia</span></td>
+          <td>08–14 Jun</td>
+          <td class="anex-val">R$271,80</td>
+          <td class="pct-val">1,17%</td>
+          <td>4.597</td>
+          <td class="conv-val">131</td>
+          <td>2,85%</td>
+        </tr>
+        <tr>
+          <td><span class="week-label">LS005</span></td>
+          <td>15–21 Jun</td>
+          <td class="anex-val">R$599,64</td>
+          <td class="pct-val">1,27%</td>
+          <td>9.300</td>
+          <td class="conv-val">375</td>
+          <td>4,03%</td>
+        </tr>
+        <tr>
+          <td><span class="week-label">LS006</span></td>
+          <td>22–28 Jun</td>
+          <td class="anex-val">R$674,06</td>
+          <td class="pct-val">0,93%</td>
+          <td>12.782</td>
+          <td class="conv-val">459</td>
+          <td>3,59%</td>
+        </tr>
+        <tr class="peak-row">
+          <td><span class="week-label">LS007</span><span class="badge badge-peak">pico</span></td>
+          <td>29 Jun–05 Jul</td>
+          <td class="anex-val">R$1.147,44</td>
+          <td class="pct-val">1,68%</td>
+          <td>14.346</td>
+          <td class="conv-val">567</td>
+          <td>3,95%</td>
+        </tr>
+        <tr>
+          <td><span class="week-label">LS008</span></td>
+          <td>06–12 Jul</td>
+          <td class="anex-val">R$1.357,90</td>
+          <td class="pct-val">2,37%</td>
+          <td>12.480</td>
+          <td class="conv-val">473</td>
+          <td>3,79%</td>
+        </tr>
+        <tr>
+          <td><span class="week-label">LS009</span></td>
+          <td>13–19 Jul</td>
+          <td class="anex-val">R$2.258,88</td>
+          <td class="pct-val">3,68%</td>
+          <td>14.711</td>
+          <td class="conv-val">525</td>
+          <td>3,57%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- INSIGHTS -->
+  <div class="section-header">Análise</div>
+  <div class="insights">
+    <div class="ins-card purple">
+      <div class="ins-title">📈 Tendência: correlação positiva</div>
+      <div class="ins-text">
+        Excluindo LS004 (semana morta), as conversões cresceram de <strong>373</strong> (LS001) para <strong>525</strong> (LS009), com pico de <strong>567</strong> no LS007. No mesmo período, o ANEX05 saiu de <strong>R$60</strong> para <strong>R$2.259/semana</strong> — crescimento de <strong>38×</strong>. Os melhores resultados (LS006, LS007, LS009) coincidem com os maiores investimentos em distribuição.
+      </div>
+    </div>
+    <div class="ins-card orange">
+      <div class="ins-title">⚠️ LS004: outlier — semana morta</div>
+      <div class="ins-text">
+        LS004 (08–14/06) teve apenas <strong>131 conversões</strong> com investimento total de R$23.248 — menos da metade das outras semanas. Mesmo com ANEX05 ativo (R$272), sem campanhas de captação rodando o efeito da distribuição se perde. Isso confirma que o ANEX05 <strong>amplifica</strong> um lançamento ativo, não substitui ele.
+      </div>
+    </div>
+    <div class="ins-card green">
+      <div class="ins-title">🎯 O que o ANEX05 faz</div>
+      <div class="ins-text">
+        Campanhas C1 (Promover Seguidores), C2 (Engajamento de Vídeo), C3 (Engajamento com Post) + impulsionamentos de posts orgânicos constroem audiência aquecida ao longo das semanas. Quem já seguiu ou interagiu com o perfil responde melhor aos anúncios de captação — <strong>menor CPM, maior CTR e taxa de conversão estável (~3,6%)</strong> mesmo com volume crescente.
+      </div>
+    </div>
+    <div class="ins-card">
+      <div class="ins-title">💡 Sobre o orgânico e o site</div>
+      <div class="ins-text">
+        As conversões mostradas são via <em>pixel Meta</em> (tráfego majoritariamente pago). Vendas puramente orgânicas — bio do Instagram, WhatsApp direto, Google — <strong>não são capturadas aqui</strong>. O efeito real do ANEX05 no orgânico é subestimado neste dado: a distribuição aquece audiências que convertem por canais não rastreados. O impacto total é maior do que o gráfico mostra.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Brito Mídias</strong> &nbsp;·&nbsp; Análise ANEX05 Distribuição &amp; Leads &nbsp;·&nbsp; 20/07/2026<br>
+  Dados: Meta Ads (ANEX05 · 870034975015887) + VK Metrics (pixel platform_purchases) &nbsp;·&nbsp; LS001→LS009 · 18 Mai–19 Jul 2026
+</footer>
+
+<script>
+const data = [
+  {ls:'LS001', purch:373, anex:59.63,   anomaly:false, peak:false},
+  {ls:'LS002', purch:418, anex:257.51,  anomaly:false, peak:false},
+  {ls:'LS003', purch:328, anex:252.01,  anomaly:false, peak:false},
+  {ls:'LS004', purch:131, anex:271.80,  anomaly:true,  peak:false},
+  {ls:'LS005', purch:375, anex:599.64,  anomaly:false, peak:false},
+  {ls:'LS006', purch:459, anex:674.06,  anomaly:false, peak:false},
+  {ls:'LS007', purch:567, anex:1147.44, anomaly:false, peak:true },
+  {ls:'LS008', purch:473, anex:1357.90, anomaly:false, peak:false},
+  {ls:'LS009', purch:525, anex:2258.88, anomaly:false, peak:false},
+];
+
+const svg = document.getElementById('mainChart');
+const W=740, H=330;
+const PAD={top:28,right:68,bottom:52,left:58};
+const CW = W-PAD.left-PAD.right;
+const CH = H-PAD.top-PAD.bottom;
+const n = data.length;
+const slotW = CW/n;
+const barW = slotW*0.52;
+
+const maxP=600, maxA=2600;
+const scaleP = v => PAD.top + CH - (v/maxP*CH);
+const scaleA = v => PAD.top + CH - (v/maxA*CH);
+const barX  = i => PAD.left + i*slotW + (slotW-barW)/2;
+const midX  = i => PAD.left + i*slotW + slotW/2;
+
+let out='';
+
+// ── Background grid
+for(let i=0;i<=6;i++){
+  const y = PAD.top + CH - (i/6*CH);
+  out += `<line x1="${PAD.left}" y1="${y.toFixed(1)}" x2="${PAD.left+CW}" y2="${y.toFixed(1)}" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>`;
+  const pv = Math.round(i/6*maxP);
+  out += `<text x="${PAD.left-10}" y="${(y+4).toFixed(1)}" text-anchor="end" fill="#475569" font-size="10" font-family="inherit">${pv}</text>`;
+  const av = Math.round(i/6*maxA);
+  const alabel = av>=1000 ? 'R$'+(av/1000).toFixed(1)+'k' : 'R$'+av;
+  out += `<text x="${PAD.left+CW+10}" y="${(y+4).toFixed(1)}" text-anchor="start" fill="#065f46" font-size="10" font-family="inherit">${alabel}</text>`;
+}
+
+// ── Bars
+data.forEach((d,i)=>{
+  const x = barX(i);
+  const y = scaleP(d.purch);
+  const h = PAD.top+CH - y;
+  const color = d.anomaly ? '#f97316' : d.peak ? '#10b981' : '#7c3aed';
+  const opacity = d.anomaly ? 0.4 : 0.65;
+  out += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${h.toFixed(1)}" fill="${color}" opacity="${opacity}" rx="4"/>`;
+  // Value label
+  const lcolor = d.anomaly ? '#fb923c' : d.peak ? '#34d399' : '#a78bfa';
+  out += `<text x="${(x+barW/2).toFixed(1)}" y="${(y-6).toFixed(1)}" text-anchor="middle" fill="${lcolor}" font-size="11" font-weight="700" font-family="inherit">${d.purch}</text>`;
+  // X label
+  out += `<text x="${midX(i).toFixed(1)}" y="${PAD.top+CH+20}" text-anchor="middle" fill="#64748b" font-size="11" font-family="inherit">${d.ls}</text>`;
+});
+
+// ── ANEX05 area fill (subtle)
+let aPath = '';
+data.forEach((d,i)=>{
+  const x = midX(i), y = scaleA(d.anex);
+  aPath += (i===0 ? `M${x.toFixed(1)},${y.toFixed(1)}` : ` L${x.toFixed(1)},${y.toFixed(1)}`);
+});
+const lastX = midX(n-1), baseY = PAD.top+CH, firstX = midX(0);
+out += `<path d="${aPath} L${lastX.toFixed(1)},${baseY} L${firstX.toFixed(1)},${baseY} Z" fill="rgba(16,185,129,0.07)"/>`;
+
+// ── ANEX05 line
+out += `<path d="${aPath}" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`;
+
+// ── ANEX05 dots + selected labels
+data.forEach((d,i)=>{
+  const x = midX(i), y = scaleA(d.anex);
+  const big = i===0||i===n-1||d.peak;
+  out += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${big?5:3.5}" fill="#10b981" stroke="#060612" stroke-width="${big?2:1.5}"/>`;
+  if(i===0||i===n-1||d.peak){
+    const label = d.anex>=1000 ? 'R$'+(d.anex/1000).toFixed(2)+'k' : 'R$'+d.anex.toFixed(0);
+    const yOff = y < PAD.top+24 ? 18 : -10;
+    out += `<text x="${x.toFixed(1)}" y="${(y+yOff).toFixed(1)}" text-anchor="middle" fill="#34d399" font-size="10" font-weight="700" font-family="inherit">${label}</text>`;
+  }
+});
+
+// ── Axis labels
+out += `<text x="${PAD.left+CW/2}" y="${H-6}" text-anchor="middle" fill="#334155" font-size="11" font-family="inherit">Semana de Lançamento</text>`;
+out += `<text x="12" y="${PAD.top+CH/2}" text-anchor="middle" fill="#7c3aed" font-size="11" font-family="inherit" transform="rotate(-90,12,${PAD.top+CH/2})">Conversões (pixel)</text>`;
+out += `<text x="${W-8}" y="${PAD.top+12}" text-anchor="end" fill="#065f46" font-size="11" font-family="inherit">Invest. ANEX05</text>`;
+
+svg.innerHTML = out;
+</script>
+</body>
+</html>
