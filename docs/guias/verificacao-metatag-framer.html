@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guia · Verificar domínio no Meta pelo Framer · Brito Mídias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --roxo:#7C3AED; --roxo-dark:#5B21B6; --roxo-deep:#3B0F73; --roxo-light:#A78BFA; --roxo-xlight:#EDE9FE;
+  --ink:#141018; --cinza:#5B5566; --linha:#E7E3EE; --bg:#FFFFFF; --bg-soft:#FAF9FC;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Poppins",sans-serif;font-weight:300;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding:0 28px}
+a{color:var(--roxo-dark)}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;overflow:hidden;
+  background:radial-gradient(1100px 500px at 78% -10%,rgba(124,58,237,.55),transparent 60%),linear-gradient(150deg,#0A0A0A 0%,#17111F 45%,#3B0F73 100%);
+  color:#fff;padding:40px 0 56px}
+.hero::before{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.14) 1px,transparent 1px);
+  background-size:44px 44px;
+  -webkit-mask-image:radial-gradient(circle at 70% 0%,#000,transparent 72%);mask-image:radial-gradient(circle at 70% 0%,#000,transparent 72%);
+  pointer-events:none}
+.hero .wrap{position:relative}
+.brand{display:flex;align-items:center;gap:16px;margin-bottom:40px}
+.brand svg{width:46px;height:46px}
+.brand .word{display:flex;align-items:center;gap:12px;font-weight:300}
+.brand .word b{font-weight:800;font-size:20px;letter-spacing:.01em}
+.brand .word .bar{width:2px;height:30px;background:rgba(255,255,255,.55)}
+.brand .word .m{font-size:20px;letter-spacing:.22em;font-weight:300}
+.section-label{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--roxo)}
+.section-label::before{content:"";width:34px;height:2px;background:var(--roxo);border-radius:2px}
+.hero .section-label{color:var(--roxo-light)}
+.hero .section-label::before{background:var(--roxo-light)}
+h1{font-weight:800;font-size:46px;letter-spacing:-.02em;line-height:1.1;margin:16px 0 14px;max-width:16ch}
+.hero p.intro{font-weight:300;font-size:17px;color:rgba(255,255,255,.82);max-width:60ch}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.pill{border:1px solid var(--roxo-light);color:var(--roxo-dark);border-radius:100px;padding:8px 16px;font-size:12px;font-weight:600;letter-spacing:.10em;text-transform:uppercase;background:#fff}
+.hero .pill{background:rgba(255,255,255,.06);border-color:rgba(167,139,250,.6);color:#EDE9FE}
+.hero .pill.dom{font-family:ui-monospace,Menlo,monospace;text-transform:none;letter-spacing:0;color:#fff}
+
+/* ---------- SECTIONS ---------- */
+section{padding:52px 0}
+section.soft{background:var(--bg-soft);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
+h2{font-weight:700;font-size:28px;letter-spacing:-.01em;margin:14px 0 10px}
+.intro-p{color:var(--cinza);font-size:16px;max-width:66ch;margin-bottom:8px}
+
+/* ---------- METATAG CODE ---------- */
+.codebox{position:relative;background:var(--ink);border-radius:14px;padding:26px 22px 22px;margin:22px 0 4px}
+.codebox .cap{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--roxo-light);margin-bottom:12px}
+.codebox code{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;font-weight:400;color:#EDE9FE;word-break:break-all;line-height:1.6}
+.codebox .hl{color:#A78BFA}
+.btn{background:linear-gradient(90deg,var(--roxo),var(--roxo-dark));color:#fff;border:none;border-radius:10px;padding:11px 20px;font-family:inherit;font-weight:600;font-size:13px;cursor:pointer;position:absolute;top:18px;right:18px}
+.btn:hover{filter:brightness(1.08)}
+.btn.done{background:linear-gradient(90deg,#16a34a,#15803d)}
+
+/* ---------- STEPS ---------- */
+ol.steps{list-style:none;counter-reset:s;margin:26px 0 0}
+ol.steps>li{counter-increment:s;position:relative;padding:2px 0 26px 56px;margin-left:18px;border-left:2px solid var(--linha)}
+ol.steps>li:last-child{border-left:2px solid transparent;padding-bottom:0}
+ol.steps>li::before{content:counter(s);position:absolute;left:-19px;top:-4px;width:36px;height:36px;
+  background:linear-gradient(135deg,var(--roxo),var(--roxo-dark));color:#fff;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px}
+.st-t{font-weight:600;font-size:16.5px;color:var(--ink);margin-bottom:3px}
+.st-d{color:var(--cinza);font-size:15px}
+.mono{font-family:ui-monospace,Menlo,monospace;background:var(--roxo-xlight);color:var(--roxo-dark);padding:1px 6px;border-radius:4px;font-size:.9em}
+
+/* ---------- CALLOUT ---------- */
+.callout{border:1px solid var(--linha);border-left:3px solid var(--roxo);border-radius:14px;background:#fff;padding:18px 22px;margin:24px 0 0;font-size:15px;color:var(--ink)}
+.callout.tip{border-left-color:#16a34a}
+.callout b{font-weight:600}
+
+/* ---------- WHY (lista de motivos) ---------- */
+.why{list-style:none;margin:20px 0 0}
+.why li{position:relative;padding:14px 18px 14px 46px;border:1px solid var(--linha);border-radius:12px;margin-bottom:12px;background:var(--bg-soft);font-size:15px;color:var(--ink)}
+.why li::before{content:"✕";position:absolute;left:18px;top:15px;color:#dc2626;font-weight:700}
+.why li b{font-weight:600}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--ink);color:rgba(255,255,255,.6);padding:34px 0}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px}
+footer .brand{margin-bottom:0}
+footer .brand .word b,footer .brand .word .m{font-size:17px}
+footer .brand svg{width:38px;height:38px}
+footer small{font-size:12px;color:rgba(255,255,255,.45)}
+
+@media(max-width:640px){h1{font-size:34px}.btn{position:static;margin-top:16px}}
+</style>
+</head>
+<body>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="wrap">
+    <div class="brand">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+        <polygon points="50,33 65,59 35,59"></polygon>
+        <line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line>
+        <line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line>
+        <line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line>
+        <line x1="10" y1="27" x2="50" y2="33"></line>
+      </svg>
+      <span class="word"><b>BM</b><i class="bar"></i><span class="m">MÍDIAS</span></span>
+    </div>
+
+    <div class="section-label">Guia · Verificação de domínio</div>
+    <h1>Verificar o domínio no Meta pelo Framer</h1>
+    <p class="intro">Passo a passo para o time verificar o subdomínio da página de captação no Gerenciador de Negócios do Meta, usando o método de metatag — o único que funciona com páginas hospedadas no Framer.</p>
+
+    <div class="hero-meta">
+      <span class="pill dom">lp.lucrocomia.com.br</span>
+      <span class="pill">Portfólio · ANEX BM</span>
+      <span class="pill">Funil · QUIZZ</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== A METATAG ===================== -->
+<section>
+  <div class="wrap">
+    <div class="section-label">A metatag</div>
+    <h2>O código que vai para o site</h2>
+    <p class="intro-p">Este é o código de verificação. Ele é o mesmo para todo o portfólio ANEX BM, então não há risco de trocar o código — é só copiar e colar exatamente como está.</p>
+
+    <div class="codebox">
+      <div class="cap">Metatag de verificação</div>
+      <button class="btn" onclick="cp(this)">Copiar</button>
+      <code id="tag">&lt;meta name=<span class="hl">"facebook-domain-verification"</span> content=<span class="hl">"ezf5ecxc7l2577e2zd4pcve3pedxx6"</span> /&gt;</code>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PASSO A PASSO ===================== -->
+<section class="soft">
+  <div class="wrap">
+    <div class="section-label">Passo a passo</div>
+    <h2>Cinco passos, cerca de 5 minutos</h2>
+
+    <ol class="steps">
+      <li>
+        <div class="st-t">Abra o site no Framer</div>
+        <div class="st-d">Entre no projeto do <b>lp.lucrocomia.com.br</b> dentro da conta Framer.</div>
+      </li>
+      <li>
+        <div class="st-t">Vá em Site Settings → General → Custom Code</div>
+        <div class="st-d">Clique na engrenagem de configurações do site e desça até a seção <b>Custom Code</b>.</div>
+      </li>
+      <li>
+        <div class="st-t">Cole a metatag no campo “Start of &lt;head&gt; tag”</div>
+        <div class="st-d">Tem que ser esse campo, o início do <span class="mono">&lt;head&gt;</span>. Não cole no corpo da página nem em bloco de código dentro do layout: se ficar fora do <span class="mono">&lt;head&gt;</span>, o Meta não reconhece.</div>
+      </li>
+      <li>
+        <div class="st-t">Salve e clique em Publish (republicar)</div>
+        <div class="st-d">O passo mais esquecido. No Framer a metatag só vai para o ar depois de republicar o site. Sem republicar, nada muda na página.</div>
+      </li>
+      <li>
+        <div class="st-t">Volte ao Meta e clique em “Verificar domínio”</div>
+        <div class="st-d">Gerenciador de Negócios → Configurações → Domínios → selecione <b>lp.lucrocomia.com.br</b> → botão <b>Verificar domínio</b>. O status deve virar <b>Verified</b>.</div>
+      </li>
+    </ol>
+
+    <div class="callout tip">
+      <b>Confira antes de clicar em verificar.</b> Depois de republicar no Framer, abra <a href="http://lp.lucrocomia.com.br/" target="_blank">lp.lucrocomia.com.br</a>, aperte <span class="mono">Ctrl+U</span> (exibir código-fonte) e procure por <span class="mono">facebook-domain-verification</span>. Se o código aparecer ali dentro, a verificação vai passar.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== POR QUE NÃO FUNCIONAVA ===================== -->
+<section>
+  <div class="wrap">
+    <div class="section-label">Diagnóstico</div>
+    <h2>Por que não verificava antes</h2>
+    <p class="intro-p">Não era erro de quem tentou. O subdomínio tem uma particularidade técnica que trava os outros métodos:</p>
+
+    <ul class="why">
+      <li><b>O domínio raiz estava verificado, mas o subdomínio não.</b> O Meta trata <span class="mono">lucrocomia.com.br</span> e <span class="mono">lp.lucrocomia.com.br</span> como coisas separadas. Verificar a raiz não verifica o <span class="mono">lp.</span> automaticamente.</li>
+      <li><b>O método por DNS (registro TXT) é impossível neste caso.</b> O <span class="mono">lp.</span> é um CNAME apontando para o Framer, e pela regra do DNS um host que é CNAME não aceita registro TXT junto. Por isso qualquer tentativa pelo DNS falhava, por mais que estivesse tudo certo.</li>
+      <li><b>A metatag ainda não estava publicada na página.</b> O código não constava no <span class="mono">&lt;head&gt;</span> do site — provavelmente por não ter republicado no Framer depois de colar.</li>
+    </ul>
+
+    <div class="callout">
+      Ou seja: <b>a metatag é o caminho certo</b> para páginas em Framer, não um plano B. O código é o mesmo que já verificou a raiz com sucesso; muda só o lugar onde ele fica — dentro do site, no <span class="mono">&lt;head&gt;</span>, em vez do DNS.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <div class="brand">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+        <polygon points="50,33 65,59 35,59"></polygon>
+        <line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line>
+        <line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line>
+        <line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line>
+        <line x1="10" y1="27" x2="50" y2="33"></line>
+      </svg>
+      <span class="word"><b>BM</b><i class="bar"></i><span class="m">MÍDIAS</span></span>
+    </div>
+    <small>Guia interno · Marketex · atualizado em 21/07/2026</small>
+  </div>
+</footer>
+
+<script>
+function cp(b){
+  var t=document.getElementById('tag').innerText;
+  navigator.clipboard.writeText(t).then(function(){
+    b.textContent='Copiado ✓';b.classList.add('done');
+    setTimeout(function(){b.textContent='Copiar';b.classList.remove('done')},2000);
+  });
+}
+</script>
+</body>
+</html>
