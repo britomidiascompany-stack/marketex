@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MPD · Funil de Aplicação — Relatório 27.07.26 · Brito Mídias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --roxo:#7C3AED; --roxo-dark:#5B21B6; --roxo-deep:#3B0F73;
+    --roxo-light:#A78BFA; --roxo-xlight:#EDE9FE;
+    --preto:#0A0A0A; --ink:#141018; --cinza:#5B5566; --linha:#E7E3EE;
+    --bg:#FFFFFF; --bg-soft:#FAF9FC;
+    --good:#16A34A; --warn:#D97706; --bad:#DC2626;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Poppins',-apple-system,sans-serif;font-weight:300;
+    background:var(--bg);color:var(--ink);line-height:1.6;font-size:16px}
+  a{color:var(--roxo);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* HERO */
+  .hero{background:
+      radial-gradient(1100px 500px at 78% -10%, rgba(124,58,237,.55), transparent 60%),
+      linear-gradient(150deg,#0A0A0A 0%,#17111F 45%,#3B0F73 100%);
+    color:#fff;padding:44px 28px 56px;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);
+    background-size:44px 44px;
+    mask-image:radial-gradient(ellipse at 50% 30%,black 40%,transparent 80%);
+    -webkit-mask-image:radial-gradient(ellipse at 50% 30%,black 40%,transparent 80%);
+    pointer-events:none}
+  .hero-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1}
+  .brand{display:flex;align-items:center;gap:16px;margin-bottom:32px}
+  .brand svg{width:44px;height:44px}
+  .brand .word{display:flex;align-items:center;gap:12px;font-weight:300;color:#fff}
+  .brand .word b{font-weight:800;font-size:20px}
+  .brand .word .bar{width:2px;height:28px;background:rgba(255,255,255,.55)}
+  .brand .word span{font-size:18px;letter-spacing:.22em}
+  .hero .eyebrow{color:var(--roxo-light);font-size:12px;font-weight:600;
+    letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px}
+  .hero h1{font-size:44px;font-weight:800;letter-spacing:-.02em;margin:0 0 8px;color:#fff;line-height:1.1}
+  .hero .sub{font-size:15px;color:rgba(255,255,255,.65);margin-bottom:24px}
+  .hero .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+  .hero .pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+    color:#fff;padding:8px 16px;border-radius:100px;font-size:12px;font-weight:600;letter-spacing:.06em}
+  .hero .pill.solid{background:linear-gradient(90deg,var(--roxo),var(--roxo-dark));border-color:transparent}
+  .hero .pill.alert{background:rgba(220,38,38,.22);border-color:rgba(248,113,113,.55)}
+
+  /* LAYOUT */
+  .wrap{max-width:1100px;margin:0 auto;padding:0 28px}
+  section{padding:56px 0}
+  section.soft{background:var(--bg-soft)}
+  .section-label{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--roxo);margin-bottom:12px}
+  .section-label::before{content:"";width:34px;height:2px;background:var(--roxo);border-radius:2px}
+  h2{font-size:30px;font-weight:700;letter-spacing:-.01em;margin:0 0 8px;color:var(--ink)}
+  h3{font-size:18px;font-weight:700;margin:32px 0 12px;color:var(--ink)}
+  .lead{color:var(--cinza);font-size:15.5px;margin:0 0 32px;max-width:820px}
+
+  /* KPI */
+  .kpi-row{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+  @media(max-width:900px){.kpi-row{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:560px){.kpi-row{grid-template-columns:1fr 1fr}}
+  .mini-card{border:1px solid var(--linha);border-radius:14px;padding:16px 18px;background:var(--bg-soft)}
+  .mini-card small{color:var(--roxo);font-size:11px;font-weight:600;letter-spacing:.12em;
+    text-transform:uppercase;display:block;margin-bottom:4px}
+  .mini-card b{font-size:21px;font-weight:700;display:block;color:var(--ink)}
+  .mini-card .hint{font-size:11px;color:var(--cinza);margin-top:4px;display:block;font-weight:300}
+
+  /* TABELA */
+  .table-wrap{overflow-x:auto;border:1px solid var(--linha);border-radius:16px;background:#fff}
+  table{width:100%;border-collapse:collapse;font-size:14px;min-width:720px}
+  thead th{background:var(--bg-soft);color:var(--cinza);font-weight:600;text-transform:uppercase;
+    font-size:11px;letter-spacing:.1em;padding:13px 12px;text-align:right;border-bottom:1px solid var(--linha)}
+  thead th:first-child{text-align:left}
+  thead tr.grp th{font-size:10px;letter-spacing:.14em;color:var(--roxo);
+    border-bottom:1px solid var(--linha);text-align:center;padding:10px 12px 6px}
+  tbody td{padding:13px 12px;text-align:right;border-bottom:1px solid var(--linha);font-weight:400}
+  tbody td:first-child{text-align:left;font-weight:500;color:var(--ink)}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr.hero-row td{background:var(--roxo-xlight)}
+  tbody tr.hero-row td:first-child{color:var(--roxo-dark);font-weight:700}
+  tbody tr.pause-row td{background:#FEF2F2}
+  tbody tr.pause-row td:first-child{color:var(--bad);font-weight:700}
+  tbody tr.tot td{background:var(--bg-soft);font-weight:700;color:var(--ink)}
+  .sep{border-left:1px solid var(--linha)}
+  .good{color:var(--good);font-weight:600}
+  .bad{color:var(--bad);font-weight:600}
+  .warn{color:var(--warn);font-weight:600}
+  .muted{color:var(--cinza);font-weight:300}
+
+  /* CRIATIVO */
+  .cname{display:block;font-size:13px;font-weight:600;color:var(--ink);word-break:break-word;line-height:1.35}
+  .clink{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;
+    color:var(--roxo);margin-top:5px;letter-spacing:.04em}
+  .clink::before{content:"▶";font-size:8px}
+  .tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.1em;padding:2px 7px;
+    border-radius:4px;margin-left:6px;vertical-align:middle;text-transform:uppercase}
+  .tag.top{background:var(--roxo);color:#fff}
+  .tag.zero{background:#FEE2E2;color:var(--bad)}
+  .tag.novo{background:#DCFCE7;color:var(--good)}
+
+  /* SPARK */
+  .spark{display:flex;align-items:flex-end;gap:3px;height:34px}
+  .spark i{display:block;width:9px;background:var(--roxo-light);border-radius:2px 2px 0 0;min-height:2px}
+  .spark i.last{background:var(--bad)}
+  .spark i.hi{background:var(--roxo)}
+
+  /* NOTAS */
+  .notes{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:900px){.notes{grid-template-columns:1fr}}
+  .note-card{border:1px solid var(--linha);border-radius:16px;padding:24px;background:#fff}
+  .note-card.roxo{border-color:var(--roxo-light);background:linear-gradient(180deg,#fff,var(--roxo-xlight) 400%)}
+  .note-card.warn{border-color:#FDE68A;background:linear-gradient(180deg,#fff,#FFFBEB 400%)}
+  .note-card h3{font-size:17px;font-weight:700;margin:0 0 12px;color:var(--ink)}
+  .note-card p{color:var(--cinza);font-size:14px;margin:8px 0}
+  .note-card ul{margin:8px 0 0;padding-left:20px;color:var(--cinza);font-size:14px}
+  .note-card li{margin-bottom:9px}
+  .note-card b,.note-card strong{color:var(--ink);font-weight:600}
+
+  /* STEPS */
+  .steps{counter-reset:s}
+  .step{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--linha)}
+  .step:last-child{border-bottom:none}
+  .step .n{flex:0 0 34px;height:34px;border-radius:100px;
+    background:linear-gradient(90deg,var(--roxo),var(--roxo-dark));color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+  .step .c h4{margin:4px 0 6px;font-size:16px;font-weight:700}
+  .step .c p{margin:0;color:var(--cinza);font-size:14px}
+
+  .badge-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{background:#fff;border:1px solid var(--roxo-light);color:var(--roxo-dark);
+    padding:6px 12px;border-radius:100px;font-size:12px;font-weight:500}
+  .badge.solid{background:linear-gradient(90deg,var(--roxo),var(--roxo-dark));color:#fff;border-color:transparent}
+  .badge.gray{background:var(--bg-soft);color:var(--cinza);border-color:var(--linha)}
+
+  /* BLOCO DE SEMANA */
+  .wk-block{border:1px solid var(--linha);border-radius:18px;background:#fff;
+    padding:26px;margin-bottom:20px}
+  .wk-block.best{border-color:var(--roxo-light);
+    background:linear-gradient(180deg,#fff,var(--roxo-xlight) 500%)}
+  .wk-block.broken{border-color:#FCA5A5;background:linear-gradient(180deg,#fff,#FEF2F2 500%)}
+  .wk-head{display:flex;align-items:baseline;justify-content:space-between;
+    flex-wrap:wrap;gap:10px;margin-bottom:6px}
+  .wk-head h3{margin:0;font-size:21px;font-weight:700}
+  .wk-head .wk-per{font-size:13px;color:var(--cinza)}
+  .wk-flag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;padding:4px 10px;border-radius:100px;margin-left:10px;vertical-align:middle}
+  .wk-flag.best{background:var(--roxo);color:#fff}
+  .wk-flag.broken{background:var(--bad);color:#fff}
+  .wk-flag.mid{background:var(--roxo-xlight);color:var(--roxo-dark)}
+  .wk-kpi{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:18px 0}
+  @media(max-width:900px){.wk-kpi{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:560px){.wk-kpi{grid-template-columns:1fr 1fr}}
+  .wk-kpi div{background:var(--bg-soft);border:1px solid var(--linha);border-radius:12px;padding:12px 14px}
+  .wk-kpi small{display:block;font-size:10px;color:var(--roxo);text-transform:uppercase;
+    letter-spacing:.1em;font-weight:600;margin-bottom:3px}
+  .wk-kpi b{font-size:18px;font-weight:700;display:block}
+  .wk-kpi b.good{color:var(--good)} .wk-kpi b.bad{color:var(--bad)} .wk-kpi b.warn{color:var(--warn)}
+  .wk-sub{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--cinza);margin:20px 0 8px}
+  .wk-block table{min-width:560px;font-size:13.5px}
+  .wk-highlight{display:flex;align-items:center;gap:10px;background:var(--roxo-xlight);
+    border:1px solid var(--roxo-light);border-radius:12px;padding:12px 16px;margin:16px 0;
+    font-size:13.5px;color:var(--roxo-dark)}
+  .wk-highlight b{color:var(--ink);font-weight:700}
+  .wk-highlight .ico{font-size:16px}
+  .wk-block.broken .wk-highlight{background:#FEF2F2;border-color:#FCA5A5;color:var(--bad)}
+  .wk-note{background:var(--bg-soft);border-left:3px solid var(--roxo);border-radius:0 10px 10px 0;
+    padding:14px 18px;margin-top:18px;font-size:14px;color:var(--cinza)}
+  .wk-note b{color:var(--ink);font-weight:600}
+  .wk-block.broken .wk-note{border-left-color:var(--bad);background:#FEF2F2}
+
+  .fonte{font-size:12px;color:var(--cinza);margin-top:14px;font-weight:300}
+  footer{background:var(--ink);color:rgba(255,255,255,.65);padding:32px 28px;text-align:center;font-size:13px}
+  footer .brand-mini{display:inline-flex;align-items:center;gap:10px;margin-bottom:8px;color:#fff;font-weight:500}
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="brand">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+        <polygon points="50,33 65,59 35,59"></polygon>
+        <line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line>
+        <line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line>
+        <line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line>
+        <line x1="10" y1="27" x2="50" y2="33"></line>
+      </svg>
+      <span class="word"><b>BM</b><i class="bar"></i><span>MÍDIAS</span></span>
+    </div>
+
+    <div class="eyebrow">MPD · Mentoria Paraíso Digital · Funil de Aplicação</div>
+    <h1>Relatório de Campanhas</h1>
+    <div class="sub">Julho completo · 01 a 27/07/2026 &nbsp;·&nbsp; Atualizado em 27/07/2026</div>
+
+    <div class="pills">
+      <span class="pill">Julho: R$ 5.813,67 investido · 214 aplicações · 91 qualificadas</span>
+      <span class="pill solid">🏆 ADC006 é o criativo do mês</span>
+      <span class="pill alert">⚠ Funil novo (Unnichat) desde 24/07 · 0 qualificado até agora</span>
+    </div>
+  </div>
+</header>
+
+<!-- ================= 1. DIAGNÓSTICO DA PAUSA ================= -->
+<section>
+<div class="wrap">
+  <div class="section-label">O que aconteceu</div>
+  <h2>A pausa, a volta e o funil novo</h2>
+  <p class="lead">A campanha foi pausada porque o funil foi alterado, e voltou a rodar em <b>24/07</b>
+    já sob a estrutura nova. O que mudou especificamente e o que os primeiros dias mostram está
+    detalhado na última seção deste relatório.</p>
+
+  <div class="notes">
+    <div class="note-card roxo">
+      <h3>✅ A decisão de pausar foi correta</h3>
+      <p>O princípio se confirmou na prática: <b>não se investe numa estrutura que ainda não está
+        consolidada</b>. Enquanto o funil novo não está validado, verba aplicada é verba sob risco.</p>
+      <p>Por isso os números da semana de 13–19/07 aparecem neste relatório <b>separados e sinalizados</b>:
+        eles refletem o período de transição, não a performance real das campanhas.</p>
+    </div>
+    <div class="note-card warn">
+      <h3>⚠️ Antes de religar</h3>
+      <p>A campanha volta <b>hoje ou amanhã</b>, dependendo da resposta do time de automações.
+        Antes de subir a verba de novo, três coisas precisam estar verificadas:</p>
+      <ul>
+        <li><b>Teste de ponta a ponta</b> — clicar no anúncio, preencher o formulário e confirmar
+          que a aplicação aparece no YAY <i>e</i> dispara o pixel.</li>
+        <li><b>UTMs preservadas</b> no novo caminho — sem elas, perdemos a leitura por criativo.</li>
+        <li><b>Volta escalonada</b> — religar com verba reduzida por 24h e só escalar depois de
+          confirmar aplicação real entrando.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ================= 2. VISÃO CONSOLIDADA ================= -->
+<section class="soft">
+<div class="wrap">
+  <div class="section-label">Visão consolidada</div>
+  <h2>Últimas 6 semanas em números</h2>
+  <p class="lead">Período de 08/06 a 19/07/2026. Aplicações sem duplicidade (mesmo e-mail dentro da
+    semana conta uma vez). Qualificação pela regra oficial do Comercial.</p>
+
+  <div class="kpi-row">
+    <div class="mini-card"><small>Investimento</small><b>R$ 11.761</b><span class="hint">Advantage + Remarketing</span></div>
+    <div class="mini-card"><small>Aplicações pagas</small><b>259</b><span class="hint">+122 orgânicas</span></div>
+    <div class="mini-card"><small>Qualificadas (pagas)</small><b>144</b><span class="hint">+49 orgânicas</span></div>
+    <div class="mini-card"><small>Taxa de qualificação</small><b>55,6%</b><span class="hint">das aplicações pagas</span></div>
+    <div class="mini-card"><small>CPA aplicação</small><b>R$ 45,41</b><span class="hint">custo por aplicação</span></div>
+    <div class="mini-card"><small>CPA qualificada</small><b>R$ 81,67</b><span class="hint">custo por lead qualificado</span></div>
+  </div>
+
+  <h3>Julho completo (01 a 27/07 — S5 em andamento)</h3>
+  <div class="kpi-row">
+    <div class="mini-card"><small>Investido</small><b>R$ 5.813,67</b></div>
+    <div class="mini-card"><small>Aplicações</small><b>214</b><span class="hint">91 pago · 123 orgânico</span></div>
+    <div class="mini-card"><small>Qualificadas</small><b>91</b><span class="hint">53 pago · 38 orgânico</span></div>
+    <div class="mini-card"><small>Melhor criativo do mês</small><b class="good">ADC006</b><span class="hint">36 qualif. · CPA médio R$ 85</span></div>
+    <div class="mini-card"><small>Taxa qualif. geral</small><b>42,5%</b></div>
+    <div class="mini-card"><small>Melhor semana</small><b>Jul S1</b><span class="hint">CPA qualif. R$ 67,40</span></div>
+  </div>
+
+  <p class="fonte">Fonte: export YAY Forms 20/07/2026 (respostas <i>completed</i>) + aba MTADS da planilha
+    Funil de Aplicação 2026 OFICIAL. Investimento do Meta consolidado até 17/07 (último dia com veiculação).</p>
+</div>
+</section>
+
+<!-- ================= 3. SEMANA A SEMANA ================= -->
+<section>
+<div class="wrap">
+  <div class="section-label">Semana a semana</div>
+  <h2>Advantage × Remarketing × Orgânico</h2>
+  <p class="lead">As seis semanas do período, separando as campanhas normais (Advantage e públicos quentes)
+    das campanhas de remarketing, mais o volume que chega sem tráfego pago.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr class="grp">
+          <th></th>
+          <th colspan="4">Advantage (normal)</th>
+          <th colspan="4" class="sep">Remarketing</th>
+          <th colspan="2" class="sep">Orgânico</th>
+        </tr>
+        <tr>
+          <th>Semana</th>
+          <th>Invest.</th><th>Aplic.</th><th>Qualif.</th><th>CPA qualif.</th>
+          <th class="sep">Invest.</th><th>Aplic.</th><th>Qualif.</th><th>CPA qualif.</th>
+          <th class="sep">Aplic.</th><th>Qualif.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>08–14/06</td>
+          <td>R$ 1.841</td><td>47</td><td>24</td><td>R$ 76,71</td>
+          <td class="sep muted">—</td><td class="muted">—</td><td class="muted">—</td><td class="muted">—</td>
+          <td class="sep">11</td><td>5</td>
+        </tr>
+        <tr>
+          <td>15–21/06</td>
+          <td>R$ 1.347</td><td>33</td><td>16</td><td>R$ 84,20</td>
+          <td class="sep muted">—</td><td class="muted">—</td><td class="muted">—</td><td class="muted">—</td>
+          <td class="sep">26</td><td>9</td>
+        </tr>
+        <tr class="hero-row">
+          <td>22–28/06</td>
+          <td>R$ 2.656</td><td>68</td><td>37</td><td>R$ 71,78</td>
+          <td class="sep muted">—</td><td class="muted">—</td><td class="muted">—</td><td class="muted">—</td>
+          <td class="sep">24</td><td>14</td>
+        </tr>
+        <tr class="hero-row">
+          <td>29/06–05/07</td>
+          <td>R$ 2.419</td><td>65</td><td>39</td><td class="good">R$ 62,02</td>
+          <td class="sep muted">—</td><td class="muted">—</td><td class="muted">—</td><td class="muted">—</td>
+          <td class="sep">17</td><td>5</td>
+        </tr>
+        <tr>
+          <td>06–12/07</td>
+          <td>R$ 1.508</td><td>31</td><td>21</td><td>R$ 71,80</td>
+          <td class="sep">R$ 523</td><td>7</td><td>3</td><td class="warn">R$ 174,36</td>
+          <td class="sep">24</td><td>9</td>
+        </tr>
+        <tr class="pause-row">
+          <td>13–19/07 ⏸</td>
+          <td>R$ 827</td><td>4</td><td>2</td><td class="bad">R$ 413,30</td>
+          <td class="sep">R$ 641</td><td>4</td><td>2</td><td class="bad">R$ 320,45</td>
+          <td class="sep">20</td><td>7</td>
+        </tr>
+        <tr class="tot">
+          <td>Total 6 semanas</td>
+          <td>R$ 10.597</td><td>248</td><td>139</td><td>R$ 76,24</td>
+          <td class="sep">R$ 1.164</td><td>11</td><td>5</td><td>R$ 232,80</td>
+          <td class="sep">122</td><td>49</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="notes" style="margin-top:24px">
+    <div class="note-card">
+      <h3>Leitura da semana 13–19/07</h3>
+      <p>O CPA de R$ 413 no Advantage e R$ 320 no Remarketing <b>não são performance ruim de campanha</b> —
+        são o efeito da transição do funil, que rodou durante a semana.</p>
+      <p>No início da semana o ritmo ainda estava normal. <b>Esses números não devem ser usados como
+        base de decisão sobre criativo ou público.</b></p>
+    </div>
+    <div class="note-card">
+      <h3>Remarketing: leitura ainda parcial</h3>
+      <p>A campanha <b>[57] REMARKETING LS</b> rodou por apenas duas semanas e uma delas foi a semana
+        de transição. Base real de leitura: <b>7 aplicações / 3 qualificadas por R$ 523</b> na semana de 06–12/07.</p>
+      <p>CPA de R$ 174 contra R$ 72 do Advantage no mesmo período. <b>Ainda é cedo para concluir</b> —
+        precisa de pelo menos duas semanas limpas para comparar de verdade.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ================= 3B. DETALHE POR SEMANA ================= -->
+<section class="soft">
+<div class="wrap">
+  <div class="section-label">Detalhe por semana</div>
+  <h2>Julho completo, semana a semana</h2>
+  <p class="lead">Recorte fechado de cada semana de julho, com o melhor criativo de cada uma e o custo
+    por qualificada. <b>Atenção:</b> Jul S1 tem apenas 5 dias (01 a 05/07, quarta a domingo) contra
+    7 dias das demais — por isso os blocos S1–S3 trazem também a média por dia, que é a comparação justa.
+    A partir de S4 (24/07) o funil mudou — ver o porquê na última seção deste relatório.</p>
+
+  <!-- ---------- JUL S1 ---------- -->
+  <div class="wk-block best">
+    <div class="wk-head">
+      <h3>Jul S1 <span class="wk-flag best">Melhor CPA</span></h3>
+      <span class="wk-per">01 a 05/07 · 5 dias (qua–dom)</span>
+    </div>
+    <div class="wk-kpi">
+      <div><small>Investido</small><b>R$ 1.685</b></div>
+      <div><small>Aplicações</small><b>57</b></div>
+      <div><small>Qualificadas</small><b>29</b></div>
+      <div><small>Taxa qualif.</small><b>50,9%</b></div>
+      <div><small>CPA qualif. (pago)</small><b class="good">R$ 67,40</b></div>
+      <div><small>Aplic. pagas/dia</small><b class="good">9,0</b></div>
+    </div>
+
+    <div class="wk-highlight"><span class="ico">🏆</span> Melhor criativo da semana: <b>ADC006 — O Jeito de Cobrar Está Errado</b> — 12 qualificadas · CPA qualif. R$ 62,12</div>
+
+    <div class="wk-sub">Por origem</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Origem</th><th>Invest.</th><th>Aplic.</th><th>Qualif.</th><th>Taxa</th><th>CPA aplic.</th><th>CPA qualif.</th></tr></thead>
+        <tbody>
+          <tr><td>Advantage</td><td>R$ 1.685,02</td><td>45</td><td>25</td><td>55,6%</td><td>R$ 37,44</td><td class="good">R$ 67,40</td></tr>
+          <tr><td>Remarketing</td><td class="muted">—</td><td class="muted">—</td><td class="muted">—</td><td class="muted">—</td><td class="muted">—</td><td class="muted">—</td></tr>
+          <tr><td>Orgânico</td><td class="muted">R$ 0</td><td>12</td><td>4</td><td>33,3%</td><td class="muted">—</td><td class="muted">—</td></tr>
+          <tr class="tot"><td>Total</td><td>R$ 1.685,02</td><td>57</td><td>29</td><td>50,9%</td><td>—</td><td>R$ 58,10</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="wk-sub">Faixas de renda</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Faixa</th><th>Aplicações</th><th>Qualificadas</th></tr></thead>
+        <tbody>
+          <tr><td>Acima de R$ 10.000</td><td>14</td><td>14</td></tr>
+          <tr><td>R$ 8.000 a R$ 10.000</td><td>9</td><td>9</td></tr>
+          <tr><td>R$ 5.000 a R$ 8.000</td><td>11</td><td>6 <span class="muted">(com urgência alta)</span></td></tr>
+          <tr><td>Menos de R$ 5.000</td><td>23</td><td class="muted">0</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="wk-sub">Criativos</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Criativo</th><th>Invest.</th><th>Aplic.</th><th>Qualif.</th><th>CPA qualif.</th></tr></thead>
+        <tbody>
+          <tr><td>ADV78_MPD_TP_APLICACAO_ANOS 80_1.17</td><td>R$ 928,19</td><td>22</td><td>11</td><td>R$ 84,38</td></tr>
+          <tr><td>ADC006_MPD_TP_APLICACAO_O JEITO DE COBRAR ESTÁ ERRADO</td><td>R$ 745,48</td><td>21</td><td>12</td><td class="good">R$ 62,12</td></tr>
+          <tr><td>ADC005_MPD_TP_APLICACAO_PRESA NA PRÓPRIA AGENDA</td><td>R$ 1,44</td><td>2</td><td>2</td><td class="good">R$ 0,72</td></tr>
+          <tr><td>Demais (ADV76 · ADV77 · ADV81 · ADC004)</td><td>R$ 9,91</td><td>0</td><td>0</td><td class="muted">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="wk-note">A melhor semana do mês em eficiência: <b>ADV78 e ADC006 rodando lado a lado
+      em equilíbrio</b> (22 e 21 aplicações). Foi o último período em que o ADV78 entregou volume.
+      Metade das aplicações veio da faixa acima de R$ 8.000 — o público estava certo.</div>
+  </div>
+
+  <!-- ---------- JUL S2 ---------- -->
+  <div class="wk-block">
+    <div class="wk-head">
+      <h3>Jul S2 <span class="wk-flag mid">Virada do ADC006</span></h3>
+      <span class="wk-per">06 a 12/07 · 7 dias</span>
+    </div>
+    <div class="wk-kpi">
+      <div><small>Investido</small><b>R$ 2.031</b></div>
+      <div><small>Aplicações</small><b>62</b></div>
+      <div><small>Qualificadas</small><b>33</b></div>
+      <div><small>Taxa qualif.</small><b>53,2%</b></div>
+      <div><small>CPA qualif. (pago)</small><b>R$ 84,62</b></div>
+      <div><small>Aplic. pagas/dia</small><b>5,4</b></div>
+    </div>
+
+    <div class="wk-highlight"><span class="ico">🏆</span> Melhor criativo da semana: <b>ADC006 — O Jeito de Cobrar Está Errado</b> — 20 qualificadas · CPA qualif. R$ 67,70</div>
+
+    <div class="wk-sub">Por origem</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Origem</th><th>Invest.</th><th>Aplic.</th><th>Qualif.</th><th>Taxa</th><th>CPA aplic.</th><th>CPA qualif.</th></tr></thead>
+        <tbody>
+          <tr><td>Advantage</td><td>R$ 1.507,72</td><td>31</td><td>21</td><td class="good">67,7%</td><td>R$ 48,64</td><td>R$ 71,80</td></tr>
+          <tr><td>Remarketing <span class="tag novo">Estreia</span></td><td>R$ 523,08</td><td>7</td><td>3</td><td>42,9%</td><td>R$ 74,73</td><td class="warn">R$ 174,36</td></tr>
+          <tr><td>Orgânico</td><td class="muted">R$ 0</td><td>24</td><td>9</td><td>37,5%</td><td class="muted">—</td><td class="muted">—</td></tr>
+          <tr class="tot"><td>Total</td><td>R$ 2.030,80</td><td>62</td><td>33</td><td>53,2%</td><td>—</td><td>R$ 61,54</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="wk-sub">Faixas de renda</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Faixa</th><th>Aplicações</th><th>Qualificadas</th></tr></thead>
+        <tbody>
+          <tr><td>Acima de R$ 10.000</td><td>11</td><td>11</td></tr>
+          <tr><td>R$ 8.000 a R$ 10.000</td><td>7</td><td>7</td></tr>
+          <tr><td>R$ 5.000 a R$ 8.000</td><td>25</td><td>15 <span class="muted">(com urgência alta)</span></td></tr>
+          <tr><td>Menos de R$ 5.000</td><td>19</td><td class="muted">0</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="wk-sub">Criativos</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Criativo</th><th>Invest.</th><th>Aplic.</th><th>Qualif.</th><th>CPA qualif.</th></tr></thead>
+        <tbody>
+          <tr><td>ADC006_MPD_TP_APLICACAO_O JEITO DE COBRAR ESTÁ ERRADO</td><td>R$ 1.353,97</td><td>30</td><td>20</td><td class="good">R$ 67,70</td></tr>
+          <tr><td>ADV78_MPD_TP_APLICACAO_ANOS 80_1.17</td><td>R$ 578,43</td><td>6</td><td>4</td><td class="bad">R$ 144,61</td></tr>
+          <tr><td>ADV81_MPD_TP_APLICACAO_SEU CLIENTES TE INDICAM_1.08</td><td>R$ 47,18</td><td>1</td><td>0</td><td class="muted">—</td></tr>
+          <tr><td>Demais (ADV76 · ADV77 · ADC004 · ADC005)</td><td>R$ 51,22</td><td>1</td><td>0</td><td class="muted">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="wk-note">A semana em que a <b>fadiga do ADV78 ficou explícita</b>: caiu de 22 para 6
+      aplicações e o CPA por qualificada quase dobrou (R$ 84 → R$ 145), <b>mesmo recebendo R$ 578</b>.
+      O ADC006 absorveu a demanda e subiu para 30 aplicações mantendo CPA de R$ 67,70.
+      Também foi a estreia do Remarketing. Perfil da semana puxou para a faixa de R$ 5–8 mil
+      (25 aplicações), mas 15 delas vieram com urgência alta e qualificaram.</div>
+  </div>
+
+  <!-- ---------- JUL S3 ---------- -->
+  <div class="wk-block broken">
+    <div class="wk-head">
+      <h3>Jul S3 <span class="wk-flag broken">Transição do funil · pausa</span></h3>
+      <span class="wk-per">13 a 19/07 · 7 dias</span>
+    </div>
+    <div class="wk-kpi">
+      <div><small>Investido</small><b>R$ 1.468</b></div>
+      <div><small>Aplicações</small><b>28</b></div>
+      <div><small>Qualificadas</small><b>11</b></div>
+      <div><small>Taxa qualif.</small><b class="bad">39,3%</b></div>
+      <div><small>CPA qualif. (pago)</small><b class="bad">R$ 366,88</b></div>
+      <div><small>Aplic. pagas/dia</small><b class="bad">1,1</b></div>
+    </div>
+
+    <div class="wk-highlight"><span class="ico">🏆</span> Melhor criativo da semana: <b>ADC006 — O Jeito de Cobrar Está Errado</b> — 4 qualificadas · CPA qualif. R$ 246,43 (único criativo que ainda entregou algo)</div>
+
+    <div class="wk-sub">Por origem</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Origem</th><th>Invest.</th><th>Aplic.</th><th>Qualif.</th><th>Taxa</th><th>CPA aplic.</th><th>CPA qualif.</th></tr></thead>
+        <tbody>
+          <tr><td>Advantage</td><td>R$ 826,60</td><td>4</td><td>2</td><td>50,0%</td><td class="bad">R$ 206,65</td><td class="bad">R$ 413,30</td></tr>
+          <tr><td>Remarketing</td><td>R$ 640,90</td><td>4</td><td>2</td><td>50,0%</td><td class="bad">R$ 160,23</td><td class="bad">R$ 320,45</td></tr>
+          <tr><td>Orgânico</td><td class="muted">R$ 0</td><td>20</td><td>7</td><td>35,0%</td><td class="muted">—</td><td class="muted">—</td></tr>
+          <tr class="tot"><td>Total</td><td>R$ 1.467,50</td><td>28</td><td>11</td><td>39,3%</td><td>—</td><td>R$ 133,41</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="wk-sub">Faixas de renda</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Faixa</th><th>Aplicações</th><th>Qualificadas</th></tr></thead>
+        <tbody>
+          <tr><td>Acima de R$ 10.000</td><td>3</td><td>3</td></tr>
+          <tr><td>R$ 8.000 a R$ 10.000</td><td>4</td><td>4</td></tr>
+          <tr><td>R$ 5.000 a R$ 8.000</td><td>5</td><td>4 <span class="muted">(com urgência alta)</span></td></tr>
+          <tr><td>Menos de R$ 5.000</td><td>16</td><td class="muted">0</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="wk-sub">Criativos</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Criativo</th><th>Invest.</th><th>Aplic.</th><th>Qualif.</th><th>CPA qualif.</th></tr></thead>
+        <tbody>
+          <tr><td>ADC006_MPD_TP_APLICACAO_O JEITO DE COBRAR ESTÁ ERRADO</td><td>R$ 985,73</td><td>8</td><td>4</td><td class="bad">R$ 246,43</td></tr>
+          <tr><td>ADV50_MPD_TP_APLICACAO_40 MAIS PROFISSIONAL EXPERIENCIA IA_1.30</td><td>R$ 139,42</td><td class="bad">0</td><td class="bad">0</td><td class="muted">—</td></tr>
+          <tr><td>ADV81_MPD_TP_APLICACAO_SEU CLIENTES TE INDICAM_1.08</td><td>R$ 128,59</td><td class="bad">0</td><td class="bad">0</td><td class="muted">—</td></tr>
+          <tr><td>ADV78_MPD_TP_APLICACAO_ANOS 80_1.17</td><td>R$ 68,14</td><td class="bad">0</td><td class="bad">0</td><td class="muted">—</td></tr>
+          <tr><td>ADV83_MPD_TP_APLICACAO_ESPECIALISTAS MENTORIA IA PARA_1.02</td><td>R$ 62,86</td><td class="bad">0</td><td class="bad">0</td><td class="muted">—</td></tr>
+          <tr><td>Demais (ADV76 · ADV79 · ADC004 · ADC005)</td><td>R$ 82,76</td><td class="bad">0</td><td class="bad">0</td><td class="muted">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="wk-note"><b>Semana contaminada — não usar para avaliar criativo ou público.</b>
+      A queda de 5,4 para 1,1 aplicação paga por dia não é performance: é a transição do funil.
+      Note que <b>6 dos 7 criativos com verba não trouxeram nenhuma aplicação</b>, incluindo o ADC006
+      que vinha em 30 na semana anterior. Quando todos caem junto, o problema não é o criativo —
+      é a estrutura.</div>
+  </div>
+
+  <!-- ---------- JUL S4 ---------- -->
+  <div class="wk-block broken">
+    <div class="wk-head">
+      <h3>Jul S4 <span class="wk-flag broken">Funil novo (Unnichat) desde 24/07</span></h3>
+      <span class="wk-per">20 a 26/07 · 7 dias</span>
+    </div>
+    <div class="wk-kpi">
+      <div><small>Investido</small><b>R$ 565,74</b></div>
+      <div><small>Aplicações</small><b>61</b></div>
+      <div><small>Qualificadas</small><b>17</b></div>
+      <div><small>Taxa qualif.</small><b>27,9%</b></div>
+      <div><small>CPA qualif. (pago)</small><b class="bad">—</b></div>
+      <div><small>Qualif. via tráfego</small><b class="bad">0</b></div>
+    </div>
+
+    <div class="wk-highlight"><span class="ico">⚠️</span> Nenhum criativo gerou aplicação qualificada essa semana — o funil mudou em 24/07 e o tráfego pago parou de aparecer no formulário (veja a seção "Funil Novo" ao final)</div>
+
+    <div class="wk-sub">Por origem</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Origem</th><th>Invest.</th><th>Aplic.</th><th>Qualif.</th><th>Taxa</th><th>CPA aplic.</th><th>CPA qualif.</th></tr></thead>
+        <tbody>
+          <tr><td>Tráfego pago</td><td>R$ 565,74</td><td class="bad">0</td><td class="bad">0</td><td class="muted">—</td><td class="muted">—</td><td class="muted">—</td></tr>
+          <tr><td>Orgânico</td><td class="muted">R$ 0</td><td>61</td><td>17</td><td>27,9%</td><td class="muted">—</td><td class="muted">—</td></tr>
+          <tr class="tot"><td>Total</td><td>R$ 565,74</td><td>61</td><td>17</td><td>27,9%</td><td>—</td><td>R$ 33,28</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="wk-sub">Faixas de renda</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Faixa</th><th>Aplicações</th><th>Qualificadas</th></tr></thead>
+        <tbody>
+          <tr><td>Acima de R$ 10.000</td><td>8</td><td>8</td></tr>
+          <tr><td>R$ 8.000 a R$ 10.000</td><td>1</td><td>1</td></tr>
+          <tr><td>R$ 5.000 a R$ 8.000</td><td>13</td><td>8 <span class="muted">(com urgência alta)</span></td></tr>
+          <tr><td>Menos de R$ 5.000</td><td>39</td><td class="muted">0</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="wk-sub">Investimento por criativo (funil novo · sem resultado no YAY)</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Criativo</th><th>Invest.</th><th>Aplic.</th><th>Qualif.</th></tr></thead>
+        <tbody>
+          <tr><td>ADV79_MPD_TP_APLICACAO_TAREFA DE 32 HORAS_0.44</td><td>R$ 245,65</td><td class="bad">0</td><td class="bad">0</td></tr>
+          <tr><td>ADV82_MPD_TP_APLICACAO_ESPECIALISTA_1.15</td><td>R$ 218,82</td><td class="bad">0</td><td class="bad">0</td></tr>
+          <tr><td>ADC006_MPD_TP_APLICACAO_O JEITO DE COBRAR ESTÁ ERRADO</td><td>R$ 66,57</td><td class="bad">0</td><td class="bad">0</td></tr>
+          <tr><td>ADV78_MPD_TP_APLICACAO_ANOS 80_1.17</td><td>R$ 19,42</td><td class="bad">0</td><td class="bad">0</td></tr>
+          <tr><td>ADV50_MPD_TP_APLICACAO_40 MAIS PROFISSIONAL EXPERIENCIA IA_1.30</td><td>R$ 15,28</td><td class="bad">0</td><td class="bad">0</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="wk-note"><b>Primeira semana do funil novo (campanha voltou em 24/07 sob "CONCLUIR INSCRIÇÃO UNNICHAT").</b>
+      As 17 qualificadas da semana são <b>100% orgânicas</b> — o volume orgânico inclusive triplicou
+      (61 aplicações, recorde do mês). O pago não gerou nenhuma aplicação no formulário, mas isso não é
+      falta de entrega: veja na última seção que impressão, CTR e CPM estão normais. O detalhe completo
+      do que mudou está no final deste relatório.</div>
+  </div>
+
+  <!-- ---------- JUL S5 ---------- -->
+  <div class="wk-block broken">
+    <div class="wk-head">
+      <h3>Jul S5 <span class="wk-flag broken">Em andamento</span></h3>
+      <span class="wk-per">27 a 31/07 · dados até 27/07 (1 de 5 dias)</span>
+    </div>
+    <div class="wk-kpi">
+      <div><small>Investido até agora</small><b>R$ 64,61</b></div>
+      <div><small>Aplicações</small><b>6</b></div>
+      <div><small>Qualificadas</small><b>1</b></div>
+      <div><small>Taxa qualif.</small><b>16,7%</b></div>
+      <div><small>CPA qualif. (pago)</small><b class="bad">—</b></div>
+      <div><small>Qualif. via tráfego</small><b class="bad">0</b></div>
+    </div>
+
+    <div class="wk-highlight"><span class="ico">⏳</span> Semana em aberto — faltam 28 a 31/07 pra fechar. Números abaixo são parciais.</div>
+
+    <div class="wk-sub">Por origem</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Origem</th><th>Invest.</th><th>Aplic.</th><th>Qualif.</th></tr></thead>
+        <tbody>
+          <tr><td>Tráfego pago</td><td>R$ 64,61</td><td class="bad">0</td><td class="bad">0</td></tr>
+          <tr><td>Orgânico</td><td class="muted">R$ 0</td><td>6</td><td>1</td></tr>
+          <tr class="tot"><td>Total (parcial)</td><td>R$ 64,61</td><td>6</td><td>1</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="wk-sub">Investimento por criativo (parcial · sem resultado no YAY)</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Criativo</th><th>Invest.</th><th>Aplic.</th><th>Qualif.</th></tr></thead>
+        <tbody>
+          <tr><td>ADV82_MPD_TP_APLICACAO_ESPECIALISTA_1.15</td><td>R$ 39,36</td><td class="bad">0</td><td class="bad">0</td></tr>
+          <tr><td>ADC006_MPD_TP_APLICACAO_O JEITO DE COBRAR ESTÁ ERRADO</td><td>R$ 10,24</td><td class="bad">0</td><td class="bad">0</td></tr>
+          <tr><td>ADV79_MPD_TP_APLICACAO_TAREFA DE 32 HORAS_0.44</td><td>R$ 9,19</td><td class="bad">0</td><td class="bad">0</td></tr>
+          <tr><td>ADV78_MPD_TP_APLICACAO_ANOS 80_1.17</td><td>R$ 5,34</td><td class="bad">0</td><td class="bad">0</td></tr>
+          <tr><td>ADV50_MPD_TP_APLICACAO_40 MAIS PROFISSIONAL EXPERIENCIA IA_1.30</td><td>R$ 0,48</td><td class="bad">0</td><td class="bad">0</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="wk-note">Ainda cedo pra tirar conclusão — só 1 dia de dado. Fechamos essa semana no
+      próximo relatório, já com o quadro mais claro do funil novo.</div>
+  </div>
+
+  <div class="notes">
+    <div class="note-card roxo">
+      <h3>📉 A deterioração em três tempos — e depois a virada de chave</h3>
+      <p>Normalizando por dia (S1 tem 5 dias, as demais 7):</p>
+      <ul>
+        <li><b>Jul S1:</b> 9,0 aplicações pagas/dia · CPA qualif <b>R$ 67,40</b></li>
+        <li><b>Jul S2:</b> 5,4 aplicações pagas/dia · CPA qualif <b>R$ 84,62</b></li>
+        <li><b>Jul S3:</b> 1,1 aplicação paga/dia · CPA qualif <b>R$ 366,88</b></li>
+        <li><b>Jul S4/S5:</b> funil mudou — métrica de "aplicação paga" via YAY <b>deixa de existir</b>, não é mais 0 por performance</li>
+      </ul>
+      <p>Até S3 eram <b>duas quedas de causas diferentes</b>: de S1 para S2 foi fadiga de criativo
+        (ADV78); de S2 para S3 foi a transição do funil. De S3 para S4 não é mais deterioração —
+        é troca de régua de medição.</p>
+    </div>
+    <div class="note-card">
+      <h3>💡 O criativo do mês</h3>
+      <p><b>ADC006 — "O Jeito de Cobrar Está Errado"</b> foi o melhor criativo em <b>todas as três
+        semanas em que o funil antigo ainda operou</b> (S1, S2, S3): 36 qualificadas no total,
+        CPA médio de R$ 85. Nenhum outro criativo chegou perto.</p>
+      <p>Com o ADV78 fadigado e fora de rotação, o ADC006 é hoje o único criativo com histórico
+        comprovado de conversão — prioridade máxima nas próximas variações.</p>
+    </div>
+  </div>
+
+  <p class="fonte">Períodos fechados conforme solicitado: Jul S1 = 01–05/07 (5 dias), Jul S2 = 06–12/07,
+    Jul S3 = 13–19/07, Jul S4 = 20–26/07, Jul S5 = 27–31/07 (parcial, só 27/07 disponível).
+    Aplicações sem duplicidade por e-mail dentro de cada período. Investimento do Meta consolidado até 27/07.</p>
+</div>
+</section>
+
+<!-- ================= 4. CRIATIVOS ================= -->
+<section>
+<div class="wrap">
+  <div class="section-label">Criativos</div>
+  <h2>Desempenho por criativo — 6 semanas</h2>
+  <p class="lead">Todos os criativos que receberam verba no período, com nome completo e link direto para
+    o arquivo no Drive. Investimento vindo do Meta; aplicações e qualificações vindas do formulário,
+    atribuídas pela UTM do anúncio.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Criativo</th>
+          <th>Invest.</th><th>Aplic.</th><th>Qualif.</th>
+          <th>CPA aplic.</th><th>CPA qualif.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="hero-row">
+          <td>
+            <span class="cname">ADV78_MPD_TP_APLICACAO_ANOS 80_1.17<span class="tag top">Top volume</span></span>
+            <a class="clink" href="https://drive.google.com/open?id=12qt-bO2m_g76wofzVmMlslegGyDpaLc9&usp=drive_copy" target="_blank" rel="noopener">Abrir criativo no Drive</a>
+          </td>
+          <td>R$ 6.021,93</td><td>138</td><td>75</td><td>R$ 43,64</td><td>R$ 80,29</td>
+        </tr>
+        <tr class="hero-row">
+          <td>
+            <span class="cname">ADC006_MPD_TP_APLICACAO_O JEITO DE COBRAR ESTÁ ERRADO<span class="tag top">Melhor CPA</span></span>
+            <a class="clink" href="https://drive.google.com/drive/folders/1jVBbLlZlMtylmRa91y0yFSAj3hvRcWXx" target="_blank" rel="noopener">Abrir criativo no Drive</a>
+          </td>
+          <td>R$ 4.400,45</td><td>94</td><td>57</td><td>R$ 46,81</td><td class="good">R$ 77,20</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="cname">ADV81_MPD_TP_APLICACAO_SEU CLIENTES TE INDICAM_1.08</span>
+            <a class="clink" href="https://drive.google.com/open?id=1B4T8THlGra_6oLpmAaVbXzDmfIP8sPNt&usp=drive_copy" target="_blank" rel="noopener">Abrir criativo no Drive</a>
+          </td>
+          <td>R$ 866,95</td><td>16</td><td>5</td><td>R$ 54,18</td><td class="warn">R$ 173,39</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="cname">ADV50_MPD_TP_APLICACAO_40 MAIS PROFISSIONAL EXPERIENCIA IA_1.30<span class="tag zero">0 aplic.</span></span>
+            <a class="clink" href="https://drive.google.com/open?id=1M7NSQT2Jqaft5RtaYyVPYT_3AlkGisls&usp=drive_copy" target="_blank" rel="noopener">Abrir criativo no Drive</a>
+          </td>
+          <td>R$ 139,42</td><td class="bad">0</td><td class="bad">0</td><td class="muted">—</td><td class="muted">—</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="cname">ADC005_MPD_TP_APLICACAO_PRESA NA PRÓPRIA AGENDA</span>
+            <a class="clink" href="https://drive.google.com/drive/folders/1LXcSWO_ahExODECN_MO7t87jRR7WMiud" target="_blank" rel="noopener">Abrir criativo no Drive</a>
+          </td>
+          <td>R$ 96,94</td><td>2</td><td>2</td><td>R$ 48,47</td><td class="good">R$ 48,47</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="cname">ADV76_MPD_TP_APLICACAO_ESPECIALISTA_1.12</span>
+            <a class="clink" href="https://drive.google.com/open?id=1gZp-Gr_o0OwoK8mXxxvMFHmiAUy0tgvB&usp=drive_copy" target="_blank" rel="noopener">Abrir criativo no Drive</a>
+          </td>
+          <td>R$ 86,35</td><td>3</td><td>2</td><td class="good">R$ 28,78</td><td class="good">R$ 43,18</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="cname">ADV83_MPD_TP_APLICACAO_ESPECIALISTAS MENTORIA IA PARA_1.02<span class="tag zero">0 aplic.</span></span>
+            <a class="clink" href="https://drive.google.com/open?id=1m2aHoOE6ddcmu5Fevo_FvpIb-4cRPB4o&usp=drive_copy" target="_blank" rel="noopener">Abrir criativo no Drive</a>
+          </td>
+          <td>R$ 62,86</td><td class="bad">0</td><td class="bad">0</td><td class="muted">—</td><td class="muted">—</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="cname">ADV79_MPD_TP_APLICACAO_TAREFA DE 32 HORAS_0.44</span>
+            <a class="clink" href="https://drive.google.com/open?id=1EmthHgGGst4RhtN2SCwjevGMKe3_HBEN&usp=drive_copy" target="_blank" rel="noopener">Abrir criativo no Drive</a>
+          </td>
+          <td>R$ 33,99</td><td>1</td><td>0</td><td>R$ 33,99</td><td class="muted">—</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="cname">ADV77_MPD_TP_APLICACAO_TRABALHA MUITO_1.24</span>
+            <a class="clink" href="https://drive.google.com/open?id=1ft6zWucE4964NPNlt6kqKWJYciD0JoDE&usp=drive_copy" target="_blank" rel="noopener">Abrir criativo no Drive</a>
+          </td>
+          <td>R$ 33,23</td><td>1</td><td>0</td><td>R$ 33,23</td><td class="muted">—</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="cname">ADC004_MPD_TP_APLICACAO_AGENDA CHEIA<span class="tag zero">0 aplic.</span></span>
+            <a class="clink" href="https://drive.google.com/drive/folders/1Y_utPkI5PQqzUuanl2Pv-ihjK69bvsaI" target="_blank" rel="noopener">Abrir criativo no Drive</a>
+          </td>
+          <td>R$ 18,55</td><td class="bad">0</td><td class="bad">0</td><td class="muted">—</td><td class="muted">—</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="cname">ADV80_MPD_TP_APLICACAO_SEGREDO PRA ESCALAR_1.12<span class="tag zero">0 aplic.</span></span>
+            <a class="clink" href="https://drive.google.com/open?id=1UvZWKcQGIWLhfhj7l262DNEVu90IiweJ&usp=drive_copy" target="_blank" rel="noopener">Abrir criativo no Drive</a>
+          </td>
+          <td>R$ 0,41</td><td class="bad">0</td><td class="bad">0</td><td class="muted">—</td><td class="muted">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="fonte">Planilha-fonte dos criativos:
+    <a href="https://docs.google.com/spreadsheets/d/1ud70190mtTHlM0Zbg4spgIe0DJ9og_8L_KLcJBR2KIk/edit" target="_blank" rel="noopener">Criativos de Aplicação — links do Drive</a>.
+    Dois criativos concentram <b>88,6% de todo o investimento</b> do período (ADV78 + ADC006).</p>
+</div>
+</section>
+
+<!-- ================= 5. FADIGA ================= -->
+<section class="soft">
+<div class="wrap">
+  <div class="section-label">Tendência</div>
+  <h2>Fadiga de criativo — semana a semana</h2>
+  <p class="lead">Aplicações por criativo em cada uma das 6 semanas. A última coluna (13–19/07) está
+    contaminada pela transição do funil — leia a tendência até 12/07.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Criativo</th>
+          <th>08–14/06</th><th>15–21/06</th><th>22–28/06</th><th>29/06–05/07</th><th>06–12/07</th>
+          <th>13–19/07 ⏸</th><th>Curva</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="hero-row">
+          <td><span class="cname">ADV78_MPD_TP_APLICACAO_ANOS 80_1.17</span></td>
+          <td>29</td><td>33</td><td class="good">39</td><td>31</td><td class="bad">6</td><td class="bad">0</td>
+          <td><div class="spark"><i style="height:74%"></i><i style="height:85%"></i><i class="hi" style="height:100%"></i><i style="height:79%"></i><i style="height:15%"></i><i class="last" style="height:2%"></i></div></td>
+        </tr>
+        <tr class="hero-row">
+          <td><span class="cname">ADC006_MPD_TP_APLICACAO_O JEITO DE COBRAR ESTÁ ERRADO</span></td>
+          <td class="muted">—</td><td class="muted">—</td><td>25</td><td class="good">31</td><td class="good">30</td><td>8</td>
+          <td><div class="spark"><i style="height:2%"></i><i style="height:2%"></i><i style="height:81%"></i><i class="hi" style="height:100%"></i><i style="height:97%"></i><i class="last" style="height:26%"></i></div></td>
+        </tr>
+        <tr>
+          <td><span class="cname">ADV81_MPD_TP_APLICACAO_SEU CLIENTES TE INDICAM_1.08</span></td>
+          <td>14</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td>
+          <td><div class="spark"><i class="hi" style="height:100%"></i><i style="height:2%"></i><i style="height:2%"></i><i style="height:7%"></i><i style="height:7%"></i><i class="last" style="height:2%"></i></div></td>
+        </tr>
+        <tr>
+          <td><span class="cname">ADV76_MPD_TP_APLICACAO_ESPECIALISTA_1.12</span></td>
+          <td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td>
+          <td><div class="spark"><i style="height:100%"></i><i style="height:2%"></i><i style="height:100%"></i><i style="height:2%"></i><i style="height:100%"></i><i class="last" style="height:2%"></i></div></td>
+        </tr>
+        <tr>
+          <td><span class="cname">ADC005_MPD_TP_APLICACAO_PRESA NA PRÓPRIA AGENDA</span></td>
+          <td class="muted">—</td><td class="muted">—</td><td class="muted">—</td><td>2</td><td>0</td><td>0</td>
+          <td><div class="spark"><i style="height:2%"></i><i style="height:2%"></i><i style="height:2%"></i><i class="hi" style="height:100%"></i><i style="height:2%"></i><i class="last" style="height:2%"></i></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="notes" style="margin-top:24px">
+    <div class="note-card warn">
+      <h3>📉 ADV78 fadigou — confirmado</h3>
+      <p>A curva é clara: <b>29 → 33 → 39 → 31 → 6</b>. O pico foi na semana de 22–28/06 e a queda
+        para 6 aplicações aconteceu <b>antes</b> da transição do funil, então é fadiga real, não efeito da pausa.</p>
+      <p>O investimento nele já vinha sendo reduzido (só R$ 68 na última semana, contra R$ 6.021 no
+        acumulado). <b>Está no fim do ciclo</b> — mesmo com o melhor CPA de aplicação do período (R$ 43,64).</p>
+    </div>
+    <div class="note-card roxo">
+      <h3>📈 ADC006 assumiu e sustentou</h3>
+      <p>Entrou na semana de 22–28/06 e manteve o patamar: <b>25 → 31 → 30</b>. Melhor CPA por
+        qualificada do período (<b>R$ 77,20</b>) e a maior taxa de qualificação dos criativos de volume
+        (<b>60,6%</b> contra 54,3% do ADV78).</p>
+      <p><b>É o criativo de referência para as próximas variações.</b> O ângulo "o jeito de cobrar está
+        errado" é o que está trazendo o público certo, não só volume.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ================= 6. QUALIFICAÇÃO ================= -->
+<section>
+<div class="wrap">
+  <div class="section-label">Qualificação</div>
+  <h2>Perfil de renda e regra aplicada</h2>
+  <p class="lead">Regra oficial do Comercial: renda acima de R$ 8.000 qualifica automaticamente;
+    de R$ 5.000 a R$ 8.000 qualifica apenas se a urgência for <b>Alta</b> ou <b>Pra ontem</b>;
+    abaixo de R$ 5.000 não qualifica.</p>
+
+  <h3>Semana 13–19/07 · 28 aplicações · 11 qualificadas (39,3%)</h3>
+  <div class="kpi-row">
+    <div class="mini-card"><small>Acima de R$ 10.000</small><b>3</b><span class="hint">qualifica direto</span></div>
+    <div class="mini-card"><small>R$ 8.000 a R$ 10.000</small><b>4</b><span class="hint">qualifica direto</span></div>
+    <div class="mini-card"><small>R$ 5.000 a R$ 8.000</small><b>5</b><span class="hint">4 com urgência alta</span></div>
+    <div class="mini-card"><small>Menos de R$ 5.000</small><b>16</b><span class="hint">não qualifica</span></div>
+    <div class="mini-card"><small>Qualificadas pagas</small><b>4</b><span class="hint">2 Adv · 2 Rmk</span></div>
+    <div class="mini-card"><small>Qualificadas orgânicas</small><b>7</b></div>
+  </div>
+
+  <div class="note-card" style="margin-top:24px">
+    <h3>Observação sobre a semana</h3>
+    <p>Com a campanha parada, <b>o orgânico respondeu por 7 das 11 qualificadas</b> da semana — 64%.
+      Nas semanas normais o tráfego pago responde por 70% a 80% das qualificadas. Isso dá a dimensão
+      do que se perde com a campanha desligada: <b>cerca de 20 a 25 leads qualificados por semana</b>.</p>
+    <p class="fonte">Os dados de contato dos leads qualificados não são publicados nesta página por
+      tratarem de dado pessoal (LGPD). Vão por Slack para o Comercial e ficam na planilha interna.</p>
+  </div>
+</div>
+</section>
+
+<!-- ================= 7. PRÓXIMOS PASSOS ================= -->
+<section class="soft">
+<div class="wrap">
+  <div class="section-label">Plano de ação</div>
+  <h2>O que fazer na volta</h2>
+  <p class="lead">A campanha volta hoje ou amanhã, conforme a resposta do time de automações.
+    Ordem recomendada:</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="n">1</div>
+      <div class="c">
+        <h4>Validar o funil antes de qualquer verba</h4>
+        <p>Teste completo: clicar no anúncio → preencher o formulário → confirmar que a aplicação
+          aparece no YAY <b>e</b> que o pixel <i>MPDAplicacaoQualificada2</i> dispara. Sem os dois
+          confirmados, a campanha não sobe.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="n">2</div>
+      <div class="c">
+        <h4>Religar escalonado — 24h em verba reduzida</h4>
+        <p>Subir com cerca de <b>40% do orçamento normal</b> no primeiro dia. Confirmar aplicação real
+          entrando antes de voltar ao patamar normal de investimento.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="n">3</div>
+      <div class="c">
+        <h4>Subir com o ADC006 como criativo principal</h4>
+        <p>É o que tem o melhor CPA por qualificada (R$ 77,20) e a maior taxa de qualificação (60,6%),
+          e não apresentou fadiga até a pausa. O ADV78 entra como apoio, com verba reduzida —
+          já está no fim do ciclo.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="n">4</div>
+      <div class="c">
+        <h4>Produzir 3 variações do ADC006</h4>
+        <p>Manter o ângulo "o jeito de cobrar está errado", que é o que traz o público de renda mais
+          alta. Usar os vídeos existentes como base para novas ideias — o formato carrossel do ADC006
+          é o que está performando.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="n">5</div>
+      <div class="c">
+        <h4>Dar duas semanas limpas ao Remarketing antes de julgar</h4>
+        <p>A campanha [57] só teve uma semana válida (7 aplicações / 3 qualificadas por R$ 523).
+          CPA de R$ 174 contra R$ 72 do Advantage — mas a amostra é pequena demais para decidir
+          cortar ou escalar.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="n">6</div>
+      <div class="c">
+        <h4>Revisar os criativos que gastaram sem entregar</h4>
+        <p><b>ADV50</b> (R$ 139), <b>ADV83</b> (R$ 63), <b>ADC004</b> (R$ 19) somam R$ 221 com zero
+          aplicações. Parte disso caiu na janela de transição — vale um novo teste limpo antes de
+          descartar de vez.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="badge-list">
+    <span class="badge solid">Prioridade: validar funil</span>
+    <span class="badge">ADC006 como principal</span>
+    <span class="badge">Volta escalonada 40%</span>
+    <span class="badge gray">Remarketing em observação</span>
+  </div>
+</div>
+</section>
+
+<!-- ================= 8. FUNIL NOVO — UNNICHAT ================= -->
+<section>
+<div class="wrap">
+  <div class="section-label">O que mudou</div>
+  <h2>Funil novo: qualificação agora acontece dentro do Unnichat</h2>
+  <p class="lead">A campanha voltou a rodar em <b>24/07</b> sob uma estrutura diferente — não é mais o
+    formulário YAY com renda/urgência calculando qualificação automaticamente. Agora o lead entra,
+    conversa pelo WhatsApp via Unnichat, e o comercial classifica manualmente como
+    Qualificada / Desqualificada / Para Qualificar. Isso muda a forma de medir daqui pra frente.</p>
+
+  <h3>O direcionamento de tráfego continua normal</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Métrica</th><th>Funil antigo (01–14/07)</th><th>Funil novo (24–27/07)</th></tr></thead>
+      <tbody>
+        <tr><td>Investido</td><td>R$ 4.386,83</td><td>R$ 630,35</td></tr>
+        <tr><td>Impressões</td><td>31.532</td><td>5.585</td></tr>
+        <tr><td>Cliques no link</td><td>699</td><td>111</td></tr>
+        <tr><td>Visualização de página</td><td>649</td><td>93</td></tr>
+        <tr><td>CPM</td><td>R$ 139,12</td><td class="good">R$ 112,86</td></tr>
+        <tr><td>CTR</td><td>2,22%</td><td>1,99%</td></tr>
+        <tr><td>CPC</td><td>R$ 6,28</td><td class="good">R$ 5,68</td></tr>
+        <tr class="tot"><td>Custo por visualização de página</td><td>R$ 6,76</td><td>R$ 6,78</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="fonte">CPM, CTR e custo por visualização de página estão praticamente idênticos ao funil
+    anterior — em alguns pontos até melhores. <b>O tráfego chega igual. O que muda é o que acontece
+    depois do clique.</b></p>
+
+  <h3>Os primeiros resultados: zero em tudo</h3>
+  <div class="kpi-row">
+    <div class="mini-card"><small>Tráfego pago · cadastros</small><b>2</b><span class="hint">R$ 629 investidos</span></div>
+    <div class="mini-card"><small>Tráfego pago · qualificados</small><b class="bad">0</b><span class="hint">2 desqualificados</span></div>
+    <div class="mini-card"><small>Orgânico · cadastros</small><b>71</b><span class="hint">17 a 27/07</span></div>
+    <div class="mini-card"><small>Orgânico · qualificados</small><b class="bad">0</b><span class="hint">64 desqualificados</span></div>
+    <div class="mini-card"><small>Para Qualificar (pendente)</small><b class="warn">7</b><span class="hint">ainda em análise pelo comercial</span></div>
+    <div class="mini-card"><small>Vídeo novo no ar</small><b>0</b><span class="hint">só imagem/carrossel até agora</span></div>
+  </div>
+
+  <div class="notes" style="margin-top:24px">
+    <div class="note-card warn">
+      <h3>🔍 A hipótese que os dados sustentam</h3>
+      <p>O tráfego pago zerou em qualificados — mas <b>o orgânico também zerou</b>, e o orgânico
+        historicamente sempre gerou qualificados de forma consistente (9, depois 17 nas duas semanas
+        anteriores). Os dois canais zerarem ao mesmo tempo, exatamente quando a classificação virou
+        manual dentro do Unnichat, aponta pra um lugar específico: <b>não é problema de direcionamento
+        de tráfego</b> (as métricas de entrega provam isso) — é a régua de qualificação usada hoje
+        dentro do fluxo novo.</p>
+      <p>Se o critério que o comercial está aplicando no WhatsApp estiver mais rígido do que a regra
+        antiga (renda + urgência), praticamente ninguém passa — pago ou orgânico. As <b>7 "Para
+        Qualificar"</b> ainda podem confirmar ou não essa leitura, dependendo de como forem
+        classificadas.</p>
+    </div>
+    <div class="note-card">
+      <h3>📋 O que isso muda na leitura dos próximos relatórios</h3>
+      <p>A partir de S4, <b>"aplicação via tráfego" pelo YAY deixa de existir como métrica</b> — o
+        lead pago não passa mais por ali. O acompanhamento do funil novo precisa vir direto da
+        planilha Unnichat (coluna "Classificação"), não mais do cálculo por renda/urgência.</p>
+      <p>Enquanto a régua de qualificação do Unnichat não estiver validada (comparada com um período
+        maior, e idealmente contra uma amostra que sabidamente deveria qualificar), <b>tratar S4/S5
+        como período de calibração</b>, não como resultado real de performance.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<footer>
+  <div class="brand-mini">
+    <svg viewBox="0 0 100 100" width="22" height="22" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round">
+      <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+      <polygon points="50,33 65,59 35,59"></polygon>
+    </svg>
+    <span>BM | MÍDIAS</span>
+  </div>
+  <div>Relatório do Funil de Aplicação · MPD — Mentoria Paraíso Digital · Marketex</div>
+  <div>Gerado em 20/07/2026 · Brito Mídias — Central de Estratégia e Resultados</div>
+</footer>
+
+</body>
+</html>
