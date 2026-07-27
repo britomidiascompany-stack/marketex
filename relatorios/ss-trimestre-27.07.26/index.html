@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sala Secreta · Relatório de Tráfego Pago — 27.07.26 · Brito Mídias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --roxo:#7C3AED; --roxo-dark:#5B21B6; --roxo-deep:#3B0F73; --roxo-light:#A78BFA; --roxo-xlight:#EDE9FE;
+    --preto:#0A0A0A; --ink:#141018; --cinza:#5B5566; --linha:#E7E3EE; --bg:#FFFFFF; --bg-soft:#FAF9FC;
+    --good:#16A34A; --warn:#D97706; --bad:#DC2626;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:'Poppins',-apple-system,sans-serif; font-weight:300; background:var(--bg); color:var(--ink); line-height:1.6; font-size:16px; }
+  a { color:var(--roxo); text-decoration:none; } a:hover{ text-decoration:underline; }
+
+  .hero { background: radial-gradient(1100px 500px at 78% -10%, rgba(124,58,237,.55), transparent 60%), linear-gradient(150deg,#0A0A0A 0%,#17111F 45%,#3B0F73 100%); color:#fff; padding:44px 28px 56px; position:relative; overflow:hidden; }
+  .hero::before { content:""; position:absolute; inset:0; background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px); background-size:44px 44px; mask-image: radial-gradient(ellipse at 50% 30%, black 40%, transparent 80%); pointer-events:none; }
+  .hero-inner { max-width:1100px; margin:0 auto; position:relative; z-index:1; }
+  .brand { display:flex; align-items:center; gap:16px; margin-bottom:32px; }
+  .brand svg { width:44px; height:44px; }
+  .brand .word { display:flex; align-items:center; gap:12px; font-weight:300; color:#fff; }
+  .brand .word b { font-weight:800; font-size:20px; }
+  .brand .word .bar { width:2px; height:28px; background:rgba(255,255,255,.55); }
+  .brand .word span { font-size:18px; letter-spacing:.22em; }
+  .hero .eyebrow { color:var(--roxo-light); font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; margin-bottom:12px; }
+  .hero h1 { font-size:42px; font-weight:800; letter-spacing:-.02em; margin:0 0 8px; color:#fff; line-height:1.1; }
+  .hero .sub { font-size:15px; color:rgba(255,255,255,.65); margin-bottom:24px; }
+  .hero .pills { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+  .hero .pill { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); color:#fff; padding:8px 16px; border-radius:100px; font-size:12px; font-weight:600; letter-spacing:.06em; }
+  .hero .pill.solid { background:linear-gradient(90deg,var(--roxo),var(--roxo-dark)); border-color:transparent; }
+
+  .wrap { max-width:1100px; margin:0 auto; padding:0 28px; }
+  section { padding:56px 0; } section.soft { background:var(--bg-soft); }
+  .back { display:inline-block;color:rgba(255,255,255,.5);font-size:13px;margin-bottom:20px;text-decoration:none; }
+  .back:hover { color:#fff; }
+
+  .section-label { display:flex; align-items:center; gap:12px; font-size:13px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--roxo); margin-bottom:12px; }
+  .section-label::before { content:""; width:34px; height:2px; background:var(--roxo); border-radius:2px; }
+  h2 { font-size:30px; font-weight:700; letter-spacing:-.01em; margin:0 0 8px; color:var(--ink); }
+  .lead { color:var(--cinza); font-size:15.5px; margin:0 0 32px; max-width:780px; }
+
+  .months { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:20px; }
+  @media (max-width:900px){ .months{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .months{grid-template-columns:1fr;} }
+  .month-card { border:1px solid var(--linha); border-radius:16px; padding:22px; background:#fff; position:relative; }
+  .month-card.current { border-color:var(--roxo); background:linear-gradient(180deg,#fff,var(--roxo-xlight) 200%); box-shadow:0 8px 24px rgba(124,58,237,.08); }
+  .month-card .m-head { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:16px; }
+  .month-card .m-name { font-weight:700; font-size:16px; color:var(--ink); }
+  .month-card .m-status { font-size:11px; color:var(--cinza); letter-spacing:.06em; text-transform:uppercase; }
+  .month-card .m-status.parcial { color:var(--roxo); font-weight:600; }
+  .month-card .m-kpi { margin-bottom:12px; } .month-card .m-kpi:last-child{margin-bottom:0;}
+  .month-card .m-kpi .k-lbl { font-size:11px; color:var(--cinza); text-transform:uppercase; letter-spacing:.1em; margin-bottom:2px; }
+  .month-card .m-kpi .k-val { font-size:22px; font-weight:700; color:var(--ink); }
+  .month-card .m-kpi .k-val.roxo { color:var(--roxo); }
+
+  .week-row { display:grid; grid-template-columns:140px 1fr 1fr 1fr 1fr 1fr; gap:0; align-items:center; background:#fff; border:1px solid var(--linha); border-radius:14px; padding:20px 24px; margin-bottom:12px; }
+  .week-row.win { border-color:var(--roxo-light); background:linear-gradient(90deg,var(--roxo-xlight) 0%,#fff 40%); }
+  .week-row.alert { border-color:#FDE68A; background:linear-gradient(90deg,#FFFBEB 0%,#fff 40%); }
+  .week-row .wr-date { font-weight:700; font-size:15px; color:var(--roxo); }
+  .week-row .wr-date .wr-tag { display:block; font-size:10px; color:var(--cinza); text-transform:uppercase; letter-spacing:.1em; margin-top:2px; font-weight:500; }
+  .week-row .wr-kpi { padding:0 12px; border-left:1px solid var(--linha); }
+  .week-row .wr-kpi small { display:block; font-size:10.5px; color:var(--cinza); text-transform:uppercase; letter-spacing:.1em; margin-bottom:4px; font-weight:500; }
+  .week-row .wr-kpi b { display:block; font-size:17px; font-weight:700; color:var(--ink); }
+  .week-row .wr-kpi b.roxo{color:var(--roxo);} .week-row .wr-kpi b.good{color:var(--good);} .week-row .wr-kpi b.bad{color:var(--bad);}
+  @media (max-width:900px){ .week-row{grid-template-columns:1fr 1fr 1fr;gap:12px;} .week-row .wr-date{grid-column:1/-1;padding-bottom:8px;border-bottom:1px solid var(--linha);margin-bottom:8px;} .week-row .wr-kpi{border-left:none;padding:0;} }
+
+  .kpi-row { display:grid; grid-template-columns:repeat(6,1fr); gap:12px; }
+  @media (max-width:900px){ .kpi-row{grid-template-columns:repeat(3,1fr);} }
+  @media (max-width:560px){ .kpi-row{grid-template-columns:1fr 1fr;} }
+  .mini-card { border:1px solid var(--linha); border-radius:14px; padding:16px 18px; background:var(--bg-soft); }
+  .mini-card small { color:var(--roxo); font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; display:block; margin-bottom:4px; }
+  .mini-card b { font-size:20px; font-weight:700; display:block; color:var(--ink); }
+  .mini-card .hint { font-size:11px; color:var(--cinza); margin-top:4px; display:block; }
+
+  .table-wrap { overflow-x:auto; border:1px solid var(--linha); border-radius:16px; background:#fff; }
+  table { width:100%; border-collapse:collapse; font-size:14px; min-width:640px; }
+  thead th { background:var(--bg-soft); color:var(--cinza); font-weight:600; text-transform:uppercase; font-size:11px; letter-spacing:.1em; padding:14px; text-align:right; border-bottom:1px solid var(--linha); }
+  thead th:first-child { text-align:left; }
+  tbody td { padding:14px; text-align:right; border-bottom:1px solid var(--linha); font-weight:400; }
+  tbody td:first-child { text-align:left; font-weight:500; color:var(--ink); }
+  tbody tr:last-child td { border-bottom:none; }
+  tbody tr.hero-row td { background:var(--roxo-xlight); }
+  tbody tr.hero-row td:first-child { color:var(--roxo-dark); font-weight:700; }
+  tbody tr.new-row td:first-child::after { content:" NOVO"; font-size:9px; background:var(--roxo); color:#fff; padding:2px 6px; border-radius:4px; margin-left:6px; letter-spacing:.1em; vertical-align:middle; }
+  tbody tr.alert-row td { background:#FFFBEB; }
+  tbody tr.alert-row td:first-child { color:var(--warn); }
+  .good{color:var(--good);font-weight:600;} .bad{color:var(--bad);font-weight:600;} .warn{color:var(--warn);font-weight:600;}
+  .creat-link { font-size:12.5px; }
+
+  .notes { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:900px){ .notes{grid-template-columns:1fr;} }
+  .note-card { border:1px solid var(--linha); border-radius:16px; padding:24px; background:#fff; }
+  .note-card.roxo { border-color:var(--roxo-light); background:linear-gradient(180deg,#fff,var(--roxo-xlight) 400%); }
+  .note-card.warn { border-color:#FDE68A; background:linear-gradient(180deg,#fff,#FFFBEB 400%); }
+  .note-card h3 { font-size:17px; font-weight:700; margin:0 0 12px; color:var(--ink); }
+  .note-card p { color:var(--cinza); font-size:14px; margin:8px 0; }
+  .note-card ul { margin:8px 0 0; padding-left:20px; color:var(--cinza); font-size:14px; }
+  .note-card li { margin-bottom:8px; }
+  .note-card b,.note-card strong { color:var(--ink); font-weight:600; }
+
+  footer { background:var(--ink); color:rgba(255,255,255,.65); padding:32px 28px; text-align:center; font-size:13px; }
+  footer .brand-mini { display:inline-flex; align-items:center; gap:10px; margin-bottom:8px; color:#fff; font-weight:500; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <a href="../../" class="back">← Voltar ao hub Marketex</a>
+    <div class="brand">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+        <polygon points="50,33 65,59 35,59"></polygon>
+        <line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line>
+        <line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line>
+        <line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line>
+        <line x1="10" y1="27" x2="50" y2="33"></line>
+      </svg>
+      <span class="word"><b>BM</b><i class="bar"></i><span>MÍDIAS</span></span>
+    </div>
+    <div class="eyebrow">Sala Secreta · Tráfego Pago · Marketex</div>
+    <h1>Relatório de Campanhas</h1>
+    <div class="sub">Comparativo mensal · Semana a semana · Criativos · Página — atualizado em 27/07/2026</div>
+    <div class="pills">
+      <span class="pill solid">✅ 3 semanas seguidas com CPL abaixo de R$ 1,90</span>
+      <span class="pill">Novo líder: ADV40 (CPL R$ 1,67)</span>
+      <span class="pill">⚠️ ABO Portugal ainda ativo — CPL R$ 11,33</span>
+    </div>
+  </div>
+</header>
+
+<!-- 4.2 RESUMO GERAL POR MÊS -->
+<section>
+<div class="wrap">
+  <div class="section-label">Visão Geral</div>
+  <h2>Resultado geral por mês</h2>
+  <p class="lead">Investimento, quantidade de leads e custo por lead nos últimos 4 meses. Julho segue em curso (5ª semana parcial), mas já supera Junho em qualidade de resultado nas últimas 3 semanas.</p>
+
+  <div class="months">
+    <div class="month-card">
+      <div class="m-head"><span class="m-name">Abril</span><span class="m-status">fechado · 5 sem</span></div>
+      <div class="m-kpi"><div class="k-lbl">Investido</div><div class="k-val">R$ 3.130</div></div>
+      <div class="m-kpi"><div class="k-lbl">Leads</div><div class="k-val">1.591</div></div>
+      <div class="m-kpi"><div class="k-lbl">Custo por lead</div><div class="k-val roxo">R$ 1,97</div></div>
+    </div>
+    <div class="month-card">
+      <div class="m-head"><span class="m-name">Maio</span><span class="m-status">fechado · 4 sem</span></div>
+      <div class="m-kpi"><div class="k-lbl">Investido</div><div class="k-val">R$ 2.519</div></div>
+      <div class="m-kpi"><div class="k-lbl">Leads</div><div class="k-val">1.319</div></div>
+      <div class="m-kpi"><div class="k-lbl">Custo por lead</div><div class="k-val roxo">R$ 1,91</div></div>
+    </div>
+    <div class="month-card">
+      <div class="m-head"><span class="m-name">Junho</span><span class="m-status">fechado · 4 sem</span></div>
+      <div class="m-kpi"><div class="k-lbl">Investido</div><div class="k-val">R$ 3.590</div></div>
+      <div class="m-kpi"><div class="k-lbl">Leads</div><div class="k-val">1.305</div></div>
+      <div class="m-kpi"><div class="k-lbl">Custo por lead</div><div class="k-val roxo">R$ 2,75</div></div>
+    </div>
+    <div class="month-card current">
+      <div class="m-head"><span class="m-name">Julho</span><span class="m-status parcial">em curso · 5ª sem parcial</span></div>
+      <div class="m-kpi"><div class="k-lbl">Investido</div><div class="k-val">R$ 5.915</div></div>
+      <div class="m-kpi"><div class="k-lbl">Leads</div><div class="k-val">2.578</div></div>
+      <div class="m-kpi"><div class="k-lbl">Custo por lead</div><div class="k-val roxo">R$ 2,29</div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 4.3 MÊS ATUAL SEMANA A SEMANA -->
+<section class="soft">
+<div class="wrap">
+  <div class="section-label">Mês Atual · Julho</div>
+  <h2>Semana a semana — desempenho completo</h2>
+  <p class="lead">Julho começou muito ruim (sem 01/07 com CPL R$ 3,73) e vem em recuperação sólida desde então. As 3 últimas semanas — incluindo a atual, parcial — todas com CPL abaixo de R$ 1,90, no nível das melhores semanas do ano.</p>
+
+  <div class="week-row alert">
+    <div class="wr-date">Sem 01/07 <span class="wr-tag">fechada</span></div>
+    <div class="wr-kpi"><small>Investimento</small><b>R$ 1.916</b></div>
+    <div class="wr-kpi"><small>Custo por lead</small><b class="bad">R$ 3,73</b></div>
+    <div class="wr-kpi"><small>CTR</small><b class="bad">2,27%</b></div>
+    <div class="wr-kpi"><small>CPM</small><b>R$ 28,43</b></div>
+    <div class="wr-kpi"><small>Conv. página</small><b class="bad">45,3%</b></div>
+  </div>
+
+  <div class="week-row">
+    <div class="wr-date">Sem 08/07 <span class="wr-tag">fechada</span></div>
+    <div class="wr-kpi"><small>Investimento</small><b>R$ 891</b></div>
+    <div class="wr-kpi"><small>Custo por lead</small><b>R$ 2,37</b></div>
+    <div class="wr-kpi"><small>CTR</small><b>4,03%</b></div>
+    <div class="wr-kpi"><small>CPM</small><b>R$ 43,20</b></div>
+    <div class="wr-kpi"><small>Conv. página</small><b>57,9%</b></div>
+  </div>
+
+  <div class="week-row win">
+    <div class="wr-date">Sem 15/07 <span class="wr-tag">fechada</span></div>
+    <div class="wr-kpi"><small>Investimento</small><b>R$ 1.022</b></div>
+    <div class="wr-kpi"><small>Custo por lead</small><b class="good">R$ 1,80</b></div>
+    <div class="wr-kpi"><small>CTR</small><b class="good">4,16%</b></div>
+    <div class="wr-kpi"><small>CPM</small><b>R$ 34,54</b></div>
+    <div class="wr-kpi"><small>Conv. página</small><b class="good">58,2%</b></div>
+  </div>
+
+  <div class="week-row win">
+    <div class="wr-date">Sem 22/07 <span class="wr-tag">fechada</span></div>
+    <div class="wr-kpi"><small>Investimento</small><b>R$ 1.268</b></div>
+    <div class="wr-kpi"><small>Custo por lead</small><b class="good">R$ 1,89</b></div>
+    <div class="wr-kpi"><small>CTR</small><b class="good">4,08%</b></div>
+    <div class="wr-kpi"><small>CPM</small><b>R$ 35,64</b></div>
+    <div class="wr-kpi"><small>Conv. página</small><b class="good">57,5%</b></div>
+  </div>
+
+  <div class="week-row win">
+    <div class="wr-date">Sem 29/07 <span class="wr-tag">parcial · 5 dias</span></div>
+    <div class="wr-kpi"><small>Investimento</small><b>R$ 817</b></div>
+    <div class="wr-kpi"><small>Custo por lead</small><b class="good">R$ 1,83</b></div>
+    <div class="wr-kpi"><small>CTR</small><b class="good">4,04%</b></div>
+    <div class="wr-kpi"><small>CPM</small><b>R$ 35,97</b></div>
+    <div class="wr-kpi"><small>Conv. página</small><b class="good">58,9%</b></div>
+  </div>
+</div>
+</section>
+
+<!-- 4.4 MELHORES CRIATIVOS -->
+<section>
+<div class="wrap">
+  <div class="section-label">Criativos</div>
+  <h2>Melhores criativos — geral × Julho</h2>
+  <p class="lead">Ranking dos criativos com maior volume de leads. Pela primeira vez em meses, o ADV14 (clone) não é mais o de menor CPL — o ADV40 (Especialista) assumiu a liderança de eficiência.</p>
+
+  <div class="notes">
+    <div class="note-card">
+      <h3>🏆 Melhores criativos gerais (Mar → Jul)</h3>
+      <div class="table-wrap" style="border-radius:12px;">
+      <table style="min-width:auto;">
+        <thead><tr><th>Criativo</th><th>Leads</th><th>CPL</th></tr></thead>
+        <tbody>
+          <tr class="hero-row"><td><a class="creat-link" href="https://drive.google.com/open?id=1zMS8i6wmktRp1QzoXqiiyvcyPdHjZpzc&usp=drive_copy" target="_blank">ADV14_SST_CAP_CLONE EM VIDEO E EM FOTO_0.45</a></td><td>5.833</td><td>R$ 1,82</td></tr>
+          <tr><td><a class="creat-link" href="https://drive.google.com/open?id=1wAgjGJy_5AjpLsT8JJM0p9FiQs6sLLAT&usp=drive_copy" target="_blank">ADV12_SS_CAP_MAIS DE 30 MM</a></td><td>2.442</td><td>R$ 6,14</td></tr>
+          <tr><td><a class="creat-link" href="https://drive.google.com/open?id=1n3kTOct7TeNTBZ4nfVddDLM0It0aouq-&usp=drive_copy" target="_blank">ADV04_SS_CAP_POSSIVEL CRIAR</a></td><td>1.650</td><td>R$ 4,34</td></tr>
+          <tr><td><a class="creat-link" href="https://drive.google.com/file/d/1xS4amss1qlsEej0Hn2mexX4T63cemkSF/view?usp=drive_link" target="_blank">ADV01_SST_CAP_STORIES DO DIA</a></td><td>1.062</td><td>R$ 6,96</td></tr>
+          <tr><td><a class="creat-link" href="https://drive.google.com/file/d/1_kxf8xxQDu26oERKEl7ngefVgTqQDQuj/view?usp=drive_link" target="_blank">AD01_SST_CAP_GERAL</a></td><td>552</td><td>R$ 10,10</td></tr>
+          <tr class="new-row"><td><a class="creat-link" href="https://drive.google.com/open?id=18yFvtCy7T5m_8yCWt2k9Z3C_gTW0JpqU&usp=drive_copy" target="_blank">ADV40_SST_CAP_ESPECIALISTA_0.37</a></td><td>522</td><td class="good">R$ 1,67</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="font-size:13px;margin-top:10px;">ADV14 acumula 5.833 leads desde março — segue como criativo de maior volume histórico. Mas o <strong>ADV40 já entrega mais barato</strong> (R$ 1,67 vs R$ 1,82), mesmo com muito menos verba investida até aqui.</p>
+    </div>
+
+    <div class="note-card roxo">
+      <h3>⭐ Melhores criativos em Julho</h3>
+      <div class="table-wrap" style="border-radius:12px;">
+      <table style="min-width:auto;">
+        <thead><tr><th>Criativo</th><th>Leads</th><th>CPL</th></tr></thead>
+        <tbody>
+          <tr><td><a class="creat-link" href="https://drive.google.com/open?id=1zMS8i6wmktRp1QzoXqiiyvcyPdHjZpzc&usp=drive_copy" target="_blank">ADV14_SST_CAP_CLONE EM VIDEO E EM FOTO_0.45</a></td><td>1.336</td><td>R$ 1,78</td></tr>
+          <tr class="hero-row"><td><a class="creat-link" href="https://drive.google.com/open?id=18yFvtCy7T5m_8yCWt2k9Z3C_gTW0JpqU&usp=drive_copy" target="_blank">ADV40_SST_CAP_ESPECIALISTA_0.37</a></td><td>522</td><td class="good">R$ 1,67</td></tr>
+          <tr class="new-row"><td><a class="creat-link" href="https://drive.google.com/drive/folders/1SxDSD76z_elnl-5sFHoo8Wa48EwM8bJU" target="_blank">ADC03_SST_CARROSSEL_CAP_7 TAREFAS QUE EMPRESAS PAGAM_25.02.26</a></td><td>206</td><td>R$ 2,68</td></tr>
+          <tr class="new-row"><td><a class="creat-link" href="https://drive.google.com/file/d/1tNjGU3acYSClAcThw4u5_72Wzu9m90Qn/view?usp=drivesdk" target="_blank">ADV43_SST_CAP_TUDO MUITO COMPLICADO_0.37</a></td><td>158</td><td class="good">R$ 2,14</td></tr>
+          <tr class="new-row"><td><a class="creat-link" href="https://drive.google.com/open?id=1b5IhmEwqdLmf7QhezeZ6oU4xRyeCxP5o&usp=drive_copy" target="_blank">ADV30_SST_CAP_CLAUDE LIVE ARTIFACTS 02_1.18</a></td><td>105</td><td>R$ 2,74</td></tr>
+          <tr class="new-row"><td><a class="creat-link" href="https://drive.google.com/open?id=1RnPGAMk1TaawQXtGT4hcVndIgEUad8P4&usp=drive_copy" target="_blank">ADV29_SST_CAP_CLAUDE LIVE ARTIFACTS 01_1.25</a></td><td>93</td><td>R$ 2,88</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="font-size:13px;margin-top:10px;"><strong>ADV14 caiu para 51,8% do volume de Julho</strong> (1.336 de 2.578 leads) — a menor concentração em meses. Diversificação real de ativo criativo em curso.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 4.5 ANÁLISE DOS CRIATIVOS NOVOS -->
+<section class="soft">
+<div class="wrap">
+  <div class="section-label">Novos criativos</div>
+  <h2>Como os novos criativos performaram</h2>
+  <p class="lead">Bateria de criativos novos subiu em julho para reduzir a dependência do ADV14. O resultado foi além do esperado: o ADV40 não só diversificou o ativo, como se tornou o criativo mais barato da conta.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Criativo novo</th>
+          <th>Formato</th>
+          <th>Leads Jul</th>
+          <th>CPL Jul</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="hero-row"><td><a class="creat-link" href="https://drive.google.com/open?id=18yFvtCy7T5m_8yCWt2k9Z3C_gTW0JpqU&usp=drive_copy" target="_blank">ADV40_SST_CAP_ESPECIALISTA_0.37</a></td><td>Vídeo</td><td>522</td><td class="good">R$ 1,67</td><td>🚀 Escalar — novo líder de eficiência</td></tr>
+        <tr><td><a class="creat-link" href="https://drive.google.com/drive/folders/1SxDSD76z_elnl-5sFHoo8Wa48EwM8bJU" target="_blank">ADC03_SST_CARROSSEL_CAP_7 TAREFAS QUE EMPRESAS PAGAM_25.02.26</a></td><td>Carrossel</td><td>206</td><td>R$ 2,68</td><td>✅ Manter — primeiro carrossel consolidado</td></tr>
+        <tr><td><a class="creat-link" href="https://drive.google.com/file/d/1tNjGU3acYSClAcThw4u5_72Wzu9m90Qn/view?usp=drivesdk" target="_blank">ADV43_SST_CAP_TUDO MUITO COMPLICADO_0.37</a></td><td>Vídeo</td><td>158</td><td class="good">R$ 2,14</td><td>🚀 Escalar</td></tr>
+        <tr><td><a class="creat-link" href="https://drive.google.com/open?id=1b5IhmEwqdLmf7QhezeZ6oU4xRyeCxP5o&usp=drive_copy" target="_blank">ADV30_SST_CAP_CLAUDE LIVE ARTIFACTS 02_1.18</a></td><td>Vídeo</td><td>105</td><td>R$ 2,74</td><td>✅ Manter</td></tr>
+        <tr><td><a class="creat-link" href="https://drive.google.com/open?id=1RnPGAMk1TaawQXtGT4hcVndIgEUad8P4&usp=drive_copy" target="_blank">ADV29_SST_CAP_CLAUDE LIVE ARTIFACTS 01_1.25</a></td><td>Vídeo</td><td>93</td><td>R$ 2,88</td><td>✅ Manter</td></tr>
+        <tr><td><a class="creat-link" href="https://drive.google.com/open?id=1QATGfwddzoMZNafMSzrXHOdNhGBVvHG3&usp=drive_copy" target="_blank">ADV41_SST_CAP_AUTOMATIZOU_0.31</a></td><td>Vídeo</td><td>16</td><td class="good">R$ 2,09</td><td>✅ Testar mais verba</td></tr>
+        <tr><td><a class="creat-link" href="https://drive.google.com/file/d/1Vm-mpgEKRJjIX-hGTbeDFbYcjfRJhY9Z/view?usp=drivesdk" target="_blank">ADV44_SST_CAP_E HOJE SALA SECRETA_0.35</a></td><td>Vídeo</td><td>13</td><td class="good">R$ 2,19</td><td>✅ Testar mais verba</td></tr>
+        <tr><td><a class="creat-link" href="https://drive.google.com/file/d/1Oh61hLKOYLqVNkXm4tE2ne8tqdTTWqQx/view?usp=drivesdk" target="_blank">ADV42_SST_CAP_A INTELIGENCIA NOVA_0.39</a></td><td>Vídeo</td><td>9</td><td class="good">R$ 2,05</td><td>✅ Testar mais verba</td></tr>
+        <tr><td><a class="creat-link" href="https://drive.google.com/open?id=1xly6eMLIWU5cw8UJMHBiK7fWtgeKh9hf&usp=drive_copy" target="_blank">ADV39_SST_CAP_OCULOS IA_1.29</a></td><td>Vídeo</td><td>6</td><td>R$ 2,91</td><td>🟡 Amostra baixa · observar</td></tr>
+        <tr><td><a class="creat-link" href="https://drive.google.com/open?id=1IAShbfrLfinv7Xn7k0fNFMBN08LB_yDj&usp=drive_copy" target="_blank">ADV38_SST_CAP_MULHER_0.54</a></td><td>Vídeo</td><td>6</td><td class="good">R$ 1,56</td><td>🟡 Amostra baixa · promissor</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note-card roxo" style="margin-top:20px;">
+    <h3>Leitura estratégica dos novos criativos</h3>
+    <ul>
+      <li><strong>ADV40 (Especialista) virou o novo líder de eficiência:</strong> R$ 1,67 de CPL em 522 leads — mais barato que o próprio ADV14 (R$ 1,78 em Julho). Na semana atual (parcial), ele já entrega a R$ 1,52.</li>
+      <li><strong>Carrossel se consolidou como formato viável:</strong> ADC03 acumula 206 leads a R$ 2,68 — a conta nunca tinha rodado carrossel de forma relevante antes.</li>
+      <li><strong>Série "Claude Live Artifacts" (ADV29+ADV30) entregou 198 leads</strong> ao CPL médio R$ 2,81 — segura bem quando os líderes respiram.</li>
+      <li><strong>Diversificação real e crescente:</strong> ADV14 caiu de ~90% do volume em Junho para <strong>51,8% em Julho</strong> — a conta hoje tem 2 criativos fortes (ADV14 + ADV40) e mais 4-5 em consolidação.</li>
+      <li><strong>ADV38 (Mulher) é o criativo mais barato da bateria</strong> (R$ 1,56) mas com amostra pequena (6 leads) — vale escalar verba pra confirmar o padrão.</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- 4.6 ESTRUTURA DE CAMPANHAS -->
+<section>
+<div class="wrap">
+  <div class="section-label">Campanhas · testes</div>
+  <h2>Estrutura de campanhas rodando</h2>
+  <p class="lead">6 campanhas ativas em Julho — 5 delas em CBO/Advantage com resultado saudável, e 1 (ABO Portugal) ainda com CPL bem acima da média.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Campanha</th>
+          <th>Estrutura</th>
+          <th>Leads Jul</th>
+          <th>CPL Jul</th>
+          <th>Nota</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="hero-row"><td>[03] CBO Brasil ADV13-16</td><td>Advantage · Vídeo · CBO</td><td>1.317</td><td class="good">R$ 1,72</td><td>Motor original — segue o mais eficiente</td></tr>
+        <tr><td>[04] CBO Brasil</td><td>Advantage · Vídeo · CBO</td><td>539</td><td class="good">R$ 1,81</td><td>Segunda frente — abriga o ADV40</td></tr>
+        <tr><td>[06] CBO Carrossel</td><td>Advantage · Carrossel · CBO</td><td>211</td><td>R$ 2,72</td><td>Frente de teste de formato (ADC03)</td></tr>
+        <tr><td>[07] CBO Brasil</td><td>Advantage · Vídeo · CBO</td><td>180</td><td>R$ 2,14</td><td>Frente nova, ainda em ajuste</td></tr>
+        <tr><td>[05] CBO Internacional</td><td>Advantage · Vídeo · CBO</td><td>237</td><td>R$ 2,73</td><td>Substituto do ABO Portugal antigo — bem mais barato</td></tr>
+        <tr class="alert-row"><td>ABO Portugal (Frio Internacional)</td><td>ABO · Vídeo</td><td>94</td><td class="bad">R$ 11,33</td><td>⚠️ Ainda ativa — CPL 6-7x acima da média da conta</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note-card warn" style="margin-top:20px;">
+    <h3>⚠️ Observação importante — campanha ABO Portugal</h3>
+    <p>A campanha antiga em <strong>ABO</strong> (não Advantage/CBO) para o público frio internacional continua ativa em Julho, com <strong>R$ 1.065 investidos, 94 leads e CPL R$ 11,33</strong> — 6 a 7 vezes mais cara que qualquer outra campanha da conta. A frente <strong>[05] CBO Internacional</strong> já resolve esse público de forma muito mais eficiente (R$ 2,73). Recomendação: pausar a campanha ABO antiga e realocar a verba para a [05] ou para o ADV40 na [04].</p>
+  </div>
+
+  <div class="note-card" style="margin-top:20px;">
+    <h3>Observações gerais da estrutura</h3>
+    <ul>
+      <li><strong>5 das 6 campanhas estão em CBO com Advantage</strong> — estrutura muito mais saudável que a de meses atrás, quando a conta dependia de poucas campanhas concentradas.</li>
+      <li><strong>Formato carrossel [06] validado</strong> — primeira vez que esse formato sustenta volume relevante na conta.</li>
+      <li><strong>Frente [07] ainda em ajuste</strong> — CPL R$ 2,14 é aceitável, mas ainda não no nível das campanhas 03/04.</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- 4.7 PÁGINA -->
+<section class="soft">
+<div class="wrap">
+  <div class="section-label">Página · Landing</div>
+  <h2>Página A — desempenho em Julho</h2>
+  <p class="lead">A conta usa apenas uma página de captação (Página A). Indicadores do mês inteiro (parcial) e evolução semana a semana.</p>
+
+  <div class="kpi-row">
+    <div class="mini-card"><small>CPM</small><b>R$ 33,62</b><span class="hint">Custo por 1.000 impr.</span></div>
+    <div class="mini-card"><small>Custo por Visualização</small><b>R$ 1,26</b><span class="hint">Custo por LPV</span></div>
+    <div class="mini-card"><small>Connect Rate</small><b>78,6%</b><span class="hint">Clique → LPV</span></div>
+    <div class="mini-card"><small>Conversão da página</small><b>55,0%</b><span class="hint">LPV → Lead</span></div>
+    <div class="mini-card"><small>CPC</small><b>R$ 0,99</b><span class="hint">Custo por clique</span></div>
+    <div class="mini-card"><small>CTR</small><b>3,39%</b><span class="hint">Cliques / impressões</span></div>
+  </div>
+
+  <div class="notes" style="margin-top:24px;">
+    <div class="note-card">
+      <h3>Evolução da página ao longo de Julho</h3>
+      <div class="table-wrap" style="border-radius:12px;">
+      <table style="min-width:auto;">
+        <thead><tr><th>Sem.</th><th>CPM</th><th>Cust/Vis</th><th>Connect</th><th>Conv. página</th></tr></thead>
+        <tbody>
+          <tr><td>01/07</td><td>R$ 28,43</td><td>R$ 1,69</td><td>74,2%</td><td class="bad">45,3%</td></tr>
+          <tr><td>08/07</td><td>R$ 43,20</td><td>R$ 1,37</td><td>78,1%</td><td>57,9%</td></tr>
+          <tr><td>15/07</td><td>R$ 34,54</td><td>R$ 1,05</td><td>79,4%</td><td>58,2%</td></tr>
+          <tr><td>22/07</td><td>R$ 35,64</td><td>R$ 1,08</td><td>80,5%</td><td>57,5%</td></tr>
+          <tr><td>29/07*</td><td>R$ 35,97</td><td>R$ 1,08</td><td class="good">82,6%</td><td class="good">58,9%</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="font-size:13px;margin-top:10px;">A página vem melhorando de forma consistente desde a sem 01/07: Connect Rate subiu de 74,2% para 82,6%, e Conversão da página de 45,3% para 58,9%. A sem 01/07 foi ruim porque o tráfego vinha desqualificado (ABO Portugal ainda escalado + criativos antigos rodando), não por causa da página.</p>
+    </div>
+
+    <div class="note-card roxo">
+      <h3>Leitura da página</h3>
+      <ul>
+        <li><strong>Connect Rate 82,6%</strong> (sem 29/07 parcial) — o melhor patamar do trimestre. Referência de mercado é ≥75%.</li>
+        <li><strong>Conversão da página 58,9%</strong> — para captação de leads free, ≥50% já é ótimo; a página está bem acima disso.</li>
+        <li><strong>Custo por visualização estável em ~R$ 1,05-1,10</strong> nas últimas 3 semanas — o menor patamar do ano.</li>
+        <li>A página não é gargalo. O CPL sobe quando chega tráfego mal qualificado (ex.: ABO Portugal) — a solução é na ponta de mídia/criativo, não na página.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<footer>
+  <div class="brand-mini">
+    <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" style="width:22px;height:22px">
+      <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+      <polygon points="50,33 65,59 35,59"></polygon>
+    </svg>
+    <span><b>BM</b> Mídias · Sala Secreta · Marketex</span>
+  </div>
+  <div>Dados extraídos em 27/07/2026 · fonte: planilha Sala Secreta (Tráfego Pago SS · MTADS)</div>
+</footer>
+
+</body>
+</html>
