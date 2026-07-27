@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LS010 · Fechamento Captação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--roxo:#7C3AED;--roxo-light:#A78BFA;--verde:#059669;--vermelho:#DC2626;--amarelo:#D97706;--bg:#fff;--soft:#FAF9FC;--border:#E7E3EE;--text:#1F1F2E;--text-muted:#6B7280;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Poppins',sans-serif;background:#fff;color:var(--text);font-size:14px;line-height:1.6;}
+.container{max-width:1100px;margin:0 auto;padding:0 24px;}
+/* HERO */
+.hero{background:linear-gradient(150deg,#0A0A0A 0%,#17111F 45%,#3B0F73 100%);position:relative;padding:56px 0 44px;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(124,58,237,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(124,58,237,.08) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(1100px 500px at 78% -10%,rgba(124,58,237,.55),transparent 60%);pointer-events:none;}
+.hero .container{position:relative;z-index:1;}
+.hero-logo{display:flex;align-items:center;gap:10px;margin-bottom:24px;}
+.hero-logo svg{width:36px;height:36px;}
+.hero-logo span{font-size:13px;font-weight:600;color:#A78BFA;letter-spacing:.05em;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(124,58,237,.25);border:1px solid rgba(124,58,237,.5);color:#C4B5FD;font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;margin-bottom:14px;letter-spacing:.04em;}
+.hero h1{font-size:28px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:6px;}
+.hero-meta{color:#A78BFA;font-size:12px;font-weight:500;margin-bottom:32px;}
+.hero-meta span{color:#D8B4FE;font-weight:600;}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+.kpi{background:rgba(255,255,255,.07);border:1px solid rgba(124,58,237,.3);border-radius:14px;padding:18px 20px;}
+.kpi-label{font-size:10px;font-weight:600;color:#A78BFA;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;}
+.kpi-value{font-size:24px;font-weight:800;color:#fff;line-height:1;}
+.kpi-sub{font-size:11px;color:#9CA3AF;margin-top:4px;}
+.kpi.good .kpi-value{color:#34D399;}
+.kpi.bad .kpi-value{color:#F87171;}
+.kpi.warn .kpi-value{color:#FBBF24;}
+/* SECTIONS */
+section{padding:40px 0;}
+.bg{background:#fff;}
+.bg-soft{background:var(--soft);}
+.section-title{font-size:18px;font-weight:700;color:var(--roxo);margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+/* KPI CARDS */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:24px;}
+.card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px 18px;}
+.card-label{font-size:10px;font-weight:600;color:var(--roxo);letter-spacing:.07em;text-transform:uppercase;margin-bottom:6px;}
+.card-value{font-size:20px;font-weight:700;color:var(--text);line-height:1.1;}
+.card-sub{font-size:11px;color:var(--text-muted);margin-top:3px;}
+.card.good{border-left:3px solid var(--verde);}
+.card.bad{border-left:3px solid var(--vermelho);}
+.card.warn{border-left:3px solid var(--amarelo);}
+/* FUNIL */
+.funil-grid{display:grid;grid-template-columns:1fr;gap:8px;}
+.funil-row{display:flex;align-items:center;gap:12px;padding:10px 16px;background:#fff;border:1px solid var(--border);border-radius:10px;}
+.funil-label{font-size:11px;color:var(--text-muted);width:200px;flex-shrink:0;}
+.funil-value{font-size:14px;font-weight:600;color:var(--text);min-width:120px;}
+.funil-bar{flex:1;background:#F3F4F6;border-radius:4px;height:6px;overflow:hidden;}
+.funil-fill{height:100%;background:linear-gradient(90deg,var(--roxo-light),var(--roxo));border-radius:4px;}
+.funil-arrow{text-align:center;font-size:18px;color:var(--border);line-height:1;margin:2px 0;}
+/* TABLES */
+.table-wrap{overflow-x:auto;border-radius:16px;border:1px solid var(--border);}
+table{width:100%;border-collapse:collapse;min-width:500px;}
+th{background:var(--soft);color:var(--roxo);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+td{padding:10px 14px;font-size:13px;border-bottom:1px solid #F3F4F6;color:var(--text);}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:#FAFAFA;}
+.td-bold{font-weight:600;}
+.td-good{color:var(--verde);font-weight:600;}
+.td-bad{color:var(--vermelho);font-weight:600;}
+.td-warn{color:var(--amarelo);font-weight:600;}
+.td-muted{color:var(--text-muted);font-size:12px;}
+/* ANALYSIS CARDS */
+.analysis-grid{display:grid;gap:16px;}
+.analysis-card{border-radius:14px;padding:20px 22px;}
+.analysis-card.green{background:linear-gradient(135deg,#F0FDF4,#DCFCE7);border-left:4px solid var(--verde);}
+.analysis-card.yellow{background:linear-gradient(135deg,#FFFBEB,#FEF3C7);border-left:4px solid var(--amarelo);}
+.analysis-card.red{background:linear-gradient(135deg,#FEF2F2,#FEE2E2);border-left:4px solid var(--vermelho);}
+.analysis-card h3{font-size:14px;font-weight:700;margin-bottom:10px;}
+.analysis-card ul{list-style:none;padding:0;}
+.analysis-card ul li{font-size:13px;padding:3px 0;padding-left:16px;position:relative;}
+.analysis-card ul li::before{content:'→';position:absolute;left:0;color:var(--text-muted);}
+/* BADGE */
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:.04em;}
+.badge-roxo{background:#EDE9FE;color:var(--roxo);}
+.badge-verde{background:#D1FAE5;color:var(--verde);}
+.badge-vermelho{background:#FEE2E2;color:var(--vermelho);}
+.badge-amarelo{background:#FEF3C7;color:var(--amarelo);}
+.badge-gray{background:#F3F4F6;color:#6B7280;}
+/* FOOTER */
+footer{background:#141018;padding:32px 0;}
+footer .container{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{display:flex;align-items:center;gap:8px;}
+.footer-logo span{font-size:12px;color:#A78BFA;font-weight:600;}
+footer p{font-size:11px;color:#6B7280;}
+.pill{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:600;}
+.sep{color:var(--border);margin:0 4px;}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="container">
+    <div class="hero-logo">
+      <svg viewBox="0 0 36 36" fill="none"><path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" fill="#7C3AED" opacity=".8"/><path d="M18 8L28 14V22L18 28L8 22V14L18 8Z" fill="none" stroke="#A78BFA" stroke-width="1.5"/><circle cx="18" cy="18" r="4" fill="#A78BFA"/></svg>
+      <span>BRITO MÍDIAS</span>
+    </div>
+    <div class="hero-badge">📦 FECHAMENTO CAPTAÇÃO</div>
+    <h1>LS010 · Fechamento Captação</h1>
+    <div class="hero-meta">
+      20/07/2026 – 26/07/2026 &nbsp;·&nbsp; Gerado em <span>27/07/2026 às 14:17</span> &nbsp;·&nbsp; Fonte: Meta Ads + VK Metrics + Hotmart
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi bad">
+        <div class="kpi-label">Invest c/imp</div>
+        <div class="kpi-value">R$ 56.153</div>
+        <div class="kpi-sub">bruto R$ 49.326</div>
+      </div>
+      <div class="kpi bad">
+        <div class="kpi-label">Retorno Líquido</div>
+        <div class="kpi-value">R$ 43.935</div>
+        <div class="kpi-sub">exposição -R$ 12.218</div>
+      </div>
+      <div class="kpi bad">
+        <div class="kpi-label">ROAS Captação</div>
+        <div class="kpi-value">0,78×</div>
+        <div class="kpi-sub">abaixo do break-even</div>
+      </div>
+      <div class="kpi warn">
+        <div class="kpi-label">Ingressos Workshop</div>
+        <div class="kpi-value">488</div>
+        <div class="kpi-sub">97,6% da meta · faltou 12</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUADRO GERAL -->
+<section class="bg">
+  <div class="container">
+    <div class="section-title">📊 Quadro Geral — D1 a D7 (completo)</div>
+    <div class="kpi-row">
+      <div class="card bad">
+        <div class="card-label">Invest c/imp</div>
+        <div class="card-value">R$ 56.153,24</div>
+        <div class="card-sub">bruto R$ 49.325,56 · Meta Ads oficial</div>
+      </div>
+      <div class="card bad">
+        <div class="card-label">Retorno Líquido</div>
+        <div class="card-value">R$ 43.935,42</div>
+        <div class="card-sub">Hotmart col K (BRL) / col AX (intl)</div>
+      </div>
+      <div class="card bad">
+        <div class="card-label">Exposição</div>
+        <div class="card-value" style="color:var(--vermelho)">-R$ 12.217,82</div>
+        <div class="card-sub">será recuperado nas aulas + mentoria</div>
+      </div>
+      <div class="card bad">
+        <div class="card-label">ROAS Captação</div>
+        <div class="card-value">0,78×</div>
+        <div class="card-sub">vs LS009 F1 = 0,86×</div>
+      </div>
+      <div class="card warn">
+        <div class="card-label">Ingressos (Hotmart)</div>
+        <div class="card-value">488</div>
+        <div class="card-sub">97,6% da meta 500 · faltou 12</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Meta Pixel Purchases</div>
+        <div class="card-value">450</div>
+        <div class="card-sub">inclui bumps sem ingresso</div>
+      </div>
+    </div>
+    <div class="kpi-row">
+      <div class="card">
+        <div class="card-label">CPA c/imp</div>
+        <div class="card-value">R$ 115,07</div>
+        <div class="card-sub">vs LS009 R$ 110,55</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Ticket Médio</div>
+        <div class="card-value">R$ 90,03</div>
+        <div class="card-sub">ingresso + bumps por venda</div>
+      </div>
+      <div class="card good">
+        <div class="card-label">Conv. Bumps</div>
+        <div class="card-value">37,1%</div>
+        <div class="card-sub">181 bumps / 488 ingressos</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Freq. média</div>
+        <div class="card-value">1,12×</div>
+        <div class="card-sub">exposição saudável</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Impressões</div>
+        <div class="card-value">650.622</div>
+        <div class="card-sub">alcance 583.255</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Status</div>
+        <div class="card-value" style="font-size:14px">⏳ Pós-cap</div>
+        <div class="card-sub">Aguardando aulas + mentoria</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNIL -->
+<section class="bg-soft">
+  <div class="container">
+    <div class="section-title">🔽 Funil de Captação — D1 a D7 acumulado</div>
+    <div class="funil-grid">
+      <div class="funil-row">
+        <div class="funil-label">💰 Investimento c/imp</div>
+        <div class="funil-value" style="color:var(--roxo)">R$ 56.153,24</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:100%"></div></div>
+      </div>
+      <div class="funil-arrow">↓</div>
+      <div class="funil-row">
+        <div class="funil-label">👁️ Impressões</div>
+        <div class="funil-value">650.622</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:100%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">👥 Alcance único</div>
+        <div class="funil-value">583.255</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:90%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">🔄 Frequência</div>
+        <div class="funil-value">1,12×</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:15%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">💵 CPM c/imp</div>
+        <div class="funil-value">R$ 86,31</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:30%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">🖱️ CTR (link)</div>
+        <div class="funil-value">1,92%</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:19%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">🎬 Hook Rate (ADV)</div>
+        <div class="funil-value">24,9%</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:25%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">🔗 Cliques no link</div>
+        <div class="funil-value">12.522</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:65%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">💲 CPC c/imp</div>
+        <div class="funil-value">R$ 4,48</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:20%"></div></div>
+      </div>
+      <div class="funil-arrow">↓</div>
+      <div class="funil-row">
+        <div class="funil-label">📄 Visualizações de página (LPV)</div>
+        <div class="funil-value">11.489</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:60%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">💲 Custo por LPV</div>
+        <div class="funil-value">R$ 4,89</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:18%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">↗️ Conv. Página → Checkout</div>
+        <div class="funil-value">17,51%</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:18%"></div></div>
+      </div>
+      <div class="funil-arrow">↓</div>
+      <div class="funil-row">
+        <div class="funil-label">🛒 Checkouts iniciados (IC)</div>
+        <div class="funil-value">2.012</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:52%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">💲 Custo por IC</div>
+        <div class="funil-value">R$ 27,91</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:22%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">↗️ Conv. Checkout → Ingresso</div>
+        <div class="funil-value">24,25%</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:24%"></div></div>
+      </div>
+      <div class="funil-arrow">↓</div>
+      <div class="funil-row" style="border:1px solid var(--roxo);">
+        <div class="funil-label" style="color:var(--roxo);font-weight:600;">🎟️ Ingressos Workshop (Hotmart)</div>
+        <div class="funil-value" style="color:var(--roxo)">488</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:100%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">↗️ Conv. Página → Ingresso</div>
+        <div class="funil-value">4,25%</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:4%"></div></div>
+      </div>
+      <div class="funil-row" style="border:1px solid var(--verde);">
+        <div class="funil-label" style="color:var(--verde);font-weight:600;">💰 CPA c/imp</div>
+        <div class="funil-value" style="color:var(--verde)">R$ 115,07</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:40%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">🎯 ROAS Captação</div>
+        <div class="funil-value" style="color:var(--vermelho)">0,78×</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:78%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">🎟️ Ticket Médio</div>
+        <div class="funil-value">R$ 90,03</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:30%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIA-A-DIA -->
+<section class="bg">
+  <div class="container">
+    <div class="section-title">📅 Dia-a-Dia — LS010 (D1 a D7)</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Dia</th>
+            <th>Data</th>
+            <th>Invest c/imp</th>
+            <th>Ingressos</th>
+            <th>CPA</th>
+            <th>% Meta Diária</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="td-bold">D1</td><td>20/07/26</td><td>R$ 9.115,72</td><td>82</td><td class="td-warn">R$ 111</td><td>57,3%</td></tr>
+          <tr><td class="td-bold">D2</td><td>21/07/26</td><td>R$ 8.540,41</td><td>53</td><td class="td-bad">R$ 161</td><td>37,1%</td></tr>
+          <tr><td class="td-bold">D3</td><td>22/07/26</td><td>R$ 3.947,82</td><td>41</td><td class="td-good">R$ 96</td><td>28,7%</td></tr>
+          <tr><td class="td-bold">D4</td><td>23/07/26</td><td>R$ 3.938,17</td><td>37</td><td class="td-warn">R$ 106</td><td>25,9%</td></tr>
+          <tr><td class="td-bold">D5</td><td>24/07/26</td><td>R$ 6.571,11</td><td>67</td><td class="td-good">R$ 98</td><td>46,9%</td></tr>
+          <tr><td class="td-bold">D6</td><td>25/07/26</td><td>R$ 9.657,17</td><td>70</td><td class="td-bad">R$ 138</td><td>49,0%</td></tr>
+          <tr><td class="td-bold">D7</td><td>26/07/26</td><td>R$ 14.382,84</td><td>138</td><td class="td-warn">R$ 104</td><td>96,5%</td></tr>
+          <tr style="background:var(--soft);font-weight:700;">
+            <td colspan="2"><strong>TOTAL</strong></td>
+            <td>R$ 56.153,24</td>
+            <td><strong>488</strong></td>
+            <td>R$ 115,07</td>
+            <td>97,6%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:11px;color:var(--text-muted);margin-top:8px;">D1-D4: Meta Ads oficial · D5-D7: Meta Ads bruto × 1,1383 (c/imp). % Meta Diária = sobre meta de 143/dia (1000/7). D7 foi o melhor dia do LS010 — 138 ingressos.</p>
+  </div>
+</section>
+
+<!-- VENDAS + BUMPS -->
+<section class="bg-soft">
+  <div class="container">
+    <div class="section-title">🎟️ Vendas + Order Bumps</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Vendas</th>
+            <th>Receita Líquida</th>
+            <th>% Conv. (sobre ingresso)</th>
+            <th>Ticket Médio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#F5F3FF;">
+            <td class="td-bold">🏆 Workshop Ingresso</td>
+            <td class="td-bold">488</td>
+            <td class="td-bold">R$ 30.404,31</td>
+            <td>—</td>
+            <td>R$ 62,30</td>
+          </tr>
+          <tr>
+            <td>Acesso Premium Especialista com IA</td>
+            <td>57</td>
+            <td>R$ 6.775,90</td>
+            <td>11,7%</td>
+            <td>R$ 118,87</td>
+          </tr>
+          <tr>
+            <td>Fotos com IA</td>
+            <td>62</td>
+            <td>R$ 3.887,82</td>
+            <td>12,7%</td>
+            <td>R$ 62,71</td>
+          </tr>
+          <tr>
+            <td>Palestra em Minutos</td>
+            <td>56</td>
+            <td>R$ 2.590,19</td>
+            <td>11,5%</td>
+            <td>R$ 46,25</td>
+          </tr>
+          <tr>
+            <td>Fotos Acesso Estendido</td>
+            <td>6</td>
+            <td>R$ 277,20</td>
+            <td>1,2%</td>
+            <td>R$ 46,20</td>
+          </tr>
+          <tr style="background:#F0FDF4;font-weight:600;">
+            <td>✅ Total Bumps</td>
+            <td>181</td>
+            <td>R$ 13.531,11</td>
+            <td><strong>37,1%</strong></td>
+            <td>R$ 74,76</td>
+          </tr>
+          <tr style="background:var(--soft);font-weight:700;">
+            <td><strong>TOTAL GERAL (captação)</strong></td>
+            <td><strong>488 ingressos</strong></td>
+            <td><strong>R$ 43.935,42</strong></td>
+            <td>—</td>
+            <td><strong>R$ 90,03</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:11px;color:var(--text-muted);margin-top:8px;">Receita = Hotmart col K (BRL) / col AX (internacional). Status: Aprovado + Completo. Acesso Premium é o bump de maior ticket (R$ 118,87).</p>
+  </div>
+</section>
+
+<!-- CRIATIVOS -->
+<section class="bg">
+  <div class="container">
+    <div class="section-title">🎨 Criativos — Rankings Finais D1–D7</div>
+    <p style="font-size:12px;color:var(--text-muted);margin-bottom:20px;">Fonte: VK Metrics por trafego.ad_name · Spend c/imp = bruto × 1,1383 · ROAS est. = vendas × R$ 90,03 / invest c/imp</p>
+
+    <!-- TOP VOLUME -->
+    <div style="margin-bottom:28px;">
+      <h3 style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:12px;">🚀 Top 5 por Volume de Vendas</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Criativo</th><th>Tipo</th><th>Vendas</th><th>Invest c/imp</th><th>CPA</th><th>ROAS est.</th><th>Drive</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-bold">ADV320_WEIA_VD_V1_EUFAZENOMUNDO_IA_30S</td>
+              <td><span class="badge badge-roxo">📹 Vídeo</span></td>
+              <td class="td-bold">121</td>
+              <td>R$ 15.065,00</td>
+              <td class="td-warn">R$ 124,50</td>
+              <td>0,72×</td>
+              <td><a href="https://drive.google.com/file/d/1z_QguczndXRZca-cvuyyaQfk_UdM-vnz/view?usp=drivesdk" target="_blank">▶ Drive</a></td>
+            </tr>
+            <tr>
+              <td class="td-bold">ADC023_WEIA_CR_V1</td>
+              <td><span class="badge badge-gray">🖼 Carrossel</span></td>
+              <td>57</td>
+              <td>R$ 6.286,52</td>
+              <td class="td-warn">R$ 110,29</td>
+              <td>0,82×</td>
+              <td><a href="https://drive.google.com/drive/folders/1-NKoY1MJxs5OOP1lNJH34X8jJo_VklRd" target="_blank">📁 Drive</a></td>
+            </tr>
+            <tr>
+              <td class="td-bold">ADV291_WEIA_VD_V1</td>
+              <td><span class="badge badge-roxo">📹 Vídeo</span></td>
+              <td>53</td>
+              <td>R$ 6.567,72</td>
+              <td class="td-warn">R$ 123,92</td>
+              <td>0,73×</td>
+              <td><a href="https://drive.google.com/file/d/14UCpiBmwYlHC7s0KI75OGfRB4i-U-Lea/view?usp=drivesdk" target="_blank">▶ Drive</a></td>
+            </tr>
+            <tr>
+              <td class="td-bold">ADV325_WEIA_VD_V1</td>
+              <td><span class="badge badge-roxo">📹 Vídeo</span></td>
+              <td>33</td>
+              <td>R$ 4.037,04</td>
+              <td class="td-warn">R$ 122,34</td>
+              <td>0,74×</td>
+              <td><a href="https://drive.google.com/file/d/1p580OOdmKQbTYuwKzc6AG0nlO5Ao0rxH/view?usp=drivesdk" target="_blank">▶ Drive</a></td>
+            </tr>
+            <tr>
+              <td class="td-bold">ADV309_WEIA_VD_V1</td>
+              <td><span class="badge badge-roxo">📹 Vídeo</span></td>
+              <td>30</td>
+              <td>R$ 3.019,49</td>
+              <td class="td-good">R$ 100,65</td>
+              <td>0,89×</td>
+              <td><a href="https://drive.google.com/file/d/1_DMO-rsBdcnQ9Pt_wzTrduybwkInUZ-G/view?usp=drivesdk" target="_blank">▶ Drive</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MELHOR CPA -->
+    <div style="margin-bottom:28px;">
+      <h3 style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:12px;">💸 Top 5 por Menor CPA (mín. 5 vendas)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Criativo</th><th>Tipo</th><th>Vendas</th><th>Invest c/imp</th><th>CPA</th><th>ROAS est.</th><th>Drive</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-bold">ADC028_WEIA_CR_V1</td>
+              <td><span class="badge badge-gray">🖼 Carrossel</span></td>
+              <td>7</td>
+              <td>R$ 371,09</td>
+              <td class="td-good">R$ 53,01</td>
+              <td class="td-good">1,70×</td>
+              <td><a href="https://drive.google.com/drive/folders/1QSp9vwHT3dmmgKVThD_-bJ-FQHn5Rpy7" target="_blank">📁 Drive</a></td>
+            </tr>
+            <tr>
+              <td class="td-bold">ADV351_WEIA_VD_V1</td>
+              <td><span class="badge badge-roxo">📹 Vídeo</span></td>
+              <td>9</td>
+              <td>R$ 688,55</td>
+              <td class="td-good">R$ 76,51</td>
+              <td class="td-good">1,18×</td>
+              <td><a href="https://drive.google.com/file/d/1uDx1KAOpMegex7Xos00xDvw2FiI_sb8V/view?usp=drivesdk" target="_blank">▶ Drive</a></td>
+            </tr>
+            <tr>
+              <td class="td-bold">ADV267_WEIA_VD_V1</td>
+              <td><span class="badge badge-roxo">📹 Vídeo</span></td>
+              <td>20</td>
+              <td>R$ 1.557,51</td>
+              <td class="td-good">R$ 77,88</td>
+              <td class="td-good">1,16×</td>
+              <td><a href="https://drive.google.com/file/d/1D0nxCxRSWqgLNPuMK0vSjNeULkkAk20W/view?usp=drivesdk" target="_blank">▶ Drive</a></td>
+            </tr>
+            <tr>
+              <td class="td-bold">ADC020_WEIA_CR_V1</td>
+              <td><span class="badge badge-gray">🖼 Carrossel</span></td>
+              <td>15</td>
+              <td>R$ 1.293,06</td>
+              <td class="td-good">R$ 86,20</td>
+              <td>1,04×</td>
+              <td><a href="https://drive.google.com/drive/folders/1-NKoY1MJxs5OOP1lNJH34X8jJo_VklRd" target="_blank">📁 Drive</a></td>
+            </tr>
+            <tr>
+              <td class="td-bold">ADV327_WEIA_VD_V1</td>
+              <td><span class="badge badge-roxo">📹 Vídeo</span></td>
+              <td>18</td>
+              <td>R$ 1.606,25</td>
+              <td class="td-good">R$ 89,24</td>
+              <td>1,01×</td>
+              <td><a href="https://drive.google.com/file/d/1nmfJoWX0sNOGB0UXB86rBQemkrQQmDIG/view?usp=drivesdk" target="_blank">▶ Drive</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:11px;color:var(--text-muted);margin-top:6px;">⚠️ ADC028 (7 vendas) e ADV351 (9 vendas) têm volume baixo — sinal emergente. ADV267 (20 vendas) é o mais confiável: bom volume + melhor CPA + ROAS positivo.</p>
+    </div>
+
+    <!-- MELHOR ROAS -->
+    <div style="margin-bottom:28px;">
+      <h3 style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:12px;">💎 Top 5 por Maior ROAS (mín. 5 vendas)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Criativo</th><th>Tipo</th><th>Vendas</th><th>ROAS est.</th><th>CPA</th><th>Invest c/imp</th><th>Drive</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-bold">ADC028_WEIA_CR_V1</td>
+              <td><span class="badge badge-gray">🖼 Carrossel</span></td>
+              <td>7</td>
+              <td class="td-good td-bold">1,70×</td>
+              <td class="td-good">R$ 53,01</td>
+              <td>R$ 371,09</td>
+              <td><a href="https://drive.google.com/drive/folders/1QSp9vwHT3dmmgKVThD_-bJ-FQHn5Rpy7" target="_blank">📁 Drive</a></td>
+            </tr>
+            <tr>
+              <td class="td-bold">ADV351_WEIA_VD_V1</td>
+              <td><span class="badge badge-roxo">📹 Vídeo</span></td>
+              <td>9</td>
+              <td class="td-good td-bold">1,18×</td>
+              <td class="td-good">R$ 76,51</td>
+              <td>R$ 688,55</td>
+              <td><a href="https://drive.google.com/file/d/1uDx1KAOpMegex7Xos00xDvw2FiI_sb8V/view?usp=drivesdk" target="_blank">▶ Drive</a></td>
+            </tr>
+            <tr>
+              <td class="td-bold">ADV267_WEIA_VD_V1</td>
+              <td><span class="badge badge-roxo">📹 Vídeo</span></td>
+              <td>20</td>
+              <td class="td-good td-bold">1,16×</td>
+              <td class="td-good">R$ 77,88</td>
+              <td>R$ 1.557,51</td>
+              <td><a href="https://drive.google.com/file/d/1D0nxCxRSWqgLNPuMK0vSjNeULkkAk20W/view?usp=drivesdk" target="_blank">▶ Drive</a></td>
+            </tr>
+            <tr>
+              <td class="td-bold">ADC020_WEIA_CR_V1</td>
+              <td><span class="badge badge-gray">🖼 Carrossel</span></td>
+              <td>15</td>
+              <td>1,04×</td>
+              <td class="td-good">R$ 86,20</td>
+              <td>R$ 1.293,06</td>
+              <td><a href="https://drive.google.com/drive/folders/1-NKoY1MJxs5OOP1lNJH34X8jJo_VklRd" target="_blank">📁 Drive</a></td>
+            </tr>
+            <tr>
+              <td class="td-bold">ADV327_WEIA_VD_V1</td>
+              <td><span class="badge badge-roxo">📹 Vídeo</span></td>
+              <td>18</td>
+              <td>1,01×</td>
+              <td class="td-good">R$ 89,24</td>
+              <td>R$ 1.606,25</td>
+              <td><a href="https://drive.google.com/file/d/1nmfJoWX0sNOGB0UXB86rBQemkrQQmDIG/view?usp=drivesdk" target="_blank">▶ Drive</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- VIGIAR -->
+    <div>
+      <h3 style="font-size:15px;font-weight:700;color:var(--vermelho);margin-bottom:12px;">⚠️ Vigiar — Alto Gasto, Resultado Ruim</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Criativo</th><th>Tipo</th><th>Vendas</th><th>Invest c/imp</th><th>CPA</th><th>ROAS est.</th><th>Observação</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-bold td-bad">ADV281_WEIA_VD_V1</td>
+              <td><span class="badge badge-roxo">📹 Vídeo</span></td>
+              <td>18</td>
+              <td class="td-bad">R$ 3.008,68</td>
+              <td class="td-bad">R$ 167,15</td>
+              <td class="td-bad">0,54×</td>
+              <td class="td-muted">CPA 46% acima da média — escalar foi equívoco</td>
+            </tr>
+            <tr>
+              <td class="td-bold td-bad">ADC004_WEIA_CR_V1</td>
+              <td><span class="badge badge-gray">🖼 Carrossel</span></td>
+              <td>24</td>
+              <td class="td-bad">R$ 3.539,42</td>
+              <td class="td-bad">R$ 147,47</td>
+              <td class="td-bad">0,61×</td>
+              <td class="td-muted">Volume ok mas CPA muito alto — pausar no LS011</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANÁLISE -->
+<section class="bg-soft">
+  <div class="container">
+    <div class="section-title">🔍 Análise Final do LS010</div>
+    <div class="analysis-grid">
+      <div class="analysis-card green">
+        <h3>🟢 Muito Bom — Replicar</h3>
+        <ul>
+          <li>D7 entregou 138 ingressos — melhor dia do LS010, salvou o pace</li>
+          <li>Conv. bumps 37,1% — acima da média histórica. Acesso Premium lidera (11,7%)</li>
+          <li>ADV267 + ADC028 + ADV351: ROAS > 1 com CPA abaixo de R$ 80 — esses criativos devem receber verba prioritária no LS011</li>
+          <li>Hook ADV 24,9% — saudável, público engajando nos primeiros 3s</li>
+          <li>97,6% da meta de 500 ingressos — muito próximo sem estourar CPA</li>
+        </ul>
+      </div>
+      <div class="analysis-card yellow">
+        <h3>🟡 Não Mexer — Contexto Importa</h3>
+        <ul>
+          <li>ROAS 0,78 na captação é ESPERADO — o retorno real vem do pitch da mentoria nas aulas</li>
+          <li>D2 com CPA R$ 161 foi isolado (otimização Meta ainda aquecendo); os outros dias ficaram em R$ 96–138</li>
+          <li>Exposição -R$ 12.218 está dentro da faixa de LS anteriores (LS009: -R$ 9.200, LS008: ~-R$ 10k)</li>
+          <li>Frequência 1,12× — sem saturação de público detectada</li>
+        </ul>
+      </div>
+      <div class="analysis-card red">
+        <h3>🔴 Vigiar — Melhorar no LS011</h3>
+        <ul>
+          <li>ADV281 e ADC004 consumiram R$ 6.548 com ROAS 0,54–0,61 — dreno de budget</li>
+          <li>CPM c/imp R$ 86,31 — acima de LS009 (R$ 85,10) — testar públicos Advantage+ novos</li>
+          <li>Conv. checkout → ingresso 24,25% — abaixo de LS009 (aprox. 27%); avaliar se página está convertendo bem</li>
+          <li>D6 CPA R$ 138 — sábado costuma ser mais caro; alocar menos verba em D6 no LS011</li>
+        </ul>
+      </div>
+      <div class="analysis-card" style="background:linear-gradient(135deg,#EDE9FE,#F5F3FF);border-left:4px solid var(--roxo);">
+        <h3>🛠️ Ações para o LS011</h3>
+        <ul>
+          <li>Priorizar verba em ADV267, ADC028, ADV351 — comprovados com ROAS > 1</li>
+          <li>Pausar ADV281 e ADC004 imediatamente no LS011</li>
+          <li>Testar ADV320 com CPA otimizado (maior volume mas CPA alto — pode melhorar com ajuste de bid)</li>
+          <li>Aumentar invest D5 e D7 onde o CPA é historicamente melhor</li>
+          <li>Monitorar hook rate diariamente — benchmark: manter acima de 24%</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-logo">
+      <svg width="28" height="28" viewBox="0 0 36 36" fill="none"><path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" fill="#7C3AED" opacity=".8"/><path d="M18 8L28 14V22L18 28L8 22V14L18 8Z" fill="none" stroke="#A78BFA" stroke-width="1.5"/><circle cx="18" cy="18" r="4" fill="#A78BFA"/></svg>
+      <span>BRITO MÍDIAS</span>
+    </div>
+    <p>LS010 Fechamento Captação · Gerado em 27/07/2026 às 14:17 · Dados: Meta Ads + VK Metrics + Hotmart</p>
+    <p style="margin-top:4px;">Fechamento 2 (pós-reembolso): previsto para 03/08/2026</p>
+  </div>
+</footer>
+
+</body>
+</html>

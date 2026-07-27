@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LS011 · D1 · Relatório de Tráfego Pago</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--roxo:#7C3AED;--roxo-light:#A78BFA;--verde:#059669;--vermelho:#DC2626;--amarelo:#D97706;--bg:#fff;--soft:#FAF9FC;--border:#E7E3EE;--text:#1F1F2E;--text-muted:#6B7280;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Poppins',sans-serif;background:#fff;color:var(--text);font-size:14px;line-height:1.6;}
+.container{max-width:1100px;margin:0 auto;padding:0 24px;}
+.hero{background:linear-gradient(150deg,#0A0A0A 0%,#17111F 45%,#3B0F73 100%);position:relative;padding:56px 0 44px;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(124,58,237,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(124,58,237,.08) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(1100px 500px at 78% -10%,rgba(124,58,237,.55),transparent 60%);pointer-events:none;}
+.hero .container{position:relative;z-index:1;}
+.hero-logo{display:flex;align-items:center;gap:10px;margin-bottom:24px;}
+.hero-logo svg{width:36px;height:36px;}
+.hero-logo span{font-size:13px;font-weight:600;color:#A78BFA;letter-spacing:.05em;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(5,150,105,.3);border:1px solid rgba(5,150,105,.6);color:#6EE7B7;font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;margin-bottom:14px;letter-spacing:.04em;}
+.hero h1{font-size:28px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:6px;}
+.hero-meta{color:#A78BFA;font-size:12px;font-weight:500;margin-bottom:32px;}
+.hero-meta span{color:#D8B4FE;font-weight:600;}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+.kpi{background:rgba(255,255,255,.07);border:1px solid rgba(124,58,237,.3);border-radius:14px;padding:18px 20px;}
+.kpi-label{font-size:10px;font-weight:600;color:#A78BFA;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;}
+.kpi-value{font-size:24px;font-weight:800;color:#fff;line-height:1;}
+.kpi-sub{font-size:11px;color:#9CA3AF;margin-top:4px;}
+.kpi.good .kpi-value{color:#34D399;}
+.kpi.bad .kpi-value{color:#F87171;}
+.kpi.warn .kpi-value{color:#FBBF24;}
+section{padding:40px 0;}
+.bg{background:#fff;}
+.bg-soft{background:var(--soft);}
+.section-title{font-size:18px;font-weight:700;color:var(--roxo);margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:24px;}
+.card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px 18px;}
+.card-label{font-size:10px;font-weight:600;color:var(--roxo);letter-spacing:.07em;text-transform:uppercase;margin-bottom:6px;}
+.card-value{font-size:20px;font-weight:700;color:var(--text);line-height:1.1;}
+.card-sub{font-size:11px;color:var(--text-muted);margin-top:3px;}
+.card.good{border-left:3px solid var(--verde);}
+.card.bad{border-left:3px solid var(--vermelho);}
+.card.warn{border-left:3px solid var(--amarelo);}
+.funil-grid{display:grid;gap:8px;}
+.funil-row{display:flex;align-items:center;gap:12px;padding:10px 16px;background:#fff;border:1px solid var(--border);border-radius:10px;}
+.funil-label{font-size:11px;color:var(--text-muted);width:220px;flex-shrink:0;}
+.funil-value{font-size:14px;font-weight:600;color:var(--text);min-width:120px;}
+.funil-bar{flex:1;background:#F3F4F6;border-radius:4px;height:6px;overflow:hidden;}
+.funil-fill{height:100%;background:linear-gradient(90deg,var(--roxo-light),var(--roxo));border-radius:4px;}
+.funil-arrow{text-align:center;font-size:18px;color:var(--border);line-height:1;margin:2px 0;}
+.table-wrap{overflow-x:auto;border-radius:16px;border:1px solid var(--border);}
+table{width:100%;border-collapse:collapse;min-width:500px;}
+th{background:var(--soft);color:var(--roxo);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+td{padding:10px 14px;font-size:13px;border-bottom:1px solid #F3F4F6;color:var(--text);}
+tr:last-child td{border-bottom:none;}
+.td-bold{font-weight:600;}
+.td-good{color:var(--verde);font-weight:600;}
+.td-bad{color:var(--vermelho);font-weight:600;}
+.td-warn{color:var(--amarelo);font-weight:600;}
+.td-muted{color:var(--text-muted);font-size:12px;}
+.analysis-grid{display:grid;gap:16px;}
+.analysis-card{border-radius:14px;padding:20px 22px;}
+.analysis-card.green{background:linear-gradient(135deg,#F0FDF4,#DCFCE7);border-left:4px solid var(--verde);}
+.analysis-card.yellow{background:linear-gradient(135deg,#FFFBEB,#FEF3C7);border-left:4px solid var(--amarelo);}
+.analysis-card.red{background:linear-gradient(135deg,#FEF2F2,#FEE2E2);border-left:4px solid var(--vermelho);}
+.analysis-card h3{font-size:14px;font-weight:700;margin-bottom:10px;}
+.analysis-card ul{list-style:none;padding:0;}
+.analysis-card ul li{font-size:13px;padding:3px 0;padding-left:16px;position:relative;}
+.analysis-card ul li::before{content:'→';position:absolute;left:0;color:var(--text-muted);}
+footer{background:#141018;padding:32px 0;}
+footer .container{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{display:flex;align-items:center;gap:8px;}
+.footer-logo span{font-size:12px;color:#A78BFA;font-weight:600;}
+footer p{font-size:11px;color:#6B7280;}
+.comparativo-wrap{overflow-x:auto;}
+.comparativo-table{width:100%;border-collapse:collapse;min-width:700px;}
+.comparativo-table th{background:var(--soft);color:var(--roxo);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding:10px 14px;text-align:right;border-bottom:1px solid var(--border);}
+.comparativo-table th:first-child{text-align:left;}
+.comparativo-table td{padding:10px 14px;font-size:13px;border-bottom:1px solid #F3F4F6;text-align:right;}
+.comparativo-table td:first-child{text-align:left;font-weight:500;color:var(--text-muted);}
+.comparativo-table tr.highlight td{background:#F5F3FF;font-weight:700;color:var(--roxo);}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="container">
+    <div class="hero-logo">
+      <svg viewBox="0 0 36 36" fill="none"><path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" fill="#7C3AED" opacity=".8"/><path d="M18 8L28 14V22L18 28L8 22V14L18 8Z" fill="none" stroke="#A78BFA" stroke-width="1.5"/><circle cx="18" cy="18" r="4" fill="#A78BFA"/></svg>
+      <span>BRITO MÍDIAS</span>
+    </div>
+    <div class="hero-badge">🟢 D1 — EM ANDAMENTO</div>
+    <h1>LS011 · Relatório D1 — Tarde</h1>
+    <div class="hero-meta">
+      Captação: 27/07 – 02/08/2026 &nbsp;·&nbsp; Gerado em <span>27/07/2026 às 14:17</span> &nbsp;·&nbsp; Fonte: Meta Ads + VK Metrics (Hotmart parcial até 09:47)
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi warn">
+        <div class="kpi-label">Invest c/imp D1</div>
+        <div class="kpi-value">R$ 13.296</div>
+        <div class="kpi-sub">bruto R$ 11.680 (Meta oficial)</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">CPM c/imp</div>
+        <div class="kpi-value">R$ 120,07</div>
+        <div class="kpi-sub">vs LS010 D1: R$ 86,31</div>
+      </div>
+      <div class="kpi good">
+        <div class="kpi-label">Hook ADV</div>
+        <div class="kpi-value">25,7%</div>
+        <div class="kpi-sub">vs LS010 D1: 24,9%</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Platform Purchases</div>
+        <div class="kpi-value">49</div>
+        <div class="kpi-sub">Meta pixel (incl. bumps)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AVISO -->
+<section class="bg">
+  <div class="container">
+    <div style="background:#FFFBEB;border:1px solid #FCD34D;border-radius:12px;padding:14px 18px;margin-bottom:24px;">
+      <strong style="color:#92400E;">⚠️ D1 em andamento:</strong>
+      <span style="font-size:13px;color:#78350F;"> Dados de investimento e funil refletem o dia completo até o momento do pull (Meta: 27/07). Hotmart parcial até 09:47. Os dados VK são os mais completos disponíveis para D1.</span>
+    </div>
+
+    <div class="section-title">📊 Quadro Geral — D1 (27/07/2026)</div>
+    <div class="kpi-row">
+      <div class="card warn">
+        <div class="card-label">Invest c/imp</div>
+        <div class="card-value">R$ 13.295,59</div>
+        <div class="card-sub">bruto R$ 11.680,13 (Meta Ads)</div>
+      </div>
+      <div class="card warn">
+        <div class="card-label">CPM c/imp</div>
+        <div class="card-value">R$ 120,07</div>
+        <div class="card-sub">Meta bruto R$ 105,48 · alto no D1</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Impressões</div>
+        <div class="card-value">110.732</div>
+        <div class="card-sub">alcance 98.180 · freq 1,13×</div>
+      </div>
+      <div class="card good">
+        <div class="card-label">CTR (link)</div>
+        <div class="card-value">1,83%</div>
+        <div class="card-sub">vs LS010 D1: 1,92%</div>
+      </div>
+      <div class="card good">
+        <div class="card-label">Hook Rate ADV</div>
+        <div class="card-value">25,7%</div>
+        <div class="card-sub">vs LS010 acumulado: 24,9%</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Status</div>
+        <div class="card-value" style="font-size:14px">⚡ D1/7</div>
+        <div class="card-sub">LS011 iniciou hoje</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNIL D1 -->
+<section class="bg-soft">
+  <div class="container">
+    <div class="section-title">🔽 Funil D1 — VK Metrics (Meta oficial para invest)</div>
+    <div class="funil-grid">
+      <div class="funil-row">
+        <div class="funil-label">💰 Investimento c/imp</div>
+        <div class="funil-value" style="color:var(--roxo)">R$ 13.295,59</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:100%"></div></div>
+      </div>
+      <div class="funil-arrow">↓</div>
+      <div class="funil-row">
+        <div class="funil-label">👁️ Impressões (Meta)</div>
+        <div class="funil-value">110.732</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:100%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">👥 Alcance (VK)</div>
+        <div class="funil-value">98.180</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:89%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">🔄 Frequência</div>
+        <div class="funil-value">1,13×</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:13%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">💵 CPM c/imp</div>
+        <div class="funil-value" style="color:var(--amarelo)">R$ 120,07</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:40%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">🖱️ CTR (link)</div>
+        <div class="funil-value">1,83%</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:18%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">🎬 Hook Rate (ADV)</div>
+        <div class="funil-value" style="color:var(--verde)">25,7%</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:26%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">🔗 Cliques no link</div>
+        <div class="funil-value">1.974</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:65%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">💲 CPC c/imp</div>
+        <div class="funil-value">R$ 6,74</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:22%"></div></div>
+      </div>
+      <div class="funil-arrow">↓</div>
+      <div class="funil-row">
+        <div class="funil-label">📄 Visualizações de página (LPV)</div>
+        <div class="funil-value">1.772</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:60%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">💲 Custo por LPV</div>
+        <div class="funil-value">R$ 7,50</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:22%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">↗️ Conv. Página → Checkout</div>
+        <div class="funil-value">17,44%</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:17%"></div></div>
+      </div>
+      <div class="funil-arrow">↓</div>
+      <div class="funil-row">
+        <div class="funil-label">🛒 Checkouts (IC)</div>
+        <div class="funil-value">309</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:50%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">💲 Custo por IC</div>
+        <div class="funil-value">R$ 43,03</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:28%"></div></div>
+      </div>
+      <div class="funil-row">
+        <div class="funil-label">↗️ Conv. Checkout → Purchase</div>
+        <div class="funil-value" style="color:var(--amarelo)">15,86%</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:16%"></div></div>
+      </div>
+      <div class="funil-arrow">↓</div>
+      <div class="funil-row" style="border:1px solid var(--roxo);">
+        <div class="funil-label" style="color:var(--roxo);font-weight:600;">🛍️ Platform Purchases (Meta pixel)</div>
+        <div class="funil-value" style="color:var(--roxo)">49</div>
+        <div class="funil-bar"><div class="funil-fill" style="width:100%"></div></div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--text-muted);margin-top:8px;">⚠️ Platform purchases inclui bumps sem ingresso. Ingressos reais (Hotmart, até 09:47): 43. VK = fonte de funil; Meta oficial = fonte de invest/impressões.</p>
+  </div>
+</section>
+
+<!-- COMPARATIVO D1 -->
+<section class="bg">
+  <div class="container">
+    <div class="section-title">📊 Comparativo D1 — LS011 vs Histórico</div>
+    <div class="comparativo-wrap">
+      <table class="comparativo-table">
+        <thead>
+          <tr>
+            <th style="text-align:left;">Métrica (D1)</th>
+            <th>LS009<br>13/07/26</th>
+            <th>LS010<br>20/07/26</th>
+            <th style="background:#F5F3FF;color:var(--roxo);">LS011 *<br>27/07/26</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Invest c/imp</td>
+            <td>R$ 9.116</td>
+            <td>R$ 9.116</td>
+            <td class="td-bold" style="color:var(--roxo)">R$ 13.296</td>
+          </tr>
+          <tr>
+            <td>CPM c/imp</td>
+            <td>R$ 96,90</td>
+            <td>R$ 86,31 (avg)</td>
+            <td class="td-warn">R$ 120,07</td>
+          </tr>
+          <tr>
+            <td>CTR link</td>
+            <td>~1,90%</td>
+            <td>1,92% (avg)</td>
+            <td>1,83%</td>
+          </tr>
+          <tr>
+            <td>Hook ADV</td>
+            <td>~27,5%</td>
+            <td>~24,9%</td>
+            <td class="td-good">25,7%</td>
+          </tr>
+          <tr>
+            <td>Conv. pág → checkout</td>
+            <td>~17,5%</td>
+            <td>17,51% (avg)</td>
+            <td>17,44%</td>
+          </tr>
+          <tr>
+            <td>Conv. checkout → purchase</td>
+            <td>~22%</td>
+            <td>24,25% (avg)</td>
+            <td class="td-warn">15,86%</td>
+          </tr>
+          <tr>
+            <td>Platform purchases</td>
+            <td>~72</td>
+            <td>~82 (Hotmart)</td>
+            <td>49</td>
+          </tr>
+          <tr>
+            <td>Ingressos (Hotmart)</td>
+            <td>79</td>
+            <td>82</td>
+            <td class="td-muted">43 (até 09:47)*</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:11px;color:var(--text-muted);margin-top:8px;">* LS011 D1 ainda em andamento. Hotmart parcial (00:00–09:47). Invest LS011 D1 é +46% maior que LS009/010 D1 — abertura mais agressiva.</p>
+  </div>
+</section>
+
+<!-- ANÁLISE -->
+<section class="bg-soft">
+  <div class="container">
+    <div class="section-title">🔍 Análise D1 — LS011</div>
+    <div class="analysis-grid">
+      <div class="analysis-card green">
+        <h3>🟢 Muito Bom</h3>
+        <ul>
+          <li>Hook ADV 25,7% — acima do LS010 acumulado (24,9%). Os criativos estão engajando bem nos primeiros 3s</li>
+          <li>Conv. página → checkout 17,44% — consistente com histórico (LS010: 17,51%)</li>
+          <li>Invest D1 agressivo (R$ 13.296) — estratégia intencional para capturar volume no início</li>
+        </ul>
+      </div>
+      <div class="analysis-card yellow">
+        <h3>🟡 Não Mexer (aguardar D2)</h3>
+        <ul>
+          <li>CPM R$ 120 alto é ESPERADO no D1 — o leilão do Meta aquece e o CPM tende a cair D2-D3</li>
+          <li>Conv. checkout → purchase 15,86% abaixo do histórico (~22-24%) — mas D1 tem comportamento volátil. Avaliar D2 antes de agir</li>
+          <li>Hotmart parcial (43 ingressos até 09:47) não representa o dia — aguardar D2 para a leitura correta</li>
+        </ul>
+      </div>
+      <div class="analysis-card red">
+        <h3>🔴 Vigiar</h3>
+        <ul>
+          <li>CPM R$ 120 vs histórico R$ 86-97: monitorar D2 — se não cair, ajustar bid strategy</li>
+          <li>Conv. checkout → purchase baixa (15,86%): verificar se a página de checkout está carregando corretamente</li>
+          <li>CPC c/imp R$ 6,74 — mais alto que LS010 (R$ 4,48). Consequência do CPM elevado</li>
+        </ul>
+      </div>
+      <div class="analysis-card" style="background:linear-gradient(135deg,#EDE9FE,#F5F3FF);border-left:4px solid var(--roxo);">
+        <h3>🛠️ Ações para D2</h3>
+        <ul>
+          <li>Monitorar CPM D2 às 10h — se ainda acima de R$ 100, revisar públicos/lances</li>
+          <li>Verificar taxa de conv. checkout às 14h — se ainda abaixo de 18%, checar página de checkout</li>
+          <li>Priorizar ADV267 + ADC028 + ADV351 (criativos vencedores do LS010) para manter ROAS positivo</li>
+          <li>Manter invest D2 em nível similar — não cortar ainda com base em D1 parcial</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-logo">
+      <svg width="28" height="28" viewBox="0 0 36 36" fill="none"><path d="M18 2L32 10V26L18 34L4 26V10L18 2Z" fill="#7C3AED" opacity=".8"/><path d="M18 8L28 14V22L18 28L8 22V14L18 8Z" fill="none" stroke="#A78BFA" stroke-width="1.5"/><circle cx="18" cy="18" r="4" fill="#A78BFA"/></svg>
+      <span>BRITO MÍDIAS</span>
+    </div>
+    <p>LS011 · D1 Tarde · 27/07/2026 às 14:17 · Meta Ads oficial + VK Metrics · Hotmart parcial (até 09:47)</p>
+  </div>
+</footer>
+
+</body>
+</html>
