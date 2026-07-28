@@ -3,833 +3,376 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Criativos por Semana · LS001→LS009</title>
+<title>Análise de Criativos LS · Top 10 novas versões · 28/07/26</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+:root{
+  --roxo:#7C3AED; --roxo-dark:#5B21B6; --roxo-deep:#3B0F73; --roxo-light:#A78BFA; --roxo-xlight:#EDE9FE;
+  --preto:#0A0A0A; --ink:#141018; --cinza:#5B5566; --linha:#E7E3EE; --bg:#FFFFFF; --bg-soft:#FAF9FC;
+  --verde:#059669; --verde-soft:#D1FAE5; --vermelho:#DC2626; --vermelho-soft:#FEE2E2;
+  --amarelo:#D97706; --amarelo-soft:#FEF3C7;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#0a0e17;color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.55;padding:20px;max-width:1500px;margin:0 auto}
-header{background:radial-gradient(circle at top right,rgba(124,92,255,.25),transparent 60%),radial-gradient(circle at bottom left,rgba(34,211,238,.18),transparent 55%),#11172a;border-radius:20px;padding:32px;margin-bottom:28px;border:1px solid rgba(124,92,255,.25)}
-header h1{font-size:28px;background:linear-gradient(135deg,#7c5cff,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;font-weight:800}
-header .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-header .meta span{background:rgba(124,92,255,.12);padding:6px 14px;border-radius:8px;font-size:13px;color:#cbd5e1;border:1px solid rgba(124,92,255,.2)}
-h2{font-size:19px;margin:36px 0 12px;color:#f1f5f9;display:flex;align-items:center;gap:10px}
-h2::before{content:"";width:4px;height:22px;background:linear-gradient(180deg,#7c5cff,#22d3ee);border-radius:2px}
-h3{font-size:14px;margin:10px 0 6px;color:#cbd5e1;font-weight:600}
-.card{background:#11172a;border-radius:14px;padding:16px 18px;border:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;margin-bottom:12px}
-.card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#7c5cff,#22d3ee)}
-.card.gold::before{background:linear-gradient(90deg,#facc15,#f97316)}
-.card.bad::before{background:linear-gradient(90deg,#ef4444,#f43f5e)}
-.scroll-x{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:11.5px;margin-top:6px}
-th,td{padding:6px 5px;text-align:left;border-bottom:1px solid rgba(255,255,255,.05);white-space:nowrap}
-th{color:#94a3b8;font-size:10px;text-transform:uppercase;letter-spacing:.3px;font-weight:600;background:rgba(124,92,255,.04)}
-tr:hover td{background:rgba(124,92,255,.04)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Poppins',sans-serif;font-weight:300;line-height:1.6;font-size:16px}
+img,svg{max-width:100%;display:block}
+.container{max-width:1100px;margin:0 auto;padding:0 28px}
+.hero{position:relative;background:radial-gradient(1100px 500px at 78% -10%, rgba(124,58,237,.55), transparent 60%),linear-gradient(150deg, #0A0A0A 0%, #17111F 45%, #3B0F73 100%);color:#fff;padding:56px 0 72px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.14) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.14) 1px, transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(1200px 500px at 50% 40%, #000, transparent 75%);mask-image:radial-gradient(1200px 500px at 50% 40%, #000, transparent 75%);opacity:.55}
+.hero .container{position:relative;z-index:1}
+.brand{display:flex;align-items:center;gap:16px;margin-bottom:40px}
+.brand svg{width:44px;height:44px}
+.brand .word{display:flex;align-items:center;gap:14px;font-weight:300;color:#fff}
+.brand .word b{font-weight:800;font-size:20px;letter-spacing:.02em}
+.brand .word .bar{width:2px;height:28px;background:rgba(255,255,255,.55)}
+.brand .word span{font-size:18px;letter-spacing:.22em}
+.hero h1{font-size:44px;font-weight:800;letter-spacing:-.02em;line-height:1.1;max-width:900px;margin-bottom:16px}
+.hero .lead{font-size:18px;font-weight:300;color:#EDE9FE;max-width:820px;margin-bottom:28px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px}
+.hero-meta .chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:100px;border:1px solid rgba(167,139,250,.45);background:rgba(124,58,237,.15);font-size:12px;font-weight:500;letter-spacing:.06em;color:#EDE9FE}
+.hero-meta .chip.solid{background:linear-gradient(90deg,#7C3AED,#5B21B6);border-color:transparent;color:#fff}
+section{padding:56px 0}
+section.soft{background:var(--bg-soft)}
+.section-label{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--roxo);margin-bottom:14px}
+.section-label::before{content:"";width:34px;height:2px;background:var(--roxo);border-radius:2px}
+section h2{font-size:30px;font-weight:700;letter-spacing:-.01em;line-height:1.2;margin-bottom:14px}
+section h3{font-size:18px;font-weight:600;margin:24px 0 10px;color:var(--ink)}
+section p.intro{color:var(--cinza);max-width:820px;margin-bottom:28px}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}
+@media(max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+.kpi{border:1px solid var(--linha);border-radius:16px;padding:18px 20px;background:#fff}
+.kpi small{display:block;color:var(--roxo);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.kpi b{display:block;font-size:26px;font-weight:700;letter-spacing:-.01em;color:var(--ink);line-height:1.1}
+.kpi span{display:block;color:var(--cinza);font-size:12px;font-weight:300;margin-top:4px}
+.top-grid{display:grid;grid-template-columns:1fr;gap:18px;margin-top:24px}
+.top-card{border:1px solid var(--linha);border-radius:20px;padding:24px;background:#fff;display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;position:relative;overflow:hidden}
+.top-card::before{content:"";position:absolute;top:0;left:0;bottom:0;width:6px;background:linear-gradient(180deg,var(--roxo),var(--roxo-dark))}
+.top-card.gold::before{background:linear-gradient(180deg,#D97706,#F59E0B)}
+.top-card.silver::before{background:linear-gradient(180deg,#A78BFA,#7C5CFF)}
+.top-card.bronze::before{background:linear-gradient(180deg,#059669,#10B981)}
+.top-rank{width:56px;height:56px;border-radius:50%;background:var(--roxo-xlight);color:var(--roxo-dark);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;flex-shrink:0}
+.top-card.gold .top-rank{background:linear-gradient(135deg,#D97706,#F59E0B);color:#fff}
+.top-card.silver .top-rank{background:linear-gradient(135deg,#A78BFA,#7C5CFF);color:#fff}
+.top-card.bronze .top-rank{background:linear-gradient(135deg,#059669,#10B981);color:#fff}
+.top-info{flex:1;min-width:0}
+.top-name{font-size:17px;font-weight:700;color:var(--ink);margin-bottom:4px;line-height:1.3;word-break:break-word}
+.top-tags{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.top-why{font-size:13px;color:var(--cinza);line-height:1.5;margin-top:8px}
+.top-metrics{display:grid;grid-template-columns:repeat(2,auto);gap:8px 16px;font-size:13px;text-align:right;font-variant-numeric:tabular-nums;flex-shrink:0}
+.top-metrics .k{color:var(--roxo);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.top-metrics .v{color:var(--ink);font-weight:700}
+@media(max-width:900px){.top-card{grid-template-columns:1fr;text-align:left}.top-rank{margin-bottom:8px}.top-metrics{grid-template-columns:repeat(4,1fr);text-align:left}}
+.pill{display:inline-block;padding:3px 10px;border-radius:100px;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;line-height:1.4}
+.pill.win{background:var(--verde-soft);color:var(--verde)}
+.pill.warn{background:var(--amarelo-soft);color:var(--amarelo)}
+.pill.new{background:var(--roxo-xlight);color:var(--roxo-dark)}
+.pill.motor{background:linear-gradient(90deg,#7C3AED,#5B21B6);color:#fff}
+.table-wrap{border:1px solid var(--linha);border-radius:16px;overflow:hidden;background:#fff;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:700px}
+th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--linha)}
+th{background:var(--bg-soft);color:var(--roxo);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+td{font-weight:400;color:var(--ink)}
 td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
-.win{color:#4ade80;font-weight:600}
-.lose{color:#f87171;font-weight:600}
-.warn-txt{color:#facc15;font-weight:600}
-.tot{background:rgba(124,92,255,.10);font-weight:700}
-.tag{display:inline-block;padding:2px 7px;border-radius:5px;font-size:10px;color:#cbd5e1;margin-left:2px}
-.grid{display:grid;gap:14px;grid-template-columns:repeat(4,1fr)}
-@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
-.kpi{font-size:12px;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px}
-.val{font-size:26px;font-weight:700;color:#f1f5f9;margin:4px 0}
-.sub{font-size:12px;color:#64748b}
-a{color:#22d3ee}
-.alert-box{background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.3);border-radius:12px;padding:14px 18px;margin-bottom:20px;font-size:13px;color:#cbd5e1}
-.alert-box b{color:#22d3ee}
-.alert-box.bad{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.3)}
-.alert-box.bad b{color:#f87171}
-.group-header{background:linear-gradient(135deg,rgba(124,92,255,.15),rgba(34,211,238,.10));border-radius:10px;padding:12px 16px;margin:20px 0 10px;font-weight:700;font-size:14px;color:#f1f5f9;display:flex;justify-content:space-between;align-items:center}
+tr:last-child td{border-bottom:none}
+tr.total td{background:var(--bg-soft);font-weight:700;border-top:2px solid var(--roxo-light)}
+tr.win td{background:rgba(5,150,105,.06)}
+.highlight-box{background:linear-gradient(135deg,rgba(124,58,237,.08),rgba(167,139,250,.05));border:1px solid var(--roxo-light);border-radius:20px;padding:26px 30px;margin:20px 0}
+.highlight-box.win{background:linear-gradient(135deg,rgba(5,150,105,.08),rgba(16,185,129,.04));border-color:var(--verde)}
+.highlight-box.win h3{color:var(--verde)}
+.highlight-box h3{color:var(--roxo-dark);margin-bottom:10px;font-size:20px}
+.highlight-box p{color:var(--ink);font-size:15px}
+footer{background:var(--ink);color:#EDE9FE;padding:40px 0;text-align:center;font-size:12px;letter-spacing:.06em}
+footer .brand{justify-content:center;margin-bottom:16px}
+footer .footer-text{color:#A78BFA;font-weight:300}
 </style>
 </head>
 <body>
-<header>
-<h1>📅 Criativos por Semana de Teste · LS001→LS009</h1>
-<div style="font-size:14px;color:#cbd5e1">45 criativos com impressões · Workshop Especialista com IA · Marketex</div>
-<div class="meta">
-<span>📅 Período: 18/05 → 13/07/26 (LS001-LS009)</span>
-<span>⏱ Gerado 14/07 · atualizado</span>
-<span>📊 Fonte: VK Metrics + planilha CONTROLE DE CRIATIVOS</span>
-<span>💰 Imposto Meta +13,83%</span>
-</div>
+
+<header class="hero">
+  <div class="container">
+    <div class="brand">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+        <polygon points="50,33 65,59 35,59"></polygon>
+        <line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line>
+        <line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line>
+        <line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line>
+        <line x1="10" y1="27" x2="50" y2="33"></line>
+      </svg>
+      <span class="word"><b>BM</b><i class="bar"></i><span>MÍDIAS</span></span>
+    </div>
+    <h1>Análise de Criativos LS · Top 10 novas versões</h1>
+    <p class="lead">Ranking dos 10 criativos mais indicados para gerar novas versões · baseado em performance agregada dos últimos 6 lançamentos (LS006 → LS011 em captação) · Workshop Especialista com IA · Marketex.</p>
+    <div class="hero-meta">
+      <span class="chip solid">🧪 LS006 → LS011</span>
+      <span class="chip">📅 22/06 → 09/08/26</span>
+      <span class="chip">⏱ Gerado 28/07 · terça</span>
+      <span class="chip">📊 VK Metrics + Meta Ads</span>
+      <span class="chip">🔄 Semanal · toda terça</span>
+    </div>
+  </div>
 </header>
 
-<div class="alert-box">
-📖 <b>Como ler:</b> Comece pelo <b>Total Geral</b> abaixo (agregado dos 45 criativos com impressões). Depois olhe os grupos por semanas de teste — dentro de cada card, cada linha mostra performance por LS (impressões / vendas). <b>Nome do criativo é clicável</b> — abre o vídeo ou pasta do Drive direto.
-</div>
+<section>
+  <div class="container">
+    <div class="section-label">Panorama consolidado</div>
+    <h2>LS006 → LS011 · o que aconteceu</h2>
+    <div class="kpi-grid">
+      <div class="kpi"><small>Investimento c/imp</small><b>R$ 344.443</b><span>(bruto R$ 302.592)</span></div>
+      <div class="kpi"><small>Vendas pixel Meta</small><b>2.543</b><span>Ingressos Workshop</span></div>
+      <div class="kpi"><small>CPA médio c/imp</small><b>R$ 135,44</b><span>Média 6 LS</span></div>
+      <div class="kpi"><small>ROAS médio</small><b>0,88×</b><span>Estimado ing.+bumps ÷ inv.</span></div>
+    </div>
+    <div class="highlight-box">
+      <h3>📖 Como ler este relatório</h3>
+      <p>O ranking abaixo cruza <b>4 sinais</b> pra apontar os melhores candidatos a novas versões:<br>
+      1. <b>ROAS ≥ 1,0×</b> ou próximo — o criativo se paga.<br>
+      2. <b>Bumps % ≥ 38%</b> — quem compra na página desse criativo tende a levar order bump (indica alta intenção).<br>
+      3. <b>CPA baixo</b> — eficiência.<br>
+      4. <b>Validação em múltiplos LS</b> — não é sorte de uma semana.<br>
+      Bônus: <b>criativos "novos"</b> (rodaram em 1-3 LS) com bons sinais recebem prêmio no score — ainda têm espaço pra escalar.</p>
+    </div>
+  </div>
+</section>
 
-<h2>📊 TOTAL GERAL · 45 criativos (agregado LS001→LS009)</h2>
-<div class="grid">
-<div class="card">
-<div class="kpi">Investimento c/imposto</div>
-<div class="val">R$ 68.469</div>
-<div class="sub">bruto R$ 60.151</div>
-</div>
-<div class="card">
-<div class="kpi">Ingressos (pixel Meta)</div>
-<div class="val">599</div>
-<div class="sub">CPA médio R$ 114.31</div>
-</div>
-<div class="card">
-<div class="kpi">Order Bumps estimados</div>
-<div class="val">234</div>
-<div class="sub">AP 75 · Fotos 84 · Palestra 75 · 39% conv</div>
-</div>
-<div class="card">
-<div class="kpi">ROAS geral</div>
-<div class="val" style="color:#facc15">0.86×</div>
-<div class="sub">R$ 58.616 receita estimada</div>
-</div>
-</div>
+<section class="soft">
+  <div class="container">
+    <div class="section-label">Top 10 candidatos a novas versões</div>
+    <h2>Ranking de novas versões</h2>
+    <p class="intro">Ordenado por score composto (ROAS + hook + CTR + CPA + novidade). Motores absolutos (rodam há 4+ LS) aparecem, mas ganham menos prêmio de "novidade" porque já foram exaustivamente escalados.</p>
 
-<h3>📅 Distribuição por Lançamento (LS)</h3>
-<div class="card"><div class="scroll-x"><table><thead><tr><th>LS</th><th>Datas</th><th class="num">Spend bruto</th><th class="num">Spend c/imp</th><th class="num">Impressões</th><th class="num">Vendas pixel</th><th class="num">CPA c/imp</th></tr></thead><tbody>
-<tr><td><b>LS001</b></td><td>18-24/05</td><td class="num">R$ 0</td><td class="num">R$ 0</td><td class="num">0</td><td class="num">0</td><td class="num">—</td></tr><tr><td><b>LS002</b></td><td>25-31/05</td><td class="num">R$ 0</td><td class="num">R$ 0</td><td class="num">0</td><td class="num">0</td><td class="num">—</td></tr><tr><td><b>LS003</b></td><td>01-07/06</td><td class="num">R$ 0</td><td class="num">R$ 0</td><td class="num">0</td><td class="num">0</td><td class="num">—</td></tr><tr><td><b>LS004</b></td><td>08-14/06</td><td class="num">R$ 0</td><td class="num">R$ 0</td><td class="num">0</td><td class="num">0</td><td class="num">—</td></tr><tr><td><b>LS005</b></td><td>15-21/06</td><td class="num">R$ 0</td><td class="num">R$ 0</td><td class="num">0</td><td class="num">0</td><td class="num">—</td></tr><tr class="tot"><td><b>LS006</b></td><td>22-28/06</td><td class="num">R$ 8.957</td><td class="num">R$ 10.196</td><td class="num">90.418</td><td class="num">105</td><td class="num">R$ 97</td></tr><tr class="tot"><td><b>LS007</b></td><td>29/06-05/07</td><td class="num">R$ 28.970</td><td class="num">R$ 32.977</td><td class="num">344.969</td><td class="num">261</td><td class="num">R$ 126</td></tr><tr class="tot"><td><b>LS008</b></td><td>06-12/07</td><td class="num">R$ 19.976</td><td class="num">R$ 22.739</td><td class="num">294.388</td><td class="num">214</td><td class="num">R$ 106</td></tr><tr class="tot"><td><b>LS009</b></td><td>13-19/07</td><td class="num">R$ 3.994</td><td class="num">R$ 4.546</td><td class="num">59.639</td><td class="num">35</td><td class="num">R$ 130</td></tr><tr class="tot"><td colspan="2"><b>TOTAL</b></td><td class="num"><b>R$ 60.151</b></td><td class="num"><b>R$ 68.469</b></td><td class="num"><b>789.414</b></td><td class="num"><b>599</b></td><td class="num"><b>R$ 114</b></td></tr></tbody></table></div><p style="font-size:11px;color:#64748b;margin-top:6px">Somente os 45 criativos deste recorte · não é o total geral do lançamento.</p></div><div class="alert-box bad">🚫 <b>Criativos SEM IMPRESSÕES (2):</b><ul style="margin-left:20px;margin-top:8px"><li><a href="https://drive.google.com/file/d/164V0HzzJd-vYF0zB33zVlHhAOf7BJNgf/view?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV347_LS_CAP_NEW_V2_EXPERT REVELA_1.34</a></li><li><a href="https://drive.google.com/file/d/1uDx1KAOpMegex7Xos00xDvw2FiI_sb8V/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV351_LS_CAP_NEW_V1_ESPECIALISTA NAO USA IA ACHA DIFICIL _1.17</a></li></ul></div><div class="card"><h3>📆 Mapa LS → Semana ISO</h3><div class="scroll-x"><table><thead><tr><th>LS</th><th>Datas</th><th>Semana ISO</th></tr></thead><tbody><tr><td><b>LS001</b></td><td>18-24/05</td><td>21</td></tr><tr><td><b>LS002</b></td><td>25-31/05</td><td>22</td></tr><tr><td><b>LS003</b></td><td>01-07/06</td><td>23</td></tr><tr><td><b>LS004</b></td><td>08-14/06</td><td>24</td></tr><tr><td><b>LS005</b></td><td>15-21/06</td><td>25</td></tr><tr><td><b>LS006</b></td><td>22-28/06</td><td>26</td></tr><tr><td><b>LS007</b></td><td>29/06-05/07</td><td>27</td></tr><tr><td><b>LS008</b></td><td>06-12/07</td><td>28</td></tr><tr><td><b>LS009</b></td><td>13-19/07</td><td>29</td></tr></tbody></table></div></div>
-<h2>📋 Lista completa · 45 criativos (agregado todas as semanas)</h2>
-<div class="card"><div class="scroll-x"><table><thead>
-<tr>
-<th>#</th>
-<th>Criativo</th>
-<th class="num">Spend bruto</th>
-<th class="num">Spend c/imp</th>
-<th class="num">Ingressos</th>
-<th class="num">CPA c/imp</th>
-<th class="num">AP</th>
-<th class="num">Fotos</th>
-<th class="num">Palestra</th>
-<th class="num">Total bumps</th>
-<th class="num">Bumps%</th>
-<th class="num">Receita est.</th>
-<th class="num">ROAS</th>
-<th class="num">CTR</th>
-<th class="num">Hook</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>1</td>
-<td><a href="https://drive.google.com/file/d/1clSL6wBpMqwYYD9kKmontkMTOP0X1aUL/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV322_LS_CAP_NEW_V1_CHAT AJUDA A CRIAR SLIDES_0.37</a></td>
-<td class="num">R$ 24.406</td>
-<td class="num">R$ 27.781</td>
-<td class="num">195</td>
-<td class="num">R$ 142</td>
-<td class="num">30</td>
-<td class="num">37</td>
-<td class="num">30</td>
-<td class="num">97</td>
-<td class="num">50%</td>
-<td class="num">R$ 20.669</td>
-<td class="num warn-txt"><b>0.74×</b></td>
-<td class="num">2.20%</td>
-<td class="num">29.4%</td>
-</tr><tr>
-<td>2</td>
-<td><a href="https://drive.google.com/file/d/1z_QguczndXRZca-cvuyyaQfk_UdM-vnz/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV320_LS_CAP_NEW_V1_CHAT CRIA ID VISUAL CLONE CONTEUDO_0.39</a></td>
-<td class="num">R$ 15.797</td>
-<td class="num">R$ 17.982</td>
-<td class="num">226</td>
-<td class="num">R$ 80</td>
-<td class="num">24</td>
-<td class="num">26</td>
-<td class="num">25</td>
-<td class="num">75</td>
-<td class="num">33%</td>
-<td class="num">R$ 21.052</td>
-<td class="num win"><b>1.17×</b></td>
-<td class="num">2.11%</td>
-<td class="num">23.3%</td>
-</tr><tr>
-<td>3</td>
-<td><a href="https://drive.google.com/file/d/1OhP_9Yggh1XaBWJs9y_eixuPiqc9_84B/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV324_LS_CAP_NEW_V1_CHAT PARA POST ID VISUAL SITE_HOOK48_BODY27_1.22</a></td>
-<td class="num">R$ 5.962</td>
-<td class="num">R$ 6.787</td>
-<td class="num">46</td>
-<td class="num">R$ 148</td>
-<td class="num">6</td>
-<td class="num">4</td>
-<td class="num">3</td>
-<td class="num">13</td>
-<td class="num">28%</td>
-<td class="num">R$ 4.242</td>
-<td class="num lose"><b>0.63×</b></td>
-<td class="num">1.65%</td>
-<td class="num">22.8%</td>
-</tr><tr>
-<td>4</td>
-<td><a href="https://drive.google.com/file/d/186Dc6YuC2POxLPaRRgvqCnu8IJnAGZYN/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV321_LS_CAP_NEW_V1_CHAT FAZ SUA ID VISUAL_0.37</a></td>
-<td class="num">R$ 2.046</td>
-<td class="num">R$ 2.329</td>
-<td class="num">17</td>
-<td class="num">R$ 137</td>
-<td class="num">4</td>
-<td class="num">4</td>
-<td class="num">5</td>
-<td class="num">13</td>
-<td class="num">76%</td>
-<td class="num">R$ 2.145</td>
-<td class="num warn-txt"><b>0.92×</b></td>
-<td class="num">1.93%</td>
-<td class="num">29.7%</td>
-</tr><tr>
-<td>5</td>
-<td><a href="https://drive.google.com/file/d/1Nxs6nvTW81hEIznkSV76Is0gp2Dnbwp7/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV334_LS_CAP_NEW_V1_JA USA CHAT GPT E CLAUDE_1.02</a></td>
-<td class="num">R$ 1.880</td>
-<td class="num">R$ 2.140</td>
-<td class="num">8</td>
-<td class="num">R$ 267</td>
-<td class="num">—</td>
-<td class="num">1</td>
-<td class="num">2</td>
-<td class="num">3</td>
-<td class="num">38%</td>
-<td class="num">R$ 698</td>
-<td class="num lose"><b>0.33×</b></td>
-<td class="num">1.23%</td>
-<td class="num">19.9%</td>
-</tr><tr>
-<td>6</td>
-<td><a href="https://drive.google.com/file/d/1EsSEEhcZZK66z983k8NgSWI9F_VFfPKC/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV319_LS_CAP_NEW_V1_ID VISUAL COM CHATGPT_0.28</a></td>
-<td class="num">R$ 1.262</td>
-<td class="num">R$ 1.437</td>
-<td class="num">14</td>
-<td class="num">R$ 103</td>
-<td class="num">2</td>
-<td class="num">2</td>
-<td class="num">2</td>
-<td class="num">6</td>
-<td class="num">43%</td>
-<td class="num">R$ 1.416</td>
-<td class="num warn-txt"><b>0.99×</b></td>
-<td class="num">2.43%</td>
-<td class="num">24.8%</td>
-</tr><tr>
-<td>7</td>
-<td><a href="https://drive.google.com/drive/folders/1BW-zTB7zbOhmpSof3avl-r03fVhenvsO?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV325_LS_CAP_NEW_V1_CHAT FAZ SITE ID E POSTS_HOOK49_BODY28_1.19</a></td>
-<td class="num">R$ 1.240</td>
-<td class="num">R$ 1.412</td>
-<td class="num">24</td>
-<td class="num">R$ 59</td>
-<td class="num">5</td>
-<td class="num">3</td>
-<td class="num">1</td>
-<td class="num">9</td>
-<td class="num">38%</td>
-<td class="num">R$ 2.479</td>
-<td class="num win"><b>1.76×</b></td>
-<td class="num">2.03%</td>
-<td class="num">26.2%</td>
-</tr><tr>
-<td>8</td>
-<td><a href="https://drive.google.com/drive/folders/1BW-zTB7zbOhmpSof3avl-r03fVhenvsO?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV327_LS_CAP_NEW_V1_WORKSHOP PAGINA PRONTA_HOOK51_BODY30_0.49</a></td>
-<td class="num">R$ 752</td>
-<td class="num">R$ 857</td>
-<td class="num">13</td>
-<td class="num">R$ 66</td>
-<td class="num">1</td>
-<td class="num">1</td>
-<td class="num">1</td>
-<td class="num">3</td>
-<td class="num">23%</td>
-<td class="num">R$ 1.110</td>
-<td class="num win"><b>1.30×</b></td>
-<td class="num">2.60%</td>
-<td class="num">26.4%</td>
-</tr><tr>
-<td>9</td>
-<td><a href="https://drive.google.com/file/d/1lgDRuGMaGDd_K38BREBgVLskd9L1p0OV/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV330_LS_CAP_NEW_V1_PROCESSO CRIAR PAGINA_1.25</a></td>
-<td class="num">R$ 577</td>
-<td class="num">R$ 657</td>
-<td class="num">3</td>
-<td class="num">R$ 219</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">0%</td>
-<td class="num">R$ 201</td>
-<td class="num lose"><b>0.31×</b></td>
-<td class="num">2.41%</td>
-<td class="num">28.6%</td>
-</tr><tr>
-<td>10</td>
-<td><a href="https://drive.google.com/file/d/1KAz4WIiXFeSAebGW31koHpQUuNZUL-Cp/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV352_LS_CAP_NEW_V1_DEPENDE DE ABRIR A AGENDA _1.00</a></td>
-<td class="num">R$ 553</td>
-<td class="num">R$ 630</td>
-<td class="num">4</td>
-<td class="num">R$ 157</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">0%</td>
-<td class="num">R$ 268</td>
-<td class="num lose"><b>0.43×</b></td>
-<td class="num">1.41%</td>
-<td class="num">29.0%</td>
-</tr><tr>
-<td>11</td>
-<td><a href="https://drive.google.com/file/d/1_OLCYzC5XzW4ZZG-4MO3p5ZuGZ6rCCQB/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV332_LS_CAP_NEW_V1_NAO DOMINA IA_1.08</a></td>
-<td class="num">R$ 472</td>
-<td class="num">R$ 538</td>
-<td class="num">5</td>
-<td class="num">R$ 108</td>
-<td class="num">1</td>
-<td class="num">1</td>
-<td class="num">2</td>
-<td class="num">4</td>
-<td class="num">80%</td>
-<td class="num">R$ 624</td>
-<td class="num win"><b>1.16×</b></td>
-<td class="num">1.61%</td>
-<td class="num">27.2%</td>
-</tr><tr>
-<td>12</td>
-<td><a href="https://drive.google.com/file/d/1aXfEAK6MMwk5KzpdueFXOevJSNEkI268/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV336_LS_CAP_NEW_V1_JA USA CHAT GPT E CLAUDE 2_1.05</a></td>
-<td class="num">R$ 421</td>
-<td class="num">R$ 479</td>
-<td class="num">2</td>
-<td class="num">R$ 240</td>
-<td class="num">1</td>
-<td class="num">1</td>
-<td class="num">1</td>
-<td class="num">3</td>
-<td class="num">150%</td>
-<td class="num">R$ 373</td>
-<td class="num warn-txt"><b>0.78×</b></td>
-<td class="num">1.19%</td>
-<td class="num">17.7%</td>
-</tr><tr>
-<td>13</td>
-<td><a href="https://drive.google.com/file/d/1EyUpitsQ-RJoiLbB1JYQzUOLRytptuyS/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV337_LS_CAP_NEW_V1_JA USA CHAT GPT E CLAUDE TERAPEUTA_1.13</a></td>
-<td class="num">R$ 396</td>
-<td class="num">R$ 451</td>
-<td class="num">4</td>
-<td class="num">R$ 113</td>
-<td class="num">—</td>
-<td class="num">1</td>
-<td class="num">—</td>
-<td class="num">1</td>
-<td class="num">25%</td>
-<td class="num">R$ 330</td>
-<td class="num warn-txt"><b>0.73×</b></td>
-<td class="num">1.39%</td>
-<td class="num">19.5%</td>
-</tr><tr>
-<td>14</td>
-<td><a href="https://drive.google.com/file/d/1q4kSCkkNjthHjNEh15wmv83OliZ9XcoE/view?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV349_LS_CAP_NEW_V1_ESPECIALISTA VERGONHA DE APARECER_1.30</a></td>
-<td class="num">R$ 373</td>
-<td class="num">R$ 425</td>
-<td class="num">2</td>
-<td class="num">R$ 212</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">0%</td>
-<td class="num">R$ 134</td>
-<td class="num lose"><b>0.32×</b></td>
-<td class="num">1.60%</td>
-<td class="num">28.0%</td>
-</tr><tr>
-<td>15</td>
-<td><a href="https://drive.google.com/drive/folders/1SdB-SFWTyxweRiW86a_2n-mpZNGCmVsq" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV350_LS_CAP_NEW_V1_ESPECIALISTA CRIA CLONE_1.07</a></td>
-<td class="num">R$ 357</td>
-<td class="num">R$ 406</td>
-<td class="num">5</td>
-<td class="num">R$ 81</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">0%</td>
-<td class="num">R$ 335</td>
-<td class="num warn-txt"><b>0.83×</b></td>
-<td class="num">2.71%</td>
-<td class="num">47.5%</td>
-</tr><tr>
-<td>16</td>
-<td><a href="https://drive.google.com/file/d/1Gqh6ejqAI5Ke2rSOOO81UaquKAuPYaYr/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV323_LS_CAP_NEW_V1_CRIAR CONTEUDO COM CHAT_HOOK47_BODY26_1.00</a></td>
-<td class="num">R$ 349</td>
-<td class="num">R$ 397</td>
-<td class="num">1</td>
-<td class="num">R$ 397</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">0%</td>
-<td class="num">R$ 67</td>
-<td class="num lose"><b>0.17×</b></td>
-<td class="num">2.09%</td>
-<td class="num">25.1%</td>
-</tr><tr>
-<td>17</td>
-<td><a href="https://drive.google.com/file/d/1tbN5Wij9_4wXI5fOQkz0EhnSFrFanA1T/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV339_LS_CAP_NEW_V1_INSTAGRAM TÁ FEIO_1.39</a></td>
-<td class="num">R$ 305</td>
-<td class="num">R$ 347</td>
-<td class="num">1</td>
-<td class="num">R$ 347</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">0%</td>
-<td class="num">R$ 67</td>
-<td class="num lose"><b>0.19×</b></td>
-<td class="num">1.97%</td>
-<td class="num">26.4%</td>
-</tr><tr>
-<td>18</td>
-<td><a href="https://drive.google.com/file/d/15cSqV-zHNZhjuROQ1T8LBs7E1BGNRACf/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV341_LS_CAP_NEW_V1_OCULOS COM IA_2.03</a></td>
-<td class="num">R$ 293</td>
-<td class="num">R$ 334</td>
-<td class="num">4</td>
-<td class="num">R$ 83</td>
-<td class="num">—</td>
-<td class="num">2</td>
-<td class="num">—</td>
-<td class="num">2</td>
-<td class="num">50%</td>
-<td class="num">R$ 392</td>
-<td class="num win"><b>1.17×</b></td>
-<td class="num">2.64%</td>
-<td class="num">32.9%</td>
-</tr><tr>
-<td>19</td>
-<td><a href="https://drive.google.com/file/d/19IajcG-bxm6EtD9Jm6TAY9IuUdzPy3sZ/view?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV346_LS_CAP_NEW_V1_EXPERT REVELA_1.34</a></td>
-<td class="num">R$ 287</td>
-<td class="num">R$ 327</td>
-<td class="num">2</td>
-<td class="num">R$ 164</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">0%</td>
-<td class="num">R$ 134</td>
-<td class="num lose"><b>0.41×</b></td>
-<td class="num">1.90%</td>
-<td class="num">37.1%</td>
-</tr><tr>
-<td>20</td>
-<td><a href="https://drive.google.com/file/d/1xcSrDt4XqvhgEesFTcQMcOd4Ld-9dlb9/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV331_LS_CAP_NEW_V1_NO DICAS COPILOTO_1.25</a></td>
-<td class="num">R$ 266</td>
-<td class="num">R$ 303</td>
-<td class="num">2</td>
-<td class="num">R$ 151</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">0%</td>
-<td class="num">R$ 134</td>
-<td class="num lose"><b>0.44×</b></td>
-<td class="num">1.26%</td>
-<td class="num">24.0%</td>
-</tr><tr>
-<td>21</td>
-<td><a href="https://drive.google.com/file/d/1AyZrpM1BQe1z06q8q_IiONamplOquF0T/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV335_LS_CAP_NEW_V1_COMO DOMINAR GPT E CLAUDE PARA CONTEUDOS_0.56</a></td>
-<td class="num">R$ 239</td>
-<td class="num">R$ 272</td>
-<td class="num">1</td>
-<td class="num">R$ 272</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">0%</td>
-<td class="num">R$ 67</td>
-<td class="num lose"><b>0.25×</b></td>
-<td class="num">1.42%</td>
-<td class="num">23.0%</td>
-</tr><tr>
-<td>22</td>
-<td><a href="https://drive.google.com/file/d/1flg1a_CThuuSGtcc-fQrKBW_LWYTjz1r/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV340_LS_CAP_NEW_V1_EXEMPLO POST_2.01</a></td>
-<td class="num">R$ 232</td>
-<td class="num">R$ 264</td>
-<td class="num">1</td>
-<td class="num">R$ 264</td>
-<td class="num">1</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">1</td>
-<td class="num">100%</td>
-<td class="num">R$ 194</td>
-<td class="num warn-txt"><b>0.73×</b></td>
-<td class="num">1.84%</td>
-<td class="num">19.1%</td>
-</tr><tr>
-<td>23</td>
-<td><a href="https://drive.google.com/file/d/1aq4nm9CXgJnJDzg2oyHbjdbr2gTwhhoh/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV333_LS_CAP_NEW_V1_COMO DOMINAR IA PARA CRIAR_1.11</a></td>
-<td class="num">R$ 227</td>
-<td class="num">R$ 259</td>
-<td class="num">3</td>
-<td class="num">R$ 86</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">2</td>
-<td class="num">2</td>
-<td class="num">67%</td>
-<td class="num">R$ 301</td>
-<td class="num win"><b>1.16×</b></td>
-<td class="num">1.46%</td>
-<td class="num">20.1%</td>
-</tr><tr>
-<td>24</td>
-<td><a href="https://drive.google.com/file/d/1kBsB_Mao3gf9bSJMDoiHLHD4pMD1XV0B/view?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV348_LS_CAP_NEW_V1_CONTEUDO PARA O MES INTEIRO_1.14</a></td>
-<td class="num">R$ 204</td>
-<td class="num">R$ 232</td>
-<td class="num">2</td>
-<td class="num">R$ 116</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">0%</td>
-<td class="num">R$ 134</td>
-<td class="num lose"><b>0.58×</b></td>
-<td class="num">2.11%</td>
-<td class="num">25.3%</td>
-</tr><tr>
-<td>25</td>
-<td><a href="https://drive.google.com/drive/folders/1BW-zTB7zbOhmpSof3avl-r03fVhenvsO?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV326_LS_CAP_NEW_V1_CHAT FAZ PAGINA SITE_HOOK50_BODY29_1.33</a></td>
-<td class="num">R$ 142</td>
-<td class="num">R$ 161</td>
-<td class="num">0</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">—</td>
-<td class="num">R$ 0</td>
-<td class="num lose"><b>0.00×</b></td>
-<td class="num">1.58%</td>
-<td class="num">29.7%</td>
-</tr><tr>
-<td>26</td>
-<td><a href="https://drive.google.com/drive/folders/1PrHXeCzdIOeK6ZuPwTBXRcUWeFbUt3vp?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADC025_LS_CAP_NEW_V1_CACAR CLIENTES TEM CUSTO</a></td>
-<td class="num">R$ 117</td>
-<td class="num">R$ 133</td>
-<td class="num">1</td>
-<td class="num">R$ 133</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">0%</td>
-<td class="num">R$ 67</td>
-<td class="num lose"><b>0.50×</b></td>
-<td class="num">1.60%</td>
-<td class="num">—</td>
-</tr><tr>
-<td>27</td>
-<td><a href="https://drive.google.com/file/d/1fUA4VBnH8jxZ6nc4mlkIGB2AFrK1vJYR/view?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADI185_LS_CAP_NEW_V1_PERDE POST POR FALTA DE TEMPO</a></td>
-<td class="num">R$ 113</td>
-<td class="num">R$ 128</td>
-<td class="num">3</td>
-<td class="num">R$ 43</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">0%</td>
-<td class="num">R$ 201</td>
-<td class="num win"><b>1.57×</b></td>
-<td class="num">1.88%</td>
-<td class="num">—</td>
-</tr><tr>
-<td>28</td>
-<td><a href="https://drive.google.com/file/d/1tehHbPnCOc1BwUzSMiRPXFmLpZpksLfW/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV344_LS_CAP_NEW_V1_PERSONAGENS DO CHAVES TRABALHANDO_1.59</a></td>
-<td class="num">R$ 106</td>
-<td class="num">R$ 121</td>
-<td class="num">1</td>
-<td class="num">R$ 121</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">0%</td>
-<td class="num">R$ 67</td>
-<td class="num lose"><b>0.55×</b></td>
-<td class="num">1.90%</td>
-<td class="num">28.2%</td>
-</tr><tr>
-<td>29</td>
-<td><a href="https://drive.google.com/file/d/1Ru50648MoSAZSlbF865MaDDCvgkN8Q58/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV342_LS_CAP_NEW_V1_EQUIPE DE CONTEUDOS SEM CONTRATAR_1.33</a></td>
-<td class="num">R$ 100</td>
-<td class="num">R$ 114</td>
-<td class="num">0</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">—</td>
-<td class="num">R$ 0</td>
-<td class="num lose"><b>0.00×</b></td>
-<td class="num">1.37%</td>
-<td class="num">23.3%</td>
-</tr><tr>
-<td>30</td>
-<td><a href="https://drive.google.com/open?id=1-NKoY1MJxs5OOP1lNJH34X8jJo_VklRd&usp=drive_copy" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADC023_LS_CAP_NEW_V1_1 MES DE POST EM UMA TARDE</a></td>
-<td class="num">R$ 79</td>
-<td class="num">R$ 90</td>
-<td class="num">0</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">—</td>
-<td class="num">R$ 0</td>
-<td class="num lose"><b>0.00×</b></td>
-<td class="num">1.18%</td>
-<td class="num">—</td>
-</tr><tr>
-<td>31</td>
-<td><a href="https://drive.google.com/file/d/1Wm0zkSshw9F-fwDrn99VJWmpIsr4dA2f/view?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADI186_LS_CAP_NEW_V1_PARA DE ADIAR SEU SITE</a></td>
-<td class="num">R$ 78</td>
-<td class="num">R$ 89</td>
-<td class="num">3</td>
-<td class="num">R$ 30</td>
-<td class="num">—</td>
-<td class="num">1</td>
-<td class="num">1</td>
-<td class="num">2</td>
-<td class="num">67%</td>
-<td class="num">R$ 313</td>
-<td class="num win"><b>3.52×</b></td>
-<td class="num">2.14%</td>
-<td class="num">—</td>
-</tr><tr>
-<td>32</td>
-<td><a href="https://drive.google.com/drive/folders/10TzxjRBPwKW_FZI3h0pnFDSta1wdo2ed?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADC024_LS_CAP_NEW_V1_AGENDA SEMPRE CHEIA</a></td>
-<td class="num">R$ 67</td>
-<td class="num">R$ 77</td>
-<td class="num">2</td>
-<td class="num">R$ 38</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">0%</td>
-<td class="num">R$ 134</td>
-<td class="num win"><b>1.74×</b></td>
-<td class="num">1.69%</td>
-<td class="num">—</td>
-</tr><tr>
-<td>33</td>
-<td><a href="https://drive.google.com/file/d/1ZkTz5pyl1TJpFp01rLHcqiOkT-w60cdI/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV338_LS_CAP_NEW_V1_DEIXAR DE SER INVISIVEL_1.16</a></td>
-<td class="num">R$ 62</td>
-<td class="num">R$ 71</td>
-<td class="num">0</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">—</td>
-<td class="num">R$ 0</td>
-<td class="num lose"><b>0.00×</b></td>
-<td class="num">1.47%</td>
-<td class="num">27.2%</td>
-</tr><tr>
-<td>34</td>
-<td><a href="https://drive.google.com/file/d/1RQC23YXxaBgyYMY-UgLM3RLHsUWupJwp/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV345_LS_CAP_NEW_V1_POSTAR TODO DIA SEM LIGAR A CAMERA_1.16</a></td>
-<td class="num">R$ 57</td>
-<td class="num">R$ 65</td>
-<td class="num">1</td>
-<td class="num">R$ 65</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">0%</td>
-<td class="num">R$ 67</td>
-<td class="num win"><b>1.03×</b></td>
-<td class="num">2.79%</td>
-<td class="num">22.7%</td>
-</tr><tr>
-<td>35</td>
-<td><a href="https://drive.google.com/drive/folders/1BW-zTB7zbOhmpSof3avl-r03fVhenvsO?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV328_LS_CAP_NEW_V1_PERDESSE IG PAGINA_HOOK52_BODY31_1.12</a></td>
-<td class="num">R$ 57</td>
-<td class="num">R$ 65</td>
-<td class="num">0</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">—</td>
-<td class="num">R$ 0</td>
-<td class="num lose"><b>0.00×</b></td>
-<td class="num">2.89%</td>
-<td class="num">26.3%</td>
-</tr><tr>
-<td>36</td>
-<td><a href="https://drive.google.com/drive/folders/1Nmm8LISXF1PtFaDlmd29FDVJS2ZiTh8r?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADC026_LS_CAP_NEW_V1_MOTIVOS DE NAO TER UM SITE</a></td>
-<td class="num">R$ 50</td>
-<td class="num">R$ 57</td>
-<td class="num">0</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">—</td>
-<td class="num">R$ 0</td>
-<td class="num lose"><b>0.00×</b></td>
-<td class="num">1.28%</td>
-<td class="num">—</td>
-</tr><tr>
-<td>37</td>
-<td><a href="https://drive.google.com/open?id=1FzYfubdUPF2DQCqQ74Eg_tggLnoEiEx7&usp=drive_copy" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADC021_LS_CAP_NEW_V1_REDE SOCIAL PARADA</a></td>
-<td class="num">R$ 47</td>
-<td class="num">R$ 54</td>
-<td class="num">1</td>
-<td class="num">R$ 54</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">0%</td>
-<td class="num">R$ 67</td>
-<td class="num win"><b>1.25×</b></td>
-<td class="num">1.54%</td>
-<td class="num">—</td>
-</tr><tr>
-<td>38</td>
-<td><a href="https://drive.google.com/open?id=1CqHkSmHo3E95KDAEU6QMq7Itp9mTg1RA&usp=drive_copy" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADC022_LS_CAP_NEW_V1_NAO PRECISA CONTRATAR</a></td>
-<td class="num">R$ 43</td>
-<td class="num">R$ 49</td>
-<td class="num">1</td>
-<td class="num">R$ 49</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">0%</td>
-<td class="num">R$ 67</td>
-<td class="num win"><b>1.36×</b></td>
-<td class="num">1.34%</td>
-<td class="num">—</td>
-</tr><tr>
-<td>39</td>
-<td><a href="https://drive.google.com/file/d/1sYD4HR1lrUFl4z-lMpYPx6-YkP28Q5UY/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV343_LS_CAP_NEW_V1_PERDI TEMPO REESCREVENDO_1.34</a></td>
-<td class="num">R$ 39</td>
-<td class="num">R$ 44</td>
-<td class="num">0</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">—</td>
-<td class="num">R$ 0</td>
-<td class="num lose"><b>0.00×</b></td>
-<td class="num">1.10%</td>
-<td class="num">20.2%</td>
-</tr><tr>
-<td>40</td>
-<td><a href="https://drive.google.com/file/d/1qLCpQoVM7njvtQPrF-uBVMvbMpQVyP9o/view?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADI189_LS_CAP_NEW_V1_A IA CRIA ID VISUAL</a></td>
-<td class="num">R$ 37</td>
-<td class="num">R$ 43</td>
-<td class="num">0</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">—</td>
-<td class="num">R$ 0</td>
-<td class="num lose"><b>0.00×</b></td>
-<td class="num">0.66%</td>
-<td class="num">—</td>
-</tr><tr>
-<td>41</td>
-<td><a href="https://drive.google.com/file/d/1QAuJpkWY0cDR6EatIDei7UQkcL-xDO9p/view?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADI187_LS_CAP_NEW_V1_PRECISA DE MAIS CLIENTES NEH</a></td>
-<td class="num">R$ 25</td>
-<td class="num">R$ 29</td>
-<td class="num">0</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">—</td>
-<td class="num">R$ 0</td>
-<td class="num lose"><b>0.00×</b></td>
-<td class="num">0.45%</td>
-<td class="num">—</td>
-</tr><tr>
-<td>42</td>
-<td><a href="https://drive.google.com/file/d/1-07553UMYlwC5Jh531V-r2ols1LkWnVq/view?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADI184_LS_CAP_NEW_V1_GARGALO DE CONTEUDO APARECER</a></td>
-<td class="num">R$ 18</td>
-<td class="num">R$ 21</td>
-<td class="num">0</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">—</td>
-<td class="num">R$ 0</td>
-<td class="num lose"><b>0.00×</b></td>
-<td class="num">1.67%</td>
-<td class="num">—</td>
-</tr><tr>
-<td>43</td>
-<td><a href="https://drive.google.com/file/d/1e-xew5wkujRrNNTVvo9_qhlZyywwVJgj/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADV329_LS_CAP_NEW_V1_NAO SABER USAR O GPT_1.14</a></td>
-<td class="num">R$ 8</td>
-<td class="num">R$ 9</td>
-<td class="num">1</td>
-<td class="num">R$ 9</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">0%</td>
-<td class="num">R$ 67</td>
-<td class="num win"><b>7.64×</b></td>
-<td class="num">2.47%</td>
-<td class="num">28.4%</td>
-</tr><tr>
-<td>44</td>
-<td><a href="https://drive.google.com/file/d/1r4RTH4Fx7bV74iC5lLx-eqwwkeHIZSsn/view?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34.211.238..4)">ADI188_LS_CAP_NEW_V1_SUAS REDE PRECISA DE POST</a></td>
-<td class="num">R$ 6</td>
-<td class="num">R$ 6</td>
-<td class="num">0</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">—</td>
-<td class="num">0</td>
-<td class="num">—</td>
-<td class="num">R$ 0</td>
-<td class="num lose"><b>0.00×</b></td>
-<td class="num">1.85%</td>
-<td class="num">—</td>
-</tr><tr class="tot">
-<td colspan="2"><b>TOTAL 45 criativos</b></td>
-<td class="num"><b>R$ 60.151</b></td>
-<td class="num"><b>R$ 68.469</b></td>
-<td class="num"><b>599</b></td>
-<td class="num"><b>R$ 114</b></td>
-<td class="num"><b>75</b></td>
-<td class="num"><b>84</b></td>
-<td class="num"><b>75</b></td>
-<td class="num"><b>234</b></td>
-<td class="num"><b>39%</b></td>
-<td class="num"><b>R$ 58.616</b></td>
-<td class="num"><b>0.86×</b></td>
-<td class="num">—</td>
-<td class="num">—</td>
-</tr></tbody></table></div>
-<p style="font-size:11px;color:#64748b;margin-top:8px">Ordenado por Spend c/imp (maior→menor). Ingressos = pixel Meta. Bumps = estimados via proporção do join tráfego×purchases. Receita estimada = ingressos×R$67 + AP×R$127 + Fotos×R$62 + Palestra×R$50.</p>
-</div>
+    <div class="top-grid">
 
-<div class="group-header">🏆 Motores estruturais · rodou nos ÚLTIMOS 4 lançamentos <span style="color:#94a3b8;font-size:12px">2 criativos · LS006+LS007+LS008+LS009</span></div><div class="card gold"><div class="scroll-x"><table><thead><tr><th>Criativo</th><th class="num" >LS001<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS002<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS003<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS004<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS005<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" style="color:#4ade80;font-weight:700">LS006<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" style="color:#4ade80;font-weight:700">LS007<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" style="color:#4ade80;font-weight:700">LS008<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" style="color:#4ade80;font-weight:700">LS009<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num">TOTAL vd</th><th class="num">Spend c/imp</th><th class="num">CPA</th><th class="num">ROAS</th></tr></thead><tbody><tr><td><a href="https://drive.google.com/file/d/1z_QguczndXRZca-cvuyyaQfk_UdM-vnz/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV320_LS_CAP_NEW_V1_CHAT CRIA ID VISUAL CLONE CONTEUDO_0.39</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>7.251</b><br><span style="color:#4ade80">13 vd</span></td><td class="num"><b>38.804</b><br><span style="color:#4ade80">63 vd</span></td><td class="num"><b>211.188</b><br><span style="color:#4ade80">140 vd</span></td><td class="num"><b>37.575</b><br><span style="color:#4ade80">20 vd</span></td><td class="num"><b>236</b></td><td class="num">R$ 17.982</td><td class="num">R$ 80</td><td class="num win"><b>1.17×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1clSL6wBpMqwYYD9kKmontkMTOP0X1aUL/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV322_LS_CAP_NEW_V1_CHAT AJUDA A CRIAR SLIDES_0.37</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>58.584</b><br><span style="color:#4ade80">67 vd</span></td><td class="num"><b>214.319</b><br><span style="color:#4ade80">124 vd</span></td><td class="num"><b>4.378</b><br><span style="color:#4ade80">4 vd</span></td><td class="num"><b>320</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num"><b>195</b></td><td class="num">R$ 27.781</td><td class="num">R$ 142</td><td class="num warn-txt"><b>0.74×</b></td></tr></tbody></table></div></div><div class="group-header">🥈 LS006 → LS008 (não continuou LS009) <span style="color:#94a3b8;font-size:12px">4 criativos · LS006+LS007+LS008</span></div><div class="card gold"><div class="scroll-x"><table><thead><tr><th>Criativo</th><th class="num" >LS001<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS002<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS003<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS004<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS005<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" style="color:#4ade80;font-weight:700">LS006<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" style="color:#4ade80;font-weight:700">LS007<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" style="color:#4ade80;font-weight:700">LS008<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS009<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num">TOTAL vd</th><th class="num">Spend c/imp</th><th class="num">CPA</th><th class="num">ROAS</th></tr></thead><tbody><tr><td><a href="https://drive.google.com/file/d/1EsSEEhcZZK66z983k8NgSWI9F_VFfPKC/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV319_LS_CAP_NEW_V1_ID VISUAL COM CHATGPT_0.28</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>10.526</b><br><span style="color:#4ade80">14 vd</span></td><td class="num"><b>652</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num"><b>1.703</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>14</b></td><td class="num">R$ 1.437</td><td class="num">R$ 103</td><td class="num warn-txt"><b>0.99×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/186Dc6YuC2POxLPaRRgvqCnu8IJnAGZYN/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV321_LS_CAP_NEW_V1_CHAT FAZ SUA ID VISUAL_0.37</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>1.711</b><br><span style="color:#4ade80">1 vd</span></td><td class="num"><b>14.800</b><br><span style="color:#4ade80">14 vd</span></td><td class="num"><b>3.606</b><br><span style="color:#4ade80">2 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>17</b></td><td class="num">R$ 2.329</td><td class="num">R$ 137</td><td class="num warn-txt"><b>0.92×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1Gqh6ejqAI5Ke2rSOOO81UaquKAuPYaYr/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV323_LS_CAP_NEW_V1_CRIAR CONTEUDO COM CHAT_HOOK47_BODY26_1.00</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>1.368</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num"><b>1.081</b><br><span style="color:#4ade80">1 vd</span></td><td class="num"><b>185</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>1</b></td><td class="num">R$ 397</td><td class="num">R$ 397</td><td class="num lose"><b>0.17×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1OhP_9Yggh1XaBWJs9y_eixuPiqc9_84B/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV324_LS_CAP_NEW_V1_CHAT PARA POST ID VISUAL SITE_HOOK48_BODY27_1.22</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>10.978</b><br><span style="color:#4ade80">10 vd</span></td><td class="num"><b>55.097</b><br><span style="color:#4ade80">35 vd</span></td><td class="num"><b>8.467</b><br><span style="color:#4ade80">1 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>46</b></td><td class="num">R$ 6.787</td><td class="num">R$ 148</td><td class="num lose"><b>0.63×</b></td></tr></tbody></table></div></div><div class="group-header">📊 LS007 · LS008 · LS009 <span style="color:#94a3b8;font-size:12px">3 criativos · LS007+LS008+LS009</span></div><div class="card gold"><div class="scroll-x"><table><thead><tr><th>Criativo</th><th class="num" >LS001<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS002<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS003<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS004<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS005<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS006<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" style="color:#4ade80;font-weight:700">LS007<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" style="color:#4ade80;font-weight:700">LS008<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" style="color:#4ade80;font-weight:700">LS009<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num">TOTAL vd</th><th class="num">Spend c/imp</th><th class="num">CPA</th><th class="num">ROAS</th></tr></thead><tbody><tr><td><a href="https://drive.google.com/drive/folders/1BW-zTB7zbOhmpSof3avl-r03fVhenvsO?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV325_LS_CAP_NEW_V1_CHAT FAZ SITE ID E POSTS_HOOK49_BODY28_1.19</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>1.339</b><br><span style="color:#4ade80">6 vd</span></td><td class="num"><b>8.827</b><br><span style="color:#4ade80">16 vd</span></td><td class="num"><b>1.978</b><br><span style="color:#4ade80">4 vd</span></td><td class="num"><b>26</b></td><td class="num">R$ 1.412</td><td class="num">R$ 59</td><td class="num win"><b>1.76×</b></td></tr><tr><td><a href="https://drive.google.com/drive/folders/1BW-zTB7zbOhmpSof3avl-r03fVhenvsO?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV327_LS_CAP_NEW_V1_WORKSHOP PAGINA PRONTA_HOOK51_BODY30_0.49</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>1.846</b><br><span style="color:#4ade80">4 vd</span></td><td class="num"><b>4.223</b><br><span style="color:#4ade80">6 vd</span></td><td class="num"><b>3.240</b><br><span style="color:#4ade80">5 vd</span></td><td class="num"><b>15</b></td><td class="num">R$ 857</td><td class="num">R$ 66</td><td class="num win"><b>1.30×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1Nxs6nvTW81hEIznkSV76Is0gp2Dnbwp7/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV334_LS_CAP_NEW_V1_JA USA CHAT GPT E CLAUDE_1.02</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>3.315</b><br><span style="color:#4ade80">1 vd</span></td><td class="num"><b>11.151</b><br><span style="color:#4ade80">6 vd</span></td><td class="num"><b>8.786</b><br><span style="color:#4ade80">1 vd</span></td><td class="num"><b>8</b></td><td class="num">R$ 2.140</td><td class="num">R$ 267</td><td class="num lose"><b>0.33×</b></td></tr></tbody></table></div></div><div class="group-header">🔄 LS007 e LS008 (remessa 6/7 antiga) <span style="color:#94a3b8;font-size:12px">19 criativos · LS007+LS008</span></div><div class="card "><div class="scroll-x"><table><thead><tr><th>Criativo</th><th class="num" >LS001<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS002<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS003<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS004<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS005<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS006<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" style="color:#4ade80;font-weight:700">LS007<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" style="color:#4ade80;font-weight:700">LS008<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS009<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num">TOTAL vd</th><th class="num">Spend c/imp</th><th class="num">CPA</th><th class="num">ROAS</th></tr></thead><tbody><tr><td><a href="https://drive.google.com/open?id=1FzYfubdUPF2DQCqQ74Eg_tggLnoEiEx7&usp=drive_copy" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADC021_LS_CAP_NEW_V1_REDE SOCIAL PARADA</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>642</b><br><span style="color:#4ade80">1 vd</span></td><td class="num"><b>139</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>1</b></td><td class="num">R$ 54</td><td class="num">R$ 54</td><td class="num win"><b>1.25×</b></td></tr><tr><td><a href="https://drive.google.com/open?id=1CqHkSmHo3E95KDAEU6QMq7Itp9mTg1RA&usp=drive_copy" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADC022_LS_CAP_NEW_V1_NAO PRECISA CONTRATAR</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>515</b><br><span style="color:#4ade80">1 vd</span></td><td class="num"><b>80</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>1</b></td><td class="num">R$ 49</td><td class="num">R$ 49</td><td class="num win"><b>1.36×</b></td></tr><tr><td><a href="https://drive.google.com/open?id=1-NKoY1MJxs5OOP1lNJH34X8jJo_VklRd&usp=drive_copy" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADC023_LS_CAP_NEW_V1_1 MES DE POST EM UMA TARDE</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>660</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num"><b>190</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>0</b></td><td class="num">R$ 90</td><td class="num">—</td><td class="num lose"><b>0.00×</b></td></tr><tr><td><a href="https://drive.google.com/drive/folders/1BW-zTB7zbOhmpSof3avl-r03fVhenvsO?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV326_LS_CAP_NEW_V1_CHAT FAZ PAGINA SITE_HOOK50_BODY29_1.33</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>1.112</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num"><b>90</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>0</b></td><td class="num">R$ 161</td><td class="num">—</td><td class="num lose"><b>0.00×</b></td></tr><tr><td><a href="https://drive.google.com/drive/folders/1BW-zTB7zbOhmpSof3avl-r03fVhenvsO?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV328_LS_CAP_NEW_V1_PERDESSE IG PAGINA_HOOK52_BODY31_1.12</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>200</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num"><b>180</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>0</b></td><td class="num">R$ 65</td><td class="num">—</td><td class="num lose"><b>0.00×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1lgDRuGMaGDd_K38BREBgVLskd9L1p0OV/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV330_LS_CAP_NEW_V1_PROCESSO CRIAR PAGINA_1.25</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>1.049</b><br><span style="color:#4ade80">1 vd</span></td><td class="num"><b>3.728</b><br><span style="color:#4ade80">2 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>3</b></td><td class="num">R$ 657</td><td class="num">R$ 219</td><td class="num lose"><b>0.31×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1xcSrDt4XqvhgEesFTcQMcOd4Ld-9dlb9/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV331_LS_CAP_NEW_V1_NO DICAS COPILOTO_1.25</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>872</b><br><span style="color:#4ade80">1 vd</span></td><td class="num"><b>1.904</b><br><span style="color:#4ade80">1 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>2</b></td><td class="num">R$ 303</td><td class="num">R$ 151</td><td class="num lose"><b>0.44×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1aq4nm9CXgJnJDzg2oyHbjdbr2gTwhhoh/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV333_LS_CAP_NEW_V1_COMO DOMINAR IA PARA CRIAR_1.11</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>1.883</b><br><span style="color:#4ade80">3 vd</span></td><td class="num"><b>173</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>3</b></td><td class="num">R$ 259</td><td class="num">R$ 86</td><td class="num win"><b>1.16×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1AyZrpM1BQe1z06q8q_IiONamplOquF0T/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV335_LS_CAP_NEW_V1_COMO DOMINAR GPT E CLAUDE PARA CONTEUDOS_0.56</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>445</b><br><span style="color:#4ade80">1 vd</span></td><td class="num"><b>1.532</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>1</b></td><td class="num">R$ 272</td><td class="num">R$ 272</td><td class="num lose"><b>0.25×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1aXfEAK6MMwk5KzpdueFXOevJSNEkI268/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV336_LS_CAP_NEW_V1_JA USA CHAT GPT E CLAUDE 2_1.05</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>359</b><br><span style="color:#4ade80">1 vd</span></td><td class="num"><b>3.163</b><br><span style="color:#4ade80">1 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>2</b></td><td class="num">R$ 479</td><td class="num">R$ 240</td><td class="num warn-txt"><b>0.78×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1EyUpitsQ-RJoiLbB1JYQzUOLRytptuyS/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV337_LS_CAP_NEW_V1_JA USA CHAT GPT E CLAUDE TERAPEUTA_1.13</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>971</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num"><b>2.764</b><br><span style="color:#4ade80">4 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>4</b></td><td class="num">R$ 451</td><td class="num">R$ 113</td><td class="num warn-txt"><b>0.73×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1ZkTz5pyl1TJpFp01rLHcqiOkT-w60cdI/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV338_LS_CAP_NEW_V1_DEIXAR DE SER INVISIVEL_1.16</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>298</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num"><b>177</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>0</b></td><td class="num">R$ 71</td><td class="num">—</td><td class="num lose"><b>0.00×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1tbN5Wij9_4wXI5fOQkz0EhnSFrFanA1T/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV339_LS_CAP_NEW_V1_INSTAGRAM TÁ FEIO_1.39</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>690</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num"><b>2.358</b><br><span style="color:#4ade80">1 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>1</b></td><td class="num">R$ 347</td><td class="num">R$ 347</td><td class="num lose"><b>0.19×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1flg1a_CThuuSGtcc-fQrKBW_LWYTjz1r/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV340_LS_CAP_NEW_V1_EXEMPLO POST_2.01</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>661</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num"><b>1.355</b><br><span style="color:#4ade80">1 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>1</b></td><td class="num">R$ 264</td><td class="num">R$ 264</td><td class="num warn-txt"><b>0.73×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/15cSqV-zHNZhjuROQ1T8LBs7E1BGNRACf/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV341_LS_CAP_NEW_V1_OCULOS COM IA_2.03</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>678</b><br><span style="color:#4ade80">2 vd</span></td><td class="num"><b>1.485</b><br><span style="color:#4ade80">2 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>4</b></td><td class="num">R$ 334</td><td class="num">R$ 83</td><td class="num win"><b>1.17×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1Ru50648MoSAZSlbF865MaDDCvgkN8Q58/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV342_LS_CAP_NEW_V1_EQUIPE DE CONTEUDOS SEM CONTRATAR_1.33</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>959</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num"><b>138</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>0</b></td><td class="num">R$ 114</td><td class="num">—</td><td class="num lose"><b>0.00×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1sYD4HR1lrUFl4z-lMpYPx6-YkP28Q5UY/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV343_LS_CAP_NEW_V1_PERDI TEMPO REESCREVENDO_1.34</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>406</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num"><b>138</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>0</b></td><td class="num">R$ 44</td><td class="num">—</td><td class="num lose"><b>0.00×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1tehHbPnCOc1BwUzSMiRPXFmLpZpksLfW/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV344_LS_CAP_NEW_V1_PERSONAGENS DO CHAVES TRABALHANDO_1.59</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>793</b><br><span style="color:#4ade80">1 vd</span></td><td class="num"><b>103</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>1</b></td><td class="num">R$ 121</td><td class="num">R$ 121</td><td class="num lose"><b>0.55×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1RQC23YXxaBgyYMY-UgLM3RLHsUWupJwp/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV345_LS_CAP_NEW_V1_POSTAR TODO DIA SEM LIGAR A CAMERA_1.16</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>505</b><br><span style="color:#4ade80">1 vd</span></td><td class="num"><b>68</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>1</b></td><td class="num">R$ 65</td><td class="num">R$ 65</td><td class="num win"><b>1.03×</b></td></tr></tbody></table></div></div><div class="group-header">🎯 LS008 e LS009 (novos remessa 7/8) <span style="color:#94a3b8;font-size:12px">9 criativos · LS008+LS009</span></div><div class="card "><div class="scroll-x"><table><thead><tr><th>Criativo</th><th class="num" >LS001<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS002<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS003<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS004<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS005<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS006<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS007<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" style="color:#4ade80;font-weight:700">LS008<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" style="color:#4ade80;font-weight:700">LS009<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num">TOTAL vd</th><th class="num">Spend c/imp</th><th class="num">CPA</th><th class="num">ROAS</th></tr></thead><tbody><tr><td><a href="https://drive.google.com/drive/folders/1PrHXeCzdIOeK6ZuPwTBXRcUWeFbUt3vp?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADC025_LS_CAP_NEW_V1_CACAR CLIENTES TEM CUSTO</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>910</b><br><span style="color:#4ade80">1 vd</span></td><td class="num"><b>500</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num"><b>1</b></td><td class="num">R$ 133</td><td class="num">R$ 133</td><td class="num lose"><b>0.50×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1fUA4VBnH8jxZ6nc4mlkIGB2AFrK1vJYR/view?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADI185_LS_CAP_NEW_V1_PERDE POST POR FALTA DE TEMPO</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>975</b><br><span style="color:#4ade80">3 vd</span></td><td class="num"><b>244</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num"><b>3</b></td><td class="num">R$ 128</td><td class="num">R$ 43</td><td class="num win"><b>1.57×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1Wm0zkSshw9F-fwDrn99VJWmpIsr4dA2f/view?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADI186_LS_CAP_NEW_V1_PARA DE ADIAR SEU SITE</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>1.029</b><br><span style="color:#4ade80">3 vd</span></td><td class="num"><b>149</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num"><b>3</b></td><td class="num">R$ 89</td><td class="num">R$ 30</td><td class="num win"><b>3.52×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1_OLCYzC5XzW4ZZG-4MO3p5ZuGZ6rCCQB/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV332_LS_CAP_NEW_V1_NAO DOMINA IA_1.08</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>3.690</b><br><span style="color:#4ade80">5 vd</span></td><td class="num"><b>158</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num"><b>5</b></td><td class="num">R$ 538</td><td class="num">R$ 108</td><td class="num win"><b>1.16×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/19IajcG-bxm6EtD9Jm6TAY9IuUdzPy3sZ/view?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV346_LS_CAP_NEW_V1_EXPERT REVELA_1.34</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>1.984</b><br><span style="color:#4ade80">1 vd</span></td><td class="num"><b>418</b><br><span style="color:#4ade80">1 vd</span></td><td class="num"><b>2</b></td><td class="num">R$ 327</td><td class="num">R$ 164</td><td class="num lose"><b>0.41×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1kBsB_Mao3gf9bSJMDoiHLHD4pMD1XV0B/view?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV348_LS_CAP_NEW_V1_CONTEUDO PARA O MES INTEIRO_1.14</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>1.172</b><br><span style="color:#4ade80">2 vd</span></td><td class="num"><b>932</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num"><b>2</b></td><td class="num">R$ 232</td><td class="num">R$ 116</td><td class="num lose"><b>0.58×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1q4kSCkkNjthHjNEh15wmv83OliZ9XcoE/view?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV349_LS_CAP_NEW_V1_ESPECIALISTA VERGONHA DE APARECER_1.30</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>3.081</b><br><span style="color:#4ade80">2 vd</span></td><td class="num"><b>160</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num"><b>2</b></td><td class="num">R$ 425</td><td class="num">R$ 212</td><td class="num lose"><b>0.32×</b></td></tr><tr><td><a href="https://drive.google.com/drive/folders/1SdB-SFWTyxweRiW86a_2n-mpZNGCmVsq" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV350_LS_CAP_NEW_V1_ESPECIALISTA CRIA CLONE_1.07</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>1.964</b><br><span style="color:#4ade80">3 vd</span></td><td class="num"><b>3.947</b><br><span style="color:#4ade80">3 vd</span></td><td class="num"><b>6</b></td><td class="num">R$ 406</td><td class="num">R$ 81</td><td class="num warn-txt"><b>0.83×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1KAz4WIiXFeSAebGW31koHpQUuNZUL-Cp/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV352_LS_CAP_NEW_V1_DEPENDE DE ABRIR A AGENDA _1.00</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>3.595</b><br><span style="color:#4ade80">4 vd</span></td><td class="num"><b>1.060</b><br><span style="color:#4ade80">1 vd</span></td><td class="num"><b>5</b></td><td class="num">R$ 630</td><td class="num">R$ 157</td><td class="num lose"><b>0.43×</b></td></tr></tbody></table></div></div><div class="group-header">🆕 Só LS008 <span style="color:#94a3b8;font-size:12px">7 criativos · LS008</span></div><div class="card "><div class="scroll-x"><table><thead><tr><th>Criativo</th><th class="num" >LS001<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS002<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS003<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS004<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS005<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS006<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS007<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" style="color:#4ade80;font-weight:700">LS008<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num" >LS009<br><span style="font-size:9px;color:#64748b">imp / vd</span></th><th class="num">TOTAL vd</th><th class="num">Spend c/imp</th><th class="num">CPA</th><th class="num">ROAS</th></tr></thead><tbody><tr><td><a href="https://drive.google.com/drive/folders/10TzxjRBPwKW_FZI3h0pnFDSta1wdo2ed?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADC024_LS_CAP_NEW_V1_AGENDA SEMPRE CHEIA</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>741</b><br><span style="color:#4ade80">2 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>2</b></td><td class="num">R$ 77</td><td class="num">R$ 38</td><td class="num win"><b>1.74×</b></td></tr><tr><td><a href="https://drive.google.com/drive/folders/1Nmm8LISXF1PtFaDlmd29FDVJS2ZiTh8r?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADC026_LS_CAP_NEW_V1_MOTIVOS DE NAO TER UM SITE</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>610</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>0</b></td><td class="num">R$ 57</td><td class="num">—</td><td class="num lose"><b>0.00×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1-07553UMYlwC5Jh531V-r2ols1LkWnVq/view?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADI184_LS_CAP_NEW_V1_GARGALO DE CONTEUDO APARECER</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>234</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>0</b></td><td class="num">R$ 21</td><td class="num">—</td><td class="num lose"><b>0.00×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1QAuJpkWY0cDR6EatIDei7UQkcL-xDO9p/view?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADI187_LS_CAP_NEW_V1_PRECISA DE MAIS CLIENTES NEH</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>222</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>0</b></td><td class="num">R$ 29</td><td class="num">—</td><td class="num lose"><b>0.00×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1r4RTH4Fx7bV74iC5lLx-eqwwkeHIZSsn/view?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADI188_LS_CAP_NEW_V1_SUAS REDE PRECISA DE POST</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>54</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>0</b></td><td class="num">R$ 6</td><td class="num">—</td><td class="num lose"><b>0.00×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1qLCpQoVM7njvtQPrF-uBVMvbMpQVyP9o/view?usp=drive_link" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADI189_LS_CAP_NEW_V1_A IA CRIA ID VISUAL</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>571</b><br><span style="color:#94a3b8">0 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>0</b></td><td class="num">R$ 43</td><td class="num">—</td><td class="num lose"><b>0.00×</b></td></tr><tr><td><a href="https://drive.google.com/file/d/1e-xew5wkujRrNNTVvo9_qhlZyywwVJgj/view?usp=drivesdk" target="_blank" style="color:#22d3ee;text-decoration:none;border-bottom:1px dashed rgba(34,211,238,.4)">ADV329_LS_CAP_NEW_V1_NAO SABER USAR O GPT_1.14</a></td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num" style="color:#475569">—</td><td class="num"><b>63</b><br><span style="color:#4ade80">1 vd</span></td><td class="num" style="color:#475569">—</td><td class="num"><b>1</b></td><td class="num">R$ 9</td><td class="num">R$ 9</td><td class="num win"><b>7.64×</b></td></tr></tbody></table></div></div>
-<div style="font-size:11px;color:#475569;text-align:center;margin-top:40px;padding:14px 0;border-top:1px solid rgba(255,255,255,.05)">
-Criativos por Semana LS001→LS009 · v2 (com Total Geral + links completos) · 14/07/2026 · VK Metrics + planilha CONTROLE · Marketex / Brito Mídias
-</div>
-</body></html>
+      <div class="top-card gold">
+        <div class="top-rank">🥇</div>
+        <div class="top-info">
+          <div class="top-name">ADV351 · ESPECIALISTA NAO USA IA ACHA DIFICIL</div>
+          <div class="top-tags"><span class="pill new">🔥 novo · 2 LS</span><span class="pill win">ROAS 1,52×</span><span class="pill win">bumps 38%</span></div>
+          <div class="top-why"><b>Por que testar novas versões:</b> achado recente do LS009 · CPA R$ 64 · maior ROAS do ranking. O ângulo "especialista acha IA difícil" bate no gargalo emocional do avatar. Vale variar: mesma dor em contextos diferentes (advocacia, saúde, coach, etc).</div>
+        </div>
+        <div class="top-metrics">
+          <div class="k">Vendas</div><div class="v">26</div>
+          <div class="k">CPA c/imp</div><div class="v">R$ 64</div>
+          <div class="k">CTR</div><div class="v">1,75%</div>
+          <div class="k">Hook</div><div class="v">22,1%</div>
+        </div>
+      </div>
+
+      <div class="top-card silver">
+        <div class="top-rank">🥈</div>
+        <div class="top-info">
+          <div class="top-name">ADV267 · MÁQUINA DE CONTEÚDO · HOOK10 BODY14</div>
+          <div class="top-tags"><span class="pill motor">motor · 6 LS</span><span class="pill win">ROAS 1,18×</span><span class="pill win">bumps 40%</span></div>
+          <div class="top-why"><b>Por que testar novas versões:</b> validado em TODOS os 6 últimos LS · CTR 2,34% (top do ranking). Ângulo "máquina de conteúdo" é consistente. Vale testar novos hooks e bodies mantendo o corpo.</div>
+        </div>
+        <div class="top-metrics">
+          <div class="k">Vendas</div><div class="v">40</div>
+          <div class="k">CPA c/imp</div><div class="v">R$ 83</div>
+          <div class="k">CTR</div><div class="v">2,34%</div>
+          <div class="k">Hook</div><div class="v">24,0%</div>
+        </div>
+      </div>
+
+      <div class="top-card bronze">
+        <div class="top-rank">🥉</div>
+        <div class="top-info">
+          <div class="top-name">ADV327 · WORKSHOP PÁGINA PRONTA · HOOK51 BODY30</div>
+          <div class="top-tags"><span class="pill motor">motor · 5 LS</span><span class="pill win">ROAS 1,19×</span><span class="pill win">bumps 39%</span></div>
+          <div class="top-why"><b>Por que testar novas versões:</b> ROAS &gt; 1× consistente em 5 LS · 56 vendas totais. Ângulo "página pronta" é gatilho concreto (entregável tangível). Testar variações enfatizando outros ativos que saem prontos (clone, posts, etc).</div>
+        </div>
+        <div class="top-metrics">
+          <div class="k">Vendas</div><div class="v">56</div>
+          <div class="k">CPA c/imp</div><div class="v">R$ 82</div>
+          <div class="k">CTR</div><div class="v">2,12%</div>
+          <div class="k">Hook</div><div class="v">24,0%</div>
+        </div>
+      </div>
+
+      <div class="top-card">
+        <div class="top-rank">4º</div>
+        <div class="top-info">
+          <div class="top-name">ADV325 · CHAT FAZ SITE ID E POSTS · HOOK49 BODY28</div>
+          <div class="top-tags"><span class="pill motor">motor · 5 LS</span><span class="pill win">ROAS 1,06×</span><span class="pill win">bumps 39%</span></div>
+          <div class="top-why"><b>Por que testar novas versões:</b> 95 vendas totais em 5 LS · CTR 2,34% · hook 25,3%. Ângulo "IA cria site + posts + identidade" é o combo mais persuasivo (mostra escala do que a IA entrega). Testar 3-4 ganchos diferentes segurando o mesmo body.</div>
+        </div>
+        <div class="top-metrics">
+          <div class="k">Vendas</div><div class="v">95</div>
+          <div class="k">CPA c/imp</div><div class="v">R$ 92</div>
+          <div class="k">CTR</div><div class="v">2,34%</div>
+          <div class="k">Hook</div><div class="v">25,3%</div>
+        </div>
+      </div>
+
+      <div class="top-card">
+        <div class="top-rank">5º</div>
+        <div class="top-info">
+          <div class="top-name">ADV350 · ESPECIALISTA CRIA CLONE</div>
+          <div class="top-tags"><span class="pill new">recente · 3 LS</span><span class="pill warn">ROAS 0,73×</span><span class="pill win">hook 39,7%</span></div>
+          <div class="top-why"><b>Por que testar novas versões:</b> <b>maior hook rate do ranking</b> (39,7%) — o gancho de "criar clone" prende atenção como nenhum outro. Bumps 38%. Testar variações que segurem o hook e melhorem o body (conversão pág→ck ainda fraca).</div>
+        </div>
+        <div class="top-metrics">
+          <div class="k">Vendas</div><div class="v">53</div>
+          <div class="k">CPA c/imp</div><div class="v">R$ 134</div>
+          <div class="k">CTR</div><div class="v">1,93%</div>
+          <div class="k">Hook</div><div class="v">39,7%</div>
+        </div>
+      </div>
+
+      <div class="top-card">
+        <div class="top-rank">6º</div>
+        <div class="top-info">
+          <div class="top-name">ADI179 · 30 POSTS PRONTOS NUMA TARDE</div>
+          <div class="top-tags"><span class="pill new">3 LS</span><span class="pill win">ROAS 1,34×</span><span class="pill win">bumps 42%</span></div>
+          <div class="top-why"><b>Por que testar novas versões:</b> ROAS 1,34× em imagem (não vídeo!) · <b>bumps 42%</b> (maior conv. de bump por venda). O apelo "30 posts em uma tarde" é objetivo. Testar variações: 30 vídeos, 30 legendas, 30 stories.</div>
+        </div>
+        <div class="top-metrics">
+          <div class="k">Vendas</div><div class="v">12</div>
+          <div class="k">CPA c/imp</div><div class="v">R$ 77</div>
+          <div class="k">CTR</div><div class="v">1,50%</div>
+          <div class="k">Hook</div><div class="v">img</div>
+        </div>
+      </div>
+
+      <div class="top-card">
+        <div class="top-rank">7º</div>
+        <div class="top-info">
+          <div class="top-name">ADV291 · SE VOCÊ USA CHATGPT COMO GOOGLE</div>
+          <div class="top-tags"><span class="pill new">2 LS</span><span class="pill warn">ROAS 0,81×</span><span class="pill win">bumps 39%</span></div>
+          <div class="top-why"><b>Por que testar novas versões:</b> 49 vendas em só 2 LS (validação de escala) · o hook "usa como Google" é uma provocação forte. Não rodou LS009+. Vale ressuscitar em nova versão com body atualizado.</div>
+        </div>
+        <div class="top-metrics">
+          <div class="k">Vendas</div><div class="v">49</div>
+          <div class="k">CPA c/imp</div><div class="v">R$ 120</div>
+          <div class="k">CTR</div><div class="v">1,86%</div>
+          <div class="k">Hook</div><div class="v">18,7%</div>
+        </div>
+      </div>
+
+      <div class="top-card">
+        <div class="top-rank">8º</div>
+        <div class="top-info">
+          <div class="top-name">ADV320 · CHAT CRIA ID VISUAL CLONE CONTEÚDO</div>
+          <div class="top-tags"><span class="pill motor">MOTOR ABSOLUTO · 6 LS</span><span class="pill win">ROAS 0,99×</span><span class="pill win">523 vd</span></div>
+          <div class="top-why"><b>Por que testar novas versões:</b> <b>o criativo #1 histórico</b> — 523 vendas em 6 LS · sozinho responde por ~20% do total. Já foi tão escalado que qualquer variação nova provavelmente também rendará. Testar hook novo mantendo body.</div>
+        </div>
+        <div class="top-metrics">
+          <div class="k">Vendas</div><div class="v">523</div>
+          <div class="k">CPA c/imp</div><div class="v">R$ 99</div>
+          <div class="k">CTR</div><div class="v">2,03%</div>
+          <div class="k">Hook</div><div class="v">24,3%</div>
+        </div>
+      </div>
+
+      <div class="top-card">
+        <div class="top-rank">9º</div>
+        <div class="top-info">
+          <div class="top-name">ADV319 · ID VISUAL COM CHATGPT</div>
+          <div class="top-tags"><span class="pill new">4 LS</span><span class="pill win">ROAS 0,96×</span><span class="pill win">bumps 43%</span></div>
+          <div class="top-why"><b>Por que testar novas versões:</b> maior conv. de bumps (43%) · CTR 2,40% (top). Rodou 4 LS mas só o LS006 puxou volume (14 vd). Vale investigar por que caiu e refazer com abordagem atualizada — a semente estava boa.</div>
+        </div>
+        <div class="top-metrics">
+          <div class="k">Vendas</div><div class="v">14</div>
+          <div class="k">CPA c/imp</div><div class="v">R$ 106</div>
+          <div class="k">CTR</div><div class="v">2,40%</div>
+          <div class="k">Hook</div><div class="v">24,6%</div>
+        </div>
+      </div>
+
+      <div class="top-card">
+        <div class="top-rank">10º</div>
+        <div class="top-info">
+          <div class="top-name">ADC018 · ACORDOU COM PIQUE</div>
+          <div class="top-tags"><span class="pill new">3 LS</span><span class="pill win">ROAS 1,21×</span><span class="pill win">bumps 38%</span></div>
+          <div class="top-why"><b>Por que testar novas versões:</b> carrossel com 39 vendas em 3 LS · ROAS 1,21×. Não rodou LS009+. Formato carrossel tem CPA baixo consistente — vale voltar com nova sequência (ângulos diferentes da rotina do especialista).</div>
+        </div>
+        <div class="top-metrics">
+          <div class="k">Vendas</div><div class="v">39</div>
+          <div class="k">CPA c/imp</div><div class="v">R$ 81</div>
+          <div class="k">CTR</div><div class="v">1,82%</div>
+          <div class="k">Hook</div><div class="v">carr</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="highlight-box win" style="margin-top:32px">
+      <h3>🎯 Diretriz para a próxima remessa</h3>
+      <p>Priorizar variações dos <b>Top 3</b> (ADV351 · ADV267 · ADV327) — todos ROAS ≥ 1,18× · validados. Do 4-6 (ADV325 · ADV350 · ADI179), focar em <b>testar ganchos novos</b> mantendo body. Do 7-10, refazer criativos que sumiram há alguns LS mas tinham potencial (ADV291 · ADV319 · ADC018).</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">Histórico por LS</div>
+    <h2>Como o top 10 performou em cada lançamento</h2>
+    <p class="intro">Vendas (pixel Meta) / impressões (mil) por LS. Traço = criativo não rodou naquele LS.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Criativo</th><th class="num">LS006</th><th class="num">LS007</th><th class="num">LS008</th><th class="num">LS009</th><th class="num">LS010</th><th class="num">LS011*</th><th class="num">Total vd</th></tr>
+        </thead>
+        <tbody>
+          <tr class="win"><td>🥇 <b>ADV351</b> ESPECIALISTA NAO USA IA</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">17vd / 5k</td><td class="num">9vd / 4k</td><td class="num">—</td><td class="num"><b>26</b></td></tr>
+          <tr class="win"><td>🥈 <b>ADV267</b> MÁQ. CONTEÚDO HOOK10</td><td class="num">1vd / 0k</td><td class="num">2vd / 2k</td><td class="num">3vd / 1k</td><td class="num">12vd / 9k</td><td class="num">20vd / 12k</td><td class="num">2vd / 1k</td><td class="num"><b>40</b></td></tr>
+          <tr class="win"><td>🥉 <b>ADV327</b> WORKSHOP PÁGINA PRONTA</td><td class="num">—</td><td class="num">4vd / 1k</td><td class="num">6vd / 4k</td><td class="num">25vd / 15k</td><td class="num">18vd / 16k</td><td class="num">3vd / 4k</td><td class="num"><b>56</b></td></tr>
+          <tr><td>4º <b>ADV325</b> CHAT FAZ SITE ID</td><td class="num">—</td><td class="num">6vd / 1k</td><td class="num">16vd / 8k</td><td class="num">31vd / 21k</td><td class="num">33vd / 40k</td><td class="num">9vd / 10k</td><td class="num"><b>95</b></td></tr>
+          <tr><td>5º <b>ADV350</b> ESPECIALISTA CRIA CLONE</td><td class="num">—</td><td class="num">—</td><td class="num">3vd / 1k</td><td class="num">49vd / 80k</td><td class="num">1vd / 12k</td><td class="num">—</td><td class="num"><b>53</b></td></tr>
+          <tr><td>6º <b>ADI179</b> 30 POSTS PRONTOS</td><td class="num">0vd / 0k</td><td class="num">8vd / 3k</td><td class="num">4vd / 5k</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num"><b>12</b></td></tr>
+          <tr><td>7º <b>ADV291</b> CHATGPT COMO GOOGLE</td><td class="num">—</td><td class="num">20vd / 24k</td><td class="num">28vd / 45k</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num"><b>49</b></td></tr>
+          <tr><td>8º <b>ADV320</b> CHAT CRIA ID VISUAL <span class="pill motor">motor</span></td><td class="num">13vd / 7k</td><td class="num">63vd / 38k</td><td class="num">140vd / 211k</td><td class="num">156vd / 265k</td><td class="num">121vd / 236k</td><td class="num">30vd / 43k</td><td class="num"><b>523</b></td></tr>
+          <tr><td>9º <b>ADV319</b> ID VISUAL COM CHATGPT</td><td class="num">14vd / 10k</td><td class="num">0vd / 0k</td><td class="num">0vd / 1k</td><td class="num">0vd / 0k</td><td class="num">—</td><td class="num">—</td><td class="num"><b>14</b></td></tr>
+          <tr><td>10º <b>ADC018</b> ACORDOU COM PIQUE</td><td class="num">0vd / 0k</td><td class="num">25vd / 15k</td><td class="num">13vd / 13k</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num"><b>39</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px;color:var(--cinza);margin-top:12px">* LS011 em captação (dados até 28/07 · D2 · leadsPeriod até 09/08).</p>
+  </div>
+</section>
+
+<section class="soft">
+  <div class="container">
+    <div class="section-label">Volume por lançamento</div>
+    <h2>Panorama LS006 → LS011</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>LS</th><th>Datas</th><th class="num">Spend bruto</th><th class="num">Spend c/imp</th><th class="num">Vendas pixel</th><th class="num">CPA c/imp</th></tr></thead>
+        <tbody>
+          <tr><td><b>LS006</b></td><td>22-28/06</td><td class="num">R$ 66.370</td><td class="num">R$ 75.549</td><td class="num">455</td><td class="num">R$ 166,04</td></tr>
+          <tr><td><b>LS007</b></td><td>29/06-05/07</td><td class="num">R$ 62.951</td><td class="num">R$ 71.658</td><td class="num">565</td><td class="num">R$ 126,83</td></tr>
+          <tr><td><b>LS008</b></td><td>06-12/07</td><td class="num">R$ 52.616</td><td class="num">R$ 59.893</td><td class="num">473</td><td class="num">R$ 126,62</td></tr>
+          <tr><td><b>LS009</b></td><td>13-19/07</td><td class="num">R$ 56.199</td><td class="num">R$ 63.972</td><td class="num">525</td><td class="num">R$ 121,85</td></tr>
+          <tr><td><b>LS010</b></td><td>20-26/07</td><td class="num">R$ 48.825</td><td class="num">R$ 55.578</td><td class="num">450</td><td class="num">R$ 123,51</td></tr>
+          <tr><td><b>LS011</b> <span class="pill new">captação</span></td><td>27/07-09/08</td><td class="num">R$ 15.631*</td><td class="num">R$ 17.793*</td><td class="num">75*</td><td class="num">R$ 237,24*</td></tr>
+          <tr class="total"><td colspan="2"><b>TOTAL LS006-LS011</b></td><td class="num"><b>R$ 302.592</b></td><td class="num"><b>R$ 344.443</b></td><td class="num"><b>2.543</b></td><td class="num"><b>R$ 135,44</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px;color:var(--cinza);margin-top:12px">* LS011 até 28/07 (D2 · parcial · leadsPeriod até 09/08).</p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="brand">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#A78BFA" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+        <polygon points="50,33 65,59 35,59"></polygon>
+        <line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line>
+        <line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line>
+        <line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line>
+        <line x1="10" y1="27" x2="50" y2="33"></line>
+      </svg>
+      <span class="word"><b>BM</b><i class="bar"></i><span>MÍDIAS</span></span>
+    </div>
+    <div class="footer-text">Análise de Criativos LS · Semanal (terça) · 28/07/2026</div>
+    <div class="footer-text" style="margin-top:8px">Fontes: VK Metrics · Meta Ads (ANEX03 + ANEX07) · Marketex / Brito Mídias</div>
+  </div>
+</footer>
+
+</body>
+</html>
