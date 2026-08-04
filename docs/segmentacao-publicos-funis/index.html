@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Segmentações de Público por Funil · Marketex | Brito Mídias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --roxo:#7C3AED; --roxo-dark:#5B21B6; --roxo-deep:#3B0F73;
+  --roxo-light:#A78BFA; --roxo-xlight:#EDE9FE;
+  --preto:#0A0A0A; --ink:#141018; --cinza:#5B5566;
+  --linha:#E7E3EE; --bg:#FFFFFF; --bg-soft:#FAF9FC;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;font-weight:300;color:var(--ink);background:var(--bg);line-height:1.6}
+img{max-width:100%;display:block}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;padding:64px 28px 56px;
+  background:
+    radial-gradient(1100px 500px at 78% -10%, rgba(124,58,237,.55), transparent 60%),
+    linear-gradient(150deg, #0A0A0A 0%, #17111F 45%, #3B0F73 100%);
+  color:#fff;text-align:center}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 43px, rgba(255,255,255,.05) 44px),
+    repeating-linear-gradient(90deg, transparent, transparent 43px, rgba(255,255,255,.05) 44px);
+  -webkit-mask-image:radial-gradient(circle at 60% 20%, #000 0%, transparent 72%);
+          mask-image:radial-gradient(circle at 60% 20%, #000 0%, transparent 72%)}
+.hero-inner{position:relative;z-index:1;max-width:760px;margin:0 auto}
+.brand{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:34px}
+.brand svg{width:34px;height:34px}
+.brand .word{display:flex;align-items:center;gap:10px;font-weight:300}
+.brand .word b{font-weight:800;font-size:16px}
+.brand .word .bar{width:1.5px;height:20px;background:rgba(255,255,255,.5)}
+.brand .word span{font-size:16px;letter-spacing:.22em}
+.hero .pill{display:inline-flex;border:1px solid var(--roxo-light);color:#E9E2FF;border-radius:100px;
+  padding:8px 18px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:22px}
+.hero h1{font-size:40px;font-weight:800;letter-spacing:-.02em;line-height:1.16;margin-bottom:16px}
+.hero p.sub{font-size:16px;font-weight:300;color:#D8D1E6;max-width:600px;margin:0 auto 28px}
+.hero-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.hero-meta span{font-size:12px;font-weight:500;color:#E9E2FF;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.16);border-radius:100px;padding:7px 15px}
+
+/* LAYOUT */
+.wrap{max-width:1000px;margin:0 auto;padding:0 28px}
+section.block{padding:56px 0}
+section.block.soft{background:var(--bg-soft)}
+.soft-inner{max-width:1000px;margin:0 auto;padding:56px 28px}
+.section-label{display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--roxo);margin-bottom:14px}
+.section-label::before{content:"";width:34px;height:2px;background:var(--roxo);border-radius:2px;flex:none}
+h2{font-size:28px;font-weight:700;letter-spacing:-.01em;margin-bottom:10px}
+p.lede{color:var(--cinza);font-size:15px;max-width:680px;margin-bottom:32px}
+
+/* PUBLICO CARD */
+.pub-grid{display:grid;gap:16px}
+.pub{border:1px solid var(--linha);border-radius:16px;padding:22px 24px;background:#fff}
+.pub-head{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+.pub-head h3{font-size:17px;font-weight:700}
+.badge{font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  border-radius:100px;padding:4px 11px}
+.badge.principal{background:linear-gradient(90deg,#7C3AED,#5B21B6);color:#fff}
+.badge.testado{background:var(--roxo-xlight);color:var(--roxo-dark)}
+.badge.baixo{background:#F5F0FF;color:#8A7A9E;border:1px solid var(--linha)}
+.pub-params{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px 20px;margin-bottom:12px}
+.pub-params div small{display:block;color:var(--roxo);font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px}
+.pub-params div b{font-size:13.5px;font-weight:500;color:var(--ink)}
+.pub-note{font-size:13px;color:var(--cinza);border-top:1px solid var(--linha);padding-top:12px;margin-top:4px}
+.pub-result{display:inline-block;margin-top:10px;font-size:13px;font-weight:600;color:var(--roxo-dark);
+  background:var(--roxo-xlight);border-radius:10px;padding:8px 14px}
+
+/* CALLOUT */
+.callout{border:1px solid var(--roxo-light);background:var(--roxo-xlight);border-radius:14px;
+  padding:18px 22px;margin-top:22px;font-size:13.5px;color:var(--roxo-dark)}
+.callout b{font-weight:700}
+
+/* RESUMO CARDS */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:28px}
+.kpi{border:1px solid var(--linha);border-radius:14px;padding:18px 20px;background:var(--bg-soft)}
+.kpi small{display:block;color:var(--roxo);font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.kpi b{display:block;font-size:15px;font-weight:700;margin-bottom:4px}
+.kpi span{font-size:12.5px;color:var(--cinza)}
+
+/* TABLE (retargeting) */
+table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13.5px}
+th{text-align:left;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--roxo);border-bottom:1px solid var(--linha);padding:8px 12px}
+td{padding:12px;border-bottom:1px solid var(--linha);vertical-align:top}
+tr:last-child td{border-bottom:none}
+
+/* FOOTER */
+footer{background:var(--ink);color:#B9B2C8;padding:44px 28px;text-align:center}
+footer .brand{margin-bottom:18px}
+footer p{font-size:12.5px;color:#8B8499}
+
+@media(max-width:640px){.hero h1{font-size:30px}h2{font-size:23px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="brand">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+        <polygon points="50,33 65,59 35,59"></polygon>
+        <line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line>
+        <line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line>
+        <line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line>
+        <line x1="10" y1="27" x2="50" y2="33"></line>
+      </svg>
+      <span class="word"><b>BM</b><i class="bar"></i><span>MÍDIAS</span></span>
+    </div>
+    <div class="pill">Estratégia de Públicos · Meta Ads</div>
+    <h1>Segmentações de Público por Funil</h1>
+    <p class="sub">Mapeamento completo dos públicos testados e utilizados hoje em cada funil ativo do portfólio, com base no histórico real de campanhas rodadas.</p>
+    <div class="hero-meta">
+      <span>👤 Cliente: Marketex · Ana Tex</span>
+      <span>📅 Atualizado: agosto/2026</span>
+      <span>🎯 4 funis mapeados</span>
+    </div>
+  </div>
+</header>
+
+<section class="block">
+  <div class="wrap">
+    <div class="section-label">Visão Consolidada</div>
+    <h2>O que roda hoje em cada funil</h2>
+    <p class="lede">Resumo do público principal de cada funil neste momento. Os detalhes completos — variações já testadas, o que performou e o que foi descartado — estão nas seções abaixo.</p>
+    <div class="kpi-grid">
+      <div class="kpi">
+        <small>Lançamento Pago Semanal</small>
+        <b>Advantage+ · Mulheres 34–60 · Brasil</b>
+        <span>Melhor público já rodado: 3.921 vendas a R$ 119,36 de CPA</span>
+      </div>
+      <div class="kpi">
+        <small>Sala Secreta</small>
+        <b>Advantage+ · Mulheres 30–55 · Portugal</b>
+        <span>Localização restrita a Portugal há ~4 meses, a pedido da Marketex</span>
+      </div>
+      <div class="kpi">
+        <small>Aplicações</small>
+        <b>Advantage+ · Mulheres 30–60</b>
+        <span>Em todas as combinações testadas, é sempre o público mais barato</span>
+      </div>
+      <div class="kpi">
+        <small>Distribuição de Conteúdo</small>
+        <b>Impulsionamento via Instagram · Mulheres 34–55 · Brasil</b>
+        <span>Melhor resultado hoje, à frente de campanhas via Gerenciador</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNIL 1 — LANÇAMENTO PAGO SEMANAL -->
+<section class="block soft">
+  <div class="soft-inner">
+    <div class="section-label">Funil 01</div>
+    <h2>Lançamento Pago Semanal</h2>
+    <p class="lede">Funil com o maior volume histórico de testes. O público Advantage+ é hoje o pilar da operação — todas as demais estratégias (público quente, interesses, lookalike) foram testadas como complemento, mas nenhuma superou o Advantage+ em escala.</p>
+
+    <div class="pub-grid">
+      <div class="pub">
+        <div class="pub-head"><h3>Público Advantage+</h3><span class="badge principal">Principal · mais usado</span></div>
+        <div class="pub-params">
+          <div><small>Idade</small><b>34/35 até 55/60 anos</b></div>
+          <div><small>Gênero</small><b>Somente mulheres</b></div>
+          <div><small>Localização</small><b>Brasil</b></div>
+        </div>
+        <p class="pub-note">Já testado também até 50 anos — não fez diferença relevante entre o limite de 55 e 60.</p>
+        <div class="pub-result">🏆 3.921 vendas · CPA médio R$ 119,36 — melhor público já rodado no funil</div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-head"><h3>Público Quente</h3><span class="badge testado">Testado</span></div>
+        <div class="pub-params">
+          <div><small>Gênero</small><b>Mulheres</b></div>
+          <div><small>Localização</small><b>Brasil</b></div>
+        </div>
+        <p class="pub-note">Variações testadas: seguidores do Instagram · envolvimento Instagram + Facebook (30 dias) · envolvimento Instagram + Facebook (365 dias) · envolvimento total combinando 30 e 365 dias (inclui perfil visitado, vídeo assistido, mensagem enviada, compartilhamento e curtida). Também combinado com Advantage+ ligado (34–55, mulheres, Brasil).</p>
+        <div class="pub-result">16 vendas no total — geralmente não sustenta performance por muito tempo</div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-head"><h3>Público Frio · Interesses de Alta Renda</h3><span class="badge testado">Testado com Advantage+ ligado</span></div>
+        <div class="pub-params">
+          <div><small>Idade</small><b>34–55 anos</b></div>
+          <div><small>Gênero</small><b>Mulheres</b></div>
+          <div><small>Interesses</small><b>Luxo ou Bens de luxo (varejo)</b></div>
+          <div><small>Comportamentos</small><b>Viajantes internacionais frequentes · Pessoas que preferem produtos de valor alto no Brasil</b></div>
+        </div>
+        <p class="pub-note">Com o Advantage+ ligado, esse direcionamento funciona como sugestão — a campanha não roda exclusivamente para esse público.</p>
+        <div class="pub-result">227 vendas · CPA R$ 129,52 — boa performance, mas sem a escala do Advantage+</div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-head"><h3>Lookalike 1% · Compradores TP10</h3><span class="badge testado">Testado com Advantage+ ligado</span></div>
+        <div class="pub-params">
+          <div><small>Base</small><b>Compradores do TP10</b></div>
+          <div><small>Semelhança</small><b>1%</b></div>
+        </div>
+        <div class="pub-result">100 vendas · CPA R$ 128,31 — pouca escala</div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-head"><h3>Testes de amplitude</h3><span class="badge baixo">Referência</span></div>
+        <div class="pub-params">
+          <div><small>Idade testada</small><b>18 a 65 anos (mais aberta)</b></div>
+          <div><small>Gênero</small><b>Nunca testado para homens — sempre fechado para mulheres</b></div>
+        </div>
+        <p class="pub-note">Com direcionamento mais aberto, o ganho de performance passa a depender mais do criativo do que da segmentação.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNIL 2 — SALA SECRETA -->
+<section class="block">
+  <div class="wrap">
+    <div class="section-label">Funil 02</div>
+    <h2>Sala Secreta</h2>
+    <p class="lede">Funil já testado de forma ampla — hoje concentrado em Advantage+, com localização restrita a Portugal por decisão da própria Marketex.</p>
+
+    <div class="pub-grid">
+      <div class="pub">
+        <div class="pub-head"><h3>Advantage+ Internacional</h3><span class="badge principal">Ativo hoje</span></div>
+        <div class="pub-params">
+          <div><small>Idade</small><b>30 a 50/55 anos</b></div>
+          <div><small>Gênero</small><b>Somente mulheres</b></div>
+          <div><small>Localização</small><b>Portugal</b></div>
+        </div>
+        <p class="pub-note">Já testado para Brasil e diversos outros países. Há aproximadamente 4 meses rodando exclusivamente para Portugal, por solicitação direta da Marketex.</p>
+      </div>
+
+      <div class="pub">
+        <div class="pub-head"><h3>Advantage+ Normal</h3><span class="badge principal">Ativo hoje</span></div>
+        <div class="pub-params">
+          <div><small>Idade</small><b>30 a 50/55 anos</b></div>
+          <div><small>Gênero</small><b>Somente mulheres</b></div>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-head"><h3>Testes de envolvimento</h3><span class="badge testado">Testado</span></div>
+        <div class="pub-params">
+          <div><small>Envolvimento perfil Marketex</small><b>30 dias</b></div>
+          <div><small>Envolvimento perfil Marketex</small><b>7 dias (esporádico)</b></div>
+        </div>
+        <p class="pub-note">O recorte de 7 dias é usado principalmente para testar criativos novos — costuma sair mais caro e geralmente é retirado após o teste.</p>
+      </div>
+    </div>
+
+    <div class="callout">📍 <b>Restrição ativa:</b> a Marketex solicitou manter a segmentação apenas em Portugal — recomendação é manter essa restrição até uma nova orientação do cliente.</div>
+  </div>
+</section>
+
+<!-- FUNIL 3 — APLICAÇÕES -->
+<section class="block soft">
+  <div class="soft-inner">
+    <div class="section-label">Funil 03</div>
+    <h2>Aplicações</h2>
+    <p class="lede">Funil com maior variedade de combinações testadas. Em praticamente todas as comparações, o Advantage+ se manteve como o público mais barato e de melhor desempenho.</p>
+
+    <div class="pub-grid">
+      <div class="pub">
+        <div class="pub-head"><h3>Perfil demográfico geral</h3><span class="badge principal">Base do funil</span></div>
+        <div class="pub-params">
+          <div><small>Idade</small><b>30 a 60 anos</b></div>
+          <div><small>Gênero</small><b>Priorizando mulheres</b></div>
+        </div>
+        <p class="pub-note">Já testado para homens e mulheres juntos, mas nos últimos períodos o direcionamento tem priorizado mulheres.</p>
+      </div>
+
+      <div class="pub">
+        <div class="pub-head"><h3>Compradores TP10 + Leadscoring AAA</h3><span class="badge testado">Testado em 3 formatos</span></div>
+        <p class="pub-note">Testado como interesse normal · como lookalike 1% · e combinado com Advantage+ ligado (formato mais rodado dos três).</p>
+      </div>
+
+      <div class="pub">
+        <div class="pub-head"><h3>Público Quente</h3><span class="badge testado">Diversas combinações</span></div>
+        <p class="pub-note">Envolvimento testado em recortes de 30, 60, 90 e 365 dias no Instagram — rodado tanto com todos os tipos de engajamento juntos quanto isolando apenas seguidores.</p>
+      </div>
+
+      <div class="pub">
+        <div class="pub-head"><h3>Remarketing</h3><span class="badge testado">Recorrente a cada lançamento pago</span></div>
+        <p class="pub-note">Segmentado por tipo de envolvimento: quem participou, quem comprou e quem se envolveu de alguma forma (visualizou anúncios ou campanhas de aquecimento). Essa divisão é aplicada em todo lançamento pago.</p>
+      </div>
+
+      <div class="pub">
+        <div class="pub-head"><h3>Público salvo de referência</h3><span class="badge testado">Print de campanha</span></div>
+        <div class="pub-params">
+          <div><small>Idade</small><b>Maiores de 25 (sugestão 35–50)</b></div>
+          <div><small>Gênero</small><b>Mulheres</b></div>
+          <div><small>Localização</small><b>Brasil (variante internacional: EUA, Canadá, Europa, Ásia, Austrália)</b></div>
+          <div><small>Interesses sugeridos</small><b>Mentorship · Cruzeiros (viagens/turismo) · Compras na internet (varejo)</b></div>
+        </div>
+        <p class="pub-note">Advantage+ ativado, combinando compradores Hotmart, mentoria, viagens e interesse em produtos de luxo.</p>
+      </div>
+    </div>
+
+    <div class="callout">🏆 <b>Conclusão do funil:</b> em todas as variações testadas — interesse, lookalike, público quente — o Advantage+ é sempre o público mais barato e de melhor performance.</div>
+  </div>
+</section>
+
+<!-- FUNIL 4 — DISTRIBUIÇÃO DE CONTEÚDO -->
+<section class="block">
+  <div class="wrap">
+    <div class="section-label">Funil 04</div>
+    <h2>Distribuição de Conteúdo</h2>
+    <p class="lede">Funil operado hoje via impulsionamento direto de post no Instagram — formato que superou tanto o Gerenciador de Anúncios quanto o Meta Business Suite nos testes realizados.</p>
+
+    <div class="pub-grid">
+      <div class="pub">
+        <div class="pub-head"><h3>Testes já realizados (não ativos hoje)</h3><span class="badge baixo">Histórico</span></div>
+        <p class="pub-note">Lookalike dos compradores do TP10 · lookalike de quem comprou a mentoria (1% de todas as localizações) · interesses por profissão específica (advogados, terapeutas, arquitetos, professores).</p>
+      </div>
+
+      <div class="pub">
+        <div class="pub-head"><h3>Impulsionamento via Instagram</h3><span class="badge principal">Ativo hoje · melhor resultado</span></div>
+        <div class="pub-params">
+          <div><small>Gênero</small><b>Mulheres</b></div>
+          <div><small>Localização</small><b>Brasil</b></div>
+        </div>
+        <p class="pub-note">O impulsionamento direto pelo Instagram não permite o uso de públicos lookalike — por isso a segmentação é feita com um público de interesse/seguidores qualificado. Já testado internacionalmente, mas descontinuado após aparecimento de engajamento fora do perfil do público-alvo da Ana. Hoje roda apenas no Brasil.</p>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:36px">Sequência de Retargeting</div>
+    <h2 style="font-size:22px;margin-bottom:14px">Conteúdo 1 → 2 → 3 (C1 → C2 → C3)</h2>
+    <table>
+      <tr><th>Etapa</th><th>Público</th></tr>
+      <tr><td><b>C2</b></td><td>Compradores dos últimos lançamentos (TP8 até TP10) + quem assistiu 75% do conteúdo do C1</td></tr>
+      <tr><td><b>C3</b></td><td>Compradores dos últimos lançamentos + quem assistiu 75% do conteúdo do C2</td></tr>
+    </table>
+    <div class="callout">🎯 <b>Segmentação padrão em todas as etapas:</b> mulheres, 34 a 55 anos — faixa definida desde o início da operação. Variações (30–60 anos) já testadas, sem diferença relevante de performance.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="brand">
+    <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias" style="width:26px;height:26px;margin:0 auto 10px">
+      <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+      <polygon points="50,33 65,59 35,59"></polygon>
+      <line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line>
+      <line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line>
+      <line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line>
+      <line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line>
+      <line x1="10" y1="27" x2="50" y2="33"></line>
+    </svg>
+  </div>
+  <p>Brito Mídias · Central de Estratégia e Resultados — Gestão de Tráfego Pago</p>
+  <p style="margin-top:6px">Documento de estratégia interna · Marketex / Ana Tex · agosto/2026</p>
+</footer>
+
+</body>
+</html>
