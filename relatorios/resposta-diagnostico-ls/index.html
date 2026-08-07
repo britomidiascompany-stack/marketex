@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resposta ao Diagnóstico — LS Ana Tex | Brito Mídias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --roxo:        #7C3AED;
+  --roxo-dark:   #5B21B6;
+  --roxo-deep:   #3B0F73;
+  --roxo-light:  #A78BFA;
+  --roxo-xlight: #EDE9FE;
+  --preto:   #0A0A0A;
+  --ink:     #141018;
+  --cinza:   #5B5566;
+  --linha:   #E7E3EE;
+  --bg:      #FFFFFF;
+  --bg-soft: #FAF9FC;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Poppins',sans-serif;font-weight:300;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+.container{max-width:1000px;margin:0 auto;padding:0 28px}
+img,svg{max-width:100%}
+
+/* HERO */
+.hero{
+  position:relative;overflow:hidden;color:#fff;padding:90px 0 70px;
+  background:
+    radial-gradient(1100px 500px at 78% -10%, rgba(124,58,237,.55), transparent 60%),
+    linear-gradient(150deg, #0A0A0A 0%, #17111F 45%, #3B0F73 100%);
+}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.14) 1px, transparent 1px);
+  background-size:44px 44px;
+  -webkit-mask-image:radial-gradient(ellipse at 60% 20%, black 0%, transparent 70%);
+  mask-image:radial-gradient(ellipse at 60% 20%, black 0%, transparent 70%);
+}
+.hero-content{position:relative;z-index:1}
+.brand{display:flex;align-items:center;gap:14px;margin-bottom:46px}
+.brand svg{width:38px;height:38px}
+.brand .word{display:flex;align-items:center;gap:11px;font-weight:300}
+.brand .word b{font-weight:800;font-size:17px;color:#fff}
+.brand .word .bar{width:2px;height:22px;background:rgba(255,255,255,.55)}
+.brand .word span{font-size:14px;letter-spacing:.22em;color:#fff}
+
+.pill{display:inline-flex;align-items:center;border:1px solid var(--roxo-light);color:#fff;border-radius:100px;
+  padding:8px 16px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:22px}
+.hero h1{font-weight:800;font-size:44px;letter-spacing:-.02em;max-width:760px;line-height:1.15;margin-bottom:18px}
+.hero .lead{font-size:18px;font-weight:300;color:var(--roxo-light);max-width:640px;margin-bottom:28px}
+.hero-meta{display:flex;gap:28px;flex-wrap:wrap;font-size:13px;color:rgba(255,255,255,.65);border-top:1px solid rgba(255,255,255,.15);padding-top:22px;margin-top:10px}
+.hero-meta b{color:#fff;font-weight:600}
+
+/* SECTIONS */
+section{padding:64px 0}
+section.soft{background:var(--bg-soft)}
+.section-label{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--roxo);margin-bottom:16px}
+.section-label::before{content:"";width:34px;height:2px;background:var(--roxo);border-radius:2px}
+h2{font-weight:700;font-size:30px;letter-spacing:-.01em;margin-bottom:14px;max-width:720px}
+.intro{color:var(--cinza);font-size:16px;max-width:680px;margin-bottom:36px}
+
+/* mini cards */
+.grid-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:28px 0}
+.mini-card{border:1px solid var(--linha);border-radius:14px;padding:18px 18px;background:var(--bg-soft)}
+.mini-card small{display:block;color:var(--roxo);font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.mini-card b{display:block;font-size:21px;font-weight:700;margin-bottom:4px}
+.mini-card .ok{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:#1a8a4a}
+section.soft .mini-card{background:#fff}
+
+/* verdict banner */
+.verdict{
+  border-radius:18px;padding:28px 30px;margin:32px 0 8px;
+  background:linear-gradient(135deg, #5B21B6 0%, #7C3AED 100%);
+  color:#fff;display:flex;align-items:flex-start;gap:18px;
+}
+.verdict .check{
+  flex:0 0 auto;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.18);
+  display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;margin-top:2px;
+}
+.verdict strong{display:block;font-size:17px;font-weight:700;margin-bottom:6px}
+.verdict p{font-size:14.5px;font-weight:300;color:rgba(255,255,255,.92);max-width:640px}
+
+/* observation quote */
+.obs{
+  border-left:3px solid var(--roxo);background:var(--roxo-xlight);border-radius:0 12px 12px 0;
+  padding:16px 22px;margin:20px 0;font-size:14.5px;color:var(--ink)
+}
+.obs b{color:var(--roxo-dark)}
+
+/* improvement item */
+.item{border:1px solid var(--linha);border-radius:16px;padding:28px 30px;margin-bottom:20px;background:#fff}
+section.soft .item{background:#fff}
+.item-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.item-num{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:linear-gradient(90deg,var(--roxo),var(--roxo-dark));
+  color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.item-head h3{font-size:19px;font-weight:700}
+.item p{font-size:14.5px;color:var(--ink);margin-bottom:10px}
+.item p.muted{color:var(--cinza)}
+.item ul{margin:10px 0 4px 18px}
+.item li{font-size:14.5px;margin-bottom:6px}
+
+/* table */
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:13.5px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--linha)}
+th{color:var(--roxo);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+tr:last-child td{border-bottom:none}
+td.num{font-weight:600}
+.tag-zero{color:#b42323;font-weight:600}
+.tag-one{color:#1a8a4a;font-weight:600}
+
+/* footer */
+footer{background:var(--ink);color:rgba(255,255,255,.55);padding:44px 0;font-size:13px}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+footer b{color:#fff}
+
+@media (max-width:640px){
+  .hero{padding:60px 0 46px}
+  .hero h1{font-size:32px}
+  section{padding:44px 0}
+  .item{padding:22px 20px}
+  footer .container{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="container hero-content">
+    <div class="brand">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+        <polygon points="50,33 65,59 35,59"></polygon>
+        <line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line>
+        <line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line>
+        <line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line>
+        <line x1="10" y1="27" x2="50" y2="33"></line>
+      </svg>
+      <span class="word"><b>BM</b><i class="bar"></i><span>MÍDIAS</span></span>
+    </div>
+    <div class="pill">Nota Técnica · Tráfego Pago</div>
+    <h1>Resposta ao Diagnóstico do Lançamento LS</h1>
+    <p class="lead">Ana Tex · Workshop Especialista com IA — validação das métricas de tráfego pago e plano de melhoria para os próximos ciclos.</p>
+    <div class="hero-meta">
+      <div>Período auditado<br><b>18/05 a 28/07/2026 · LS01–LS10</b></div>
+      <div>Responsável<br><b>Brito Mídias — Gestão de Tráfego Pago</b></div>
+      <div>Emitido em<br><b>07/08/2026</b></div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="section-label">Validação dos dados</div>
+    <h2>Todas as métricas de tráfego pago estão corretas</h2>
+    <p class="intro">Conferimos, linha por linha, cada número do diagnóstico marcado para confirmação — direto contra a planilha oficial (Captação Diária, tráfego bruto do Meta Ads e Vendas Detalhadas da Mentoria). Nenhuma divergência de valor, contagem ou percentual.</p>
+
+    <div class="grid-cards">
+      <div class="mini-card"><small>Verba de anúncio</small><b>R$ 499.607</b><span class="ok">✓ confere</span></div>
+      <div class="mini-card"><small>Retorno captação líq.</small><b>R$ 435.402</b><span class="ok">✓ confere</span></div>
+      <div class="mini-card"><small>ROAS captação</small><b>0,77x</b><span class="ok">✓ confere</span></div>
+      <div class="mini-card"><small>CPA do ingresso</small><b>R$ 116,87</b><span class="ok">✓ confere</span></div>
+      <div class="mini-card"><small>Impressões</small><b>6.048.971</b><span class="ok">✓ confere</span></div>
+      <div class="mini-card"><small>Ingressos vendidos</small><b>4.866</b><span class="ok">✓ confere</span></div>
+    </div>
+
+    <div class="verdict">
+      <div class="check">✓</div>
+      <div>
+        <strong>Todas as métricas ativas e corretas</strong>
+        <p>Da nossa parte de tráfego pago, a avaliação do período está tecnicamente correta de ponta a ponta — investimento, funil, ROAS, CPA e a atribuição por criativo da mentoria. Pode ser confirmado sem ressalva. Os pontos abaixo são onde a operação, como um todo, pode evoluir daqui pra frente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="soft">
+  <div class="container">
+    <div class="section-label">Plano de ação</div>
+    <h2>Pontos de melhoria</h2>
+    <p class="intro">Seis frentes — o que está fora do nosso controle, o que já investigamos a fundo, e o que dá pra melhorar na página, no conteúdo e no funil.</p>
+
+    <!-- ITEM 1 -->
+    <div class="item">
+      <div class="item-head"><div class="item-num">1</div><h3>A quebra de UTM (<code>{{ad.name}}</code>) — o que é, e por que não tem o que fazer</h3></div>
+      <p>Em duas vendas da mentoria, o nome do anúncio apareceu na planilha como o código bruto <code>{{ad.name}}</code>, em vez do nome real do criativo. Isso acontece quando alguém pega o link do anúncio e repassa pra outra pessoa (WhatsApp, print, etc.) — quem recebe esse link encaminhado clica numa versão que não passou pelo processo normal da Meta de preencher o nome do anúncio.</p>
+      <p>Da nossa parte, está tudo certo: não há nenhum caractere especial no nome dos anúncios que pudesse quebrar esse preenchimento. É provável que tenha relação com o uso de <b>Criativo Dinâmico</b> ou com o próprio método de like sharing do link — não dá pra cravar a causa exata. O que dá pra fazer é vigiar pra não configurar as campanhas como Criativo Dinâmico daqui pra frente.</p>
+      <div class="obs"><b>Importante:</b> isso pode voltar a acontecer — sempre que uma pessoa repassa o link do anúncio pra outra, não tem como a nossa configuração impedir. Não é uma falha corrigível, é uma característica do jeito como as pessoas compartilham link.</div>
+    </div>
+
+    <!-- ITEM 2 -->
+    <div class="item">
+      <div class="item-head"><div class="item-num">2</div><h3>Conferência cruzada no VK Metrics — não existe atribuição perdida</h3></div>
+      <p>Pegamos os e-mails de todo mundo que comprou a mentoria e está hoje como "Não Atribuída" na planilha, e batemos cada um direto na atribuição própria do VK Metrics — independente do método de cruzamento com o Workshop que a planilha usa.</p>
+      <table>
+        <tr><th>Verificação</th><th>Resultado</th></tr>
+        <tr><td>E-mails únicos verificados</td><td class="num">62</td></tr>
+        <tr><td>Encontrados na base de compras do VK Metrics</td><td class="num">61</td></tr>
+        <tr><td>Com atribuição de <b>anúncio pago</b> recuperada</td><td class="num tag-zero">0</td></tr>
+        <tr><td>Com atribuição <b>orgânica</b> recuperada</td><td class="num tag-one">1 · grupo de WhatsApp (LS03)</td></tr>
+        <tr><td>Sem nenhum registro de compra no VK Metrics</td><td class="num">1</td></tr>
+      </table>
+      <p class="muted">Dos 62, só 1 tinha algum rastro — e era orgânico (post num grupo de WhatsApp), não anúncio pago. Os outros 60 não têm nem <code>utm_content</code>, nem <code>vk_ad_id</code>, nem canal registrado no VK também — ou seja, o próprio VK Metrics, com seu jeito próprio de rastrear, também não capturou origem pra esses compradores.</p>
+      <div class="obs"><b>Conclusão:</b> essa receita "sem origem" não é uma falha de checagem nossa — é tráfego genuinamente não rastreado (link direto, indicação, checkout aberto sem cookie de rastreamento). Confirma exatamente o que o diagnóstico já apontava.</div>
+    </div>
+
+    <!-- ITEM 3 -->
+    <div class="item">
+      <div class="item-head"><div class="item-num">3</div><h3>Narrativa de conteúdo — comunicar com o que a pessoa sai</h3></div>
+      <p>O que mais deve melhorar a conversão da página é a pessoa entender, de forma simples, que aquilo é um <b>plano</b> pra ela: ela vai sair com X entregáveis prontos. Isso precisa aparecer tanto no anúncio quanto na página.</p>
+      <ul>
+        <li><b>VSL curta</b> — mesmo um vídeo de vendas de 2 minutos já deixaria a pessoa com o essencial, sem depender de assistir a semana inteira.</li>
+        <li><b>Visual por entregável</b> — se for fazer página nova, cada entregável ganha uma peça visual própria (imagem ou mini-vídeo tipo GIF), desde que não pese a página.</li>
+        <li><b>Checkout</b> — repetir ali, no momento da decisão, com o que a pessoa vai sair.</li>
+      </ul>
+    </div>
+
+    <!-- ITEM 4 -->
+    <div class="item">
+      <div class="item-head"><div class="item-num">4</div><h3>Aula preparativa na Hotmart</h3></div>
+      <p>Colocar uma aula preparativa junto da aula de Boas-Vindas — algo de bônus, mão-na-massa, que a pessoa já vai fazendo antes do evento. Não pode depender de a pessoa assistir aquilo pra entender o evento, mas precisa reforçar o valor de quem participa.</p>
+    </div>
+
+    <!-- ITEM 5 -->
+    <div class="item">
+      <div class="item-head"><div class="item-num">5</div><h3>Funil — não é reduzir exposição, é converter mais no fim da mentoria</h3></div>
+      <p>Em vez de pensar em reduzir a exposição, o caminho é pensar em como monetizar melhor quem já chegou até ali — aumentar a conversão final da mentoria em vez de cortar topo de funil.</p>
+    </div>
+
+    <!-- ITEM 6 -->
+    <div class="item">
+      <div class="item-head"><div class="item-num">6</div><h3>Bônus na página</h3></div>
+      <p>Colocar bônus visíveis já na página, pra quem se inscreve sair recebendo algo de imediato.</p>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div><b>Brito Mídias</b> — Central de Estratégia e Resultados</div>
+    <div>rafael@britomidias.com.br</div>
+  </div>
+</footer>
+
+</body>
+</html>
