@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Como adicionar o MCP do VKmetrics nas IAs · Marketex</title>
+<meta name="description" content="Passo a passo para conectar Claude Code, Cursor e Windsurf ao VKmetrics via MCP.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --roxo:#7C3AED; --roxo-dark:#5B21B6; --roxo-deep:#3B0F73;
+    --roxo-light:#A78BFA; --roxo-xlight:#EDE9FE;
+    --ink:#141018; --cinza:#5B5566; --linha:#E7E3EE; --bg:#FFFFFF; --bg-soft:#FAF9FC;
+    --verde:#059669; --verde-light:#D1FAE5;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{font-family:'Poppins',sans-serif; font-weight:300; color:var(--ink); background:var(--bg); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  a{color:var(--roxo);}
+  .wrap{max-width:960px; margin:0 auto; padding:0 28px;}
+
+  /* HERO */
+  .hero{
+    position:relative; overflow:hidden; color:#fff; padding:72px 0 80px;
+    background:
+      radial-gradient(1100px 500px at 78% -10%, rgba(124,58,237,.55), transparent 60%),
+      linear-gradient(150deg, #0A0A0A 0%, #17111F 45%, #3B0F73 100%);
+  }
+  .hero .grid{
+    position:absolute; inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px),linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);
+    background-size:44px 44px;
+    -webkit-mask-image:radial-gradient(circle at 60% 20%,#000 30%,transparent 75%);
+    mask-image:radial-gradient(circle at 60% 20%,#000 30%,transparent 75%);
+  }
+  .hero-inner{position:relative;z-index:2;}
+  .brand{display:flex;align-items:center;gap:14px;margin-bottom:36px;}
+  .brand svg{width:36px;height:36px;}
+  .brand .word{display:flex;align-items:center;gap:11px;font-weight:300;}
+  .brand .word b{font-weight:800;font-size:16px;}
+  .brand .word .bar{width:2px;height:20px;background:rgba(255,255,255,.5);}
+  .brand .word span{font-size:16px;letter-spacing:.22em;}
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;border:1px solid #A78BFA;color:#EDE9FE;
+    border-radius:100px;padding:6px 14px;font-size:11px;font-weight:600;letter-spacing:.14em;
+    text-transform:uppercase;margin-bottom:20px;
+  }
+  .hero h1{font-size:34px;font-weight:800;letter-spacing:-.02em;line-height:1.18;margin:0 0 14px;max-width:680px;}
+  .hero p.lead{font-size:15px;font-weight:300;color:rgba(255,255,255,.82);max-width:580px;margin:0 0 28px;}
+  .url-badge{
+    display:inline-flex;align-items:center;gap:14px;
+    background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+    border-radius:12px;padding:12px 18px;flex-wrap:wrap;
+  }
+  .url-badge .label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6);}
+  .url-badge .url{font-size:14px;font-weight:500;font-family:'JetBrains Mono',monospace;color:#fff;}
+  .url-badge .copy-url-btn{
+    background:var(--roxo);border:none;border-radius:8px;padding:6px 14px;
+    color:#fff;font-size:12px;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;white-space:nowrap;
+  }
+  .url-badge .copy-url-btn:hover{background:var(--roxo-dark);}
+
+  /* SECTIONS */
+  section{padding:52px 0;}
+  section.soft{background:var(--bg-soft);}
+  .section-label{
+    display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--roxo);margin-bottom:12px;
+  }
+  .section-label::before{content:"";width:30px;height:2px;background:var(--roxo);border-radius:2px;}
+  h2{font-size:22px;font-weight:700;letter-spacing:-.01em;margin:0 0 8px;}
+  .intro-text{color:var(--cinza);font-size:14px;max-width:700px;margin:0 0 28px;}
+
+  /* TABS */
+  .tabs{display:flex;gap:6px;margin-bottom:24px;flex-wrap:wrap;}
+  .tab{
+    display:flex;align-items:center;gap:8px;
+    padding:10px 18px;border-radius:100px;font-size:13px;font-weight:600;
+    border:1.5px solid var(--linha);background:#fff;cursor:pointer;color:var(--cinza);
+    font-family:'Poppins',sans-serif;transition:.15s;
+  }
+  .tab:hover{border-color:var(--roxo-light);color:var(--roxo);}
+  .tab.active{background:var(--roxo);border-color:var(--roxo);color:#fff;}
+  .tab .dot{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.7;}
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;}
+
+  /* STEPS */
+  .steps{display:flex;flex-direction:column;gap:20px;}
+  .step{display:grid;grid-template-columns:40px 1fr;gap:16px;align-items:start;}
+  .step .snum{
+    width:40px;height:40px;border-radius:12px;background:var(--roxo-xlight);
+    display:flex;align-items:center;justify-content:center;
+    font-size:15px;font-weight:700;color:var(--roxo-dark);flex:none;
+  }
+  .step .scontent h3{font-size:15px;font-weight:600;margin:0 0 5px;padding-top:8px;}
+  .step .scontent p{font-size:13.5px;color:var(--cinza);margin:0;}
+  .step .scontent .path{
+    display:inline-flex;align-items:center;gap:5px;flex-wrap:wrap;
+    font-size:12.5px;font-weight:600;color:var(--roxo-dark);background:var(--roxo-xlight);
+    border-radius:8px;padding:5px 10px;margin-top:8px;
+  }
+  .step .scontent .path span{opacity:.6;font-weight:400;font-size:12px;}
+
+  /* CODE BLOCK */
+  .code-block{
+    position:relative;background:#0F0A1A;border-radius:14px;padding:20px 20px 16px;
+    margin-top:12px;overflow:hidden;border:1px solid rgba(124,58,237,.3);
+  }
+  .code-block pre{
+    margin:0;font-family:'JetBrains Mono',monospace;font-size:13px;
+    color:#E2D9F3;line-height:1.65;white-space:pre;overflow-x:auto;
+  }
+  .code-block .lang{
+    font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+    color:rgba(167,139,250,.7);margin-bottom:10px;font-family:'Poppins',sans-serif;
+  }
+  .code-block .copy-code-btn{
+    position:absolute;top:14px;right:14px;
+    display:flex;align-items:center;gap:6px;
+    background:rgba(124,58,237,.25);border:1px solid rgba(124,58,237,.4);border-radius:8px;
+    padding:5px 10px;color:#A78BFA;font-size:11.5px;font-weight:600;
+    cursor:pointer;font-family:'Poppins',sans-serif;transition:.15s;
+  }
+  .code-block .copy-code-btn:hover{background:rgba(124,58,237,.4);}
+  .code-block .copy-code-btn.copied{background:rgba(5,150,105,.25);border-color:rgba(5,150,105,.4);color:#34D399;}
+  .code-block .copy-code-btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.2;}
+  .hl{color:#A78BFA;} /* highlight purple in code */
+  .hl2{color:#86EFAC;} /* highlight green in code */
+  .hl3{color:#FDE68A;} /* highlight yellow in code */
+
+  /* CALLOUT */
+  .callout{
+    display:flex;gap:12px;padding:14px 16px;border-radius:12px;margin-top:16px;
+    border:1px solid;font-size:13px;
+  }
+  .callout.info{background:#EFF6FF;border-color:#BFDBFE;color:#1E40AF;}
+  .callout.tip{background:var(--verde-light);border-color:#6EE7B7;color:#065F46;}
+  .callout.warn{background:#FFFBEB;border-color:#FDE68A;color:#92400E;}
+  .callout .icon{font-size:16px;flex:none;}
+  .callout p{margin:0;}
+  .callout b{font-weight:600;}
+
+  /* NOTA */
+  .nota{
+    border:1px solid var(--linha);border-left:3px solid var(--roxo);border-radius:12px;
+    padding:16px 20px;margin-top:24px;background:#fff;font-size:13.5px;color:var(--cinza);
+  }
+  .nota b{color:var(--ink);font-weight:600;}
+
+  /* STRIP */
+  .strip{
+    background:linear-gradient(90deg,#7C3AED,#5B21B6);border-radius:18px;padding:26px 28px;
+    color:#fff;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  }
+  .strip div h3{margin:0 0 5px;font-size:16px;font-weight:700;}
+  .strip div p{margin:0;font-size:13px;color:rgba(255,255,255,.85);max-width:500px;}
+  .strip a.btn{
+    background:#fff;color:var(--roxo-dark);text-decoration:none;font-weight:600;font-size:13px;
+    padding:11px 20px;border-radius:10px;white-space:nowrap;flex-shrink:0;
+  }
+
+  /* FOOTER */
+  footer{background:var(--ink);color:rgba(255,255,255,.6);padding:32px 0;font-size:12.5px;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+  footer .brand2{display:flex;align-items:center;gap:10px;color:#fff;font-weight:600;font-size:13px;}
+  footer .brand2 svg{width:18px;height:18px;}
+
+  @media(max-width:640px){
+    .hero{padding:50px 0 58px;}
+    .hero h1{font-size:26px;}
+    .tabs{gap:5px;}
+    .tab{padding:8px 14px;font-size:12px;}
+    .strip{flex-direction:column;align-items:flex-start;}
+    .step{grid-template-columns:36px 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="grid"></div>
+  <div class="wrap hero-inner">
+    <div class="brand">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+        <polygon points="50,33 65,59 35,59"></polygon>
+        <line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line>
+        <line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line>
+        <line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line>
+        <line x1="10" y1="27" x2="50" y2="33"></line>
+      </svg>
+      <span class="word"><b>BM</b><i class="bar"></i><span>MÍDIAS</span></span>
+    </div>
+    <div class="pill">Guia Técnico · Marketex</div>
+    <h1>Como adicionar o MCP do VKmetrics nas IAs</h1>
+    <p class="lead">Conecte sua IA ao VKmetrics via MCP e acesse dados de campanhas, funis e vendas direto na conversa. Funciona com Claude, Cursor, Windsurf e outras ferramentas compatíveis.</p>
+    <div class="url-badge">
+      <div>
+        <div class="label">URL do servidor MCP</div>
+        <div class="url" id="mcp-url">https://bi.vkdigital.com.br/ai/metrics-mcp</div>
+      </div>
+      <button class="copy-url-btn" onclick="copyUrl(this)">Copiar URL</button>
+    </div>
+  </div>
+</div>
+
+<!-- PASSO A PASSO -->
+<section class="soft">
+  <div class="wrap">
+    <div class="section-label">Passo a passo</div>
+    <h2>Selecione sua ferramenta</h2>
+    <p class="intro-text">O processo varia conforme a IA que você usa. Escolha abaixo e siga as instruções da sua ferramenta.</p>
+
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('claude-web', this)"><span class="dot"></span>Claude.ai (web)</button>
+      <button class="tab" onclick="showTab('claude-cli', this)"><span class="dot"></span>Claude Code (terminal)</button>
+      <button class="tab" onclick="showTab('cursor', this)"><span class="dot"></span>Cursor</button>
+      <button class="tab" onclick="showTab('windsurf', this)"><span class="dot"></span>Windsurf</button>
+    </div>
+
+    <!-- CLAUDE.AI WEB -->
+    <div class="tab-panel active" id="tab-claude-web">
+      <div class="steps">
+
+        <div class="step">
+          <div class="snum">1</div>
+          <div class="scontent">
+            <h3>Acesse as configurações do Claude.ai</h3>
+            <p>Abra o <a href="https://claude.ai" target="_blank">claude.ai</a> no navegador. Clique no seu avatar ou no menu no canto inferior esquerdo e vá em <b>Configurações</b>.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="snum">2</div>
+          <div class="scontent">
+            <h3>Abra a aba de Conectores</h3>
+            <p>Dentro das configurações, clique na aba <b>"Conectores"</b> (ou "Integrations"/"MCP", dependendo da versão do idioma).</p>
+            <div class="path">Configurações <span>›</span> Conectores</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="snum">3</div>
+          <div class="scontent">
+            <h3>Adicione um novo conector</h3>
+            <p>Clique em <b>"Novo conector"</b> ou <b>"Add connector"</b>.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="snum">4</div>
+          <div class="scontent">
+            <h3>Preencha o nome e a URL</h3>
+            <p>Dê o nome <b>VKmetrics</b> e cole a URL abaixo no campo do MCP:</p>
+            <div class="code-block" style="margin-top:10px;">
+              <div class="lang">URL do servidor</div>
+              <button class="copy-code-btn" onclick="copyBlock(this)">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                Copiar
+              </button>
+              <pre>https://bi.vkdigital.com.br/ai/metrics-mcp</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="snum">5</div>
+          <div class="scontent">
+            <h3>Salve e confirme</h3>
+            <p>Clique em <b>Salvar</b>. O conector vai aparecer na lista e vai ficar ativo para todas as conversas do Claude.ai automaticamente.</p>
+            <div class="callout tip" style="margin-top:10px;">
+              <div class="icon">✓</div>
+              <p><b>Pronto!</b> Para testar, abra uma nova conversa e pergunte algo como: "Quais campanhas do Meta estão ativas agora?" — o Claude vai consultar os dados diretamente do VKmetrics.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CLAUDE CODE CLI -->
+    <div class="tab-panel" id="tab-claude-cli">
+      <div class="steps">
+
+        <div class="step">
+          <div class="snum">1</div>
+          <div class="scontent">
+            <h3>Abra o terminal</h3>
+            <p>Qualquer terminal funciona: Terminal do Mac, iTerm, ou o terminal integrado no VS Code.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="snum">2</div>
+          <div class="scontent">
+            <h3>Execute o comando de adição</h3>
+            <p>Cole o comando abaixo e pressione <b>Enter</b>:</p>
+            <div class="code-block">
+              <div class="lang">bash — terminal</div>
+              <button class="copy-code-btn" onclick="copyBlock(this)">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                Copiar
+              </button>
+              <pre>claude mcp add <span class="hl">--transport http</span> <span class="hl3">"VKmetrics"</span> <span class="hl2">https://bi.vkdigital.com.br/ai/metrics-mcp</span></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="snum">3</div>
+          <div class="scontent">
+            <h3>Confirme o servidor adicionado</h3>
+            <p>Para verificar se funcionou, rode:</p>
+            <div class="code-block">
+              <div class="lang">bash — terminal</div>
+              <button class="copy-code-btn" onclick="copyBlock(this)">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                Copiar
+              </button>
+              <pre>claude mcp list</pre>
+            </div>
+            <p style="margin-top:8px;">O VKmetrics deve aparecer na lista de servidores ativos.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="snum">4</div>
+          <div class="scontent">
+            <h3>Alternativa: editar o settings.json</h3>
+            <p>Se preferir adicionar manualmente, abra o arquivo <code style="background:var(--roxo-xlight);color:var(--roxo-dark);padding:1px 6px;border-radius:4px;font-size:12px;">~/.claude/settings.json</code> e adicione:</p>
+            <div class="code-block">
+              <div class="lang">json — ~/.claude/settings.json</div>
+              <button class="copy-code-btn" onclick="copyBlock(this)">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                Copiar
+              </button>
+              <pre>{
+  <span class="hl3">"mcpServers"</span>: {
+    <span class="hl3">"VKmetrics"</span>: {
+      <span class="hl">"type"</span>: <span class="hl2">"http"</span>,
+      <span class="hl">"url"</span>: <span class="hl2">"https://bi.vkdigital.com.br/ai/metrics-mcp"</span>
+    }
+  }
+}</pre>
+            </div>
+            <div class="callout info" style="margin-top:10px;">
+              <div class="icon">ℹ</div>
+              <p>Se o <code>settings.json</code> ja tiver outros campos, adicione só o bloco <b>"mcpServers"</b> dentro do objeto existente, sem apagar o que ja está lá.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CURSOR -->
+    <div class="tab-panel" id="tab-cursor">
+      <div class="steps">
+
+        <div class="step">
+          <div class="snum">1</div>
+          <div class="scontent">
+            <h3>Abra as configurações do Cursor</h3>
+            <p>No Cursor, abra o menu de configurações. Você pode usar o atalho <b>Cmd + Shift + J</b> (Mac) ou <b>Ctrl + Shift + J</b> (Windows) para abrir o painel de configurações do Cursor.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="snum">2</div>
+          <div class="scontent">
+            <h3>Vá em MCP</h3>
+            <p>Dentro das configurações do Cursor, clique na aba <b>"MCP"</b> ou procure por "MCP" no campo de busca das configurações.</p>
+            <div class="path">Settings <span>›</span> Features <span>›</span> MCP</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="snum">3</div>
+          <div class="scontent">
+            <h3>Edite o arquivo mcp.json</h3>
+            <p>Clique em <b>"Edit MCP Settings"</b> ou abra o arquivo diretamente em <code style="background:var(--roxo-xlight);color:var(--roxo-dark);padding:1px 6px;border-radius:4px;font-size:12px;">~/.cursor/mcp.json</code>. Adicione o bloco do VKmetrics:</p>
+            <div class="code-block">
+              <div class="lang">json — ~/.cursor/mcp.json</div>
+              <button class="copy-code-btn" onclick="copyBlock(this)">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                Copiar
+              </button>
+              <pre>{
+  <span class="hl3">"mcpServers"</span>: {
+    <span class="hl3">"VKmetrics"</span>: {
+      <span class="hl">"url"</span>: <span class="hl2">"https://bi.vkdigital.com.br/ai/metrics-mcp"</span>
+    }
+  }
+}</pre>
+            </div>
+            <div class="callout info" style="margin-top:10px;">
+              <div class="icon">ℹ</div>
+              <p>Se o arquivo ja tiver outros servidores dentro de <b>"mcpServers"</b>, adicione o bloco <b>"VKmetrics"</b> ao lado dos que ja existem, separado por vírgula.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="snum">4</div>
+          <div class="scontent">
+            <h3>Salve e reinicie o Cursor</h3>
+            <p>Salve o arquivo. O Cursor vai carregar o servidor automaticamente. Se não aparecer de imediato, feche e abra o Cursor novamente.</p>
+            <div class="callout tip" style="margin-top:10px;">
+              <div class="icon">✓</div>
+              <p><b>Pronto!</b> O VKmetrics vai aparecer na lista de ferramentas disponíveis no painel MCP do Cursor.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- WINDSURF -->
+    <div class="tab-panel" id="tab-windsurf">
+      <div class="steps">
+
+        <div class="step">
+          <div class="snum">1</div>
+          <div class="scontent">
+            <h3>Abra as configurações do Windsurf</h3>
+            <p>No Windsurf, acesse o menu superior e vá em <b>Windsurf → Settings</b>, ou use o atalho <b>Cmd + ,</b> (Mac) / <b>Ctrl + ,</b> (Windows).</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="snum">2</div>
+          <div class="scontent">
+            <h3>Encontre a seção de MCP</h3>
+            <p>No painel de configurações, procure por <b>"MCP"</b> ou <b>"Model Context Protocol"</b>. Clique em <b>"Open Config"</b> para abrir o arquivo de configuração.</p>
+            <div class="path">Settings <span>›</span> Cascade <span>›</span> MCP Servers <span>›</span> Open Config</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="snum">3</div>
+          <div class="scontent">
+            <h3>Adicione o VKmetrics no arquivo de configuração</h3>
+            <p>O arquivo que vai abrir é o <code style="background:var(--roxo-xlight);color:var(--roxo-dark);padding:1px 6px;border-radius:4px;font-size:12px;">~/.codeium/windsurf/mcp_config.json</code>. Adicione o bloco abaixo:</p>
+            <div class="code-block">
+              <div class="lang">json — mcp_config.json</div>
+              <button class="copy-code-btn" onclick="copyBlock(this)">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                Copiar
+              </button>
+              <pre>{
+  <span class="hl3">"mcpServers"</span>: {
+    <span class="hl3">"VKmetrics"</span>: {
+      <span class="hl">"serverUrl"</span>: <span class="hl2">"https://bi.vkdigital.com.br/ai/metrics-mcp"</span>
+    }
+  }
+}</pre>
+            </div>
+            <div class="callout info" style="margin-top:10px;">
+              <div class="icon">ℹ</div>
+              <p>Se o arquivo ja tiver outros servidores, adicione <b>"VKmetrics"</b> dentro do objeto <b>"mcpServers"</b> existente, separado por vírgula.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="snum">4</div>
+          <div class="scontent">
+            <h3>Salve e reinicie o Windsurf</h3>
+            <p>Salve o arquivo e reinicie o Windsurf. O servidor VKmetrics vai aparecer disponível no painel do Cascade.</p>
+            <div class="callout tip" style="margin-top:10px;">
+              <div class="icon">✓</div>
+              <p><b>Pronto!</b> Pergunte para o Cascade: "Quais campanhas estão rodando no Meta?" e ele vai consultar o VKmetrics automaticamente.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- O QUE É O MCP -->
+<section>
+  <div class="wrap">
+    <div class="section-label">O que é o MCP</div>
+    <h2>Por que conectar a IA ao VKmetrics?</h2>
+    <p class="intro-text">O MCP (Model Context Protocol) é um protocolo que permite que ferramentas de IA acessem dados externos em tempo real. Com o VKmetrics conectado, a IA pode consultar métricas de campanhas, vendas e funis diretamente na conversa, sem precisar copiar e colar planilhas.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:8px;">
+      <div style="border:1px solid var(--linha);border-radius:16px;padding:20px 22px;">
+        <div style="font-size:22px;margin-bottom:8px;">📊</div>
+        <h3 style="font-size:14.5px;font-weight:600;margin:0 0 6px;">Dados em tempo real</h3>
+        <p style="font-size:13px;color:var(--cinza);margin:0;">A IA acessa as métricas atualizadas direto no VKmetrics, sem depender de exportações manuais.</p>
+      </div>
+      <div style="border:1px solid var(--linha);border-radius:16px;padding:20px 22px;">
+        <div style="font-size:22px;margin-bottom:8px;">🤖</div>
+        <h3 style="font-size:14.5px;font-weight:600;margin:0 0 6px;">Análises automáticas</h3>
+        <p style="font-size:13px;color:var(--cinza);margin:0;">Peça análises, comparativos e insights diretamente na conversa com a IA, sem abrir o painel.</p>
+      </div>
+      <div style="border:1px solid var(--linha);border-radius:16px;padding:20px 22px;">
+        <div style="font-size:22px;margin-bottom:8px;">⚡</div>
+        <h3 style="font-size:14.5px;font-weight:600;margin:0 0 6px;">Uma configuração, sempre ativo</h3>
+        <p style="font-size:13px;color:var(--cinza);margin:0;">Configure uma vez e o servidor fica disponível em todas as conversas da ferramenta automaticamente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="soft">
+  <div class="wrap">
+    <div class="strip">
+      <div>
+        <h3>Ficou alguma duvida?</h3>
+        <p>Fala com a gente no WhatsApp. Se travarmos em algum passo, a gente resolve junto.</p>
+      </div>
+      <a class="btn" href="https://wa.me/5587988731863?text=Oi!%20Tive%20uma%20d%C3%BAvida%20na%20hora%20de%20conectar%20o%20MCP%20do%20VKmetrics." target="_blank">Falar com a Brito Mídias</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand2">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+        <polygon points="50,33 65,59 35,59"></polygon>
+      </svg>
+      Brito Mídias
+    </div>
+    <div>Guia Técnico · Marketex · rafael@britomidias.com.br</div>
+  </div>
+</footer>
+
+<script>
+const COPY_IC = '<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>';
+const CHECK_IC = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+
+function showTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
+function copyUrl(btn) {
+  navigator.clipboard.writeText('https://bi.vkdigital.com.br/ai/metrics-mcp').then(() => {
+    btn.textContent = 'Copiado!';
+    btn.style.background = '#059669';
+    setTimeout(() => { btn.textContent = 'Copiar URL'; btn.style.background = ''; }, 2500);
+  });
+}
+
+function copyBlock(btn) {
+  const pre = btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.innerText.trim()).then(() => {
+    btn.classList.add('copied');
+    btn.innerHTML = CHECK_IC + ' Copiado!';
+    setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = COPY_IC + ' Copiar'; }, 2500);
+  });
+}
+</script>
+
+</body>
+</html>
