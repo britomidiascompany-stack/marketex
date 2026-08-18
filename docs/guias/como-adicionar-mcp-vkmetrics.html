@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Como adicionar o MCP do VKmetrics nas IAs · Marketex</title>
-<meta name="description" content="Passo a passo para conectar Claude Code, Cursor e Windsurf ao VKmetrics via MCP.">
+<meta name="description" content="Passo a passo para conectar Claude, Cursor, Windsurf, ChatGPT e Codex ao VKmetrics via MCP.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -219,6 +219,8 @@
       <button class="tab" onclick="showTab('claude-cli', this)"><span class="dot"></span>Claude Code (terminal)</button>
       <button class="tab" onclick="showTab('cursor', this)"><span class="dot"></span>Cursor</button>
       <button class="tab" onclick="showTab('windsurf', this)"><span class="dot"></span>Windsurf</button>
+      <button class="tab" onclick="showTab('chatgpt', this)"><span class="dot"></span>ChatGPT (desktop)</button>
+      <button class="tab" onclick="showTab('codex', this)"><span class="dot"></span>Codex CLI</button>
     </div>
 
     <!-- CLAUDE.AI WEB -->
@@ -473,6 +475,155 @@
             <div class="callout tip" style="margin-top:10px;">
               <div class="icon">✓</div>
               <p><b>Pronto!</b> Pergunte para o Cascade: "Quais campanhas estão rodando no Meta?" e ele vai consultar o VKmetrics automaticamente.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- CHATGPT DESKTOP -->
+    <div class="tab-panel" id="tab-chatgpt">
+      <div class="callout warn" style="margin-bottom:20px;">
+        <div class="icon">⚠</div>
+        <p><b>Plano necessario:</b> O suporte a MCP no ChatGPT desktop exige plano <b>Pro, Team, Enterprise ou Edu</b>. Nao funciona no plano gratuito.</p>
+      </div>
+      <div class="steps">
+
+        <div class="step">
+          <div class="snum">1</div>
+          <div class="scontent">
+            <h3>Instale o app ChatGPT para desktop</h3>
+            <p>Baixe e instale o <b>ChatGPT desktop</b> (Mac ou Windows) em <a href="https://openai.com/chatgpt/desktop" target="_blank">openai.com/chatgpt/desktop</a>. O recurso de MCP nao esta disponivel na versao web.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="snum">2</div>
+          <div class="scontent">
+            <h3>Ative o modo desenvolvedor</h3>
+            <p>Dentro do app, va em <b>Configuracoes</b> e ative a opcao <b>Developer Mode</b>. Sem isso, o menu de MCP nao aparece.</p>
+            <div class="path">Configuracoes <span>›</span> Developer Mode <span>›</span> Ativar</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="snum">3</div>
+          <div class="scontent">
+            <h3>Abra a secao de MCP servers</h3>
+            <p>Ainda em Configuracoes, clique em <b>MCP servers</b> e depois em <b>Add server</b>.</p>
+            <div class="path">Configuracoes <span>›</span> MCP servers <span>›</span> Add server</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="snum">4</div>
+          <div class="scontent">
+            <h3>Configure o servidor VKmetrics</h3>
+            <p>Preencha os campos assim:</p>
+            <ul style="font-size:13.5px;color:var(--cinza);padding-left:18px;margin:8px 0 0;">
+              <li><b>Name:</b> VKmetrics</li>
+              <li><b>Transport:</b> Streamable HTTP</li>
+              <li><b>URL:</b> cole o endereco abaixo</li>
+            </ul>
+            <div class="code-block" style="margin-top:10px;">
+              <div class="lang">URL do servidor</div>
+              <button class="copy-code-btn" onclick="copyBlock(this)">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                Copiar
+              </button>
+              <pre>https://bi.vkdigital.com.br/ai/metrics-mcp</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="snum">5</div>
+          <div class="scontent">
+            <h3>Salve e teste</h3>
+            <p>Clique em <b>Save</b>. O VKmetrics vai aparecer na lista de servidores MCP ativos. Abra uma nova conversa e pergunte sobre campanhas para confirmar que esta funcionando.</p>
+            <div class="callout tip" style="margin-top:10px;">
+              <div class="icon">✓</div>
+              <p><b>Pronto!</b> O ChatGPT vai usar os dados do VKmetrics automaticamente quando voce perguntar sobre campanhas, funis ou vendas.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CODEX CLI -->
+    <div class="tab-panel" id="tab-codex">
+      <div class="steps">
+
+        <div class="step">
+          <div class="snum">1</div>
+          <div class="scontent">
+            <h3>Instale o Codex CLI</h3>
+            <p>Se ainda nao tiver instalado, rode no terminal:</p>
+            <div class="code-block">
+              <div class="lang">bash — terminal</div>
+              <button class="copy-code-btn" onclick="copyBlock(this)">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                Copiar
+              </button>
+              <pre>npm install -g @openai/codex</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="snum">2</div>
+          <div class="scontent">
+            <h3>Adicione o servidor VKmetrics</h3>
+            <p>Execute o comando abaixo no terminal:</p>
+            <div class="code-block">
+              <div class="lang">bash — terminal</div>
+              <button class="copy-code-btn" onclick="copyBlock(this)">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                Copiar
+              </button>
+              <pre>codex mcp add <span class="hl3">VKmetrics</span> <span class="hl">--url</span> <span class="hl2">https://bi.vkdigital.com.br/ai/metrics-mcp</span></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="snum">3</div>
+          <div class="scontent">
+            <h3>Verifique a configuracao</h3>
+            <p>Confirme que o servidor foi adicionado:</p>
+            <div class="code-block">
+              <div class="lang">bash — terminal</div>
+              <button class="copy-code-btn" onclick="copyBlock(this)">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                Copiar
+              </button>
+              <pre>codex mcp list</pre>
+            </div>
+            <p style="margin-top:8px;">O VKmetrics deve aparecer na lista.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="snum">4</div>
+          <div class="scontent">
+            <h3>Alternativa: editar o config.toml</h3>
+            <p>Se preferir configurar manualmente, edite o arquivo <code style="background:var(--roxo-xlight);color:var(--roxo-dark);padding:1px 6px;border-radius:4px;font-size:12px;">~/.codex/config.toml</code>:</p>
+            <div class="code-block">
+              <div class="lang">toml — ~/.codex/config.toml</div>
+              <button class="copy-code-btn" onclick="copyBlock(this)">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                Copiar
+              </button>
+              <pre>[<span class="hl3">mcp_servers.VKmetrics</span>]
+<span class="hl">transport</span> = <span class="hl2">"http"</span>
+<span class="hl">url</span>       = <span class="hl2">"https://bi.vkdigital.com.br/ai/metrics-mcp"</span></pre>
+            </div>
+            <div class="callout tip" style="margin-top:10px;">
+              <div class="icon">✓</div>
+              <p><b>Pronto!</b> O Codex vai consultar o VKmetrics automaticamente nas sessoes de trabalho.</p>
             </div>
           </div>
         </div>
