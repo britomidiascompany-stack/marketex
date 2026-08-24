@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LS013 · Criativos Desativados (menção ao Claude) · 22/08/2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--roxo:#7C3AED;--roxo-soft:#A78BFA;--verde:#059669;--vermelho:#DC2626;--amarelo:#D97706;--cinza:#6B7280;--borda:#E7E3EE;--bg-soft:#FAF9FC;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Poppins',sans-serif;font-weight:300;background:#fff;color:#1F1135;}
+a{color:var(--roxo);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+.hero{background:linear-gradient(150deg,#0A0A0A 0%,#17111F 45%,#3B0F73 100%);position:relative;overflow:hidden;padding:56px 24px 48px;text-align:center;color:#fff;}
+.hero::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(transparent,transparent 43px,rgba(124,58,237,.18) 43px,rgba(124,58,237,.18) 44px),repeating-linear-gradient(90deg,transparent,transparent 43px,rgba(124,58,237,.18) 43px,rgba(124,58,237,.18) 44px);pointer-events:none;}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 55% at 50% 40%,rgba(124,58,237,.55) 0%,transparent 70%);pointer-events:none;}
+.hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;}
+.logo-bm{width:52px;height:52px;margin-bottom:16px;}
+.hero h1{font-size:clamp(1.4rem,3.6vw,2.2rem);font-weight:800;letter-spacing:-.5px;margin-bottom:6px;}
+.hero .sub{font-size:.95rem;opacity:.75;margin-bottom:4px;}
+.hero .ts{font-size:.8rem;opacity:.55;margin-bottom:28px;}
+.hero .status-badge{display:inline-block;background:rgba(220,38,38,.30);border:1px solid rgba(248,113,113,.5);border-radius:20px;padding:4px 16px;font-size:.8rem;font-weight:600;color:#FCA5A5;margin-bottom:28px;}
+.hero-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;max-width:900px;margin:0 auto;}
+.hero-kpi{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px 14px;}
+.hero-kpi .label{font-size:.7rem;opacity:.6;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+.hero-kpi .val{font-size:1.5rem;font-weight:800;line-height:1.1;}
+.hero-kpi .sub2{font-size:.72rem;opacity:.55;margin-top:4px;}
+
+.container{max-width:1100px;margin:0 auto;padding:0 20px;}
+section{padding:44px 20px;}
+section.bg{background:#fff;}
+section.bg-soft{background:var(--bg-soft);}
+.section-title{font-size:1.15rem;font-weight:700;color:var(--roxo);margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+
+.table-wrap{overflow-x:auto;border-radius:16px;border:1.5px solid var(--borda);}
+table{width:100%;border-collapse:collapse;font-size:.8rem;}
+thead tr{background:var(--bg-soft);}
+th{padding:12px 14px;text-align:left;font-weight:700;color:var(--roxo);font-size:.7rem;text-transform:uppercase;letter-spacing:.4px;border-bottom:1.5px solid var(--borda);}
+td{padding:10px 14px;border-bottom:1px solid var(--borda);}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(124,58,237,.03);}
+.bold{font-weight:700;}
+.muted{color:var(--cinza);font-size:.75rem;}
+.neg-txt{color:var(--vermelho);}
+.pos-txt{color:var(--verde);}
+.warn-txt{color:var(--amarelo);}
+td.hl{background:rgba(124,58,237,.05);font-weight:700;}
+th.hl{background:rgba(124,58,237,.1);color:var(--roxo);}
+.tag{display:inline-block;border-radius:20px;padding:2px 10px;font-size:.68rem;font-weight:600;margin-left:4px;}
+.tag-star{background:#F3E8FF;color:#6B21A8;}
+.tag-off{background:#FEE2E2;color:#991B1B;}
+.tag-on{background:#D1FAE5;color:#065F46;}
+
+.alert-box{border-radius:14px;padding:18px 20px;margin-bottom:18px;display:flex;gap:14px;align-items:flex-start;}
+.alert-box.red{background:#FEF2F2;border:1.5px solid #DC2626;}
+.alert-box.blue{background:#EFF6FF;border:1.5px solid #2563EB;}
+.alert-box.green{background:#F0FDF4;border:1.5px solid #059669;}
+.alert-box.yellow{background:#FFFBEB;border:1.5px solid #D97706;}
+.alert-box .icon{font-size:1.5rem;flex-shrink:0;}
+.alert-box .content h4{font-size:.9rem;font-weight:700;margin-bottom:6px;}
+.alert-box.red .content h4{color:#991B1B;}
+.alert-box.blue .content h4{color:#1D4ED8;}
+.alert-box.green .content h4{color:#065F46;}
+.alert-box.yellow .content h4{color:#92400E;}
+.alert-box .content p{font-size:.82rem;line-height:1.65;}
+.alert-box.red .content p{color:#7F1D1D;}
+.alert-box.blue .content p{color:#1E3A8A;}
+.alert-box.green .content p{color:#064E3B;}
+.alert-box.yellow .content p{color:#78350F;}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:14px;margin-bottom:16px;}
+.kpi-card{background:#fff;border:1.5px solid var(--borda);border-radius:14px;padding:18px 16px;}
+.kpi-card .label{font-size:.7rem;text-transform:uppercase;letter-spacing:.5px;color:var(--roxo);font-weight:600;margin-bottom:6px;}
+.kpi-card .val{font-size:1.3rem;font-weight:800;color:#1F1135;line-height:1.1;}
+.kpi-card .sub{font-size:.7rem;color:var(--cinza);margin-top:4px;}
+
+footer{background:#141018;color:rgba(255,255,255,.5);padding:36px 20px;text-align:center;font-size:.78rem;}
+footer .logo-f{color:#A78BFA;font-weight:800;font-size:1rem;margin-bottom:8px;}
+footer p{margin-bottom:4px;}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <svg class="logo-bm" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="26,2 48,14 48,38 26,50 4,38 4,14" fill="none" stroke="white" stroke-width="2"/>
+      <polygon points="26,10 40,18 40,34 26,42 12,34 12,18" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="1.2"/>
+      <text x="26" y="31" text-anchor="middle" font-family="Poppins,sans-serif" font-size="13" font-weight="800" fill="white">BM</text>
+    </svg>
+    <h1>LS013 · Criativos Desativados por Menção ao Claude</h1>
+    <div class="sub">Workshop Especialista com IA — Marketex / Ana Tex</div>
+    <div class="ts">Relatório gerado em 22/08/2026 · Semana 17/08 → 22/08 (D1-D6) + resultado do dia (22/08)</div>
+    <div class="status-badge">⚠️ 12 criativos desligados hoje — impacto direto numa campanha de R$3.600/dia</div>
+    <div class="hero-kpis">
+      <div class="hero-kpi">
+        <div class="label">Vendas geradas (semana)</div>
+        <div class="val">127</div>
+        <div class="sub2">50% de todas as vendas do LS013 nesta semana</div>
+      </div>
+      <div class="hero-kpi">
+        <div class="label">Invest c/imp (semana)</div>
+        <div class="val">R$22.636</div>
+        <div class="sub2">CPA médio R$178,23</div>
+      </div>
+      <div class="hero-kpi">
+        <div class="label">ROAS médio (semana)</div>
+        <div class="val">0,36×</div>
+        <div class="sub2">média ponderada dos 12 criativos</div>
+      </div>
+      <div class="hero-kpi">
+        <div class="label">Criativos desligados</div>
+        <div class="val">12</div>
+        <div class="sub2">de 14 identificados com menção ao Claude</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTEXTO -->
+<section class="bg" style="padding-bottom:0;">
+<div class="container">
+  <div class="alert-box red">
+    <div class="icon">⚠️</div>
+    <div class="content">
+      <h4>Por que desativamos esses criativos</h4>
+      <p>Identificamos que vários criativos ativos do LS013 citam a marca "Claude" (Anthropic) diretamente no roteiro/copy. Pra evitar risco de política de anúncio e de marca, desligamos hoje (22/08) 12 desses criativos. Alguns deles estavam entre os melhores da captação — geraram <strong>127 vendas</strong> combinadas só nesta semana (17/08 a 22/08), quase metade de tudo que o LS013 vendeu no período. O desligamento tem impacto real, especialmente numa campanha que rodava com orçamento de R$3.600/dia sustentada majoritariamente por esses criativos.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- TABELA PRINCIPAL -->
+<section class="bg">
+<div class="container">
+  <div class="section-title">📋 Criativos desativados — resultado da semana vs. hoje</div>
+  <p style="font-size:.78rem;color:var(--cinza);margin-bottom:16px;">
+    Semana = 17/08 a 22/08 (D1-D6 do LS013, acumulado). Hoje = 22/08, gasto até o momento da desativação. CPA/ROAS calculados só quando há venda atribuída (VK Metrics, ad_attribution, product_id 7689363 · c/imp = spend × 1,1383).
+  </p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th>Criativo</th><th>Vendas sem.</th><th>CPA sem.</th><th>ROAS sem.</th><th>Vendas hoje</th><th>CPA hoje</th><th>ROAS hoje</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><a href="https://drive.google.com/file/d/1z_QguczndXRZca-cvuyyaQfk_UdM-vnz/view?usp=drivesdk" target="_blank">ADV320_LS_CAP_NEW_V1_CHAT CRIA ID VISUAL CLONE CONTEUDO_0.39</a></td>
+          <td class="bold">41</td><td>R$157,73</td><td>0,40×</td>
+          <td>4</td><td>R$151,14</td><td>0,41×</td>
+        </tr>
+        <tr>
+          <td><a href="https://drive.google.com/open?id=1bO2LCKa5mZ4cNJrMcGkrEw1CzOst-GlG&usp=drive_copy" target="_blank">ADV325_LS_CAP_NEW_V1_CHAT FAZ SITE ID E POSTS_HOOK49_BODY28_1.19</a></td>
+          <td class="bold">28</td><td>R$173,40</td><td>0,37×</td>
+          <td>1</td><td>R$431,83</td><td class="neg-txt">0,16×</td>
+        </tr>
+        <tr>
+          <td><a href="https://drive.google.com/open?id=1-NKoY1MJxs5OOP1lNJH34X8jJo_VklRd&usp=drive_copy" target="_blank">ADC023_LS_CAP_NEW_V1_1 MES DE POST EM UMA TARDE</a></td>
+          <td class="bold">18</td><td>R$226,98</td><td>0,27×</td>
+          <td>0</td><td>—</td><td>—</td>
+        </tr>
+        <tr>
+          <td><a href="https://drive.google.com/file/d/14UCpiBmwYlHC7s0KI75OGfRB4i-U-Lea/view?usp=drive_link" target="_blank">ADV291_LS_CAP_NEW_V1_MAQUINA DE PROSPECCAO DE CLIENTES_HOOK16_BODY10_1.16</a></td>
+          <td class="bold">17</td><td>R$159,18</td><td>0,39×</td>
+          <td>1</td><td>R$475,44</td><td class="neg-txt">0,13×</td>
+        </tr>
+        <tr style="background:rgba(124,58,237,.04);">
+          <td><a href="https://drive.google.com/file/d/1ANbRwgveTLq0D7nzaanFap4z6jTaxgzu/view?usp=drivesdk" target="_blank">ADV365_LS_CAP_NEW_V1_QUER AUTOMATIZAR TAREFAS COM O CHATGPT E O CLAUDE_1.25</a> <span class="tag tag-star">★ replicar</span></td>
+          <td class="bold pos-txt">14</td><td class="pos-txt">R$121,04</td><td class="pos-txt bold">0,51×</td>
+          <td class="pos-txt bold">3</td><td class="pos-txt">R$39,56</td><td class="pos-txt bold">1,58×</td>
+        </tr>
+        <tr>
+          <td><a href="https://drive.google.com/file/d/1_DMO-rsBdcnQ9Pt_wzTrduybwkInUZ-G/view" target="_blank">ADV309_LS_CAP_OTM_V9_MAQUINA DE CONTEUDO_HOOK31_BODY19_CTA03_1.39</a></td>
+          <td class="bold">4</td><td class="neg-txt">R$292,83</td><td class="neg-txt">0,21×</td>
+          <td>1</td><td>R$121,90</td><td class="pos-txt">0,51×</td>
+        </tr>
+        <tr>
+          <td><a href="https://drive.google.com/open?id=1nmfJoWX0sNOGB0UXB86rBQemkrQQmDIG&usp=drive_copy" target="_blank">ADV327_LS_CAP_NEW_V1_WORKSHOP PAGINA PRONTA_HOOK51_BODY30_0.49</a></td>
+          <td>3</td><td>R$211,48</td><td>0,29×</td>
+          <td>0</td><td>—</td><td>—</td>
+        </tr>
+        <tr>
+          <td><a href="https://drive.google.com/file/d/1aq4nm9CXgJnJDzg2oyHbjdbr2gTwhhoh/view?usp=drivesdk" target="_blank">ADV333_LS_CAP_NEW_V1_COMO DOMINAR IA PARA CRIAR_1.11</a></td>
+          <td>2</td><td>R$179,34</td><td>0,38×</td>
+          <td>0</td><td>—</td><td>—</td>
+        </tr>
+        <tr>
+          <td><a href="https://drive.google.com/file/d/186Dc6YuC2POxLPaRRgvqCnu8IJnAGZYN/view?usp=drivesdk" target="_blank">ADV321_LS_CAP_NEW_V1_CHAT FAZ SUA ID VISUAL_0.37</a></td>
+          <td>0</td><td>—</td><td>—</td>
+          <td>0</td><td>—</td><td>—</td>
+        </tr>
+        <tr>
+          <td><a href="https://drive.google.com/file/d/18onDcPA4pecgBX19ZuXnFPXvnJipRtbh/view?usp=drivesdk" target="_blank">ADV363_LS_CAP_NEW_V1_QUAL A MELHOR IA_1.01</a></td>
+          <td>0</td><td>—</td><td>—</td>
+          <td>0</td><td>—</td><td>—</td>
+        </tr>
+        <tr>
+          <td><a href="https://drive.google.com/file/d/1D0nxCxRSWqgLNPuMK0vSjNeULkkAk20W/view?usp=drivesdk" target="_blank">ADV267_LS_CAP_NEW_V1_MAQUINA DE CONTEUDO_HOOK10_BODY14_1.40</a></td>
+          <td>0</td><td>—</td><td>—</td>
+          <td class="muted">já desligado antes de hoje</td><td></td><td></td>
+        </tr>
+        <tr>
+          <td><a href="https://drive.google.com/file/d/1uDx1KAOpMegex7Xos00xDvw2FiI_sb8V/view?usp=drivesdk" target="_blank">ADV351_LS_CAP_NEW_V1_ESPECIALISTA NAO USA IA ACHA DIFICIL_1.17</a></td>
+          <td>0</td><td>—</td><td>—</td>
+          <td class="muted">já desligado antes de hoje</td><td></td><td></td>
+        </tr>
+        <tr class="hl">
+          <td class="hl">TOTAL (12 criativos desativados)</td>
+          <td class="hl bold">127</td><td class="hl">R$178,23</td><td class="hl">0,36×</td>
+          <td class="hl bold">10</td><td class="hl">R$257,23</td><td class="hl neg-txt">0,24×</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:.75rem;color:var(--cinza);margin-top:12px;line-height:1.6;">
+    ⚠️ 127 vendas dos 12 criativos desativados representam <strong>~50% de todas as vendas do LS013 nesta semana</strong> (254 ingressos no total D1-D6). É um corte grande — não uma poda de criativos fracos, é a saída de parte relevante do motor de vendas da captação.
+  </p>
+</div>
+</section>
+
+<!-- ADV365 DESTAQUE -->
+<section class="bg-soft">
+<div class="container">
+  <div class="alert-box green">
+    <div class="icon">💡</div>
+    <div class="content">
+      <h4>ADV365 — conteúdo bom pra replicar com o novo estilo</h4>
+      <p>Esse criativo específico (<a href="https://drive.google.com/file/d/1ANbRwgveTLq0D7nzaanFap4z6jTaxgzu/view?usp=drivesdk" target="_blank"><strong>ADV365_LS_CAP_NEW_V1_QUER AUTOMATIZAR TAREFAS COM O CHATGPT E O CLAUDE_1.25</strong></a>) foi o melhor de todo o grupo desativado — CPA R$121,04 e ROAS 0,51× na semana, subindo pra CPA R$39,56 e ROAS 1,58× só hoje antes de ser desligado. Segundo o Rafael, é um conteúdo muito bom pra <strong>replicar agora com o novo estilo que vai lançar com as novas entregas do Workshop</strong> — vale usar como referência de roteiro/ângulo pra próxima leva de criativos, só trocando a menção à ferramenta específica.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- CAMPANHA AFETADA -->
+<section class="bg">
+<div class="container">
+  <div class="section-title">📉 Impacto na campanha de R$3.600/dia</div>
+  <div class="alert-box yellow">
+    <div class="icon">🚧</div>
+    <div class="content">
+      <h4>Praticamente voltando alguns passos na estrutura</h4>
+      <p>Uma das campanhas rodava com orçamento de <strong>R$3.600/dia</strong> sustentada majoritariamente pelos criativos que caíram na lista de desativados — eram justamente os que estavam performando bem e com CPA competitivo. Com o desligamento, essa campanha vai ser muito afetada: já reduzimos o orçamento pra dar tempo dos criativos que sobraram tentarem sustentar sozinhos. Se não derem conta, a saída vai ser <strong>criar estrutura e criativos novos do zero</strong> pra escalar de novo. Não é começar do zero — é dar vários passos pra trás na conta pra depois voltar a subir.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- NAO DESATIVADOS -->
+<section class="bg-soft">
+<div class="container">
+  <div class="section-title">✅ Dois que NÃO foram desativados</div>
+  <div class="table-wrap" style="margin-bottom:14px;">
+    <table>
+      <thead><tr><th>Criativo</th><th>Vendas sem.</th><th>CPA sem.</th><th>ROAS sem.</th><th>Vendas hoje</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><a href="https://drive.google.com/file/d/1enBjJ-KPkJsvF43uLj3Z1defCEKLjq9r/view?usp=drivesdk" target="_blank">ADV367_LS_CAP_NEW_V1_VOCE USA O CHATGPT COMO GOOGLE_0.41</a></td>
+          <td class="bold">9</td><td>R$179,78</td><td>0,35×</td>
+          <td>2</td><td><span class="tag tag-on">mantido ativo</span></td>
+        </tr>
+        <tr>
+          <td><a href="https://drive.google.com/file/d/1vh7XEQpX0P8q47BM7ESE205ekNnjcsbF/view?usp=drivesdk" target="_blank">ADV361_LS_CAP_NEW_V1_RESPONDENDO PERGUNTA_0.53</a></td>
+          <td>0</td><td>—</td><td>—</td>
+          <td>0</td><td><span class="tag tag-on">mantido ativo</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:.8rem;color:var(--cinza);line-height:1.65;">
+    Segundo o Rafael, esses dois não foram desligados por dois motivos: <strong>(1)</strong> a menção ao "Claude" aparece de forma muito sutil, só no finalzinho do vídeo ("eu vou te ensinar como dominar o ChatGPT e o Claude"), e <strong>(2)</strong> ambos seguem entregando bons resultados — ficou complicado justificar tirar todos de uma vez. Vale monitorar de perto e reavaliar se a política de anúncio apertar mais.
+  </p>
+</div>
+</section>
+
+<footer>
+  <div class="logo-f">Brito Mídias</div>
+  <p>LS013 · Workshop Especialista com IA · Marketex / Ana Tex</p>
+  <p>Relatório gerado em 22/08/2026 · Fonte: VK Metrics (ad_attribution)</p>
+</footer>
+
+</body>
+</html>
