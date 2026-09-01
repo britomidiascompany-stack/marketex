@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rastracking100 — Plano de Estudo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --roxo:#7C3AED;--roxo-dark:#5B21B6;--roxo-deep:#3B0F73;
+  --roxo-light:#A78BFA;--roxo-xlight:#EDE9FE;
+  --preto:#0A0A0A;--ink:#141018;--cinza:#5B5566;--linha:#E7E3EE;
+  --bg:#FFFFFF;--bg-soft:#FAF9FC;
+  --grad-marca:linear-gradient(90deg,#7C3AED,#5B21B6);
+  --grad-realce:linear-gradient(135deg,#5B21B6 0%,#A78BFA 100%);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:'Poppins',sans-serif;font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* HERO */
+.hero{
+  background:radial-gradient(1100px 500px at 78% -10%,rgba(124,58,237,.55),transparent 60%),
+    linear-gradient(150deg,#0A0A0A 0%,#17111F 45%,#3B0F73 100%);
+  position:relative;overflow:hidden;padding:0;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:44px 44px;
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,black 40%,transparent 100%);
+  mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,black 40%,transparent 100%);
+}
+.hero-inner{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:36px 28px 0}
+
+/* LOGO */
+.brand{display:flex;align-items:center;gap:14px;margin-bottom:36px}
+.brand svg{width:44px;height:44px}
+.brand-text{display:flex;align-items:center;gap:12px;font-size:20px;font-weight:300;color:#fff}
+.brand-text b{font-weight:800}
+.brand-bar{width:2px;height:28px;background:rgba(255,255,255,.45)}
+.brand-text span{letter-spacing:.22em;font-size:18px}
+
+/* HERO CONTENT */
+.hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--roxo-light);
+  background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.25);
+  border-radius:100px;padding:5px 14px;margin-bottom:18px}
+.hero-tag::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--roxo-light)}
+.hero h1{font-size:clamp(26px,4.5vw,46px);font-weight:800;color:#fff;
+  letter-spacing:-.02em;line-height:1.08;text-wrap:balance;margin-bottom:10px}
+.hero h1 em{font-style:normal;background:var(--grad-realce);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:14px;color:rgba(255,255,255,.6);max-width:520px;margin-bottom:0}
+
+/* STATS STRIP */
+.stats-strip{display:flex;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.1);margin-top:32px}
+.stat{flex:1;min-width:110px;padding:16px 20px;border-right:1px solid rgba(255,255,255,.08)}
+.stat:last-child{border-right:none}
+.stat .num{font-size:26px;font-weight:700;color:#fff;line-height:1}
+.stat .lbl{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);margin-top:3px}
+
+/* PROGRESS SECTION */
+.progress-wrap{max-width:1080px;margin:0 auto;padding:28px 28px 0}
+.progress-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:20px}
+.prog-card{background:var(--bg-soft);border:1px solid var(--linha);border-radius:14px;padding:16px 18px}
+.prog-card .pc-label{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--roxo);
+  display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.prog-card .pc-label::before{content:"";width:24px;height:2px;background:var(--roxo);border-radius:2px}
+.prog-card .pc-count{font-size:22px;font-weight:700;color:var(--ink)}
+.prog-card .pc-sub{font-size:12px;color:var(--cinza)}
+.prog-bar-wrap{margin-top:8px;background:var(--linha);border-radius:100px;height:6px;overflow:hidden}
+.prog-bar{height:100%;background:var(--grad-marca);border-radius:100px;transition:width .4s ease}
+
+/* TABS */
+.tabs-wrap{max-width:1080px;margin:24px auto 0;padding:0 28px}
+.tabs-nav{display:flex;gap:0;border-bottom:2px solid var(--linha);margin-bottom:0}
+.tab-btn{background:none;border:none;padding:12px 20px;font-family:'Poppins',sans-serif;
+  font-size:13px;font-weight:600;color:var(--cinza);cursor:pointer;
+  border-bottom:2px solid transparent;margin-bottom:-2px;transition:.15s;letter-spacing:.02em}
+.tab-btn:hover{color:var(--roxo)}
+.tab-btn.active{color:var(--roxo);border-bottom-color:var(--roxo)}
+.tab-panel{display:none;padding:24px 0 60px}
+.tab-panel.active{display:block}
+
+/* SECTION LABEL */
+.sec-label{display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--roxo);margin-bottom:16px}
+.sec-label::before{content:"";width:34px;height:2px;background:var(--roxo);border-radius:2px}
+
+/* DAY TABLE */
+.day-table-wrap{overflow-x:auto;border:1px solid var(--linha);border-radius:14px}
+table.day-table{width:100%;border-collapse:collapse;min-width:500px}
+table.day-table thead th{background:var(--bg-soft);padding:10px 14px;text-align:left;
+  font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--cinza);border-bottom:1px solid var(--linha)}
+table.day-table tbody tr{border-bottom:1px solid var(--linha);transition:.1s}
+table.day-table tbody tr:last-child{border-bottom:none}
+table.day-table tbody tr:hover{background:var(--bg-soft)}
+table.day-table tbody tr.completed{background:#F0FDF4}
+table.day-table tbody tr.today{background:#FAF5FF}
+table.day-table td{padding:12px 14px;font-size:13px;vertical-align:middle}
+table.day-table td.td-day{font-weight:700;color:var(--roxo);white-space:nowrap;font-size:14px}
+table.day-table td.td-date{font-size:12px;color:var(--cinza);white-space:nowrap}
+table.day-table td.td-content{line-height:1.5}
+table.day-table td.td-check{text-align:center;width:60px}
+
+/* BADGE */
+.badge{display:inline-flex;align-items:center;font-size:10px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;border-radius:100px;padding:2px 8px}
+.badge.done{background:#DCFCE7;color:#16A34A}
+.badge.today{background:var(--roxo-xlight);color:var(--roxo-dark)}
+.badge.next{background:#F0F9FF;color:#0284C7}
+.badge.pending{background:var(--bg-soft);color:var(--cinza)}
+
+/* CUSTOM CHECKBOX */
+.cb-wrap{display:flex;align-items:center;justify-content:center}
+.cb-wrap input[type="checkbox"]{appearance:none;-webkit-appearance:none;
+  width:20px;height:20px;border:2px solid var(--linha);border-radius:6px;
+  background:var(--bg);cursor:pointer;position:relative;transition:.15s;flex-shrink:0}
+.cb-wrap input[type="checkbox"]:hover{border-color:var(--roxo-light)}
+.cb-wrap input[type="checkbox"]:checked{background:var(--grad-marca);border-color:transparent}
+.cb-wrap input[type="checkbox"]:checked::after{
+  content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:12px;font-weight:700}
+
+/* MODULE ACCORDION */
+.module-list{display:flex;flex-direction:column;gap:10px}
+.module-card{border:1px solid var(--linha);border-radius:14px;overflow:hidden;background:var(--bg)}
+.module-header{display:flex;align-items:center;gap:14px;padding:14px 18px;
+  cursor:pointer;user-select:none;transition:.15s}
+.module-header:hover{background:var(--bg-soft)}
+.mod-tag{font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--roxo-dark);
+  background:var(--roxo-xlight);border-radius:6px;padding:2px 8px;white-space:nowrap;flex-shrink:0}
+.mod-title{font-size:14px;font-weight:600;flex:1}
+.mod-prog{font-size:12px;color:var(--cinza);white-space:nowrap}
+.mod-arrow{font-size:12px;color:var(--cinza);transition:.2s;flex-shrink:0}
+.module-card.open .mod-arrow{transform:rotate(180deg)}
+.module-body{display:none;border-top:1px solid var(--linha);background:var(--bg-soft)}
+.module-card.open .module-body{display:block}
+.lesson-list{padding:8px 0}
+.lesson-row{display:flex;align-items:center;gap:12px;padding:8px 18px;
+  border-bottom:1px solid rgba(0,0,0,.04)}
+.lesson-row:last-child{border-bottom:none}
+.lesson-row:hover{background:rgba(124,58,237,.04)}
+.lesson-row.lesson-done{background:rgba(34,197,94,.04)}
+.lesson-num{font-size:11px;font-weight:600;color:var(--cinza);min-width:28px}
+.lesson-title{font-size:13px;flex:1;font-weight:400}
+.lesson-yt a{display:inline-flex;align-items:center;gap:5px;font-size:11px;
+  color:#CC0000;text-decoration:none;font-weight:500;white-space:nowrap}
+.lesson-yt a:hover{text-decoration:underline}
+.lesson-yt a::before{content:"▶";font-size:9px}
+
+/* MILESTONES */
+.milestone-box{background:linear-gradient(135deg,var(--roxo-xlight),rgba(167,139,250,.15));
+  border:1px solid var(--roxo-light);border-radius:10px;padding:10px 14px;
+  font-size:12px;font-weight:600;color:var(--roxo-dark);margin-top:4px;display:inline-block}
+.milestone-box::before{content:"⚑ "}
+
+/* RESET BTN */
+.reset-btn{background:none;border:1px solid var(--linha);color:var(--cinza);
+  font-family:'Poppins',sans-serif;font-size:12px;font-weight:500;padding:6px 14px;
+  border-radius:8px;cursor:pointer;transition:.15s;margin-top:16px}
+.reset-btn:hover{border-color:var(--roxo-light);color:var(--roxo)}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(255,255,255,.35);font-size:11px;
+  text-align:center;padding:24px 28px;letter-spacing:.06em}
+footer b{color:var(--roxo-light);font-weight:600}
+
+/* SAVE NOTE */
+.save-note{background:var(--bg-soft);border:1px solid var(--linha);border-radius:10px;
+  padding:12px 16px;font-size:12px;color:var(--cinza);margin-top:16px;display:flex;align-items:flex-start;gap:8px}
+.save-note::before{content:"💾";flex-shrink:0}
+
+@media(max-width:600px){
+  .stats-strip{flex-wrap:wrap}
+  .stat{min-width:50%}
+  .hero h1{font-size:26px}
+  .tabs-nav{overflow-x:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="brand">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4"
+           stroke-linejoin="round" stroke-linecap="round">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+        <polygon points="50,33 65,59 35,59"></polygon>
+        <line x1="50" y1="4" x2="50" y2="33"></line>
+        <line x1="90" y1="73" x2="65" y2="59"></line>
+        <line x1="10" y1="73" x2="35" y2="59"></line>
+        <line x1="90" y1="27" x2="50" y2="33"></line>
+        <line x1="90" y1="27" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="35" y2="59"></line>
+        <line x1="10" y1="27" x2="35" y2="59"></line>
+        <line x1="10" y1="27" x2="50" y2="33"></line>
+      </svg>
+      <div class="brand-text">
+        <b>BM</b>
+        <div class="brand-bar"></div>
+        <span>MÍDIAS</span>
+      </div>
+    </div>
+
+    <div class="hero-tag">Plano de Estudo</div>
+    <h1>Rastracking<em>100</em><br>Dericson Calari</h1>
+    <p>202 aulas · 15 módulos · ~58 horas · 2 horas por dia · conclusão em 30 dias</p>
+
+    <div class="stats-strip">
+      <div class="stat"><div class="num">202</div><div class="lbl">Aulas totais</div></div>
+      <div class="stat"><div class="num">15</div><div class="lbl">Módulos</div></div>
+      <div class="stat"><div class="num">~58h</div><div class="lbl">Duração estimada</div></div>
+      <div class="stat"><div class="num">2h</div><div class="lbl">Por dia</div></div>
+      <div class="stat"><div class="num">29</div><div class="lbl">Dias para concluir</div></div>
+      <div class="stat"><div class="num">30/set</div><div class="lbl">Conclusão em 2026</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div style="margin-top:24px">
+    <div class="sec-label">Progresso Geral</div>
+    <div class="progress-cards">
+      <div class="prog-card">
+        <div class="pc-label">Dias concluídos</div>
+        <div class="pc-count"><span id="days-done">0</span>/29</div>
+        <div class="pc-sub" id="days-pct">0% do cronograma</div>
+        <div class="prog-bar-wrap"><div class="prog-bar" id="bar-days" style="width:0%"></div></div>
+      </div>
+      <div class="prog-card">
+        <div class="pc-label">Aulas assistidas</div>
+        <div class="pc-count"><span id="lessons-done">0</span>/202</div>
+        <div class="pc-sub" id="lessons-pct">0% do conteúdo</div>
+        <div class="prog-bar-wrap"><div class="prog-bar" id="bar-lessons" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="save-note">O progresso é salvo automaticamente no navegador. Não é necessário criar conta ou clicar em "salvar" — ao marcar uma aula ou dia, ele fica registrado aqui mesmo.</div>
+    <button class="reset-btn" onclick="resetAll()">Reiniciar progresso</button>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrap">
+  <div class="tabs-nav">
+    <button class="tab-btn active" onclick="switchTab('cronograma',this)">📅 Cronograma (29 dias)</button>
+    <button class="tab-btn" onclick="switchTab('aulas',this)">📚 Aulas (202 aulas)</button>
+  </div>
+
+  <!-- TAB: CRONOGRAMA -->
+  <div class="tab-panel active" id="tab-cronograma">
+    <div class="sec-label">Dia a dia — início em 01/set/2026</div>
+    <div class="day-table-wrap">
+      <table class="day-table" id="day-table">
+        <thead>
+          <tr>
+            <th>Dia</th>
+            <th>Data</th>
+            <th style="min-width:300px">O que estudar</th>
+            <th>Status</th>
+            <th>✓</th>
+          </tr>
+        </thead>
+        <tbody id="day-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB: AULAS -->
+  <div class="tab-panel" id="tab-aulas">
+    <div class="sec-label">Todos os módulos e aulas</div>
+    <div class="module-list" id="module-list"></div>
+  </div>
+</div>
+
+<footer>
+  <b>Brito Mídias</b> · rafael@britomidias.com.br · Plano gerado em 01/set/2026 · Rastracking100 — Dericson Calari
+</footer>
+
+<script>
+// ─── DATA ───────────────────────────────────────────────────────────────────
+
+const MODULES = [
+  {id:'M1',  name:'Seja bem-vindo ao multiverso do rastreamento', count:5, lessons:[
+    {title:'Bem-vindo ao Rastracking100!', yt:'tTnZdM_di0A'},
+    {title:'Ferramentas que iremos utilizar', yt:'HU-Fa-fKvX4'},
+    {title:'Você tem 7 dias...'},
+    {title:'Suporte e Grupo no Discord'},
+    {title:'Feedback'},
+  ]},
+  {id:'M2',  name:'Os diferentes universos do rastracking', count:20},
+  {id:'M3a', name:'API de Conversões + Advanced Match — Facebook Ads', count:38},
+  {id:'M3b', name:'API de Conversões do Google Ads', count:5},
+  {id:'M4',  name:'O rastreamento externo', count:25},
+  {id:'M5',  name:'Rastreamento e Trackeamento de WhatsApp (com site)', count:27},
+  {id:'M6',  name:'Tracking próprio do ActiveCampaign (não é via UTM)', count:11},
+  {id:'M7',  name:'Bônus: Tag Manager — Tracking sem formulário', count:3},
+  {id:'M8',  name:'Data Tag e Data Client Stape', count:3},
+  {id:'M9',  name:'Método Purchase100: contingência de envio de eventos', count:13},
+  {id:'M10', name:'Conversão Offline do Google Ads', count:7},
+  {id:'M11', name:'Typebot: Rastreio e Tracking', count:5},
+  {id:'M13', name:'Bônus: Dashboards', count:19},
+  {id:'M14', name:'VPS e instalações — N8n e MySQL', count:15},
+  {id:'M15', name:'Como vender seu serviço de implementação', count:6},
+];
+
+const MILESTONES = {
+  4:'✅ M1 + M2 concluídos — fundação teórica pronta',
+  9:'✅ API de Conversões Meta (M3.a) concluída',
+  10:'✅ API de Conversões Google (M3.b) concluída',
+  13:'✅ Rastreamento Externo (M4) concluído',
+  17:'✅ Tracking de WhatsApp (M5) concluído',
+  19:'✅ ActiveCampaign + Tag Manager + Stape concluídos',
+  22:'✅ Purchase100 + Google Offline + Typebot concluídos',
+  25:'✅ Dashboards (M13) concluídos',
+  28:'✅ VPS / N8n / MySQL (M14) concluídos',
+  29:'🏁 CURSO CONCLUÍDO — Rastracking100',
+};
+
+const PER_DAY = 7; // avg aulas por dia (~2h)
+const TOTAL_DAYS = 29;
+const START_YEAR = 2026;
+const START_MONTH = 8; // 0-indexed: August = 8, September
+const START_DAY_OF_MONTH = 1;
+
+// Fill lesson titles where not provided
+MODULES.forEach(m => {
+  if (!m.lessons) m.lessons = [];
+  for (let i = m.lessons.length; i < m.count; i++) {
+    m.lessons.push({title: 'Aula ' + (i + 1)});
+  }
+});
+
+// Compute day-by-day plan
+function computeDayPlan() {
+  const days = [];
+  let mIdx = 0, lIdx = 0;
+  const dates = [
+    '01/set','02/set','03/set','04/set','05/set','06/set','07/set',
+    '08/set','09/set','10/set','11/set','12/set','13/set','14/set',
+    '15/set','16/set','17/set','18/set','19/set','20/set','21/set',
+    '22/set','23/set','24/set','25/set','26/set','27/set','28/set',
+    '29/set',
+  ];
+
+  let totalAssigned = 0;
+  for (let day = 1; day <= TOTAL_DAYS; day++) {
+    const remaining_total = 202 - totalAssigned;
+    const remaining_days = TOTAL_DAYS - day + 1;
+    const take_today = day < TOTAL_DAYS ? PER_DAY : remaining_total;
+    let remaining = take_today;
+    const segments = [];
+
+    while (remaining > 0 && mIdx < MODULES.length) {
+      const mod = MODULES[mIdx];
+      const available = mod.count - lIdx;
+      const take = Math.min(remaining, available);
+      segments.push({modId: mod.id, modName: mod.name, from: lIdx + 1, to: lIdx + take, total: mod.count});
+      lIdx += take;
+      remaining -= take;
+      totalAssigned += take;
+      if (lIdx >= mod.count) { mIdx++; lIdx = 0; }
+    }
+    days.push({day, date: dates[day - 1], segments});
+  }
+  return days;
+}
+
+const DAY_PLAN = computeDayPlan();
+
+// ─── STORAGE ────────────────────────────────────────────────────────────────
+const KEY_DAYS = 'rast100_days';
+const KEY_LESSONS = 'rast100_lessons';
+
+function loadSet(key) {
+  try { return new Set(JSON.parse(localStorage.getItem(key) || '[]')); }
+  catch(e) { return new Set(); }
+}
+function saveSet(key, s) {
+  try { localStorage.setItem(key, JSON.stringify([...s])); } catch(e){}
+}
+
+let completedDays = loadSet(KEY_DAYS);
+let completedLessons = loadSet(KEY_LESSONS);
+
+// ─── UTILS ──────────────────────────────────────────────────────────────────
+function lessonKey(modId, lessonIdx) { return modId + '_' + lessonIdx; }
+
+function getTodayDayNum() {
+  try {
+    const today = new Date();
+    const start = new Date(2026, 8, 1); // Sept 1 2026
+    const diff = Math.floor((today - start) / 86400000);
+    return Math.min(29, Math.max(1, diff + 1));
+  } catch(e) { return 1; }
+}
+
+function updateProgress() {
+  const dd = completedDays.size;
+  const dl = completedLessons.size;
+  const ddp = Math.round(dd / 29 * 100);
+  const dlp = Math.round(dl / 202 * 100);
+
+  document.getElementById('days-done').textContent = dd;
+  document.getElementById('days-pct').textContent = ddp + '% do cronograma';
+  document.getElementById('bar-days').style.width = ddp + '%';
+  document.getElementById('lessons-done').textContent = dl;
+  document.getElementById('lessons-pct').textContent = dlp + '% do conteúdo';
+  document.getElementById('bar-lessons').style.width = dlp + '%';
+}
+
+// ─── RENDER CRONOGRAMA ───────────────────────────────────────────────────────
+function renderDayTable() {
+  const todayNum = getTodayDayNum();
+  const tbody = document.getElementById('day-tbody');
+  tbody.innerHTML = '';
+
+  DAY_PLAN.forEach(({day, date, segments}) => {
+    const isDone = completedDays.has(day);
+    const isToday = day === todayNum;
+    const isPast = day < todayNum;
+
+    const tr = document.createElement('tr');
+    if (isDone) tr.classList.add('completed');
+    else if (isToday) tr.classList.add('today');
+
+    // Day num
+    const tdDay = document.createElement('td');
+    tdDay.className = 'td-day';
+    tdDay.textContent = 'Dia ' + day;
+    tr.appendChild(tdDay);
+
+    // Date
+    const tdDate = document.createElement('td');
+    tdDate.className = 'td-date';
+    tdDate.textContent = date;
+    tr.appendChild(tdDate);
+
+    // Content
+    const tdContent = document.createElement('td');
+    tdContent.className = 'td-content';
+    const segHtml = segments.map(s => {
+      const range = s.from === s.to ? 'Aula ' + s.from : 'Aulas ' + s.from + '–' + s.to;
+      return '<span style="color:var(--roxo-dark);font-weight:600">' + s.modId + '</span> — ' + range;
+    }).join(' &nbsp;·&nbsp; ');
+    let html = segHtml;
+    if (MILESTONES[day]) {
+      html += '<br><span class="milestone-box">' + MILESTONES[day] + '</span>';
+    }
+    tdContent.innerHTML = html;
+    tr.appendChild(tdContent);
+
+    // Status
+    const tdStatus = document.createElement('td');
+    if (isDone) tdStatus.innerHTML = '<span class="badge done">Concluído</span>';
+    else if (isToday) tdStatus.innerHTML = '<span class="badge today">Hoje</span>';
+    else if (isPast) tdStatus.innerHTML = '<span class="badge pending">Pendente</span>';
+    else tdStatus.innerHTML = '<span class="badge next">Próximo</span>';
+    tr.appendChild(tdStatus);
+
+    // Checkbox
+    const tdCheck = document.createElement('td');
+    tdCheck.className = 'td-check';
+    const cbWrap = document.createElement('div');
+    cbWrap.className = 'cb-wrap';
+    const cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.checked = isDone;
+    cb.setAttribute('aria-label', 'Marcar dia ' + day + ' como concluído');
+    cb.addEventListener('change', () => {
+      if (cb.checked) completedDays.add(day); else completedDays.delete(day);
+      saveSet(KEY_DAYS, completedDays);
+      renderDayTable();
+      updateProgress();
+    });
+    cbWrap.appendChild(cb);
+    tdCheck.appendChild(cbWrap);
+    tr.appendChild(tdCheck);
+
+    tbody.appendChild(tr);
+  });
+}
+
+// ─── RENDER MODULE LIST ──────────────────────────────────────────────────────
+function renderModules() {
+  const container = document.getElementById('module-list');
+  container.innerHTML = '';
+
+  MODULES.forEach(mod => {
+    const done = mod.lessons.filter((_, i) => completedLessons.has(lessonKey(mod.id, i))).length;
+
+    const card = document.createElement('div');
+    card.className = 'module-card';
+
+    const header = document.createElement('div');
+    header.className = 'module-header';
+    header.innerHTML =
+      '<span class="mod-tag">' + mod.id + '</span>' +
+      '<span class="mod-title">' + mod.name + '</span>' +
+      '<span class="mod-prog">' + done + '/' + mod.count + '</span>' +
+      '<span class="mod-arrow">▼</span>';
+    header.onclick = () => {
+      card.classList.toggle('open');
+    };
+    card.appendChild(header);
+
+    const body = document.createElement('div');
+    body.className = 'module-body';
+    const lessonList = document.createElement('div');
+    lessonList.className = 'lesson-list';
+
+    mod.lessons.forEach((lesson, i) => {
+      const key = lessonKey(mod.id, i);
+      const isDoneLesson = completedLessons.has(key);
+
+      const row = document.createElement('div');
+      row.className = 'lesson-row' + (isDoneLesson ? ' lesson-done' : '');
+
+      const num = document.createElement('span');
+      num.className = 'lesson-num';
+      num.textContent = String(i + 1).padStart(2, '0');
+      row.appendChild(num);
+
+      const cbW = document.createElement('div');
+      cbW.className = 'cb-wrap';
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.checked = isDoneLesson;
+      cb.setAttribute('aria-label', 'Marcar aula ' + (i+1));
+      cb.addEventListener('change', () => {
+        if (cb.checked) completedLessons.add(key);
+        else completedLessons.delete(key);
+        saveSet(KEY_LESSONS, completedLessons);
+        row.classList.toggle('lesson-done', cb.checked);
+        // Update module header count
+        const newDone = mod.lessons.filter((_, j) => completedLessons.has(lessonKey(mod.id, j))).length;
+        header.querySelector('.mod-prog').textContent = newDone + '/' + mod.count;
+        updateProgress();
+      });
+      cbW.appendChild(cb);
+      row.appendChild(cbW);
+
+      const title = document.createElement('span');
+      title.className = 'lesson-title';
+      title.textContent = lesson.title;
+      row.appendChild(title);
+
+      if (lesson.yt) {
+        const ytWrap = document.createElement('span');
+        ytWrap.className = 'lesson-yt';
+        const a = document.createElement('a');
+        a.href = 'https://www.youtube.com/watch?v=' + lesson.yt;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.textContent = 'YouTube';
+        ytWrap.appendChild(a);
+        row.appendChild(ytWrap);
+      }
+
+      lessonList.appendChild(row);
+    });
+
+    body.appendChild(lessonList);
+    card.appendChild(body);
+    container.appendChild(card);
+  });
+}
+
+// ─── TABS ────────────────────────────────────────────────────────────────────
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+}
+
+// ─── RESET ───────────────────────────────────────────────────────────────────
+function resetAll() {
+  if (!confirm('Reiniciar todo o progresso? Esta ação não pode ser desfeita.')) return;
+  completedDays = new Set();
+  completedLessons = new Set();
+  saveSet(KEY_DAYS, completedDays);
+  saveSet(KEY_LESSONS, completedLessons);
+  renderDayTable();
+  renderModules();
+  updateProgress();
+}
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+renderDayTable();
+renderModules();
+updateProgress();
+</script>
+</body>
+</html>
