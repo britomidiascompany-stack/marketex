@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sala Secreta · Relatório de Tráfego Pago — 07.09.26 · Brito Mídias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --roxo:#7C3AED; --roxo-dark:#5B21B6; --roxo-deep:#3B0F73; --roxo-light:#A78BFA; --roxo-xlight:#EDE9FE;
+    --preto:#0A0A0A; --ink:#141018; --cinza:#5B5566; --linha:#E7E3EE; --bg:#FFFFFF; --bg-soft:#FAF9FC;
+    --good:#16A34A; --warn:#D97706; --bad:#DC2626;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:'Poppins',-apple-system,sans-serif; font-weight:300; background:var(--bg); color:var(--ink); line-height:1.6; font-size:16px; }
+  a { color:var(--roxo); text-decoration:none; } a:hover{ text-decoration:underline; }
+
+  .hero { background: radial-gradient(1100px 500px at 78% -10%, rgba(124,58,237,.55), transparent 60%), linear-gradient(150deg,#0A0A0A 0%,#17111F 45%,#3B0F73 100%); color:#fff; padding:44px 28px 56px; position:relative; overflow:hidden; }
+  .hero::before { content:""; position:absolute; inset:0; background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px); background-size:44px 44px; mask-image: radial-gradient(ellipse at 50% 30%, black 40%, transparent 80%); pointer-events:none; }
+  .hero-inner { max-width:1100px; margin:0 auto; position:relative; z-index:1; }
+  .brand { display:flex; align-items:center; gap:16px; margin-bottom:32px; }
+  .brand svg { width:44px; height:44px; }
+  .brand .word { display:flex; align-items:center; gap:12px; font-weight:300; color:#fff; }
+  .brand .word b { font-weight:800; font-size:20px; }
+  .brand .word .bar { width:2px; height:28px; background:rgba(255,255,255,.55); }
+  .brand .word span { font-size:18px; letter-spacing:.22em; }
+  .hero .eyebrow { color:var(--roxo-light); font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; margin-bottom:12px; }
+  .hero h1 { font-size:42px; font-weight:800; letter-spacing:-.02em; margin:0 0 8px; color:#fff; line-height:1.1; }
+  .hero .sub { font-size:15px; color:rgba(255,255,255,.65); margin-bottom:24px; }
+  .hero .pills { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+  .hero .pill { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); color:#fff; padding:8px 16px; border-radius:100px; font-size:12px; font-weight:600; letter-spacing:.06em; }
+  .hero .pill.solid { background:linear-gradient(90deg,var(--roxo),var(--roxo-dark)); border-color:transparent; }
+
+  .wrap { max-width:1100px; margin:0 auto; padding:0 28px; }
+  section { padding:56px 0; } section.soft { background:var(--bg-soft); }
+
+  .section-label { display:flex; align-items:center; gap:12px; font-size:13px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--roxo); margin-bottom:12px; }
+  .section-label::before { content:""; width:34px; height:2px; background:var(--roxo); border-radius:2px; }
+  h2 { font-size:30px; font-weight:700; letter-spacing:-.01em; margin:0 0 8px; color:var(--ink); }
+  .lead { color:var(--cinza); font-size:15.5px; margin:0 0 32px; max-width:780px; }
+
+  .months { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin-bottom:20px; }
+  @media (max-width:1000px){ .months{grid-template-columns:repeat(3,1fr);} }
+  @media (max-width:640px){ .months{grid-template-columns:1fr 1fr;} }
+  .month-card { border:1px solid var(--linha); border-radius:16px; padding:22px; background:#fff; position:relative; }
+  .month-card.current { border-color:var(--roxo); background:linear-gradient(180deg,#fff,var(--roxo-xlight) 200%); box-shadow:0 8px 24px rgba(124,58,237,.08); }
+  .month-card .m-head { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:16px; }
+  .month-card .m-name { font-weight:700; font-size:16px; color:var(--ink); }
+  .month-card .m-status { font-size:11px; color:var(--cinza); letter-spacing:.06em; text-transform:uppercase; }
+  .month-card .m-status.parcial { color:var(--roxo); font-weight:600; }
+  .month-card .m-kpi { margin-bottom:12px; } .month-card .m-kpi:last-child{margin-bottom:0;}
+  .month-card .m-kpi .k-lbl { font-size:11px; color:var(--cinza); text-transform:uppercase; letter-spacing:.1em; margin-bottom:2px; }
+  .month-card .m-kpi .k-val { font-size:22px; font-weight:700; color:var(--ink); }
+  .month-card .m-kpi .k-val.roxo { color:var(--roxo); }
+
+  .week-row { display:grid; grid-template-columns:140px 1fr 1fr 1fr 1fr 1fr; gap:0; align-items:center; background:#fff; border:1px solid var(--linha); border-radius:14px; padding:20px 24px; margin-bottom:12px; }
+  .week-row.win { border-color:var(--roxo-light); background:linear-gradient(90deg,var(--roxo-xlight) 0%,#fff 40%); }
+  .week-row.alert { border-color:#FDE68A; background:linear-gradient(90deg,#FFFBEB 0%,#fff 40%); }
+  .week-row .wr-date { font-weight:700; font-size:15px; color:var(--roxo); }
+  .week-row .wr-date .wr-tag { display:block; font-size:10px; color:var(--cinza); text-transform:uppercase; letter-spacing:.1em; margin-top:2px; font-weight:500; }
+  .week-row .wr-kpi { padding:0 12px; border-left:1px solid var(--linha); }
+  .week-row .wr-kpi small { display:block; font-size:10.5px; color:var(--cinza); text-transform:uppercase; letter-spacing:.1em; margin-bottom:4px; font-weight:500; }
+  .week-row .wr-kpi b { display:block; font-size:17px; font-weight:700; color:var(--ink); }
+  .week-row .wr-kpi b.roxo{color:var(--roxo);} .week-row .wr-kpi b.good{color:var(--good);} .week-row .wr-kpi b.bad{color:var(--bad);}
+  @media (max-width:900px){ .week-row{grid-template-columns:1fr 1fr 1fr;gap:12px;} .week-row .wr-date{grid-column:1/-1;padding-bottom:8px;border-bottom:1px solid var(--linha);margin-bottom:8px;} .week-row .wr-kpi{border-left:none;padding:0;} }
+
+  .kpi-row { display:grid; grid-template-columns:repeat(6,1fr); gap:12px; }
+  @media (max-width:900px){ .kpi-row{grid-template-columns:repeat(3,1fr);} }
+  @media (max-width:560px){ .kpi-row{grid-template-columns:1fr 1fr;} }
+  .mini-card { border:1px solid var(--linha); border-radius:14px; padding:16px 18px; background:var(--bg-soft); }
+  .mini-card small { color:var(--roxo); font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; display:block; margin-bottom:4px; }
+  .mini-card b { font-size:20px; font-weight:700; display:block; color:var(--ink); }
+  .mini-card .hint { font-size:11px; color:var(--cinza); margin-top:4px; display:block; }
+
+  .table-wrap { overflow-x:auto; border:1px solid var(--linha); border-radius:16px; background:#fff; }
+  table { width:100%; border-collapse:collapse; font-size:14px; min-width:560px; }
+  thead th { background:var(--bg-soft); color:var(--cinza); font-weight:600; text-transform:uppercase; font-size:11px; letter-spacing:.1em; padding:14px; text-align:right; border-bottom:1px solid var(--linha); }
+  thead th:first-child { text-align:left; }
+  tbody td { padding:14px; text-align:right; border-bottom:1px solid var(--linha); font-weight:400; }
+  tbody td:first-child { text-align:left; font-weight:500; color:var(--ink); }
+  tbody tr:last-child td { border-bottom:none; }
+  tbody tr.hero-row td { background:var(--roxo-xlight); }
+  tbody tr.hero-row td:first-child { color:var(--roxo-dark); font-weight:700; }
+  .good{color:var(--good);font-weight:600;} .bad{color:var(--bad);font-weight:600;} .warn{color:var(--warn);font-weight:600;}
+
+  .notes { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:900px){ .notes{grid-template-columns:1fr;} }
+  .note-card { border:1px solid var(--linha); border-radius:16px; padding:24px; background:#fff; }
+  .note-card.roxo { border-color:var(--roxo-light); background:linear-gradient(180deg,#fff,var(--roxo-xlight) 400%); }
+  .note-card h3 { font-size:17px; font-weight:700; margin:0 0 12px; color:var(--ink); }
+  .note-card p { color:var(--cinza); font-size:14px; margin:8px 0; }
+  .note-card ul { margin:8px 0 0; padding-left:20px; color:var(--cinza); font-size:14px; }
+  .note-card li { margin-bottom:8px; }
+  .note-card b,.note-card strong { color:var(--ink); font-weight:600; }
+
+  footer { background:var(--ink); color:rgba(255,255,255,.65); padding:32px 28px; text-align:center; font-size:13px; }
+  footer .brand-mini { display:inline-flex; align-items:center; gap:10px; margin-bottom:8px; color:#fff; font-weight:500; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="brand">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+        <polygon points="50,33 65,59 35,59"></polygon>
+        <line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line>
+        <line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line>
+        <line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line>
+        <line x1="10" y1="27" x2="50" y2="33"></line>
+      </svg>
+      <span class="word"><b>BM</b><i class="bar"></i><span>MÍDIAS</span></span>
+    </div>
+    <div class="eyebrow">Sala Secreta · Tráfego Pago · Marketex</div>
+    <h1>Relatório de Campanhas</h1>
+    <div class="sub">Comparativo mensal · Semana a semana · Criativos · Página — atualizado em 07/09/2026</div>
+    <div class="pills">
+      <span class="pill solid">Setembro em curso: CPL R$ 1,65 (7 dias)</span>
+      <span class="pill">Agosto fechado: R$ 1,48 CPL · melhor mês do ano</span>
+      <span class="pill">ADV40 segue líder do mês</span>
+    </div>
+  </div>
+</header>
+
+<!-- 4.2 RESUMO GERAL POR MÊS -->
+<section>
+<div class="wrap">
+  <div class="section-label">Visão Geral</div>
+  <h2>Resultado geral por mês</h2>
+  <p class="lead">Agosto fechou como o melhor mês do ano em eficiência e volume (CPL R$ 1,48). Setembro começou mais caro — CPM subiu e o CPL dos primeiros 7 dias está em R$ 1,65, ainda saudável mas acima do fechamento de agosto.</p>
+  <div class="months">
+    <div class="month-card">
+      <div class="m-head"><span class="m-name">Maio</span><span class="m-status">fechado</span></div>
+      <div class="m-kpi"><div class="k-lbl">Investimento</div><div class="k-val">R$ 2.519</div></div>
+      <div class="m-kpi"><div class="k-lbl">Leads</div><div class="k-val">1.319</div></div>
+      <div class="m-kpi"><div class="k-lbl">CPL</div><div class="k-val roxo">R$ 1,91</div></div>
+    </div>
+    <div class="month-card">
+      <div class="m-head"><span class="m-name">Junho</span><span class="m-status">fechado</span></div>
+      <div class="m-kpi"><div class="k-lbl">Investimento</div><div class="k-val">R$ 3.590</div></div>
+      <div class="m-kpi"><div class="k-lbl">Leads</div><div class="k-val">1.305</div></div>
+      <div class="m-kpi"><div class="k-lbl">CPL</div><div class="k-val roxo">R$ 2,75</div></div>
+    </div>
+    <div class="month-card">
+      <div class="m-head"><span class="m-name">Julho</span><span class="m-status">fechado</span></div>
+      <div class="m-kpi"><div class="k-lbl">Investimento</div><div class="k-val">R$ 6.229</div></div>
+      <div class="m-kpi"><div class="k-lbl">Leads</div><div class="k-val">2.738</div></div>
+      <div class="m-kpi"><div class="k-lbl">CPL</div><div class="k-val roxo">R$ 2,28</div></div>
+    </div>
+    <div class="month-card">
+      <div class="m-head"><span class="m-name">Agosto</span><span class="m-status">fechado</span></div>
+      <div class="m-kpi"><div class="k-lbl">Investimento</div><div class="k-val">R$ 4.705</div></div>
+      <div class="m-kpi"><div class="k-lbl">Leads</div><div class="k-val">3.177</div></div>
+      <div class="m-kpi"><div class="k-lbl">CPL</div><div class="k-val roxo">R$ 1,48</div></div>
+    </div>
+    <div class="month-card current">
+      <div class="m-head"><span class="m-name">Setembro</span><span class="m-status parcial">em curso · 7 dias</span></div>
+      <div class="m-kpi"><div class="k-lbl">Investimento</div><div class="k-val">R$ 1.154</div></div>
+      <div class="m-kpi"><div class="k-lbl">Leads</div><div class="k-val">698</div></div>
+      <div class="m-kpi"><div class="k-lbl">CPL</div><div class="k-val roxo">R$ 1,65</div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 4.3 MÊS ATUAL SEMANA A SEMANA -->
+<section class="soft">
+<div class="wrap">
+  <div class="section-label">Mês Atual · Setembro</div>
+  <h2>Primeiros 7 dias do mês</h2>
+  <p class="lead">Ainda é cedo pra falar em tendência (só 1 semana incompleta), mas o CPL está mais alto que o fechamento de agosto — puxado por CPM mais caro e Connect Rate mais baixo. Conversão da página segue forte (92,5%).</p>
+
+  <div class="week-row">
+    <div class="wr-date">01→07/09<span class="wr-tag">parcial · 7 dias</span></div>
+    <div class="wr-kpi"><small>Investimento</small><b>R$ 1.154,07</b></div>
+    <div class="wr-kpi"><small>Custo por lead</small><b class="roxo">R$ 1,65</b></div>
+    <div class="wr-kpi"><small>CPM</small><b>R$ 43,70</b></div>
+    <div class="wr-kpi"><small>Connect Rate</small><b>76,6%</b></div>
+    <div class="wr-kpi"><small>Conv. página</small><b class="good">92,5%</b></div>
+  </div>
+
+  <div class="table-wrap" style="margin-top:16px;">
+    <table>
+      <thead><tr><th>Dia</th><th>Investimento</th><th>Leads</th><th>CPL</th></tr></thead>
+      <tbody>
+        <tr><td>01/09</td><td>R$ 198,83</td><td>158</td><td class="good">R$ 1,26</td></tr>
+        <tr><td>02/09</td><td>R$ 171,49</td><td>120</td><td>R$ 1,43</td></tr>
+        <tr><td>03/09</td><td>R$ 138,28</td><td>63</td><td>R$ 2,19</td></tr>
+        <tr><td>04/09</td><td>R$ 168,68</td><td>115</td><td>R$ 1,47</td></tr>
+        <tr><td>05/09</td><td>R$ 167,30</td><td>78</td><td>R$ 2,14</td></tr>
+        <tr><td>06/09</td><td>R$ 227,66</td><td>113</td><td>R$ 2,01</td></tr>
+        <tr><td>07/09</td><td>R$ 81,83</td><td>51</td><td>R$ 1,60</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<!-- 4.4 MELHORES CRIATIVOS -->
+<section>
+<div class="wrap">
+  <div class="section-label">Criativos</div>
+  <h2>Melhores criativos — geral × setembro</h2>
+  <p class="lead">ADV40 consolidou a liderança que assumiu em agosto e segue na frente em setembro. ADV14 segue como recordista histórico absoluto.</p>
+  <div class="notes">
+    <div class="note-card">
+      <h3>🏆 Melhores criativos gerais (histórico)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Criativo</th><th>Leads</th><th>CPL</th></tr></thead>
+          <tbody>
+            <tr class="hero-row"><td><a href="https://drive.google.com/open?id=1zMS8i6wmktRp1QzoXqiiyvcyPdHjZpzc&usp=drive_copy" target="_blank">ADV14_SST_CAP_CLONE EM VIDEO E EM FOTO_0.45</a></td><td>7.748</td><td>R$ 1,75</td></tr>
+            <tr><td><a href="https://drive.google.com/open?id=18yFvtCy7T5m_8yCWt2k9Z3C_gTW0JpqU&usp=drive_copy" target="_blank">ADV40_SST_CAP_ESPECIALISTA_0.37</a></td><td>2.558</td><td>R$ 1,56</td></tr>
+            <tr><td><a href="https://drive.google.com/open?id=1wAgjGJy_5AjpLsT8JJM0p9FiQs6sLLAT&usp=drive_copy" target="_blank">ADV12_SS_CAP_MAIS DE 30 MM</a></td><td>2.442</td><td>R$ 6,14</td></tr>
+            <tr><td><a href="https://drive.google.com/open?id=1n3kTOct7TeNTBZ4nfVddDLM0It0aouq-&usp=drive_copy" target="_blank">ADV04_SS_CAP_POSSIVEL CRIAR</a></td><td>1.650</td><td>R$ 4,34</td></tr>
+            <tr><td><a href="https://drive.google.com/file/d/1xS4amss1qlsEej0Hn2mexX4T63cemkSF/view?usp=drive_link" target="_blank">ADV01_SST_CAP_STORIES DO DIA</a></td><td>1.062</td><td>R$ 6,96</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="note-card roxo">
+      <h3>⭐ Melhores criativos de setembro (7 dias)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Criativo</th><th>Leads</th><th>CPL</th></tr></thead>
+          <tbody>
+            <tr class="hero-row"><td><a href="https://drive.google.com/open?id=18yFvtCy7T5m_8yCWt2k9Z3C_gTW0JpqU&usp=drive_copy" target="_blank">ADV40_SST_CAP_ESPECIALISTA_0.37</a></td><td>397</td><td>R$ 1,70</td></tr>
+            <tr><td><a href="https://drive.google.com/open?id=1zMS8i6wmktRp1QzoXqiiyvcyPdHjZpzc&usp=drive_copy" target="_blank">ADV14_SST_CAP_CLONE EM VIDEO E EM FOTO_0.45</a></td><td>278</td><td class="good">R$ 1,59</td></tr>
+            <tr><td>ADV37_SST_CAP_PALESTA 40.00_1.11 <span style="color:var(--cinza);font-size:11px;">(residual)</span></td><td>12</td><td>R$ 0,88 <span style="color:var(--cinza);font-size:11px;">(amostra baixa)</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="note-card roxo" style="margin-top:20px;">
+    <h3>Leitura estratégica</h3>
+    <ul>
+      <li><b>ADV40 mantém a liderança de volume mensal</b> que conquistou em agosto — segue à frente do ADV14 também nos primeiros 7 dias de setembro (397 vs 278 leads), embora com CPL um pouco mais alto (R$ 1,70 vs R$ 1,59).</li>
+      <li>A dupla ADV40/ADV14 segue concentrando praticamente todo o volume da conta — sem criativo genuinamente novo estreando desde julho. Vale priorizar teste de criativo inédito nas próximas semanas.</li>
+      <li>Amostra de setembro ainda é pequena (7 dias) — os números tendem a estabilizar nas próximas leituras.</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- 4.6 ESTRUTURA DE CAMPANHAS -->
+<section class="soft">
+<div class="wrap">
+  <div class="section-label">Campanhas</div>
+  <h2>Estrutura de campanhas — setembro (7 dias)</h2>
+  <p class="lead">As 5 campanhas seguem ativas: 3 na Página A (histórica) e 2 na Página B, que entraram em agosto e seguem competitivas.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Campanha</th><th>Investimento</th><th>Leads</th><th>CPL</th></tr></thead>
+      <tbody>
+        <tr><td>[03] Página A · Advantage · ADV13-ADV16</td><td>R$ 440,65</td><td>278</td><td>R$ 1,59</td></tr>
+        <tr><td>[04] Página A · Advantage</td><td>R$ 196,98</td><td>116</td><td>R$ 1,70</td></tr>
+        <tr class="hero-row"><td>[08] Página B · Advantage</td><td>R$ 196,30</td><td>144</td><td>R$ 1,36</td></tr>
+        <tr><td>[09] Página B · Público Quente</td><td>R$ 191,87</td><td>108</td><td>R$ 1,78</td></tr>
+        <tr><td>[05] Página A · Advantage · Internacional</td><td>R$ 128,27</td><td>52</td><td>R$ 2,47</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note-card" style="margin-top:20px;">
+    <h3>Observações importantes</h3>
+    <ul>
+      <li><b>[08] Página B</b> assumiu a ponta de eficiência em setembro (CPL R$ 1,36) — a campanha nova segue entregando o melhor custo por lead da conta.</li>
+      <li><b>[05] Internacional</b> piorou bastante em setembro (CPL R$ 2,47, o mais alto do grupo) — vale investigar se é sazonalidade ou algo estrutural antes de continuar com a mesma verba.</li>
+      <li>Nenhuma campanha nova entrou desde o lançamento da Página B em agosto.</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- 4.7 PÁGINA -->
+<section>
+<div class="wrap">
+  <div class="section-label">Página · Landing</div>
+  <h2>Página — desempenho em setembro (7 dias)</h2>
+  <p class="lead">CPM subiu bastante em relação a agosto (R$ 43,70 vs R$ 38,80) e o Connect Rate caiu — mas a conversão da página segue muito forte (92,5%), sustentando o CPL num patamar ainda saudável.</p>
+  <div class="kpi-row">
+    <div class="mini-card"><small>CPM</small><b>R$ 43,70</b></div>
+    <div class="mini-card"><small>Custo por Visualização</small><b>R$ 1,53</b></div>
+    <div class="mini-card"><small>Connect Rate</small><b>76,6%</b></div>
+    <div class="mini-card"><small>Conversão da página</small><b>92,5%</b></div>
+    <div class="mini-card"><small>CPC</small><b>R$ 1,17</b></div>
+    <div class="mini-card"><small>CTR</small><b>3,73%</b></div>
+  </div>
+  <div class="notes" style="margin-top:24px;">
+    <div class="note-card">
+      <h3>Comparativo agosto (fechado) × setembro (7 dias)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Métrica</th><th>Agosto</th><th>Setembro</th></tr></thead>
+          <tbody>
+            <tr><td>CPM</td><td>R$ 38,80</td><td class="bad">R$ 43,70</td></tr>
+            <tr><td>Connect Rate</td><td>82,2%</td><td class="bad">76,6%</td></tr>
+            <tr><td>Conv. página</td><td>84,2%</td><td class="good">92,5%</td></tr>
+            <tr class="hero-row"><td>CPL</td><td>R$ 1,48</td><td>R$ 1,65</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="note-card roxo">
+      <h3>Leitura</h3>
+      <ul>
+        <li>Setembro começou com tráfego mais caro (CPM +13%, Connect Rate -7 p.p.) — provavelmente leilão mais concorrido no início do mês.</li>
+        <li>Conversão da página segue sendo o pilar que sustenta o CPL — 92,5% é ainda melhor que o fechamento de agosto (84,2%).</li>
+        <li>Ainda é cedo (7 dias) para tratar como tendência de mês — próxima leitura vai mostrar se o CPM estabiliza.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<footer>
+  <div class="brand-mini">
+    <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" style="width:22px;height:22px">
+      <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+      <polygon points="50,33 65,59 35,59"></polygon>
+    </svg>
+    <span><b>BM</b> Mídias · Sala Secreta · Marketex</span>
+  </div>
+  <div>Dados extraídos em 07/09/2026 · fonte: planilha Sala Secreta (Tráfego Pago SS · MTADS, agregado por data de calendário)</div>
+</footer>
+
+</body>
+</html>
