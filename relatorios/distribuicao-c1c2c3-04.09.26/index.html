@@ -1,0 +1,269 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Distribuição · C1 C2 C3 · Ago→Set 2026 · Brito Mídias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --roxo:#7C3AED; --roxo-dark:#5B21B6; --roxo-deep:#3B0F73;
+    --roxo-light:#A78BFA; --roxo-xlight:#EDE9FE;
+    --ink:#141018; --cinza:#5B5566; --linha:#E7E3EE; --bg:#FFFFFF; --bg-soft:#FAF9FC;
+    --verde:#16A34A; --amarelo:#D97706; --vermelho:#DC2626;
+    --c1:#7C3AED; --c2:#6366F1; --c3:#A78BFA;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Poppins',system-ui,-apple-system,sans-serif;font-weight:300;font-size:16px;
+    line-height:1.6;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+
+  .hero{position:relative;overflow:hidden;color:#fff;
+    background:radial-gradient(1100px 500px at 78% -10%, rgba(124,58,237,.55), transparent 60%),
+      linear-gradient(150deg,#0A0A0A 0%,#17111F 45%,#3B0F73 100%)}
+  .hero::before{content:"";position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.14) 1px,transparent 1px);
+    background-size:44px 44px;-webkit-mask-image:radial-gradient(circle at 50% 30%,#000 25%,transparent 72%);
+    mask-image:radial-gradient(circle at 50% 30%,#000 25%,transparent 72%);pointer-events:none}
+  .hero-in{position:relative;padding:44px 0 52px}
+  .brand{display:flex;align-items:center;gap:16px}
+  .brand svg{width:52px;height:52px;flex-shrink:0}
+  .brand .word{display:flex;align-items:center;gap:14px;font-weight:300}
+  .brand .word b{font-weight:800;font-size:22px}
+  .brand .word .bar{width:2px;height:34px;background:rgba(255,255,255,.55)}
+  .brand .word span{font-size:22px;letter-spacing:.22em}
+  .hero h1{font-weight:800;font-size:clamp(32px,5vw,50px);letter-spacing:-.02em;line-height:1.1;margin-top:36px;text-wrap:balance}
+  .hero .sub{font-weight:300;font-size:17px;color:rgba(255,255,255,.72);margin-top:14px;max-width:60ch}
+  .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .pill{border:1px solid var(--roxo-light);color:#fff;border-radius:100px;padding:8px 16px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+  .pill.solid{background:linear-gradient(90deg,#7C3AED,#5B21B6);border-color:transparent}
+  .hero-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:38px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.14);border-radius:16px;overflow:hidden}
+  .hk{background:rgba(10,10,10,.42);padding:20px 22px}
+  .hk small{display:block;color:var(--roxo-light);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+  .hk b{display:block;font-size:25px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1}
+  .hk i{display:block;font-style:normal;font-size:12px;color:rgba(255,255,255,.55);margin-top:5px}
+
+  .sec{padding:56px 0}
+  .sec.soft{background:var(--bg-soft);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
+  .section-label{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--roxo)}
+  .section-label::before{content:"";width:34px;height:2px;background:var(--roxo);border-radius:2px}
+  .sec h2{font-weight:700;font-size:clamp(23px,3vw,30px);letter-spacing:-.01em;margin-top:14px;text-wrap:balance}
+  .sec .intro{color:var(--cinza);margin-top:12px;max-width:70ch}
+
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--linha);border-radius:16px;margin-top:22px;background:#fff}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums}
+  th{text-align:left;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--roxo);padding:16px 18px;border-bottom:1px solid var(--linha);white-space:nowrap;background:var(--bg-soft)}
+  th:not(:first-child),td:not(:first-child){text-align:right}
+  td{padding:14px 18px;border-bottom:1px solid var(--linha);font-weight:400}
+  tr:last-child td{border-bottom:none}
+  tr.tot td{background:var(--bg-soft);font-weight:700}
+  tr.best td{background:#F5F1FE}
+  tr.best td:first-child{box-shadow:inset 3px 0 0 var(--roxo);font-weight:600}
+  .mm{font-size:11px;color:var(--cinza);font-weight:400}
+
+  .cardrow{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+  .mcard{border:1px solid var(--linha);border-radius:16px;overflow:hidden;background:#fff}
+  .mcard .mtop{padding:14px 20px;color:#fff;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+  .mcard.ago .mtop{background:linear-gradient(135deg,#5B21B6,#7C3AED)}
+  .mcard.set .mtop{background:linear-gradient(135deg,#6366F1,#4338CA)}
+  .mcard .mbody{padding:6px 20px 14px}
+  .mrow{display:flex;justify-content:space-between;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--linha)}
+  .mrow:last-child{border-bottom:none}
+  .mrow .k{font-size:13px;color:var(--cinza)}
+  .mrow .v{font-size:18px;font-weight:700;font-variant-numeric:tabular-nums}
+  .mrow .v.good{color:var(--verde)} .mrow .v.warn{color:var(--vermelho)}
+
+  .best-pub{display:flex;gap:20px;align-items:center;border:1px solid var(--roxo-light);box-shadow:0 0 0 1px var(--roxo-light);
+    border-radius:16px;padding:22px 24px;margin-top:22px;background:linear-gradient(135deg,#F5F1FE,#fff);flex-wrap:wrap}
+  .best-pub .trophy{font-size:34px;flex-shrink:0}
+  .best-pub .bp-info{flex:1;min-width:240px}
+  .best-pub .bp-tag{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--roxo-dark)}
+  .best-pub .bp-name{font-size:18px;font-weight:700;margin-top:3px;line-height:1.3}
+  .best-pub .bp-desc{font-size:13.5px;color:var(--cinza);margin-top:6px}
+  .best-pub .bp-stats{display:flex;gap:26px;margin-top:12px;flex-wrap:wrap}
+  .best-pub .bp-stat small{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--roxo);font-weight:600}
+  .best-pub .bp-stat b{font-size:17px;font-weight:800;font-variant-numeric:tabular-nums}
+  .bp-link{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:10px;background:linear-gradient(90deg,#7C3AED,#5B21B6);color:#fff;text-decoration:none;font-size:14px;font-weight:600;white-space:nowrap}
+  .bp-link:hover{filter:brightness(1.08)}
+  .bp-link:focus-visible{outline:2px solid var(--roxo);outline-offset:3px}
+
+  .callout{border:1px solid var(--linha);border-left:4px solid var(--roxo);border-radius:12px;padding:20px 24px;margin-top:22px;background:#fff}
+  .callout.green{border-left-color:var(--verde);background:#F0FDF4}
+  .callout.amber{border-left-color:var(--amarelo);background:#FFFBEB}
+  .callout h3{font-size:15px;font-weight:700;margin-bottom:8px}
+  .callout.green h3{color:var(--verde)} .callout.amber h3{color:var(--amarelo)}
+  .callout p{color:var(--cinza);font-size:14.5px} .callout p+p{margin-top:9px}
+  .callout strong{color:var(--ink);font-weight:600}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.62);padding:40px 0}
+  footer .brand svg{width:38px;height:38px}
+  footer .brand .word b{font-size:17px} footer .brand .word span{font-size:17px} footer .brand .word .bar{height:26px}
+  footer .fnote{margin-top:20px;font-size:13px;max-width:78ch;line-height:1.7}
+  footer a{color:var(--roxo-light)}
+
+  @media (max-width:820px){.hero-kpis{grid-template-columns:repeat(2,1fr)}.cardrow{grid-template-columns:1fr}}
+  @media (max-width:520px){.hero-kpis{grid-template-columns:1fr}.brand .word span{font-size:17px;letter-spacing:.16em}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="hero">
+  <div class="wrap hero-in">
+    <div class="brand">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon><polygon points="50,33 65,59 35,59"></polygon>
+        <line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line>
+        <line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line>
+        <line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line><line x1="10" y1="27" x2="50" y2="33"></line>
+      </svg>
+      <span class="word"><b>BM</b><i class="bar"></i><span>MÍDIAS</span></span>
+    </div>
+    <h1>Distribuição de Conteúdos<br>C1 · C2 · C3</h1>
+    <p class="sub">Resultados das campanhas de distribuição da Ana Tex — comparando agosto (mês fechado) com setembro (em andamento).</p>
+    <div class="pills">
+      <span class="pill solid">Agosto → Setembro 2026</span>
+      <span class="pill">Conta ANEX 05</span>
+      <span class="pill">Fonte: Meta Ads</span>
+    </div>
+    <div class="hero-kpis">
+      <div class="hk"><small>Seguidores C1 · Agosto</small><b>2.453</b><i>a R$ 1,49 cada</i></div>
+      <div class="hk"><small>Investido C1 · Agosto</small><b>R$ 3.654</b><i>campanhas [C1]</i></div>
+      <div class="hk"><small>C2 · custo/engajamento</small><b>R$ 0,03</b><i>retenção vídeo 33,8%</i></div>
+      <div class="hk"><small>C3 · frequência</small><b>15,5</b><i>ponto de atenção</i></div>
+    </div>
+  </div>
+</header>
+
+<!-- C1 -->
+<section class="sec">
+  <div class="wrap">
+    <div class="section-label">Campanha 1 · Seguidores</div>
+    <h2>C1 — quanto investimos e quantos seguidores trouxe</h2>
+    <p class="intro">Todas as campanhas marcadas <strong>[C1]</strong> na conta. Setembro ainda está em andamento, então os números do mês são parciais.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Métrica</th><th>Agosto</th><th>Setembro <span class="mm">(parcial)</span></th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Investimento</td><td>R$ 3.654,41</td><td>R$ 649,83</td></tr>
+          <tr><td>Seguidores</td><td>2.453</td><td>401</td></tr>
+          <tr class="best"><td>Custo por seguidor</td><td>R$ 1,49</td><td>R$ 1,62</td></tr>
+          <tr><td>Visitas ao perfil</td><td>7.599</td><td>1.291</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="best-pub">
+      <div class="trophy">🏆</div>
+      <div class="bp-info">
+        <div class="bp-tag">Melhor publicação — nos dois meses</div>
+        <div class="bp-name">POST077 — "Pensa nas reuniões que você precisa resumir…"</div>
+        <div class="bp-desc">Campanha <strong>[62] [ANEX] [DISTRIBUICAO] [PROMOVER] [SEGUIDORES] [POST077] [ADC017] [C1]</strong>. Melhor custo por seguidor e maior volume do período.</div>
+        <div class="bp-stats">
+          <div class="bp-stat"><small>Agosto</small><b>940 seg · R$ 1,38</b></div>
+          <div class="bp-stat"><small>Setembro (parcial)</small><b>154 seg · R$ 1,47</b></div>
+        </div>
+      </div>
+      <a class="bp-link" href="https://www.instagram.com/p/DZqZkxujNBv/" target="_blank" rel="noopener">Ver no Instagram ↗</a>
+    </div>
+
+    <div class="callout green">
+      <h3>Leitura do C1</h3>
+      <p>O <strong>custo por seguidor de R$ 1,49 em agosto</strong> está abaixo da meta de referência (R$ 1,50). Em setembro subiu um pouco (R$ 1,62), mas é mês parcial e com menos verba rodada — tende a normalizar conforme o volume entra.</p>
+      <p>O <strong>POST077</strong> é o melhor criativo consistente: lidera em custo e em volume nos dois meses. Vale seguir escalando ele e testar variações do mesmo ângulo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- C2 -->
+<section class="sec soft">
+  <div class="wrap">
+    <div class="section-label">Campanha 2 · Conteúdo</div>
+    <h2>C2 — engajamento e retenção de vídeo</h2>
+    <p class="intro">Custo por engajamento e retenção dos vídeos (de quem viu 25% até 75%). A meta de retenção é 30%.</p>
+
+    <div class="cardrow">
+      <div class="mcard ago">
+        <div class="mtop">Agosto</div>
+        <div class="mbody">
+          <div class="mrow"><span class="k">Custo por engajamento</span><span class="v good">R$ 0,03</span></div>
+          <div class="mrow"><span class="k">Retenção 25% → 75%</span><span class="v good">33,8%</span></div>
+          <div class="mrow"><span class="k">Engajamentos</span><span class="v">63.620</span></div>
+          <div class="mrow"><span class="k">Investimento</span><span class="v">R$ 1.822,61</span></div>
+        </div>
+      </div>
+      <div class="mcard set">
+        <div class="mtop">Setembro (parcial)</div>
+        <div class="mbody">
+          <div class="mrow"><span class="k">Custo por engajamento</span><span class="v good">R$ 0,03</span></div>
+          <div class="mrow"><span class="k">Retenção 25% → 75%</span><span class="v good">36,1%</span></div>
+          <div class="mrow"><span class="k">Engajamentos</span><span class="v">4.196</span></div>
+          <div class="mrow"><span class="k">Investimento</span><span class="v">R$ 134,96</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout green">
+      <h3>C2 está batendo a meta de retenção</h3>
+      <p>Engajamento a <strong>R$ 0,03</strong> nos dois meses, e a retenção de vídeo <strong>acima dos 30%</strong> (33,8% em agosto, 36,1% no parcial de setembro). É a frente mais eficiente da distribuição — mantém a audiência quente e barata.</p>
+    </div>
+  </div>
+</section>
+
+<!-- C3 -->
+<section class="sec">
+  <div class="wrap">
+    <div class="section-label">Campanha 3 · Depoimentos</div>
+    <h2>C3 — engajamento e frequência</h2>
+    <p class="intro">Custo por engajamento e frequência (quantas vezes, em média, cada pessoa viu o anúncio).</p>
+
+    <div class="cardrow">
+      <div class="mcard ago">
+        <div class="mtop">Agosto</div>
+        <div class="mbody">
+          <div class="mrow"><span class="k">Custo por engajamento</span><span class="v">R$ 0,61</span></div>
+          <div class="mrow"><span class="k">Frequência</span><span class="v warn">15,49</span></div>
+          <div class="mrow"><span class="k">Engajamentos</span><span class="v">1.463</span></div>
+          <div class="mrow"><span class="k">Investimento</span><span class="v">R$ 890,48</span></div>
+        </div>
+      </div>
+      <div class="mcard set">
+        <div class="mtop">Setembro (parcial)</div>
+        <div class="mbody">
+          <div class="mrow"><span class="k">Custo por engajamento</span><span class="v">R$ 0,59</span></div>
+          <div class="mrow"><span class="k">Frequência</span><span class="v">5,46</span></div>
+          <div class="mrow"><span class="k">Engajamentos</span><span class="v">303</span></div>
+          <div class="mrow"><span class="k">Investimento</span><span class="v">R$ 178,35</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout amber">
+      <h3>Atenção na frequência do C3</h3>
+      <p>Em agosto a frequência fechou em <strong>15,49</strong> — muito alta (o saudável é ~2–3): cada pessoa viu o mesmo depoimento ~15 vezes, o que encarece o engajamento (R$ 0,61, contra R$ 0,03 do C2). O público está estreito demais para a verba.</p>
+      <p>Em setembro a frequência aparece em 5,46, mas é <strong>parcial</strong> (mês começando) — ela sobe conforme o mês roda. A recomendação segue: <strong>abrir o público do C3</strong> ou reduzir a verba diária, e subir depoimentos novos para dar variação.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon><polygon points="50,33 65,59 35,59"></polygon>
+        <line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line>
+        <line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line>
+        <line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line><line x1="10" y1="27" x2="50" y2="33"></line>
+      </svg>
+      <span class="word"><b>BM</b><i class="bar"></i><span>MÍDIAS</span></span>
+    </div>
+    <p class="fnote">
+      Distribuição de Conteúdos · Marketex (Ana Tex) · conta ANEX 05 · agosto (fechado) e setembro (parcial) de 2026.<br>
+      C1: seguidores e visitas ao perfil via Gerenciador de Anúncios. C2/C3: engajamento, vídeo e frequência via Meta Ads. Retenção 25%→75% = reproduções 75% ÷ reproduções 25%. Valores brutos, sem imposto.<br>
+      Central de Estratégia e Resultados · <a href="mailto:rafael@britomidias.com.br">rafael@britomidias.com.br</a>
+    </p>
+  </div>
+</footer>
