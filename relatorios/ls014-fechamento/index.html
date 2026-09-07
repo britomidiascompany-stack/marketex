@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LS014 · Fechamento da Captação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--roxo:#7C3AED;--roxo-soft:#A78BFA;--verde:#059669;--vermelho:#DC2626;--amarelo:#D97706;--cinza:#6B7280;--borda:#E7E3EE;--bg-soft:#FAF9FC;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Poppins',sans-serif;font-weight:300;background:#fff;color:#1F1135;}
+a{color:var(--roxo);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.hero{background:linear-gradient(150deg,#0A0A0A 0%,#17111F 45%,#3B0F73 100%);position:relative;overflow:hidden;padding:56px 24px 48px;text-align:center;color:#fff;}
+.hero::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(transparent,transparent 43px,rgba(124,58,237,.18) 43px,rgba(124,58,237,.18) 44px),repeating-linear-gradient(90deg,transparent,transparent 43px,rgba(124,58,237,.18) 43px,rgba(124,58,237,.18) 44px);pointer-events:none;}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 55% at 50% 40%,rgba(124,58,237,.55) 0%,transparent 70%);pointer-events:none;}
+.hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;}
+.logo-bm{width:52px;height:52px;margin-bottom:16px;}
+.hero h1{font-size:clamp(1.5rem,4vw,2.4rem);font-weight:800;letter-spacing:-.5px;margin-bottom:6px;}
+.hero .sub{font-size:.95rem;opacity:.75;margin-bottom:4px;}
+.hero .ts{font-size:.8rem;opacity:.55;margin-bottom:28px;}
+.hero .status-badge{display:inline-block;background:rgba(220,38,38,.30);border:1px solid rgba(248,113,113,.5);border-radius:20px;padding:4px 16px;font-size:.8rem;font-weight:600;color:#FECACA;margin-bottom:28px;}
+.hero-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;max-width:900px;margin:0 auto;}
+.hero-kpi{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px 14px;}
+.hero-kpi .label{font-size:.7rem;opacity:.6;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+.hero-kpi .val{font-size:1.5rem;font-weight:800;line-height:1.1;}
+.hero-kpi .sub2{font-size:.72rem;opacity:.55;margin-top:4px;}
+.container{max-width:1100px;margin:0 auto;padding:0 20px;}
+section{padding:48px 20px;}
+section.bg{background:#fff;}
+section.bg-soft{background:var(--bg-soft);}
+.section-title{font-size:1.2rem;font-weight:700;color:var(--roxo);margin-bottom:22px;display:flex;align-items:center;gap:8px;}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:14px;margin-bottom:16px;}
+.kpi-card{background:#fff;border:1.5px solid var(--borda);border-radius:14px;padding:18px 16px;}
+.kpi-card .label{font-size:.7rem;text-transform:uppercase;letter-spacing:.5px;color:var(--roxo);font-weight:600;margin-bottom:6px;}
+.kpi-card .val{font-size:1.4rem;font-weight:800;color:#1F1135;line-height:1.1;}
+.kpi-card .sub{font-size:.72rem;color:var(--cinza);margin-top:4px;}
+.kpi-card.neg .val{color:var(--vermelho);}
+.kpi-card.pos .val{color:var(--verde);}
+.kpi-card.warn .val{color:var(--amarelo);}
+.table-wrap{overflow-x:auto;border-radius:16px;border:1.5px solid var(--borda);}
+table{width:100%;border-collapse:collapse;font-size:.82rem;}
+thead tr{background:var(--bg-soft);}
+th{padding:12px 14px;text-align:left;font-weight:700;color:var(--roxo);font-size:.74rem;text-transform:uppercase;letter-spacing:.4px;border-bottom:1.5px solid var(--borda);}
+td{padding:11px 14px;border-bottom:1px solid var(--borda);}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(124,58,237,.03);}
+.tag{display:inline-block;border-radius:20px;padding:2px 10px;font-size:.7rem;font-weight:600;margin-left:4px;}
+.tag-escalar{background:#D1FAE5;color:#065F46;}
+.tag-manter{background:#E0F2FE;color:#0369A1;}
+.tag-vigiar{background:#FEF3C7;color:#92400E;}
+.bold{font-weight:700;}
+.muted{color:var(--cinza);font-size:.75rem;}
+.neg-txt{color:var(--vermelho);}
+.pos-txt{color:var(--verde);}
+.warn-txt{color:var(--amarelo);}
+td.hl{background:rgba(124,58,237,.05);font-weight:700;}
+th.hl{background:rgba(124,58,237,.1);color:var(--roxo);}
+.analysis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;}
+.analysis-card{border-radius:14px;padding:20px;border-left:4px solid;}
+.analysis-card.green{background:#F0FDF4;border-color:var(--verde);}
+.analysis-card.yellow{background:#FFFBEB;border-color:var(--amarelo);}
+.analysis-card.red{background:#FEF2F2;border-color:var(--vermelho);}
+.analysis-card.blue{background:#EFF6FF;border-color:#2563EB;}
+.analysis-card h4{font-size:.88rem;font-weight:700;margin-bottom:12px;}
+.analysis-card h4.green{color:#065F46;}
+.analysis-card h4.yellow{color:#92400E;}
+.analysis-card h4.red{color:#991B1B;}
+.analysis-card h4.blue{color:#1D4ED8;}
+.analysis-card ul{list-style:none;padding:0;}
+.analysis-card li{font-size:.8rem;padding:3px 0;padding-left:14px;position:relative;line-height:1.5;}
+.analysis-card li::before{content:'→';position:absolute;left:0;opacity:.5;}
+.alert-box{border-radius:14px;padding:18px 20px;margin-bottom:18px;display:flex;gap:14px;align-items:flex-start;}
+.alert-box.red{background:#FEF2F2;border:1.5px solid #DC2626;}
+.alert-box .icon{font-size:1.5rem;flex-shrink:0;}
+.alert-box .content h4{font-size:.9rem;font-weight:700;margin-bottom:4px;}
+.alert-box.red .content h4{color:#991B1B;}
+.alert-box .content p{font-size:.8rem;line-height:1.6;}
+.alert-box.red .content p{color:#7F1D1D;}
+.origem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;}
+.origem-card{background:#fff;border:1.5px solid var(--borda);border-radius:12px;padding:14px;text-align:center;}
+.origem-card .o-val{font-size:1.5rem;font-weight:800;color:#1F1135;}
+.origem-card .o-pct{font-size:.8rem;color:var(--roxo);font-weight:600;}
+.origem-card .o-label{font-size:.7rem;color:var(--cinza);margin-top:4px;}
+footer{background:#141018;color:rgba(255,255,255,.5);padding:36px 20px;text-align:center;font-size:.78rem;}
+footer .logo-f{color:#A78BFA;font-weight:800;font-size:1rem;margin-bottom:8px;}
+footer p{margin-bottom:4px;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <svg class="logo-bm" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="26,2 48,14 48,38 26,50 4,38 4,14" fill="none" stroke="white" stroke-width="2"/>
+      <polygon points="26,10 40,18 40,34 26,42 12,34 12,18" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="1.2"/>
+      <text x="26" y="31" text-anchor="middle" font-family="Poppins,sans-serif" font-size="13" font-weight="800" fill="white">BM</text>
+    </svg>
+    <h1>LS014 · Fechamento da Captação</h1>
+    <div class="sub">Workshop Especialista com IA — Marketex / Ana Tex</div>
+    <div class="ts">Captação: 24/08 → 06/09/2026 (14 dias) · Fechamento gerado em 07/09/2026 (D+1)</div>
+    <div class="status-badge">⚠️ 442 ingressos de 1.000 (44,2% da meta) · Exposição final NEGATIVA em −R$9.002</div>
+    <div class="hero-kpis">
+      <div class="hero-kpi">
+        <div class="label">Invest c/imp</div>
+        <div class="val">R$42.929</div>
+        <div class="sub2">bruto R$37.714</div>
+      </div>
+      <div class="hero-kpi">
+        <div class="label">Retorno líquido</div>
+        <div class="val">R$33.927</div>
+        <div class="sub2">bruto R$36.453 (estimado, sem Hotmart real)</div>
+      </div>
+      <div class="hero-kpi">
+        <div class="label">Exposição</div>
+        <div class="val" style="color:#F87171">−R$9.002</div>
+        <div class="sub2">Fechamento — NEGATIVA</div>
+      </div>
+      <div class="hero-kpi">
+        <div class="label">Ingressos</div>
+        <div class="val" style="color:#A78BFA">442</div>
+        <div class="sub2">44,2% da meta de 1.000 · faltaram 558</div>
+      </div>
+      <div class="hero-kpi">
+        <div class="label">ROAS Geral</div>
+        <div class="val" style="color:#A78BFA">0,79×</div>
+        <div class="sub2">ROAS Tráfego 0,45×</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="bg" style="padding-bottom:0;">
+<div class="container">
+  <div class="alert-box red">
+    <div class="icon">📌</div>
+    <div class="content">
+      <h4>Fechamento: meta dobrada (1.000) não foi atingida — 44,2% de aproveitamento</h4>
+      <p>O LS014 foi a segunda captação de 14 dias da série (depois do LS011), com a meta dobrada para 1.000 ingressos. Fechou em 442 ingressos — abaixo mesmo do padrão histórico de 500 de uma captação normal de 7 dias. O início foi o melhor já registrado (D1: CPA R$64,09, ROAS 1,67×, exposição +R$2.848), mas a entrada das campanhas de escala [121]-[125] em D5 (28/08) marcou uma virada: 5 dias seguidos (D5-D9) de exposição negativa, só revertida por um pico de volume em D11 (03/09, 116 ingressos a CPA R$13,05 — provavelmente um push/oferta de fechamento). No total, a captação fecha com ROAS Geral 0,79× e exposição −R$9.002 — pior em eficiência de volume que o LS011 (também captação de 14 dias), que fechou com 669 ingressos (66,9% da meta) apesar de exposição absoluta pior (−R$23.348, mas sobre uma base de investimento 2,15× maior).</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="bg">
+<div class="container">
+  <div class="section-title">📊 Quadro Geral — Fechamento (14 de 14 dias)</div>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="label">Invest c/imposto</div>
+      <div class="val">R$42.929,44</div>
+      <div class="sub">bruto R$37.713,64 · +13,83% Meta (oficial, ANEX03)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="label">Retorno líquido</div>
+      <div class="val">R$33.927,25</div>
+      <div class="sub">bruto R$36.452,71 · × 0,9305 (estimado, sem planilha Hotmart)</div>
+    </div>
+    <div class="kpi-card neg">
+      <div class="label">Exposição final</div>
+      <div class="val">−R$9.002,19</div>
+      <div class="sub">Captação fechou NEGATIVA</div>
+    </div>
+    <div class="kpi-card neg">
+      <div class="label">ROAS Geral</div>
+      <div class="val">0,79×</div>
+      <div class="sub">ROAS Tráfego 0,45×</div>
+    </div>
+    <div class="kpi-card warn">
+      <div class="label">Ingressos Workshop (total)</div>
+      <div class="val">442</div>
+      <div class="sub">44,2% da meta de 1.000 · faltaram 558</div>
+    </div>
+    <div class="kpi-card">
+      <div class="label">Ingressos pagos / CPA geral</div>
+      <div class="val">217 · R$97,13</div>
+      <div class="sub">49,1% via tráfego pago · ticket médio R$95,72</div>
+    </div>
+  </div>
+  <p style="font-size:.76rem;color:var(--cinza);padding:4px 2px;line-height:1.6;">
+    ⚠️ Números finais preliminares — receita líquida estimada por fator fixo (0,9305), sem cruzamento com a planilha Hotmart. Sujeito a fechamento revisado (D+7/D+14) quando reembolsos e chargebacks forem descontados, seguindo o mesmo padrão de "Fechamento 01/02" já usado em LS012/LS013.
+  </p>
+</div>
+</section>
+
+<section class="bg-soft">
+<div class="container">
+  <div class="section-title">📐 Dia a dia — captação completa (D1-D14)</div>
+  <div class="table-wrap">
+    <table style="min-width:700px;">
+      <thead><tr><th>Dia</th><th>Data</th><th>Invest c/imp</th><th>Ingressos</th><th>CPA</th><th>ROAS</th><th>Exposição</th></tr></thead>
+      <tbody>
+        <tr><td>D1</td><td>24/08</td><td>R$4.229,80</td><td>66</td><td class="pos-txt">R$64,09</td><td class="pos-txt">1,67×</td><td class="pos-txt">+R$2.848</td></tr>
+        <tr><td>D2</td><td>25/08</td><td>R$3.442,63</td><td>17</td><td>R$202,51</td><td>0,61×</td><td class="neg-txt">−R$1.333</td></tr>
+        <tr><td>D3</td><td>26/08</td><td>R$1.965,49</td><td>19</td><td class="pos-txt">R$103,45</td><td class="pos-txt">1,16×</td><td class="pos-txt">+R$319</td></tr>
+        <tr><td>D4</td><td>27/08</td><td>R$1.427,25</td><td>9</td><td>R$158,58</td><td>0,71×</td><td class="neg-txt">−R$421</td></tr>
+        <tr><td>D5</td><td>28/08</td><td>R$3.889,61</td><td>8</td><td class="neg-txt bold">R$486,20</td><td class="neg-txt bold">0,23×</td><td class="neg-txt bold">−R$2.983</td></tr>
+        <tr><td>D6</td><td>29/08</td><td>R$3.896,31</td><td>18</td><td>R$216,46</td><td>0,55×</td><td class="neg-txt">−R$1.749</td></tr>
+        <tr><td>D7</td><td>30/08</td><td>R$2.041,86</td><td>9</td><td>R$226,87</td><td>0,89×</td><td class="neg-txt">−R$234</td></tr>
+        <tr><td>D8</td><td>31/08</td><td>R$3.283,26</td><td>14</td><td class="neg-txt">R$234,52</td><td class="neg-txt">0,45×</td><td class="neg-txt">−R$1.821</td></tr>
+        <tr><td>D9</td><td>01/09</td><td>R$3.646,73</td><td>21</td><td>R$173,65</td><td>0,52×</td><td class="neg-txt">−R$1.765</td></tr>
+        <tr><td>D10</td><td>02/09</td><td>R$2.042,13</td><td>19</td><td class="pos-txt">R$107,48</td><td class="pos-txt">0,91×</td><td class="neg-txt">−R$189</td></tr>
+        <tr><td>D11</td><td>03/09</td><td>R$1.513,69</td><td class="bold">116</td><td class="pos-txt bold">R$13,05</td><td class="pos-txt bold">2,16×</td><td class="pos-txt bold">+R$1.756</td></tr>
+        <tr><td>D12</td><td>04/09</td><td>R$2.688,03</td><td>58</td><td class="pos-txt">R$46,35</td><td class="pos-txt">1,10×</td><td class="pos-txt">+R$259</td></tr>
+        <tr><td>D13</td><td>05/09</td><td>R$3.828,02</td><td>32</td><td>R$119,63</td><td>0,62×</td><td class="neg-txt">−R$1.439</td></tr>
+        <tr><td>D14</td><td>06/09</td><td>R$5.034,67</td><td>36</td><td>R$139,85</td><td>0,55×</td><td class="neg-txt">−R$2.256</td></tr>
+        <tr class="hl"><td class="hl" colspan="2">TOTAL / MÉDIA</td><td class="hl">R$42.929,44</td><td class="hl">442</td><td class="hl">R$97,13</td><td class="hl">0,79×</td><td class="hl neg-txt">−R$9.002</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:.74rem;color:var(--cinza);margin-top:12px;line-height:1.6;">
+    D11 (03/09) é o outlier claro da captação: 116 ingressos a CPA de apenas R$13,05, muito abaixo do ticket médio de venda — indício forte de uma oferta/desconto de fechamento ou push de última hora que não estava presente nos outros dias. Sem esse dia, a captação teria fechado com ~326 ingressos e uma exposição ainda mais negativa. D5 foi o pior dia isolado (CPA R$486,20, ROAS 0,23×), coincidindo com a entrada das campanhas de escala.
+  </p>
+</div>
+</section>
+
+<section class="bg">
+<div class="container">
+  <div class="section-title">🛒 Vendas + Order Bumps — Fechamento</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Produto</th><th>Vendas</th><th>Receita</th><th>% sobre Workshop</th></tr></thead>
+      <tbody>
+        <tr><td class="bold">🏆 Workshop Especialista com IA (ingresso)</td><td class="bold">442</td><td class="bold">R$23.280,29</td><td>—</td></tr>
+        <tr><td>Acesso Premium Especialista com IA (+ 12 meses)</td><td>63</td><td>R$8.895,03</td><td>38,2%</td></tr>
+        <tr><td>Fotos com Inteligência Artificial</td><td>39</td><td>R$2.548,61</td><td>10,9%</td></tr>
+        <tr><td>Palestra em Minutos</td><td>27</td><td>R$1.408,95</td><td>6,1%</td></tr>
+        <tr><td>Fotos com IA - Acesso estendido</td><td>6</td><td>R$319,83</td><td>1,4%</td></tr>
+        <tr><td class="hl">TOTAL Order Bumps</td><td class="hl">135</td><td class="hl">R$13.172,42</td><td class="hl">conv. 30,5% sobre ingresso</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:.75rem;color:var(--cinza);margin-top:10px;line-height:1.6;">
+    Conversão de bumps do fechamento (30,5%) é bem mais baixa que a média observada em meados da captação (~58-60%) — reflexo direto do pico de D11, onde o alto volume de ingressos "baratos" veio com taxa de bump menor (comum em ofertas de última hora / bundle sem upsell).
+  </p>
+</div>
+</section>
+
+<section class="bg-soft">
+<div class="container">
+  <div class="section-title">🌐 Ingressos por Origem — Fechamento</div>
+  <div class="origem-grid">
+    <div class="origem-card">
+      <div class="o-val">217</div>
+      <div class="o-pct">49,1%</div>
+      <div class="o-label">paid_metaads</div>
+    </div>
+    <div class="origem-card">
+      <div class="o-val">157</div>
+      <div class="o-pct">35,5%</div>
+      <div class="o-label">sem atribuição</div>
+    </div>
+    <div class="origem-card">
+      <div class="o-val">42</div>
+      <div class="o-pct">9,5%</div>
+      <div class="o-label">organic_ig_bio</div>
+    </div>
+    <div class="origem-card">
+      <div class="o-val">19</div>
+      <div class="o-pct">4,3%</div>
+      <div class="o-label">organic_ss_zoom-chat</div>
+    </div>
+    <div class="origem-card">
+      <div class="o-val">7</div>
+      <div class="o-pct">1,6%</div>
+      <div class="o-label">outros orgânicos</div>
+    </div>
+  </div>
+  <div style="background:#FFFBEB;border-left:4px solid #D97706;border-radius:10px;padding:14px 16px;margin-top:16px;font-size:.8rem;color:#92400E;line-height:1.6;">
+    ⚠️ "Sem atribuição" saltou pra 35,5% do total (era ~7-8% em meados da captação) — quase certamente puxado pelo pico de D11 (116 ingressos). Vale confirmar com o Rafael se houve uma ação específica de fechamento (e-mail, WhatsApp em massa, live) que não estava com UTM configurado.
+  </div>
+</div>
+</section>
+
+<section class="bg">
+<div class="container">
+  <div class="section-title">🎬 Criativos — Ranking Final da Captação</div>
+  <p style="font-size:.79rem;color:var(--cinza);margin-bottom:20px;">
+    Fonte: VK Metrics, spend e vendas (pixel Meta) por trafego.ad_name · CPA c/imp = spend × 1,1383 ÷ vendas · ROAS estimado = ticket médio (R$95,72) × vendas ÷ spend c/imp.
+  </p>
+  <div style="margin-bottom:26px;">
+    <div style="font-size:.92rem;font-weight:700;color:#1F1135;margin-bottom:12px;">🚀 Top vendas — captação completa</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Criativo</th><th>Vendas</th><th>Spend c/imp</th><th>CPA</th><th>ROAS est.</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>ADC023_LS_CAP_NEW_V1_1 MES DE POST EM UMA TARDE</td><td class="bold">49</td><td>R$5.821,55</td><td>R$118,81</td><td class="pos-txt">0,81×</td><td><span class="tag tag-escalar">líder de volume 🔥</span></td></tr>
+          <tr><td>ADV368_LS_CAP_NEW_V1_O CHATGPT JÁ PASSOU DA FASE DE SO ESCREVER TEXTO</td><td class="bold">38</td><td>R$4.689,57</td><td>R$123,41</td><td class="pos-txt">0,78×</td><td><span class="tag tag-manter">forte</span></td></tr>
+          <tr><td>ADV258_LS_CAP_NEW_V1_CLONE COM UMA FOTO</td><td class="bold">26</td><td>R$4.004,94</td><td>R$154,04</td><td>0,62×</td><td><span class="tag tag-manter">manter</span></td></tr>
+          <tr><td>ADV367_LS_CAP_NEW_V1_VOCE USA O CHATGPT COMO GOOGLE</td><td class="bold">23</td><td>R$4.012,69</td><td>R$174,47</td><td>0,55×</td><td><span class="tag tag-vigiar">vigiar</span></td></tr>
+          <tr><td>ADV304_LS_CAP_NEW_V1_ESSA AQUI SOU EU</td><td class="bold">23</td><td>R$5.206,61</td><td class="neg-txt">R$226,37</td><td class="neg-txt">0,42×</td><td><span class="tag tag-vigiar">vigiar</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div>
+    <div style="font-size:.92rem;font-weight:700;color:#1F1135;margin-bottom:12px;">💎 Melhor ROAS — candidatos a escalar no próximo lançamento</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Criativo</th><th>ROAS est.</th><th>CPA</th><th>Vendas</th></tr></thead>
+        <tbody>
+          <tr><td>ADV365_LS_CAP_NEW_V1_QUER AUTOMATIZAR TAREFAS COM O CHATGPT E O CLAUDE</td><td class="pos-txt bold">3,97×</td><td class="pos-txt">R$24,09</td><td>3</td></tr>
+          <tr><td>ADV325_LS_CAP_NEW_V1_CHAT FAZ SITE ID E POSTS</td><td class="pos-txt bold">1,89×</td><td class="pos-txt">R$50,75</td><td>6</td></tr>
+          <tr><td>ADV320_LS_CAP_NEW_V1_CHAT CRIA ID VISUAL CLONE CONTEUDO</td><td class="pos-txt">1,59×</td><td class="pos-txt">R$60,10</td><td>9</td></tr>
+          <tr><td>ADI179_LS_CAP_NEW_V1_30 POSTS PRONTOS NUMA TARDE</td><td class="pos-txt">1,54×</td><td class="pos-txt">R$62,16</td><td>3</td></tr>
+          <tr><td>ADI159_LS_CAP_NEW_V1_ACORDOU SEM ENERGIA</td><td class="pos-txt">1,29×</td><td class="pos-txt">R$74,05</td><td>7</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="bg-soft">
+<div class="container">
+  <div class="section-title">🧪 Páginas A/B — Resultado Final do Teste</div>
+  <p style="font-size:.79rem;color:var(--cinza);margin-bottom:16px;">
+    "OFF | TESTE 01 | LP | V1-2 » V1-3 » V1-4 » V1-5" (24/08–06/09): V1-2 concentrou 6.806 visitas e 243 conversões (3,57%). V1-3/V1-4/V1-5 somaram apenas 39 visitas no total, 0 conversões, ao longo de toda a captação.
+  </p>
+  <div style="background:#FEF2F2;border-left:4px solid #DC2626;border-radius:10px;padding:14px 16px;font-size:.8rem;color:#991B1B;line-height:1.6;">
+    🔴 Recomendação final: encerrar este teste de página. 2 lançamentos seguidos sem tráfego real nas variações — não está gerando aprendizado nenhum e só adiciona ruído à estrutura de campanhas.
+  </div>
+</div>
+</section>
+
+<section class="bg">
+<div class="container">
+  <div class="section-title">⚖️ Comparativo — Captações de 14 dias (meta de 1.000)</div>
+  <p style="font-size:.79rem;color:var(--cinza);margin-bottom:16px;">
+    LS014 é só o 2º lançamento com captação de 14 dias e meta dobrada — o único comparável de mesma estrutura é o LS011.
+  </p>
+  <div class="table-wrap">
+    <table style="min-width:600px;">
+      <thead><tr><th>Métrica (captação completa)</th><th>LS011 · 27/07-09/08</th><th class="hl">LS014 · 24/08-06/09</th></tr></thead>
+      <tbody>
+        <tr><td>Investimento c/imp</td><td>R$92.316</td><td class="hl">R$42.929</td></tr>
+        <tr><td>Ingressos</td><td class="pos-txt bold">669</td><td class="hl">442</td></tr>
+        <tr><td>% da meta (1.000)</td><td class="pos-txt bold">66,9%</td><td class="hl">44,2%</td></tr>
+        <tr><td>CPA</td><td>R$138,02</td><td class="hl pos-txt">R$97,13</td></tr>
+        <tr><td>ROAS Geral</td><td>0,75×</td><td class="hl pos-txt">0,79×</td></tr>
+        <tr><td>Exposição total</td><td class="neg-txt">−R$23.348</td><td class="hl neg-txt">−R$9.002</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="background:#FFFBEB;border-left:4px solid #D97706;border-radius:10px;padding:14px 16px;margin-top:16px;font-size:.8rem;color:#92400E;line-height:1.6;">
+    <strong>Leitura mista:</strong> o LS014 foi mais eficiente por real investido (CPA 30% menor, ROAS ligeiramente melhor) e teve prejuízo absoluto bem menor — mas investiu menos da metade do LS011 e por isso trouxe bem menos volume (442 vs 669 ingressos), ficando mais longe da meta em termos percentuais (44,2% vs 66,9%). O padrão de "captação de 14 dias com meta de 1.000" ainda não emplacou nenhuma das duas vezes que foi tentado.
+  </div>
+</div>
+</section>
+
+<section class="bg-soft">
+<div class="container">
+  <div class="section-title">🔍 Análise Final — Fechamento LS014</div>
+  <div class="analysis-grid">
+    <div class="analysis-card green">
+      <h4 class="green">🟢 O que funcionou</h4>
+      <ul>
+        <li>D1 foi o melhor dia isolado de toda a série LS (CPA R$64,09, ROAS 1,67×) — prova de que a estrutura funciona quando calibrada</li>
+        <li>D11 mostrou que uma ação de fechamento bem executada consegue gerar volume grande a custo baixíssimo (116 ingressos a CPA R$13,05)</li>
+        <li>Conversão de bumps na maior parte da captação (fora do pico de D11) ficou entre 54-60%, a mais alta já registrada na série</li>
+        <li>ADC023 fechou como o criativo mais consistente — líder de volume (49 vendas) com ROAS acima da média (0,81×)</li>
+        <li>ADV365, ADV325, ADV320, ADI179 e ADI159 são candidatos claros a escalar no LS015, com CPA entre R$24-74</li>
+      </ul>
+    </div>
+    <div class="analysis-card red">
+      <h4 class="red">🔴 O que não funcionou</h4>
+      <ul>
+        <li>Meta dobrada (1.000) não foi atingida nem de longe — 44,2% de aproveitamento, pior que o LS011 (66,9%) na mesma estrutura</li>
+        <li>As campanhas de escala [121]-[125] (entrada em D5) marcaram o início de 5 dias seguidos de exposição negativa, sem correção rápida</li>
+        <li>ADV304 e ADC004, 2 dos criativos com maior volume acumulado, fecharam com ROAS abaixo de 0,5× — spend desproporcional ao retorno</li>
+        <li>35,5% dos ingressos ficaram sem atribuição de origem — perda de visibilidade sobre o que realmente funcionou no fechamento</li>
+        <li>Teste de página A/B seguiu sem gerar nenhum aprendizado por 2 captações seguidas</li>
+      </ul>
+    </div>
+    <div class="analysis-card blue">
+      <h4 class="blue">🛠️ Recomendações para o LS015</h4>
+      <ul>
+        <li>Investigar e documentar o que exatamente gerou o pico de D11 (oferta? canal? campanha?) — se for replicável, vale antecipar essa ação em vez de deixar só pro fim da captação</li>
+        <li>Revisar o processo de decisão de "escalar orçamento" — a escalada de D5 não teve corte automático nem revisão rápida apesar de 5 dias seguidos de sinal ruim</li>
+        <li>Levar ADC023, ADV365, ADV325, ADV320, ADI179 como criativos-base do próximo lançamento</li>
+        <li>Configurar UTM na ação que gerou o pico de D11 pra não perder atribuição de novo</li>
+        <li>Encerrar de vez o teste de página V1-3/4/5</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<footer>
+  <div class="logo-f">Brito Mídias</div>
+  <p>LS014 · Workshop Especialista com IA · Marketex / Ana Tex</p>
+  <p>Fechamento gerado em 07/09/2026 · Fonte: VK Metrics + Meta Ads (oficial)</p>
+  <p>Captação: 24/08 → 06/09/2026 (14 dias) · Números preliminares — sujeitos a revisão com fechamento Hotmart (D+7/D+14)</p>
+</footer>
+
+</body>
+</html>

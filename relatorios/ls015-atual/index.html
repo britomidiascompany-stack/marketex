@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LS015 · Captação D1 · 07/09/2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--roxo:#7C3AED;--roxo-soft:#A78BFA;--verde:#059669;--vermelho:#DC2626;--amarelo:#D97706;--cinza:#6B7280;--borda:#E7E3EE;--bg-soft:#FAF9FC;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Poppins',sans-serif;font-weight:300;background:#fff;color:#1F1135;}
+a{color:var(--roxo);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.hero{background:linear-gradient(150deg,#0A0A0A 0%,#17111F 45%,#3B0F73 100%);position:relative;overflow:hidden;padding:56px 24px 48px;text-align:center;color:#fff;}
+.hero::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(transparent,transparent 43px,rgba(124,58,237,.18) 43px,rgba(124,58,237,.18) 44px),repeating-linear-gradient(90deg,transparent,transparent 43px,rgba(124,58,237,.18) 43px,rgba(124,58,237,.18) 44px);pointer-events:none;}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 55% at 50% 40%,rgba(124,58,237,.55) 0%,transparent 70%);pointer-events:none;}
+.hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;}
+.logo-bm{width:52px;height:52px;margin-bottom:16px;}
+.hero h1{font-size:clamp(1.5rem,4vw,2.4rem);font-weight:800;letter-spacing:-.5px;margin-bottom:6px;}
+.hero .sub{font-size:.95rem;opacity:.75;margin-bottom:4px;}
+.hero .ts{font-size:.8rem;opacity:.55;margin-bottom:28px;}
+.hero .status-badge{display:inline-block;background:rgba(124,58,237,.35);border:1px solid rgba(167,139,250,.5);border-radius:20px;padding:4px 16px;font-size:.8rem;font-weight:600;color:#DDD6FE;margin-bottom:28px;}
+.hero-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;max-width:900px;margin:0 auto;}
+.hero-kpi{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px 14px;}
+.hero-kpi .label{font-size:.7rem;opacity:.6;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+.hero-kpi .val{font-size:1.5rem;font-weight:800;line-height:1.1;}
+.hero-kpi .sub2{font-size:.72rem;opacity:.55;margin-top:4px;}
+.container{max-width:1100px;margin:0 auto;padding:0 20px;}
+section{padding:48px 20px;}
+section.bg{background:#fff;}
+section.bg-soft{background:var(--bg-soft);}
+.section-title{font-size:1.2rem;font-weight:700;color:var(--roxo);margin-bottom:22px;display:flex;align-items:center;gap:8px;}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:14px;margin-bottom:16px;}
+.kpi-card{background:#fff;border:1.5px solid var(--borda);border-radius:14px;padding:18px 16px;}
+.kpi-card .label{font-size:.7rem;text-transform:uppercase;letter-spacing:.5px;color:var(--roxo);font-weight:600;margin-bottom:6px;}
+.kpi-card .val{font-size:1.4rem;font-weight:800;color:#1F1135;line-height:1.1;}
+.kpi-card .sub{font-size:.72rem;color:var(--cinza);margin-top:4px;}
+.kpi-card.neg .val{color:var(--vermelho);}
+.kpi-card.pos .val{color:var(--verde);}
+.kpi-card.warn .val{color:var(--amarelo);}
+.funnel-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+@media(max-width:700px){.funnel-wrap{grid-template-columns:1fr;}}
+.funnel-box{background:#fff;border:1.5px solid var(--borda);border-radius:16px;padding:24px 20px;}
+.funnel-box h3{font-size:.95rem;font-weight:700;color:var(--roxo);margin-bottom:18px;text-align:center;}
+.funnel-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.funnel-bar{height:34px;border-radius:8px;background:linear-gradient(90deg,rgba(124,58,237,.15),rgba(124,58,237,.07));border:1px solid rgba(124,58,237,.2);display:flex;align-items:center;padding:0 12px;font-size:.76rem;font-weight:600;color:#1F1135;white-space:nowrap;overflow:hidden;}
+.funnel-meta{min-width:80px;text-align:right;font-size:.73rem;color:var(--cinza);}
+.table-wrap{overflow-x:auto;border-radius:16px;border:1.5px solid var(--borda);}
+table{width:100%;border-collapse:collapse;font-size:.82rem;}
+thead tr{background:var(--bg-soft);}
+th{padding:12px 14px;text-align:left;font-weight:700;color:var(--roxo);font-size:.74rem;text-transform:uppercase;letter-spacing:.4px;border-bottom:1.5px solid var(--borda);}
+td{padding:11px 14px;border-bottom:1px solid var(--borda);}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(124,58,237,.03);}
+.tag{display:inline-block;border-radius:20px;padding:2px 10px;font-size:.7rem;font-weight:600;margin-left:4px;}
+.tag-escalar{background:#D1FAE5;color:#065F46;}
+.tag-manter{background:#E0F2FE;color:#0369A1;}
+.tag-vigiar{background:#FEF3C7;color:#92400E;}
+.bold{font-weight:700;}
+.muted{color:var(--cinza);font-size:.75rem;}
+.neg-txt{color:var(--vermelho);}
+.pos-txt{color:var(--verde);}
+.warn-txt{color:var(--amarelo);}
+td.hl{background:rgba(124,58,237,.05);font-weight:700;}
+th.hl{background:rgba(124,58,237,.1);color:var(--roxo);}
+.analysis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;}
+.analysis-card{border-radius:14px;padding:20px;border-left:4px solid;}
+.analysis-card.green{background:#F0FDF4;border-color:var(--verde);}
+.analysis-card.yellow{background:#FFFBEB;border-color:var(--amarelo);}
+.analysis-card.red{background:#FEF2F2;border-color:var(--vermelho);}
+.analysis-card.blue{background:#EFF6FF;border-color:#2563EB;}
+.analysis-card h4{font-size:.88rem;font-weight:700;margin-bottom:12px;}
+.analysis-card h4.green{color:#065F46;}
+.analysis-card h4.yellow{color:#92400E;}
+.analysis-card h4.red{color:#991B1B;}
+.analysis-card h4.blue{color:#1D4ED8;}
+.analysis-card ul{list-style:none;padding:0;}
+.analysis-card li{font-size:.8rem;padding:3px 0;padding-left:14px;position:relative;line-height:1.5;}
+.analysis-card li::before{content:'→';position:absolute;left:0;opacity:.5;}
+.alert-box{border-radius:14px;padding:18px 20px;margin-bottom:18px;display:flex;gap:14px;align-items:flex-start;}
+.alert-box.blue{background:#EFF6FF;border:1.5px solid #2563EB;}
+.alert-box .icon{font-size:1.5rem;flex-shrink:0;}
+.alert-box .content h4{font-size:.9rem;font-weight:700;margin-bottom:4px;}
+.alert-box.blue .content h4{color:#1D4ED8;}
+.alert-box .content p{font-size:.8rem;line-height:1.6;}
+.alert-box.blue .content p{color:#1E3A8A;}
+.origem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;}
+.origem-card{background:#fff;border:1.5px solid var(--borda);border-radius:12px;padding:14px;text-align:center;}
+.origem-card .o-val{font-size:1.5rem;font-weight:800;color:#1F1135;}
+.origem-card .o-pct{font-size:.8rem;color:var(--roxo);font-weight:600;}
+.origem-card .o-label{font-size:.7rem;color:var(--cinza);margin-top:4px;}
+footer{background:#141018;color:rgba(255,255,255,.5);padding:36px 20px;text-align:center;font-size:.78rem;}
+footer .logo-f{color:#A78BFA;font-weight:800;font-size:1rem;margin-bottom:8px;}
+footer p{margin-bottom:4px;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <svg class="logo-bm" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="26,2 48,14 48,38 26,50 4,38 4,14" fill="none" stroke="white" stroke-width="2"/>
+      <polygon points="26,10 40,18 40,34 26,42 12,34 12,18" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="1.2"/>
+      <text x="26" y="31" text-anchor="middle" font-family="Poppins,sans-serif" font-size="13" font-weight="800" fill="white">BM</text>
+    </svg>
+    <h1>LS015 · Captação D1 · Início da nova captação</h1>
+    <div class="sub">Workshop Especialista com IA — Marketex / Ana Tex</div>
+    <div class="ts">Período: 07/09 – 13/09/2026 (7 dias) · Gerado em 07/09/2026</div>
+    <div class="status-badge">🚀 Primeiro dia de captação — meta padrão de 500 ingressos em 7 dias</div>
+    <div class="hero-kpis">
+      <div class="hero-kpi">
+        <div class="label">Invest c/imp</div>
+        <div class="val">R$3.325</div>
+        <div class="sub2">bruto R$2.921</div>
+      </div>
+      <div class="hero-kpi">
+        <div class="label">Retorno líquido</div>
+        <div class="val">R$1.527</div>
+        <div class="sub2">bruto R$1.642</div>
+      </div>
+      <div class="hero-kpi">
+        <div class="label">Exposição</div>
+        <div class="val" style="color:#F87171">−R$1.798</div>
+        <div class="sub2">D1 — negativa, comum no dia de abertura</div>
+      </div>
+      <div class="hero-kpi">
+        <div class="label">Ingressos</div>
+        <div class="val" style="color:#A78BFA">20</div>
+        <div class="sub2">4,0% da meta de 500 · faltam 480</div>
+      </div>
+      <div class="hero-kpi">
+        <div class="label">ROAS Geral</div>
+        <div class="val" style="color:#A78BFA">0,46×</div>
+        <div class="sub2">ROAS Tráfego 0,36×</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="bg" style="padding-bottom:0;">
+<div class="container">
+  <div class="alert-box blue">
+    <div class="icon">🚀</div>
+    <div class="content">
+      <h4>LS015 começa — captação padrão de 7 dias, meta de 500 ingressos</h4>
+      <p>Primeiro dia do LS015 (07/09), depois do fechamento do LS014 (442 ingressos de 1.000, 44,2% da meta dobrada). O LS015 volta ao formato padrão: captação de 7 dias, meta de 500 ingressos. D1 fechou com 20 ingressos, CPA R$166,26 e ROAS 0,46× — abaixo do melhor D1 já registrado na série (LS014: R$64,09/1,67×), mas dentro da faixa observada em D1s de outros lançamentos recentes. A base de criativos já vem de saída do LS014: ADC023 lidera novamente (7 vendas), seguido por ADV368 (4 vendas) — os 2 criativos mais eficientes do fechamento anterior.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="bg">
+<div class="container">
+  <div class="section-title">📊 Quadro Geral — D1 (corte 07/09, fim do dia)</div>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="label">Invest c/imposto</div>
+      <div class="val">R$3.325,28</div>
+      <div class="sub">bruto R$2.921,27 · +13,83% Meta (oficial, ANEX03)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="label">Retorno líquido</div>
+      <div class="val">R$1.527,49</div>
+      <div class="sub">bruto R$1.641,60 · × 0,9305 (estimado, sem planilha Hotmart)</div>
+    </div>
+    <div class="kpi-card neg">
+      <div class="label">Exposição</div>
+      <div class="val">−R$1.797,79</div>
+      <div class="sub">D1 — negativa, normal no início de captação</div>
+    </div>
+    <div class="kpi-card warn">
+      <div class="label">ROAS Geral</div>
+      <div class="val">0,46×</div>
+      <div class="sub">ROAS Tráfego 0,36×</div>
+    </div>
+    <div class="kpi-card warn">
+      <div class="label">Ingressos Workshop</div>
+      <div class="val">20</div>
+      <div class="sub">4,0% da meta de 500 · faltam 480</div>
+    </div>
+    <div class="kpi-card">
+      <div class="label">Ingressos pagos (VK, Meta Ads)</div>
+      <div class="val">14</div>
+      <div class="sub">70,0% dos ingressos vieram de tráfego pago</div>
+    </div>
+  </div>
+  <p style="font-size:.76rem;color:var(--cinza);padding:4px 2px;line-height:1.6;">
+    ⚠️ Investimento oficial Meta Ads (ANEX03): R$3.325,28 c/imp em D1. LS015 é uma captação padrão de <strong>7 dias</strong> (07/09→13/09), meta de <strong>500 ingressos</strong> (voltando ao padrão normal depois da meta dobrada do LS014). Ainda é cedo demais pra qualquer leitura de tendência — é só o primeiro dia.
+  </p>
+</div>
+</section>
+
+<section class="bg-soft">
+<div class="container">
+  <div class="section-title">🔽 Funil — D1 (07/09)</div>
+  <div class="funnel-wrap">
+    <div class="funnel-box">
+      <h3>📊 D1 — Meta Ads oficial (ANEX03)</h3>
+      <div style="font-size:.75rem;color:var(--cinza);margin-bottom:14px;text-align:center;">invest c/imp = spend oficial × 1,1383</div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:100%">💰 Invest c/imp: R$3.325,28</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:100%">👁 Impressões: 26.532</div><div class="funnel-meta">CPM R$125,32</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:85%">🎬 Hook (3s/imp, ADV): 32,07%</div><div class="funnel-meta">só vídeo</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:75%">🖱 CTR Link: 2,42%</div><div class="funnel-meta">CPC R$5,19</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:55%">📄 LPV: 547</div><div class="funnel-meta">Custo R$6,08</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:30%">💳 IC: 81</div><div class="funnel-meta">Custo R$41,05</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:60%">↪ Conv checkout→venda: 24,69%</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:25%">✅ Ingressos (total): 20</div><div class="funnel-meta">CPA R$166,26</div></div>
+      <div style="background:#FEF2F2;border-radius:10px;padding:10px 12px;margin-top:8px;font-size:.76rem;color:#991B1B;">Exposição do dia: −R$1.797,79 — ROAS 0,46× (D1, normal ainda estar negativo)</div>
+    </div>
+    <div class="funnel-box">
+      <h3>📌 Leitura do D1</h3>
+      <p style="font-size:.82rem;line-height:1.8;color:var(--cinza);">
+        Hook rate (32,07%) já nasce alto — melhor que a maioria dos D1s anteriores da série. Conversão de checkout→venda (24,69%) está em linha com a média histórica.<br><br>
+        O gargalo do dia é volume: só 81 checkouts iniciados pro tamanho do investimento. CPA de R$166,26 está acima da meta ideal, mas D1s costumam ser mais caros — o algoritmo do Meta ainda está aprendendo a nova janela de otimização.<br><br>
+        Origem: 70% pago, 25% sem atribuição, 5% orgânico (IG bio) — ainda é só o primeiro dia, a base orgânica deve crescer ao longo da semana.
+      </p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="bg">
+<div class="container">
+  <div class="section-title">🛒 Vendas + Order Bumps — D1</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Produto</th><th>Vendas</th><th>Receita</th><th>% sobre Workshop</th></tr></thead>
+      <tbody>
+        <tr><td class="bold">🏆 Workshop Especialista com IA (ingresso)</td><td class="bold">20</td><td class="bold">R$1.151,60</td><td>—</td></tr>
+        <tr><td>Acesso Premium Especialista com IA</td><td>2</td><td>R$254,00</td><td>22,1%</td></tr>
+        <tr><td>Fotos com Inteligência Artificial</td><td>3</td><td>R$186,00</td><td>16,2%</td></tr>
+        <tr><td>Palestra em Minutos</td><td>1</td><td>R$50,00</td><td>4,3%</td></tr>
+        <tr><td class="hl">TOTAL Order Bumps</td><td class="hl">6</td><td class="hl">R$490,00</td><td class="hl">conv. 30,0% sobre ingresso</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:.75rem;color:var(--cinza);margin-top:10px;line-height:1.6;">
+    Conversão de bumps de 30,0% no D1 — dentro do razoável pra primeiro dia, mas vale acompanhar se sobe conforme a captação avança (na maior parte do LS014 ficou entre 54-60%).
+  </p>
+</div>
+</section>
+
+<section class="bg-soft">
+<div class="container">
+  <div class="section-title">🌐 Ingressos por Origem — D1</div>
+  <div class="origem-grid">
+    <div class="origem-card">
+      <div class="o-val">14</div>
+      <div class="o-pct">70,0%</div>
+      <div class="o-label">paid_metaads</div>
+    </div>
+    <div class="origem-card">
+      <div class="o-val">5</div>
+      <div class="o-pct">25,0%</div>
+      <div class="o-label">sem atribuição</div>
+    </div>
+    <div class="origem-card">
+      <div class="o-val">1</div>
+      <div class="o-pct">5,0%</div>
+      <div class="o-label">organic_ig_bio</div>
+    </div>
+  </div>
+  <p style="font-size:.75rem;color:var(--cinza);margin-top:12px;line-height:1.6;">
+    D1 ainda concentrado em pago — normal, a base orgânica (bio do IG, Sala Secreta, WhatsApp) tende a crescer ao longo da semana conforme o pixel acumula dados.
+  </p>
+</div>
+</section>
+
+<section class="bg">
+<div class="container">
+  <div class="section-title">🎬 Criativos — D1</div>
+  <p style="font-size:.79rem;color:var(--cinza);margin-bottom:20px;">
+    Fonte: VK Metrics, spend e vendas (pixel Meta) por trafego.ad_name · ROAS estimado = ticket médio (R$68,47) × vendas ÷ spend c/imp.
+  </p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Criativo</th><th>Vendas</th><th>Spend c/imp</th><th>CPA</th><th>ROAS est.</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>ADC023_LS_CAP_NEW_V1_1 MES DE POST EM UMA TARDE</td><td class="bold">7</td><td>R$1.104,44</td><td>R$157,78</td><td>0,43×</td><td><span class="tag tag-escalar">líder do dia 🔥</span></td></tr>
+        <tr><td>ADV368_LS_CAP_NEW_V1_O CHATGPT JÁ PASSOU DA FASE DE SO ESCREVER TEXTO</td><td class="bold">4</td><td>R$725,39</td><td>R$181,35</td><td>0,38×</td><td><span class="tag tag-manter">manter</span></td></tr>
+        <tr><td>ADV258_LS_CAP_NEW_V1_CLONE COM UMA FOTO</td><td class="bold">2</td><td>R$363,68</td><td>R$181,84</td><td>0,38×</td><td><span class="tag tag-manter">manter</span></td></tr>
+        <tr><td>ADV375_LS_CAP_NEW_V1_VOCE AINDA NAO APRENDEU A AUTOMATIZAR SUAS TAREFAS</td><td class="bold">2</td><td>R$92,25</td><td class="pos-txt bold">R$46,13</td><td class="pos-txt bold">1,48×</td><td><span class="tag tag-escalar">melhor CPA 🔥</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="background:#EFF6FF;border-left:4px solid #2563EB;border-radius:10px;padding:14px 16px;margin-top:16px;font-size:.8rem;color:#1D4ED8;line-height:1.6;">
+    ℹ️ ADC023 e ADV368 — os 2 líderes do fechamento do LS014 — já abrem na frente também no LS015. Sinal de que a base de criativos herdada é sólida. ADV375 (criativo novo) já entra com CPA baixo e vale observar se sustenta com mais volume.
+  </div>
+</div>
+</section>
+
+<footer>
+  <div class="logo-f">Brito Mídias</div>
+  <p>LS015 · Workshop Especialista com IA · Marketex / Ana Tex</p>
+  <p>Relatório gerado em 07/09/2026 · Fonte: VK Metrics + Meta Ads (oficial)</p>
+  <p>Captação de 7 dias: 07/09 → 13/09/2026 · D1 de 7 · Próxima atualização: ao longo dos próximos dias</p>
+</footer>
+
+</body>
+</html>
