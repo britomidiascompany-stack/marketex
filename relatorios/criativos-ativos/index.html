@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Criativos Ativos — Histórico Geral | Brito Mídias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --roxo:#7C3AED; --roxo-dark:#5B21B6; --roxo-deep:#3B0F73; --roxo-light:#A78BFA; --roxo-xlight:#EDE9FE;
+    --preto:#0A0A0A; --ink:#141018; --cinza:#5B5566; --linha:#E7E3EE; --bg:#FFFFFF; --bg-soft:#FAF9FC;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{font-family:'Poppins',sans-serif; font-weight:300; color:var(--ink); background:var(--bg); line-height:1.6}
+  a{color:inherit}
+  .wrap{max-width:1100px; margin:0 auto; padding:0 28px}
+
+  /* HERO */
+  .hero{
+    position:relative; overflow:hidden; padding:64px 0 56px;
+    background:
+      radial-gradient(1100px 500px at 78% -10%, rgba(124,58,237,.55), transparent 60%),
+      linear-gradient(150deg, #0A0A0A 0%, #17111F 45%, #3B0F73 100%);
+    color:#fff;
+  }
+  .hero::before{
+    content:""; position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+    background-size:44px 44px;
+    -webkit-mask-image:radial-gradient(ellipse at 60% 0%, #000 40%, transparent 75%);
+    mask-image:radial-gradient(ellipse at 60% 0%, #000 40%, transparent 75%);
+    pointer-events:none;
+  }
+  .hero .wrap{position:relative; z-index:1}
+  .brand{display:flex; align-items:center; gap:16px; margin-bottom:40px}
+  .brand svg{width:40px; height:40px}
+  .brand .word{display:flex; align-items:center; gap:12px; font-weight:300}
+  .brand .word b{font-weight:800; font-size:18px}
+  .brand .word .bar{width:2px; height:22px; background:rgba(255,255,255,.55)}
+  .brand .word span{font-size:18px; letter-spacing:.22em}
+
+  .pill{display:inline-flex; border:1px solid var(--roxo-light); color:#fff; border-radius:100px; padding:7px 16px;
+    font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; margin-bottom:22px}
+  .hero h1{font-size:clamp(28px,4vw,46px); font-weight:800; letter-spacing:-.02em; max-width:760px; margin-bottom:16px}
+  .hero p.lead{font-size:16px; font-weight:300; color:rgba(255,255,255,.78); max-width:620px}
+  .hero-meta{display:flex; gap:28px; flex-wrap:wrap; margin-top:36px}
+  .hero-meta .item small{display:block; font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--roxo-light); margin-bottom:6px}
+  .hero-meta .item b{font-size:20px; font-weight:700}
+
+  /* SECTIONS */
+  section{padding:52px 0}
+  section.soft{background:var(--bg-soft)}
+  .section-label{display:flex; align-items:center; gap:12px; font-size:13px; font-weight:600;
+    letter-spacing:.16em; text-transform:uppercase; color:var(--roxo); margin-bottom:14px}
+  .section-label::before{content:""; width:34px; height:2px; background:var(--roxo); border-radius:2px}
+  h2{font-size:26px; font-weight:700; margin-bottom:10px}
+  .intro{color:var(--cinza); max-width:680px; margin-bottom:28px; font-size:15px}
+
+  /* KPI CARDS */
+  .kpi-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin-bottom:8px}
+  .kpi-card{border:1px solid var(--linha); border-radius:14px; padding:18px 20px; background:#fff}
+  .kpi-card small{display:block; color:var(--roxo); font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; margin-bottom:8px}
+  .kpi-card b{font-size:24px; font-weight:700; display:block}
+  .kpi-card .sub{font-size:12px; color:var(--cinza); margin-top:4px}
+
+  /* TABLE */
+  .table-wrap{border:1px solid var(--linha); border-radius:16px; overflow:hidden; background:#fff}
+  table{width:100%; border-collapse:collapse; font-size:13.5px}
+  thead th{
+    background:var(--ink); color:#fff; text-align:left; padding:13px 16px; font-weight:600;
+    font-size:11px; letter-spacing:.08em; text-transform:uppercase; white-space:nowrap;
+  }
+  tbody td{padding:12px 16px; border-top:1px solid var(--linha); vertical-align:middle}
+  tbody tr:hover{background:var(--bg-soft)}
+  td.code{font-weight:700; color:var(--roxo-dark); white-space:nowrap; font-size:12.5px}
+  td.name{max-width:420px}
+  td.name a.creative-link{color:var(--ink); text-decoration:none; border-bottom:1px dashed var(--roxo-light); font-size:12.5px}
+  td.name a.creative-link:hover{color:var(--roxo)}
+  td.num{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+  td.num.roas{font-weight:700}
+  .roas-good{color:#0F7B4A}
+  .roas-bad{color:#B42318}
+  tfoot td{padding:14px 16px; border-top:2px solid var(--ink); font-weight:700; background:var(--bg-soft)}
+
+  .note{font-size:12.5px; color:var(--cinza); margin-top:14px; line-height:1.7}
+  .note b{color:var(--ink)}
+
+  /* METHOD CARDS */
+  .method-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px}
+  .mini-card{border:1px solid var(--linha); border-radius:14px; padding:18px 20px; background:var(--bg-soft)}
+  .mini-card small{color:var(--roxo); font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; display:block; margin-bottom:8px}
+  .mini-card p{font-size:13.5px; color:var(--ink); font-weight:400}
+
+  /* FOOTER */
+  footer{background:var(--ink); color:rgba(255,255,255,.7); padding:36px 0; font-size:12.5px}
+  footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px}
+  footer b{color:#fff}
+
+  @media (max-width:640px){
+    thead th, tbody td{padding:10px 10px; font-size:12px}
+    td.name{max-width:180px}
+    .hero{padding:48px 0 40px}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="brand">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+        <polygon points="50,33 65,59 35,59"></polygon>
+        <line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line>
+        <line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line>
+        <line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line>
+        <line x1="10" y1="27" x2="50" y2="33"></line>
+      </svg>
+      <span class="word"><b>BM</b><i class="bar"></i><span>MÍDIAS</span></span>
+    </div>
+    <div class="pill">Meta Ads · Inventário de Criativos</div>
+    <h1>Criativos ativos agora — histórico geral de performance</h1>
+    <p class="lead">Levantamento de todos os criativos com anúncio ativo em campanhas [LS] na conta ANEX03, com o histórico acumulado de cada um desde o início do período analisado (01/05/26) até hoje.</p>
+    <div class="hero-meta">
+      <div class="item"><small>Criativos ativos</small><b>37</b></div>
+      <div class="item"><small>Vendas (histórico)</small><b>4.144</b></div>
+      <div class="item"><small>Investimento c/imp</small><b>R$ 568.521,80</b></div>
+      <div class="item"><small>Corte</small><b>14/09/26</b></div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="section-label">Metodologia</div>
+    <h2>Como o inventário foi montado</h2>
+    <p class="intro">Passo a passo usado para chegar na lista de criativos ativos e no histórico de cada um.</p>
+    <div class="method-grid">
+      <div class="mini-card">
+        <small>01 · Campanhas ativas</small>
+        <p>Filtro no Meta Ads (conta ANEX03) por campanhas com nome contendo "[LS]" e status ativo.</p>
+      </div>
+      <div class="mini-card">
+        <small>02 · Conjuntos ativos</small>
+        <p>Dentro dessas campanhas, apenas os conjuntos de anúncios (ad sets) com status ativo.</p>
+      </div>
+      <div class="mini-card">
+        <small>03 · Anúncios ativos</small>
+        <p>Dentro dos conjuntos ativos, os anúncios com <code>effective_status = ACTIVE</code> — 60 anúncios, 37 criativos únicos após deduplicação.</p>
+      </div>
+      <div class="mini-card">
+        <small>04 · Histórico geral (VK Metrics)</small>
+        <p>Para cada criativo, spend, impressões e compras desde 01/05/26 até 14/09/26 — não apenas o lançamento atual.</p>
+      </div>
+      <div class="mini-card">
+        <small>05 · Cálculo</small>
+        <p>Investimento c/imp = spend × 1,1383. CPA = invest c/imp ÷ vendas. ROAS estimado = (ticket médio × vendas) ÷ invest c/imp, com ticket médio global de R$ 69,68 (receita/compras pagas via Meta Ads nos produtos LS desde 01/05/26).</p>
+      </div>
+      <div class="mini-card">
+        <small>06 · Link do criativo</small>
+        <p>Localizado na Planilha de Controle de Criativos e, quando ausente lá, buscado diretamente no Google Drive pelo código do criativo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="soft">
+  <div class="wrap">
+    <div class="section-label">Visão consolidada</div>
+    <h2>Os 37 criativos ativos</h2>
+    <p class="intro">Ordenados por investimento acumulado (maior para menor). Vendas = ingressos do Workshop atribuídos ao criativo. Clique no nome para abrir o material no Drive.</p>
+
+    <div class="kpi-grid">
+      <div class="kpi-card"><small>Criativos ativos</small><b>37</b><div class="sub">9 ADC · 5 ADI · 23 ADV</div></div>
+      <div class="kpi-card"><small>Vendas acumuladas</small><b>4.144</b></div>
+      <div class="kpi-card"><small>Investimento c/imp</small><b>R$ 568.521,80</b></div>
+      <div class="kpi-card"><small>CPA médio geral</small><b>R$ 137,19</b></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Criativo</th>
+            <th style="text-align:right">Vendas</th>
+            <th style="text-align:right">Investimento (c/imp)</th>
+            <th style="text-align:right">CPA</th>
+            <th style="text-align:right">ROAS est.</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="code">ADC004</td>
+          <td class="name"><a href="https://drive.google.com/drive/folders/1Z0Z8i9CxwKF_Wwuvf3wMmUzUWho4mitY" target="_blank" rel="noopener" class="creative-link" data-code="ADC004">ADC004_LS_CAP_NEW_V1_EQUIPE DE CONTEUDO ROBO</a></td>
+          <td class="num">668</td>
+          <td class="num">R$ 97.483,77</td>
+          <td class="num">R$ 145,93</td>
+          <td class="num roas">0.48×</td>
+        </tr>
+        <tr>
+          <td class="code">ADV320</td>
+          <td class="name"><a href="https://drive.google.com/file/d/1z_QguczndXRZca-cvuyyaQfk_UdM-vnz/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV320">ADV320_LS_CAP_NEW_V1_CHAT CRIA ID VISUAL CLONE CONTEUDO_0.39</a></td>
+          <td class="num">861</td>
+          <td class="num">R$ 96.804,74</td>
+          <td class="num">R$ 112,43</td>
+          <td class="num roas">0.62×</td>
+        </tr>
+        <tr>
+          <td class="code">ADC001</td>
+          <td class="name"><a href="https://drive.google.com/drive/folders/1FaPinScATsxhgJ9hTSxpb1LZvfLqmioP" target="_blank" rel="noopener" class="creative-link" data-code="ADC001">ADC001_LS_CAP_NEW_V1_POSTA SEM APARECER</a></td>
+          <td class="num">496</td>
+          <td class="num">R$ 76.620,54</td>
+          <td class="num">R$ 154,48</td>
+          <td class="num roas">0.45×</td>
+        </tr>
+        <tr>
+          <td class="code">ADV291</td>
+          <td class="name"><a href="https://drive.google.com/file/d/14UCpiBmwYlHC7s0KI75OGfRB4i-U-Lea/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV291">ADV291_LS_CAP_NEW_V1_MAQUINA DE PROSPECCAO DE CLIENTES_HOOK16_BODY10_1.16</a></td>
+          <td class="num">462</td>
+          <td class="num">R$ 61.763,55</td>
+          <td class="num">R$ 133,69</td>
+          <td class="num roas">0.52×</td>
+        </tr>
+        <tr>
+          <td class="code">ADV325</td>
+          <td class="name"><a href="https://drive.google.com/file/d/1bO2LCKa5mZ4cNJrMcGkrEw1CzOst-GlG/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV325">ADV325_LS_CAP_NEW_V1_CHAT FAZ SITE ID E POSTS_HOOK49_BODY28_1.19</a></td>
+          <td class="num">375</td>
+          <td class="num">R$ 49.021,03</td>
+          <td class="num">R$ 130,72</td>
+          <td class="num roas">0.53×</td>
+        </tr>
+        <tr>
+          <td class="code">ADC023</td>
+          <td class="name"><a href="https://drive.google.com/drive/folders/1ye54xEewvJLeahTYhp2du6YWppFSfLtW" target="_blank" rel="noopener" class="creative-link" data-code="ADC023">ADC023_LS_CAP_NEW_V1_1 MES DE POST EM UMA TARDE</a></td>
+          <td class="num">286</td>
+          <td class="num">R$ 37.863,51</td>
+          <td class="num">R$ 132,39</td>
+          <td class="num roas">0.53×</td>
+        </tr>
+        <tr>
+          <td class="code">ADV309</td>
+          <td class="name"><a href="https://drive.google.com/file/d/1_DMO-rsBdcnQ9Pt_wzTrduybwkInUZ-G/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV309">ADV309_LS_CAP_OTM_V9_MAQUINA DE CONTEUDO_HOOK31_BODY19_CTA03_1.39</a></td>
+          <td class="num">222</td>
+          <td class="num">R$ 30.406,78</td>
+          <td class="num">R$ 136,97</td>
+          <td class="num roas">0.51×</td>
+        </tr>
+        <tr>
+          <td class="code">ADV304</td>
+          <td class="name"><a href="https://drive.google.com/file/d/1yWZeo_rSwQGak_D-HauZCWjtx4QxAMaZ/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV304">ADV304_LS_CAP_NEW_V1_ESSA AQUI SOU EU_HOOK03_BODY03_0.36</a></td>
+          <td class="num">111</td>
+          <td class="num">R$ 21.825,70</td>
+          <td class="num">R$ 196,63</td>
+          <td class="num roas">0.35×</td>
+        </tr>
+        <tr>
+          <td class="code">ADV258</td>
+          <td class="name"><a href="https://drive.google.com/file/d/1h1CQQdVcKQYPpv7uslC4XGY7srFPO54H/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV258">ADV258_LS_CAP_NEW_V1_CLONE COM UMA FOTO_HOOK05_BODY09_0.35</a></td>
+          <td class="num">100</td>
+          <td class="num">R$ 16.311,95</td>
+          <td class="num">R$ 163,12</td>
+          <td class="num roas">0.43×</td>
+        </tr>
+        <tr>
+          <td class="code">ADV255</td>
+          <td class="name"><a href="https://drive.google.com/file/d/1r7p5SmN2NjIbQsVA6Wy3CERQ7aORN24C/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV255">ADV255_LS_CAP_NEW_V1_CLONE DE FESTA_HOOK03_BODY06_0.52</a></td>
+          <td class="num">99</td>
+          <td class="num">R$ 15.506,17</td>
+          <td class="num">R$ 156,63</td>
+          <td class="num roas">0.44×</td>
+        </tr>
+        <tr>
+          <td class="code">ADV368</td>
+          <td class="name"><a href="https://drive.google.com/file/d/1lHd27cdHoiNXXP-_OsdmvjoP09SLMlkE/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV368">ADV368_LS_CAP_NEW_V1_O CHATGPT JÁ PASSOU DA FASE DE SO ESCREVER TEXTO_0.59</a></td>
+          <td class="num">98</td>
+          <td class="num">R$ 13.356,31</td>
+          <td class="num">R$ 136,29</td>
+          <td class="num roas">0.51×</td>
+        </tr>
+        <tr>
+          <td class="code">ADV367</td>
+          <td class="name"><a href="https://drive.google.com/file/d/1enBjJ-KPkJsvF43uLj3Z1defCEKLjq9r/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV367">ADV367_LS_CAP_NEW_V1_VOCE USA O CHATGPT COMO GOOGLE _0.41</a></td>
+          <td class="num">44</td>
+          <td class="num">R$ 7.142,38</td>
+          <td class="num">R$ 162,33</td>
+          <td class="num roas">0.43×</td>
+        </tr>
+        <tr>
+          <td class="code">ADI199</td>
+          <td class="name"><a href="https://drive.google.com/file/d/14haXROS_gq-Iw5xZylEMQuBKf97YmRX0/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADI199">ADI199_LS_CAP_NEW_VI_CRIE SEU CLONE DIGITAL COM IA</a></td>
+          <td class="num">43</td>
+          <td class="num">R$ 6.790,59</td>
+          <td class="num">R$ 157,92</td>
+          <td class="num roas">0.44×</td>
+        </tr>
+        <tr>
+          <td class="code">ADV253</td>
+          <td class="name"><a href="https://drive.google.com/file/d/1hjkamwMxE8XChNIpTY9gGvFI0gSATc8v/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV253">ADV253_LS_CAP_NEW_V1_CLONE ZERO TEMPO_HOOK02_BODY04_0.51</a></td>
+          <td class="num">30</td>
+          <td class="num">R$ 5.977,65</td>
+          <td class="num">R$ 199,25</td>
+          <td class="num roas">0.35×</td>
+        </tr>
+        <tr>
+          <td class="code">ADV375</td>
+          <td class="name"><a href="https://drive.google.com/file/d/1laenRDi65-ZswV-zpy4eLS-zGSsp3D9M/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV375">ADV375_LS_CAP_NEW_V1_VOCE AINDA NAO APRENDEU A AUTOMATIZAR SUAS TAREFAS_0.43</a></td>
+          <td class="num">40</td>
+          <td class="num">R$ 4.665,97</td>
+          <td class="num">R$ 116,65</td>
+          <td class="num roas">0.60×</td>
+        </tr>
+        <tr>
+          <td class="code">ADV365</td>
+          <td class="name"><a href="https://drive.google.com/file/d/1ANbRwgveTLq0D7nzaanFap4z6jTaxgzu/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV365">ADV365_LS_CAP_NEW_V1_QUER AUTOMATIZAR TAREFAS COM O CHATGPT E O CLAUDE_1.25</a></td>
+          <td class="num">41</td>
+          <td class="num">R$ 3.727,56</td>
+          <td class="num">R$ 90,92</td>
+          <td class="num roas">0.77×</td>
+        </tr>
+        <tr>
+          <td class="code">ADV321</td>
+          <td class="name"><a href="https://drive.google.com/file/d/186Dc6YuC2POxLPaRRgvqCnu8IJnAGZYN/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV321">ADV321_LS_CAP_NEW_V1_CHAT FAZ SUA ID VISUAL_0.37</a></td>
+          <td class="num">32</td>
+          <td class="num">R$ 3.710,74</td>
+          <td class="num">R$ 115,96</td>
+          <td class="num roas">0.60×</td>
+        </tr>
+        <tr>
+          <td class="code">ADV341</td>
+          <td class="name"><a href="https://drive.google.com/file/d/15cSqV-zHNZhjuROQ1T8LBs7E1BGNRACf/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV341">ADV341_LS_CAP_NEW_V1_OCULOS COM IA_2.03</a></td>
+          <td class="num">16</td>
+          <td class="num">R$ 3.104,43</td>
+          <td class="num">R$ 194,03</td>
+          <td class="num roas">0.36×</td>
+        </tr>
+        <tr>
+          <td class="code">ADV252</td>
+          <td class="name"><a href="https://drive.google.com/file/d/1eQZjMR_tVGdOmRQkJ-ahH7VnU7Ek8lD0/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV252">ADV252_LS_CAP_NEW_V1_CLONE ZERO TEMPO_HOOK02_BODY03_0.38</a></td>
+          <td class="num">15</td>
+          <td class="num">R$ 2.419,22</td>
+          <td class="num">R$ 161,28</td>
+          <td class="num roas">0.43×</td>
+        </tr>
+        <tr>
+          <td class="code">ADV259</td>
+          <td class="name"><a href="https://drive.google.com/file/d/1fQILVUhlPtl8San6Q3Dk46aRRGPZ9Tcw/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV259">ADV259_LS_CAP_NEW_V1_CLONE COM UMA FOTO_HOOK05_BODY10_0.29</a></td>
+          <td class="num">13</td>
+          <td class="num">R$ 1.529,69</td>
+          <td class="num">R$ 117,67</td>
+          <td class="num roas">0.59×</td>
+        </tr>
+        <tr>
+          <td class="code">ADI159</td>
+          <td class="name"><a href="https://drive.google.com/file/d/1P1wAj7PuG6MhRuWzyTS0MFElffM3OxcX/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADI159">ADI159_LS_CAP_NEW_V1_ACORDOU SEM ENERGIA</a></td>
+          <td class="num">18</td>
+          <td class="num">R$ 1.509,56</td>
+          <td class="num">R$ 83,86</td>
+          <td class="num roas">0.83×</td>
+        </tr>
+        <tr>
+          <td class="code">ADV376</td>
+          <td class="name"><a href="https://drive.google.com/file/d/1FODKfvYp6JVwIF35Vl866xzrGgN6cJYK/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV376">ADV376_LS_CAP_NEW_V1_CRIE SEUS SISTEMAS_0.47</a></td>
+          <td class="num">5</td>
+          <td class="num">R$ 1.505,37</td>
+          <td class="num">R$ 301,07</td>
+          <td class="num roas">0.23×</td>
+        </tr>
+        <tr>
+          <td class="code">ADI156</td>
+          <td class="name"><a href="https://drive.google.com/file/d/1hOf7Nf2kdIZQbA4aQFgj3mwtb5OQ_klx/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADI156">ADI156_LS_CAP_NEW_V1_VOCE PRODUZ VOCE RESPONDE</a></td>
+          <td class="num">12</td>
+          <td class="num">R$ 1.479,47</td>
+          <td class="num">R$ 123,29</td>
+          <td class="num roas">0.57×</td>
+        </tr>
+        <tr>
+          <td class="code">ADI179</td>
+          <td class="name"><a href="https://drive.google.com/file/d/1L8PUmCYlcscDX5rNlGS0kuMvRYnjiK_L/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADI179">ADI179_LS_CAP_NEW_V1_30 POSTS PRONTOS NUMA TARDE</a></td>
+          <td class="num">16</td>
+          <td class="num">R$ 1.465,04</td>
+          <td class="num">R$ 91,56</td>
+          <td class="num roas">0.76×</td>
+        </tr>
+        <tr>
+          <td class="code">ADV369</td>
+          <td class="name"><a href="https://drive.google.com/file/d/13PjiINqt2RYfQ-6znEi9r9L4sgyMKRjH/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV369">ADV369_LS_CAP_NEW_V1_PARA DE ADIAR APRENDER IA_0.51</a></td>
+          <td class="num">10</td>
+          <td class="num">R$ 1.392,06</td>
+          <td class="num">R$ 139,21</td>
+          <td class="num roas">0.50×</td>
+        </tr>
+        <tr>
+          <td class="code">ADC042</td>
+          <td class="name"><a href="https://drive.google.com/drive/folders/1CvLwgL4DTlzNszNaRHUxDivxW1lw5K-k" target="_blank" rel="noopener" class="creative-link" data-code="ADC042">ADC042_LS_CAP_NEW_V1_O BLOQUEIO NA HORA DE GRAVAR</a></td>
+          <td class="num">14</td>
+          <td class="num">R$ 1.339,26</td>
+          <td class="num">R$ 95,66</td>
+          <td class="num roas">0.73×</td>
+        </tr>
+        <tr>
+          <td class="code">ADV263</td>
+          <td class="name"><a href="https://drive.google.com/file/d/1Gje0ztZMVUMfLWE5tSx5j1aWe1kOQokV/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV263">ADV263_LS_CAP_NEW_V1_TOLHA PARA TUDO CLONE_HOOK07_BODY12_0.52</a></td>
+          <td class="num">4</td>
+          <td class="num">R$ 792,64</td>
+          <td class="num">R$ 198,16</td>
+          <td class="num roas">0.35×</td>
+        </tr>
+        <tr>
+          <td class="code">ADV370</td>
+          <td class="name"><a href="https://drive.google.com/file/d/1i232xRUuYiR7rCTXkTKqOsoBoIvebshz/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV370">ADV370_LS_CAP_NEW_V1_PARE DE CRIAR SEUS POSTS NA MAO_0.39</a></td>
+          <td class="num">4</td>
+          <td class="num">R$ 682,50</td>
+          <td class="num">R$ 170,63</td>
+          <td class="num roas">0.41×</td>
+        </tr>
+        <tr>
+          <td class="code">ADV250</td>
+          <td class="name"><a href="https://drive.google.com/file/d/14adoKCCuopDd8wJfhnwObLAnTkqUWNGF/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV250">ADV250_LS_CAP_NEW_V1_CLONE MULHER FALANDO COM VOCE_HOOK01_BODY01_0.32</a></td>
+          <td class="num">4</td>
+          <td class="num">R$ 548,90</td>
+          <td class="num">R$ 137,22</td>
+          <td class="num roas">0.51×</td>
+        </tr>
+        <tr>
+          <td class="code">ADC050</td>
+          <td class="name"><a href="https://drive.google.com/drive/folders/1twQS0hk4JbZ1cSx-mV9XVZGeQlKKgMg8" target="_blank" rel="noopener" class="creative-link" data-code="ADC050">ADC050_LS_CAP_NEW_V1_MUDAR DE PAIS SEM PERDER QUEM VOCE E</a></td>
+          <td class="num">1</td>
+          <td class="num">R$ 269,23</td>
+          <td class="num">R$ 269,23</td>
+          <td class="num roas">0.26×</td>
+        </tr>
+        <tr>
+          <td class="code">ADC054</td>
+          <td class="name"><a href="https://drive.google.com/drive/folders/1d1auK9etJKdKtJZIcrsGCwQTwyEqzxXB" target="_blank" rel="noopener" class="creative-link" data-code="ADC054">ADC054_LS_CAP_NEW_V1_A VANTAGEM DE VIVER FORA PARA SEU NEGOCIO</a></td>
+          <td class="num">0</td>
+          <td class="num">R$ 265,78</td>
+          <td class="num">—</td>
+          <td class="num roas">—</td>
+        </tr>
+        <tr>
+          <td class="code">ADC052</td>
+          <td class="name"><a href="https://drive.google.com/drive/folders/1f1zfHFgTy3pb3EGpox8FB8bSnrX-N1Zl" target="_blank" rel="noopener" class="creative-link" data-code="ADC052">ADC052_LS_CAP_NEW_V1_O LIMITE QUE O TRABALHO DURO NAO SUPERA</a></td>
+          <td class="num">0</td>
+          <td class="num">R$ 264,80</td>
+          <td class="num">—</td>
+          <td class="num roas">—</td>
+        </tr>
+        <tr>
+          <td class="code">ADC053</td>
+          <td class="name"><a href="https://drive.google.com/drive/folders/1nzc1utl7iMReEMlTDJrPMlKfOf7VbjQz" target="_blank" rel="noopener" class="creative-link" data-code="ADC053">ADC053_LS_CAP_NEW_V1_A MAIOR PERDA AO RECOMECAR EM OUTRO PAIS E</a></td>
+          <td class="num">2</td>
+          <td class="num">R$ 264,80</td>
+          <td class="num">R$ 132,40</td>
+          <td class="num roas">0.53×</td>
+        </tr>
+        <tr>
+          <td class="code">ADC051</td>
+          <td class="name"><a href="https://drive.google.com/drive/folders/1CBegNfZwFUQKHHeHf6wp8UeyTl-x4_79" target="_blank" rel="noopener" class="creative-link" data-code="ADC051">ADC051_LS_CAP_NEW_V1_A PERDA INVISIVEL AO MUDAR DE PAIS</a></td>
+          <td class="num">0</td>
+          <td class="num">R$ 247,17</td>
+          <td class="num">—</td>
+          <td class="num roas">—</td>
+        </tr>
+        <tr>
+          <td class="code">ADV262</td>
+          <td class="name"><a href="https://drive.google.com/file/d/1kO62Q_KDn82SsjkjwY0t1pYyx5JhHQPc/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV262">ADV262_LS_CAP_NEW_V1_TOLHA PARA TUDO CLONE_HOOK07_BODY07_0.51</a></td>
+          <td class="num">2</td>
+          <td class="num">R$ 192,51</td>
+          <td class="num">R$ 96,25</td>
+          <td class="num roas">0.72×</td>
+        </tr>
+        <tr>
+          <td class="code">ADV261</td>
+          <td class="name"><a href="https://drive.google.com/file/d/1Q4M1e4Y8ioPFRFd1bjlOHaILl4mEjkUn/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADV261">ADV261_LS_CAP_NEW_V1_CLONE VARIAS LINGUAS_HOOK06_BODY06_0.43</a></td>
+          <td class="num">0</td>
+          <td class="num">R$ 175,01</td>
+          <td class="num">—</td>
+          <td class="num roas">—</td>
+        </tr>
+        <tr>
+          <td class="code">ADI160</td>
+          <td class="name"><a href="https://drive.google.com/file/d/1vQy0CuQCWcbg9mMSbs_uF5wWkicdAX3H/view?usp=drivesdk" target="_blank" rel="noopener" class="creative-link" data-code="ADI160">ADI160_LS_CAP_NEW_V1_VOCE UNICA FORMA</a></td>
+          <td class="num">0</td>
+          <td class="num">R$ 95,42</td>
+          <td class="num">—</td>
+          <td class="num roas">—</td>
+        </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2">Total / Média</td>
+            <td class="num">4.144</td>
+            <td class="num">R$ 568.521,80</td>
+            <td class="num">R$ 137,19</td>
+            <td class="num">0,52×</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <p class="note">
+      <b>Vendas</b> = ingressos do Workshop atribuídos ao criativo (VK Metrics, campo <code>platform_purchases</code>), histórico desde 01/05/26.
+      <b>Investimento (c/imp)</b> = spend bruto Meta × 1,1383 (imposto). <b>CPA</b> = investimento c/imp ÷ vendas.
+      <b>ROAS estimado</b> = (ticket médio global R$ 69,68 × vendas) ÷ investimento c/imp — estimativa, pois o VK não atribui receita por criativo diretamente; usa o ticket médio de todas as vendas pagas via Meta Ads dos produtos da LS no período.
+      Criativos com 0 vendas no período não têm CPA/ROAS calculável (—).
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>Brito Mídias · Central de Estratégia e Resultados</div>
+    <div>Relatório gerado em <b>14/09/26</b> · Fonte: Meta Ads + VK Metrics</div>
+  </div>
+</footer>
+
+</body>
+</html>
