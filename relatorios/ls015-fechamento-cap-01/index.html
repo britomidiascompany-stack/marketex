@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LS015 FECHAMENTO CAPTAÇÃO 01 · 16/09/26</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--roxo:#7C3AED;--roxo-soft:#A78BFA;--verde:#059669;--vermelho:#DC2626;--amarelo:#D97706;--cinza:#6B7280;--borda:#E7E3EE;--bg-soft:#FAF9FC;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Poppins',sans-serif;font-weight:300;background:#fff;color:#1F1135;}
+a{color:var(--roxo);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+.hero{background:linear-gradient(150deg,#0A0A0A 0%,#17111F 45%,#3B0F73 100%);position:relative;overflow:hidden;padding:56px 24px 48px;text-align:center;color:#fff;}
+.hero::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(transparent,transparent 43px,rgba(124,58,237,.18) 43px,rgba(124,58,237,.18) 44px),repeating-linear-gradient(90deg,transparent,transparent 43px,rgba(124,58,237,.18) 43px,rgba(124,58,237,.18) 44px);pointer-events:none;}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 55% at 50% 40%,rgba(124,58,237,.55) 0%,transparent 70%);pointer-events:none;}
+.hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;}
+.logo-bm{width:52px;height:52px;margin-bottom:16px;}
+.hero h1{font-size:clamp(1.5rem,4vw,2.4rem);font-weight:800;letter-spacing:-.5px;margin-bottom:6px;}
+.hero .sub{font-size:.95rem;opacity:.75;margin-bottom:4px;}
+.hero .ts{font-size:.8rem;opacity:.55;margin-bottom:28px;}
+.hero .status-badge{display:inline-block;background:rgba(124,58,237,.35);border:1px solid rgba(164,140,250,.5);border-radius:20px;padding:4px 16px;font-size:.8rem;font-weight:600;color:#C4B5FD;margin-bottom:28px;}
+.hero-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;max-width:900px;margin:0 auto;}
+.hero-kpi{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px 14px;}
+.hero-kpi .label{font-size:.7rem;opacity:.6;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+.hero-kpi .val{font-size:1.5rem;font-weight:800;line-height:1.1;}
+.hero-kpi .sub2{font-size:.72rem;opacity:.55;margin-top:4px;}
+
+.container{max-width:1100px;margin:0 auto;padding:0 20px;}
+section{padding:48px 20px;}
+section.bg{background:#fff;}
+section.bg-soft{background:var(--bg-soft);}
+.section-title{font-size:1.2rem;font-weight:700;color:var(--roxo);margin-bottom:22px;display:flex;align-items:center;gap:8px;}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:14px;margin-bottom:16px;}
+.kpi-card{background:#fff;border:1.5px solid var(--borda);border-radius:14px;padding:18px 16px;}
+.kpi-card .label{font-size:.7rem;text-transform:uppercase;letter-spacing:.5px;color:var(--roxo);font-weight:600;margin-bottom:6px;}
+.kpi-card .val{font-size:1.4rem;font-weight:800;color:#1F1135;line-height:1.1;}
+.kpi-card .sub{font-size:.72rem;color:var(--cinza);margin-top:4px;}
+.kpi-card.neg .val{color:var(--vermelho);}
+.kpi-card.pos .val{color:var(--verde);}
+.kpi-card.warn .val{color:var(--amarelo);}
+
+.funnel-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+@media(max-width:700px){.funnel-wrap{grid-template-columns:1fr;}}
+.funnel-box{background:#fff;border:1.5px solid var(--borda);border-radius:16px;padding:24px 20px;}
+.funnel-box h3{font-size:.95rem;font-weight:700;color:var(--roxo);margin-bottom:18px;text-align:center;}
+.funnel-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.funnel-bar{height:34px;border-radius:8px;background:linear-gradient(90deg,rgba(124,58,237,.15),rgba(124,58,237,.07));border:1px solid rgba(124,58,237,.2);display:flex;align-items:center;padding:0 12px;font-size:.76rem;font-weight:600;color:#1F1135;white-space:nowrap;overflow:hidden;}
+.funnel-meta{min-width:80px;text-align:right;font-size:.73rem;color:var(--cinza);}
+
+.table-wrap{overflow-x:auto;border-radius:16px;border:1.5px solid var(--borda);}
+table{width:100%;border-collapse:collapse;font-size:.82rem;}
+thead tr{background:var(--bg-soft);}
+th{padding:12px 14px;text-align:left;font-weight:700;color:var(--roxo);font-size:.74rem;text-transform:uppercase;letter-spacing:.4px;border-bottom:1.5px solid var(--borda);}
+td{padding:11px 14px;border-bottom:1px solid var(--borda);}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(124,58,237,.03);}
+.tag{display:inline-block;border-radius:20px;padding:2px 10px;font-size:.7rem;font-weight:600;margin-left:4px;}
+.tag-video{background:#EDE9FE;color:#5B21B6;}
+.tag-imagem{background:#E0F2FE;color:#0369A1;}
+.tag-carrossel{background:#FEF9C3;color:#854D0E;}
+.tag-escalar{background:#D1FAE5;color:#065F46;}
+.tag-manter{background:#E0F2FE;color:#0369A1;}
+.tag-pausar{background:#FEE2E2;color:#991B1B;}
+.tag-vigiar{background:#FEF3C7;color:#92400E;}
+.tag-novo{background:#F3E8FF;color:#6B21A8;}
+.bold{font-weight:700;}
+.muted{color:var(--cinza);font-size:.75rem;}
+.neg-txt{color:var(--vermelho);}
+.pos-txt{color:var(--verde);}
+.warn-txt{color:var(--amarelo);}
+td.hl{background:rgba(124,58,237,.05);font-weight:700;}
+th.hl{background:rgba(124,58,237,.1);color:var(--roxo);}
+
+.analysis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;}
+.analysis-card{border-radius:14px;padding:20px;border-left:4px solid;}
+.analysis-card.green{background:#F0FDF4;border-color:var(--verde);}
+.analysis-card.yellow{background:#FFFBEB;border-color:var(--amarelo);}
+.analysis-card.red{background:#FEF2F2;border-color:var(--vermelho);}
+.analysis-card.blue{background:#EFF6FF;border-color:#2563EB;}
+.analysis-card h4{font-size:.88rem;font-weight:700;margin-bottom:12px;}
+.analysis-card h4.green{color:#065F46;}
+.analysis-card h4.yellow{color:#92400E;}
+.analysis-card h4.red{color:#991B1B;}
+.analysis-card h4.blue{color:#1D4ED8;}
+.analysis-card ul{list-style:none;padding:0;}
+.analysis-card li{font-size:.8rem;padding:3px 0;padding-left:14px;position:relative;line-height:1.5;}
+.analysis-card li::before{content:'→';position:absolute;left:0;opacity:.5;}
+
+.alert-box{border-radius:14px;padding:18px 20px;margin-bottom:18px;display:flex;gap:14px;align-items:flex-start;}
+.alert-box.green{background:#F0FDF4;border:1.5px solid #059669;}
+.alert-box.blue{background:#EFF6FF;border:1.5px solid #2563EB;}
+.alert-box.amber{background:#FFFBEB;border:1.5px solid #D97706;}
+.alert-box.red{background:#FEF2F2;border:1.5px solid #DC2626;}
+.alert-box .icon{font-size:1.5rem;flex-shrink:0;}
+.alert-box .content h4{font-size:.9rem;font-weight:700;margin-bottom:4px;}
+.alert-box.green .content h4{color:#065F46;}
+.alert-box.blue .content h4{color:#1D4ED8;}
+.alert-box.amber .content h4{color:#92400E;}
+.alert-box.red .content h4{color:#991B1B;}
+.alert-box .content p{font-size:.8rem;line-height:1.6;}
+.alert-box.green .content p{color:#14532D;}
+.alert-box.blue .content p{color:#1E3A8A;}
+.alert-box.amber .content p{color:#92400E;}
+.alert-box.red .content p{color:#991B1B;}
+
+.origem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;}
+.origem-card{background:#fff;border:1.5px solid var(--borda);border-radius:12px;padding:14px;text-align:center;}
+.origem-card .o-val{font-size:1.5rem;font-weight:800;color:#1F1135;}
+.origem-card .o-pct{font-size:.8rem;color:var(--roxo);font-weight:600;}
+.origem-card .o-label{font-size:.7rem;color:var(--cinza);margin-top:4px;}
+
+footer{background:#141018;color:rgba(255,255,255,.5);padding:36px 20px;text-align:center;font-size:.78rem;}
+footer .logo-f{color:#A78BFA;font-weight:800;font-size:1rem;margin-bottom:8px;}
+footer p{margin-bottom:4px;}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <svg class="logo-bm" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="26,2 48,14 48,38 26,50 4,38 4,14" fill="none" stroke="white" stroke-width="2"/>
+      <polygon points="26,10 40,18 40,34 26,42 12,34 12,18" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="1.2"/>
+      <text x="26" y="31" text-anchor="middle" font-family="Poppins,sans-serif" font-size="13" font-weight="800" fill="white">BM</text>
+    </svg>
+    <h1>LS015 · Fechamento Captação 01</h1>
+    <div class="sub">Workshop Especialista com IA — Marketex / Ana Tex</div>
+    <div class="ts">Captação: 07/09 – 13/09/2026 (D1-D7) · Gerado em 16/09/2026 (D+3) · Fonte: VK Metrics + Meta Ads (oficial) + Hotmart (líquido real, corte D+3)</div>
+    <div class="status-badge">⏳ Fechamento 01 — PARCIAL, ainda sujeito a reembolso (Fechamento 02 em ~7 dias)</div>
+    <div class="hero-kpis">
+      <div class="hero-kpi">
+        <div class="label">Invest c/imp</div>
+        <div class="val">R$35.448</div>
+        <div class="sub2">bruto R$31.141</div>
+      </div>
+      <div class="hero-kpi">
+        <div class="label">Retorno líquido</div>
+        <div class="val">R$21.033</div>
+        <div class="sub2">Hotmart real (K/AX), corte D+3</div>
+      </div>
+      <div class="hero-kpi">
+        <div class="label">Exposição</div>
+        <div class="val" style="color:#F87171">−R$14.415</div>
+        <div class="sub2">líquido − invest c/imp</div>
+      </div>
+      <div class="hero-kpi">
+        <div class="label">Ingressos</div>
+        <div class="val" style="color:#F87171">258</div>
+        <div class="sub2">51,6% da meta de 500 · faltam 242</div>
+      </div>
+      <div class="hero-kpi">
+        <div class="label">ROAS Geral</div>
+        <div class="val" style="color:#A78BFA">0,59×</div>
+        <div class="sub2">ROAS Tráfego 0,42×</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ALERTA -->
+<section class="bg" style="padding-bottom:0;">
+<div class="container">
+  <div class="alert-box amber">
+    <div class="icon">⏳</div>
+    <div class="content">
+      <h4>Dados de líquido REAL da Hotmart, corte D+3 — ainda sujeito a reembolsos nos próximos dias</h4>
+      <p>Este é o <strong>Fechamento 01</strong> do LS015: 3 dias após o encerramento da captação (domingo 13/09), com o líquido já vindo direto da aba "HOTMART | VENDAS MARKETEX - COM" (nome truncado da aba "...COMPLETA") da planilha unificada do lançamento (372 transações em status Aprovado/Completo dentro do período, de 378 registros totais). Ainda assim, a Hotmart processa reembolsos ao longo de ~7 dias após a compra, então este número <strong>pode cair</strong> até o Fechamento 02, previsto para ~7 dias à frente (D+7), que é o definitivo. Funil, tráfego e investimento seguem vindo do VK Metrics/Meta Ads normalmente — só receita/líquido/ROAS/ticket médio usam o valor real da Hotmart em vez da aproximação (receita VK × 0,93).</p>
+    </div>
+  </div>
+  <div class="alert-box red">
+    <div class="icon">🎯</div>
+    <div class="content">
+      <h4>Meta de 500 ingressos NÃO batida — apenas 258 vendidos, faltam 242 (51,6%)</h4>
+      <p>O LS015 fechou a captação com o pior resultado percentual entre os últimos 4 lançamentos de 7 dias acompanhados (LS012: 95,2% · LS013: 72,8%). Investimento c/imp caiu para R$35.448 (o menor volume investido da série recente), e mesmo com CPM em linha com o histórico, o CPA pago (R$181,78) segue subindo — a captação está claramente mais cara e com menos verba dedicada do que os ciclos anteriores. Ver Análise ao final.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- QUADRO GERAL -->
+<section class="bg">
+<div class="container">
+  <div class="section-title">📊 Quadro Geral — Fechamento 01 (D1→D7, corte D+3)</div>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="label">Invest c/imposto</div>
+      <div class="val">R$35.448,02</div>
+      <div class="sub">bruto R$31.141,19 · +13,83% Meta (oficial, ANEX03)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="label">Retorno líquido (real)</div>
+      <div class="val">R$21.032,76</div>
+      <div class="sub">Hotmart real (K/AX), 372 transações Aprovado/Completo</div>
+    </div>
+    <div class="kpi-card neg">
+      <div class="label">Exposição</div>
+      <div class="val">−R$14.415,26</div>
+      <div class="sub">líquido real − invest c/imp</div>
+    </div>
+    <div class="kpi-card neg">
+      <div class="label">ROAS Geral</div>
+      <div class="val">0,59×</div>
+      <div class="sub">ROAS Tráfego 0,42× (líquido paid, estimado)</div>
+    </div>
+    <div class="kpi-card neg">
+      <div class="label">Ingressos Workshop (total)</div>
+      <div class="val">258</div>
+      <div class="sub">51,6% da meta de 500 · faltam 242</div>
+    </div>
+    <div class="kpi-card">
+      <div class="label">Ingressos pagos (VK, Meta Ads)</div>
+      <div class="val">195</div>
+      <div class="sub">75,6% dos ingressos vieram de tráfego pago</div>
+    </div>
+  </div>
+  <p style="font-size:.76rem;color:var(--cinza);padding:4px 2px;line-height:1.6;">
+    ⚠️ Investimento oficial Meta Ads (campanhas [LS], ANEX03), com imposto +13,83% — spend agregado do VK no mesmo período ficou em R$30.648,15 (diferença de R$493,04 frente ao Meta, dentro do ruído normal de corte de horário entre as duas fontes; usamos o valor oficial do Meta). Conta ANEX07 (Advantage) conferida: zero gasto em campanhas [LS] no período. <strong>Retorno líquido vem 100% da aba Hotmart da planilha unificada</strong> (regra K/AX — Preço da Oferta para vendas nacionais, Valor recebido convertido para vendas internacionais quando "Moeda de recebimento" ≠ BRL, status Aprovado/Completo, filtrado por Data de Venda 07/09-13/09) — R$21.032,76. Contagem de ingressos Workshop bate exatamente entre Hotmart (258) e VK (258, somando todas as origens). Ingressos pagos (VK, product_id 7689363, vk_source=paid_metaads) = 195.
+  </p>
+</div>
+</section>
+
+<!-- FUNIL -->
+<section class="bg-soft">
+<div class="container">
+  <div class="section-title">🔽 Funil Completo D1→D7</div>
+  <div class="funnel-wrap">
+    <div class="funnel-box">
+      <h3>📡 Mídia — Meta Ads (VK, ad_attribution)</h3>
+      <div style="font-size:.75rem;color:var(--cinza);margin-bottom:14px;text-align:center;">Meta Ads oficial (ANEX03) · invest c/imp = spend oficial × 1,1383 · 07/09-13/09</div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:100%">💰 Invest c/imp: R$35.448</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:100%">👁 Impressões: 400.222</div><div class="funnel-meta">CPM R$88,57</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:87%">🎬 3s View/impr: 16,59%</div><div class="funnel-meta">agregado</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:79%">🖱 CTR Link: 2,12%</div><div class="funnel-meta">CPC R$4,17</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:72%">🔗 Cliques link: 8.500</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:65%">📄 LPV: 7.593</div><div class="funnel-meta">Custo R$4,67</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:58%">↪ Conv pág→checkout: 14,09%</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:51%">💳 IC: 1.070</div><div class="funnel-meta">Custo R$33,13</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:44%">↪ Conv checkout→venda: 18,22%</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:37%">✅ Platform purchases (VK): 223</div><div class="funnel-meta">CPA R$158,96</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:33%">💎 ROAS estimado: 0,42×</div></div>
+    </div>
+
+    <div class="funnel-box">
+      <h3>💎 Vendas — VK Metrics (ingresso Workshop)</h3>
+      <div style="font-size:.75rem;color:var(--cinza);margin-bottom:14px;text-align:center;">Fonte: VK Metrics · D1→D7 · ingresso Workshop, product_id 7689363</div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:100%">👁 Impressões: 400.222</div><div class="funnel-meta">CPM R$88,57</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:79%">🖱 CTR Link: 2,12%</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:65%">📄 LPV: 7.593</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:51%">💳 IC: 1.070</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:44%">↪ Conv checkout→venda (pago): 18,22%</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:41%">✅ Ingressos pagos (VK): 195</div><div class="funnel-meta">CPA R$181,78</div></div>
+      <div class="funnel-row"><div class="funnel-bar" style="width:36%">🎯 Ingressos totais (todas origens): 258</div><div class="funnel-meta">51,6% da meta</div></div>
+      <div style="background:linear-gradient(135deg,#EDE9FE,#F5F3FF);border-radius:12px;padding:14px;margin-top:10px;border:1px solid #DDD6FE;">
+        <div style="font-size:.82rem;font-weight:700;color:#1F1135;margin-bottom:6px;">Ticket médio (real Hotmart): R$81,52 · ROAS real (tráfego, líquido): 0,42×</div>
+        <div style="font-size:.76rem;color:var(--cinza);">Receita paga total bruta VK (Workshop+bumps): R$17.337,89 · Receita front total bruta VK (todas origens): R$24.531,52 · Líquido total real (Hotmart, D+3): R$21.032,76</div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:.74rem;color:var(--cinza);margin-top:16px;line-height:1.6;">
+    ⚠️ "Platform purchases (VK)" no funil de mídia (223) conta compras atribuídas via ad_attribution (Workshop+bumps agregados por clique). VK conta <strong>ingressos</strong> reais do Workshop (product_id 7689363), filtrado por vk_source=paid_metaads (195). São métricas diferentes por definição — o CPA/ROAS de referência do relatório é sempre o do funil VK (ingresso). ROAS estimado aplica a taxa líquida global da Hotmart (85,74% = R$21.032,76 ÷ R$24.531,52) sobre a receita paga bruta do VK, pois a Hotmart não segrega diretamente por vk_source neste export.
+  </p>
+</div>
+</section>
+
+<!-- VENDAS + BUMPS -->
+<section class="bg">
+<div class="container">
+  <div class="section-title">🛒 Vendas + Order Bumps — D1→D7 (Hotmart real, líquido)</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Produto</th><th>Vendas</th><th>Líquido real (Hotmart)</th><th>% sobre Workshop</th></tr></thead>
+      <tbody>
+        <tr><td class="bold">🏆 Workshop Especialista com IA (ingresso)</td><td class="bold">258</td><td class="bold">R$14.308,68</td><td>—</td></tr>
+        <tr><td>Acesso Premium Especialista com IA</td><td>34</td><td>R$3.566,70</td><td>24,9%</td></tr>
+        <tr><td>Acesso Premium Especialista com IA (12 meses)</td><td>4</td><td>R$1.109,10</td><td>7,8%</td></tr>
+        <tr><td>Fotos com Inteligência Artificial</td><td>22</td><td>R$1.216,68</td><td>8,5%</td></tr>
+        <tr><td>Fotos com IA - Acesso estendido</td><td>2</td><td>R$92,40</td><td>0,6%</td></tr>
+        <tr><td>Palestra em Minutos</td><td>18</td><td>R$739,20</td><td>5,2%</td></tr>
+        <tr><td class="hl">TOTAL Order Bumps</td><td class="hl">80</td><td class="hl">R$6.724,08</td><td class="hl">conv. 31,0% sobre ingresso</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:.75rem;color:var(--cinza);margin-top:10px;line-height:1.6;">
+    ⚠️ Vendas ingresso Workshop = 258 no Fechamento 01 (todas as origens) — 51,6% da meta de 500, faltam 242. 195 são pagas via Meta Ads (paid_metaads); as demais vieram de orgânico/sem atribuição (ver seção de Origem). Order bumps somam receita líquida adicional real de R$6.724,08 (não contam como "venda" no funil/CPA principal). Acesso Premium é o bump com maior receita total e puxa o ticket médio pra cima — ticket médio final real: R$81,52 (o menor da série recente, reflexo da queda de conversão de bumps: 31,0% vs 44,2% no LS013 e 35,8%+10,7% no LS012).
+  </p>
+</div>
+</section>
+
+<!-- QUADRO DE REEMBOLSO -->
+<section class="bg-soft">
+<div class="container">
+  <div class="section-title">🔄 Quadro de Reembolso — risco até o Fechamento 02</div>
+  <div class="alert-box amber" style="margin-bottom:0;">
+    <div class="icon">⚠️</div>
+    <div class="content">
+      <h4>372 de 378 registros (98,4%) confirmados — apenas 6 pedidos em "Reclamado" (chargeback em análise)</h4>
+      <p>Das 378 transações do LS015 (Workshop + bumps + back-end) dentro do período de captação (07/09-13/09), 372 estão em status "Aprovado" ou "Completo" (líquido usado neste relatório). As 6 restantes estão todas em status <strong>Reclamado</strong> (disputa/chargeback aberto no cartão) — 3 ingressos Workshop (R$186,75), 1 Palestra em Minutos (R$46,20), 1 Fotos com IA (R$57,53) e 1 Mentoria Paraíso Digital (R$12.299,80, back-end, fora do escopo deste relatório). Esse é o número mais limpo de reembolso desde que o Fechamento 01 passou a ser acompanhado — mesmo assim, os 5 pedidos de Workshop/bumps reclamados (R$290,48) são o risco concreto de queda no líquido até o Fechamento 02. Este export foi extraído em 16/09 (D+3) — o número de 258 ingressos pode cair ligeiramente até o Fechamento 02 (~7 dias à frente), que é a leitura definitiva.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ORIGENS -->
+<section class="bg">
+<div class="container">
+  <div class="section-title">🌐 Ingressos por Origem — Workshop · D1→D7</div>
+  <div class="origem-grid">
+    <div class="origem-card">
+      <div class="o-val">195</div>
+      <div class="o-pct">75,6%</div>
+      <div class="o-label">paid_metaads</div>
+    </div>
+    <div class="origem-card">
+      <div class="o-val">22</div>
+      <div class="o-pct">8,5%</div>
+      <div class="o-label">organic_ig_bio</div>
+    </div>
+    <div class="origem-card">
+      <div class="o-val">13</div>
+      <div class="o-pct">5,0%</div>
+      <div class="o-label">outros orgânicos<br>(manychat, unnichat, zoom-chat, ig_bio_marketex)</div>
+    </div>
+    <div class="origem-card">
+      <div class="o-val">28</div>
+      <div class="o-pct">10,9%</div>
+      <div class="o-label">sem atribuição</div>
+    </div>
+  </div>
+  <p style="font-size:.75rem;color:var(--cinza);margin-top:12px;line-height:1.6;">
+    Origem calculada sobre os 258 ingressos Workshop atribuídos pelo VK (product_id 7689363), batendo exatamente com o total Hotmart. Pago segue como o canal dominante (75,6% em quantidade), mas com participação menor que nos últimos ciclos (LS013: 81,0%) — reflexo direto da queda de investimento no período. Orgânico do Instagram bio segue como segundo canal relevante (8,5%), e a parcela "sem atribuição" (10,9%) subiu levemente frente ao padrão histórico.
+  </p>
+</div>
+</section>
+
+<!-- CRIATIVOS -->
+<section class="bg-soft">
+<div class="container">
+  <div class="section-title">🎬 Criativos — D1→D7 (ranking, atribuição via VK ad_attribution)</div>
+  <p style="font-size:.79rem;color:var(--cinza);margin-bottom:20px;">
+    Fonte: VK Metrics (trafego.ad_name, filtrado campanha [LS], 07/09-13/09) · Vendas = platform_purchases atribuído por anúncio (Workshop+bumps agregados) · CPA c/imp = spend × 1,1383 ÷ vendas · ROAS = (vendas × ticket médio real R$81,52) ÷ spend c/imp — fallback estimado, sem atribuição de receita real por criativo neste corte.
+  </p>
+
+  <!-- TOP VOLUME -->
+  <div style="margin-bottom:26px;">
+    <div style="font-size:.92rem;font-weight:700;color:#1F1135;margin-bottom:12px;">🚀 Top 5 por Volume de Vendas</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>Criativo</th><th>Tipo</th><th>Vendas</th><th>Spend c/imp</th><th>CPA</th><th>ROAS</th><th>CTR</th><th>Status</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td><a href="https://drive.google.com/drive/folders/1ye54xEewvJLeahTYhp2du6YWppFSfLtW" target="_blank">ADC023_LS_CAP_NEW_V1_1 MES DE POST EM UMA TARDE</a></td>
+            <td><span class="tag tag-carrossel">🎠 Carrossel</span></td>
+            <td class="bold">58</td><td>R$9.009</td><td class="warn-txt bold">R$155,33</td><td class="neg-txt">0,52×</td><td>2,11%</td>
+            <td><span class="tag tag-escalar">motor 🔥</span></td>
+          </tr>
+          <tr>
+            <td><a href="https://drive.google.com/file/d/1lHd27cdHoiNXXP-_OsdmvjoP09SLMlkE/view?usp=drivesdk" target="_blank">ADV368_LS_CAP_NEW_V1_O CHATGPT JÁ PASSOU DA FASE DE SO ESCREVER TEXTO_0.59</a></td>
+            <td><span class="tag tag-video">▶ Vídeo</span></td>
+            <td class="bold">49</td><td>R$7.196</td><td class="warn-txt bold">R$146,87</td><td class="neg-txt">0,56×</td><td>2,59%</td>
+            <td><span class="tag tag-escalar">vice-motor 🔥</span></td>
+          </tr>
+          <tr>
+            <td><a href="https://drive.google.com/file/d/1h1CQQdVcKQYPpv7uslC4XGY7srFPO54H/view?usp=drivesdk" target="_blank">ADV258_LS_CAP_NEW_V1_CLONE COM UMA FOTO_HOOK05_BODY09_0.35</a></td>
+            <td><span class="tag tag-video">▶ Vídeo</span></td>
+            <td class="bold">46</td><td>R$8.635</td><td class="neg-txt bold">R$187,72</td><td class="neg-txt">0,43×</td><td>2,63%</td>
+            <td><span class="tag tag-vigiar">vigiar</span></td>
+          </tr>
+          <tr>
+            <td><a href="https://drive.google.com/file/d/1laenRDi65-ZswV-zpy4eLS-zGSsp3D9M/view?usp=drivesdk" target="_blank">ADV375_LS_CAP_NEW_V1_VOCE AINDA NAO APRENDEU A AUTOMATIZAR SUAS TAREFAS_0.43</a></td>
+            <td><span class="tag tag-video">▶ Vídeo</span></td>
+            <td class="bold">34</td><td>R$3.620</td><td class="pos-txt bold">R$106,46</td><td class="warn-txt">0,77×</td><td>2,08%</td>
+            <td><span class="tag tag-manter">manter</span></td>
+          </tr>
+          <tr>
+            <td><a href="https://drive.google.com/file/d/1yWZeo_rSwQGak_D-HauZCWjtx4QxAMaZ/view?usp=drivesdk" target="_blank">ADV304_LS_CAP_NEW_V1_ESSA AQUI SOU EU_HOOK03_BODY03_0.36</a></td>
+            <td><span class="tag tag-video">▶ Vídeo</span></td>
+            <td class="bold">12</td><td>R$2.039</td><td class="neg-txt bold">R$169,93</td><td class="neg-txt">0,48×</td><td>2,73%</td>
+            <td><span class="tag tag-vigiar">vigiar</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:26px;">
+    <div>
+      <div style="font-size:.92rem;font-weight:700;color:#1F1135;margin-bottom:12px;">💸 Top 5 Melhor CPA (mín. 3 vendas)</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Criativo</th><th>Vendas</th><th>CPA</th><th>CTR</th></tr></thead>
+          <tbody>
+            <tr><td><a href="https://drive.google.com/file/d/1bO2LCKa5mZ4cNJrMcGkrEw1CzOst-GlG/view?usp=drivesdk" target="_blank">ADV325_LS_CAP_NEW_V1_CHAT FAZ SITE ID E POSTS_HOOK49_BODY28_1.19</a></td><td>3</td><td class="pos-txt bold">R$81,05</td><td>3,05%</td></tr>
+            <tr><td><a href="https://drive.google.com/file/d/1P1wAj7PuG6MhRuWzyTS0MFElffM3OxcX/view?usp=drivesdk" target="_blank">ADI159_LS_CAP_NEW_V1_ACORDOU SEM ENERGIA</a></td><td>5</td><td class="pos-txt bold">R$72,61</td><td>1,44%</td></tr>
+            <tr><td><a href="https://drive.google.com/file/d/1z_QguczndXRZca-cvuyyaQfk_UdM-vnz/view?usp=drivesdk" target="_blank">ADV320_LS_CAP_NEW_V1_CHAT CRIA ID VISUAL CLONE CONTEUDO_0.39</a></td><td>8</td><td class="pos-txt bold">R$124,47</td><td>2,55%</td></tr>
+            <tr><td><a href="https://drive.google.com/drive/folders/1FaPinScATsxhgJ9hTSxpb1LZvfLqmioP" target="_blank">ADC001_LS_CAP_NEW_V1_POSTA SEM APARECER</a></td><td>5</td><td class="warn-txt bold">R$127,76</td><td>2,25%</td></tr>
+            <tr><td><a href="https://drive.google.com/file/d/1laenRDi65-ZswV-zpy4eLS-zGSsp3D9M/view?usp=drivesdk" target="_blank">ADV375_LS_CAP_NEW_V1_VOCE AINDA NAO APRENDEU...</a></td><td>34</td><td class="warn-txt bold">R$106,46</td><td>2,08%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:.92rem;font-weight:700;color:#1F1135;margin-bottom:12px;">💎 Top 5 Melhor ROAS (mín. 3 vendas, estimado)</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Criativo</th><th>ROAS</th><th>CPA</th><th>Vendas</th></tr></thead>
+          <tbody>
+            <tr><td><a href="https://drive.google.com/file/d/1bO2LCKa5mZ4cNJrMcGkrEw1CzOst-GlG/view?usp=drivesdk" target="_blank">ADV325 ▶</a></td><td class="pos-txt bold">1,01×</td><td>R$81,05</td><td>3</td></tr>
+            <tr><td><a href="https://drive.google.com/file/d/1P1wAj7PuG6MhRuWzyTS0MFElffM3OxcX/view?usp=drivesdk" target="_blank">ADI159 🖼</a></td><td class="warn-txt bold">0,89×</td><td>R$72,61</td><td>5</td></tr>
+            <tr><td><a href="https://drive.google.com/file/d/1laenRDi65-ZswV-zpy4eLS-zGSsp3D9M/view?usp=drivesdk" target="_blank">ADV375 ▶</a></td><td class="warn-txt">0,77×</td><td>R$106,46</td><td>34</td></tr>
+            <tr><td><a href="https://drive.google.com/drive/folders/1FaPinScATsxhgJ9hTSxpb1LZvfLqmioP" target="_blank">ADC001 🎠</a></td><td class="warn-txt">0,64×</td><td>R$127,76</td><td>5</td></tr>
+            <tr><td><a href="https://drive.google.com/file/d/1z_QguczndXRZca-cvuyyaQfk_UdM-vnz/view?usp=drivesdk" target="_blank">ADV320 ▶</a></td><td class="warn-txt">0,65×</td><td>R$124,47</td><td>8</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div style="font-size:.92rem;font-weight:700;color:var(--vermelho);margin-bottom:12px;">⚠️ Vigiar — spend alto, resultado fraco</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Criativo</th><th>Spend c/imp</th><th>Vendas</th><th>CPA</th><th>Observação</th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://drive.google.com/file/d/1h1CQQdVcKQYPpv7uslC4XGY7srFPO54H/view?usp=drivesdk" target="_blank">ADV258_LS_CAP_NEW_V1_CLONE COM UMA FOTO_HOOK05_BODY09_0.35</a></td><td class="neg-txt">R$8.635</td><td>46</td><td class="neg-txt">R$187,72</td><td>Segundo maior spend do período com o pior CPA do top 5 de volume — hook antigo (LS001) mostrando fadiga, candidato a pausa ou renovação</td></tr>
+          <tr><td><a href="https://drive.google.com/drive/folders/1ye54xEewvJLeahTYhp2du6YWppFSfLtW" target="_blank">ADC023_LS_CAP_NEW_V1_1 MES DE POST EM UMA TARDE</a></td><td class="warn-txt">R$9.009</td><td>58</td><td class="warn-txt">R$155,33</td><td>Motor da captação em volume, mas CPA acima da faixa saudável (R$80-120) — segue puxando o CPA médio geral pra cima</td></tr>
+          <tr><td><a href="https://drive.google.com/file/d/1yWZeo_rSwQGak_D-HauZCWjtx4QxAMaZ/view?usp=drivesdk" target="_blank">ADV304_LS_CAP_NEW_V1_ESSA AQUI SOU EU_HOOK03_BODY03_0.36</a></td><td class="warn-txt">R$2.039</td><td>12</td><td class="neg-txt">R$169,93</td><td>CPA quase o dobro do melhor criativo do ciclo (ADV325) — reavaliar copy/oferta antes de manter verba</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <p style="font-size:.75rem;color:var(--cinza);margin-top:12px;line-height:1.6;">
+    🛠️ ADC023 (58v) e ADV368 (49v) seguem como motor e vice-motor da captação (107 das 223 vendas atribuídas via VK, 48%), mas ambos operam com CPA acima de R$145 — acima do saudável (R$80-120). ADV325, ADI159 e ADV320 tiveram os melhores CPA/ROAS, mas com volume muito baixo (3-8 vendas) — candidatos a escalar/testar novas versões no próximo ciclo. Nenhum criativo do top 5 de volume operou com ROAS acima de 1× neste corte, confirmando o quadro geral de captação mais cara.
+  </p>
+</div>
+</section>
+
+<!-- PÁGINAS A/B -->
+<section class="bg">
+<div class="container">
+  <div class="section-title">🧪 Páginas A/B</div>
+  <div style="background:#EFF6FF;border-left:4px solid #2563EB;border-radius:10px;padding:14px 16px;font-size:.8rem;color:#1E3A8A;line-height:1.6;">
+    ℹ️ Teste "OFF | TESTE 01 | LP | V1-2 >> V1-3 >> V1-4 >> V1-5" tecnicamente ativo no período (07/09-13/09), mas sem distribuição real de tráfego: V1-2 recebeu 4.285 visitas únicas (165 conversões, 3,85%) contra apenas 1, 1 e 2 visitas nas variações V1-3/V1-4/V1-5 — praticamente todo o tráfego pago seguiu para a página padrão V1-2 (vencedora validada em ciclos anteriores), sem leitura estatística possível para as demais variações neste ciclo.
+  </div>
+</div>
+</section>
+
+<!-- DIA A DIA -->
+<section class="bg-soft">
+<div class="container">
+  <div class="section-title">📅 Comparativo Dia-a-Dia — LS015 (D1-D7, fechado)</div>
+  <div class="table-wrap" style="overflow-x:auto;">
+    <table style="min-width:1100px;">
+      <thead><tr>
+        <th>Métrica</th>
+        <th>D1 · 07/09 (seg)</th>
+        <th>D2 · 08/09 (ter)</th>
+        <th>D3 · 09/09 (qua)</th>
+        <th>D4 · 10/09 (qui)</th>
+        <th>D5 · 11/09 (sex)</th>
+        <th>D6 · 12/09 (sáb)</th>
+        <th class="hl">D7 · 13/09 (dom)</th>
+        <th>Acumulado</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Invest c/imp</td><td>R$4.919</td><td>R$4.737</td><td class="pos-txt">R$4.307</td><td>R$4.502</td><td>R$4.468</td><td class="warn-txt">R$5.671</td><td class="hl neg-txt bold">R$6.279</td><td>R$35.448</td></tr>
+        <tr><td>Vendas ingresso (pago, VK)</td><td>22</td><td>12</td><td class="neg-txt">24</td><td>25</td><td class="pos-txt">31</td><td>31</td><td class="hl pos-txt bold">50</td><td>195</td></tr>
+        <tr><td>Platform purchases (VK)</td><td>30</td><td>18</td><td>25</td><td>29</td><td>31</td><td>35</td><td class="hl">55</td><td>223</td></tr>
+        <tr><td>CPA pago (VK, ingresso)</td><td class="warn-txt">R$223,58</td><td class="neg-txt bold">R$394,71</td><td class="neg-txt">R$179,44</td><td>R$180,08</td><td class="pos-txt">R$144,14</td><td class="warn-txt">R$182,94</td><td class="hl pos-txt bold">R$125,58</td><td>R$181,78</td></tr>
+        <tr><td>ROAS Tráfego (estimado, ticket real)</td><td class="warn-txt">0,30×</td><td class="neg-txt bold">0,17×</td><td class="neg-txt">0,38×</td><td>0,37×</td><td class="pos-txt">0,47×</td><td class="warn-txt">0,37×</td><td class="hl pos-txt bold">0,53×</td><td>0,42×</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:.74rem;color:var(--cinza);margin-top:8px;line-height:1.6;">D7 (domingo, fechamento) foi de longe o melhor dia da captação: maior volume (50 vendas pagas), melhor CPA (R$125,58) e melhor ROAS estimado (0,53×) — repetindo o padrão de "virada de domingo" visto em praticamente todos os LS anteriores. D2 (terça) foi disparado o pior dia (CPA R$394,71, apenas 12 vendas com investimento quase igual ao de D1) — vale investigar se houve problema de entrega ou orçamento específico nesse dia. Nenhum dia do ciclo chegou perto do CPA saudável histórico (R$80-120).</p>
+</div>
+</section>
+
+<!-- CROSS-LANÇAMENTO -->
+<section class="bg">
+<div class="container">
+  <div class="section-title">⚖️ Comparativo Cross-Lançamento — Fechamento 01 (LS012 → LS015)</div>
+  <div class="table-wrap" style="overflow-x:auto;">
+    <table style="min-width:900px;">
+      <thead><tr>
+        <th>Métrica</th>
+        <th>LS012 · 10-16/08 (7d, meta 500)</th>
+        <th>LS013 · 17-23/08 (7d, meta 500)</th>
+        <th>LS014 · 24/08-06/09 (14d, meta 1.000)</th>
+        <th class="hl">LS015 · 07-13/09 (7d, meta 500)</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Invest c/imp</td><td>R$55.314</td><td>R$49.824</td><td>R$42.929</td><td class="hl neg-txt bold">R$35.448</td></tr>
+        <tr><td>Ingressos totais</td><td class="pos-txt">476 (95,2%)</td><td>364 (72,8%)</td><td>442 (44,2%)</td><td class="hl neg-txt bold">258 (51,6%)</td></tr>
+        <tr><td>Ingressos pagos (VK)</td><td>370</td><td>294</td><td>217</td><td class="hl">195</td></tr>
+        <tr><td>CPA pago</td><td class="pos-txt">R$149,50</td><td>R$169,47</td><td class="neg-txt">R$197,83</td><td class="hl warn-txt bold">R$181,78</td></tr>
+        <tr><td>ROAS Geral</td><td class="pos-txt bold">0,85×</td><td>0,69×</td><td>0,79×</td><td class="hl neg-txt bold">0,59×</td></tr>
+        <tr><td>ROAS Tráfego</td><td class="pos-txt">0,66×</td><td>0,49×</td><td>0,45×</td><td class="hl neg-txt bold">0,42×</td></tr>
+        <tr><td>Exposição</td><td class="pos-txt">−R$8.564</td><td class="neg-txt">−R$15.417</td><td>−R$9.002</td><td class="hl neg-txt">−R$14.415</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:.75rem;color:var(--cinza);margin-top:10px;line-height:1.6;">
+    ⚠️ LS014 rodou 14 dias com meta dobrada (1.000) — os % de meta não são diretamente comparáveis aos ciclos de 7 dias, mas CPA/ROAS/exposição são. O LS015 é o pior fechamento em volume absoluto (258) e em ROAS Geral (0,59×) da série recente, mesmo tendo o menor investimento (R$35.448 — quase metade do LS012). Em outras palavras: não é só "menos verba, menos venda" — a eficiência por real investido também piorou (ROAS Tráfego 0,42×, o menor dos quatro), sinal de que o problema não é só volume de mídia, mas conversão/qualidade de tráfego no período.
+  </p>
+</div>
+</section>
+
+<!-- ANÁLISE -->
+<section class="bg-soft">
+<div class="container">
+  <div class="section-title">🔍 Análise de Fechamento — Captação LS015 (Fechamento 01)</div>
+
+  <div style="background:linear-gradient(135deg,#FEF2F2,#FEE2E2);border-left:4px solid #DC2626;border-radius:12px;padding:16px 20px;margin-bottom:22px;font-size:.85rem;color:#991B1B;line-height:1.7;">
+    <strong>📌 Meta não batida (258/500, 51,6%) — pior fechamento em volume absoluto entre os ciclos de 7 dias acompanhados.</strong><br>
+    O LS015 fechou a captação bem abaixo do alvo de 500 ingressos, e também abaixo do LS013 (364/500, 72,8%) e do LS012 (476/500, 95,2%). O investimento c/imp também foi o menor da série recente (R$35.448 vs R$49.824 no LS013), mas isso só explica parte da queda: ROAS Geral (0,59×) e ROAS Tráfego (0,42×) também são os piores da série, indicando que a eficiência da captação piorou, não só o volume de mídia. CPA pago (R$181,78) segue acima da faixa saudável (R$80-120) e o ticket médio real (R$81,52) caiu frente ao LS013 (R$94,53) — conversão de order bumps mais fraca (31,0% vs 44,2%).
+  </div>
+
+  <div class="analysis-grid">
+    <div class="analysis-card green">
+      <h4 class="green">🟢 Muito bom — reembolso baixo e D7 forte de novo</h4>
+      <ul>
+        <li>Apenas 6 pedidos em "Reclamado" no período (98,4% de confirmação) — o corte mais limpo de reembolso desde que o Fechamento 01 passou a ser acompanhado</li>
+        <li>D7 (fechamento): melhor CPA (R$125,58) e melhor ROAS (0,53×) da semana — mesma leitura de "virada de domingo" vista em todos os ciclos anteriores</li>
+        <li>Contagem de ingressos idêntica entre Hotmart (258) e VK (258) — zero sinal de problema de atribuição</li>
+        <li>ADV325, ADI159 e ADV320 entregaram CPA abaixo de R$125 — sinal de que existe criativo saudável na base, mesmo com volume ainda baixo</li>
+      </ul>
+    </div>
+
+    <div class="analysis-card yellow">
+      <h4 class="yellow">🟡 Não mexer — exposição negativa e ROAS de tráfego abaixo de 1× são esperados</h4>
+      <ul>
+        <li>Exposição de −R$14.415,26 é orçamento de aquisição, não prejuízo — o ingresso é vendido abaixo do CPA por design, o retorno vem da mentoria back-end</li>
+        <li>Ausência de teste A/B de página com distribuição real não é erro de configuração — página V1-2 (vencedora validada) seguiu recebendo praticamente todo o tráfego</li>
+        <li>Investimento menor que os ciclos anteriores foi decisão consciente de verba — não é sinal de problema técnico de entrega</li>
+      </ul>
+    </div>
+
+    <div class="analysis-card red">
+      <h4 class="red">🔴 Vigiar — meta longe de bater, ROAS caindo e ticket médio em queda</h4>
+      <ul>
+        <li>258/500 ingressos (51,6%) — pior fechamento em volume absoluto da série de 7 dias; mesmo com menos investimento, o ROAS Geral (0,59×) é o pior dos últimos 4 ciclos</li>
+        <li>D2 (terça) foi um dia isolado muito fraco (CPA R$394,71, 12 vendas com spend quase igual a D1) — vale investigar entrega/orçamento específico nesse dia</li>
+        <li>Conversão de order bumps caiu para 31,0% (vs 44,2% no LS013) — ticket médio real no menor patamar da série (R$81,52)</li>
+        <li>ADC023 e ADV368 (motores) operam com CPA acima de R$145 — puxando o CPA médio geral pra cima</li>
+      </ul>
+    </div>
+
+    <div class="analysis-card blue">
+      <h4 class="blue">🛠️ Ações tomadas / próximos passos</h4>
+      <ul>
+        <li>⏳ Aguardar Fechamento 02 (~7 dias à frente) para confirmar o número definitivo de ingressos líquidos pós-reembolso</li>
+        <li>🔼 ADV325, ADI159 e ADV320 identificados como melhores CPA/ROAS com volume baixo — bons candidatos pra escalar/gerar novas versões no próximo ciclo</li>
+        <li>⚠️ ADV258 e ADV304 marcados para revisão ou substituição — CPA acima da faixa saudável, com spend relevante</li>
+        <li>🔍 Investigar a queda específica de D2 (terça) — CPA mais do que o dobro da média da semana</li>
+        <li>📊 Avaliar retomada de investimento nos próximos ciclos: queda de verba coincidiu com queda de eficiência (ROAS), não só de volume</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<footer>
+  <div class="logo-f">Brito Mídias</div>
+  <p>LS015 · Fechamento Captação 01 · Workshop Especialista com IA · Marketex / Ana Tex</p>
+  <p>Relatório gerado em 16/09/2026 · Fonte: VK Metrics + Meta Ads (oficial) + Hotmart (líquido real, corte D+3)</p>
+  <p>Captação: 07/09 → 13/09/2026 (D1-D7) · 258/500 ingressos (51,6%) · Fechamento 02 (definitivo) previsto para ~7 dias à frente</p>
+</footer>
+
+</body>
+</html>
