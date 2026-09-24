@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direcionamento — Dashboard de Resultado de Criativos · Marketex</title>
+<meta name="description" content="Briefing técnico para construir o dashboard de resultado de criativos dos lançamentos LS — investimento, CPA Meta x Hotmart, ROAS e order bump.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --roxo:#7C3AED; --roxo-dark:#5B21B6; --roxo-deep:#3B0F73;
+    --roxo-light:#A78BFA; --roxo-xlight:#EDE9FE;
+    --ink:#141018; --cinza:#5B5566; --linha:#E7E3EE; --bg:#FFFFFF; --bg-soft:#FAF9FC;
+    --verde:#059669; --verde-light:#D1FAE5;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{font-family:'Poppins',sans-serif;font-weight:300;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;}
+  a{color:var(--roxo);}
+  .wrap{max-width:900px;margin:0 auto;padding:0 28px;}
+
+  /* HERO */
+  .hero{
+    position:relative;overflow:hidden;color:#fff;padding:64px 0 64px;
+    background:
+      radial-gradient(1100px 500px at 78% -10%,rgba(124,58,237,.55),transparent 60%),
+      linear-gradient(150deg,#0A0A0A 0%,#17111F 45%,#3B0F73 100%);
+  }
+  .hero .grid{
+    position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);
+    background-size:44px 44px;
+    -webkit-mask-image:radial-gradient(circle at 60% 20%,#000 30%,transparent 75%);
+    mask-image:radial-gradient(circle at 60% 20%,#000 30%,transparent 75%);
+  }
+  .hero-inner{position:relative;z-index:2;}
+  .brand{display:flex;align-items:center;gap:14px;margin-bottom:36px;}
+  .brand svg{width:36px;height:36px;}
+  .brand .word{display:flex;align-items:center;gap:11px;font-weight:300;}
+  .brand .word b{font-weight:800;font-size:16px;}
+  .brand .word .bar{width:2px;height:20px;background:rgba(255,255,255,.5);}
+  .brand .word span{font-size:16px;letter-spacing:.22em;}
+  .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid #A78BFA;color:#EDE9FE;border-radius:100px;padding:6px 14px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px;}
+  .hero h1{font-size:32px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin:0 0 14px;max-width:680px;}
+  .hero p.lead{font-size:15px;font-weight:300;color:rgba(255,255,255,.82);max-width:600px;margin:0 0 6px;}
+  .hero p.lead b{color:#fff;font-weight:600;}
+
+  /* SECTIONS */
+  section{padding:44px 0;}
+  section.soft{background:var(--bg-soft);}
+  .section-label{display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--roxo);margin-bottom:12px;}
+  .section-label::before{content:"";width:30px;height:2px;background:var(--roxo);border-radius:2px;}
+  h2{font-size:21px;font-weight:700;letter-spacing:-.01em;margin:0 0 8px;}
+  .intro-text{color:var(--cinza);font-size:14px;max-width:700px;margin:0 0 20px;}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media (max-width:720px){.steps{grid-template-columns:1fr;}}
+  .step-card{background:#fff;border:1px solid var(--linha);border-radius:14px;padding:18px 20px;}
+  .step-card .n{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;background:var(--roxo-xlight);color:var(--roxo-dark);font-weight:700;font-size:12.5px;margin-bottom:10px;}
+  .step-card h3{font-size:14.5px;font-weight:600;margin:0 0 6px;}
+  .step-card p{font-size:13px;color:var(--cinza);margin:0;}
+
+  /* CODE BLOCK */
+  .code-block{position:relative;background:#0F0A1A;border-radius:14px;padding:22px 22px 18px;margin-top:10px;overflow:hidden;border:1px solid rgba(124,58,237,.3);}
+  .code-block pre{margin:0;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#E2D9F3;line-height:1.7;white-space:pre-wrap;word-break:break-word;max-height:640px;overflow-y:auto;}
+  .code-block .lang{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(167,139,250,.7);margin-bottom:10px;font-family:'Poppins',sans-serif;}
+  .code-block .copy-code-btn{position:sticky;float:right;top:14px;margin-left:14px;display:flex;align-items:center;gap:6px;background:rgba(124,58,237,.25);border:1px solid rgba(124,58,237,.4);border-radius:8px;padding:7px 14px;color:#A78BFA;font-size:12px;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;transition:.15s;}
+  .code-block .copy-code-btn:hover{background:rgba(124,58,237,.4);}
+  .code-block .copy-code-btn.copied{background:rgba(5,150,105,.25);border-color:rgba(5,150,105,.4);color:#34D399;}
+  .code-block .copy-code-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.2;}
+  code.inline{font-family:'JetBrains Mono',monospace;background:var(--roxo-xlight);color:var(--roxo-dark);padding:1px 6px;border-radius:5px;font-size:12.5px;}
+
+  table{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border:1px solid var(--linha);border-radius:12px;overflow:hidden;}
+  thead th{background:var(--bg-soft);color:var(--cinza);font-weight:600;text-transform:uppercase;font-size:10.5px;letter-spacing:.08em;padding:10px 12px;text-align:left;border-bottom:1px solid var(--linha);}
+  tbody td{padding:10px 12px;border-bottom:1px solid var(--linha);vertical-align:top;}
+  tbody tr:last-child td{border-bottom:none;}
+
+  .strip{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:linear-gradient(150deg,#0A0A0A,#3B0F73);border-radius:18px;padding:26px 30px;color:#fff;}
+  .strip h3{margin:0 0 4px;font-size:17px;font-weight:700;}
+  .strip p{margin:0;color:rgba(255,255,255,.72);font-size:13px;}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--roxo);color:#fff;text-decoration:none;font-weight:600;font-size:13.5px;padding:11px 22px;border-radius:10px;white-space:nowrap;}
+  .btn:hover{background:var(--roxo-dark);}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.6);padding:28px 0;}
+  footer .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;}
+  .brand2{display:flex;align-items:center;gap:10px;color:#fff;font-weight:600;font-size:13px;}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="grid"></div>
+  <div class="wrap hero-inner">
+    <div class="brand">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+        <polygon points="50,33 65,59 35,59"></polygon>
+        <line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line>
+        <line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line>
+        <line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line>
+        <line x1="10" y1="27" x2="50" y2="33"></line>
+      </svg>
+      <span class="word"><b>BM</b><i class="bar"></i><span>MÍDIAS</span></span>
+    </div>
+    <div class="pill">Direcionamento técnico · Marketex</div>
+    <h1>Dashboard de Resultado de Criativos</h1>
+    <p class="lead">Oi, Cíntia! Esse é o briefing completo do dashboard que a gente precisa — <b>copia o prompt lá embaixo e cola direto no chat da sua IA</b> pra ela construir. Antes disso, só o contexto rápido de onde e por quê.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="section-label">Contexto</div>
+    <h2>O que é e onde entra</h2>
+    <p class="intro-text">Hoje a gente já sabe, por lançamento, o resultado geral (investimento, retorno, ROAS). O que falta é descer um nível: <b>por criativo</b> — pra saber não só quem gera mais venda de ingresso, mas quem traz o cliente que compra mais order bump e tem ticket médio mais alto. Isso já existia num dashboard parecido (o da Sala Secreta) — esse aqui é a versão pro funil do LS, com a lógica de atribuição via Hotmart que a gente validou numa análise manual do LS016.</p>
+    <div class="steps">
+      <div class="step-card">
+        <div class="n">1</div>
+        <h3>Onde roda</h3>
+        <p>Apps Script + HTML, dentro da própria planilha do Google Sheets (igual outros dashboards já feitos pro cliente) — sem depender de outra ferramenta.</p>
+      </div>
+      <div class="step-card">
+        <div class="n">2</div>
+        <h3>De onde vêm os dados</h3>
+        <p>Tudo já está na planilha: aba de tráfego (MTADS), aba de vendas da Hotmart e aba do Funil Por Semana (pra pegar as datas de cada lançamento fechado).</p>
+      </div>
+      <div class="step-card">
+        <div class="n">3</div>
+        <h3>O que fazer agora</h3>
+        <p>Copia o bloco de prompt abaixo inteiro e manda pro chat da tua IA (Claude, ChatGPT, o que você usa) — ele já tem todas as regras, nomes exatos e colunas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="soft">
+  <div class="wrap">
+    <div class="section-label">Prompt completo</div>
+    <h2>Copia e cola no chat da tua IA</h2>
+    <p class="intro-text">Um bloco só, já com tudo dentro — fontes de dados, os 2 filtros, a regra de atribuição, os nomes exatos dos produtos e as colunas que o dashboard precisa mostrar.</p>
+    <div class="code-block">
+      <button class="copy-code-btn" onclick="copyBlock(this)">
+        <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        Copiar prompt
+      </button>
+      <div class="lang">prompt · cole no chat da sua IA</div>
+      <pre id="prompt-text">Você vai construir um dashboard (Apps Script + HTML, rodando dentro da planilha do Google Sheets, no mesmo padrão de outros dashboards já feitos pra esse cliente) que mostra o resultado por criativo dos lançamentos pagos "LS" da Marketex.
+
+### Fontes de dados (todas na mesma planilha)
+
+- Tráfego pago | MTADS — tráfego diário por anúncio. Colunas: A=Data, D=Anúncio (nome do criativo), E=Investimento, L=Compra (Meta), M=Valor de Conversão.
+- HOTMART | VENDAS MARKETEX - COMPLETA — vendas reais da Hotmart. Colunas relevantes: A=Nome do Produto, G=Origem (contém a UTM completa, incluindo o parâmetro co=NOME_DO_CRIATIVO), I=Preço do Produto, K=Preço da Oferta, M=Moeda, Q=Data de Venda, S=Status, AR=Taxa de Câmbio Real, AX=Valor que você recebeu convertido.
+- 📡 Funil Por Semana — cabeçalhos de cada bloco de lançamento têm o formato "📅 LSxxx-26 — Captação D a D/MM/AAAA" (ou "DD/MM a DD/MM/AAAA" quando cruza mês). É daqui que vem a lista de lançamentos fechados e as datas de cada um.
+
+### Os 2 filtros
+
+1. Por data (início/fim livre, o usuário escolhe).
+2. Por lançamento fechado (dropdown com os códigos LS001, LS002... extraídos dos cabeçalhos da aba Funil Por Semana — ao escolher um, preenche automaticamente o início/fim com a "Captação" daquele bloco).
+
+### Regra de atribuição (Hotmart → Criativo)
+
+Para cada venda na Hotmart dentro do período filtrado:
+- Filtrar Status = "Aprovado" ou "Completo".
+- Pegar o texto da coluna Origem.
+- Testar se Origem contém o nome do criativo (da aba MTADS) como substring — usar CONTÉM, não igualdade exata.
+- Atenção: às vezes o parâmetro co= na Origem vem cortado (a Hotmart trunca UTMs longas). Se não achar por "Origem contém nome do criativo", tentar o inverso: "nome do criativo começa com o texto depois de co= na Origem". Usar o que der match.
+- Vendas sem nenhum match (Origem = bio, zoom-chat, boas-vindas, {{ad.name}} etc.) são orgânicas/sem rastreio — não contam pra nenhum criativo, ficam de fora.
+
+### Produtos considerados (nomes EXATOS como aparecem na coluna A da Hotmart)
+
+- Ticket (produto principal): "Workshop Especialista com Inteligência Artificial - 6 Aulas Ao vivo"
+- Order bumps (somam à receita total, mas não entram na "Vendas Hotmart"/CPA, que é só do ticket):
+  - "Palestra em Minutos"
+  - "Fotos com Inteligência Artificial" (excluir se a Origem contiver "org" — é a versão orgânica/gratuita)
+  - "Fotos com Inteligência Artificial - Acesso estendido"
+  - "Acesso Premium Especialista com IA"
+  - "Acesso Premium Especialista com IA - 12 meses"
+  - "Combo Exclusivo: Fotos em Minutos + Palestra em Minutos + Acesso gravação do Workshop por 12 meses"
+
+### Conversão de moeda (venda internacional)
+
+Se Moeda (M) ≠ "BRL": valor em reais = Preço do Produto (I) ÷ Taxa de Câmbio Real (AR). Se AR estiver vazio, usar Valor que você recebeu convertido (AX). Se os dois estiverem vazios, usar o Preço do Produto (I) puro como último recurso. Se Moeda = "BRL", usar o Preço do Produto (I) direto.
+
+### Colunas que o dashboard tem que mostrar, por criativo
+
+| Coluna | Fonte / Cálculo |
+|---|---|
+| Nome completo do criativo | MTADS, com link clicável (abre o criativo — puxar o link de onde a equipe já mantém isso, ex. aba de links de criativos) |
+| Investimento | Soma de MTADS!Investimento no período |
+| Vendas do Meta | Soma de MTADS!Compra no período |
+| CPA do Meta | Investimento ÷ Vendas do Meta |
+| Vendas da Hotmart | Contagem de vendas do ticket (só "6 Aulas") atribuídas a esse criativo |
+| CPA da Hotmart | Investimento ÷ Vendas da Hotmart |
+| Receita Total (Hotmart) | Soma do valor (já convertido) do ticket + todos os order bumps atribuídos a esse criativo |
+| ROAS (Hotmart) | Receita Total ÷ Investimento |
+| Vendas de Order Bump | Contagem de vendas dos produtos de order bump (lista acima) atribuídas a esse criativo |
+| Ticket Médio | Receita Total ÷ (Vendas Hotmart + Vendas de Order Bump) — mostra quais criativos trazem cliente que gasta mais |
+
+Isso deixa fácil ver não só quem vende mais ingresso, mas quem traz o cliente que compra mais order bump e tem ticket médio mais alto — pode ser um criativo diferente do que mais vende ingresso.
+
+### Comportamento esperado
+
+- Trocar o filtro (data ou lançamento) recalcula a tabela na hora.
+- Ordenação por qualquer coluna (padrão: mais vendas Hotmart primeiro).
+- Uma linha de TOTAL no topo ou rodapé com os mesmos indicadores somados/recalculados pro período inteiro.</pre>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="strip">
+      <div>
+        <h3>Ficou alguma dúvida?</h3>
+        <p>Chama a gente no WhatsApp — se travar em algum passo, resolvemos junto.</p>
+      </div>
+      <a class="btn" href="https://wa.me/5587988731863?text=Oi!%20Tive%20uma%20d%C3%BAvida%20no%20direcionamento%20do%20dashboard%20de%20criativos." target="_blank">Falar com a Brito Mídias</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand2">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+        <polygon points="50,33 65,59 35,59"></polygon>
+      </svg>
+      Brito Mídias
+    </div>
+    <div>Direcionamento técnico · Marketex · rafael@britomidias.com.br</div>
+  </div>
+</footer>
+
+<script>
+const COPY_IC = '<svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>';
+const CHECK_IC = '<svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.2"><polyline points="20 6 9 17 4 12"/></svg>';
+
+function copyBlock(btn) {
+  const pre = document.getElementById('prompt-text');
+  navigator.clipboard.writeText(pre.innerText.trim()).then(() => {
+    btn.classList.add('copied');
+    btn.innerHTML = CHECK_IC + ' Copiado!';
+    setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = COPY_IC + ' Copiar prompt'; }, 2500);
+  });
+}
+</script>
+
+</body>
+</html>
