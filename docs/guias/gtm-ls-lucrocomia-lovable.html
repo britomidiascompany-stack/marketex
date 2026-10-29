@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guia · Instalar GTM na página ls.lucrocomia.com.br (Lovable) · Brito Mídias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --roxo:#7C3AED; --roxo-dark:#5B21B6; --roxo-deep:#3B0F73; --roxo-light:#A78BFA; --roxo-xlight:#EDE9FE;
+  --ink:#141018; --cinza:#5B5566; --linha:#E7E3EE; --bg:#FFFFFF; --bg-soft:#FAF9FC;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Poppins",sans-serif;font-weight:300;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding:0 28px}
+a{color:var(--roxo-dark)}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;overflow:hidden;
+  background:radial-gradient(1100px 500px at 78% -10%,rgba(124,58,237,.55),transparent 60%),linear-gradient(150deg,#0A0A0A 0%,#17111F 45%,#3B0F73 100%);
+  color:#fff;padding:40px 0 56px}
+.hero::before{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.14) 1px,transparent 1px);
+  background-size:44px 44px;
+  -webkit-mask-image:radial-gradient(circle at 70% 0%,#000,transparent 72%);mask-image:radial-gradient(circle at 70% 0%,#000,transparent 72%);
+  pointer-events:none}
+.hero .wrap{position:relative}
+.brand{display:flex;align-items:center;gap:16px;margin-bottom:40px}
+.brand svg{width:46px;height:46px}
+.brand .word{display:flex;align-items:center;gap:12px;font-weight:300}
+.brand .word b{font-weight:800;font-size:20px;letter-spacing:.01em}
+.brand .word .bar{width:2px;height:30px;background:rgba(255,255,255,.55)}
+.brand .word .m{font-size:20px;letter-spacing:.22em;font-weight:300}
+.section-label{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--roxo)}
+.section-label::before{content:"";width:34px;height:2px;background:var(--roxo);border-radius:2px}
+.hero .section-label{color:var(--roxo-light)}
+.hero .section-label::before{background:var(--roxo-light)}
+h1{font-weight:800;font-size:46px;letter-spacing:-.02em;line-height:1.1;margin:16px 0 14px;max-width:16ch}
+.hero p.intro{font-weight:300;font-size:17px;color:rgba(255,255,255,.82);max-width:60ch}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.pill{border:1px solid var(--roxo-light);color:var(--roxo-dark);border-radius:100px;padding:8px 16px;font-size:12px;font-weight:600;letter-spacing:.10em;text-transform:uppercase;background:#fff}
+.hero .pill{background:rgba(255,255,255,.06);border-color:rgba(167,139,250,.6);color:#EDE9FE}
+.hero .pill.dom{font-family:ui-monospace,Menlo,monospace;text-transform:none;letter-spacing:0;color:#fff}
+
+/* ---------- SECTIONS ---------- */
+section{padding:52px 0}
+section.soft{background:var(--bg-soft);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
+h2{font-weight:700;font-size:28px;letter-spacing:-.01em;margin:14px 0 10px}
+.intro-p{color:var(--cinza);font-size:16px;max-width:66ch;margin-bottom:8px}
+
+/* ---------- METATAG CODE ---------- */
+.codebox{position:relative;background:var(--ink);border-radius:14px;padding:26px 22px 22px;margin:22px 0 4px}
+.codebox .cap{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--roxo-light);margin-bottom:12px}
+.codebox code{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;font-weight:400;color:#EDE9FE;word-break:break-all;line-height:1.6}
+.codebox .hl{color:#A78BFA}
+.btn{background:linear-gradient(90deg,var(--roxo),var(--roxo-dark));color:#fff;border:none;border-radius:10px;padding:11px 20px;font-family:inherit;font-weight:600;font-size:13px;cursor:pointer;position:absolute;top:18px;right:18px}
+.btn:hover{filter:brightness(1.08)}
+.btn.done{background:linear-gradient(90deg,#16a34a,#15803d)}
+
+/* ---------- STEPS ---------- */
+ol.steps{list-style:none;counter-reset:s;margin:26px 0 0}
+ol.steps>li{counter-increment:s;position:relative;padding:2px 0 26px 56px;margin-left:18px;border-left:2px solid var(--linha)}
+ol.steps>li:last-child{border-left:2px solid transparent;padding-bottom:0}
+ol.steps>li::before{content:counter(s);position:absolute;left:-19px;top:-4px;width:36px;height:36px;
+  background:linear-gradient(135deg,var(--roxo),var(--roxo-dark));color:#fff;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px}
+.st-t{font-weight:600;font-size:16.5px;color:var(--ink);margin-bottom:3px}
+.st-d{color:var(--cinza);font-size:15px}
+.mono{font-family:ui-monospace,Menlo,monospace;background:var(--roxo-xlight);color:var(--roxo-dark);padding:1px 6px;border-radius:4px;font-size:.9em}
+
+/* ---------- CALLOUT ---------- */
+.callout{border:1px solid var(--linha);border-left:3px solid var(--roxo);border-radius:14px;background:#fff;padding:18px 22px;margin:24px 0 0;font-size:15px;color:var(--ink)}
+.callout.tip{border-left-color:#16a34a}
+.callout b{font-weight:600}
+
+/* ---------- WHY (lista de motivos) ---------- */
+.why{list-style:none;margin:20px 0 0}
+.why li{position:relative;padding:14px 18px 14px 46px;border:1px solid var(--linha);border-radius:12px;margin-bottom:12px;background:var(--bg-soft);font-size:15px;color:var(--ink)}
+.why li::before{content:"✕";position:absolute;left:18px;top:15px;color:#dc2626;font-weight:700}
+.why li b{font-weight:600}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--ink);color:rgba(255,255,255,.6);padding:34px 0}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px}
+footer .brand{margin-bottom:0}
+footer .brand .word b,footer .brand .word .m{font-size:17px}
+footer .brand svg{width:38px;height:38px}
+footer small{font-size:12px;color:rgba(255,255,255,.45)}
+
+@media(max-width:640px){h1{font-size:34px}.btn{position:static;margin-top:16px}}
+
+.codebox pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;color:#EDE9FE;white-space:pre-wrap;word-break:break-word;line-height:1.6;margin-top:6px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:20px}
+.card{border:1px solid var(--linha);border-radius:14px;background:#fff;padding:18px 20px}
+.card .k{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--roxo)}
+.card .v{font-weight:700;font-size:18px;margin-top:4px;word-break:break-all}
+.card p{color:var(--cinza);font-size:14px;margin-top:4px}
+.ok li::before{content:"✓";color:#16a34a}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="brand"><svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias"><polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon><polygon points="50,33 65,59 35,59"></polygon><line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line><line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line><line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line><line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line><line x1="10" y1="27" x2="50" y2="33"></line></svg><span class="word"><b>BM</b><i class="bar"></i><span class="m">MÍDIAS</span></span></div>
+  <div class="section-label">Guia de instalação · rastreamento</div>
+  <h1>Instalar o GTM na página da Lovable</h1>
+  <p class="intro">Passo a passo para colocar o Google Tag Manager na nova página do LS. Basta colar um prompt na Lovable: o GTM já está configurado e publicado com pixel, servidor, GA4, VK e repasse de UTMs.</p>
+  <div class="hero-meta"><span class="pill dom">ls.lucrocomia.com.br</span><span class="pill dom">GTM-MXCRT4LM</span><span class="pill">Feito na Lovable</span></div>
+</div></header>
+
+<section><div class="wrap">
+  <div class="section-label">Passo 1</div>
+  <h2>Cole este prompt na Lovable</h2>
+  <p class="intro-p">Abra o projeto da página na Lovable, cole o texto abaixo no chat e envie. Ele instala o GTM do jeito certo e publica no domínio.</p>
+  <div class="codebox"><div class="cap">Prompt para a Lovable</div><button class="btn" onclick="cp(this,'prompt')">Copiar</button><pre id="prompt">Instale o Google Tag Manager (GTM-MXCRT4LM) neste projeto, seguindo exatamente estas regras:
+
+1. No arquivo index.html (raiz do projeto), cole o código abaixo O MAIS ALTO POSSÍVEL dentro do &lt;head&gt;, logo depois da tag &lt;meta charset&gt;:
+
+&lt;!-- Google Tag Manager --&gt;
+&lt;script&gt;(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({&#x27;gtm.start&#x27;:
+new Date().getTime(),event:&#x27;gtm.js&#x27;});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!=&#x27;dataLayer&#x27;?&#x27;&amp;l=&#x27;+l:&#x27;&#x27;;j.async=true;j.src=
+&#x27;https://www.googletagmanager.com/gtm.js?id=&#x27;+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,&#x27;script&#x27;,&#x27;dataLayer&#x27;,&#x27;GTM-MXCRT4LM&#x27;);&lt;/script&gt;
+&lt;!-- End Google Tag Manager --&gt;
+
+2. No mesmo index.html, cole o código abaixo IMEDIATAMENTE depois da abertura da tag &lt;body&gt;:
+
+&lt;!-- Google Tag Manager (noscript) --&gt;
+&lt;noscript&gt;&lt;iframe src=&quot;https://www.googletagmanager.com/ns.html?id=GTM-MXCRT4LM&quot;
+height=&quot;0&quot; width=&quot;0&quot; style=&quot;display:none;visibility:hidden&quot;&gt;&lt;/iframe&gt;&lt;/noscript&gt;
+&lt;!-- End Google Tag Manager (noscript) --&gt;
+
+3. NÃO adicione nenhum outro código de rastreamento direto no projeto (nada de Meta Pixel / fbq, Google Analytics / gtag, VK Metrics, Clarity ou similares). Tudo isso já é disparado pelo GTM. Se já existir algum desses códigos no projeto, remova.
+
+4. Todos os botões de compra que levam para o checkout da Hotmart (https://pay.hotmart.com/...) devem ser links &lt;a href=&quot;https://pay.hotmart.com/...&quot;&gt; normais. Não use window.location, navigate() ou onClick com JavaScript para abrir o checkout, e não abra em nova aba. Isso é necessário para o GTM repassar as UTMs para a Hotmart.
+
+5. Não remova nem reescreva os parâmetros da URL (utm_source, utm_medium, utm_campaign, utm_content, utm_term, src, sck, vk_source, fbclid) ao carregar a página ou trocar de rota.
+
+6. Não altere nada no visual nem no conteúdo da página. Depois de aplicar, publique o projeto no domínio ls.lucrocomia.com.br.</pre></div>
+  <div class="callout"><b>Por que os botões precisam ser links normais?</b> O GTM acrescenta as UTMs, o <span class="mono">src</span> e o <span class="mono">vk_source</span> no link da Hotmart na hora do clique. Se o botão abrir o checkout por JavaScript, os parâmetros se perdem e a venda fica sem campanha.</div>
+</div></section>
+
+<section class="soft"><div class="wrap">
+  <div class="section-label">Alternativa</div>
+  <h2>Os códigos separados</h2>
+  <p class="intro-p">Se preferir colar à mão no <span class="mono">index.html</span>:</p>
+  <div class="codebox"><div class="cap">1 · Dentro do &lt;head&gt;, o mais alto possível</div><button class="btn" onclick="cp(this,'head')">Copiar</button><pre id="head">&lt;!-- Google Tag Manager --&gt;
+&lt;script&gt;(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({&#x27;gtm.start&#x27;:
+new Date().getTime(),event:&#x27;gtm.js&#x27;});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!=&#x27;dataLayer&#x27;?&#x27;&amp;l=&#x27;+l:&#x27;&#x27;;j.async=true;j.src=
+&#x27;https://www.googletagmanager.com/gtm.js?id=&#x27;+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,&#x27;script&#x27;,&#x27;dataLayer&#x27;,&#x27;GTM-MXCRT4LM&#x27;);&lt;/script&gt;
+&lt;!-- End Google Tag Manager --&gt;</pre></div>
+  <div class="codebox"><div class="cap">2 · Logo depois da abertura do &lt;body&gt;</div><button class="btn" onclick="cp(this,'body')">Copiar</button><pre id="body">&lt;!-- Google Tag Manager (noscript) --&gt;
+&lt;noscript&gt;&lt;iframe src=&quot;https://www.googletagmanager.com/ns.html?id=GTM-MXCRT4LM&quot;
+height=&quot;0&quot; width=&quot;0&quot; style=&quot;display:none;visibility:hidden&quot;&gt;&lt;/iframe&gt;&lt;/noscript&gt;
+&lt;!-- End Google Tag Manager (noscript) --&gt;</pre></div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="section-label">Passo 2</div>
+  <h2>Depois de publicar</h2>
+  <ol class="steps">
+    <li><div class="st-t">Confirme que a página abre</div><div class="st-d">Acesse <span class="mono">https://ls.lucrocomia.com.br</span>. Hoje o domínio já aponta para a Lovable, mas mostra "Project not found" até o projeto ser publicado nele.</div></li>
+    <li><div class="st-t">Avise o Rafael</div><div class="st-d">A Brito Mídias testa: pixel oficial e ILD disparando uma vez, evento chegando no servidor <span class="mono">gtm.lucrocomia.com.br</span>, VK registrando e o link da Hotmart saindo com <span class="mono">src</span>, <span class="mono">vk_source</span> e <span class="mono">sck</span>.</div></li>
+  </ol>
+</div></section>
+
+<section class="soft"><div class="wrap">
+  <div class="section-label">Referência</div>
+  <h2>O que já está pronto</h2>
+  <div class="grid2">
+    <div class="card"><div class="k">GTM web</div><div class="v">GTM-MXCRT4LM</div><p>"Marketex | Web | ls.lucrocomia.com.br" · publicado</p></div>
+    <div class="card"><div class="k">Servidor (Cloud Run)</div><div class="v">gtm.lucrocomia.com.br</div><p>O mesmo server de todo o lucrocomia.com.br · nada a configurar</p></div>
+    <div class="card"><div class="k">Pixels</div><div class="v">1117829508632155 · 1326766722828717</div><p>Oficial e ILD, navegador + API com o mesmo ID de evento</p></div>
+    <div class="card"><div class="k">Outros</div><div class="v">GA4 · VK Metrics</div><p>G-B6DNCYBGNF e VK da Marketex</p></div>
+  </div>
+  <ul class="why ok"><li><b>DNS:</b> não precisa mexer. O domínio já aponta para a Lovable e o servidor de rastreamento já atende qualquer subdomínio de lucrocomia.com.br.</li></ul>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="brand"><svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias"><polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon><polygon points="50,33 65,59 35,59"></polygon><line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line><line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line><line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line><line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line><line x1="10" y1="27" x2="50" y2="33"></line></svg><span class="word"><b>BM</b><i class="bar"></i><span class="m">MÍDIAS</span></span></div>
+  <small>Guia interno · Marketex · atualizado em 29/10/2026</small>
+</div></footer>
+<script>
+function cp(b,id){
+  var t=document.getElementById(id).innerText;
+  navigator.clipboard.writeText(t).then(function(){
+    b.textContent='Copiado ✓';b.classList.add('done');
+    setTimeout(function(){b.textContent='Copiar';b.classList.remove('done')},2000);
+  });
+}
+</script>
+</body>
+</html>
