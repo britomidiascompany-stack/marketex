@@ -113,8 +113,31 @@
   small{font-weight:400}
   tbody td{white-space:nowrap} tbody td:first-child{white-space:normal;min-width:190px}
 
+
+  html{scroll-behavior:smooth}
+  section[id],[id^=criativos-]{scroll-margin-top:24px}
+  .layout{display:grid;grid-template-columns:230px minmax(0,1fr);align-items:start}
+  .layout main{min-width:0}
+  .sumario{position:sticky;top:0;height:100vh;overflow-y:auto;padding:28px 14px 28px 22px;border-right:1px solid var(--linha);background:#fff;display:flex;flex-direction:column;gap:2px}
+  .sum-title{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--roxo);margin:0 0 12px 10px;display:flex;align-items:center;gap:8px}
+  .sum-title::before{content:"";width:18px;height:2px;background:var(--roxo);border-radius:2px}
+  .sumario a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;color:var(--cinza);font-size:13.5px;font-weight:500;line-height:1.3;text-decoration:none;border-left:3px solid transparent}
+  .sumario a span{font-size:11px;font-weight:700;color:var(--roxo-light);min-width:18px}
+  .sumario a:hover{background:var(--bg-soft);color:var(--ink);text-decoration:none}
+  .sumario a.ativo{background:var(--roxo-xlight);color:var(--roxo-dark);border-left-color:var(--roxo);font-weight:600}
+  .sumario a.ativo span{color:var(--roxo)}
+  .sumario a.sub{padding:6px 10px 6px 38px;font-size:12.5px;font-weight:400}
+  .sumario a.sub.ativo{background:transparent;border-left-color:transparent;color:var(--roxo-dark);font-weight:400}
+  .sumario a.topo{margin-top:16px;font-size:12px;color:var(--roxo)}
+  @media (max-width:1000px){
+    .layout{display:block}
+    .sumario{position:sticky;top:0;z-index:5;height:auto;flex-direction:row;overflow-x:auto;overflow-y:hidden;padding:10px 12px;border-right:0;border-bottom:1px solid var(--linha);gap:6px;white-space:nowrap}
+    .sum-title,.sumario a.sub,.sumario a.topo{display:none}
+    .sumario a{padding:7px 12px;border-left:0;border-radius:100px;font-size:12.5px;flex:0 0 auto}
+    section[id],[id^=criativos-]{scroll-margin-top:64px}
+  }
 </style></head><body>
-<header class="hero"><div class="hero-inner">
+<header class="hero" id="topo"><div class="hero-inner">
 <div class="brand"><svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias">
         <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
         <polygon points="50,33 65,59 35,59"></polygon>
@@ -133,8 +156,9 @@
 <span class="pill">[60] Quente R$ 69,92 por qualificado</span>
 <span class="pill">Melhor público: mulheres de 35 a 54 anos</span>
 </div></div></header>
+<div class="layout"><nav class="sumario" aria-label="Sumário do relatório"><div class="sum-title">Sumário</div><a href="#extrato" data-sec="extrato"><span>01</span>Resultado geral</a><a href="#dia-a-dia" data-sec="dia-a-dia"><span>02</span>Dia a dia</a><a href="#quiz" data-sec="quiz"><span>03</span>Etapas do quiz</a><a href="#publicos" data-sec="publicos"><span>04</span>Melhores públicos</a><a href="#criativos" data-sec="criativos"><span>05</span>Criativos</a><a class="sub" href="#criativos-60" data-sec="criativos">[60] Quente</a><a class="sub" href="#criativos-59" data-sec="criativos">[59] Amplo</a><a href="#posicionamentos" data-sec="posicionamentos"><span>06</span>Posicionamentos</a><a href="#comparacao" data-sec="comparacao"><span>07</span>Quiz × Aplicação</a><a href="#leitura" data-sec="leitura"><span>08</span>O que os números dizem</a><a class="topo" href="#topo">↑ Voltar ao topo</a></nav><main>
 
-<section><div class="wrap">
+<section id="extrato"><div class="wrap">
 <div class="section-label">Extrato do período</div>
 <h2>Resultado geral do quiz</h2>
 <p class="lead">Todos os custos estão com imposto. <b>Qualificado</b> é quem respondeu ao quiz e foi direcionado ao Mapeamento. <b>Clicou em agendar</b> é quem chegou ao fim e clicou no botão que abre o WhatsApp, não o agendamento confirmado.</p>
@@ -164,14 +188,14 @@
 </div>
 </div></section>
 
-<section class="soft"><div class="wrap">
+<section id="dia-a-dia" class="soft"><div class="wrap">
 <div class="section-label">Dia a dia</div>
 <h2>Tráfego dia a dia</h2>
 <p class="lead">Quem começou o quiz entra no dia em que entrou. *09/11 ainda parcial.</p>
 <div class="table-wrap"><table><thead><tr><th>Dia</th><th>Investido c/ imp.</th><th>Impressões</th><th>Cliques</th><th>Visitas</th><th>Começaram</th><th>Contato</th><th>Qualificados</th><th>Agendar</th><th>Custo/qualif.</th></tr></thead><tbody><tr><td>04/11 <small style="color:var(--cinza)">qua</small></td><td>R$ 97,68</td><td>2.465</td><td>118</td><td>86</td><td>5</td><td>0</td><td><b>0</b></td><td>0</td><td class="muted">–</td></tr><tr><td>05/11 <small style="color:var(--cinza)">qui</small></td><td>R$ 228,96</td><td>2.453</td><td>42</td><td>34</td><td>10</td><td>5</td><td><b>1</b></td><td>0</td><td class="bad">R$ 228,96</td></tr><tr><td>06/11 <small style="color:var(--cinza)">sex</small></td><td>R$ 335,79</td><td>3.910</td><td>603</td><td>495</td><td>27</td><td>4</td><td><b>1</b></td><td>1</td><td class="bad">R$ 335,79</td></tr><tr class="hero-row"><td>07/11 <small style="color:var(--cinza)">sáb</small></td><td>R$ 507,93</td><td>4.308</td><td>697</td><td>556</td><td>21</td><td>12</td><td><b>8</b></td><td>5</td><td class="good">R$ 63,49</td></tr><tr><td>08/11 <small style="color:var(--cinza)">dom</small></td><td>R$ 533,13</td><td>16.806</td><td>956</td><td>420</td><td>20</td><td>12</td><td><b>8</b></td><td>6</td><td class="good">R$ 66,64</td></tr><tr><td>09/11 <small style="color:var(--cinza)">seg*</small></td><td>R$ 250,86</td><td>1.363</td><td>28</td><td>23</td><td>8</td><td>4</td><td><b>2</b></td><td>0</td><td class="warn">R$ 125,43</td></tr><tr class="hero-row"><td>TOTAL</td><td>R$ 1.954,35</td><td>31.305</td><td>2.444</td><td>1.614</td><td>91</td><td>37</td><td><b>20</b></td><td>12</td><td class="good">R$ 97,72</td></tr></tbody></table></div>
 </div></section>
 
-<section><div class="wrap">
+<section id="quiz"><div class="wrap">
 <div class="section-label">Quiz</div>
 <h2>Onde as pessoas saem do quiz</h2>
 <p class="lead">Evasão em relação à etapa anterior; acima de 15% aparece em vermelho. A maior perda é logo na primeira pergunta (42,9%), e quase toda ela vem do tráfego da [59]. Depois do contato, o quiz divide as pessoas em três ramos.</p>
@@ -181,7 +205,7 @@
 </div>
 </div></section>
 
-<section class="soft"><div class="wrap">
+<section id="publicos" class="soft"><div class="wrap">
 <div class="section-label">Públicos</div>
 <h2>Melhores públicos</h2>
 <p class="lead">O público quente (engajamento no Instagram e Facebook em 90 dias) traz qualificado por menos da metade do custo do amplo. Por idade e gênero, os melhores recortes são <b>mulheres</b> e a faixa de <b>35 a 54 anos</b>. Idade e gênero usam o qualificado do pixel do Meta, porque a planilha não tem essa informação.</p>
@@ -196,32 +220,32 @@
 </div>
 </div></section>
 
-<section><div class="wrap">
+<section id="criativos"><div class="wrap">
 <div class="section-label">Criativos</div>
 <h2>Criativos por campanha</h2>
 <p class="lead">Ordenados por qualificados. Clique no nome para abrir o arquivo no Drive. <b>ADV004 "5 COISAS"</b> lidera na [60]; na [59], ADV004 e ADI004 empatam com 2 qualificados cada. No geral, vídeo sai a R$ 97,54 por qualificado e imagem a R$ 98,74.</p>
-<div class="grp-title">🔥 [60] Quente · engajamento IG + FB 90 dias</div>
+<div class="grp-title" id="criativos-60">🔥 [60] Quente · engajamento IG + FB 90 dias</div>
 <div class="table-wrap"><table><thead><tr><th>Criativo</th><th>Investido c/ imp.</th><th>CTR</th><th>Visitas</th><th>Começaram</th><th>Contato</th><th>Qualif.</th><th>Custo/qualif.</th><th>Agendar</th></tr></thead><tbody><tr class="hero-row"><td><a href="https://drive.google.com/file/d/1M72lNoWpd0ybMLlfXBaDEtPrVe1BIVHL/view?usp=drivesdk" target="_blank" rel="noopener">ADV004_MPO_QUIZ_V1_VID_5 COISAS _0.41</a><span class="tag">vídeo</span></td><td>R$ 696,16</td><td>2,13%</td><td>85</td><td>21</td><td>18</td><td><b>12</b></td><td class="good">R$ 58,01</td><td>9</td></tr><tr class="hero-row"><td><a href="https://drive.google.com/file/d/1gy0bVzr6ujmrxeOjh-61vL_a70uGL0k7/view?usp=drivesdk" target="_blank" rel="noopener">ADV002_MPO_QUIZ_V1_VID_VOCE JA GANHA BEM_0.55</a><span class="tag">vídeo</span></td><td>R$ 38,10</td><td>2,42%</td><td>6</td><td>2</td><td>2</td><td><b>2</b></td><td class="good">R$ 19,05</td><td>1</td></tr><tr><td><a href="https://drive.google.com/file/d/15zTRuqvTqEY6PYQvAWIGV66-2K5l52cX/view?usp=drive_link" target="_blank" rel="noopener">ADV001_MPO_QUIZ_V1_VID_GANHAR MAIS SEM MAIS HORAS SEVERINO_1.01</a><span class="tag">vídeo</span></td><td>R$ 83,03</td><td>1,72%</td><td>9</td><td>3</td><td>2</td><td><b>0</b></td><td class="muted">–</td><td>0</td></tr><tr><td><a href="https://drive.google.com/file/d/1v0_J8lQ9kg3IJ0Rh8r5xfKDl1tMgl1bs/view?usp=drivesdk" target="_blank" rel="noopener">ADV006_MPO_QUIZ_V1_VID_ESTAVA DEITADA _0.45</a><span class="tag">vídeo</span></td><td>R$ 38,51</td><td>1,64%</td><td>4</td><td>0</td><td>0</td><td><b>0</b></td><td class="muted">–</td><td>0</td></tr><tr><td><a href="https://drive.google.com/file/d/1mxJ5wZlNA0yQeNvSA0iocuL-ccax0eO5/view?usp=drive_link" target="_blank" rel="noopener">ADI005_MPO_QUIZ_V1_IMG_CRESCER SEM PERDER QUEM VOCE AMA</a><span class="tag img">imagem</span></td><td>R$ 37,73</td><td>1,13%</td><td>5</td><td>0</td><td>0</td><td><b>0</b></td><td class="muted">–</td><td>0</td></tr><tr><td><a href="https://drive.google.com/file/d/1QhYvVTRtb4pAQskV296PA5VdHqY7VmIK/view?usp=drive_link" target="_blank" rel="noopener">ADI004_MPO_QUIZ_V1_IMG_A IA E O FUTURO DO SEU NEGOCIO</a><span class="tag img">imagem</span></td><td>R$ 27,98</td><td>0,24%</td><td>1</td><td>1</td><td>0</td><td><b>0</b></td><td class="muted">–</td><td>0</td></tr><tr><td><a href="https://drive.google.com/file/d/1HdY38Ee6IAeBpEHCNfXSs2s6t3zVCxpB/view?usp=drive_link" target="_blank" rel="noopener">ADI001_MPO_QUIZ_V1_IMG_HORAS DE VOLTA PRA VOCE</a><span class="tag img">imagem</span></td><td>R$ 19,82</td><td>1,06%</td><td>2</td><td>0</td><td>0</td><td><b>0</b></td><td class="muted">–</td><td>0</td></tr><tr><td><a href="https://drive.google.com/file/d/1ZnaMILgwM3ou46QQ1L-9KpBCypn6R2sM/view?usp=drivesdk" target="_blank" rel="noopener">ADV007_MPO_QUIZ_V1_VID_VOCE ACHA QUE A IA NAO MUDA NADA_0.58</a><span class="tag">vídeo</span></td><td>R$ 18,99</td><td>1,68%</td><td>2</td><td>0</td><td>0</td><td><b>0</b></td><td class="muted">–</td><td>0</td></tr><tr><td><a href="https://drive.google.com/file/d/1NW4i9hENF8vkq_EorXUgbMr0BlHr2S7I/view?usp=drivesdk" target="_blank" rel="noopener">ADV005_MPO_QUIZ_V1_VID_FICO PENSANDO _0.41</a><span class="tag">vídeo</span></td><td>R$ 8,03</td><td>1,89%</td><td>0</td><td>0</td><td>0</td><td><b>0</b></td><td class="muted">–</td><td>0</td></tr><tr><td><a href="https://drive.google.com/file/d/11WTzAfa9j1ykfk8MOGjVZOABJcbzVlMk/view?usp=drivesdk" target="_blank" rel="noopener">ADV003_MPO_QUIZ_V1_VID_A IA NAO TE ROBATIZA_0.52</a><span class="tag">vídeo</span></td><td>R$ 5,61</td><td>1,96%</td><td>1</td><td>0</td><td>0</td><td><b>0</b></td><td class="muted">–</td><td>0</td></tr><tr><td><a href="https://drive.google.com/file/d/1YInG7wSKVnQ0YPQOyQhAQ1X2oV-7AXPn/view?usp=drive_link" target="_blank" rel="noopener">ADI003_MPO_QUIZ_V1_IMG_FATURAR SEM TRABALHAR MAIS</a><span class="tag img">imagem</span></td><td>R$ 2,88</td><td>1,33%</td><td>0</td><td>0</td><td>0</td><td><b>0</b></td><td class="muted">–</td><td>0</td></tr><tr><td><a href="https://drive.google.com/file/d/1BqTyLqdqTlhrX6-_4ksJJQrLq9kId016/view?usp=drive_link" target="_blank" rel="noopener">ADI002_MPO_QUIZ_V1_IMG_SEU NEGOCIO SEM DEPENDER DE VOCE</a><span class="tag img">imagem</span></td><td>R$ 2,11</td><td>0,00%</td><td>0</td><td>0</td><td>0</td><td><b>0</b></td><td class="muted">–</td><td>0</td></tr><tr class="hero-row"><td>TOTAL [60]</td><td>R$ 978,94</td><td>1,85%</td><td>115</td><td>27</td><td>22</td><td><b>14</b></td><td>R$ 69,92</td><td>10</td></tr></tbody></table></div>
-<div class="grp-title">🌎 [59] Amplo · Advantage+ (sugestão mulheres 30–55)</div>
+<div class="grp-title" id="criativos-59">🌎 [59] Amplo · Advantage+ (sugestão mulheres 30–55)</div>
 <div class="table-wrap"><table><thead><tr><th>Criativo</th><th>Investido c/ imp.</th><th>CTR</th><th>Visitas</th><th>Começaram</th><th>Contato</th><th>Qualif.</th><th>Custo/qualif.</th><th>Agendar</th></tr></thead><tbody><tr class="hero-row"><td><a href="https://drive.google.com/file/d/1M72lNoWpd0ybMLlfXBaDEtPrVe1BIVHL/view?usp=drivesdk" target="_blank" rel="noopener">ADV004_MPO_QUIZ_V1_VID_5 COISAS _0.41</a><span class="tag">vídeo</span></td><td>R$ 133,06</td><td>7,59%</td><td>41</td><td>8</td><td>5</td><td><b>2</b></td><td class="good">R$ 66,53</td><td>1</td></tr><tr class="hero-row"><td><a href="https://drive.google.com/file/d/1QhYvVTRtb4pAQskV296PA5VdHqY7VmIK/view?usp=drive_link" target="_blank" rel="noopener">ADI004_MPO_QUIZ_V1_IMG_A IA E O FUTURO DO SEU NEGOCIO</a><span class="tag img">imagem</span></td><td>R$ 125,14</td><td>2,14%</td><td>27</td><td>7</td><td>3</td><td><b>2</b></td><td class="good">R$ 62,57</td><td>0</td></tr><tr><td><a href="https://drive.google.com/file/d/15zTRuqvTqEY6PYQvAWIGV66-2K5l52cX/view?usp=drive_link" target="_blank" rel="noopener">ADV001_MPO_QUIZ_V1_VID_GANHAR MAIS SEM MAIS HORAS SEVERINO_1.01</a><span class="tag">vídeo</span></td><td>R$ 476,77</td><td>6,61%</td><td>143</td><td>12</td><td>3</td><td><b>1</b></td><td class="muted">R$ 476,77</td><td>0</td></tr><tr><td><a href="https://drive.google.com/file/d/1YInG7wSKVnQ0YPQOyQhAQ1X2oV-7AXPn/view?usp=drive_link" target="_blank" rel="noopener">ADI003_MPO_QUIZ_V1_IMG_FATURAR SEM TRABALHAR MAIS</a><span class="tag img">imagem</span></td><td>R$ 32,79</td><td>4,32%</td><td>175</td><td>5</td><td>1</td><td><b>1</b></td><td class="muted">R$ 32,79</td><td>1</td></tr><tr><td><a href="https://drive.google.com/file/d/1ZnaMILgwM3ou46QQ1L-9KpBCypn6R2sM/view?usp=drivesdk" target="_blank" rel="noopener">ADV007_MPO_QUIZ_V1_VID_VOCE ACHA QUE A IA NAO MUDA NADA_0.58</a><span class="tag">vídeo</span></td><td>R$ 58,83</td><td>30,84%</td><td>670</td><td>16</td><td>0</td><td><b>0</b></td><td class="muted">–</td><td>0</td></tr><tr><td><a href="https://drive.google.com/file/d/1gy0bVzr6ujmrxeOjh-61vL_a70uGL0k7/view?usp=drivesdk" target="_blank" rel="noopener">ADV002_MPO_QUIZ_V1_VID_VOCE JA GANHA BEM_0.55</a><span class="tag">vídeo</span></td><td>R$ 51,49</td><td>6,70%</td><td>26</td><td>2</td><td>1</td><td><b>0</b></td><td class="muted">–</td><td>0</td></tr><tr><td><a href="https://drive.google.com/file/d/1mxJ5wZlNA0yQeNvSA0iocuL-ccax0eO5/view?usp=drive_link" target="_blank" rel="noopener">ADI005_MPO_QUIZ_V1_IMG_CRESCER SEM PERDER QUEM VOCE AMA</a><span class="tag img">imagem</span></td><td>R$ 29,78</td><td>1,47%</td><td>4</td><td>1</td><td>1</td><td><b>0</b></td><td class="muted">–</td><td>0</td></tr><tr><td><a href="https://drive.google.com/file/d/1v0_J8lQ9kg3IJ0Rh8r5xfKDl1tMgl1bs/view?usp=drivesdk" target="_blank" rel="noopener">ADV006_MPO_QUIZ_V1_VID_ESTAVA DEITADA _0.45</a><span class="tag">vídeo</span></td><td>R$ 23,47</td><td>34,64%</td><td>296</td><td>5</td><td>0</td><td><b>0</b></td><td class="muted">–</td><td>0</td></tr><tr><td><a href="https://drive.google.com/file/d/1HdY38Ee6IAeBpEHCNfXSs2s6t3zVCxpB/view?usp=drive_link" target="_blank" rel="noopener">ADI001_MPO_QUIZ_V1_IMG_HORAS DE VOLTA PRA VOCE</a><span class="tag img">imagem</span></td><td>R$ 15,08</td><td>4,35%</td><td>9</td><td>2</td><td>1</td><td><b>0</b></td><td class="muted">–</td><td>0</td></tr><tr><td><a href="https://drive.google.com/file/d/1NW4i9hENF8vkq_EorXUgbMr0BlHr2S7I/view?usp=drivesdk" target="_blank" rel="noopener">ADV005_MPO_QUIZ_V1_VID_FICO PENSANDO _0.41</a><span class="tag">vídeo</span></td><td>R$ 14,95</td><td>22,61%</td><td>67</td><td>4</td><td>0</td><td><b>0</b></td><td class="muted">–</td><td>0</td></tr><tr><td><a href="https://drive.google.com/file/d/11WTzAfa9j1ykfk8MOGjVZOABJcbzVlMk/view?usp=drivesdk" target="_blank" rel="noopener">ADV003_MPO_QUIZ_V1_VID_A IA NAO TE ROBATIZA_0.52</a><span class="tag">vídeo</span></td><td>R$ 11,14</td><td>31,11%</td><td>36</td><td>2</td><td>0</td><td><b>0</b></td><td class="muted">–</td><td>0</td></tr><tr><td><a href="https://drive.google.com/file/d/1BqTyLqdqTlhrX6-_4ksJJQrLq9kId016/view?usp=drive_link" target="_blank" rel="noopener">ADI002_MPO_QUIZ_V1_IMG_SEU NEGOCIO SEM DEPENDER DE VOCE</a><span class="tag img">imagem</span></td><td>R$ 2,91</td><td>11,50%</td><td>5</td><td>0</td><td>0</td><td><b>0</b></td><td class="muted">–</td><td>0</td></tr><tr class="hero-row"><td>TOTAL [59]</td><td>R$ 975,41</td><td>9,68%</td><td>1.499</td><td>64</td><td>15</td><td><b>6</b></td><td>R$ 162,57</td><td>2</td></tr></tbody></table></div>
 <p style="font-size:13px;color:var(--cinza);margin-top:12px">Verde: abaixo de R$ 100 por qualificado. Vermelho: acima de R$ 200, ou mais de R$ 100 gastos sem qualificado. Cinza: menos de 2 qualificados (amostra pequena).</p>
 </div></section>
 
-<section class="soft"><div class="wrap">
+<section id="posicionamentos" class="soft"><div class="wrap">
 <div class="section-label">Posicionamentos</div>
 <h2>Onde o dinheiro foi gasto</h2>
 <p class="lead">A maior parte dos qualificados das duas campanhas vem do Instagram.</p>
 <div class="table-wrap"><table><thead><tr><th>Campanha · posicionamento</th><th>Investido c/ imp.</th><th>Impressões</th><th>CPM</th><th>Visitas</th><th>Qualif. Meta</th><th>Custo/qualif.</th></tr></thead><tbody><tr><td>[59] Instagram</td><td>R$ 528,30</td><td>3.168</td><td>R$ 166,76</td><td>55</td><td><b>3</b></td><td class="warn">R$ 176,10</td></tr><tr><td>[59] Facebook</td><td>R$ 325,36</td><td>1.643</td><td>R$ 198,03</td><td>32</td><td><b>1</b></td><td class="muted">R$ 325,36</td></tr><tr><td>[59] WhatsApp</td><td>R$ 45,68</td><td>1.048</td><td>R$ 43,59</td><td>9</td><td><b>1</b></td><td class="muted">R$ 45,68</td></tr><tr><td>[59] Threads</td><td>R$ 4,18</td><td>94</td><td>R$ 44,44</td><td>3</td><td><b>0</b></td><td class="muted">–</td></tr><tr><td>[60] Instagram</td><td>R$ 922,87</td><td>6.821</td><td>R$ 135,30</td><td>105</td><td><b>14</b></td><td class="good">R$ 65,92</td></tr><tr><td>[60] Facebook</td><td>R$ 45,44</td><td>497</td><td>R$ 91,43</td><td>7</td><td><b>0</b></td><td class="muted">–</td></tr><tr><td>[60] WhatsApp</td><td>R$ 7,18</td><td>110</td><td>R$ 65,30</td><td>0</td><td><b>0</b></td><td class="muted">–</td></tr><tr><td>[60] Threads</td><td>R$ 2,44</td><td>34</td><td>R$ 71,65</td><td>3</td><td><b>0</b></td><td class="muted">–</td></tr></tbody></table></div>
 </div></section>
 
-<section><div class="wrap">
+<section id="comparacao"><div class="wrap">
 <div class="section-label">Comparação</div>
 <h2>Quiz × Aplicação antiga</h2>
 <p class="lead">Custo bruto, sem imposto, nas duas pontas, porque é como o Meta mostra o histórico. Os eventos são diferentes (QuizQualificado no quiz, MPDAplicacaoQualificada2 na Aplicação), então a comparação é aproximada. O quente [60] já está abaixo do melhor resultado da Aplicação; o amplo [59] ainda está acima.</p>
 <div class="table-wrap"><table><thead><tr><th>Campanha · funil</th><th>Público</th><th>Investido bruto</th><th>Qualificados</th><th>Custo/qualif.</th></tr></thead><tbody><tr class="hero-row"><td>[60] · Quiz<div class="bar" style="max-width:200px"><i style="width:11%"></i></div></td><td>Quente · engajamento IG + FB 90 dias</td><td>R$ 860,00</td><td>14</td><td class="good">R$ 61,43</td></tr><tr><td>[54] · Aplicação<div class="bar" style="max-width:200px"><i style="width:17%"></i></div></td><td>Amplo Advantage+ · mulheres 30–55</td><td>R$ 3.570,93</td><td>36</td><td class="good">R$ 99,19</td></tr><tr><td>[53] · Aplicação<div class="bar" style="max-width:200px"><i style="width:20%"></i></div></td><td>Amplo Advantage+ · mulheres 30–55</td><td>R$ 6.938,62</td><td>61</td><td class="warn">R$ 113,75</td></tr><tr class="hero-row"><td>[59] · Quiz<div class="bar" style="max-width:200px"><i style="width:29%"></i></div></td><td>Amplo Advantage+ · mulheres 30–55 (sugestão)</td><td>R$ 856,90</td><td>5</td><td class="warn">R$ 171,38</td></tr><tr><td>[51] · Aplicação<div class="bar" style="max-width:200px"><i style="width:36%"></i></div></td><td>Frio · interesses</td><td>R$ 634,86</td><td>3</td><td class="bad">R$ 211,62</td></tr><tr><td>[50] · Aplicação<div class="bar" style="max-width:200px"><i style="width:38%"></i></div></td><td>Frio · interesses</td><td>R$ 662,55</td><td>3</td><td class="bad">R$ 220,85</td></tr><tr><td>[57] · Aplicação<div class="bar" style="max-width:200px"><i style="width:100%"></i></div></td><td>Quente · compradores do LS</td><td>R$ 1.163,98</td><td>2</td><td class="bad">R$ 581,99</td></tr></tbody></table></div>
 </div></section>
 
-<section class="soft"><div class="wrap">
+<section id="leitura" class="soft"><div class="wrap">
 <div class="section-label">Leitura</div>
 <h2>O que os números dizem</h2>
 <div class="notes">
@@ -243,5 +267,21 @@
 <li>Se as 17 pessoas que foram para MNIA e ANP compraram essas ofertas.</li></ul></div>
 </div></div></section>
 
+</main></div>
 <footer><div class="brand-mini">BM MÍDIAS</div><div>Quiz do Mapeamento · Marketex · Fontes: Meta Ads (ANEX 08, campanhas [59] e [60]), aba QUIZ | LEADS (inLead) da planilha unificada pela UTM e histórico da Aplicação no Meta · leads de teste fora da conta · gerado em 09/11/2026</div></footer>
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.sumario a[data-sec]'));
+  var secs=[].slice.call(document.querySelectorAll('main section[id]'));
+  function marcar(id){links.forEach(function(a){a.classList.toggle('ativo',a.getAttribute('data-sec')===id);});
+    var at=document.querySelector('.sumario a.ativo:not(.sub)'); if(at&&window.innerWidth<=1000){at.scrollIntoView({block:'nearest',inline:'center'});}}
+  function atualizar(){var y=window.scrollY+window.innerHeight*0.3, atual=secs[0]&&secs[0].id;
+    secs.forEach(function(s){if(s.offsetTop<=y)atual=s.id;}); if((window.innerHeight+window.scrollY)>=document.body.scrollHeight-4)atual=secs[secs.length-1].id; marcar(atual);}
+  [].slice.call(document.querySelectorAll('.sumario a[href^="#"]')).forEach(function(a){a.addEventListener('click',function(e){
+    var id=a.getAttribute('href').slice(1), alvo=document.getElementById(id); if(!alvo)return; e.preventDefault();
+    alvo.scrollIntoView({behavior:'smooth',block:'start'}); try{history.replaceState(null,'','#'+id);}catch(_){}
+  });});
+  window.addEventListener('scroll',atualizar,{passive:true}); window.addEventListener('resize',atualizar); atualizar();
+})();
+</script>
 </body></html>
