@@ -105,8 +105,32 @@
   td.muted{color:#A8A2B3}
   .note-card.bad{border-color:#FECACA;background:linear-gradient(180deg,#fff,#FEF2F2 400%)}
   .note-card.good{border-color:#BBF7D0;background:linear-gradient(180deg,#fff,#F0FDF4 400%)}
+
+  html{scroll-behavior:smooth}
+  section{scroll-margin-top:16px}
+  .layout{display:grid;grid-template-columns:230px minmax(0,1fr);max-width:1380px;margin:0 auto}
+  .layout main{min-width:0}
+  .layout main section .wrap{max-width:1100px}
+  .toc{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;padding:36px 14px 24px 24px;border-right:1px solid var(--linha);background:#fff}
+  .toc-title{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--roxo);margin:0 0 14px 10px}
+  .toc a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;color:var(--cinza);font-size:13.5px;font-weight:500;line-height:1.3;margin-bottom:2px;border-left:2px solid transparent;text-decoration:none}
+  .toc a .n{font-size:11px;font-weight:700;color:var(--roxo-light);min-width:18px}
+  .toc a:hover{background:var(--bg-soft);color:var(--ink);text-decoration:none}
+  .toc a.active{background:var(--roxo-xlight);color:var(--roxo-dark);border-left-color:var(--roxo)}
+  .toc a.active .n{color:var(--roxo)}
+  .toc a.toc-top{margin-top:16px;font-size:12px;color:var(--roxo)}
+  @media (max-width:1250px){.layout .kpi-row{grid-template-columns:repeat(3,1fr)}}
+  @media (max-width:560px){.layout .kpi-row{grid-template-columns:1fr 1fr}}
+  @media (max-width:900px){
+    .layout{grid-template-columns:1fr}
+    .toc{height:auto;flex-direction:row;display:flex;gap:6px;overflow-x:auto;padding:10px 16px;border-right:none;border-bottom:1px solid var(--linha);z-index:10;white-space:nowrap;box-shadow:0 4px 12px rgba(20,16,24,.06)}
+    .toc-title,.toc a.toc-top{display:none}
+    .toc a{border-left:none;margin:0;padding:7px 12px;background:var(--bg-soft);font-size:12.5px;flex:0 0 auto}
+    .toc a .n{display:none}
+    section{scroll-margin-top:64px}
+  }
 </style></head><body>
-<header class="hero"><div class="hero-inner">
+<header class="hero" id="topo"><div class="hero-inner">
 <div class="brand"><svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias">
         <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
         <polygon points="50,33 65,59 35,59"></polygon>
@@ -126,7 +150,16 @@
 <span class="pill">Vídeo mais barato que imagem</span>
 </div></div></header>
 
-<section><div class="wrap">
+<div class="layout"><nav class="toc" aria-label="Sumário"><div class="toc-title">Sumário</div>
+<a href="#extrato" data-id="extrato"><span class="n">01</span>Extrato do período</a>
+<a href="#dia-a-dia" data-id="dia-a-dia"><span class="n">02</span>Tráfego dia a dia</a>
+<a href="#publicos" data-id="publicos"><span class="n">03</span>Públicos</a>
+<a href="#criativos" data-id="criativos"><span class="n">04</span>Criativos</a>
+<a href="#apoio" data-id="apoio"><span class="n">05</span>Lembrete e Remarketing</a>
+<a href="#audiencia" data-id="audiencia"><span class="n">06</span>Audiência e vendas</a>
+<a href="#leitura" data-id="leitura"><span class="n">07</span>Leitura</a>
+<a href="#topo" class="toc-top">↑ Voltar ao topo</a></nav><main>
+<section id="extrato"><div class="wrap">
 <div class="section-label">Extrato do período</div>
 <h2>Resultado geral da captação</h2>
 <p class="lead">Todos os custos estão com imposto. <b>Cadastros pagos</b> são os cadastros da página com UTM do tráfego; <b>leads no pixel</b> ficam só como conferência do Meta.</p>
@@ -135,21 +168,21 @@
 <div class="grp-title">💰 Verba e ritmo</div><div class="kpi-row"><div class="mini-card "><small>Verba restante</small><b>R$ 776,70</b><span class="hint">com imposto</span></div><div class="mini-card "><small>Dias restantes</small><b>2</b><span class="hint">09/11 e 10/11 (até a aula)</span></div><div class="mini-card "><small>Gasto/dia necessário</small><b>R$ 388,35</b><span class="hint">para usar a verba toda</span></div><div class="mini-card "><small>Gasto médio/dia</small><b>R$ 844,66</b><span class="hint">dias com investimento</span></div><div class="mini-card "><small>Projeção de cadastros</small><b>208</b><span class="hint">no custo atual · meta máx. 417</span></div><div class="mini-card good"><small>Melhor dia</small><b>08/11</b><span class="hint">59 cadastros · R$ 22,31</span></div></div>
 </div></section>
 
-<section class="soft"><div class="wrap">
+<section class="soft" id="dia-a-dia"><div class="wrap">
 <div class="section-label">Dia a dia</div>
 <h2>Tráfego dia a dia</h2>
 <p class="lead">Domingo (08/11) foi o melhor dia em volume. A última coluna mostra todas as entradas no grupo, de todas as origens, conforme lançado pelo time; 03/11 concentrou a chamada da Tex com link direto. *09/11 ainda parcial.</p>
 <div class="table-wrap"><table><thead><tr><th>Dia</th><th>Investido c/ imp.</th><th>Impressões</th><th>Cliques</th><th>Visitas</th><th>Cadastros pagos</th><th>No grupo</th><th>Custo/cadastro</th><th>Conv. página</th><th>Cadastro→grupo</th><th>Entradas no grupo (todas)</th></tr></thead><tbody><tr><td>03/11 <small style="color:var(--cinza)">ter</small></td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td>2.820</td></tr><tr><td>04/11 <small style="color:var(--cinza)">qua</small></td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td>345</td></tr><tr><td>05/11 <small style="color:var(--cinza)">qui</small></td><td>R$ 528,54</td><td>7.081</td><td>111</td><td>79</td><td><b>22</b></td><td>18</td><td class="warn">R$ 24,02</td><td>27,8%</td><td>81,8%</td><td>149</td></tr><tr><td>06/11 <small style="color:var(--cinza)">sex</small></td><td>R$ 949,77</td><td>11.075</td><td>168</td><td>115</td><td><b>30</b></td><td>25</td><td class="bad">R$ 31,66</td><td>26,1%</td><td>83,3%</td><td>–</td></tr><tr><td>07/11 <small style="color:var(--cinza)">sáb</small></td><td>R$ 927,48</td><td>11.412</td><td>252</td><td>178</td><td><b>46</b></td><td>39</td><td class="warn">R$ 20,16</td><td>25,8%</td><td>84,8%</td><td>–</td></tr><tr class="hero-row"><td>08/11 <small style="color:var(--cinza)">dom</small></td><td>R$ 1.316,11</td><td>19.958</td><td>445</td><td>293</td><td><b>59</b></td><td>44</td><td class="warn">R$ 22,31</td><td>20,1%</td><td>74,6%</td><td>–</td></tr><tr><td>09/11 <small style="color:var(--cinza)">seg*</small></td><td>R$ 501,40</td><td>8.521</td><td>208</td><td>138</td><td><b>19</b></td><td>14</td><td class="bad">R$ 26,39</td><td>13,8%</td><td>73,7%</td><td>–</td></tr><tr><td>10/11 <small style="color:var(--cinza)">ter · aula</small></td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td>–</td></tr><tr class="hero-row"><td>TOTAL</td><td>R$ 4.223,30</td><td>58.047</td><td>1.184</td><td>803</td><td><b>176</b></td><td>140</td><td class="warn">R$ 24,00</td><td>21,9%</td><td>79,5%</td><td>3.314</td></tr></tbody></table></div>
 </div></section>
 
-<section><div class="wrap">
+<section id="publicos"><div class="wrap">
 <div class="section-label">Públicos</div>
 <h2>Resultado por público</h2>
 <p class="lead">Engajados traz mais volume pelo menor custo. Site e leads usou só metade da verba planejada e custa quase o dobro por cadastro.</p>
 <div class="table-wrap"><table><thead><tr><th>Público</th><th>Verba planejada</th><th>Investido c/ imp.</th><th>Visitas</th><th>Cadastros</th><th>No grupo</th><th>Conv. página</th><th>Custo/cadastro</th><th>Custo/entrada no grupo</th></tr></thead><tbody><tr class="hero-row"><td>Engajados (IG + FB 90D)<div class="bar" style="max-width:180px"><i style="width:90%"></i></div></td><td>50% · R$ 2.500,00</td><td>R$ 2.249,86 <small style="color:var(--cinza)">(90%)</small></td><td>537</td><td><b>106</b></td><td>81</td><td>19,7%</td><td class="warn">R$ 21,23</td><td>R$ 27,78</td></tr><tr><td>Clientes (listas)<div class="bar" style="max-width:180px"><i style="width:82%"></i></div></td><td>30% · R$ 1.500,00</td><td>R$ 1.222,86 <small style="color:var(--cinza)">(82%)</small></td><td>177</td><td><b>56</b></td><td>48</td><td>31,6%</td><td class="warn">R$ 21,84</td><td>R$ 25,48</td></tr><tr><td>Site e leads<div class="bar" style="max-width:180px"><i style="width:50%"></i></div></td><td>20% · R$ 1.000,00</td><td>R$ 498,62 <small style="color:var(--cinza)">(50%)</small></td><td>49</td><td><b>13</b></td><td>10</td><td>26,5%</td><td class="bad">R$ 38,36</td><td>R$ 49,86</td></tr><tr><td>Outros (Lembrete)</td><td>–</td><td>R$ 251,95</td><td>40</td><td>1</td><td>1</td><td>–</td><td class="muted">não é objetivo</td><td>–</td></tr></tbody></table></div>
 </div></section>
 
-<section class="soft"><div class="wrap">
+<section class="soft" id="criativos"><div class="wrap">
 <div class="section-label">Criativos</div>
 <h2>Criativos da captação</h2>
 <p class="lead">Ordenados por cadastros. Os vídeos que entraram em 06/11 já lideram em custo: <b>vídeo R$ 19,15</b> por cadastro (94 cadastros) contra <b>imagem R$ 24,45</b> (81). ADV04 e ADV03 são os únicos dentro da meta com volume.</p>
@@ -157,7 +190,7 @@
 <p style="font-size:13px;color:var(--cinza);margin-top:12px">Custo com menos de 5 cadastros aparece em cinza (amostra pequena). Imagens abrem a pasta das imagens no Drive.</p>
 </div></section>
 
-<section><div class="wrap">
+<section id="apoio"><div class="wrap">
 <div class="section-label">Lembrete e Remarketing</div>
 <h2>Campanhas de apoio</h2>
 <div class="notes">
@@ -174,14 +207,14 @@
 <li>⚠️ LOGO ACABA 19.11 e ENCERRA AMANHÃ 29.11 precisam de data própria.</li></ul></div>
 </div></div></section>
 
-<section class="soft"><div class="wrap">
+<section class="soft" id="audiencia"><div class="wrap">
 <div class="section-label">Audiência e vendas</div>
 <h2>Depois da aula</h2>
 <p class="lead">Mesma estrutura do Consolidado da Sala Secreta. Os cartões são preenchidos depois da aula de 10/11, com a audiência do Zoom e as vendas da Black.</p>
 <div class="kpi-row"><div class="mini-card "><small>Pico de audiência</small><b>—</b><span class="hint">na aula de 10/11</span></div><div class="mini-card "><small>Presença</small><b>—</b><span class="hint">pico ÷ grupo</span></div><div class="mini-card "><small>Vendas da Black</small><b>—</b><span class="hint">quantidade</span></div><div class="mini-card "><small>Receita</small><b>—</b><span class="hint">líquida</span></div><div class="mini-card "><small>ROAS</small><b>—</b><span class="hint">receita ÷ investido</span></div><div class="mini-card "><small>CAC por venda</small><b>—</b><span class="hint">investido ÷ vendas</span></div></div>
 </div></section>
 
-<section><div class="wrap">
+<section id="leitura"><div class="wrap">
 <div class="section-label">Leitura</div>
 <h2>O que os números dizem</h2>
 <div class="notes">
@@ -195,5 +228,14 @@
 <li><b>79,5%</b> de quem se cadastra entra no grupo: a passagem página → WhatsApp funciona.</li></ul></div>
 </div></div></section>
 
+</main></div>
 <footer><div class="brand-mini">BM MÍDIAS</div><div>Black Tex · Marketex · Fonte: <a href="https://docs.google.com/spreadsheets/d/1KSl3UTyrusTkBsxZxFsDGAQybOZl0apiagtMz0MQjyQ/edit" style="color:var(--roxo-light)">[BTEX] Controle de Tráfego | Captação</a> (Meta + cadastros com UTM + grupo) · Lembrete pelo Meta · gerado em 09/11/2026</div></footer>
+<script>
+(function(){var links=[].slice.call(document.querySelectorAll('.toc a[data-id]'));
+var map={};links.forEach(function(a){map[a.dataset.id]=a});
+function act(id){links.forEach(function(a){a.classList.toggle('active',a.dataset.id===id)});var a=map[id];if(a&&window.innerWidth<=900){a.scrollIntoView({block:'nearest',inline:'center'})}}
+var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)act(e.target.id)})},{rootMargin:'-35% 0px -60% 0px'});
+Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)obs.observe(el)});act('extrato');})();
+</script>
+
 </body></html>
