@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Black Tex · Painel da Captação — Brito Mídias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --roxo:#7C3AED; --roxo-dark:#5B21B6; --roxo-deep:#3B0F73; --roxo-light:#A78BFA; --roxo-xlight:#EDE9FE;
+    --preto:#0A0A0A; --ink:#141018; --cinza:#5B5566; --linha:#E7E3EE; --bg:#FFFFFF; --bg-soft:#FAF9FC;
+    --good:#16A34A; --warn:#D97706; --bad:#DC2626;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:'Poppins',-apple-system,sans-serif; font-weight:300; background:var(--bg); color:var(--ink); line-height:1.6; font-size:16px; }
+  a { color:var(--roxo); text-decoration:none; } a:hover{ text-decoration:underline; }
+
+  .hero { background: radial-gradient(1100px 500px at 78% -10%, rgba(124,58,237,.55), transparent 60%), linear-gradient(150deg,#0A0A0A 0%,#17111F 45%,#3B0F73 100%); color:#fff; padding:44px 28px 56px; position:relative; overflow:hidden; }
+  .hero::before { content:""; position:absolute; inset:0; background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px); background-size:44px 44px; mask-image: radial-gradient(ellipse at 50% 30%, black 40%, transparent 80%); pointer-events:none; }
+  .hero-inner { max-width:1100px; margin:0 auto; position:relative; z-index:1; }
+  .brand { display:flex; align-items:center; gap:16px; margin-bottom:32px; }
+  .brand svg { width:44px; height:44px; }
+  .brand .word { display:flex; align-items:center; gap:12px; font-weight:300; color:#fff; }
+  .brand .word b { font-weight:800; font-size:20px; }
+  .brand .word .bar { width:2px; height:28px; background:rgba(255,255,255,.55); }
+  .brand .word span { font-size:18px; letter-spacing:.22em; }
+  .hero .eyebrow { color:var(--roxo-light); font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; margin-bottom:12px; }
+  .hero h1 { font-size:42px; font-weight:800; letter-spacing:-.02em; margin:0 0 8px; color:#fff; line-height:1.1; }
+  .hero .sub { font-size:15px; color:rgba(255,255,255,.65); margin-bottom:24px; }
+  .hero .pills { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+  .hero .pill { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); color:#fff; padding:8px 16px; border-radius:100px; font-size:12px; font-weight:600; letter-spacing:.06em; }
+  .hero .pill.solid { background:linear-gradient(90deg,var(--roxo),var(--roxo-dark)); border-color:transparent; }
+
+  .wrap { max-width:1100px; margin:0 auto; padding:0 28px; }
+  section { padding:56px 0; } section.soft { background:var(--bg-soft); }
+
+  .section-label { display:flex; align-items:center; gap:12px; font-size:13px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--roxo); margin-bottom:12px; }
+  .section-label::before { content:""; width:34px; height:2px; background:var(--roxo); border-radius:2px; }
+  h2 { font-size:30px; font-weight:700; letter-spacing:-.01em; margin:0 0 8px; color:var(--ink); }
+  .lead { color:var(--cinza); font-size:15.5px; margin:0 0 32px; max-width:780px; }
+
+  .months { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin-bottom:20px; }
+  @media (max-width:1000px){ .months{grid-template-columns:repeat(3,1fr);} }
+  @media (max-width:640px){ .months{grid-template-columns:1fr 1fr;} }
+  .month-card { border:1px solid var(--linha); border-radius:16px; padding:22px; background:#fff; position:relative; }
+  .month-card.current { border-color:var(--roxo); background:linear-gradient(180deg,#fff,var(--roxo-xlight) 200%); box-shadow:0 8px 24px rgba(124,58,237,.08); }
+  .month-card .m-head { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:16px; }
+  .month-card .m-name { font-weight:700; font-size:16px; color:var(--ink); }
+  .month-card .m-status { font-size:11px; color:var(--cinza); letter-spacing:.06em; text-transform:uppercase; }
+  .month-card .m-status.parcial { color:var(--roxo); font-weight:600; }
+  .month-card .m-kpi { margin-bottom:12px; } .month-card .m-kpi:last-child{margin-bottom:0;}
+  .month-card .m-kpi .k-lbl { font-size:11px; color:var(--cinza); text-transform:uppercase; letter-spacing:.1em; margin-bottom:2px; }
+  .month-card .m-kpi .k-val { font-size:22px; font-weight:700; color:var(--ink); }
+  .month-card .m-kpi .k-val.roxo { color:var(--roxo); }
+
+  .week-row { display:grid; grid-template-columns:140px 1fr 1fr 1fr 1fr 1fr; gap:0; align-items:center; background:#fff; border:1px solid var(--linha); border-radius:14px; padding:20px 24px; margin-bottom:12px; }
+  .week-row.win { border-color:var(--roxo-light); background:linear-gradient(90deg,var(--roxo-xlight) 0%,#fff 40%); }
+  .week-row.alert { border-color:#FDE68A; background:linear-gradient(90deg,#FFFBEB 0%,#fff 40%); }
+  .week-row .wr-date { font-weight:700; font-size:15px; color:var(--roxo); }
+  .week-row .wr-date .wr-tag { display:block; font-size:10px; color:var(--cinza); text-transform:uppercase; letter-spacing:.1em; margin-top:2px; font-weight:500; }
+  .week-row .wr-kpi { padding:0 12px; border-left:1px solid var(--linha); }
+  .week-row .wr-kpi small { display:block; font-size:10.5px; color:var(--cinza); text-transform:uppercase; letter-spacing:.1em; margin-bottom:4px; font-weight:500; }
+  .week-row .wr-kpi b { display:block; font-size:17px; font-weight:700; color:var(--ink); }
+  .week-row .wr-kpi b.roxo{color:var(--roxo);} .week-row .wr-kpi b.good{color:var(--good);} .week-row .wr-kpi b.bad{color:var(--bad);}
+  @media (max-width:900px){ .week-row{grid-template-columns:1fr 1fr 1fr;gap:12px;} .week-row .wr-date{grid-column:1/-1;padding-bottom:8px;border-bottom:1px solid var(--linha);margin-bottom:8px;} .week-row .wr-kpi{border-left:none;padding:0;} }
+
+  .kpi-row { display:grid; grid-template-columns:repeat(6,1fr); gap:12px; }
+  @media (max-width:900px){ .kpi-row{grid-template-columns:repeat(3,1fr);} }
+  @media (max-width:560px){ .kpi-row{grid-template-columns:1fr 1fr;} }
+  .mini-card { border:1px solid var(--linha); border-radius:14px; padding:16px 18px; background:var(--bg-soft); }
+  .mini-card small { color:var(--roxo); font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; display:block; margin-bottom:4px; }
+  .mini-card b { font-size:20px; font-weight:700; display:block; color:var(--ink); }
+  .mini-card .hint { font-size:11px; color:var(--cinza); margin-top:4px; display:block; }
+
+  .table-wrap { overflow-x:auto; border:1px solid var(--linha); border-radius:16px; background:#fff; }
+  table { width:100%; border-collapse:collapse; font-size:14px; min-width:560px; }
+  thead th { background:var(--bg-soft); color:var(--cinza); font-weight:600; text-transform:uppercase; font-size:11px; letter-spacing:.1em; padding:14px; text-align:right; border-bottom:1px solid var(--linha); }
+  thead th:first-child { text-align:left; }
+  tbody td { padding:14px; text-align:right; border-bottom:1px solid var(--linha); font-weight:400; }
+  tbody td:first-child { text-align:left; font-weight:500; color:var(--ink); }
+  tbody tr:last-child td { border-bottom:none; }
+  tbody tr.hero-row td { background:var(--roxo-xlight); }
+  tbody tr.hero-row td:first-child { color:var(--roxo-dark); font-weight:700; }
+  .good{color:var(--good);font-weight:600;} .bad{color:var(--bad);font-weight:600;} .warn{color:var(--warn);font-weight:600;}
+
+  .notes { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:900px){ .notes{grid-template-columns:1fr;} }
+  .note-card { border:1px solid var(--linha); border-radius:16px; padding:24px; background:#fff; }
+  .note-card.roxo { border-color:var(--roxo-light); background:linear-gradient(180deg,#fff,var(--roxo-xlight) 400%); }
+  .note-card h3 { font-size:17px; font-weight:700; margin:0 0 12px; color:var(--ink); }
+  .note-card p { color:var(--cinza); font-size:14px; margin:8px 0; }
+  .note-card ul { margin:8px 0 0; padding-left:20px; color:var(--cinza); font-size:14px; }
+  .note-card li { margin-bottom:8px; }
+  .note-card b,.note-card strong { color:var(--ink); font-weight:600; }
+
+  footer { background:var(--ink); color:rgba(255,255,255,.65); padding:32px 28px; text-align:center; font-size:13px; }
+  footer .brand-mini { display:inline-flex; align-items:center; gap:10px; margin-bottom:8px; color:#fff; font-weight:500; }
+
+  .kpi-row{margin-bottom:12px}
+  .mini-card.bad b{color:var(--bad)} .mini-card.good b{color:var(--good)} .mini-card.roxo b{color:var(--roxo)}
+  .grp-title{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--cinza);margin:22px 0 10px}
+  .bar{height:8px;border-radius:8px;background:var(--linha);overflow:hidden;margin-top:6px}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--roxo),var(--roxo-dark))}
+  .tag{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.06em;padding:2px 8px;border-radius:100px;background:var(--roxo-xlight);color:var(--roxo-dark);margin-left:6px;vertical-align:middle}
+  .tag.img{background:#F1F5F9;color:#334155}
+  .placeholder{border:1px dashed var(--roxo-light);border-radius:16px;padding:22px;background:#fff;color:var(--cinza)}
+  td.muted{color:#A8A2B3}
+  .note-card.bad{border-color:#FECACA;background:linear-gradient(180deg,#fff,#FEF2F2 400%)}
+  .note-card.good{border-color:#BBF7D0;background:linear-gradient(180deg,#fff,#F0FDF4 400%)}
+</style></head><body>
+<header class="hero"><div class="hero-inner">
+<div class="brand"><svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+        <polygon points="50,33 65,59 35,59"></polygon>
+        <line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line>
+        <line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line>
+        <line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line>
+        <line x1="10" y1="27" x2="50" y2="33"></line>
+      </svg><span class="word"><b>BM</b><i class="bar"></i><span>MÍDIAS</span></span></div>
+<div class="eyebrow">Black Tex · Tráfego Pago · Marketex</div>
+<h1>Painel da Captação</h1>
+<div class="sub">Grupo de WhatsApp para a aula ao vivo de 10/11 às 10h · tráfego pago desde 05/11 · dados até 09/11 (parcial)</div>
+<div class="pills">
+<span class="pill solid">176 cadastros pagos · 70% da meta mínima</span>
+<span class="pill">Custo por cadastro R$ 24,00 (meta R$ 12–20)</span>
+<span class="pill">84,5% da verba usada</span>
+<span class="pill">Vídeo mais barato que imagem</span>
+</div></div></header>
+
+<section><div class="wrap">
+<div class="section-label">Extrato do período</div>
+<h2>Resultado geral da captação</h2>
+<p class="lead">Todos os custos estão com imposto. <b>Cadastros pagos</b> são os cadastros da página com UTM do tráfego; <b>leads no pixel</b> ficam só como conferência do Meta.</p>
+<div class="grp-title">🚀 Tráfego pago</div><div class="kpi-row"><div class="mini-card "><small>Investido c/ imposto</small><b>R$ 4.223</b><span class="hint">de R$ 5.000 · 84,5% usado</span></div><div class="mini-card roxo"><small>Cadastros pagos</small><b>176</b><span class="hint">meta mínima 250 · 70%</span></div><div class="mini-card bad"><small>Custo por cadastro</small><b>R$ 24,00</b><span class="hint">meta R$ 12 a R$ 20</span></div><div class="mini-card "><small>Conversão da página</small><b>21,9%</b><span class="hint">cadastros ÷ visitas</span></div><div class="mini-card "><small>Entraram no grupo</small><b>140</b><span class="hint">79,5% dos cadastros pagos</span></div><div class="mini-card "><small>Custo por entrada no grupo</small><b>R$ 30,17</b><span class="hint">investido ÷ entradas pagas</span></div></div>
+<div class="grp-title">👥 Grupo e funil</div><div class="kpi-row"><div class="mini-card "><small>Pessoas no grupo</small><b>3.314</b><span class="hint">todas as origens</span></div><div class="mini-card "><small>Vindas do pago</small><b>4,2%</b><span class="hint">140 de 3.314 entradas</span></div><div class="mini-card "><small>Leads no pixel</small><b>298</b><span class="hint">conferência do Meta</span></div><div class="mini-card "><small>CPM</small><b>R$ 72,76</b><span class="hint">custo por mil impressões</span></div><div class="mini-card "><small>CTR no link</small><b>2,0%</b><span class="hint">cliques ÷ impressões</span></div><div class="mini-card "><small>Custo por visita</small><b>R$ 5,26</b><span class="hint">por visualização de página</span></div></div>
+<div class="grp-title">💰 Verba e ritmo</div><div class="kpi-row"><div class="mini-card "><small>Verba restante</small><b>R$ 776,70</b><span class="hint">com imposto</span></div><div class="mini-card "><small>Dias restantes</small><b>2</b><span class="hint">09/11 e 10/11 (até a aula)</span></div><div class="mini-card "><small>Gasto/dia necessário</small><b>R$ 388,35</b><span class="hint">para usar a verba toda</span></div><div class="mini-card "><small>Gasto médio/dia</small><b>R$ 844,66</b><span class="hint">dias com investimento</span></div><div class="mini-card "><small>Projeção de cadastros</small><b>208</b><span class="hint">no custo atual · meta máx. 417</span></div><div class="mini-card good"><small>Melhor dia</small><b>08/11</b><span class="hint">59 cadastros · R$ 22,31</span></div></div>
+</div></section>
+
+<section class="soft"><div class="wrap">
+<div class="section-label">Dia a dia</div>
+<h2>Tráfego dia a dia</h2>
+<p class="lead">Domingo (08/11) foi o melhor dia em volume. A última coluna mostra todas as entradas no grupo, de todas as origens, conforme lançado pelo time; 03/11 concentrou a chamada da Tex com link direto. *09/11 ainda parcial.</p>
+<div class="table-wrap"><table><thead><tr><th>Dia</th><th>Investido c/ imp.</th><th>Impressões</th><th>Cliques</th><th>Visitas</th><th>Cadastros pagos</th><th>No grupo</th><th>Custo/cadastro</th><th>Conv. página</th><th>Cadastro→grupo</th><th>Entradas no grupo (todas)</th></tr></thead><tbody><tr><td>03/11 <small style="color:var(--cinza)">ter</small></td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td>2.820</td></tr><tr><td>04/11 <small style="color:var(--cinza)">qua</small></td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td>345</td></tr><tr><td>05/11 <small style="color:var(--cinza)">qui</small></td><td>R$ 528,54</td><td>7.081</td><td>111</td><td>79</td><td><b>22</b></td><td>18</td><td class="warn">R$ 24,02</td><td>27,8%</td><td>81,8%</td><td>149</td></tr><tr><td>06/11 <small style="color:var(--cinza)">sex</small></td><td>R$ 949,77</td><td>11.075</td><td>168</td><td>115</td><td><b>30</b></td><td>25</td><td class="bad">R$ 31,66</td><td>26,1%</td><td>83,3%</td><td>–</td></tr><tr><td>07/11 <small style="color:var(--cinza)">sáb</small></td><td>R$ 927,48</td><td>11.412</td><td>252</td><td>178</td><td><b>46</b></td><td>39</td><td class="warn">R$ 20,16</td><td>25,8%</td><td>84,8%</td><td>–</td></tr><tr class="hero-row"><td>08/11 <small style="color:var(--cinza)">dom</small></td><td>R$ 1.316,11</td><td>19.958</td><td>445</td><td>293</td><td><b>59</b></td><td>44</td><td class="warn">R$ 22,31</td><td>20,1%</td><td>74,6%</td><td>–</td></tr><tr><td>09/11 <small style="color:var(--cinza)">seg*</small></td><td>R$ 501,40</td><td>8.521</td><td>208</td><td>138</td><td><b>19</b></td><td>14</td><td class="bad">R$ 26,39</td><td>13,8%</td><td>73,7%</td><td>–</td></tr><tr><td>10/11 <small style="color:var(--cinza)">ter · aula</small></td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td class="muted">–</td><td>–</td></tr><tr class="hero-row"><td>TOTAL</td><td>R$ 4.223,30</td><td>58.047</td><td>1.184</td><td>803</td><td><b>176</b></td><td>140</td><td class="warn">R$ 24,00</td><td>21,9%</td><td>79,5%</td><td>3.314</td></tr></tbody></table></div>
+</div></section>
+
+<section><div class="wrap">
+<div class="section-label">Públicos</div>
+<h2>Resultado por público</h2>
+<p class="lead">Engajados traz mais volume pelo menor custo. Site e leads usou só metade da verba planejada e custa quase o dobro por cadastro.</p>
+<div class="table-wrap"><table><thead><tr><th>Público</th><th>Verba planejada</th><th>Investido c/ imp.</th><th>Visitas</th><th>Cadastros</th><th>No grupo</th><th>Conv. página</th><th>Custo/cadastro</th><th>Custo/entrada no grupo</th></tr></thead><tbody><tr class="hero-row"><td>Engajados (IG + FB 90D)<div class="bar" style="max-width:180px"><i style="width:90%"></i></div></td><td>50% · R$ 2.500,00</td><td>R$ 2.249,86 <small style="color:var(--cinza)">(90%)</small></td><td>537</td><td><b>106</b></td><td>81</td><td>19,7%</td><td class="warn">R$ 21,23</td><td>R$ 27,78</td></tr><tr><td>Clientes (listas)<div class="bar" style="max-width:180px"><i style="width:82%"></i></div></td><td>30% · R$ 1.500,00</td><td>R$ 1.222,86 <small style="color:var(--cinza)">(82%)</small></td><td>177</td><td><b>56</b></td><td>48</td><td>31,6%</td><td class="warn">R$ 21,84</td><td>R$ 25,48</td></tr><tr><td>Site e leads<div class="bar" style="max-width:180px"><i style="width:50%"></i></div></td><td>20% · R$ 1.000,00</td><td>R$ 498,62 <small style="color:var(--cinza)">(50%)</small></td><td>49</td><td><b>13</b></td><td>10</td><td>26,5%</td><td class="bad">R$ 38,36</td><td>R$ 49,86</td></tr><tr><td>Outros (Lembrete)</td><td>–</td><td>R$ 251,95</td><td>40</td><td>1</td><td>1</td><td>–</td><td class="muted">não é objetivo</td><td>–</td></tr></tbody></table></div>
+</div></section>
+
+<section class="soft"><div class="wrap">
+<div class="section-label">Criativos</div>
+<h2>Criativos da captação</h2>
+<p class="lead">Ordenados por cadastros. Os vídeos que entraram em 06/11 já lideram em custo: <b>vídeo R$ 19,15</b> por cadastro (94 cadastros) contra <b>imagem R$ 24,45</b> (81). ADV04 e ADV03 são os únicos dentro da meta com volume.</p>
+<div class="table-wrap"><table><thead><tr><th>Criativo</th><th>Investido c/ imp.</th><th>Visitas</th><th>Cadastros</th><th>No grupo</th><th>Conv. página</th><th>Custo/cadastro</th><th>Custo/entrada no grupo</th></tr></thead><tbody><tr class="hero-row"><td><a href="https://drive.google.com/file/d/1x-4W4HSXhhG510c_A5XuMqZxC-Gtq5v-/view" target="_blank">ADV04_BTEX_CAPT_FOTOS EM MINUTOS_0.29</a><span class="tag">vídeo</span></td><td>R$ 869,14</td><td>141</td><td><b>48</b></td><td>38</td><td>34,0%</td><td class="good">R$ 18,11</td><td>R$ 22,87</td></tr><tr class="hero-row"><td><a href="https://drive.google.com/drive/folders/17fJxzlt25oVdDTIoiJyInVe1r-8w7ZY_" target="_blank">ADI15_BTEX_CAPT_VOCE JA ME VIU USANDO IA</a><span class="tag img">imagem</span></td><td>R$ 1.080,11</td><td>138</td><td><b>43</b></td><td>33</td><td>31,2%</td><td class="bad">R$ 25,12</td><td>R$ 32,73</td></tr><tr class="hero-row"><td><a href="https://drive.google.com/file/d/1eA_5EtvgNTSQUF3WGXwElfACGA-rjQUy/view" target="_blank">ADV03_BTEX_CAPT_TRABALHANDO DA PRAIA_0.57</a><span class="tag">vídeo</span></td><td>R$ 686,32</td><td>118</td><td><b>40</b></td><td>31</td><td>33,9%</td><td class="good">R$ 17,16</td><td>R$ 22,14</td></tr><tr><td><a href="https://drive.google.com/drive/folders/17fJxzlt25oVdDTIoiJyInVe1r-8w7ZY_" target="_blank">ADI04_BTEX_CAPT_VOCE JA VIU O QUE EU FACO COM IA</a><span class="tag img">imagem</span></td><td>R$ 480,45</td><td>67</td><td><b>16</b></td><td>14</td><td>23,9%</td><td class="bad">R$ 30,03</td><td>R$ 34,32</td></tr><tr><td><a href="https://drive.google.com/drive/folders/17fJxzlt25oVdDTIoiJyInVe1r-8w7ZY_" target="_blank">ADI01_BTEX_CAPT_VOCE JA ME ACOMPANHA</a><span class="tag img">imagem</span></td><td>R$ 327,55</td><td>45</td><td><b>13</b></td><td>9</td><td>28,9%</td><td class="bad">R$ 25,20</td><td>R$ 36,39</td></tr><tr><td><a href="https://drive.google.com/drive/folders/17fJxzlt25oVdDTIoiJyInVe1r-8w7ZY_" target="_blank">ADI06_BTEX_CAPT_VAMOS PREPARAR SEU NEGOCIO PARA 2027</a><span class="tag img">imagem</span></td><td>R$ 92,38</td><td>27</td><td><b>9</b></td><td>8</td><td>33,3%</td><td class="good">R$ 10,26</td><td>R$ 11,55</td></tr><tr><td><a href="https://drive.google.com/file/d/1qT_oZkdoN27EESPfWdYo6gyF0AzXq6Ye/view" target="_blank">ADV05_BTEX_CAPT_FONTES DE LUCRO ONLINE_1.18</a><span class="tag">vídeo</span></td><td>R$ 82,79</td><td>8</td><td><b>3</b></td><td>3</td><td>37,5%</td><td class="muted">R$ 27,60</td><td>R$ 27,60</td></tr><tr><td><a href="https://drive.google.com/file/d/1LmbuJXoOBsR6wxtF1vEhYDpcuWcGkUEH/view" target="_blank">ADV01_BTEX_CAPT_MINHA BLACK FRIDAY TA AI_0.50</a><span class="tag">vídeo</span></td><td>R$ 98,16</td><td>16</td><td><b>2</b></td><td>2</td><td>12,5%</td><td class="muted">R$ 49,08</td><td>R$ 49,08</td></tr><tr><td><a href="https://drive.google.com/file/d/1GjiBiMXabeLpVEbudIHGlZi9MWC0fXgV/view" target="_blank">ADV02_BTEX_CAPT_FORMACOES DA BLACK_0.30</a><span class="tag">vídeo</span></td><td>R$ 63,52</td><td>13</td><td><b>1</b></td><td>1</td><td>7,7%</td><td class="muted">R$ 63,52</td><td>R$ 63,52</td></tr></tbody></table></div>
+<p style="font-size:13px;color:var(--cinza);margin-top:12px">Custo com menos de 5 cadastros aparece em cinza (amostra pequena). Imagens abrem a pasta das imagens no Drive.</p>
+</div></section>
+
+<section><div class="wrap">
+<div class="section-label">Lembrete e Remarketing</div>
+<h2>Campanhas de apoio</h2>
+<div class="notes">
+<div class="note-card roxo"><h3>🔔 Lembrete · no ar até 10/11 às 10h</h3>
+<p><b>[02] Tráfego</b> e <b>[03] Interações</b>, públicos Envolvidos Black Tex e Engajamento 30D.</p>
+<ul><li><b>R$ 442,89</b> investidos com imposto · 17.600 impressões · 427 cliques · 230 visitas na página.</li>
+<li>FONTES DE LUCRO DIGITAIS: 236 cliques a R$ 0,89 · ERA DAS CAVERNAS: 147 cliques a R$ 1,33.</li>
+<li>"É amanhã" rodando hoje em 4 conjuntos próprios, só em 09/11.</li>
+<li>Objetivo é lembrar quem já conhece a Black, não gerar cadastro.</li></ul></div>
+<div class="note-card"><h3>🛒 Remarketing · começa 10/11 às 11h</h3>
+<p><b>[04] Vendas</b>, otimizado para Compra, R$ 50/dia em cada um dos 2 conjuntos (Envolvidos Black Tex e Engajamento 90D) até 30/11.</p>
+<ul><li>6 vídeos, incluindo CONTRATAR MAIS GENTE, OFERTA MUITO ESPECIAL e VAI ACABAR.</li>
+<li>⚠️ Falta o link da oferta: hoje aponta para a página do grupo.</li>
+<li>⚠️ LOGO ACABA 19.11 e ENCERRA AMANHÃ 29.11 precisam de data própria.</li></ul></div>
+</div></div></section>
+
+<section class="soft"><div class="wrap">
+<div class="section-label">Audiência e vendas</div>
+<h2>Depois da aula</h2>
+<p class="lead">Mesma estrutura do Consolidado da Sala Secreta. Os cartões são preenchidos depois da aula de 10/11, com a audiência do Zoom e as vendas da Black.</p>
+<div class="kpi-row"><div class="mini-card "><small>Pico de audiência</small><b>—</b><span class="hint">na aula de 10/11</span></div><div class="mini-card "><small>Presença</small><b>—</b><span class="hint">pico ÷ grupo</span></div><div class="mini-card "><small>Vendas da Black</small><b>—</b><span class="hint">quantidade</span></div><div class="mini-card "><small>Receita</small><b>—</b><span class="hint">líquida</span></div><div class="mini-card "><small>ROAS</small><b>—</b><span class="hint">receita ÷ investido</span></div><div class="mini-card "><small>CAC por venda</small><b>—</b><span class="hint">investido ÷ vendas</span></div></div>
+</div></section>
+
+<section><div class="wrap">
+<div class="section-label">Leitura</div>
+<h2>O que os números dizem</h2>
+<div class="notes">
+<div class="note-card bad"><h3>🔴 Atenção</h3><ul>
+<li><b>Custo por cadastro em R$ 24,00</b>, acima do teto de R$ 20. A projeção é fechar com cerca de 208 cadastros, abaixo da meta mínima de 250.</li>
+<li><b>Site e leads</b> custa R$ 38,36 por cadastro, quase o dobro de Engajados.</li>
+<li>Só 4,2% das pessoas do grupo vieram do pago: quase todo o grupo veio do orgânico.</li></ul></div>
+<div class="note-card good"><h3>🟢 Funcionando</h3><ul>
+<li><b>Vídeos</b> ADV04 (R$ 18,11) e ADV03 (R$ 17,16) são os únicos dentro da meta com volume.</li>
+<li><b>Engajados</b> concentra 60% dos cadastros, a R$ 21,22.</li>
+<li><b>79,5%</b> de quem se cadastra entra no grupo: a passagem página → WhatsApp funciona.</li></ul></div>
+</div></div></section>
+
+<footer><div class="brand-mini">BM MÍDIAS</div><div>Black Tex · Marketex · Fonte: <a href="https://docs.google.com/spreadsheets/d/1KSl3UTyrusTkBsxZxFsDGAQybOZl0apiagtMz0MQjyQ/edit" style="color:var(--roxo-light)">[BTEX] Controle de Tráfego | Captação</a> (Meta + cadastros com UTM + grupo) · Lembrete pelo Meta · gerado em 09/11/2026</div></footer>
+</body></html>
