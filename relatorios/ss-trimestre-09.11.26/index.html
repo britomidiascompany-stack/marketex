@@ -115,6 +115,36 @@ ol.acoes span{color:var(--cinza);font-size:14.5px}
 footer{background:var(--ink);color:rgba(255,255,255,.7);padding-block:30px;text-align:center;font-size:13px}
 footer .brand-mini{display:inline-flex;align-items:center;gap:10px;margin-bottom:6px;color:#fff;font-weight:500}
 
+
+/* sumário lateral */
+.sumario{background:var(--ink);color:#fff;z-index:15}
+.sumario .sm-brand,.sumario .sm-tit,.sumario .sm-rod{display:none}
+.sumario ol{list-style:none;margin:0;padding:0;display:flex;gap:4px}
+.sumario a{display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.72);padding:8px 12px;border-radius:10px;font-size:13.5px;font-weight:400;white-space:nowrap;text-decoration:none;border-left:3px solid transparent}
+.sumario a:hover{background:rgba(255,255,255,.07);color:#fff;text-decoration:none}
+.sumario a.ativo{background:rgba(124,58,237,.28);color:#fff;font-weight:600;border-left-color:var(--roxo-light)}
+@media (max-width:1179px){
+  body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:16;background:var(--ink)}
+  .sumario{position:sticky;top:env(safe-area-inset-top,0px);overflow-x:auto;padding:8px max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px));scrollbar-width:none}
+  .sumario::-webkit-scrollbar{display:none}
+  .sumario a{border-left:none;padding:7px 12px}
+  section,header{scroll-margin-top:56px}
+}
+@media (min-width:1180px){
+  body{padding-left:248px}
+  .sumario{position:fixed;top:0;left:0;bottom:0;width:248px;display:flex;flex-direction:column;gap:18px;padding:calc(26px + env(safe-area-inset-top,0px)) 16px calc(20px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));overflow-y:auto;border-right:1px solid rgba(255,255,255,.08)}
+  .sumario .sm-brand{display:flex;align-items:center;gap:10px;padding:0 12px;color:#fff}
+  .sumario .sm-brand svg{width:26px;height:26px}
+  .sumario .sm-brand b{font-weight:800}
+  .sumario .sm-brand span{letter-spacing:.2em;font-weight:300;font-size:13px}
+  .sumario .sm-tit{display:block;padding:0 12px;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--roxo-light)}
+  .sumario ol{flex-direction:column;gap:2px}
+  .sumario .sm-rod{display:block;margin-top:auto;padding:0 12px;font-size:11.5px;color:rgba(255,255,255,.5);line-height:1.5}
+}
+body.ap{padding-left:0}
+body.ap .sumario{display:none}
+body.ap::before{display:none}
+
 /* modo apresentação */
 .navap{display:none}
 body.ap .slide{display:none}
@@ -130,7 +160,13 @@ body.ap .navap{display:flex;position:fixed;left:0;right:0;bottom:0;justify-conte
 <body>
 
 
-<header class="hero slide">
+<nav class="sumario" id="sumario" aria-label="Sumário do relatório">
+  <div class="sm-brand"><svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon><polygon points="50,33 65,59 35,59"></polygon></svg><span><b>BM</b> MÍDIAS</span></div>
+  <div class="sm-tit">Sumário</div>
+  <ol><li><a href="#topo" data-alvo="topo">Início</a></li><li><a href="#resumo" data-alvo="resumo">Resumo</a></li><li><a href="#dias" data-alvo="dias">Últimos dias</a></li><li><a href="#d30" data-alvo="d30">30 × 30 dias</a></li><li><a href="#d7" data-alvo="d7">7 × 7 dias</a></li><li><a href="#criativos" data-alvo="criativos">Melhores criativos</a></li><li><a href="#paginas" data-alvo="paginas">Páginas</a></li><li><a href="#origem" data-alvo="origem">Origem dos cadastros</a></li><li><a href="#melhorar" data-alvo="melhorar">O que melhorar</a></li><li><a href="#fontes" data-alvo="fontes">Fontes e critérios</a></li></ol>
+  <div class="sm-rod">Sala Secreta · Marketex<br>Dados até 08/11/2026</div>
+</nav>
+<header id="topo" class="hero slide">
   <div class="wrap">
     <div class="brand">
       <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias">
@@ -157,7 +193,7 @@ body.ap .navap{display:flex;position:fixed;left:0;right:0;bottom:0;justify-conte
 </header>
 
 <!-- RESUMO -->
-<section class="slide">
+<section id="resumo" class="slide">
 <div class="wrap">
   <div class="section-label">Resumo</div>
   <h2>O custo por entrada no grupo caiu 15% na última semana</h2>
@@ -185,7 +221,7 @@ body.ap .navap{display:flex;position:fixed;left:0;right:0;bottom:0;justify-conte
 </section>
 
 <!-- ÚLTIMOS DIAS -->
-<section class="slide soft">
+<section id="dias" class="slide soft">
 <div class="wrap">
   <div class="section-label">Últimos dias</div>
   <h2>Depois do pico de 27/10, o custo ficou abaixo de R$ 4 na maior parte dos dias</h2>
@@ -200,7 +236,7 @@ body.ap .navap{display:flex;position:fixed;left:0;right:0;bottom:0;justify-conte
 </section>
 
 <!-- 30 x 30 -->
-<section class="slide">
+<section id="d30" class="slide">
 <div class="wrap">
   <div class="section-label">30 dias × 30 anteriores</div>
   <h2>O custo por cadastro ficou igual, e o volume total subiu com o orgânico</h2>
@@ -230,7 +266,7 @@ body.ap .navap{display:flex;position:fixed;left:0;right:0;bottom:0;justify-conte
 </section>
 
 <!-- 7 x 7 -->
-<section class="slide soft">
+<section id="d7" class="slide soft">
 <div class="wrap">
   <div class="section-label">7 dias × 7 anteriores</div>
   <h2>O que mudou na última semana</h2>
@@ -258,7 +294,7 @@ body.ap .navap{display:flex;position:fixed;left:0;right:0;bottom:0;justify-conte
 </section>
 
 <!-- CRIATIVOS -->
-<section class="slide">
+<section id="criativos" class="slide">
 <div class="wrap">
   <div class="section-label">Criativos</div>
   <h2>ADV39 é o criativo mais barato. ADV14 segue o mais forte em volume.</h2>
@@ -284,7 +320,7 @@ body.ap .navap{display:flex;position:fixed;left:0;right:0;bottom:0;justify-conte
 </section>
 
 <!-- PÁGINAS -->
-<section class="slide soft">
+<section id="paginas" class="slide soft">
 <div class="wrap">
   <div class="section-label">Páginas</div>
   <h2>Página C lidera na semana. Página A é a mais consistente em 30 dias.</h2>
@@ -310,7 +346,7 @@ body.ap .navap{display:flex;position:fixed;left:0;right:0;bottom:0;justify-conte
 </section>
 
 <!-- ORIGEM -->
-<section class="slide">
+<section id="origem" class="slide">
 <div class="wrap">
   <div class="section-label">Origem dos cadastros</div>
   <h2>O orgânico já é 40% dos cadastros em 30 dias, mas perdeu força na última semana</h2>
@@ -323,7 +359,7 @@ body.ap .navap{display:flex;position:fixed;left:0;right:0;bottom:0;justify-conte
 </section>
 
 <!-- RECOMENDAÇÕES -->
-<section class="slide soft">
+<section id="melhorar" class="slide soft">
 <div class="wrap">
   <div class="section-label">O que melhorar</div>
   <h2>Próximos passos</h2>
@@ -341,7 +377,7 @@ body.ap .navap{display:flex;position:fixed;left:0;right:0;bottom:0;justify-conte
 </section>
 
 <!-- FONTES -->
-<section class="slide">
+<section id="fontes" class="slide">
 <div class="wrap">
   <div class="section-label">Fontes e critérios</div>
   <h2>Como os números foram calculados</h2>
@@ -383,6 +419,19 @@ body.ap .navap{display:flex;position:fixed;left:0;right:0;bottom:0;justify-conte
   function sai(){var alvo=slides[i];document.body.classList.remove('ap');
     try{if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(function(){});}catch(e){}
     alvo.scrollIntoView({block:'start'});}
+
+  // sumário: rolagem suave e item ativo
+  var links=[].slice.call(document.querySelectorAll('#sumario a'));
+  var reduz=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function ativa(id){links.forEach(function(a){var on=a.getAttribute('data-alvo')===id;a.classList.toggle('ativo',on);
+    if(on&&window.innerWidth<1180&&a.scrollIntoView){try{a.scrollIntoView({block:'nearest',inline:'center'});}catch(e){}}});}
+  links.forEach(function(a){a.addEventListener('click',function(e){var alvo=document.getElementById(a.getAttribute('data-alvo'));
+    if(!alvo)return;e.preventDefault();alvo.scrollIntoView({behavior:reduz?'auto':'smooth',block:'start'});ativa(alvo.id);});});
+  if('IntersectionObserver' in window){
+    var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting)ativa(en.target.id);});},{rootMargin:'-35% 0px -60% 0px'});
+    links.forEach(function(a){var el=document.getElementById(a.getAttribute('data-alvo'));if(el)obs.observe(el);});
+  }
+  ativa('topo');
   document.getElementById('btn-ap').onclick=entra;
   document.getElementById('ap-sair').onclick=sai;
   document.getElementById('ap-ant').onclick=function(){mostra(i-1);};
