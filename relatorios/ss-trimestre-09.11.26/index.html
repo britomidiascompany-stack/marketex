@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sala Secreta · Relatório 09.11.26</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Layout: identidade Brito Mídias — hero escuro, seções claras alternadas, rodapé escuro. Visual único (claro), cores explícitas. */
+:root{
+  --roxo:#7C3AED; --roxo-dark:#5B21B6; --roxo-deep:#3B0F73; --roxo-light:#A78BFA; --roxo-xlight:#EDE9FE;
+  --preto:#0A0A0A; --ink:#141018; --cinza:#5B5566; --linha:#E7E3EE; --bg:#FFFFFF; --bg-soft:#FAF9FC;
+  --good:#16A34A; --warn:#D97706; --bad:#DC2626;
+  --font:'Poppins',-apple-system,'Segoe UI',sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{margin:0;font-family:var(--font);font-weight:300;color:var(--ink);line-height:1.6;font-size:16px}
+a{color:var(--roxo);text-decoration:none} a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:3px solid var(--roxo-light);outline-offset:2px}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media (min-width:700px){.wrap{padding-left:max(28px,env(safe-area-inset-left,0px));padding-right:max(28px,env(safe-area-inset-right,0px))}}
+
+.hero{background:radial-gradient(1100px 500px at 78% -10%,rgba(124,58,237,.55),transparent 60%),linear-gradient(150deg,#0A0A0A 0%,#17111F 45%,#3B0F73 100%);color:#fff;padding-block:40px 52px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(ellipse at 50% 30%,black 40%,transparent 80%);mask-image:radial-gradient(ellipse at 50% 30%,black 40%,transparent 80%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1}
+.brand{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+.brand svg{width:44px;height:44px;flex:none}
+.brand .word{display:flex;align-items:center;gap:12px;color:#fff}
+.brand .word b{font-weight:800;font-size:20px}
+.brand .word .bar{width:2px;height:28px;background:rgba(255,255,255,.55)}
+.brand .word span{font-size:18px;letter-spacing:.22em;font-weight:300}
+.eyebrow{color:var(--roxo-light);font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px}
+.hero h1{font-size:clamp(30px,5vw,44px);font-weight:800;letter-spacing:-.02em;margin:0 0 8px;color:#fff;line-height:1.1;text-wrap:balance}
+.hero .sub{font-size:15px;color:rgba(255,255,255,.7);max-width:62ch}
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:#fff;padding:8px 16px;border-radius:100px;font-size:12.5px;font-weight:600;letter-spacing:.03em}
+.pill.solid{background:linear-gradient(90deg,var(--roxo),var(--roxo-dark));border-color:transparent}
+.hero-actions{margin-top:26px;display:flex;gap:10px;flex-wrap:wrap}
+.btn{font:600 14px var(--font);border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff}
+.btn:hover{background:rgba(255,255,255,.18)}
+
+section{padding-block:52px;background:var(--bg)}
+section.soft{background:var(--bg-soft)}
+.section-label{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--roxo);margin-bottom:12px}
+.section-label::before{content:"";width:34px;height:2px;background:var(--roxo);border-radius:2px}
+h2{font-size:clamp(23px,3.2vw,30px);font-weight:700;letter-spacing:-.01em;margin:0 0 8px;color:var(--ink);text-wrap:balance;line-height:1.2}
+h3{font-size:17px;font-weight:700;margin:0 0 10px;color:var(--ink)}
+.lead{color:var(--cinza);font-size:15.5px;margin:0 0 28px;max-width:72ch}
+b,strong{font-weight:600}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px;margin-bottom:24px}
+.kpi{border:1px solid var(--linha);border-radius:14px;padding:18px 20px;background:var(--bg);min-width:0}
+.kpi.dest{border-color:var(--roxo);background:linear-gradient(180deg,var(--bg),var(--roxo-xlight) 220%)}
+.kpi small{display:block;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--roxo);margin-bottom:4px}
+.kpi b{display:block;font-size:24px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.kpi span{display:block;font-size:12.5px;color:var(--cinza);margin-top:2px}
+
+.table-wrap{overflow-x:auto;border:1px solid var(--linha);border-radius:16px;background:var(--bg);min-width:0}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:620px;font-variant-numeric:tabular-nums}
+thead th{background:var(--bg-soft);color:var(--cinza);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.1em;padding:13px 14px;text-align:right;border-bottom:1px solid var(--linha);white-space:nowrap}
+thead th:first-child{text-align:left}
+tbody td{padding:12px 14px;text-align:right;border-bottom:1px solid var(--linha);font-weight:400;white-space:nowrap}
+tbody td:first-child{text-align:left;font-weight:500;color:var(--ink);white-space:normal;min-width:220px}
+tbody tr:last-child td{border-bottom:none}
+tbody tr.hl td{background:var(--roxo-xlight);font-weight:600}
+tbody tr.hero-row td{background:var(--roxo-xlight)}
+tbody tr.hero-row td:first-child{color:var(--roxo-dark);font-weight:700}
+tbody tr.alert td{background:#FFFBEB}
+tbody tr.win td{background:#F0FDF4}
+.good{color:var(--good);font-weight:600}.bad{color:var(--bad);font-weight:600}.neu{color:var(--cinza)}
+.tag{display:inline-block;font-size:9.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:100px;border:1px solid var(--linha);color:var(--cinza);margin-left:6px;vertical-align:middle}
+.st{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:100px;margin-left:6px;vertical-align:middle}
+.st.ok{background:#DCFCE7;color:#166534}.st.off{background:#F1EFF4;color:var(--cinza)}
+.url{display:block;font-size:11.5px;color:var(--cinza);font-weight:400}
+
+.chart{width:100%;height:auto;display:block;background:var(--bg);border:1px solid var(--linha);border-radius:16px;padding:8px}
+.legenda{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--cinza);margin:0 0 10px}
+.legenda i{display:inline-block;width:18px;height:3px;border-radius:2px;vertical-align:middle;margin-right:7px}
+
+.months{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px;margin-top:24px}
+.month-card{border:1px solid var(--linha);border-radius:16px;padding:20px;background:var(--bg)}
+.month-card.current{border-color:var(--roxo);background:linear-gradient(180deg,var(--bg),var(--roxo-xlight) 200%)}
+.m-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:14px}
+.m-name{font-weight:700;font-size:16px}
+.m-status{font-size:11px;color:var(--cinza);letter-spacing:.06em;text-transform:uppercase}
+.m-status.parcial{color:var(--roxo);font-weight:600}
+.m-kpi{margin-bottom:10px}
+.k-lbl{font-size:11px;color:var(--cinza);text-transform:uppercase;letter-spacing:.1em}
+.k-val{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+.k-val.roxo{color:var(--roxo)}
+.m-note{font-size:12px;color:var(--cinza);line-height:1.45}
+
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:18px;margin-top:22px}
+.note-card{border:1px solid var(--linha);border-radius:16px;padding:22px 24px;background:var(--bg);min-width:0}
+.note-card.roxo{border-color:var(--roxo-light);background:linear-gradient(180deg,var(--bg),var(--roxo-xlight) 400%)}
+.note-card p,.note-card li{color:var(--cinza);font-size:14.5px}
+.note-card p{margin:6px 0}
+.note-card ul{margin:6px 0 0;padding-left:20px}
+.note-card li{margin-bottom:8px}
+.note-card b,.note-card strong{color:var(--ink)}
+.nota{font-size:13px;color:var(--cinza);margin-top:12px;max-width:80ch}
+
+ol.acoes{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;counter-reset:a}
+ol.acoes li{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start;counter-increment:a;border:1px solid var(--linha);border-radius:14px;padding:16px 18px;background:var(--bg)}
+ol.acoes li::before{content:counter(a);font-weight:700;font-size:17px;color:var(--roxo);background:var(--roxo-xlight);border-radius:10px;height:40px;display:grid;place-items:center}
+ol.acoes li div{min-width:0}
+ol.acoes b{display:block;font-weight:700;font-size:15.5px;color:var(--ink);margin-bottom:2px}
+ol.acoes span{color:var(--cinza);font-size:14.5px}
+
+footer{background:var(--ink);color:rgba(255,255,255,.7);padding-block:30px;text-align:center;font-size:13px}
+footer .brand-mini{display:inline-flex;align-items:center;gap:10px;margin-bottom:6px;color:#fff;font-weight:500}
+
+/* modo apresentação */
+.navap{display:none}
+body.ap .slide{display:none}
+body.ap .slide.atual{display:block;min-height:100vh;padding-bottom:90px}
+body.ap footer{display:none}
+body.ap .navap{display:flex;position:fixed;left:0;right:0;bottom:0;justify-content:center;gap:10px;align-items:center;padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:rgba(20,16,24,.92);z-index:20}
+.navap button{font:600 14px var(--font);border-radius:10px;padding:9px 16px;cursor:pointer;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff}
+.navap span{color:rgba(255,255,255,.8);font-size:13px;min-width:70px;text-align:center}
+@media (prefers-reduced-motion:no-preference){body.ap .slide.atual{animation:entra .25s ease-out}}
+@keyframes entra{from{opacity:.4}to{opacity:1}}
+</style>
+</head>
+<body>
+
+
+<header class="hero slide">
+  <div class="wrap">
+    <div class="brand">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+        <polygon points="50,33 65,59 35,59"></polygon>
+        <line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line>
+        <line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line>
+        <line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line>
+        <line x1="10" y1="27" x2="50" y2="33"></line>
+      </svg>
+      <span class="word"><b>BM</b><i class="bar"></i><span>MÍDIAS</span></span>
+    </div>
+    <div class="eyebrow">Sala Secreta · Tráfego Pago · Marketex</div>
+    <h1>Relatório de Campanhas</h1>
+    <div class="sub">Últimos dias · 30 dias contra os 30 anteriores · 7 dias contra os 7 anteriores · Criativos · Páginas. Dados até 08/11/2026, atualizado em 09/11/2026.</div>
+    <div class="pills">
+      <span class="pill solid">R$ 3,88 por entrada no grupo na semana · era R$ 4,59</span>
+      <span class="pill">ADV39 é o melhor criativo: R$ 2,43 por entrada</span>
+      <span class="pill">Página C lidera na semana: R$ 2,64</span>
+    </div>
+    <div class="hero-actions"><button class="btn" id="btn-ap" type="button">▶ Apresentar</button></div>
+  </div>
+</header>
+
+<!-- RESUMO -->
+<section class="slide">
+<div class="wrap">
+  <div class="section-label">Resumo</div>
+  <h2>O custo por entrada no grupo caiu 15% na última semana</h2>
+  <p class="lead">De 02 a 08/11, cada pessoa que entrou no grupo pelo tráfego pago custou R$ 3,88, contra R$ 4,59 na semana anterior. Do anúncio até o cadastro o funil está estável. O ganho veio de um criativo e da entrada no grupo, que voltou ao normal.</p>
+  <div class="kpis">
+    <div class="kpi dest"><small>Custo por entrada no grupo</small><b>R$ 3,88</b><span>era R$ 4,59 na semana anterior</span></div>
+    <div class="kpi"><small>Custo por cadastro pago</small><b>R$ 2,88</b><span>era R$ 3,05</span></div>
+    <div class="kpi"><small>Cadastro que entra no grupo</small><b>74,3%</b><span>era 66,4%</span></div>
+    <div class="kpi"><small>Cadastros em 30 dias</small><b>3.664</b><span>eram 2.641 nos 30 anteriores</span></div>
+  </div>
+  <div class="notes">
+    <div class="note-card roxo"><h3>O que deu certo</h3><ul>
+      <li><b>ADV39 (Óculos IA)</b> virou o melhor criativo da conta: R$ 2,43 por entrada no grupo, com CTR de 6,5%. O Meta passou a verba para ele sozinho na [08] e na [12].</li>
+      <li><b>Página C</b> fez o menor custo da semana: R$ 2,64 por entrada.</li>
+      <li><b>Orgânico</b> mais que dobrou em 30 dias: 585 → 1.479 cadastros, puxado pelo “ESPIAR” no Instagram.</li>
+    </ul></div>
+    <div class="note-card"><h3>O que precisa de atenção</h3><ul>
+      <li><b>ADV14 e ADV40</b> dão sinais de cansaço: o ADV40 subiu para R$ 4,53 por entrada na semana.</li>
+      <li>O <b>“ESPIAR”</b> caiu na última semana: 247 → 145 cadastros.</li>
+      <li><b>Internacional</b> segue de 2 a 3 vezes mais caro que o Brasil.</li>
+      <li>A <b>[09]</b> e a <b>[14]</b> foram pausadas hoje (09/11). No ar ficaram [03], [05], [08] e [12], somando R$ 150 por dia.</li>
+    </ul></div>
+  </div>
+</div>
+</section>
+
+<!-- ÚLTIMOS DIAS -->
+<section class="slide soft">
+<div class="wrap">
+  <div class="section-label">Últimos dias</div>
+  <h2>Depois do pico de 27/10, o custo ficou abaixo de R$ 4 na maior parte dos dias</h2>
+  <p class="lead">Custo por cadastro pago e por entrada no grupo, dia a dia, de 26/10 a 08/11. O pico de 27/10 veio de uma queda na entrada no grupo em todas as páginas, que se normalizou a partir de 30/10.</p>
+  <div class="legenda"><span><i style="background:#DC2626"></i>Custo por entrada no grupo</span><span><i style="background:#7C3AED"></i>Custo por cadastro pago</span></div>
+  <svg class="chart" viewBox="0 0 900 330" role="img" aria-label="Custo diário por cadastro pago e por entrada no grupo, de 26/10 a 08/11"><line x1="56" x2="876" y1="290.0" y2="290.0" stroke="#E7E3EE" stroke-width="1"/><text x="46" y="294.0" text-anchor="end" font-size="12" fill="#5B5566">R$0</text><line x1="56" x2="876" y1="236.0" y2="236.0" stroke="#E7E3EE" stroke-width="1"/><text x="46" y="240.0" text-anchor="end" font-size="12" fill="#5B5566">R$3</text><line x1="56" x2="876" y1="182.0" y2="182.0" stroke="#E7E3EE" stroke-width="1"/><text x="46" y="186.0" text-anchor="end" font-size="12" fill="#5B5566">R$6</text><line x1="56" x2="876" y1="128.0" y2="128.0" stroke="#E7E3EE" stroke-width="1"/><text x="46" y="132.0" text-anchor="end" font-size="12" fill="#5B5566">R$9</text><line x1="56" x2="876" y1="74.0" y2="74.0" stroke="#E7E3EE" stroke-width="1"/><text x="46" y="78.0" text-anchor="end" font-size="12" fill="#5B5566">R$12</text><line x1="56" x2="876" y1="20.0" y2="20.0" stroke="#E7E3EE" stroke-width="1"/><text x="46" y="24.0" text-anchor="end" font-size="12" fill="#5B5566">R$15</text><text x="56.0" y="316" text-anchor="middle" font-size="12" fill="#5B5566">26/10</text><text x="182.2" y="316" text-anchor="middle" font-size="12" fill="#5B5566">28/10</text><text x="308.3" y="316" text-anchor="middle" font-size="12" fill="#5B5566">30/10</text><text x="434.5" y="316" text-anchor="middle" font-size="12" fill="#5B5566">01/11</text><text x="560.6" y="316" text-anchor="middle" font-size="12" fill="#5B5566">03/11</text><text x="686.8" y="316" text-anchor="middle" font-size="12" fill="#5B5566">05/11</text><text x="812.9" y="316" text-anchor="middle" font-size="12" fill="#5B5566">07/11</text><text x="876.0" y="316" text-anchor="middle" font-size="12" fill="#5B5566">08/11</text><path d="M56.0 240.6 L119.1 211.3 L182.2 236.9 L245.2 217.7 L308.3 246.8 L371.4 243.2 L434.5 238.6 L497.5 237.2 L560.6 239.7 L623.7 244.5 L686.8 228.5 L749.8 224.6 L812.9 238.6 L876.0 243.5" fill="none" stroke="#7C3AED" stroke-width="2.5" stroke-linejoin="round"/><path d="M56.0 189.8 L119.1 30.6 L182.2 219.2 L245.2 182.6 L308.3 234.7 L371.4 233.3 L434.5 221.4 L497.5 218.4 L560.6 222.6 L623.7 232.2 L686.8 209.6 L749.8 195.3 L812.9 225.4 L876.0 222.5" fill="none" stroke="#DC2626" stroke-width="3" stroke-linejoin="round"/><circle cx="56.0" cy="189.8" r="3.5" fill="#DC2626"/><circle cx="119.1" cy="30.6" r="3.5" fill="#DC2626"/><circle cx="182.2" cy="219.2" r="3.5" fill="#DC2626"/><circle cx="245.2" cy="182.6" r="3.5" fill="#DC2626"/><circle cx="308.3" cy="234.7" r="3.5" fill="#DC2626"/><circle cx="371.4" cy="233.3" r="3.5" fill="#DC2626"/><circle cx="434.5" cy="221.4" r="3.5" fill="#DC2626"/><circle cx="497.5" cy="218.4" r="3.5" fill="#DC2626"/><circle cx="560.6" cy="222.6" r="3.5" fill="#DC2626"/><circle cx="623.7" cy="232.2" r="3.5" fill="#DC2626"/><circle cx="686.8" cy="209.6" r="3.5" fill="#DC2626"/><circle cx="749.8" cy="195.3" r="3.5" fill="#DC2626"/><circle cx="812.9" cy="225.4" r="3.5" fill="#DC2626"/><circle cx="876.0" cy="222.5" r="3.5" fill="#DC2626"/><text x="129.1" y="35.6" font-size="13" font-weight="600" fill="#DC2626">R$ 14,41</text></svg>
+  <div class="table-wrap" style="margin-top:20px"><table>
+    <thead><tr><th>Dia</th><th>Investimento</th><th>CPM</th><th>CTR</th><th>Cadastros pagos</th><th>Custo/cadastro</th><th>Grupo</th><th>% grupo</th><th>Custo/grupo</th></tr></thead>
+    <tbody><tr class="win"><td>09/11</td><td>R$ 74,20</td><td>R$ 35,64</td><td>5,7%</td><td>42</td><td>R$ 1,77</td><td>30</td><td>71%</td><td><b>R$ 2,47</b></td></tr><tr class=""><td>08/11</td><td>R$ 232,41</td><td>R$ 40,87</td><td>4,6%</td><td>90</td><td>R$ 2,58</td><td>62</td><td>69%</td><td><b>R$ 3,75</b></td></tr><tr class=""><td>07/11</td><td>R$ 168,64</td><td>R$ 41,74</td><td>4,7%</td><td>59</td><td>R$ 2,86</td><td>47</td><td>80%</td><td><b>R$ 3,59</b></td></tr><tr class="alert"><td>06/11</td><td>R$ 152,53</td><td>R$ 39,92</td><td>3,7%</td><td>42</td><td>R$ 3,63</td><td>29</td><td>69%</td><td><b>R$ 5,26</b></td></tr><tr class=""><td>05/11</td><td>R$ 160,70</td><td>R$ 38,16</td><td>3,4%</td><td>47</td><td>R$ 3,42</td><td>36</td><td>77%</td><td><b>R$ 4,46</b></td></tr><tr class="win"><td>04/11</td><td>R$ 189,58</td><td>R$ 38,88</td><td>3,8%</td><td>75</td><td>R$ 2,53</td><td>59</td><td>79%</td><td><b>R$ 3,21</b></td></tr><tr class=""><td>03/11</td><td>R$ 176,10</td><td>R$ 34,00</td><td>3,5%</td><td>63</td><td>R$ 2,80</td><td>47</td><td>75%</td><td><b>R$ 3,75</b></td></tr><tr class=""><td>02/11</td><td>R$ 222,77</td><td>R$ 36,22</td><td>3,3%</td><td>76</td><td>R$ 2,93</td><td>56</td><td>74%</td><td><b>R$ 3,98</b></td></tr><tr class=""><td>01/11</td><td>R$ 240,01</td><td>R$ 34,76</td><td>3,7%</td><td>84</td><td>R$ 2,86</td><td>63</td><td>75%</td><td><b>R$ 3,81</b></td></tr><tr class="win"><td>31/10</td><td>R$ 163,67</td><td>R$ 38,22</td><td>4,1%</td><td>63</td><td>R$ 2,60</td><td>52</td><td>83%</td><td><b>R$ 3,15</b></td></tr><tr class="win"><td>30/10</td><td>R$ 175,04</td><td>R$ 38,73</td><td>4,0%</td><td>73</td><td>R$ 2,40</td><td>57</td><td>78%</td><td><b>R$ 3,07</b></td></tr><tr class="alert"><td>29/10</td><td>R$ 184,89</td><td>R$ 38,56</td><td>3,6%</td><td>46</td><td>R$ 4,02</td><td>31</td><td>67%</td><td><b>R$ 5,96</b></td></tr><tr class=""><td>28/10</td><td>R$ 188,90</td><td>R$ 37,50</td><td>3,6%</td><td>64</td><td>R$ 2,95</td><td>48</td><td>75%</td><td><b>R$ 3,94</b></td></tr><tr class="alert"><td>27/10</td><td>R$ 244,95</td><td>R$ 40,87</td><td>3,4%</td><td>56</td><td>R$ 4,37</td><td>17</td><td>30%</td><td><b>R$ 14,41</b></td></tr><tr class="alert"><td>26/10</td><td>R$ 189,34</td><td>R$ 37,52</td><td>3,8%</td><td>69</td><td>R$ 2,74</td><td>34</td><td>49%</td><td><b>R$ 5,57</b></td></tr></tbody></table></div>
+  <p class="nota">09/11 ainda não fechou. Verde: custo por entrada abaixo de R$ 3,30. Amarelo: acima de R$ 5.</p>
+</div>
+</section>
+
+<!-- 30 x 30 -->
+<section class="slide">
+<div class="wrap">
+  <div class="section-label">30 dias × 30 anteriores</div>
+  <h2>O custo por cadastro ficou igual, e o volume total subiu com o orgânico</h2>
+  <p class="lead">Comparação de 10/10 a 08/11 com 10/09 a 09/10. O custo por cadastro pago ficou em R$ 3,11 contra R$ 3,09. O total de cadastros cresceu porque o orgânico mais que dobrou.</p>
+  <div class="table-wrap"><table>
+<thead><tr><th>Indicador</th><th>10/09 a 09/10</th><th>10/10 a 08/11</th><th>Variação</th></tr></thead>
+<tbody><tr><td>Investimento</td><td>R$ 6.351,33</td><td><b>R$ 6.785,43</b></td><td><span class="good">+7%</span></td></tr><tr><td>CPM</td><td>R$ 42,14</td><td><b>R$ 39,27</b></td><td><span class="good">-7%</span></td></tr><tr><td>CTR (clique no link)</td><td>3,6%</td><td><b>3,6%</b></td><td><span class="neu">-0,1 p,p,</span></td></tr><tr><td>Clique que chega na página</td><td>80,9%</td><td><b>80,5%</b></td><td><span class="neu">-0,4 p,p,</span></td></tr><tr><td>Visita que vira cadastro</td><td>46,5%</td><td><b>44,0%</b></td><td><span class="bad">-2,5 p,p,</span></td></tr><tr><td>Cadastros pagos (pessoas novas)</td><td>2.056</td><td><b>2.185</b></td><td><span class="good">+6%</span></td></tr><tr class="hl"><td>Custo por cadastro pago</td><td>R$ 3,09</td><td><b>R$ 3,11</b></td><td><span class="neu">+1%</span></td></tr><tr><td>Entradas no grupo (pago)</td><td><span class="neu">sem dado*</span></td><td><b>1.569</b></td><td><span class="neu">—</span></td></tr><tr class="hl"><td>Custo por entrada no grupo</td><td><span class="neu">sem dado*</span></td><td><b>R$ 4,32</b></td><td><span class="neu">—</span></td></tr><tr><td>Cadastros orgânicos</td><td>585</td><td><b>1.479</b></td><td><span class="good">+153%</span></td></tr><tr><td>Cadastros no total</td><td>2.641</td><td><b>3.664</b></td><td><span class="good">+39%</span></td></tr><tr><td>Leads contados pelo Meta <span class="tag gray">mudou em 15/10</span></td><td>4.224</td><td><b>2.830</b></td><td><span class="bad">-33%</span></td></tr></tbody></table></div>
+  <p class="nota">* Até 30/09 parte dos cadastros vinha do Clint, que não informa a entrada no grupo. Por isso o custo por grupo dos 30 dias anteriores não é comparável. O período anterior está sem a campanha [11] Global (setembro), que trazia cadastros estrangeiros a R$ 0,34. Em 15/10 o lead do Meta passou a vir do Unnichat e deixou de contar em dobro, por isso a linha de leads do Meta não serve de comparação.</p>
+  <div class="months"><div class="month-card"><div class="m-head"><span class="m-name">Agosto</span><span class="m-status">fechado</span></div>
+<div class="m-kpi"><div class="k-lbl">Investimento</div><div class="k-val">R$ 4.705</div></div>
+<div class="m-kpi"><div class="k-lbl">Cadastros pagos</div><div class="k-val">1.767</div></div>
+<div class="m-kpi"><div class="k-lbl">Custo por cadastro</div><div class="k-val roxo">R$ 2,66</div></div>
+<div class="m-note"></div></div><div class="month-card"><div class="m-head"><span class="m-name">Setembro</span><span class="m-status">fechado</span></div>
+<div class="m-kpi"><div class="k-lbl">Investimento</div><div class="k-val">R$ 5.757</div></div>
+<div class="m-kpi"><div class="k-lbl">Cadastros pagos</div><div class="k-val">2.363</div></div>
+<div class="m-kpi"><div class="k-lbl">Custo por cadastro</div><div class="k-val roxo">R$ 2,44</div></div>
+<div class="m-note">Inclui a [11] Global, com cadastros estrangeiros baratos.</div></div><div class="month-card"><div class="m-head"><span class="m-name">Outubro</span><span class="m-status">fechado</span></div>
+<div class="m-kpi"><div class="k-lbl">Investimento</div><div class="k-val">R$ 7.611</div></div>
+<div class="m-kpi"><div class="k-lbl">Cadastros pagos</div><div class="k-val">2.301</div></div>
+<div class="m-kpi"><div class="k-lbl">Custo por cadastro</div><div class="k-val roxo">R$ 3,31</div></div>
+<div class="m-note">Custo por entrada no grupo: R$ 4,53</div></div><div class="month-card current"><div class="m-head"><span class="m-name">Novembro</span><span class="m-status parcial">até 08/11</span></div>
+<div class="m-kpi"><div class="k-lbl">Investimento</div><div class="k-val">R$ 1.543</div></div>
+<div class="m-kpi"><div class="k-lbl">Cadastros pagos</div><div class="k-val">536</div></div>
+<div class="m-kpi"><div class="k-lbl">Custo por cadastro</div><div class="k-val roxo">R$ 2,88</div></div>
+<div class="m-note">Custo por entrada no grupo: R$ 3,87</div></div></div>
+</div>
+</section>
+
+<!-- 7 x 7 -->
+<section class="slide soft">
+<div class="wrap">
+  <div class="section-label">7 dias × 7 anteriores</div>
+  <h2>O que mudou na última semana</h2>
+  <p class="lead">Comparação de 02 a 08/11 com 26/10 a 01/11. O custo por entrada no grupo caiu de R$ 4,59 para R$ 3,88. A entrada no grupo voltou de 66,4% para 74,3% e o clique passou a chegar mais na página.</p>
+  <div class="table-wrap"><table>
+<thead><tr><th>Indicador</th><th>26/10 a 01/11</th><th>02/11 a 08/11</th><th>Variação</th></tr></thead>
+<tbody><tr><td>Investimento</td><td>R$ 1.386,80</td><td><b>R$ 1.302,73</b></td><td><span class="bad">-6%</span></td></tr><tr><td>CPM</td><td>R$ 37,91</td><td><b>R$ 38,36</b></td><td><span class="neu">+1%</span></td></tr><tr><td>CTR (clique no link)</td><td>3,7%</td><td><b>3,8%</b></td><td><span class="neu">+0,1 p,p,</span></td></tr><tr><td>Clique que chega na página</td><td>79,9%</td><td><b>82,6%</b></td><td><span class="good">+2,7 p,p,</span></td></tr><tr><td>Visita que vira cadastro</td><td>41,9%</td><td><b>41,9%</b></td><td><span class="neu">+0,1 p,p,</span></td></tr><tr><td>Cadastros pagos (pessoas novas)</td><td>455</td><td><b>452</b></td><td><span class="neu">-1%</span></td></tr><tr class="hl"><td>Custo por cadastro pago</td><td>R$ 3,05</td><td><b>R$ 2,88</b></td><td><span class="good">-5%</span></td></tr><tr><td>Entradas no grupo (pago)</td><td>302</td><td><b>336</b></td><td><span class="good">+11%</span></td></tr><tr><td>Cadastro que entra no grupo</td><td>66,4%</td><td><b>74,3%</b></td><td><span class="good">+8,0 p,p,</span></td></tr><tr class="hl"><td>Custo por entrada no grupo</td><td>R$ 4,59</td><td><b>R$ 3,88</b></td><td><span class="good">-16%</span></td></tr><tr><td>Cadastros orgânicos</td><td>370</td><td><b>213</b></td><td><span class="bad">-42%</span></td></tr><tr><td>Cadastros no total</td><td>825</td><td><b>665</b></td><td><span class="bad">-19%</span></td></tr><tr><td>Leads contados pelo Meta</td><td>507</td><td><b>500</b></td><td><span class="neu">-1%</span></td></tr></tbody></table></div>
+  <h3 style="margin-top:30px">Campanha por campanha</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Campanha</th><th>Gasto 7d</th><th>CTR</th><th>Visita → cadastro</th><th>Custo/cadastro</th><th>Custo/grupo</th><th>Variação</th></tr></thead>
+    <tbody><tr><td>[12] Página C <span class="st ok">no ar</span></td><td>R$ 216</td><td>4,7%</td><td>38,0%</td><td>R$ 2,42 → <b>R$ 2,04</b></td><td>R$ 3,36 → <b>R$ 2,64</b></td><td><span class="good">-21%</span></td></tr><tr><td>[08] Página B <span class="st ok">no ar</span></td><td>R$ 213</td><td>5,3%</td><td>37,9%</td><td>R$ 2,46 → <b>R$ 2,35</b></td><td>R$ 3,45 → <b>R$ 3,28</b></td><td><span class="good">-5%</span></td></tr><tr><td>[03] Página A · ANEX 03 · HM <span class="st ok">no ar</span></td><td>R$ 490</td><td>3,8%</td><td>51,7%</td><td>R$ 2,44 → <b>R$ 2,54</b></td><td>R$ 3,65 → <b>R$ 3,47</b></td><td><span class="good">-5%</span></td></tr><tr><td>[05] Portugal · Página A <span class="st ok">no ar</span></td><td>R$ 145</td><td>3,0%</td><td>36,4%</td><td>R$ 5,09 → <b>R$ 6,04</b></td><td>R$ 9,16 → <b>R$ 7,63</b></td><td><span class="good">-17%</span></td></tr><tr><td>[09] Quente · Página B <span class="st off">pausada 09/11</span></td><td>R$ 70</td><td>2,6%</td><td>35,7%</td><td>R$ 6,06 → <b>R$ 7,04</b></td><td>R$ 9,52 → <b>R$ 7,82</b></td><td><span class="good">-18%</span></td></tr><tr><td>[14] Teste ADV57 · Página B <span class="st off">pausada 09/11</span></td><td>R$ 140</td><td>2,0%</td><td>29,1%</td><td>R$ 5,50 → <b>R$ 6,08</b></td><td>R$ 9,82 → <b>R$ 8,23</b></td><td><span class="good">-16%</span></td></tr><tr><td>[15] Portugal · Página C <span class="st off">pausada 03/11</span></td><td>R$ 28</td><td>2,7%</td><td>23,1%</td><td>R$ 6,67 → <b>R$ 9,24</b></td><td>R$ 14,00 → <b>R$ 9,24</b></td><td><span class="good">-34%</span></td></tr></tbody></table></div>
+  <div class="notes">
+    <div class="note-card roxo"><h3>Melhorou</h3><ul>
+      <li><b>[12] Página C</b>: o ADV39 tomou a verba e a campanha virou a mais barata da conta.</li>
+      <li><b>[08] Página B</b>: mesma troca, do ADV40 para o ADV39.</li>
+      <li><b>[05] Portugal</b>: a entrada no grupo subiu e o custo por entrada caiu.</li>
+    </ul></div>
+    <div class="note-card"><h3>Piorou ou parou</h3><ul>
+      <li><b>[09] Quente</b>: CPM de R$ 57 e custo de R$ 7 por cadastro. Pausada em 09/11.</li>
+      <li><b>[14] Teste ADV57</b>: CTR de link caiu para 2,0%. Pausada em 09/11. O ADV58 nunca recebeu verba.</li>
+      <li><b>[03] Página A</b>: estável no custo, mas o CTR caiu de 4,4% para 3,8%.</li>
+    </ul></div>
+  </div>
+</div>
+</section>
+
+<!-- CRIATIVOS -->
+<section class="slide">
+<div class="wrap">
+  <div class="section-label">Criativos</div>
+  <h2>ADV39 é o criativo mais barato. ADV14 segue o mais forte em volume.</h2>
+  <p class="lead">Ranking pelo custo por entrada no grupo, que é o resultado que importa. Nos 30 dias entram só criativos com pelo menos R$ 100 de gasto. Nos 7 dias, pelo menos R$ 30. Clique no nome para abrir o criativo.</p>
+  <h3>Últimos 30 dias (10/10 a 08/11)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Criativo</th><th>Gasto</th><th>CTR</th><th>Cadastros</th><th>Custo/cadastro</th><th>Grupo</th><th>Custo/grupo</th></tr></thead>
+    <tbody><tr class="hero-row"><td><a href="https://drive.google.com/open?id=1xly6eMLIWU5cw8UJMHBiK7fWtgeKh9hf&usp=drive_copy" target="_blank" rel="noopener">ADV39_SST_CAP_OCULOS IA_1.29</a></td><td>R$ 285</td><td>6,4%</td><td>148</td><td>R$ 1,92</td><td>114</td><td><b>R$ 2,50</b></td></tr><tr class=""><td><a href="https://drive.google.com/open?id=1zMS8i6wmktRp1QzoXqiiyvcyPdHjZpzc&usp=drive_copy" target="_blank" rel="noopener">ADV14_SST_CAP_CLONE EM VIDEO E EM FOTO_0.45</a></td><td>R$ 2.504</td><td>4,0%</td><td>921</td><td>R$ 2,72</td><td>670</td><td><b>R$ 3,74</b></td></tr><tr class=""><td><a href="https://drive.google.com/open?id=18yFvtCy7T5m_8yCWt2k9Z3C_gTW0JpqU&usp=drive_copy" target="_blank" rel="noopener">ADV40_SST_CAP_ESPECIALISTA_0.37</a></td><td>R$ 2.007</td><td>3,3%</td><td>645</td><td>R$ 3,11</td><td>477</td><td><b>R$ 4,21</b></td></tr><tr class=""><td><a href="https://drive.google.com/file/d/1TA3vRwcMZMyZIaEca0bWQnzAEakRuQFM/view?usp=drivesdk" target="_blank" rel="noopener">ADV51_SST_CAP_O CHATGPT CRIA PAGINAS.0.52</a></td><td>R$ 379</td><td>3,5%</td><td>122</td><td>R$ 3,11</td><td>86</td><td><b>R$ 4,41</b></td></tr><tr class=""><td><a href="https://drive.google.com/file/d/1tNjGU3acYSClAcThw4u5_72Wzu9m90Qn/view?usp=drivesdk" target="_blank" rel="noopener">ADV43_SST_CAP_TUDO MUITO COMPLICADO_0.37</a></td><td>R$ 178</td><td>2,7%</td><td>43</td><td>R$ 4,13</td><td>33</td><td><b>R$ 5,38</b></td></tr><tr class=""><td><a href="https://drive.google.com/file/d/1seJjXcrd66fZA7XjsOiovcylqUI8w6BU/view?usp=drivesdk" target="_blank" rel="noopener">ADV54_SST_CAP_ANOS 80_0.52</a></td><td>R$ 160</td><td>3,7%</td><td>34</td><td>R$ 4,72</td><td>26</td><td><b>R$ 6,17</b></td></tr><tr class=""><td><a href="https://drive.google.com/file/d/12clQxWB6ci6WKrtrrErHrXvCk3h-ADPB/view?usp=drivesdk" target="_blank" rel="noopener">ADV57_SST_CAP_CRIE SUA PAGINA COM IA_0.47</a></td><td>R$ 338</td><td>2,5%</td><td>59</td><td>R$ 5,74</td><td>41</td><td><b>R$ 8,26</b></td></tr><tr class=""><td><a href="https://drive.google.com/open?id=1Zwi__TbYWCCn6Jh2_Bd0CrqNySTTimbt&usp=drive_copy" target="_blank" rel="noopener">ADV18_SST_CAP_CLAUDE SKILS 01_2.26</a></td><td>R$ 121</td><td>2,8%</td><td>12</td><td>R$ 10,04</td><td>9</td><td><b>R$ 13,39</b></td></tr></tbody></table></div>
+  <h3 style="margin-top:28px">Últimos 7 dias (02 a 08/11)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Criativo</th><th>Gasto</th><th>CTR</th><th>Cadastros</th><th>Custo/cadastro</th><th>Grupo</th><th>Custo/grupo</th></tr></thead>
+    <tbody><tr class="hero-row"><td><a href="https://drive.google.com/open?id=1xly6eMLIWU5cw8UJMHBiK7fWtgeKh9hf&usp=drive_copy" target="_blank" rel="noopener">ADV39_SST_CAP_OCULOS IA_1.29</a></td><td>R$ 236</td><td>6,5%</td><td>128</td><td>R$ 1,84</td><td>97</td><td><b>R$ 2,43</b></td></tr><tr class=""><td><a href="https://drive.google.com/open?id=1zMS8i6wmktRp1QzoXqiiyvcyPdHjZpzc&usp=drive_copy" target="_blank" rel="noopener">ADV14_SST_CAP_CLONE EM VIDEO E EM FOTO_0.45</a></td><td>R$ 615</td><td>3,7%</td><td>217</td><td>R$ 2,83</td><td>160</td><td><b>R$ 3,84</b></td></tr><tr class=""><td><a href="https://drive.google.com/open?id=18yFvtCy7T5m_8yCWt2k9Z3C_gTW0JpqU&usp=drive_copy" target="_blank" rel="noopener">ADV40_SST_CAP_ESPECIALISTA_0.37</a></td><td>R$ 240</td><td>3,1%</td><td>73</td><td>R$ 3,29</td><td>53</td><td><b>R$ 4,53</b></td></tr><tr class=""><td><a href="https://drive.google.com/file/d/12clQxWB6ci6WKrtrrErHrXvCk3h-ADPB/view?usp=drivesdk" target="_blank" rel="noopener">ADV57_SST_CAP_CRIE SUA PAGINA COM IA_0.47</a></td><td>R$ 139</td><td>2,0%</td><td>23</td><td>R$ 6,05</td><td>17</td><td><b>R$ 8,18</b></td></tr></tbody></table></div>
+  <div class="notes">
+    <div class="note-card roxo"><h3>Leitura</h3><ul>
+      <li>Dos R$ 285 gastos no <b>ADV39</b> em 30 dias, R$ 236 foram na última semana, e o custo não subiu com o volume. O tema Óculos IA pede variações.</li>
+      <li>O <b>ADV14</b> custou R$ 3,74 por entrada em 30 dias e R$ 3,84 na semana. Os números somam o uso no Brasil e em Portugal.</li>
+      <li>O <b>ADV40</b> foi de R$ 4,21 (30 dias) para R$ 4,53 (7 dias). É o que mais está cansando.</li>
+      <li>O <b>ADV57</b> fechou o teste em R$ 8,18 por entrada, muito acima dos campeões.</li>
+    </ul></div>
+    <div class="note-card"><h3>Como ler</h3><p>Cadastros e grupo vêm do Unnichat, pela UTM de cada anúncio. Ficaram de fora o gasto da [04] e da [05] antes de 24/10, que rodaram sem UTM de criativo.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- PÁGINAS -->
+<section class="slide soft">
+<div class="wrap">
+  <div class="section-label">Páginas</div>
+  <h2>Página C lidera na semana. Página A é a mais consistente em 30 dias.</h2>
+  <p class="lead">As três páginas levam ao mesmo cadastro e ao mesmo grupo. O resultado depende também da campanha e do criativo que roda em cada uma. A página B concentra os testes ([09], [13] e [14]), o que puxa o custo dela para cima.</p>
+  <h3>Últimos 30 dias (variação contra os 30 anteriores)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Página</th><th>Gasto</th><th>CTR</th><th>Chega na página</th><th>Visita → cadastro</th><th>Custo/cadastro</th><th>Custo/grupo</th><th>Variação</th></tr></thead>
+    <tbody><tr><td>Página C · Brasil<span class="url">lp.lucrocomia.com.br/salasecreta/page-2</span></td><td>R$ 1.175</td><td>3,6%</td><td>86,5%</td><td>43,1%</td><td>R$ 2,83</td><td><b>R$ 3,85</b></td><td><span class="bad">+6%</span></td></tr><tr class="hero-row"><td>Página A · Brasil<span class="url">lp.marketex.com.br/sala-secreta-aulas-gratuitas-com-anatex-td</span></td><td>R$ 2.460</td><td>3,9%</td><td>77,0%</td><td>52,6%</td><td>R$ 2,41</td><td><b>R$ 3,40</b></td><td><span class="good">-70%</span></td></tr><tr><td>Página B · Brasil<span class="url">lp.lucrocomia.com.br/salasecreta/page</span></td><td>R$ 2.326</td><td>3,3%</td><td>82,2%</td><td>40,3%</td><td>R$ 3,54</td><td><b>R$ 4,81</b></td><td><span class="good">-3%</span></td></tr><tr><td>Página A · Portugal</td><td>R$ 320</td><td>2,8%</td><td>77,2%</td><td>35,2%</td><td>R$ 5,71</td><td><b>R$ 8,88</b></td><td><span class="neu">—</span></td></tr><tr><td>Página C · Portugal</td><td>R$ 223</td><td>3,0%</td><td>81,0%</td><td>25,2%</td><td>R$ 7,42</td><td><b>R$ 12,36</b></td><td><span class="neu">—</span></td></tr></tbody></table></div>
+  <h3 style="margin-top:28px">Últimos 7 dias (variação contra os 7 anteriores)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Página</th><th>Gasto</th><th>CTR</th><th>Chega na página</th><th>Visita → cadastro</th><th>Custo/cadastro</th><th>Custo/grupo</th><th>Variação</th></tr></thead>
+    <tbody><tr class="hero-row"><td>Página C · Brasil<span class="url">lp.lucrocomia.com.br/salasecreta/page-2</span></td><td>R$ 216</td><td>4,7%</td><td>85,6%</td><td>38,0%</td><td>R$ 2,04</td><td><b>R$ 2,64</b></td><td><span class="good">-21%</span></td></tr><tr><td>Página A · Brasil<span class="url">lp.marketex.com.br/sala-secreta-aulas-gratuitas-com-anatex-td</span></td><td>R$ 490</td><td>3,8%</td><td>80,2%</td><td>51,7%</td><td>R$ 2,54</td><td><b>R$ 3,47</b></td><td><span class="good">-5%</span></td></tr><tr><td>Página B · Brasil<span class="url">lp.lucrocomia.com.br/salasecreta/page</span></td><td>R$ 424</td><td>3,6%</td><td>85,7%</td><td>35,7%</td><td>R$ 3,42</td><td><b>R$ 4,66</b></td><td><span class="good">-9%</span></td></tr><tr><td>Página A · Portugal</td><td>R$ 145</td><td>3,0%</td><td>70,2%</td><td>36,4%</td><td>R$ 6,04</td><td><b>R$ 7,63</b></td><td><span class="good">-17%</span></td></tr><tr><td>Página C · Portugal</td><td>R$ 28</td><td>2,7%</td><td>86,7%</td><td>23,1%</td><td>R$ 9,24</td><td><b>R$ 9,24</b></td><td><span class="good">-34%</span></td></tr></tbody></table></div>
+  <div class="notes">
+    <div class="note-card roxo"><h3>Leitura</h3><ul>
+      <li><b>Página C</b>: R$ 2,64 por entrada na semana e R$ 3,85 em 30 dias. É a página que melhor converte o clique em visita.</li>
+      <li><b>Página A</b>: R$ 3,40 em 30 dias, puxada pela [03] com o ADV14 no público homens e mulheres.</li>
+      <li><b>Página B</b>: R$ 4,81 em 30 dias por causa dos testes. Sozinha, a [08] fez R$ 3,74.</li>
+      <li><b>Portugal</b>: R$ 8,88 por entrada na página A. O teste A/B de outubro apontou a A melhor que a C.</li>
+    </ul></div>
+    <div class="note-card"><h3>Observação</h3><p>A variação dos 30 dias de Portugal e da página A antes de 24/10 é aproximada: até essa data, parte dos cadastros de Portugal entrava com a UTM da [04].</p></div>
+  </div>
+</div>
+</section>
+
+<!-- ORIGEM -->
+<section class="slide">
+<div class="wrap">
+  <div class="section-label">Origem dos cadastros</div>
+  <h2>O orgânico já é 40% dos cadastros em 30 dias, mas perdeu força na última semana</h2>
+  <p class="lead">Pessoas novas por canal. Em 30 dias o Instagram orgânico foi de 224 para 1.080 cadastros. Na última semana caiu de 247 para 145.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Origem</th><th>30 dias ant.</th><th>Últimos 30</th><th>Var.</th><th>7 dias ant.</th><th>Últimos 7</th><th>Var.</th></tr></thead>
+    <tbody><tr><td>Tráfego pago (Meta)</td><td>2.056</td><td><b>2.185</b></td><td><span class="good">+6%</span></td><td>455</td><td><b>452</b></td><td><span class="neu">-1%</span></td></tr><tr><td>Instagram · comentário/stories “ESPIAR”</td><td>224</td><td><b>1.080</b></td><td><span class="good">+382%</span></td><td>247</td><td><b>145</b></td><td><span class="bad">-41%</span></td></tr><tr><td>Link da bio</td><td>57</td><td><b>223</b></td><td><span class="good">+291%</span></td><td>75</td><td><b>36</b></td><td><span class="bad">-52%</span></td></tr><tr><td>E-mail</td><td>17</td><td><b>53</b></td><td><span class="good">+212%</span></td><td>16</td><td><b>3</b></td><td><span class="bad">-81%</span></td></tr><tr><td>Outros orgânicos</td><td>163</td><td><b>15</b></td><td><span class="bad">-91%</span></td><td>3</td><td><b>2</b></td><td><span class="bad">-33%</span></td></tr><tr><td>Sem UTM</td><td>123</td><td><b>105</b></td><td><span class="bad">-15%</span></td><td>29</td><td><b>25</b></td><td><span class="bad">-14%</span></td></tr><tr><td>Anúncio de outro funil</td><td>1</td><td><b>3</b></td><td><span class="good">+200%</span></td><td>0</td><td><b>2</b></td><td><span class="neu">—</span></td></tr><tr class="hl"><td>Total</td><td>2.641</td><td><b>3.664</b></td><td><span class="good">+39%</span></td><td>825</td><td><b>665</b></td><td><span class="bad">-19%</span></td></tr></tbody></table></div>
+  <p class="nota">No período anterior, o pago está sem os cadastros da [11] Global.</p>
+</div>
+</section>
+
+<!-- RECOMENDAÇÕES -->
+<section class="slide soft">
+<div class="wrap">
+  <div class="section-label">O que melhorar</div>
+  <h2>Próximos passos</h2>
+  <p class="lead">Em ordem de impacto. Hoje a conta roda R$ 150 por dia. Novembro tem R$ 1.543 gastos até 08/11, e nesse ritmo o mês fecha perto de R$ 1.150 abaixo dos R$ 6.000 combinados.</p>
+  <ol class="acoes">
+    <li><div><b>Dar mais verba para quem está com o ADV39</b><span>[12] de R$ 30 para R$ 40 e [08] de R$ 30 para R$ 40. São as campanhas mais baratas da semana. O aumento é pequeno para não voltar ao aprendizado.</span></div></li>
+    <li><div><b>Pedir à criação 2 ou 3 variações do ADV39</b><span>O tema Óculos IA tem o maior CTR da conta. É o caminho mais rápido para aliviar o ADV14 e o ADV40, que já mostram cansaço.</span></div></li>
+    <li><div><b>Reabrir o teste de criativos com R$ 20</b><span>A [14] parou com o ADV57 a R$ 8,18 por entrada. Próxima rodada: variações do ADV39, ou ADI18 + ADC02 + ADC05.</span></div></li>
+    <li><div><b>Ajustar Portugal</b><span>Pausar ADV30 e ADV18 na [05], que gastaram sem trazer cadastro, e testar o ADV39. Decidir com a equipe se a regra de 20% a 30% da verba internacional continua.</span></div></li>
+    <li><div><b>Ter um criativo reserva para a [03]</b><span>O ADV14 roda sozinho lá e o CTR caiu de 4,4% para 3,8%. Mexer na campanha zera o aprendizado, então só trocar se o custo por entrada passar de R$ 4.</span></div></li>
+    <li><div><b>Manter um post “ESPIAR” por semana</b><span>É o maior canal sem custo de mídia, e quando ele cai o volume total cai junto.</span></div></li>
+    <li><div><b>Higiene da conta</b><span>Refazer as exclusões com as três páginas e o lead do Unnichat, fazer o Unnichat enviar fbc e fbp no lead e criar um alerta quando a entrada no grupo do dia ficar abaixo de 60%.</span></div></li>
+  </ol>
+</div>
+</section>
+
+<!-- FONTES -->
+<section class="slide">
+<div class="wrap">
+  <div class="section-label">Fontes e critérios</div>
+  <h2>Como os números foram calculados</h2>
+  <div class="notes">
+    <div class="note-card"><h3>Anúncios</h3><p>Aba MTADS da planilha da Sala Secreta (Meta Ads, contas ANEX 08 e ANEX 03), dia a dia por campanha, conjunto e anúncio, até 08/11/2026.</p></div>
+    <div class="note-card"><h3>Cadastros e grupo</h3><p>Abas “Cadastros SS com UTM” (Unnichat) e “Cadastros SS Clint”, somadas. Cada pessoa conta uma vez (e-mail ou telefone), no dia do primeiro cadastro. A entrada no grupo vem do Unnichat.</p></div>
+    <div class="note-card"><h3>Pago × orgânico</h3><p>Pago = UTM “MTADS-SST” ou anúncio do Meta com UTM padrão. Campanha, página e criativo saem da UTM de cada cadastro.</p></div>
+    <div class="note-card"><h3>Diferenças com relatórios anteriores</h3><p>Este relatório soma o histórico do Clint para identificar quem já era cadastrado. Por isso alguns números de novembro ficam um pouco abaixo dos da apresentação anterior.</p></div>
+  </div>
+</div>
+</section>
+
+<footer class="slide">
+  <div class="wrap">
+    <div class="brand-mini">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" style="width:22px;height:22px" aria-hidden="true">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon><polygon points="50,33 65,59 35,59"></polygon>
+      </svg>
+      <span><b>BM</b> Mídias · Sala Secreta · Marketex</span>
+    </div>
+    <div>Dados extraídos em 09/11/2026 · fonte: planilha Sala Secreta (MTADS, Unnichat e Clint)</div>
+  </div>
+</footer>
+
+<div class="navap" id="navap">
+  <button type="button" id="ap-ant" aria-label="Seção anterior">←</button>
+  <span id="ap-pos">1</span>
+  <button type="button" id="ap-prox" aria-label="Próxima seção">→</button>
+  <button type="button" id="ap-sair">Sair (Esc)</button>
+</div>
+
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide')).filter(function(s){return s.tagName!=='FOOTER';}), i=0;
+  function mostra(k){i=Math.max(0,Math.min(slides.length-1,k));slides.forEach(function(s,j){s.classList.toggle('atual',j===i);});
+    document.getElementById('ap-pos').textContent=(i+1)+' / '+slides.length;window.scrollTo(0,0);}
+  function entra(){document.body.classList.add('ap');mostra(0);
+    try{var p=document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();if(p&&p.catch)p.catch(function(){});}catch(e){}}
+  function sai(){var alvo=slides[i];document.body.classList.remove('ap');
+    try{if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(function(){});}catch(e){}
+    alvo.scrollIntoView({block:'start'});}
+  document.getElementById('btn-ap').onclick=entra;
+  document.getElementById('ap-sair').onclick=sai;
+  document.getElementById('ap-ant').onclick=function(){mostra(i-1);};
+  document.getElementById('ap-prox').onclick=function(){mostra(i+1);};
+  document.addEventListener('keydown',function(e){
+    if(!document.body.classList.contains('ap'))return;
+    if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();mostra(i+1);}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();mostra(i-1);}
+    else if(e.key==='Escape'){sai();}
+  });
+})();
+</script>
+
+</body>
+</html>
