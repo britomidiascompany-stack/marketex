@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Especialista com IA · Painel — Brito Mídias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --roxo:#7C3AED; --roxo-dark:#5B21B6; --roxo-deep:#3B0F73; --roxo-light:#A78BFA; --roxo-xlight:#EDE9FE;
+    --preto:#0A0A0A; --ink:#141018; --cinza:#5B5566; --linha:#E7E3EE; --bg:#FFFFFF; --bg-soft:#FAF9FC;
+    --good:#16A34A; --warn:#D97706; --bad:#DC2626;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:'Poppins',-apple-system,sans-serif; font-weight:300; background:var(--bg); color:var(--ink); line-height:1.6; font-size:16px; }
+  a { color:var(--roxo); text-decoration:none; } a:hover{ text-decoration:underline; }
+
+  .hero { background: radial-gradient(1100px 500px at 78% -10%, rgba(124,58,237,.55), transparent 60%), linear-gradient(150deg,#0A0A0A 0%,#17111F 45%,#3B0F73 100%); color:#fff; padding:44px 28px 56px; position:relative; overflow:hidden; }
+  .hero::before { content:""; position:absolute; inset:0; background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px); background-size:44px 44px; mask-image: radial-gradient(ellipse at 50% 30%, black 40%, transparent 80%); pointer-events:none; }
+  .hero-inner { max-width:1100px; margin:0 auto; position:relative; z-index:1; }
+  .brand { display:flex; align-items:center; gap:16px; margin-bottom:32px; }
+  .brand svg { width:44px; height:44px; }
+  .brand .word { display:flex; align-items:center; gap:12px; font-weight:300; color:#fff; }
+  .brand .word b { font-weight:800; font-size:20px; }
+  .brand .word .bar { width:2px; height:28px; background:rgba(255,255,255,.55); }
+  .brand .word span { font-size:18px; letter-spacing:.22em; }
+  .hero .eyebrow { color:var(--roxo-light); font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; margin-bottom:12px; }
+  .hero h1 { font-size:42px; font-weight:800; letter-spacing:-.02em; margin:0 0 8px; color:#fff; line-height:1.1; }
+  .hero .sub { font-size:15px; color:rgba(255,255,255,.65); margin-bottom:24px; }
+  .hero .pills { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+  .hero .pill { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); color:#fff; padding:8px 16px; border-radius:100px; font-size:12px; font-weight:600; letter-spacing:.06em; }
+  .hero .pill.solid { background:linear-gradient(90deg,var(--roxo),var(--roxo-dark)); border-color:transparent; }
+
+  .wrap { max-width:1100px; margin:0 auto; padding:0 28px; }
+  section { padding:56px 0; } section.soft { background:var(--bg-soft); }
+
+  .section-label { display:flex; align-items:center; gap:12px; font-size:13px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--roxo); margin-bottom:12px; }
+  .section-label::before { content:""; width:34px; height:2px; background:var(--roxo); border-radius:2px; }
+  h2 { font-size:30px; font-weight:700; letter-spacing:-.01em; margin:0 0 8px; color:var(--ink); }
+  .lead { color:var(--cinza); font-size:15.5px; margin:0 0 32px; max-width:780px; }
+
+  .months { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin-bottom:20px; }
+  @media (max-width:1000px){ .months{grid-template-columns:repeat(3,1fr);} }
+  @media (max-width:640px){ .months{grid-template-columns:1fr 1fr;} }
+  .month-card { border:1px solid var(--linha); border-radius:16px; padding:22px; background:#fff; position:relative; }
+  .month-card.current { border-color:var(--roxo); background:linear-gradient(180deg,#fff,var(--roxo-xlight) 200%); box-shadow:0 8px 24px rgba(124,58,237,.08); }
+  .month-card .m-head { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:16px; }
+  .month-card .m-name { font-weight:700; font-size:16px; color:var(--ink); }
+  .month-card .m-status { font-size:11px; color:var(--cinza); letter-spacing:.06em; text-transform:uppercase; }
+  .month-card .m-status.parcial { color:var(--roxo); font-weight:600; }
+  .month-card .m-kpi { margin-bottom:12px; } .month-card .m-kpi:last-child{margin-bottom:0;}
+  .month-card .m-kpi .k-lbl { font-size:11px; color:var(--cinza); text-transform:uppercase; letter-spacing:.1em; margin-bottom:2px; }
+  .month-card .m-kpi .k-val { font-size:22px; font-weight:700; color:var(--ink); }
+  .month-card .m-kpi .k-val.roxo { color:var(--roxo); }
+
+  .week-row { display:grid; grid-template-columns:140px 1fr 1fr 1fr 1fr 1fr; gap:0; align-items:center; background:#fff; border:1px solid var(--linha); border-radius:14px; padding:20px 24px; margin-bottom:12px; }
+  .week-row.win { border-color:var(--roxo-light); background:linear-gradient(90deg,var(--roxo-xlight) 0%,#fff 40%); }
+  .week-row.alert { border-color:#FDE68A; background:linear-gradient(90deg,#FFFBEB 0%,#fff 40%); }
+  .week-row .wr-date { font-weight:700; font-size:15px; color:var(--roxo); }
+  .week-row .wr-date .wr-tag { display:block; font-size:10px; color:var(--cinza); text-transform:uppercase; letter-spacing:.1em; margin-top:2px; font-weight:500; }
+  .week-row .wr-kpi { padding:0 12px; border-left:1px solid var(--linha); }
+  .week-row .wr-kpi small { display:block; font-size:10.5px; color:var(--cinza); text-transform:uppercase; letter-spacing:.1em; margin-bottom:4px; font-weight:500; }
+  .week-row .wr-kpi b { display:block; font-size:17px; font-weight:700; color:var(--ink); }
+  .week-row .wr-kpi b.roxo{color:var(--roxo);} .week-row .wr-kpi b.good{color:var(--good);} .week-row .wr-kpi b.bad{color:var(--bad);}
+  @media (max-width:900px){ .week-row{grid-template-columns:1fr 1fr 1fr;gap:12px;} .week-row .wr-date{grid-column:1/-1;padding-bottom:8px;border-bottom:1px solid var(--linha);margin-bottom:8px;} .week-row .wr-kpi{border-left:none;padding:0;} }
+
+  .kpi-row { display:grid; grid-template-columns:repeat(6,1fr); gap:12px; }
+  @media (max-width:900px){ .kpi-row{grid-template-columns:repeat(3,1fr);} }
+  @media (max-width:560px){ .kpi-row{grid-template-columns:1fr 1fr;} }
+  .mini-card { border:1px solid var(--linha); border-radius:14px; padding:16px 18px; background:var(--bg-soft); }
+  .mini-card small { color:var(--roxo); font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; display:block; margin-bottom:4px; }
+  .mini-card b { font-size:20px; font-weight:700; display:block; color:var(--ink); }
+  .mini-card .hint { font-size:11px; color:var(--cinza); margin-top:4px; display:block; }
+
+  .table-wrap { overflow-x:auto; border:1px solid var(--linha); border-radius:16px; background:#fff; }
+  table { width:100%; border-collapse:collapse; font-size:14px; min-width:560px; }
+  thead th { background:var(--bg-soft); color:var(--cinza); font-weight:600; text-transform:uppercase; font-size:11px; letter-spacing:.1em; padding:14px; text-align:right; border-bottom:1px solid var(--linha); }
+  thead th:first-child { text-align:left; }
+  tbody td { padding:14px; text-align:right; border-bottom:1px solid var(--linha); font-weight:400; }
+  tbody td:first-child { text-align:left; font-weight:500; color:var(--ink); }
+  tbody tr:last-child td { border-bottom:none; }
+  tbody tr.hero-row td { background:var(--roxo-xlight); }
+  tbody tr.hero-row td:first-child { color:var(--roxo-dark); font-weight:700; }
+  .good{color:var(--good);font-weight:600;} .bad{color:var(--bad);font-weight:600;} .warn{color:var(--warn);font-weight:600;}
+
+  .notes { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:900px){ .notes{grid-template-columns:1fr;} }
+  .note-card { border:1px solid var(--linha); border-radius:16px; padding:24px; background:#fff; }
+  .note-card.roxo { border-color:var(--roxo-light); background:linear-gradient(180deg,#fff,var(--roxo-xlight) 400%); }
+  .note-card h3 { font-size:17px; font-weight:700; margin:0 0 12px; color:var(--ink); }
+  .note-card p { color:var(--cinza); font-size:14px; margin:8px 0; }
+  .note-card ul { margin:8px 0 0; padding-left:20px; color:var(--cinza); font-size:14px; }
+  .note-card li { margin-bottom:8px; }
+  .note-card b,.note-card strong { color:var(--ink); font-weight:600; }
+
+  footer { background:var(--ink); color:rgba(255,255,255,.65); padding:32px 28px; text-align:center; font-size:13px; }
+  footer .brand-mini { display:inline-flex; align-items:center; gap:10px; margin-bottom:8px; color:#fff; font-weight:500; }
+
+  .kpi-row{margin-bottom:12px}
+  .mini-card.bad b{color:var(--bad)} .mini-card.good b{color:var(--good)} .mini-card.roxo b{color:var(--roxo)}
+  .grp-title{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--cinza);margin:22px 0 10px}
+  .bar{height:8px;border-radius:8px;background:var(--linha);overflow:hidden;margin-top:6px}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--roxo),var(--roxo-dark))}
+  .tag{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.06em;padding:2px 8px;border-radius:100px;background:var(--roxo-xlight);color:var(--roxo-dark);margin-left:6px;vertical-align:middle}
+  .tag.img{background:#F1F5F9;color:#334155}
+  .placeholder{border:1px dashed var(--roxo-light);border-radius:16px;padding:22px;background:#fff;color:var(--cinza)}
+  td.muted{color:#A8A2B3}
+  .note-card.bad{border-color:#FECACA;background:linear-gradient(180deg,#fff,#FEF2F2 400%)}
+  .note-card.good{border-color:#BBF7D0;background:linear-gradient(180deg,#fff,#F0FDF4 400%)}
+
+  html{scroll-behavior:smooth}
+  section{scroll-margin-top:16px}
+  .layout{display:grid;grid-template-columns:230px minmax(0,1fr);max-width:1380px;margin:0 auto}
+  .layout main{min-width:0}
+  .layout main section .wrap{max-width:1100px}
+  .toc{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;padding:36px 14px 24px 24px;border-right:1px solid var(--linha);background:#fff}
+  .toc-title{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--roxo);margin:0 0 14px 10px}
+  .toc a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;color:var(--cinza);font-size:13.5px;font-weight:500;line-height:1.3;margin-bottom:2px;border-left:2px solid transparent;text-decoration:none}
+  .toc a .n{font-size:11px;font-weight:700;color:var(--roxo-light);min-width:18px}
+  .toc a:hover{background:var(--bg-soft);color:var(--ink);text-decoration:none}
+  .toc a.active{background:var(--roxo-xlight);color:var(--roxo-dark);border-left-color:var(--roxo)}
+  .toc a.active .n{color:var(--roxo)}
+  .toc a.toc-top{margin-top:16px;font-size:12px;color:var(--roxo)}
+  @media (max-width:1250px){.layout .kpi-row{grid-template-columns:repeat(3,1fr)}}
+  @media (max-width:560px){.layout .kpi-row{grid-template-columns:1fr 1fr}}
+  @media (max-width:900px){
+    .layout{grid-template-columns:1fr}
+    .toc{height:auto;flex-direction:row;display:flex;gap:6px;overflow-x:auto;padding:10px 16px;border-right:none;border-bottom:1px solid var(--linha);z-index:10;white-space:nowrap;box-shadow:0 4px 12px rgba(20,16,24,.06)}
+    .toc-title,.toc a.toc-top{display:none}
+    .toc a{border-left:none;margin:0;padding:7px 12px;background:var(--bg-soft);font-size:12.5px;flex:0 0 auto}
+    .toc a .n{display:none}
+    section{scroll-margin-top:64px}
+  }
+
+  tbody tr.grp-row td{background:var(--bg-soft);color:var(--roxo);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:10px 14px}
+  tbody tr.alert-row td{background:#FEF2F2} tbody tr.alert-row td:first-child{color:var(--bad);font-weight:700}
+  .notes > .table-wrap, .notes > div{min-width:0}
+  small{font-weight:400}
+  tbody td{white-space:nowrap} tbody td:first-child{white-space:normal;min-width:190px}
+
+
+  html{scroll-behavior:smooth}
+  section[id],[id^=criativos-]{scroll-margin-top:24px}
+  .layout{display:grid;grid-template-columns:230px minmax(0,1fr);align-items:start}
+  .layout main{min-width:0}
+  .sumario{position:sticky;top:0;height:100vh;overflow-y:auto;padding:28px 14px 28px 22px;border-right:1px solid var(--linha);background:#fff;display:flex;flex-direction:column;gap:2px}
+  .sum-title{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--roxo);margin:0 0 12px 10px;display:flex;align-items:center;gap:8px}
+  .sum-title::before{content:"";width:18px;height:2px;background:var(--roxo);border-radius:2px}
+  .sumario a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;color:var(--cinza);font-size:13.5px;font-weight:500;line-height:1.3;text-decoration:none;border-left:3px solid transparent}
+  .sumario a span{font-size:11px;font-weight:700;color:var(--roxo-light);min-width:18px}
+  .sumario a:hover{background:var(--bg-soft);color:var(--ink);text-decoration:none}
+  .sumario a.ativo{background:var(--roxo-xlight);color:var(--roxo-dark);border-left-color:var(--roxo);font-weight:600}
+  .sumario a.ativo span{color:var(--roxo)}
+  .sumario a.sub{padding:6px 10px 6px 38px;font-size:12.5px;font-weight:400}
+  .sumario a.sub.ativo{background:transparent;border-left-color:transparent;color:var(--roxo-dark);font-weight:400}
+  .sumario a.topo{margin-top:16px;font-size:12px;color:var(--roxo)}
+  @media (max-width:1000px){
+    .layout{display:block}
+    .sumario{position:sticky;top:0;z-index:5;height:auto;flex-direction:row;overflow-x:auto;overflow-y:hidden;padding:10px 12px;border-right:0;border-bottom:1px solid var(--linha);gap:6px;white-space:nowrap}
+    .sum-title,.sumario a.sub,.sumario a.topo{display:none}
+    .sumario a{padding:7px 12px;border-left:0;border-radius:100px;font-size:12.5px;flex:0 0 auto}
+    section[id],[id^=criativos-]{scroll-margin-top:64px}
+  }
+</style></head><body>
+<header class="hero" id="topo"><div class="hero-inner">
+<div class="brand"><svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+        <polygon points="50,33 65,59 35,59"></polygon>
+        <line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line>
+        <line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line>
+        <line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line>
+        <line x1="10" y1="27" x2="50" y2="33"></line>
+      </svg><span class="word"><b>BM</b><i class="bar"></i><span>MÍDIAS</span></span></div>
+<div class="eyebrow">Quiz Especialista com IA · Tráfego Pago · Marketex</div>
+<h1>Painel do Quiz do Workshop</h1>
+<div class="sub">Funil de quiz do LS · campanhas [04], [05] e [06] na ANEX 07 · tela antiga de 27/10 a 01/11 · tela nova desde 09/11 · dados até 11/11 às 14h</div>
+<div class="pills">
+<span class="pill solid">Tela nova: 25,5% das visitas iniciam (antes 24,0% na [06])</span>
+<span class="pill">ADI004: 43,5% iniciam</span>
+<span class="pill">2 vendas no total · nenhuma desde 09/11</span>
+<span class="pill">Academia: 39,3% iniciam</span>
+</div></div></header>
+<div class="layout"><nav class="sumario" aria-label="Sumário do relatório"><div class="sum-title">Sumário</div><a href="#extrato" data-sec="extrato"><span>01</span>Resultado geral</a><a href="#dia-a-dia" data-sec="dia-a-dia"><span>02</span>Dia a dia</a><a href="#quiz" data-sec="quiz"><span>03</span>Etapas do quiz</a><a href="#criativos" data-sec="criativos"><span>04</span>Criativos</a><a class="sub" href="#criativos-nova" data-sec="criativos">Tela nova</a><a class="sub" href="#criativos-antiga" data-sec="criativos">Tela antiga</a><a href="#comparacao" data-sec="comparacao"><span>05</span>LS × Academia</a><a href="#mudancas" data-sec="mudancas"><span>06</span>O que mudamos</a><a href="#leitura" data-sec="leitura"><span>07</span>O que os números dizem</a><a class="topo" href="#topo">↑ Voltar ao topo</a></nav><main>
+<section id="extrato"><div class="wrap"><div class="section-label">Extrato do período</div><h2>Resultado geral do quiz</h2>
+<p class="lead">Custos com imposto de 13,83%. <b>Início</b> é quem clicou em começar o quiz, igual à aba Leads do inLead. <b>Visitas</b> são as visualizações da página do quiz contadas pelo Meta. Leads de teste ficam fora da conta.</p>
+<div class="grp-title">🧭 Desde 27/10, as duas telas somadas</div><div class="kpi-row"><div class="mini-card "><small>Investido c/ imposto</small><b>R$ 1.883,37</b><span class="hint">bruto R$ 1.654,55</span></div><div class="mini-card "><small>Visitas ao quiz</small><b>263</b><span class="hint">394 cliques</span></div><div class="mini-card "><small>Começaram o quiz</small><b>52</b><span class="hint">R$ 36,22 cada</span></div><div class="mini-card "><small>Concluíram</small><b>30</b><span class="hint">e foram à página de vendas</span></div><div class="mini-card "><small>Checkouts (pixel)</small><b>15</b><span class="hint">R$ 125,56 cada</span></div><div class="mini-card bad"><small>Vendas</small><b>2</b><span class="hint">CPA R$ 941,69</span></div></div>
+<div class="grp-title">⚖️ Tela antiga × tela nova</div><div class="table-wrap"><table><thead><tr><th>Métrica</th><th>Tela antiga<br><small>27/10–01/11 · 3 campanhas</small></th><th>Só a [06] na tela antiga<br><small>28/10–01/11</small></th><th>Tela nova<br><small>09/11–11/11 · [06]</small></th></tr></thead><tbody>
+<tr><td>Investimento c/ imposto</td><td>R$ 1.388,79</td><td>R$ 789,98</td><td>R$ 494,58</td></tr>
+<tr><td>Impressões</td><td>24.085</td><td>8.114</td><td>4.864</td></tr>
+<tr><td>CPM</td><td>R$ 57,66</td><td>R$ 97,36</td><td>R$ 101,68</td></tr>
+<tr><td>CTR</td><td>1,26%</td><td>1,59%</td><td>1,85%</td></tr>
+<tr><td>Cliques no link</td><td>304</td><td>129</td><td>90</td></tr>
+<tr><td>CPC</td><td>R$ 4,57</td><td>R$ 6,12</td><td>R$ 5,50</td></tr>
+<tr><td>Visitas ao quiz</td><td>208</td><td>104</td><td>55</td></tr>
+<tr><td>Custo por visita</td><td>R$ 6,68</td><td>R$ 7,60</td><td>R$ 8,99</td></tr>
+<tr class="hero-row"><td>Visitas → início</td><td>18,3%</td><td>24,0%</td><td>25,5%</td></tr>
+<tr><td>Cliques → início</td><td>12,5%</td><td>19,4%</td><td>15,6%</td></tr>
+<tr><td>Começaram o quiz</td><td>38</td><td>25</td><td>14</td></tr>
+<tr><td>Custo por início</td><td>R$ 36,55</td><td>R$ 31,60</td><td>R$ 35,33</td></tr>
+<tr><td>Concluíram</td><td>23</td><td>14</td><td>7</td></tr>
+<tr><td>Início → conclusão</td><td>60,5%</td><td>56,0%</td><td>50,0%</td></tr>
+<tr><td>Checkouts (pixel)</td><td>11</td><td>7</td><td>4</td></tr>
+<tr><td>Vendas</td><td>2</td><td>1</td><td>0</td></tr>
+<tr><td>CPA</td><td>R$ 694,40</td><td>R$ 789,98</td><td>—</td></tr>
+<tr><td>ROAS de captação</td><td>0,12</td><td>0,08</td><td>0,00</td></tr>
+</tbody></table></div><p class="lead" style="margin-top:14px">A comparação mais justa é a [06] contra ela mesma: mesmo público, mesma verba e os mesmos 4 anúncios. Só a tela inicial mudou. A tela nova ainda tem pouca amostra (55 visitas e 14 inícios).</p></div></section>
+<section id="dia-a-dia" class="soft"><div class="wrap"><div class="section-label">Dia a dia</div><h2>Tráfego e quiz por dia</h2><p class="lead">Inícios e conclusões entram no dia em que a pessoa abriu o quiz. 02/11 teve um início tardio, sem gasto. De 02/11 a 08/11 as campanhas ficaram pausadas.</p>
+<div class="table-wrap"><table><thead><tr><th>Data</th><th>Invest. c/ imp.</th><th>Cliques</th><th>Visitas</th><th>Inícios</th><th>Visita → início</th><th>Concluíram</th><th>Checkouts</th><th>Vendas</th></tr></thead><tbody>
+<tr class="grp-row"><td colspan="9">Tela antiga</td></tr><tr><td>27/10</td><td>R$ 90,63</td><td>28</td><td>16</td><td>0</td><td>0,0%</td><td>0</td><td>0</td><td>0</td></tr><tr><td>28/10</td><td>R$ 257,87</td><td>72</td><td>43</td><td>4</td><td>9,3%</td><td>3</td><td>1</td><td>0</td></tr><tr><td>29/10</td><td>R$ 347,16</td><td>88</td><td>55</td><td>12</td><td>21,8%</td><td>7</td><td>1</td><td>0</td></tr><tr><td>30/10</td><td>R$ 341,67</td><td>70</td><td>52</td><td>10</td><td>19,2%</td><td>5</td><td>3</td><td>1</td></tr><tr><td>31/10</td><td>R$ 148,35</td><td>26</td><td>23</td><td>7</td><td>30,4%</td><td>4</td><td>5</td><td>1</td></tr><tr><td>01/11</td><td>R$ 203,11</td><td>20</td><td>19</td><td>4</td><td>21,1%</td><td>3</td><td>1</td><td>0</td></tr><tr><td>02/11</td><td>R$ 0,00</td><td>0</td><td>0</td><td>1</td><td>—</td><td>1</td><td>0</td><td>0</td></tr>
+<tr class="grp-row"><td colspan="9">Tela nova · só a [06]</td></tr><tr><td>09/11</td><td>R$ 148,47</td><td>35</td><td>19</td><td>5</td><td>26,3%</td><td>2</td><td>1</td><td>0</td></tr><tr><td>10/11</td><td>R$ 210,30</td><td>40</td><td>24</td><td>4</td><td>16,7%</td><td>3</td><td>1</td><td>0</td></tr><tr><td>11/11</td><td>R$ 135,81</td><td>15</td><td>12</td><td>5</td><td>41,7%</td><td>2</td><td>2</td><td>0</td></tr>
+<tr class="hero-row"><td>Total</td><td>R$ 1.883,37</td><td>394</td><td>263</td><td>52</td><td>19,8%</td><td>30</td><td>15</td><td>2</td></tr>
+</tbody></table></div><p class="lead" style="margin-top:14px">11/11 é parcial, até 14h.</p></div></section>
+<section id="quiz"><div class="wrap"><div class="section-label">Etapas do quiz</div><h2>Onde as pessoas saem do quiz</h2><p class="lead">Quantas pessoas chegaram a cada tela e a perda em relação à tela anterior. Perdas acima de 15% ficam em vermelho. O mapa interativo mostra as perguntas, as respostas e quantas pessoas escolheram cada uma: <a href="https://britomidiascompany-stack.github.io/marketex/relatorios/quiz-ls-mapa/" target="_blank" rel="noopener">abrir o mapa do quiz</a>.</p>
+<div class="table-wrap"><table><thead><tr><th>Etapa</th><th>Tela antiga</th><th>Perda</th><th>Tela nova</th><th>Perda</th></tr></thead><tbody>
+<tr><td>Visitas ao quiz</td><td>208</td><td class="">—</td><td>55</td><td class="">—</td></tr>
+<tr class=alert-row><td>Início do quiz (P01)</td><td>38</td><td class="bad">81,7%</td><td>14</td><td class="bad">74,5%</td></tr>
+<tr class=alert-row><td>Pergunta 02</td><td>29</td><td class="bad">23,7%</td><td>10</td><td class="bad">28,6%</td></tr>
+<tr class=alert-row><td>Pergunta 03</td><td>28</td><td class="">3,4%</td><td>8</td><td class="bad">20,0%</td></tr>
+<tr><td>Pergunta 04</td><td>27</td><td class="">3,6%</td><td>8</td><td class="">0,0%</td></tr>
+<tr><td>Pergunta 05</td><td>25</td><td class="">7,4%</td><td>8</td><td class="">0,0%</td></tr>
+<tr><td>Pergunta 06</td><td>25</td><td class="">0,0%</td><td>8</td><td class="">0,0%</td></tr>
+<tr><td>Pergunta 07</td><td>24</td><td class="">4,0%</td><td>8</td><td class="">0,0%</td></tr>
+<tr><td>Pergunta 08</td><td>24</td><td class="">0,0%</td><td>8</td><td class="">0,0%</td></tr>
+<tr><td>Pergunta 09</td><td>23</td><td class="">4,2%</td><td>7</td><td class="">12,5%</td></tr>
+<tr><td>Pergunta 10</td><td>23</td><td class="">0,0%</td><td>7</td><td class="">0,0%</td></tr>
+<tr><td>Penúltima tela</td><td>23</td><td class="">0,0%</td><td>7</td><td class="">0,0%</td></tr>
+<tr><td>Tela final e página de vendas</td><td>23</td><td class="">0,0%</td><td>7</td><td class="">0,0%</td></tr>
+<tr class=alert-row><td>Checkout (pixel)</td><td>11</td><td class="bad">52,2%</td><td>4</td><td class="bad">42,9%</td></tr>
+<tr class=alert-row><td>Venda</td><td>2</td><td class="bad">81,8%</td><td>0</td><td class="bad">100,0%</td></tr>
+</tbody></table></div><p class="lead" style="margin-top:14px">Depois da Pergunta 02 quase ninguém sai. O problema está na entrada e na primeira pergunta. Checkout é evento do pixel e pode contar a mesma pessoa mais de uma vez.</p></div></section>
+<section id="criativos" class="soft"><div class="wrap"><div class="section-label">Criativos</div><h2>Desempenho por anúncio</h2><p class="lead">Ordenado por investimento. A taxa de início muda bastante de anúncio para anúncio, com a mesma tela. Isso mostra que a promessa do anúncio também pesa na entrada do quiz.</p>
+<div id="criativos-nova"><div class="grp-title">🆕 Tela nova · [06] desde 09/11</div><div class="table-wrap"><table><thead><tr><th>Anúncio</th><th>Invest. c/ imp.</th><th>Visitas</th><th>Inícios</th><th>Visita → início</th><th>Custo por início</th><th>Concluíram</th><th>Checkouts</th><th>Vendas</th></tr></thead><tbody><tr><td>ADC004<span class="tag ">carrossel</span><br><small style="color:var(--cinza)">Ela sabia mais que todo mundo</small></td><td>R$ 289,40</td><td>10</td><td>3</td><td>30,0%</td><td>R$ 96,47</td><td>3</td><td>1</td><td>0</td></tr><tr><td>ADI004<span class="tag img">imagem</span><br><small style="color:var(--cinza)">O que você já sabe vale mais</small></td><td>R$ 92,20</td><td>23</td><td>10</td><td>43,5%</td><td>R$ 9,22</td><td>4</td><td>3</td><td>0</td></tr><tr><td>ADI003<span class="tag img">imagem</span><br><small style="color:var(--cinza)">Onde está perdendo espaço no digital</small></td><td>R$ 79,00</td><td>21</td><td>1</td><td>4,8%</td><td>R$ 79,00</td><td>0</td><td>0</td><td>0</td></tr><tr><td>ADC003<span class="tag ">carrossel</span><br><small style="color:var(--cinza)">O que está na sua cabeça hoje</small></td><td>R$ 33,98</td><td>1</td><td>0</td><td>0,0%</td><td>—</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div><p class="lead" style="margin-top:12px">O ADC004 levou 59% da verba com CPM perto de R$ 225 e trouxe só 10 visitas. O ADI004 é o melhor anúncio nas duas telas e melhorou com a nova.</p></div>
+<div id="criativos-antiga"><div class="grp-title">🗂️ Tela antiga · 27/10 a 01/11</div><div class="table-wrap"><table><thead><tr><th>Anúncio</th><th>Invest. c/ imp.</th><th>Visitas</th><th>Inícios</th><th>Visita → início</th><th>Custo por início</th><th>Concluíram</th><th>Checkouts</th><th>Vendas</th></tr></thead><tbody><tr><td>ADC004<span class="tag ">carrossel</span><br><small style="color:var(--cinza)">Ela sabia mais que todo mundo</small></td><td>R$ 333,92</td><td>34</td><td>3</td><td>8,8%</td><td>R$ 111,31</td><td>2</td><td>2</td><td>1</td></tr><tr><td>ADI004<span class="tag img">imagem</span><br><small style="color:var(--cinza)">O que você já sabe vale mais</small></td><td>R$ 267,97</td><td>46</td><td>16</td><td>34,8%</td><td>R$ 16,75</td><td>9</td><td>2</td><td>0</td></tr><tr><td>ADC001<span class="tag ">carrossel</span><br><small style="color:var(--cinza)">Usando ia do jeito errado</small></td><td>R$ 259,54</td><td>18</td><td>3</td><td>16,7%</td><td>R$ 86,51</td><td>2</td><td>0</td><td>0</td></tr><tr><td>ADC002<span class="tag ">carrossel</span><br><small style="color:var(--cinza)">Gente que sabe menos ganhando espaço</small></td><td>R$ 178,64</td><td>26</td><td>3</td><td>11,5%</td><td>R$ 59,55</td><td>2</td><td>2</td><td>1</td></tr><tr><td>ADI002<span class="tag img">imagem</span><br><small style="color:var(--cinza)">Você não está ficando pra trás por competência</small></td><td>R$ 130,81</td><td>57</td><td>5</td><td>8,8%</td><td>R$ 26,16</td><td>4</td><td>2</td><td>0</td></tr><tr><td>ADC003<span class="tag ">carrossel</span><br><small style="color:var(--cinza)">O que está na sua cabeça hoje</small></td><td>R$ 107,18</td><td>9</td><td>2</td><td>22,2%</td><td>R$ 53,59</td><td>2</td><td>1</td><td>0</td></tr><tr><td>ADI003<span class="tag img">imagem</span><br><small style="color:var(--cinza)">Onde está perdendo espaço no digital</small></td><td>R$ 80,91</td><td>15</td><td>4</td><td>26,7%</td><td>R$ 20,23</td><td>1</td><td>2</td><td>0</td></tr><tr><td>ADI001<span class="tag img">imagem</span><br><small style="color:var(--cinza)">Tem gente que sabe menos</small></td><td>R$ 29,81</td><td>3</td><td>1</td><td>33,3%</td><td>R$ 29,81</td><td>1</td><td>0</td><td>0</td></tr></tbody></table></div><p class="lead" style="margin-top:12px">As duas vendas vieram de carrossel: ADC002 na [04] e ADC004 na [06]. ADI001 e ADI002 somam o pouco que gastaram na [05]. Um início sem UTM ficou fora desta tabela.</p></div>
+</div></section>
+<section id="comparacao"><div class="wrap"><div class="section-label">Comparação</div><h2>LS × Academia</h2><p class="lead">Funis e produtos diferentes: o LS vende ingresso de ticket baixo e a Academia um produto de R$ 897. Números da Academia de 01/10 a 01/11, do relatório do Hebert de 04/11. Verde quando o LS está melhor que a Academia.</p>
+<div class="table-wrap"><table><thead><tr><th>Métrica</th><th>LS tela antiga</th><th>LS tela nova</th><th>Academia</th></tr></thead><tbody>
+<tr><td>CPM</td><td class="bad">R$ 57,66</td><td class="bad">R$ 101,68</td><td>R$ 41,62</td></tr>
+<tr><td>CTR</td><td class="bad">1,26%</td><td class="good">1,85%</td><td>1,42%</td></tr>
+<tr><td>CPC</td><td class="bad">R$ 4,57</td><td class="bad">R$ 5,50</td><td>R$ 2,93</td></tr>
+<tr><td>Custo por visita</td><td class="bad">R$ 6,68</td><td class="bad">R$ 8,99</td><td>R$ 4,41</td></tr>
+<tr><td>Cliques → início</td><td class="bad">12,5%</td><td class="bad">15,6%</td><td>26,1%</td></tr>
+<tr class=hero-row><td>Visitas → início</td><td class="bad">18,3%</td><td class="bad">25,5%</td><td>39,3%</td></tr>
+<tr><td>Custo por início</td><td class="bad">R$ 36,55</td><td class="bad">R$ 35,33</td><td>R$ 11,22</td></tr>
+<tr><td>Início → Pergunta 02</td><td class="bad">76,3%</td><td class="bad">71,4%</td><td>91,1%</td></tr>
+<tr><td>Conclusão do quiz</td><td class="good">60,5%</td><td class="good">50,0%</td><td>36,1%</td></tr>
+<tr><td>Conclusão → checkout</td><td class="good">47,8%</td><td class="good">57,1%</td><td>24,0%</td></tr>
+<tr><td>Checkout → venda</td><td class="good">18,2%</td><td class="bad">0,0%</td><td>11,0%</td></tr>
+</tbody></table></div><p class="lead" style="margin-top:14px">A conclusão do quiz usa como base a Pergunta 01, como no relatório do Hebert. O quiz da Academia descarta parte das pessoas na qualificação; antes desse filtro ela mantinha 88,2%. A taxa de início da Academia considera todas as 3.743 visitas do relatório.</p></div></section>
+<section id="mudancas" class="soft"><div class="wrap"><div class="section-label">Ajustes</div><h2>O que mudamos em 09/11</h2><p class="lead">A leitura de 04/11 mostrou que a entrada do quiz era o maior gargalo. As mudanças foram feitas para medir só esse ponto.</p><div class="notes">
+<div class="note-card good"><h3>✍️ Nova tela inicial</h3><ul>
+<li>Reescrita seguindo o direcionamento do copy e republicada no inLead em 09/11 às 09h45.</li>
+<li>Título atual: <b>"Descubra onde o seu negócio está deixando de faturar com inteligência artificial"</b>, com "Dá pra ganhar mais sem atender mais gente." acima.</li>
+<li>Botão "VER MEU DIAGNÓSTICO" e um segundo botão "Leva menos de 2 minutos 100% gratuito", que também avança.</li></ul></div>
+<div class="note-card roxo"><h3>🔁 [06] religada</h3><ul>
+<li>Volume 18–65, mulheres, Brasil, R$ 150 por dia, com os mesmos 4 anúncios de antes: ADI003, ADI004, ADC003 e ADC004.</li>
+<li>[04] e [05] seguem pausadas. Assim a comparação fica limpa: só a tela inicial mudou.</li></ul></div>
+<div class="note-card"><h3>🗺️ Mapa do funil</h3><ul>
+<li>Mapa interativo do quiz: dá para aproximar, afastar e clicar em cada tela para ver perguntas, respostas, quantas pessoas escolheram cada uma e onde elas saem.</li>
+<li><a href="https://britomidiascompany-stack.github.io/marketex/relatorios/quiz-ls-mapa/" target="_blank" rel="noopener">Abrir o mapa do Quiz Especialista com IA</a></li></ul></div>
+<div class="note-card"><h3>🔎 Achado na tela inicial</h3><ul>
+<li>A tela tem um <b>campo de texto solto</b> com o texto de exemplo "Leva 2 minutinhos". Vale conferir no inLead se ele é de propósito, porque pode confundir quem chega.</li></ul></div>
+</div></div></section>
+<section id="leitura"><div class="wrap"><div class="section-label">Leitura</div><h2>O que os números dizem</h2><div class="notes">
+<div class="note-card good"><h3>🟢 O que melhorou</h3><ul>
+<li>A taxa de início subiu de 18,3% (tela antiga, 3 campanhas) para <b>25,5%</b>. Na [06] contra ela mesma, a alta é pequena: de 24,0% para 25,5%.</li>
+<li><b>ADI004</b> passou de 34,8% para <b>43,5%</b> de início, a R$ 9,22 por início. Está acima da Academia (39,3%).</li>
+<li>Depois do quiz, o LS segue convertendo melhor que a Academia: 57,1% de quem conclui vai ao checkout, contra 24,0%.</li></ul></div>
+<div class="note-card bad"><h3>🔴 O que piorou</h3><ul>
+<li>O CPM subiu para <b>R$ 101,68</b>, contra R$ 97,36 na [06] antes. O ADC004 levou 59% da verba com CPM perto de R$ 225.</li>
+<li>O ADI003 caiu de 26,7% para 4,8% de início (1 em 21 visitas).</li>
+<li>Nenhuma venda desde 09/11 (pixel e VK), com 4 checkouts. Ainda é cedo para julgar a venda.</li></ul></div>
+<div class="note-card roxo"><h3>🚀 Próximos passos sugeridos</h3><ul>
+<li>Pausar ADC004 e ADC003 e deixar a verba no ADI004 e no ADI003.</li>
+<li>Ler de novo com cerca de 100 visitas na tela nova, para separar o efeito da tela do efeito do anúncio.</li>
+<li>Conferir o campo de texto solto na tela inicial.</li></ul></div>
+<div class="note-card"><h3>📌 Falta medir</h3><ul>
+<li>As vendas desde 09/11 direto na Hotmart (hoje conferidas pelo pixel e pelo VK).</li>
+<li>A taxa de início da tela nova com mais volume: 55 visitas ainda é pouco.</li></ul></div>
+</div></div></section>
+</main></div>
+<footer><div class="brand-mini">BM MÍDIAS</div><div>Quiz Especialista com IA · Marketex · Fontes: Meta Ads (ANEX 07, campanhas [04], [05] e [06]), aba INLEAD | LEADS da planilha unificada (inLead) pela UTM, Hotmart e VK Metrics para vendas, relatório da Academia do Hebert (04/11) · leads de teste fora da conta · gerado em 11/11/2026 às 14h</div></footer>
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.sumario a[data-sec]'));
+  var secs=[].slice.call(document.querySelectorAll('main section[id]'));
+  function marcar(id){links.forEach(function(a){a.classList.toggle('ativo',a.getAttribute('data-sec')===id);});
+    var at=document.querySelector('.sumario a.ativo:not(.sub)'); if(at&&window.innerWidth<=1000){at.scrollIntoView({block:'nearest',inline:'center'});}}
+  function atualizar(){var y=window.scrollY+window.innerHeight*0.3, atual=secs[0]&&secs[0].id;
+    secs.forEach(function(s){if(s.offsetTop<=y)atual=s.id;}); if((window.innerHeight+window.scrollY)>=document.body.scrollHeight-4)atual=secs[secs.length-1].id; marcar(atual);}
+  [].slice.call(document.querySelectorAll('.sumario a[href^="#"]')).forEach(function(a){a.addEventListener('click',function(e){
+    var id=a.getAttribute('href').slice(1), alvo=document.getElementById(id); if(!alvo)return; e.preventDefault();
+    alvo.scrollIntoView({behavior:'smooth',block:'start'}); try{history.replaceState(null,'','#'+id);}catch(_){}
+  });});
+  window.addEventListener('scroll',atualizar,{passive:true}); window.addEventListener('resize',atualizar); atualizar();
+})();
+</script>
+</body></html>

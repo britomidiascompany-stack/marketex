@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Mapa do Quiz Especialista com IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --roxo:#7C3AED; --roxo2:#A78BFA; --dark:#0F0B1E; --dark2:#1A1430;
+  --bg:#F5F3FA; --dot:#D9D3EA; --card:#FFFFFF; --txt:#1F1A2E; --muted:#6B6480; --line:#E6E1F0;
+  --q:#7C3AED; --m:#059669; --n:#EA580C; --a:#DB2777; --o:#334155;
+  --warn:#B45309; --warnbg:#FEF3C7; --bad:#DC2626;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;font-family:Poppins,system-ui,sans-serif;color:var(--txt);background:var(--bg)}
+/* ---------- barra superior ---------- */
+.top{position:fixed;inset:0 0 auto 0;z-index:20;background:var(--dark);color:#fff;
+  background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:24px 24px;padding:10px 16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.brand{display:flex;flex-direction:column;min-width:0}
+.brand b{font-size:15px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+.brand b span{color:var(--roxo2)}
+.brand small{font-size:11px;color:#B9B2D0;white-space:nowrap}
+.chips{display:flex;gap:6px;overflow-x:auto;flex:1;min-width:0;scrollbar-width:none;padding:2px 0}
+.chips::-webkit-scrollbar{display:none}
+.chip{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;font:500 12px Poppins;
+  padding:6px 11px;border-radius:999px;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.chip:hover{background:rgba(255,255,255,.14)}
+.chip i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.toggle{border:0;background:var(--roxo);color:#fff;font:600 12px Poppins;padding:7px 12px;border-radius:8px;cursor:pointer;white-space:nowrap}
+/* ---------- área do mapa ---------- */
+#vp{position:fixed;inset:0;touch-action:none;cursor:grab;
+  background-color:var(--bg);background-image:radial-gradient(var(--dot) 1.2px,transparent 1.2px);background-size:26px 26px}
+#vp.drag{cursor:grabbing}
+#world{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+svg#edges{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
+/* rótulos de faixa (sempre visíveis) */
+.lane{position:absolute;font-weight:800;letter-spacing:-1px;line-height:1;white-space:nowrap;pointer-events:none}
+.lane span{display:block;font-size:44px;font-weight:600;letter-spacing:0;margin-top:14px;opacity:.75}
+/* ---------- cartões ---------- */
+.card{position:absolute;width:340px;background:var(--card);border-radius:16px;border:1px solid var(--line);
+  box-shadow:0 6px 24px rgba(31,26,46,.08);cursor:pointer;transition:box-shadow .2s, border-color .2s}
+.card:hover{box-shadow:0 10px 34px rgba(124,58,237,.18)}
+.card.open{border-color:var(--c);box-shadow:0 14px 44px rgba(31,26,46,.18)}
+.card .hd{height:56px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;border-radius:16px 16px 0 0;color:#fff;background:var(--c)}
+.card .hd .tag{color:#fff;font-weight:700;font-size:13px;letter-spacing:.3px;text-transform:uppercase}
+.card .hd .reach{color:#fff;font-weight:800;font-size:20px;line-height:1;text-align:right}
+.card .hd .reach small{display:block;font-size:10px;font-weight:500;opacity:.85}
+.lq{--c:var(--q)} .lm{--c:var(--m)} .ln{--c:var(--n)} .la{--c:var(--a)} .lo{--c:var(--o)}
+.card .ttl{padding:12px 16px 0;font-weight:700;font-size:17px;color:var(--txt)}
+.card .body{padding:6px 16px 16px;color:var(--txt)}
+.q{font-weight:600;font-size:14.5px;line-height:1.4;margin:4px 0 6px}
+.sub{font-size:12.5px;color:var(--muted);line-height:1.5;margin:4px 0}
+.more{font-size:11.5px;color:var(--roxo);font-weight:600;margin-top:8px}
+.detail{display:none}
+.card.open .detail,#world.z-near .detail{display:block}
+.card.open .more,#world.z-near .more{display:none}
+.ans{border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin:7px 0;font-size:12.5px;line-height:1.4;position:relative;overflow:hidden}
+.ans .bar{position:absolute;left:0;top:0;bottom:0;background:var(--c);opacity:.12}
+.ans .row{position:relative;display:flex;gap:8px;justify-content:space-between;align-items:flex-start}
+.ans .row b{font-size:13px;white-space:nowrap}
+.ans .row b small{font-weight:500;color:var(--muted);font-size:10.5px;margin-left:3px}
+.ans .t{color:var(--txt)}
+.route{position:relative;display:inline-block;margin-top:5px;font-size:10.5px;font-weight:700;color:#fff;padding:2px 8px;border-radius:999px}
+.r-m{background:var(--m)} .r-n{background:var(--n)} .r-a{background:var(--a)}
+.field{border:1px dashed #C9C2DA;border-radius:10px;padding:9px 10px;margin:7px 0;font-size:12px;color:var(--muted)}
+.btn{background:#02F102;color:#000;font-weight:700;font-size:11.5px;text-align:center;border-radius:10px;padding:10px;margin:9px 0 4px}
+.btn.or{background:#F3532F;color:#fff}
+.btn.wa{background:#25D366;color:#06301A}
+.btn.ls{background:#621B93;color:#fff}
+.btn.dk{background:#0a0a0a;color:#fff}
+.btn.red{background:#FC2A2A;color:#fff}
+.list{font-size:12px;line-height:1.5;margin:6px 0;padding-left:0;list-style:none}
+.list li{margin:4px 0}
+.video{background:#1F1A2E;color:#fff;border-radius:10px;padding:14px;font-size:12px;text-align:center;margin:8px 0}
+.video small{display:block;color:#B9B2D0;margin-top:3px}
+.imgs{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin:8px 0}
+.imgs img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;border:1px solid var(--line)}
+.price{border:1px solid #F3532F;border-radius:10px;padding:10px;text-align:center;margin:8px 0}
+.price s{color:var(--muted);font-size:11px}
+.price b{display:block;font-size:22px;color:var(--txt)}
+.price small{font-size:11.5px;color:var(--muted)}
+.note{font-size:11.5px;color:var(--muted);background:#F7F5FC;border-radius:8px;padding:7px 9px;margin-top:8px;line-height:1.45}
+.alert{margin:0 12px 12px;background:var(--warnbg);color:#78350F;border-radius:10px;padding:9px 11px;font-size:12px;line-height:1.45}
+.alert b{color:var(--warn)}
+.far{display:none;padding:18px 16px 22px}
+.far .ft{font-size:44px;font-weight:800;line-height:1.05;color:var(--txt)}
+.far .fn{font-size:64px;font-weight:800;line-height:1;margin-top:10px;color:var(--c)}
+.far .fn small{font-size:26px;font-weight:600;color:var(--muted);margin-left:6px}
+.far .fw{font-size:30px;margin-top:10px;color:var(--warn);font-weight:700}
+#world.z-far .card .ttl,#world.z-far .card .body,#world.z-far .card .alert{display:none}
+#world.z-far .card .far{display:block}
+#world.z-far .card .hd{height:56px}
+/* queda entre telas */
+.drop{position:absolute;transform:translate(-50%,-50%);background:#fff;border:1px solid #FCA5A5;color:var(--bad);
+  font-weight:700;font-size:12px;padding:3px 9px;border-radius:999px;white-space:nowrap;pointer-events:none;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.drop.ok{border-color:#BBF7D0;color:#15803D}
+#world.z-far .drop{font-size:26px;padding:6px 16px;border-width:2px}
+.split{position:absolute;pointer-events:none;font-weight:700;font-size:13px;padding:6px 12px;border-radius:10px;color:#fff;white-space:nowrap;line-height:1.3}
+.split small{display:block;font-weight:500;font-size:11px;opacity:.9}
+#world.z-far .split{font-size:30px;padding:12px 20px}
+#world.z-far .split small{font-size:22px}
+/* ---------- controles ---------- */
+.ctl{position:fixed;left:16px;bottom:16px;z-index:20;display:flex;flex-direction:column;background:#fff;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.14);overflow:hidden}
+.ctl button{width:44px;height:44px;border:0;background:#fff;font:600 20px Poppins;color:var(--txt);cursor:pointer;border-bottom:1px solid var(--line)}
+.ctl button:last-child{border-bottom:0;font-size:16px}
+.ctl button:hover{background:#F3F0FA}
+.zl{position:fixed;left:72px;bottom:16px;z-index:20;background:rgba(15,11,30,.82);color:#fff;font-size:11.5px;padding:7px 11px;border-radius:9px;line-height:1.45;max-width:min(420px,calc(100vw - 260px))}
+.zl b{color:var(--roxo2)}
+#mini{position:fixed;right:16px;bottom:16px;z-index:20;background:#fff;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.14);cursor:pointer}
+.info{position:fixed;right:16px;top:74px;z-index:20;width:300px;background:#fff;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,.14);font-size:12px;line-height:1.5;color:var(--txt)}
+.info .ih{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;font-weight:700;cursor:pointer;border-bottom:1px solid var(--line)}
+.info .ib{padding:10px 14px 14px}
+.info.closed .ib{display:none}
+.info.closed .ih{border-bottom:0}
+.leg{display:flex;align-items:center;gap:8px;margin:5px 0}
+.leg i{width:12px;height:12px;border-radius:4px;display:inline-block;flex:none}
+.info p{margin:8px 0 0;color:var(--muted);font-size:11.2px}
+@media (max-width:720px){
+  .top{padding:8px 12px;gap:8px}
+  .brand small{display:none}
+  .info{top:auto;bottom:16px;right:auto;left:72px;width:calc(100vw - 88px);max-width:320px}
+  .zl{display:none}
+  #mini{display:none}
+}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="brand"><b>Mapa do <span>Quiz Especialista com IA</span></b><small>Funil do Workshop · inLead · dados de 27/10 a 11/11/26</small></div>
+  <div class="chips" id="chips"></div>
+  <button class="toggle" id="tgAll">Abrir todas as telas</button>
+</div>
+<div id="vp"><div id="world"><svg id="edges"></svg></div></div>
+<div class="ctl">
+  <button id="zin" title="Aproximar">+</button>
+  <button id="zout" title="Afastar">−</button>
+  <button id="zfit" title="Ver o mapa inteiro">⤢</button>
+</div>
+<div class="zl" id="zl"><b>Como usar:</b> arraste para mover · role a roda do mouse ou faça pinça para aproximar · clique numa tela para abrir as respostas · de perto, todas as respostas aparecem.</div>
+<canvas id="mini" width="240" height="120"></canvas>
+<div class="info" id="info">
+  <div class="ih" id="infoH"><span>Como ler o mapa</span><span id="infoX">–</span></div>
+  <div class="ib">
+    <div class="leg"><i style="background:var(--q)"></i>Quiz · todo mundo passa por todas as telas</div>
+    <div class="leg"><i style="background:var(--o)"></i>Origem e destinos fora do quiz</div>
+    <div class="leg"><i style="background:var(--warnbg);border:1px solid #F59E0B"></i>Ponto de atenção</div>
+    <div class="leg"><span style="color:var(--bad);font-weight:700">−13</span>&nbsp;pessoas que saíram entre uma tela e outra</div>
+    <p><b>Número no topo de cada tela</b>: na tela 1, visitas pelo Meta; nas outras, pessoas que chegaram nela (planilha de leads do inLead, 27/10 a 01/11 e 09/11 a 11/11, só tráfego pago, sem testes).<br>
+    <b>Número em cada resposta</b>: quantas escolheram.<br>
+    Textos copiados do inLead em 11/11. Nenhum dado pessoal nesta página.</p>
+  </div>
+</div>
+
+<script>
+/* ===================== DADOS DO FUNIL ===================== */
+const STEP = 460, X0 = 0;
+const N = [{"id": "ad", "lane": "o", "x": -980, "y": 0, "tag": "Origem", "ttl": "Anúncio no Meta", "reach": 263, "reachLbl": "visitas", "q": "Campanhas [04], [05] e [06] na ANEX 07 levam para especialista.lucrocomia.com.br", "sub": "Imagens e carrosséis ADI001–004 e ADC001–004, com a UTM MTADS-LS-QUIZZ.", "list": ["27/10 a 01/11: [04] volume 25–65, [05] cost cap e [06] volume 18–65 · 304 cliques, 208 visitas", "Desde 09/11: só a [06], R$ 150/dia, mesmos 4 anúncios · 90 cliques, 55 visitas", "Total: 394 cliques e 263 visitas na tela 1 do quiz"], "alert": "<b>Desde 09/11</b>, o ADC004 levou 59% da verba da [06] com CPM perto de R$ 225 e trouxe só 10 visitas."}, {"id": "t0", "lane": "q", "x": -520, "y": 0, "tag": "Tela 1", "ttl": "Entrada", "reach": 263, "reachLbl": "visitas", "q": "Descubra onde o seu negócio está deixando de faturar com inteligência artificial", "sub": "Acima do título: \"Dá pra ganhar mais sem atender mais gente.\" Abaixo: \"São poucas perguntas, e no fim você vê onde poderia estar ganhando mais e por onde começar.\"", "btn": ["VER MEU DIAGNÓSTICO|ls", "Leva menos de 2 minutos 100% gratuito|dk"], "fields": ["Campo de texto · \"Leva 2 minutinhos\""], "note": "Texto republicado em 09/11 às 09h45, seguindo o direcionamento do copy. Os dois botões avançam para a Pergunta 01.", "alert": "<b>Maior perda do funil:</b> 263 visitas → 52 começaram (19,8%). Tela antiga 18,3% (38 de 208) · tela nova 25,5% (14 de 55). Academia: 39,3%. Tem também um campo de texto solto com \"Leva 2 minutinhos\": vale conferir se é de propósito."}, {"id": "p1", "lane": "q", "x": -60, "y": 0, "tag": "Pergunta 01", "ttl": "Incômodo", "reach": 52, "q": "QUANDO VOCÊ PENSA NO SEU NEGÓCIO HOJE, O QUE MAIS TE INCOMODA?", "ans": [["", "Sei muito, mas pouca gente sabe que eu existo.", 15], ["", "Não paro um minuto e o faturamento não acompanha.", 4], ["", "Testo as ferramentas, mas sinto que uso quase nada delas.", 3], ["", "Vejo todo mundo avançando e eu parada, sem saber por onde começar.", 17]], "alert": "<b>Maior perda dentro do quiz:</b> 52 abriram esta pergunta e só 39 responderam (−25%). Na Academia, a perda até a 2ª pergunta é de 9%."}, {"id": "p2", "lane": "q", "x": 400, "y": 0, "tag": "Pergunta 02", "ttl": "Uso de IA", "reach": 39, "q": "Como você usa Inteligência Artificial hoje?", "ans": [["", "Pra criar conteúdo, mas ainda sai com a minha cara só pela metade.", 14], ["", "Pra adiantar tarefa, mas tudo continua dependendo de mim.", 9], ["", "Como um Google: pergunto, copio, colo e reescrevo quase tudo.", 7], ["", "Quase não uso. Testei, achei genérico e larguei.", 6]]}, {"id": "p3", "lane": "q", "x": 860, "y": 0, "tag": "Pergunta 03", "ttl": "Presença digital", "reach": 36, "q": "Como está a sua presença no digital?", "ans": [["", "Meu trabalho é muito melhor que a minha vitrine.", 12], ["", "Posto quando sobra tempo. Ou seja, quase nunca.", 4], ["", "Crio, mas o resultado sai com cara de qualquer um.", 6], ["", "Sei que preciso, mas o primeiro passo nunca sai.", 13]]}, {"id": "p4", "lane": "q", "x": 1320, "y": 0, "tag": "Pergunta 04", "ttl": "O que trava", "reach": 35, "q": "Imagine que amanhã você precisa dobrar de tamanho sem trabalhar mais horas. O que te trava?", "ans": [["", "Não saberia me mostrar pra quem ainda não me conhece.", 12], ["", "Não conseguiria. Hoje o negócio sou eu, do início ao fim.", 5], ["", "Não saberia colocar a tecnologia pra fazer isso por mim.", 6], ["", "Eu nem sei o que precisaria fazer primeiro.", 10]]}, {"id": "p5", "lane": "q", "x": 1780, "y": 0, "tag": "Pergunta 05", "ttl": "Ferramenta nova", "reach": 33, "q": "Quando aparece uma ferramenta ou tendência nova, você:", "ans": [["", "Aprende, mas não sabe como virar mais autoridade com aquilo.", 13], ["", "Quer usar, mas não tem tempo de aprender direito.", 6], ["", "Testa rápido e volta a fazer do jeito antigo.", 2], ["", "Anota pra ver depois. E o depois não chega.", 12]]}, {"id": "p6", "lane": "q", "x": 2240, "y": 0, "tag": "Pergunta 06", "ttl": "70% com IA", "reach": 33, "q": "Se a IA assumisse 70% do operacional do seu negócio amanhã, o que você faria com o tempo livre?", "ans": [["", "Finalmente apareceria, criaria conteúdo, viraria referência.", 14], ["", "Respiraria. Sairia de dentro da operação pela primeira vez.", 5], ["", "Faria a ferramenta trabalhar do jeito certo, não no improviso.", 5], ["", "Honestamente, não sei. Eu nem comecei a usar isso direito.", 8]]}, {"id": "p7", "lane": "q", "x": -980, "y": 1250, "tag": "Pergunta 07", "ttl": "Negócio hoje", "reach": 32, "q": "Hoje o seu negócio é:", "ans": [["", "Uma ideia ou começo. Ainda estou estruturando.", 15], ["", "Ativo, mas todo dependente de mim.", 14], ["", "Estável, e quero escalar sem trabalhar mais.", 3], ["", "Já tem time ou estrutura, e quero modernizar.", 0]], "note": "Ninguém marcou \"Já tem time ou estrutura\"."}, {"id": "p8", "lane": "q", "x": -520, "y": 1250, "tag": "Pergunta 08", "ttl": "Área", "reach": 32, "q": "Em que área você é especialista?", "ans": [["", "Saúde e bem-estar", 16], ["", "Direito, finanças ou consultoria", 3], ["", "Educação, mentoria ou serviços", 9], ["", "Estética, moda ou outra", 2]]}, {"id": "p9", "lane": "q", "x": -60, "y": 1250, "tag": "Pergunta 09", "ttl": "Faturamento", "reach": 30, "q": "Qual a sua faixa de faturamento hoje?", "ans": [["", "Até R$5 mil por mês", 18], ["", "R$5 mil a R$10 mil por mês", 4], ["", "R$10 mil a R$20 mil por mês", 3], ["", "Acima de R$20 mil por mês", 5]], "note": "60% das pessoas faturam até R$ 5 mil por mês."}, {"id": "p10", "lane": "q", "x": 400, "y": 1250, "tag": "Pergunta 10", "ttl": "Prazo", "reach": 30, "q": "Quando você quer ver isso resolvido?", "ans": [["", "Pra ontem. Já perdi tempo demais.", 16], ["", "Nos próximos 30 dias.", 8], ["", "Esse semestre", 2], ["", "Sem pressa, só explorando.", 4]]}, {"id": "pen", "lane": "q", "x": 860, "y": 1250, "tag": "Penúltima tela", "ttl": "O que isso quer dizer", "reach": 30, "q": "O QUE ISSO QUER DIZER", "sub": "Você entrega resultado. Seu cliente sabe disso. O mercado ainda não. E enquanto isso, quem sabe menos que você está ocupando o seu lugar.", "list": ["A · Tudo passa por você. Se você para, o negócio para junto.", "B · Sua presença digital não mostra o tamanho do seu trabalho.", "C · Você usa a inteligência artificial como buscador. Pergunta, copia, cola e reescreve quase tudo"], "btn": ["QUERO RESOLVER ISSO|red"], "note": "Escolha opcional. As respostas desta tela não chegam à planilha."}, {"id": "fim", "lane": "q", "x": 1320, "y": 1250, "tag": "Tela final", "ttl": "Convite", "reach": 30, "q": "Não é falta de capacidade. É falta de sistema.", "sub": "Você gostaria de montar um sistema que vai tirar você da prisão da sua própria agenda e colocar a inteligência artificial para executar as tarefas mais demoradas por você?", "btn": ["QUERO MONTAR MEU SISTEMA|red"], "note": "O botão leva para a página de vendas do Workshop (quiz-4)."}, {"id": "lp", "lane": "o", "x": 1780, "y": 1250, "tag": "Destino", "ttl": "Página do Workshop", "reach": 30, "reachLbl": "chegaram", "q": "lp.lucrocomia.com.br/ws-especialista-com-ia/quiz-4", "sub": "Venda do ingresso do Workshop Especialista com IA.", "note": "Todo mundo que chegou à tela final clicou no botão (planilha de leads)."}, {"id": "co", "lane": "o", "x": 2240, "y": 1250, "tag": "Destino", "ttl": "Checkout Hotmart", "reach": 15, "reachLbl": "checkouts", "q": "15 checkouts no pixel do Meta (11 de 27/10 a 01/11 e 4 desde 09/11)", "note": "2 vendas confirmadas na Hotmart, as duas de 27/10 a 01/11: 30/10 (ADC002, com bump) e 31/10 (ADC004). Desde 09/11, nenhuma venda no pixel nem no VK."}];
+const E = [["ad", "t0"], ["t0", "p1"], ["p1", "p2"], ["p2", "p3"], ["p3", "p4"], ["p4", "p5"], ["p5", "p6"], ["p6", "p7"], ["p7", "p8"], ["p8", "p9"], ["p9", "p10"], ["p10", "pen"], ["pen", "fim"], ["fim", "lp"], ["lp", "co"]];
+const LANES = [{"t": "QUIZ ESPECIALISTA COM IA", "s": "13 telas · todo mundo passa por todas · dados de 27/10 a 11/11", "x": -980, "y": -330, "c": "var(--q)"}];
+const SPLITS = {};
+const CHIPS = [["Mapa inteiro", "fit"], ["Entrada", "ad,t0,p1"], ["Perguntas", "p1,p2,p3,p4,p5,p6,p7,p8,p9,p10"], ["Final", "p10,pen,fim,lp,co"]];
+
+/* ===================== MONTAGEM ===================== */
+const world = document.getElementById('world'), vp = document.getElementById('vp'), svg = document.getElementById('edges');
+const byId = {};
+const esc = s => s;
+function btnHtml(b){const [t,k]=b.split('|');return `<div class="btn ${k||''}">${t}</div>`}
+function cardHtml(n){
+  const tot = (n.ans||[]).reduce((a,x)=>a+x[2],0);
+  let d = '';
+  if(n.ans){ d += n.ans.map(a=>{
+      const pct = tot? Math.round(a[2]/tot*100):0;
+      return `<div class="ans"><div class="bar" style="width:${pct}%"></div><div class="row"><span class="t">${a[0]?a[0]+' ':''}${a[1]}</span><b>${a[2]}<small>${pct}%</small></b></div>${a[3]?`<span class="route r-${a[3]}">${a[4]}</span>`:''}</div>`}).join(''); }
+  if(n.fields) d += n.fields.map(f=>`<div class="field">✎ ${f}</div>`).join('');
+  if(n.imgs) d += `<div class="imgs">${n.imgs.map(u=>`<img src="${u}" alt="Notícia do carrossel" loading="lazy">`).join('')}</div>`;
+  if(n.video) d += `<div class="video">▶ ${n.video[0]}<small>${n.video[1]}</small></div>`;
+  if(n.list) d += `<ul class="list">${n.list.map(l=>`<li>${l}</li>`).join('')}</ul>`;
+  if(n.price) d += `<div class="price">${n.price[0]?`<s>${n.price[0]}</s>`:''}<b>${n.price[1]}</b><small>${n.price[2]}</small></div>`;
+  if(n.btn) d += n.btn.map(btnHtml).join('');
+  if(n.btn2) d += n.btn2.map(btnHtml).join('');
+  if(n.note) d += `<div class="note">${n.note}</div>`;
+  const cnt = n.ans? `${n.ans.length} respostas` : 'detalhes da tela';
+  const lbl = n.reachLbl || 'pessoas';
+  return `<div class="hd"><span class="tag">${n.tag}</span><span class="reach">${n.reach.toLocaleString('pt-BR')}<small>${lbl}</small></span></div>
+    <div class="ttl">${n.ttl}</div>
+    <div class="far"><div class="ft">${n.ttl}</div><div class="fn">${n.reach.toLocaleString('pt-BR')}<small>${lbl}</small></div>${n.alert?'<div class="fw">⚠️ atenção</div>':''}</div>
+    <div class="body"><div class="q">${n.q}</div>${n.sub?`<div class="sub">${n.sub}</div>`:''}
+      <div class="more">＋ ${cnt} · clique ou aproxime</div><div class="detail">${d}</div></div>
+    ${n.alert?`<div class="alert">⚠️ ${n.alert}</div>`:''}`;
+}
+LANES.forEach(l=>{const el=document.createElement('div');el.className='lane';el.style.cssText=`left:${l.x}px;top:${l.y}px;color:${l.c};font-size:120px`;el.innerHTML=`${l.t}<span>${l.s}</span>`;world.appendChild(el)});
+N.forEach(n=>{
+  const el=document.createElement('div');
+  el.className=`card l${n.lane}`; el.style.left=n.x+'px'; el.style.top=n.y+'px'; el.dataset.id=n.id;
+  el.innerHTML=cardHtml(n); world.appendChild(el); n.el=el; byId[n.id]=n;
+});
+const ANCH = 28, W = 340;
+function drawEdges(){
+  let p='';
+  world.querySelectorAll('.drop,.split').forEach(e=>e.remove());
+  E.forEach(([a,b,br])=>{
+    const A=byId[a],B=byId[b];
+    const x1=A.x+W, y1=A.y+ANCH, x2=B.x, y2=B.y+ANCH;
+    const col = br? `var(--${br})` : (B.lane==='o'? 'var(--o)' : `var(--${B.lane})`);
+    const dx=Math.max(80,(x2-x1)*.5);
+    p+=`<path d="M${x1},${y1} C${x1+dx},${y1} ${x2-dx},${y2} ${x2},${y2}" fill="none" stroke="${col}" stroke-width="${br?6:4}" stroke-linecap="round" opacity=".55"/>`;
+    p+=`<circle cx="${x2}" cy="${y2}" r="7" fill="${col}"/>`;
+    if(br){
+      const s=document.createElement('div'); s.className='split'; s.style.background=col;
+      s.style.left=(x1+ (x2-x1)*.62)+'px'; s.style.top=(y1+(y2-y1)*.62-26)+'px';
+      s.innerHTML=`${SPLITS[br][0]}<small>${SPLITS[br][1]}</small>`; world.appendChild(s);
+    } else if(A.lane!=='o' && B.lane!=='o' && A.reach>B.reach){
+      const d=document.createElement('div'); d.className='drop';
+      d.style.left=((x1+x2)/2)+'px'; d.style.top=((y1+y2)/2 - 22)+'px';
+      d.textContent=`−${A.reach-B.reach}`; world.appendChild(d);
+    }
+  });
+  svg.innerHTML=p;
+}
+drawEdges();
+
+/* ===================== ZOOM E MOVIMENTO ===================== */
+let s=1, tx=0, ty=0, anim=null;
+const MIN=.03, MAX=2.2;
+function apply(){
+  world.style.transform=`translate(${tx}px,${ty}px) scale(${s})`;
+  world.classList.toggle('z-far', s<.33);
+  world.classList.toggle('z-near', s>=.85);
+  drawMini();
+}
+function bounds(ids){
+  let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+  const list = ids? ids.map(i=>byId[i]) : N;
+  list.forEach(n=>{const h=n.el.offsetHeight; x0=Math.min(x0,n.x); y0=Math.min(y0,n.y-(ids?0:340)); x1=Math.max(x1,n.x+W); y1=Math.max(y1,n.y+h);});
+  return {x0,y0,x1,y1};
+}
+function viewRect(){const top=document.querySelector('.top').offsetHeight;return {x:0,y:top,w:innerWidth,h:innerHeight-top}}
+function fitTo(b,pad=60,animate=true){
+  const v=viewRect();
+  const ns=Math.min(MAX,Math.max(MIN,Math.min((v.w-pad*2)/(b.x1-b.x0),(v.h-pad*2)/(b.y1-b.y0))));
+  const ntx=v.x+v.w/2-(b.x0+b.x1)/2*ns, nty=v.y+v.h/2-(b.y0+b.y1)/2*ns;
+  animate? fly(ntx,nty,ns) : (tx=ntx,ty=nty,s=ns,apply());
+}
+function fly(ntx,nty,ns,dur=520){
+  cancelAnimationFrame(anim);
+  const sx=tx,sy=ty,ss=s,t0=performance.now();
+  const step=t=>{let k=Math.min(1,(t-t0)/dur);k=1-Math.pow(1-k,3);
+    tx=sx+(ntx-sx)*k; ty=sy+(nty-sy)*k; s=ss+(ns-ss)*k; apply(); if(k<1) anim=requestAnimationFrame(step)};
+  anim=requestAnimationFrame(step);
+}
+function zoomAt(f,cx,cy){const ns=Math.min(MAX,Math.max(MIN,s*f)); tx=cx-(cx-tx)*ns/s; ty=cy-(cy-ty)*ns/s; s=ns; apply();}
+vp.addEventListener('wheel',e=>{e.preventDefault(); cancelAnimationFrame(anim);
+  const f = e.ctrlKey? Math.exp(-e.deltaY*.01) : Math.exp(-e.deltaY*.0016);
+  zoomAt(f,e.clientX,e.clientY)},{passive:false});
+const P=new Map(); let moved=0, downTarget=null, pinch=null;
+vp.addEventListener('pointerdown',e=>{
+  cancelAnimationFrame(anim); vp.setPointerCapture(e.pointerId);
+  P.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(P.size===1){moved=0; downTarget=e.target; vp.classList.add('drag');}
+  if(P.size===2){const [a,b]=[...P.values()]; pinch={d:Math.hypot(a.x-b.x,a.y-b.y)}; moved=99;}
+});
+vp.addEventListener('pointermove',e=>{
+  if(!P.has(e.pointerId)) return;
+  const prev=P.get(e.pointerId), cur={x:e.clientX,y:e.clientY}; P.set(e.pointerId,cur);
+  if(P.size===1){tx+=cur.x-prev.x; ty+=cur.y-prev.y; moved+=Math.abs(cur.x-prev.x)+Math.abs(cur.y-prev.y); apply();}
+  else if(P.size===2 && pinch){const [a,b]=[...P.values()]; const d=Math.hypot(a.x-b.x,a.y-b.y);
+    const mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
+    if(!pinch.m) pinch.m={x:mx,y:my};
+    tx+=mx-pinch.m.x; ty+=my-pinch.m.y; pinch.m={x:mx,y:my};
+    zoomAt(d/pinch.d,mx,my); pinch.d=d;}
+});
+function up(e){
+  if(!P.has(e.pointerId)) return; P.delete(e.pointerId);
+  if(P.size<2) pinch=null;
+  if(P.size===0){vp.classList.remove('drag');
+    if(moved<6 && downTarget){const c=downTarget.closest('.card'); if(c) toggleCard(byId[c.dataset.id]);}
+    downTarget=null;}
+}
+vp.addEventListener('pointerup',up); vp.addEventListener('pointercancel',up);
+function toggleCard(n){
+  const open=!n.el.classList.contains('open');
+  n.el.classList.toggle('open',open);
+  if(open){ requestAnimationFrame(()=>{
+    const v=viewRect(), h=n.el.offsetHeight;
+    const ns=Math.max(s, Math.min(1.1,(v.h-80)/h));
+    const ntx=v.x+v.w/2-(n.x+W/2)*ns, nty=v.y+40-n.y*ns;
+    fly(ntx,nty,ns);
+  }); } else drawMini();
+}
+document.getElementById('zin').onclick=()=>{const v=viewRect();cancelAnimationFrame(anim);zoomAt(1.35,v.x+v.w/2,v.y+v.h/2)};
+document.getElementById('zout').onclick=()=>{const v=viewRect();cancelAnimationFrame(anim);zoomAt(1/1.35,v.x+v.w/2,v.y+v.h/2)};
+document.getElementById('zfit').onclick=()=>fitTo(bounds());
+addEventListener('keydown',e=>{const v=viewRect();
+  if(e.key==='+'||e.key==='=') zoomAt(1.25,v.x+v.w/2,v.y+v.h/2);
+  else if(e.key==='-') zoomAt(.8,v.x+v.w/2,v.y+v.h/2);
+  else if(e.key==='0') fitTo(bounds());
+  else if(e.key.startsWith('Arrow')){const d=80; if(e.key==='ArrowLeft')tx+=d; if(e.key==='ArrowRight')tx-=d; if(e.key==='ArrowUp')ty+=d; if(e.key==='ArrowDown')ty-=d; apply();}
+});
+/* atalhos */
+const chips=document.getElementById('chips');
+CHIPS.forEach(([t,ids,c])=>{const b=document.createElement('button');b.className='chip';
+  b.innerHTML=(c?`<i style="background:${c}"></i>`:'')+t;
+  b.onclick=()=>{ if(ids==='fit') return fitTo(bounds());
+    const arr=ids.split(','); let list=arr;
+    if(false){ // faixa inteira
+      const lane=byId[arr[0]].lane; list=N.filter(n=>n.y===byId[arr[0]].y && n.x>=byId[arr[0]].x).map(n=>n.id);}
+    if(ids==='q1,q10') list=N.filter(n=>n.lane==='q').map(n=>n.id);
+    fitTo(bounds(list),50);};
+  chips.appendChild(b)});
+let allOpen=false;
+document.getElementById('tgAll').onclick=e=>{allOpen=!allOpen;N.forEach(n=>n.el.classList.toggle('open',allOpen));
+  e.target.textContent=allOpen?'Fechar todas as telas':'Abrir todas as telas'; drawMini();};
+const info=document.getElementById('info');
+document.getElementById('infoH').onclick=()=>{info.classList.toggle('closed');document.getElementById('infoX').textContent=info.classList.contains('closed')?'+':'–'};
+if(innerWidth<720) {info.classList.add('closed');document.getElementById('infoX').textContent='+';}
+/* minimapa */
+const mini=document.getElementById('mini'), mc=mini.getContext('2d'); let mb=null, mk=1, mo={x:0,y:0};
+function drawMini(){
+  if(getComputedStyle(mini).display==='none') return;
+  mb=bounds(); const pw=mini.width, ph=mini.height, pad=8;
+  mk=Math.min((pw-pad*2)/(mb.x1-mb.x0),(ph-pad*2)/(mb.y1-mb.y0));
+  mo={x:pad+((pw-pad*2)-(mb.x1-mb.x0)*mk)/2 - mb.x0*mk, y:pad+((ph-pad*2)-(mb.y1-mb.y0)*mk)/2 - mb.y0*mk};
+  mc.clearRect(0,0,pw,ph);
+  const css=getComputedStyle(document.documentElement);
+  N.forEach(n=>{mc.fillStyle=css.getPropertyValue(n.lane==='o'?'--o':'--'+n.lane).trim();
+    mc.fillRect(mo.x+n.x*mk, mo.y+n.y*mk, Math.max(2,W*mk), Math.max(2,n.el.offsetHeight*mk));});
+  const v=viewRect();
+  const wx=(v.x-tx)/s, wy=(v.y-ty)/s, ww=v.w/s, wh=v.h/s;
+  mc.strokeStyle='#7C3AED'; mc.lineWidth=2; mc.strokeRect(mo.x+wx*mk, mo.y+wy*mk, ww*mk, wh*mk);
+}
+mini.addEventListener('pointerdown',e=>{e.stopPropagation(); const r=mini.getBoundingClientRect();
+  const wx=(e.clientX-r.left-mo.x)/mk, wy=(e.clientY-r.top-mo.y)/mk; const v=viewRect();
+  fly(v.x+v.w/2-wx*s, v.y+v.h/2-wy*s, s, 380);});
+let touched=false;
+['pointerdown','wheel','keydown'].forEach(ev=>addEventListener(ev,()=>touched=true,{capture:true,passive:true}));
+addEventListener('resize',()=>{ if(!touched) fitTo(bounds(),40,false); else apply(); });
+/* início: visão geral */
+(document.fonts?document.fonts.ready:Promise.resolve()).then(()=>fitTo(bounds(),40,false));
+fitTo(bounds(),40,false);
+</script>
+</body>
+</html>
