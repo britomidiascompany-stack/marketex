@@ -127,7 +127,7 @@ svg#edges{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 </head>
 <body>
 <div class="top">
-  <div class="brand"><b>Mapa do <span>Quiz do Mapeamento</span></b><small>Funil completo · inLead · dados de 04 a 09/11/26</small></div>
+  <div class="brand"><b>Mapa do <span>Quiz do Mapeamento</span></b><small>Funil completo · inLead · dados de 04 a 11/11/26</small></div>
   <div class="chips" id="chips"></div>
   <button class="toggle" id="tgAll">Abrir todas as telas</button>
 </div>
@@ -148,9 +148,9 @@ svg#edges{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
     <div class="leg"><i style="background:var(--a)"></i>Ramo ANP · ainda não tem negócio</div>
     <div class="leg"><i style="background:var(--warnbg);border:1px solid #F59E0B"></i>Ponto de atenção</div>
     <div class="leg"><span style="color:var(--bad);font-weight:700">−11</span>&nbsp;pessoas que saíram entre uma tela e outra</div>
-    <p><b>Número no topo de cada tela</b>: pessoas que chegaram nela (inLead, 04 a 09/11; pode incluir alguns testes).<br>
-    <b>Número em cada resposta</b>: quantas escolheram (planilha de leads, 04 a 09/11, sem testes).<br>
-    Textos copiados do inLead em 09/11. Nenhum dado pessoal nesta página.</p>
+    <p><b>Número no topo de cada tela</b>: pessoas que chegaram nela (inLead, 04 a 11/11; pode incluir alguns testes).<br>
+    <b>Número em cada resposta</b>: quantas escolheram (planilha de leads, 04 a 11/11, sem testes).<br>
+    Textos copiados do inLead em 11/11. Nenhum dado pessoal nesta página.</p>
   </div>
 </div>
 
@@ -160,102 +160,102 @@ const STEP = 460, X0 = 0;
 const YQ = 0, YM = -1500, YN = 0, YA = 1500;
 const XB = X0 + STEP*10 + 640;     // início dos ramos
 const N = [
- {id:'ad', lane:'o', x:X0-STEP-60, y:YQ, tag:'Origem', ttl:'Anúncio no Meta', reach:2043, reachLbl:'visitas',
+ {id:'ad', lane:'o', x:X0-STEP-60, y:YQ, tag:'Origem', ttl:'Anúncio no Meta', reach:2182, reachLbl:'visitas',
   q:'Campanhas [59] (amplo) e [60] (quente) levam para quizfn.lucrocomia.com.br',
   sub:'Título do anúncio: "⏰ 15 a 25 horas da sua semana de volta" · Descrição: "Diagnóstico gratuito em menos de 2 minutos".',
-  list:['[59] amplo: 2.306 cliques, sendo 2.180 da Audience Network (clique de app/jogo)','[60] quente: 138 cliques, quase todos no Instagram','Total: 2.043 visitas na tela 1 do quiz'],
-  alert:'<b>Atenção:</b> a promessa do anúncio é <b>tempo</b>. A primeira tela do quiz fala de <b>dinheiro</b>.'},
+  list:['[59] amplo: 2.366 cliques, sendo 2.180 da Audience Network até 09/11 (clique de app/jogo). A Audience Network foi desligada na noite de 09/11.','[60] quente: 200 cliques, quase todos no Instagram','Total: 2.182 visitas na tela 1 do quiz'],
+  alert:'<b>Corrigido em 09/11:</b> o anúncio promete <b>tempo</b> e a primeira tela falava só de <b>dinheiro</b>. Agora a primeira tela junta os dois e repete o número do anúncio (15 a 25 horas).'},
 
- {id:'q1', lane:'q', x:X0, y:YQ, tag:'Tela 1', ttl:'Entrada', reach:97,
-  q:'Existe dinheiro parado dentro do seu negócio agora. Em 2 minutos eu te mostro onde.',
+ {id:'q1', lane:'q', x:X0, y:YQ, tag:'Tela 1', ttl:'Entrada', reach:122,
+  q:'Fature mais e trabalhe menos: descubra as 15 a 25 horas que o seu negócio te toma toda semana. Em 2 minutos eu te mostro onde.',
   sub:'São poucas perguntas. No fim você recebe o diagnóstico do seu momento e o caminho pra destravar a primeira oportunidade.',
-  btn:['COMEÇAR MEU DIAGNÓSTICO'], note:'Rodapé: "Leva menos de 2 minutos."',
-  alert:'<b>Pior conversão do funil:</b> 2.043 visitas → 97 começaram (4,7%). Cerca de 1.400 visitas são da Audience Network. O texto fala de dinheiro e o anúncio fala de tempo.'},
+  btn:['COMEÇAR MEU DIAGNÓSTICO'], note:'Abaixo do botão, "Leva menos de 2 minutos." agora também é clicável e leva para a tela 2. <b>Nova versão desde 09/11, 21h40.</b> Antes: "Existe dinheiro parado dentro do seu negócio agora. Em 2 minutos eu te mostro onde."',
+  alert:'<b>Melhorou depois da troca:</b> antes, só 4,7% das visitas começavam o quiz (com a Audience Network da [59]). Em 10 e 11/11, foram 18%.'},
 
- {id:'q2', lane:'q', x:X0+STEP, y:YQ, tag:'Tela 2', ttl:'Uso de IA', reach:57,
+ {id:'q2', lane:'q', x:X0+STEP, y:YQ, tag:'Tela 2', ttl:'Uso de IA', reach:80,
   q:'Como você usa Inteligência Artificial hoje?',
-  ans:[['','Quase não uso. Testei, achei genérico e larguei.',8],['','Uso o ChatGPT como se fosse um Google. Pergunto, copio, colo e reescrevo quase tudo.',21],['','Uso pra adiantar tarefa, mas tudo continua dependendo de mim.',15],['','Já uso bem em algumas partes, mas nada disso está organizado num sistema.',11]],
+  ans:[['','Quase não uso. Testei, achei genérico e larguei.',12],['','Uso o ChatGPT como se fosse um Google. Pergunto, copio, colo e reescrevo quase tudo.',30],['','Uso pra adiantar tarefa, mas tudo continua dependendo de mim.',21],['','Já uso bem em algumas partes, mas nada disso está organizado num sistema.',15]],
   note:'Não pontua e não muda o caminho.',
-  alert:'<b>Queda forte:</b> 97 começaram e só 57 responderam esta primeira pergunta.'},
+  alert:'<b>Queda forte até 09/11:</b> só 59% de quem começava respondia esta pergunta. Em 10 e 11/11, foram 91%.'},
 
- {id:'q3', lane:'q', x:X0+STEP*2, y:YQ, tag:'Tela 3', ttl:'Nome', reach:46,
+ {id:'q3', lane:'q', x:X0+STEP*2, y:YQ, tag:'Tela 3', ttl:'Nome', reach:67,
   q:'Como podemos te chamar?', fields:['Nome · "Digite seu nome..." (obrigatório)'], btn:['CONTINUAR'],
-  alert:'<b>11 pessoas saem aqui</b>, quando o quiz pede o nome.'},
+  alert:'<b>13 pessoas saem aqui</b>, quando o quiz pede o nome.'},
 
- {id:'q4', lane:'q', x:X0+STEP*3, y:YQ, tag:'Tela 4', ttl:'Faturamento', reach:46,
+ {id:'q4', lane:'q', x:X0+STEP*3, y:YQ, tag:'Tela 4', ttl:'Faturamento', reach:67,
   q:'Qual é o faturamento médio do seu negócio hoje?',
-  ans:[['','Ainda não tenho negócio',12,'a','1 ponto → ramo ANP'],['','Até R$5 mil por mês',10,'n','2 pontos → ramo MNIA'],['','De R$5 mil a R$10 mil por mês',9,'m','3 pontos → ramo Mapeamento'],['','De R$10 mil a R$20 mil por mês',5,'m','4 pontos → ramo Mapeamento'],['','Acima de R$20 mil por mês',7,'m','5 pontos → ramo Mapeamento']],
+  ans:[['','Ainda não tenho negócio',15,'a','1 ponto → ramo ANP'],['','Até R$5 mil por mês',12,'n','2 pontos → ramo MNIA'],['','De R$5 mil a R$10 mil por mês',12,'m','3 pontos → ramo Mapeamento'],['','De R$10 mil a R$20 mil por mês',10,'m','4 pontos → ramo Mapeamento'],['','Acima de R$20 mil por mês',15,'m','5 pontos → ramo Mapeamento']],
   note:'<b>É a única pergunta que pontua.</b> É ela que decide para qual dos 3 ramos a pessoa vai na tela 10.'},
 
- {id:'q5', lane:'q', x:X0+STEP*4, y:YQ, tag:'Tela 5', ttl:'Identificação', reach:45,
+ {id:'q5', lane:'q', x:X0+STEP*4, y:YQ, tag:'Tela 5', ttl:'Identificação', reach:66,
   q:'Qual dessas frases mais parece com você hoje?',
-  ans:[['💰','Quero usar IA pra criar uma nova fonte de renda além do que eu já faço.',12],['⚙️','Já tenho o negócio rodando e quero colocar a IA pra trabalhar dentro dele.',13],['🚀','Quero transformar o que eu sei num negócio maior e menos dependente de mim.',17]],
+  ans:[['💰','Quero usar IA pra criar uma nova fonte de renda além do que eu já faço.',17],['⚙️','Já tenho o negócio rodando e quero colocar a IA pra trabalhar dentro dele.',22],['🚀','Quero transformar o que eu sei num negócio maior e menos dependente de mim.',24]],
   note:'Não pontua e não muda o caminho.'},
 
- {id:'q6', lane:'q', x:X0+STEP*5, y:YQ, tag:'Tela 6', ttl:'O que mudaria', reach:45,
+ {id:'q6', lane:'q', x:X0+STEP*5, y:YQ, tag:'Tela 6', ttl:'O que mudaria', reach:66,
   q:'Se a Inteligência Artificial assumisse o operacional do seu negócio amanhã, o que mudaria primeiro?',
-  ans:[['⏰','Eu recuperaria de 15 a 25 horas por semana.',12],['🎯','Eu finalmente apareceria e viraria referência na minha área.',9],['📦','Eu criaria produtos e novas fontes de receita com o que eu já sei.',8],['👥','Eu atenderia muito mais gente sem precisar estar em tudo.',13]],
+  ans:[['⏰','Eu recuperaria de 15 a 25 horas por semana.',16],['🎯','Eu finalmente apareceria e viraria referência na minha área.',12],['📦','Eu criaria produtos e novas fontes de receita com o que eu já sei.',15],['👥','Eu atenderia muito mais gente sem precisar estar em tudo.',20]],
   note:'Não pontua e não muda o caminho.'},
 
- {id:'q7', lane:'q', x:X0+STEP*6, y:YQ, tag:'Tela 7', ttl:'Último passo', reach:45,
+ {id:'q7', lane:'q', x:X0+STEP*6, y:YQ, tag:'Tela 7', ttl:'Último passo', reach:66,
   q:'🏅 VOCÊ CHEGOU AO ÚLTIMO PASSO',
   sub:'As suas respostas mostraram onde está a maior oportunidade do seu negócio. Falta uma pergunta pra eu te mostrar o caminho certo.',
   btn:['Continuar']},
 
- {id:'q8', lane:'q', x:X0+STEP*7, y:YQ, tag:'Tela 8', ttl:'Investimento', reach:45,
+ {id:'q8', lane:'q', x:X0+STEP*7, y:YQ, tag:'Tela 8', ttl:'Investimento', reach:66,
   q:'Se o caminho certo aparecer aqui, quanto você conseguiria investir para aprender soluções de Inteligência Artificial agora para o seu negócio?',
-  ans:[['','Agora não consigo investir nada',17],['','Até R$300 por mês',23],['','Até R$1.000 por mês',1],['','Acima de R$1.000 por mês',1]],
-  alert:'<b>Não filtra ninguém:</b> quem responde "não consigo investir nada" segue igual. Só 2 de 42 pessoas marcaram mais de R$300.'},
+  ans:[['','Agora não consigo investir nada',24],['','Até R$300 por mês',35],['','Até R$1.000 por mês',3],['','Acima de R$1.000 por mês',1]],
+  alert:'<b>Não filtra ninguém:</b> quem responde "não consigo investir nada" segue igual. Só 4 de 63 pessoas marcaram mais de R$300.'},
 
- {id:'q9', lane:'q', x:X0+STEP*8, y:YQ, tag:'Tela 9', ttl:'Contato', reach:40,
+ {id:'q9', lane:'q', x:X0+STEP*8, y:YQ, tag:'Tela 9', ttl:'Contato', reach:57,
   q:'Pra onde eu envio o seu diagnóstico?', fields:['E-mail (obrigatório)','WhatsApp com DDD (obrigatório)'], btn:['CONTINUAR'],
   note:'Aqui o lead é gravado na planilha e no n8n, vai para o Unnichat e dispara o evento QuizQualificado para o Meta.'},
 
- {id:'q10', lane:'q', x:X0+STEP*9, y:YQ, tag:'Tela 10', ttl:'Análise (divisão)', reach:40,
+ {id:'q10', lane:'q', x:X0+STEP*9, y:YQ, tag:'Tela 10', ttl:'Análise (divisão)', reach:57,
   q:'🔎 Estamos analisando suas respostas...',
   list:['⚙️ Cruzando o seu momento com as oportunidades do seu negócio…','✓ Analisando o seu uso atual de IA','✓ Identificando onde está o dinheiro parado','✓ Montando a sua rota'],
   note:'Barra de carregamento de 5 segundos. Depois, o quiz manda cada pessoa para um ramo, <b>só pelo faturamento da tela 4</b>.',
   alert:'O texto volta a falar de <b>dinheiro parado</b>.'},
 
  /* ----- Ramo Mapeamento ----- */
- {id:'m1', lane:'m', x:XB, y:YM, tag:'Mapeamento · 1', ttl:'Tipo de negócio', reach:21,
+ {id:'m1', lane:'m', x:XB, y:YM, tag:'Mapeamento · 1', ttl:'Tipo de negócio', reach:34,
   q:'Qual das opções abaixo mais condiz com o seu negócio hoje?',
-  ans:[['','Mentora ou expert',0],['','Infoprodutora',0],['','Prestadora de serviços digitais',2],['','Empresária',11],['','Profissional liberal',7]]},
- {id:'m2', lane:'m', x:XB+STEP, y:YM, tag:'Mapeamento · 2', ttl:'Momento', reach:19,
+  ans:[['','Mentora ou expert',0],['','Infoprodutora',0],['','Prestadora de serviços digitais',2],['','Empresária',17],['','Profissional liberal',14]]},
+ {id:'m2', lane:'m', x:XB+STEP, y:YM, tag:'Mapeamento · 2', ttl:'Momento', reach:32,
   q:'Qual das opções mais caracteriza o seu momento, hoje?',
-  ans:[['🤦','Eu até ganho bem, mas pra ganhar mais eu teria que trabalhar mais. E eu já estou no meu limite.',4],['🔥','Tudo depende de mim. Passo o dia inteiro apagando incêndio e resolvendo o mesmo de sempre.',4],['👨‍👩‍👧','Trabalho demais, e isso está me tirando do tempo com a minha família.',6],['⌛','Vejo a inteligência artificial avançando rápido e tenho medo de ficar pra trás.',1],['🤖','Quero crescer, mas tenho medo de virar uma profissional robotizada e perder o que meus clientes gostam em mim.',3]]},
- {id:'m3', lane:'m', x:XB+STEP*2, y:YM, tag:'Mapeamento · 3', ttl:'Vídeo 1', reach:17,
+  ans:[['🤦','Eu até ganho bem, mas pra ganhar mais eu teria que trabalhar mais. E eu já estou no meu limite.',7],['🔥','Tudo depende de mim. Passo o dia inteiro apagando incêndio e resolvendo o mesmo de sempre.',8],['👨‍👩‍👧','Trabalho demais, e isso está me tirando do tempo com a minha família.',9],['⌛','Vejo a inteligência artificial avançando rápido e tenho medo de ficar pra trás.',2],['🤖','Quero crescer, mas tenho medo de virar uma profissional robotizada e perder o que meus clientes gostam em mim.',5]]},
+ {id:'m3', lane:'m', x:XB+STEP*2, y:YM, tag:'Mapeamento · 3', ttl:'Vídeo 1', reach:24,
   q:'Se o seu trabalho tira tempo de quem você ama, é porque o seu negócio ainda trabalha contra você.',
   video:['Vídeo (VSL 1)','player incorporado'], btn:['QUERO TER MAIS TEMPO PARA MINHA FAMÍLIA']},
- {id:'m4', lane:'m', x:XB+STEP*3, y:YM, tag:'Mapeamento · 4', ttl:'Vídeo 2', reach:17,
+ {id:'m4', lane:'m', x:XB+STEP*3, y:YM, tag:'Mapeamento · 4', ttl:'Vídeo 2', reach:22,
   q:'Por que eu criei o Mapeamento de Oportunidades Invisíveis',
   sub:'🔎 Mapeamento de Oportunidades',
   video:['Vídeo (VSL 2)','player incorporado'],
   list:['Aqui embaixo tem um botão. Você completa a sua aplicação e escolhe o seu horário.','Vai ser um prazer olhar pro seu negócio com você. A gente se vê lá.'],
   btn:['QUERO SOLICITAR MEU MAPEAMENTO']},
- {id:'m5', lane:'m', x:XB+STEP*4, y:YM, tag:'Mapeamento · 5', ttl:'Como seguir', reach:14,
+ {id:'m5', lane:'m', x:XB+STEP*4, y:YM, tag:'Mapeamento · 5', ttl:'Como seguir', reach:19,
   q:'Com tudo isso que você viu, como você deseja seguir de agora em diante?',
-  ans:[['📅','Quero agendar meu Mapeamento e ter meu negócio analisado.',7],['❔','Quero tirar dúvidas antes de agendar meu Mapeamento',6]],
+  ans:[['📅','Quero agendar meu Mapeamento e ter meu negócio analisado.',9],['❔','Quero tirar dúvidas antes de agendar meu Mapeamento',9]],
   btn:['CONTINUAR'], note:'As duas respostas levam para a mesma tela final.'},
- {id:'m6', lane:'m', x:XB+STEP*5, y:YM, tag:'Mapeamento · 6', ttl:'Final', reach:15,
+ {id:'m6', lane:'m', x:XB+STEP*5, y:YM, tag:'Mapeamento · 6', ttl:'Final', reach:18,
   q:'⚠️ FALTA SÓ UM ÚLTIMO PASSO PARA O SEU MAPEAMENTO!',
   sub:'O Mapeamento é gratuito, mas não é liberado pra todo mundo. Mas pelas suas respostas, o seu <b>perfil foi aprovado para a vaga</b>.',
   list:['Ao clicar no botão abaixo, você fala direto com o nosso time no WhatsApp e escolhe o seu horário. A partir de agora, já é seu:','📘 Uma sessão individual de 45 minutos com uma especialista de verdade','⏰ Um plano de resgate de tempo, com o que dá pra tirar das suas mãos ainda essa semana','💬 Contato direto com o nosso time estratégico','⚡ Prioridade na agenda, porque o seu perfil já passou pela análise'],
   btn:['👉 QUERO AGENDAR MEU MAPEAMENTO|wa'], note:'Rodapé: "Agenda limitada. As vagas de cada semana acabam antes de sexta."',
   alert:'<b>Todo mundo vê "perfil aprovado"</b>, inclusive quem disse que não consegue investir nada.'},
- {id:'m7', lane:'o', x:XB+STEP*6, y:YM, tag:'Destino', ttl:'WhatsApp do time', reach:12, reachLbl:'clicaram',
+ {id:'m7', lane:'o', x:XB+STEP*6, y:YM, tag:'Destino', ttl:'WhatsApp do time', reach:15, reachLbl:'clicaram',
   q:'Abre o WhatsApp (19) 3167-1024 com a mensagem pronta:',
   sub:'"Olá. Fiz meu quiz de diagnóstico e quero agendar meu mapeamento."',
-  note:'12 pessoas das campanhas clicaram em agendar (planilha de leads). O agendamento em si acontece no WhatsApp.'},
+  note:'15 pessoas das campanhas clicaram em agendar (planilha de leads), 3 delas depois da troca de 09/11. O agendamento em si acontece no WhatsApp.'},
 
  /* ----- Ramo MNIA ----- */
- {id:'n1', lane:'n', x:XB, y:YN, tag:'MNIA · 1', ttl:'Onde trava', reach:10,
+ {id:'n1', lane:'n', x:XB, y:YN, tag:'MNIA · 1', ttl:'Onde trava', reach:12,
   q:'Onde o seu negócio mais trava hoje?',
-  ans:[['💬','No atendimento. Respondo tudo eu, o dia inteiro.',1],['🤦','No conteúdo. Travo pra postar e fico semanas sem aparecer.',4],['💸','Nas vendas. Não tenho processo, depende de mim conversar com cada pessoa.',0],['📦','Nos produtos. Tenho ideia de produto digital parada há meses.',3],['🤷','Na dependência. Pra colocar qualquer coisa no ar eu preciso de alguém.',1]]},
- {id:'n2', lane:'n', x:XB+STEP, y:YN, tag:'MNIA · 2', ttl:'Tentativas com IA', reach:10,
+  ans:[['💬','No atendimento. Respondo tudo eu, o dia inteiro.',3],['🤦','No conteúdo. Travo pra postar e fico semanas sem aparecer.',4],['💸','Nas vendas. Não tenho processo, depende de mim conversar com cada pessoa.',0],['📦','Nos produtos. Tenho ideia de produto digital parada há meses.',3],['🤷','Na dependência. Pra colocar qualquer coisa no ar eu preciso de alguém.',1]]},
+ {id:'n2', lane:'n', x:XB+STEP, y:YN, tag:'MNIA · 2', ttl:'Tentativas com IA', reach:12,
   q:'E o que aconteceu quando você tentou usar Inteligência Artificial sozinha?',
-  ans:[['🙁','Comprei curso, assisti e não apliquei nada.',2],['😰','Testei ferramenta solta e nunca virou resultado.',2],['🤔','Uso o ChatGPT, mas só pra coisa pequena.',4],['😔','Nunca tentei de verdade. Sempre fica pra depois.',1]]},
- {id:'n3', lane:'n', x:XB+STEP*2, y:YN, tag:'MNIA · 3', ttl:'Vídeo 1', reach:9,
+  ans:[['🙁','Comprei curso, assisti e não apliquei nada.',4],['😰','Testei ferramenta solta e nunca virou resultado.',2],['🤔','Uso o ChatGPT, mas só pra coisa pequena.',4],['😔','Nunca tentei de verdade. Sempre fica pra depois.',1]]},
+ {id:'n3', lane:'n', x:XB+STEP*2, y:YN, tag:'MNIA · 3', ttl:'Vídeo 1', reach:10,
   q:'Se você já tentou usar Inteligência Artificial mais de uma vez e continua no mesmo lugar, o problema nunca foi você.',
   sub:'Aperta o play. São menos de 3 minutos. 👇',
   video:['Vídeo (VSL 1)','player incorporado'],
@@ -268,44 +268,44 @@ const N = [
   price:['De R$5.997','R$ 2.997 à vista','ou 12x de R$309,96'],
   note:'🔒 Garantia de 7 dias. Não gostou, devolvo 100%. · 📅 1 ano de acesso.',
   btn2:['QUERO APLICAR IA NO MEU NEGÓCIO|or'],
-  alert:'<b>Maior queda do ramo:</b> 9 viram o vídeo 1 e só 4 chegaram à oferta.'},
+  alert:'<b>Maior queda do ramo:</b> 10 viram o vídeo 1 e só 4 chegaram à oferta.'},
  {id:'n5', lane:'o', x:XB+STEP*4, y:YN, tag:'Destino', ttl:'Página do MNIA', reach:0, reachLbl:'vendas',
   q:'lp.lucrocomia.com.br/meunegociocomia/page',
   sub:'Produto "Meu Negócio com Inteligência Artificial".',
   note:'Nenhum lead do quiz comprou até 09/11 (cruzamento com a Hotmart por e-mail e telefone).'},
 
  /* ----- Ramo ANP ----- */
- {id:'a1', lane:'a', x:XB, y:YA, tag:'ANP · 1', ttl:'Renda nova', reach:9,
+ {id:'a1', lane:'a', x:XB, y:YA, tag:'ANP · 1', ttl:'Renda nova', reach:10,
   q:'Se você tivesse uma renda nova de R$3.000 a R$8.000 por mês, o que mudaria primeiro na sua vida?',
-  ans:[['🙎','Eu não dependeria mais de ninguém pra nada.',2],['🏠','Eu trabalharia de casa, no meu horário.',4],['😀','Eu teria uma profissão que me deixa orgulhosa de dizer o nome.',1],['🙋','Eu voltaria a me sentir capaz.',2]]},
- {id:'a2', lane:'a', x:XB+STEP, y:YA, tag:'ANP · 2', ttl:'Notícias', reach:9,
+  ans:[['🙎','Eu não dependeria mais de ninguém pra nada.',2],['🏠','Eu trabalharia de casa, no meu horário.',5],['😀','Eu teria uma profissão que me deixa orgulhosa de dizer o nome.',1],['🙋','Eu voltaria a me sentir capaz.',2]]},
+ {id:'a2', lane:'a', x:XB+STEP, y:YA, tag:'ANP · 2', ttl:'Notícias', reach:10,
   q:'Enquanto você tenta encontrar uma direção, o mercado está pagando por uma habilidade que você pode aprender em semanas.',
   imgs:['https://media.inlead.cloud/uploads/17472/2026-09-18/am80u-funil-quiz-anp-noticia-1.png','https://media.inlead.cloud/uploads/17472/2026-09-18/g6koJ-funil-quiz-anp-noticia-2.png','https://media.inlead.cloud/uploads/17472/2026-09-18/RpsF1-funil-quiz-anp-noticia-3.png','https://media.inlead.cloud/uploads/17472/2026-09-18/vNqnh-funil-quiz-anp-noticia-4.png'],
   list:['Carrossel com 4 notícias (passa sozinho a cada 3 s)','Não são habilidades que exigem faculdade. Nem experiência anterior. Nem talento pra tecnologia.','Exige aprender uma coisa que quase ninguém aprendeu ainda.'],
   btn:['QUERO VER SE EU CONSIGO FAZER ISSO']},
- {id:'a3', lane:'a', x:XB+STEP*2, y:YA, tag:'ANP · 3', ttl:'Serviço', reach:8,
+ {id:'a3', lane:'a', x:XB+STEP*2, y:YA, tag:'ANP · 3', ttl:'Serviço', reach:9,
   q:'Qual desses serviços você mais se imagina entregando?',
-  ans:[['📱','Criar o conteúdo de redes sociais de pequenos negócios usando IA',3],['🤖','Montar robôs de atendimento no WhatsApp pra quem não dá conta de responder',1],['🖼️','Produzir imagens, materiais e identidade visual com IA',0],['📟','Criar páginas e sites sem escrever uma linha de código',0],['🗂️','Organizar e automatizar a rotina de quem vive apagando incêndio',4]]},
- {id:'a4', lane:'a', x:XB+STEP*3, y:YA, tag:'ANP · 4', ttl:'Reforço', reach:8,
+  ans:[['📱','Criar o conteúdo de redes sociais de pequenos negócios usando IA',3],['🤖','Montar robôs de atendimento no WhatsApp pra quem não dá conta de responder',2],['🖼️','Produzir imagens, materiais e identidade visual com IA',0],['📟','Criar páginas e sites sem escrever uma linha de código',0],['🗂️','Organizar e automatizar a rotina de quem vive apagando incêndio',4]]},
+ {id:'a4', lane:'a', x:XB+STEP*3, y:YA, tag:'ANP · 4', ttl:'Reforço', reach:9,
   q:'VOCÊ ESTÁ MAIS PERTO DO QUE IMAGINA 🏅',
   sub:'Isso que você acabou de escolher é um serviço real, que gente real está pagando muito bem pra receber. E é ensinável do zero.',
   btn:['CONTINUAR']},
- {id:'a5', lane:'a', x:XB+STEP*4, y:YA, tag:'ANP · 5', ttl:'O que precisa', reach:8,
+ {id:'a5', lane:'a', x:XB+STEP*4, y:YA, tag:'ANP · 5', ttl:'O que precisa', reach:9,
   q:'Pra viver disso, você não precisa de muita coisa',
   list:['Você NÃO precisa:','🚫 Voltar pra faculdade','🚫 Saber programar','🚫 Ter experiência anterior','🚫 Ser "boa com tecnologia"','🚫 Aparecer na internet se não quiser','Você precisa de três coisas: saber o que oferecer, saber quanto cobrar e saber onde encontrar quem paga.'],
   btn:['QUERO VER QUEM JÁ ESTÁ FAZENDO']},
- {id:'a6', lane:'a', x:XB+STEP*5, y:YA, tag:'ANP · 6', ttl:'Depoimentos', reach:8,
+ {id:'a6', lane:'a', x:XB+STEP*5, y:YA, tag:'ANP · 6', ttl:'Depoimentos', reach:9,
   q:'Elas estavam exatamente onde você está agora.',
   video:['3 vídeos de depoimento','Cassiana (programa de liderança) · Daiane Garcia (combo de robôs) · Fabiana Freire (vendeu um aplicativo por 15K)'],
   list:['Nenhuma delas tinha formação em tecnologia.','Nenhuma delas começou sabendo o que ia vender.','O que elas fizeram de diferente foi parar de tentar descobrir sozinhas.'],
   btn:['QUERO ESSE CAMINHO PRA MIM']},
- {id:'a7', lane:'a', x:XB+STEP*6, y:YA, tag:'ANP · 7', ttl:'Oferta', reach:4,
+ {id:'a7', lane:'a', x:XB+STEP*6, y:YA, tag:'ANP · 7', ttl:'Oferta', reach:5,
   q:'O caminho completo, do zero até o seu primeiro cliente pagante',
   video:['Vídeo da oferta','player incorporado'], btn:['👉 QUERO COMEÇAR AGORA|or'],
   list:['O que você recebe:','✅ A Jornada Completa em 5 etapas, das profissões básicas até consultora especialista em IA','✅ O Kit de Ferramentas: quais serviços oferecer e quanto cobrar','✅ O Ímã de Clientes: scripts prontos pra abordar e fechar','✅ Biblioteca com mais de 100 comandos prontos','✅ Treinamento de agentes de atendimento no WhatsApp'],
   price:['','R$ 897 à vista','ou 12x de R$92,77'],
   note:'🔒 Garantia de 7 dias. Não gostou, devolvo 100%.',
-  alert:'8 viram os depoimentos e só 4 chegaram à oferta.'},
+  alert:'9 viram os depoimentos e só 5 chegaram à oferta.'},
  {id:'a8', lane:'o', x:XB+STEP*7, y:YA, tag:'Destino', ttl:'Checkout Hotmart', reach:0, reachLbl:'vendas',
   q:'pay.hotmart.com · Academia de Novas Profissões com IA',
   sub:'Oferta 9gqtddp9 (R$ 897).',
@@ -322,7 +322,7 @@ const LANES = [
   {t:'RAMO MNIA', s:'faturamento até R$5 mil/mês · oferta de R$2.997', x:XB, y:YN-330, c:'var(--n)'},
   {t:'RAMO ANP', s:'ainda não tem negócio · oferta de R$897', x:XB, y:YA-330, c:'var(--a)'}
 ];
-const SPLITS = {m:['≥ R$5 mil/mês','21 pessoas'], n:['até R$5 mil/mês','10 pessoas'], a:['sem negócio','9 pessoas']};
+const SPLITS = {m:['≥ R$5 mil/mês','34 pessoas'], n:['até R$5 mil/mês','12 pessoas'], a:['sem negócio','10 pessoas']};
 const CHIPS = [['Mapa inteiro','fit'],['Entrada','ad,q1,q2'],['Qualificação','q1,q10'],['Divisão','q9,q10,m1,n1,a1'],['Mapeamento','m1,m7','var(--m)'],['MNIA','n1,n5','var(--n)'],['ANP','a1,a8','var(--a)']];
 
 /* ===================== MONTAGEM ===================== */
