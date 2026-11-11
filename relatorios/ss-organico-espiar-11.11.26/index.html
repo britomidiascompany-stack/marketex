@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orgânico ESPIAR · Sala Secreta</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Layout: identidade Brito Mídias — hero escuro, seções claras alternadas, rodapé escuro. Visual único (claro), cores explícitas. */
+:root{
+  --roxo:#7C3AED; --roxo-dark:#5B21B6; --roxo-deep:#3B0F73; --roxo-light:#A78BFA; --roxo-xlight:#EDE9FE;
+  --preto:#0A0A0A; --ink:#141018; --cinza:#5B5566; --linha:#E7E3EE; --bg:#FFFFFF; --bg-soft:#FAF9FC;
+  --good:#16A34A; --warn:#D97706; --bad:#DC2626;
+  --font:'Poppins',-apple-system,'Segoe UI',sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{margin:0;font-family:var(--font);font-weight:300;color:var(--ink);line-height:1.6;font-size:16px}
+a{color:var(--roxo);text-decoration:none} a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:3px solid var(--roxo-light);outline-offset:2px}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media (min-width:700px){.wrap{padding-left:max(28px,env(safe-area-inset-left,0px));padding-right:max(28px,env(safe-area-inset-right,0px))}}
+
+.hero{background:radial-gradient(1100px 500px at 78% -10%,rgba(124,58,237,.55),transparent 60%),linear-gradient(150deg,#0A0A0A 0%,#17111F 45%,#3B0F73 100%);color:#fff;padding-block:40px 52px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(ellipse at 50% 30%,black 40%,transparent 80%);mask-image:radial-gradient(ellipse at 50% 30%,black 40%,transparent 80%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1}
+.brand{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+.brand svg{width:44px;height:44px;flex:none}
+.brand .word{display:flex;align-items:center;gap:12px;color:#fff}
+.brand .word b{font-weight:800;font-size:20px}
+.brand .word .bar{width:2px;height:28px;background:rgba(255,255,255,.55)}
+.brand .word span{font-size:18px;letter-spacing:.22em;font-weight:300}
+.eyebrow{color:var(--roxo-light);font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px}
+.hero h1{font-size:clamp(30px,5vw,44px);font-weight:800;letter-spacing:-.02em;margin:0 0 8px;color:#fff;line-height:1.1;text-wrap:balance}
+.hero .sub{font-size:15px;color:rgba(255,255,255,.7);max-width:62ch}
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:#fff;padding:8px 16px;border-radius:100px;font-size:12.5px;font-weight:600;letter-spacing:.03em}
+.pill.solid{background:linear-gradient(90deg,var(--roxo),var(--roxo-dark));border-color:transparent}
+.hero-actions{margin-top:26px;display:flex;gap:10px;flex-wrap:wrap}
+.btn{font:600 14px var(--font);border-radius:10px;padding:10px 18px;cursor:pointer;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff}
+.btn:hover{background:rgba(255,255,255,.18)}
+
+section{padding-block:52px;background:var(--bg)}
+section.soft{background:var(--bg-soft)}
+.section-label{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--roxo);margin-bottom:12px}
+.section-label::before{content:"";width:34px;height:2px;background:var(--roxo);border-radius:2px}
+h2{font-size:clamp(23px,3.2vw,30px);font-weight:700;letter-spacing:-.01em;margin:0 0 8px;color:var(--ink);text-wrap:balance;line-height:1.2}
+h3{font-size:17px;font-weight:700;margin:0 0 10px;color:var(--ink)}
+.lead{color:var(--cinza);font-size:15.5px;margin:0 0 28px;max-width:72ch}
+b,strong{font-weight:600}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px;margin-bottom:24px}
+.kpi{border:1px solid var(--linha);border-radius:14px;padding:18px 20px;background:var(--bg);min-width:0}
+.kpi.dest{border-color:var(--roxo);background:linear-gradient(180deg,var(--bg),var(--roxo-xlight) 220%)}
+.kpi small{display:block;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--roxo);margin-bottom:4px}
+.kpi b{display:block;font-size:24px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.kpi span{display:block;font-size:12.5px;color:var(--cinza);margin-top:2px}
+
+.table-wrap{overflow-x:auto;border:1px solid var(--linha);border-radius:16px;background:var(--bg);min-width:0}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:620px;font-variant-numeric:tabular-nums}
+thead th{background:var(--bg-soft);color:var(--cinza);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.1em;padding:13px 14px;text-align:right;border-bottom:1px solid var(--linha);white-space:nowrap}
+thead th:first-child{text-align:left}
+tbody td{padding:12px 14px;text-align:right;border-bottom:1px solid var(--linha);font-weight:400;white-space:nowrap}
+tbody td:first-child{text-align:left;font-weight:500;color:var(--ink);white-space:normal;min-width:220px}
+tbody tr:last-child td{border-bottom:none}
+tbody tr.hl td{background:var(--roxo-xlight);font-weight:600}
+tbody tr.hero-row td{background:var(--roxo-xlight)}
+tbody tr.hero-row td:first-child{color:var(--roxo-dark);font-weight:700}
+tbody tr.alert td{background:#FFFBEB}
+tbody tr.win td{background:#F0FDF4}
+.good{color:var(--good);font-weight:600}.bad{color:var(--bad);font-weight:600}.neu{color:var(--cinza)}
+.tag{display:inline-block;font-size:9.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:100px;border:1px solid var(--linha);color:var(--cinza);margin-left:6px;vertical-align:middle}
+.st{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:100px;margin-left:6px;vertical-align:middle}
+.st.ok{background:#DCFCE7;color:#166534}.st.off{background:#F1EFF4;color:var(--cinza)}
+.url{display:block;font-size:11.5px;color:var(--cinza);font-weight:400}
+
+.chart{width:100%;height:auto;display:block;background:var(--bg);border:1px solid var(--linha);border-radius:16px;padding:8px}
+.legenda{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--cinza);margin:0 0 10px}
+.legenda i{display:inline-block;width:18px;height:3px;border-radius:2px;vertical-align:middle;margin-right:7px}
+
+.months{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px;margin-top:24px}
+.month-card{border:1px solid var(--linha);border-radius:16px;padding:20px;background:var(--bg)}
+.month-card.current{border-color:var(--roxo);background:linear-gradient(180deg,var(--bg),var(--roxo-xlight) 200%)}
+.m-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:14px}
+.m-name{font-weight:700;font-size:16px}
+.m-status{font-size:11px;color:var(--cinza);letter-spacing:.06em;text-transform:uppercase}
+.m-status.parcial{color:var(--roxo);font-weight:600}
+.m-kpi{margin-bottom:10px}
+.k-lbl{font-size:11px;color:var(--cinza);text-transform:uppercase;letter-spacing:.1em}
+.k-val{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+.k-val.roxo{color:var(--roxo)}
+.m-note{font-size:12px;color:var(--cinza);line-height:1.45}
+
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:18px;margin-top:22px}
+.note-card{border:1px solid var(--linha);border-radius:16px;padding:22px 24px;background:var(--bg);min-width:0}
+.note-card.roxo{border-color:var(--roxo-light);background:linear-gradient(180deg,var(--bg),var(--roxo-xlight) 400%)}
+.note-card p,.note-card li{color:var(--cinza);font-size:14.5px}
+.note-card p{margin:6px 0}
+.note-card ul{margin:6px 0 0;padding-left:20px}
+.note-card li{margin-bottom:8px}
+.note-card b,.note-card strong{color:var(--ink)}
+.nota{font-size:13px;color:var(--cinza);margin-top:12px;max-width:80ch}
+
+ol.acoes{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;counter-reset:a}
+ol.acoes li{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start;counter-increment:a;border:1px solid var(--linha);border-radius:14px;padding:16px 18px;background:var(--bg)}
+ol.acoes li::before{content:counter(a);font-weight:700;font-size:17px;color:var(--roxo);background:var(--roxo-xlight);border-radius:10px;height:40px;display:grid;place-items:center}
+ol.acoes li div{min-width:0}
+ol.acoes b{display:block;font-weight:700;font-size:15.5px;color:var(--ink);margin-bottom:2px}
+ol.acoes span{color:var(--cinza);font-size:14.5px}
+
+footer{background:var(--ink);color:rgba(255,255,255,.7);padding-block:30px;text-align:center;font-size:13px}
+footer .brand-mini{display:inline-flex;align-items:center;gap:10px;margin-bottom:6px;color:#fff;font-weight:500}
+
+
+/* sumário lateral */
+.sumario{background:var(--ink);color:#fff;z-index:15}
+.sumario .sm-brand,.sumario .sm-tit,.sumario .sm-rod{display:none}
+.sumario ol{list-style:none;margin:0;padding:0;display:flex;gap:4px}
+.sumario a{display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.72);padding:8px 12px;border-radius:10px;font-size:13.5px;font-weight:400;white-space:nowrap;text-decoration:none;border-left:3px solid transparent}
+.sumario a:hover{background:rgba(255,255,255,.07);color:#fff;text-decoration:none}
+.sumario a.ativo{background:rgba(124,58,237,.28);color:#fff;font-weight:600;border-left-color:var(--roxo-light)}
+@media (max-width:1179px){
+  body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:16;background:var(--ink)}
+  .sumario{position:sticky;top:env(safe-area-inset-top,0px);overflow-x:auto;padding:8px max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px));scrollbar-width:none}
+  .sumario::-webkit-scrollbar{display:none}
+  .sumario a{border-left:none;padding:7px 12px}
+  section,header{scroll-margin-top:56px}
+}
+@media (min-width:1180px){
+  body{padding-left:248px}
+  .sumario{position:fixed;top:0;left:0;bottom:0;width:248px;display:flex;flex-direction:column;gap:18px;padding:calc(26px + env(safe-area-inset-top,0px)) 16px calc(20px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));overflow-y:auto;border-right:1px solid rgba(255,255,255,.08)}
+  .sumario .sm-brand{display:flex;align-items:center;gap:10px;padding:0 12px;color:#fff}
+  .sumario .sm-brand svg{width:26px;height:26px}
+  .sumario .sm-brand b{font-weight:800}
+  .sumario .sm-brand span{letter-spacing:.2em;font-weight:300;font-size:13px}
+  .sumario .sm-tit{display:block;padding:0 12px;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--roxo-light)}
+  .sumario ol{flex-direction:column;gap:2px}
+  .sumario .sm-rod{display:block;margin-top:auto;padding:0 12px;font-size:11.5px;color:rgba(255,255,255,.5);line-height:1.5}
+}
+body.ap{padding-left:0}
+body.ap .sumario{display:none}
+body.ap::before{display:none}
+
+/* modo apresentação */
+.navap{display:none}
+body.ap .slide{display:none}
+body.ap .slide.atual{display:block;min-height:100vh;padding-bottom:90px}
+body.ap footer{display:none}
+body.ap .navap{display:flex;position:fixed;left:0;right:0;bottom:0;justify-content:center;gap:10px;align-items:center;padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:rgba(20,16,24,.92);z-index:20}
+.navap button{font:600 14px var(--font);border-radius:10px;padding:9px 16px;cursor:pointer;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff}
+.navap span{color:rgba(255,255,255,.8);font-size:13px;min-width:70px;text-align:center}
+@media (prefers-reduced-motion:no-preference){body.ap .slide.atual{animation:entra .25s ease-out}}
+@keyframes entra{from{opacity:.4}to{opacity:1}}
+</style>
+</head>
+<body>
+
+<style>
+.big3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px}
+.big3 .item{border:1px solid var(--linha);border-radius:16px;padding:22px 24px;background:var(--bg);min-width:0}
+.big3 .item.dest{border-color:var(--roxo);background:linear-gradient(180deg,var(--bg),var(--roxo-xlight) 220%)}
+.big3 .n{font-size:clamp(30px,4vw,40px);font-weight:800;color:var(--roxo);line-height:1.05;font-variant-numeric:tabular-nums}
+.big3 .t{font-weight:700;font-size:16px;margin:8px 0 4px;color:var(--ink)}
+.big3 p{margin:0;color:var(--cinza);font-size:14.5px}
+.sems{display:flex;flex-direction:column;gap:14px}
+.sem{border:1px solid var(--linha);border-radius:16px;padding:20px 22px;background:var(--bg);min-width:0}
+.sem.destaque{border-color:var(--roxo-light);background:linear-gradient(90deg,var(--roxo-xlight) 0%,var(--bg) 45%)}
+.sem.ruim{border-color:#FDE68A;background:linear-gradient(90deg,#FFFBEB 0%,var(--bg) 45%)}
+.sem-top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.sem-data{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--roxo)}
+.sem h3{margin:2px 0 0;font-size:18px}
+.sem-num{text-align:right}
+.sem-num b{display:block;font-size:30px;font-weight:800;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.sem-num span{font-size:11.5px;color:var(--cinza);text-transform:uppercase;letter-spacing:.08em}
+.sem p{color:var(--cinza);font-size:14.5px;margin:10px 0}
+.sem-meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--cinza);padding:10px 0;border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
+.sem-meta b{color:var(--ink)}
+ul.posts{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:14px}
+ul.posts li{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+ul.posts .com{font-weight:600;color:var(--roxo-dark);white-space:nowrap;font-variant-numeric:tabular-nums}
+ul.posts .vazio{color:var(--cinza)}
+.citacao{border-left:3px solid var(--roxo);padding:4px 0 4px 16px;color:var(--cinza);font-size:14.5px;margin:0}
+</style>
+
+<nav class="sumario" id="sumario" aria-label="Sumário">
+  <div class="sm-brand"><svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon><polygon points="50,33 65,59 35,59"></polygon></svg><span><b>BM</b> MÍDIAS</span></div>
+  <div class="sm-tit">Sumário</div>
+  <ol>
+    <li><a href="#topo" data-alvo="topo">Início</a></li>
+    <li><a href="#resposta" data-alvo="resposta">A resposta curta</a></li>
+    <li><a href="#dia" data-alvo="dia">Dia a dia</a></li>
+    <li><a href="#semanas" data-alvo="semanas">Semana a semana</a></li>
+    <li><a href="#campeoes" data-alvo="campeoes">Os posts campeões</a></li>
+    <li><a href="#feed" data-alvo="feed">O feed mudou</a></li>
+    <li><a href="#contagem" data-alvo="contagem">Contagem do Pedro × API</a></li>
+    <li><a href="#fazer" data-alvo="fazer">O que fazer</a></li>
+    <li><a href="#fontes" data-alvo="fontes">Fontes</a></li>
+  </ol>
+  <div class="sm-rod">Sala Secreta · Marketex<br>Dados até 11/11/2026</div>
+</nav>
+
+<header id="topo" class="hero slide">
+  <div class="wrap">
+    <div class="brand">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon><polygon points="50,33 65,59 35,59"></polygon>
+        <line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line><line x1="10" y1="73" x2="35" y2="59"></line>
+        <line x1="90" y1="27" x2="50" y2="33"></line><line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line><line x1="10" y1="27" x2="50" y2="33"></line>
+      </svg>
+      <span class="word"><b>BM</b><i class="bar"></i><span>MÍDIAS</span></span>
+    </div>
+    <div class="eyebrow">Sala Secreta · Orgânico · Instagram @anatex</div>
+    <h1>Por que os cadastros pelo “ESPIAR” caíram</h1>
+    <div class="sub">Cruzamento do levantamento de posts do Pedro com os cadastros do Unnichat e com os 81 posts do Instagram, de 28/09 a 11/11/2026.</div>
+    <div class="pills">
+      <span class="pill solid">Mais posts não trouxeram mais cadastros</span>
+      <span class="pill">2 posts concentram 61% dos comentários</span>
+      <span class="pill">O feed passou a chamar para o Workshop e a mentoria</span>
+    </div>
+    <div class="hero-actions"><button class="btn" id="btn-ap" type="button">▶ Apresentar</button></div>
+  </div>
+</header>
+
+<section id="resposta" class="slide">
+<div class="wrap">
+  <div class="section-label">A resposta curta</div>
+  <h2>O orgânico não caiu por falta de post. Caiu porque nenhum post com ESPIAR explodiu desde o fim de outubro.</h2>
+  <p class="lead">Os cadastros pelo ESPIAR passaram de 493 na semana de 19 a 25/10 para 284 e depois 162. O link da bio caiu junto (82 → 41), sinal de que o perfil inteiro passou a falar menos da Sala Secreta.</p>
+  <div class="big3">
+    <div class="item dest"><div class="n">16 posts → 162</div><div class="t">A semana com mais posts foi a mais fraca</div><p>De 02 a 08/11 o Pedro contou 16 posts com ESPIAR, o maior número do período, e vieram 162 cadastros.</p></div>
+    <div class="item"><div class="n">61%</div><div class="t">Dos comentários vêm de 2 posts</div><p>O Reels de 06/10 e o carrossel de 15/10 somam 2.599 dos 4.294 comentários dos posts com ESPIAR. É o que move o cadastro.</p></div>
+    <div class="item"><div class="n">10 × 2</div><div class="t">ESPECIALISTA contra ESPIAR</div><p>Em 09 e 10/11 saíram 10 Reels pedindo ESPECIALISTA (Workshop) e só 2 posts com ESPIAR. Desde 28/10 entraram também 6 pedindo MAPEAMENTO.</p></div>
+  </div>
+</div>
+</section>
+
+<section id="dia" class="slide soft">
+<div class="wrap">
+  <div class="section-label">Dia a dia</div>
+  <h2>Os picos de cadastro aparecem nos dias dos posts que explodiram</h2>
+  <p class="lead">Cadastros pelo ESPIAR por dia, de 28/09 a 11/11. As barras escuras marcam os dois posts campeões e o maior pico. As barras do fim mostram novembro.</p>
+  <svg class="chart" viewBox="0 0 920 320" role="img" aria-label="Cadastros diários pelo ESPIAR de 28/09 a 11/11"><line x1="46" x2="904" y1="280.0" y2="280.0" stroke="#E7E3EE" stroke-width="1"/><text x="38" y="284.0" text-anchor="end" font-size="11" fill="#5B5566">0</text><line x1="46" x2="904" y1="244.9" y2="244.9" stroke="#E7E3EE" stroke-width="1"/><text x="38" y="248.9" text-anchor="end" font-size="11" fill="#5B5566">20</text><line x1="46" x2="904" y1="209.7" y2="209.7" stroke="#E7E3EE" stroke-width="1"/><text x="38" y="213.7" text-anchor="end" font-size="11" fill="#5B5566">40</text><line x1="46" x2="904" y1="174.6" y2="174.6" stroke="#E7E3EE" stroke-width="1"/><text x="38" y="178.6" text-anchor="end" font-size="11" fill="#5B5566">60</text><line x1="46" x2="904" y1="139.4" y2="139.4" stroke="#E7E3EE" stroke-width="1"/><text x="38" y="143.4" text-anchor="end" font-size="11" fill="#5B5566">80</text><line x1="46" x2="904" y1="104.3" y2="104.3" stroke="#E7E3EE" stroke-width="1"/><text x="38" y="108.3" text-anchor="end" font-size="11" fill="#5B5566">100</text><line x1="46" x2="904" y1="69.1" y2="69.1" stroke="#E7E3EE" stroke-width="1"/><text x="38" y="73.1" text-anchor="end" font-size="11" fill="#5B5566">120</text><line x1="46" x2="904" y1="34.0" y2="34.0" stroke="#E7E3EE" stroke-width="1"/><text x="38" y="38.0" text-anchor="end" font-size="11" fill="#5B5566">140</text><rect x="47.0" y="264.2" width="17.1" height="15.8" rx="2" fill="#C4B5FD"><title>28/09: 9 cadastros</title></rect><text x="55.5" y="304" text-anchor="middle" font-size="11" fill="#5B5566">28/09</text><rect x="66.1" y="241.3" width="17.1" height="38.7" rx="2" fill="#C4B5FD"><title>29/09: 22 cadastros</title></rect><rect x="85.1" y="236.1" width="17.1" height="43.9" rx="2" fill="#C4B5FD"><title>30/09: 25 cadastros</title></rect><rect x="104.2" y="267.7" width="17.1" height="12.3" rx="2" fill="#C4B5FD"><title>01/10: 7 cadastros</title></rect><rect x="123.3" y="246.6" width="17.1" height="33.4" rx="2" fill="#C4B5FD"><title>02/10: 19 cadastros</title></rect><rect x="142.3" y="250.1" width="17.1" height="29.9" rx="2" fill="#C4B5FD"><title>03/10: 17 cadastros</title></rect><rect x="161.4" y="267.7" width="17.1" height="12.3" rx="2" fill="#C4B5FD"><title>04/10: 7 cadastros</title></rect><rect x="180.5" y="257.2" width="17.1" height="22.8" rx="2" fill="#C4B5FD"><title>05/10: 13 cadastros</title></rect><text x="189.0" y="304" text-anchor="middle" font-size="11" fill="#5B5566">05/10</text><rect x="199.5" y="216.7" width="17.1" height="63.3" rx="2" fill="#7C3AED"><title>06/10: 36 cadastros</title></rect><text x="208.1" y="208.7" text-anchor="middle" font-size="11.5" font-weight="600" fill="#3B0F73">Reels 06/10 · 36</text><rect x="218.6" y="209.7" width="17.1" height="70.3" rx="2" fill="#C4B5FD"><title>07/10: 40 cadastros</title></rect><rect x="237.7" y="222.0" width="17.1" height="58.0" rx="2" fill="#C4B5FD"><title>08/10: 33 cadastros</title></rect><rect x="256.7" y="251.9" width="17.1" height="28.1" rx="2" fill="#C4B5FD"><title>09/10: 16 cadastros</title></rect><rect x="275.8" y="255.4" width="17.1" height="24.6" rx="2" fill="#C4B5FD"><title>10/10: 14 cadastros</title></rect><rect x="294.9" y="246.6" width="17.1" height="33.4" rx="2" fill="#C4B5FD"><title>11/10: 19 cadastros</title></rect><rect x="313.9" y="255.4" width="17.1" height="24.6" rx="2" fill="#C4B5FD"><title>12/10: 14 cadastros</title></rect><text x="322.5" y="304" text-anchor="middle" font-size="11" fill="#5B5566">12/10</text><rect x="333.0" y="239.6" width="17.1" height="40.4" rx="2" fill="#C4B5FD"><title>13/10: 23 cadastros</title></rect><rect x="352.1" y="227.3" width="17.1" height="52.7" rx="2" fill="#C4B5FD"><title>14/10: 30 cadastros</title></rect><rect x="371.1" y="211.5" width="17.1" height="68.5" rx="2" fill="#7C3AED"><title>15/10: 39 cadastros</title></rect><text x="379.7" y="203.5" text-anchor="middle" font-size="11.5" font-weight="600" fill="#3B0F73">Carrossel 15/10 · 39</text><rect x="390.2" y="209.7" width="17.1" height="70.3" rx="2" fill="#C4B5FD"><title>16/10: 40 cadastros</title></rect><rect x="409.3" y="202.7" width="17.1" height="77.3" rx="2" fill="#C4B5FD"><title>17/10: 44 cadastros</title></rect><rect x="428.3" y="236.1" width="17.1" height="43.9" rx="2" fill="#C4B5FD"><title>18/10: 25 cadastros</title></rect><rect x="447.4" y="234.3" width="17.1" height="45.7" rx="2" fill="#C4B5FD"><title>19/10: 26 cadastros</title></rect><text x="455.9" y="304" text-anchor="middle" font-size="11" fill="#5B5566">19/10</text><rect x="466.5" y="127.1" width="17.1" height="152.9" rx="2" fill="#C4B5FD"><title>20/10: 87 cadastros</title></rect><rect x="485.5" y="56.8" width="17.1" height="223.2" rx="2" fill="#7C3AED"><title>21/10: 127 cadastros</title></rect><text x="494.1" y="48.8" text-anchor="middle" font-size="11.5" font-weight="600" fill="#3B0F73">Pico 21/10 · 127</text><rect x="504.6" y="142.9" width="17.1" height="137.1" rx="2" fill="#C4B5FD"><title>22/10: 78 cadastros</title></rect><rect x="523.7" y="155.2" width="17.1" height="124.8" rx="2" fill="#C4B5FD"><title>23/10: 71 cadastros</title></rect><rect x="542.7" y="178.1" width="17.1" height="101.9" rx="2" fill="#C4B5FD"><title>24/10: 58 cadastros</title></rect><rect x="561.8" y="199.2" width="17.1" height="80.8" rx="2" fill="#C4B5FD"><title>25/10: 46 cadastros</title></rect><rect x="580.9" y="215.0" width="17.1" height="65.0" rx="2" fill="#C4B5FD"><title>26/10: 37 cadastros</title></rect><text x="589.4" y="304" text-anchor="middle" font-size="11" fill="#5B5566">26/10</text><rect x="599.9" y="148.2" width="17.1" height="131.8" rx="2" fill="#C4B5FD"><title>27/10: 75 cadastros</title></rect><rect x="619.0" y="183.4" width="17.1" height="96.6" rx="2" fill="#C4B5FD"><title>28/10: 55 cadastros</title></rect><rect x="638.1" y="222.0" width="17.1" height="58.0" rx="2" fill="#C4B5FD"><title>29/10: 33 cadastros</title></rect><rect x="657.1" y="225.5" width="17.1" height="54.5" rx="2" fill="#C4B5FD"><title>30/10: 31 cadastros</title></rect><rect x="676.2" y="241.3" width="17.1" height="38.7" rx="2" fill="#C4B5FD"><title>31/10: 22 cadastros</title></rect><rect x="695.3" y="225.5" width="17.1" height="54.5" rx="2" fill="#C4B5FD"><title>01/11: 31 cadastros</title></rect><rect x="714.3" y="211.5" width="17.1" height="68.5" rx="2" fill="#A78BFA"><title>02/11: 39 cadastros</title></rect><text x="722.9" y="304" text-anchor="middle" font-size="11" fill="#5B5566">02/11</text><rect x="733.4" y="230.8" width="17.1" height="49.2" rx="2" fill="#A78BFA"><title>03/11: 28 cadastros</title></rect><rect x="752.5" y="246.6" width="17.1" height="33.4" rx="2" fill="#A78BFA"><title>04/11: 19 cadastros</title></rect><rect x="771.5" y="250.1" width="17.1" height="29.9" rx="2" fill="#A78BFA"><title>05/11: 17 cadastros</title></rect><rect x="790.6" y="255.4" width="17.1" height="24.6" rx="2" fill="#A78BFA"><title>06/11: 14 cadastros</title></rect><rect x="809.7" y="232.6" width="17.1" height="47.4" rx="2" fill="#A78BFA"><title>07/11: 27 cadastros</title></rect><rect x="828.7" y="248.4" width="17.1" height="31.6" rx="2" fill="#A78BFA"><title>08/11: 18 cadastros</title></rect><rect x="847.8" y="257.2" width="17.1" height="22.8" rx="2" fill="#A78BFA"><title>09/11: 13 cadastros</title></rect><text x="856.3" y="304" text-anchor="middle" font-size="11" fill="#5B5566">09/11</text><rect x="866.9" y="230.8" width="17.1" height="49.2" rx="2" fill="#A78BFA"><title>10/11: 28 cadastros</title></rect><rect x="885.9" y="260.7" width="17.1" height="19.3" rx="2" fill="#A78BFA"><title>11/11: 11 cadastros</title></rect></svg>
+  <p class="nota">Cada barra é um dia. As datas no eixo são as segundas-feiras. 11/11 ainda não fechou.</p>
+</div>
+</section>
+
+<section id="semanas" class="slide">
+<div class="wrap">
+  <div class="section-label">Semana a semana</div>
+  <h2>O que aconteceu em cada semana</h2>
+  <p class="lead">Semanas de segunda a domingo, como no levantamento do Pedro. “Visíveis na API” são os posts com ESPIAR que o Instagram devolve para consulta. Os comentários somam só esses posts.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Semana</th><th>Posts ESPIAR (Pedro)</th><th>Visíveis na API</th><th>Comentários</th><th>Cadastros ESPIAR</th><th>Link da bio</th><th>ESPECIALISTA</th><th>MAPEAMENTO</th></tr></thead>
+    <tbody><tr><td>28/09 a 04/10</td><td>2*</td><td>4</td><td>624</td><td><b>106</b></td><td>32</td><td>8</td><td>0</td></tr><tr><td>05 a 11/10</td><td>8</td><td>6</td><td>1.629</td><td><b>171</b></td><td>38</td><td>1</td><td>0</td></tr><tr><td>12 a 18/10</td><td>10</td><td>6</td><td>1.418</td><td><b>215</b></td><td>43</td><td>1</td><td>0</td></tr><tr class="win"><td>19 a 25/10</td><td>11</td><td>6</td><td>303</td><td><b>493</b></td><td>77</td><td>1</td><td>0</td></tr><tr><td>26/10 a 01/11</td><td>6</td><td>5</td><td>204</td><td><b>284</b></td><td>82</td><td>1</td><td>3</td></tr><tr class="alert"><td>02 a 08/11</td><td>16</td><td>3</td><td>92</td><td><b>162</b></td><td>41</td><td>0</td><td>2</td></tr><tr><td>09 a 11/11 <span class="tag gray">parcial</span></td><td>2*</td><td>2</td><td>24</td><td><b>52</b></td><td>33</td><td>10</td><td>1</td></tr></tbody></table></div>
+  <p class="nota">* Na primeira semana o Pedro contou só de 01 a 04/10. Na última, até a conferência dele em 09/11.</p>
+  <div class="sems" style="margin-top:24px"><article class="sem">
+  <div class="sem-top"><div><div class="sem-data">28/09 a 04/10</div><h3>Começo com posts fortes no feed</h3></div>
+  <div class="sem-num"><b>106</b><span>cadastros ESPIAR</span></div></div>
+  <p>O carrossel de 02/10 passou de 380 comentários e puxou a semana. Os 8 Reels pedindo ESPECIALISTA quase não tiveram comentários.</p>
+  <div class="sem-meta"><span>Posts ESPIAR (Pedro): <b>2*</b></span><span>Visíveis na API: <b>4</b></span><span>ESPECIALISTA: <b>8</b></span><span>MAPEAMENTO: <b>0</b></span><span>Link da bio: <b>32</b></span></div>
+  <ul class="posts"><li><a href="https://www.instagram.com/p/Dd_8YK1lIOA/" target="_blank" rel="noopener">Carrossel de 02/10</a> · “O ChatGPT não serve só pra escrever legenda. Ele…” <span class="com">387 coment.</span></li><li><a href="https://www.instagram.com/p/Dd38Iz7kdPu/" target="_blank" rel="noopener">Carrossel de 29/09</a> · “Você já criou algo que achava ótimo e ninguém…” <span class="com">127 coment.</span></li><li><a href="https://www.instagram.com/p/DeCAouEmbHd/" target="_blank" rel="noopener">Carrossel de 03/10</a> · “A gente não precisa de mais horas no dia.…” <span class="com">88 coment.</span></li><li><a href="https://www.instagram.com/p/Dd1dCmNOetM/" target="_blank" rel="noopener">Imagem de 28/09</a> · “Pra começar bem a semana: nossa lista de 9…” <span class="com">22 coment.</span></li></ul>
+</article><article class="sem">
+  <div class="sem-top"><div><div class="sem-data">05 a 11/10</div><h3>Primeiro post que explodiu</h3></div>
+  <div class="sem-num"><b>171</b><span>cadastros ESPIAR</span></div></div>
+  <p>O Reels de 06/10 com os “comandos secretos do GPT” teve 1.562 comentários. Nos três dias seguintes, os cadastros ficaram entre 33 e 40 por dia.</p>
+  <div class="sem-meta"><span>Posts ESPIAR (Pedro): <b>8</b></span><span>Visíveis na API: <b>6</b></span><span>ESPECIALISTA: <b>1</b></span><span>MAPEAMENTO: <b>0</b></span><span>Link da bio: <b>38</b></span></div>
+  <ul class="posts"><li><a href="https://www.instagram.com/reel/DeKJeqIuARO/" target="_blank" rel="noopener">Reels de 06/10</a> · “Você já conhece os comandos secretos do GPT? 👀…” <span class="com">1.562 coment.</span></li><li><a href="https://www.instagram.com/p/DeRmzKFkQwH/" target="_blank" rel="noopener">Carrossel de 09/10</a> · “Se o ChatGPT te devolve respostas genéricas, o problema…” <span class="com">24 coment.</span></li><li><a href="https://www.instagram.com/p/DeUJCCfmaoW/" target="_blank" rel="noopener">Carrossel de 10/10</a> · “Mensagem recente no grupo da mentoria. 🥹 Em poucos…” <span class="com">16 coment.</span></li><li><a href="https://www.instagram.com/p/DeMSESTGWnB/" target="_blank" rel="noopener">Carrossel de 07/10</a> · “O ChatGPT não sabe quem você é. Até você…” <span class="com">14 coment.</span></li></ul>
+</article><article class="sem">
+  <div class="sem-top"><div><div class="sem-data">12 a 18/10</div><h3>Segundo post que explodiu</h3></div>
+  <div class="sem-num"><b>215</b><span>cadastros ESPIAR</span></div></div>
+  <p>O carrossel de 15/10 (“Seu PDF não precisa ficar parado”) teve 1.037 comentários. De 15 a 17/10, entre 39 e 44 cadastros por dia.</p>
+  <div class="sem-meta"><span>Posts ESPIAR (Pedro): <b>10</b></span><span>Visíveis na API: <b>6</b></span><span>ESPECIALISTA: <b>1</b></span><span>MAPEAMENTO: <b>0</b></span><span>Link da bio: <b>43</b></span></div>
+  <ul class="posts"><li><a href="https://www.instagram.com/p/DeecQ-ImdhC/" target="_blank" rel="noopener">Carrossel de 15/10</a> · “Seu PDF não precisa ficar parado na pasta de…” <span class="com">1.037 coment.</span></li><li><a href="https://www.instagram.com/p/Debwhm4GQnQ/" target="_blank" rel="noopener">Carrossel de 13/10</a> · “E se aquilo que você sabe fazer de olhos…” <span class="com">225 coment.</span></li><li><a href="https://www.instagram.com/reel/DeY_a6EC4-h/" target="_blank" rel="noopener">Reels de 12/10</a> · “Quer ter resultado no digital, mas tem uma desculpa…” <span class="com">74 coment.</span></li><li><a href="https://www.instagram.com/p/DemDzn0DMa1/" target="_blank" rel="noopener">Carrossel de 17/10</a> · “Atender bem não precisa significar estar disponível o dia…” <span class="com">44 coment.</span></li></ul>
+</article><article class="sem destaque">
+  <div class="sem-top"><div><div class="sem-data">19 a 25/10</div><h3>O maior pico do período</h3></div>
+  <div class="sem-num"><b>493</b><span>cadastros ESPIAR</span></div></div>
+  <p>Até 127 cadastros em 21/10. Nenhum post visível na API tem comentários para explicar esse volume. O mais provável são os Reels de teste, que a API não lista.</p>
+  <div class="sem-meta"><span>Posts ESPIAR (Pedro): <b>11</b></span><span>Visíveis na API: <b>6</b></span><span>ESPECIALISTA: <b>1</b></span><span>MAPEAMENTO: <b>0</b></span><span>Link da bio: <b>77</b></span></div>
+  <ul class="posts"><li><a href="https://www.instagram.com/reel/De782ltOSOI/" target="_blank" rel="noopener">Reels de 25/10</a> · “Quer entender como funciona na prática e de forma…” <span class="com">78 coment.</span></li><li><a href="https://www.instagram.com/p/De4FTLhDI26/" target="_blank" rel="noopener">Carrossel de 24/10</a> · “Escreva isso para ter isso. ✍️ A diferença entre…” <span class="com">67 coment.</span></li><li><a href="https://www.instagram.com/reel/DetyHo_zvH6/" target="_blank" rel="noopener">Reels de 20/10</a> · “E trouxe mais uma parte dos códigos secretos do…” <span class="com">53 coment.</span></li><li><a href="https://www.instagram.com/p/Deu5WCeGX7x/" target="_blank" rel="noopener">Carrossel de 20/10</a> · “E se criar conteúdo deixasse de ser um peso…” <span class="com">50 coment.</span></li></ul>
+</article><article class="sem">
+  <div class="sem-top"><div><div class="sem-data">26/10 a 01/11</div><h3>Começa a perder força</h3></div>
+  <div class="sem-num"><b>284</b><span>cadastros ESPIAR</span></div></div>
+  <p>Os melhores posts com ESPIAR ficaram abaixo de 80 comentários. Entram os primeiros posts pedindo MAPEAMENTO (mentoria).</p>
+  <div class="sem-meta"><span>Posts ESPIAR (Pedro): <b>6</b></span><span>Visíveis na API: <b>5</b></span><span>ESPECIALISTA: <b>1</b></span><span>MAPEAMENTO: <b>3</b></span><span>Link da bio: <b>82</b></span></div>
+  <ul class="posts"><li><a href="https://www.instagram.com/p/DfAWKSnFFVI/" target="_blank" rel="noopener">Carrossel de 27/10</a> · “Como conseguir mais seguidores no Instagram usando IA. 📲…” <span class="com">76 coment.</span></li><li><a href="https://www.instagram.com/reel/De-KcVoSNJR/" target="_blank" rel="noopener">Reels de 26/10</a> · “Você pode estar sentada em uma habilidade que vale…” <span class="com">53 coment.</span></li><li><a href="https://www.instagram.com/reel/DfNIe_LN_XM/" target="_blank" rel="noopener">Reels de 01/11</a> · “2027 não vai ser um ano fácil. Mais imposto,…” <span class="com">44 coment.</span></li><li><a href="https://www.instagram.com/reel/DfNKG-UOnW4/" target="_blank" rel="noopener">Reels de 01/11</a> · ““Me ajuda rapidinho? Você é tão boa nisso!” 🙈…” <span class="com">31 coment.</span></li></ul>
+</article><article class="sem ruim">
+  <div class="sem-top"><div><div class="sem-data">02 a 08/11</div><h3>Mais posts, menos cadastros</h3></div>
+  <div class="sem-num"><b>162</b><span>cadastros ESPIAR</span></div></div>
+  <p>O Pedro contou 16 posts com ESPIAR, o maior número do período. Mesmo assim foi a semana mais fraca: nenhum post passou de 67 comentários.</p>
+  <div class="sem-meta"><span>Posts ESPIAR (Pedro): <b>16</b></span><span>Visíveis na API: <b>3</b></span><span>ESPECIALISTA: <b>0</b></span><span>MAPEAMENTO: <b>2</b></span><span>Link da bio: <b>41</b></span></div>
+  <ul class="posts"><li><a href="https://www.instagram.com/p/DfZyiJPgjb_/" target="_blank" rel="noopener">Imagem de 06/11</a> · “Você ainda usa o ChatGPT só para fazer perguntas?…” <span class="com">67 coment.</span></li><li><a href="https://www.instagram.com/reel/DfcCz94BY4f/" target="_blank" rel="noopener">Reels de 07/11</a> · “Você viu essa novidade? 👀 O Edits, o editor…” <span class="com">16 coment.</span></li><li><a href="https://www.instagram.com/p/DfSflr5o4Cs/" target="_blank" rel="noopener">Carrossel de 03/11</a> · “Trabalhando de qualquer lugar do mundo. Quais as possibilidades…” <span class="com">9 coment.</span></li></ul>
+</article><article class="sem">
+  <div class="sem-top"><div><div class="sem-data">09 a 11/11 · parcial</div><h3>O feed vira para o Workshop</h3></div>
+  <div class="sem-num"><b>52</b><span>cadastros ESPIAR</span></div></div>
+  <p>Em dois dias saíram 10 Reels pedindo ESPECIALISTA (Workshop de R$ 67) e só 2 posts com ESPIAR.</p>
+  <div class="sem-meta"><span>Posts ESPIAR (Pedro): <b>2*</b></span><span>Visíveis na API: <b>2</b></span><span>ESPECIALISTA: <b>10</b></span><span>MAPEAMENTO: <b>1</b></span><span>Link da bio: <b>33</b></span></div>
+  <ul class="posts"><li><a href="https://www.instagram.com/p/DfmYPrdDoX-/" target="_blank" rel="noopener">Imagem de 11/11</a> · “Você ainda está fazendo tudo manualmente enquanto o ChatGPT…” <span class="com">17 coment.</span></li><li><a href="https://www.instagram.com/p/DflDrB4meHj/" target="_blank" rel="noopener">Carrossel de 10/11</a> · “Eu disse que podia provar. 😉 Se você chegou…” <span class="com">7 coment.</span></li></ul>
+</article></div>
+</div>
+</section>
+
+<section id="campeoes" class="slide soft">
+<div class="wrap">
+  <div class="section-label">Os posts campeões</div>
+  <h2>Os posts que mais trouxeram gente têm uma promessa prática sobre o ChatGPT</h2>
+  <p class="lead">Os 6 posts com ESPIAR com mais comentários no período. Os dois primeiros sozinhos puxaram as melhores semanas de outubro.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Post</th><th>Comentários</th><th>Curtidas</th><th>Cita “Sala Secreta”</th></tr></thead>
+    <tbody><tr class="hero-row"><td><a href="https://www.instagram.com/reel/DeKJeqIuARO/" target="_blank" rel="noopener">Reels de 06/10</a> · “Você já conhece os comandos secretos do GPT? 👀…”</td><td>1.562</td><td>1.926</td><td>sim</td></tr><tr class="hero-row"><td><a href="https://www.instagram.com/p/DeecQ-ImdhC/" target="_blank" rel="noopener">Carrossel de 15/10</a> · “Seu PDF não precisa ficar parado na pasta de…”</td><td>1.037</td><td>2.419</td><td>sim</td></tr><tr><td><a href="https://www.instagram.com/p/Dd_8YK1lIOA/" target="_blank" rel="noopener">Carrossel de 02/10</a> · “O ChatGPT não serve só pra escrever legenda. Ele…”</td><td>387</td><td>745</td><td>sim</td></tr><tr><td><a href="https://www.instagram.com/p/Debwhm4GQnQ/" target="_blank" rel="noopener">Carrossel de 13/10</a> · “E se aquilo que você sabe fazer de olhos…”</td><td>225</td><td>304</td><td>sim</td></tr><tr><td><a href="https://www.instagram.com/p/Dd38Iz7kdPu/" target="_blank" rel="noopener">Carrossel de 29/09</a> · “Você já criou algo que achava ótimo e ninguém…”</td><td>127</td><td>149</td><td>sim</td></tr><tr><td><a href="https://www.instagram.com/p/DeCAouEmbHd/" target="_blank" rel="noopener">Carrossel de 03/10</a> · “A gente não precisa de mais horas no dia.…”</td><td>88</td><td>242</td><td>não</td></tr></tbody></table></div>
+  <h3 style="margin-top:28px">E os posts com ESPIAR desde 28/10</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Post</th><th>Comentários</th><th>Cita “Sala Secreta”</th></tr></thead>
+    <tbody><tr><td><a href="https://www.instagram.com/reel/DfNIe_LN_XM/" target="_blank" rel="noopener">Reels de 01/11</a> · “2027 não vai ser um ano fácil. Mais imposto,…”</td><td>44</td><td>não</td></tr><tr><td><a href="https://www.instagram.com/reel/DfNJgmYttqU/" target="_blank" rel="noopener">Reels de 01/11</a> · “Tudo o que você aprendeu na marra pra abrir…”</td><td>0</td><td>não</td></tr><tr><td><a href="https://www.instagram.com/reel/DfNKG-UOnW4/" target="_blank" rel="noopener">Reels de 01/11</a> · ““Me ajuda rapidinho? Você é tão boa nisso!” 🙈…”</td><td>31</td><td>não</td></tr><tr><td><a href="https://www.instagram.com/p/DfSflr5o4Cs/" target="_blank" rel="noopener">Carrossel de 03/11</a> · “Trabalhando de qualquer lugar do mundo. Quais as possibilidades…”</td><td>9</td><td>sim</td></tr><tr><td><a href="https://www.instagram.com/p/DfZyiJPgjb_/" target="_blank" rel="noopener">Imagem de 06/11</a> · “Você ainda usa o ChatGPT só para fazer perguntas?…”</td><td>67</td><td>sim</td></tr><tr><td><a href="https://www.instagram.com/reel/DfcCz94BY4f/" target="_blank" rel="noopener">Reels de 07/11</a> · “Você viu essa novidade? 👀 O Edits, o editor…”</td><td>16</td><td>sim</td></tr><tr><td><a href="https://www.instagram.com/p/DflDrB4meHj/" target="_blank" rel="noopener">Carrossel de 10/11</a> · “Eu disse que podia provar. 😉 Se você chegou…”</td><td>7</td><td>sim</td></tr><tr><td><a href="https://www.instagram.com/p/DfmYPrdDoX-/" target="_blank" rel="noopener">Imagem de 11/11</a> · “Você ainda está fazendo tudo manualmente enquanto o ChatGPT…”</td><td>17</td><td>sim</td></tr></tbody></table></div>
+  <div class="notes">
+    <div class="note-card roxo"><h3>O padrão dos campeões</h3><ul>
+      <li>Prometem algo concreto e útil: “comandos secretos do GPT”, “seu PDF vira…”, “o ChatGPT não serve só pra escrever legenda”.</li>
+      <li>O ESPIAR aparece como a forma de receber esse conteúdo.</li>
+    </ul></div>
+    <div class="note-card"><h3>O que mudou nos recentes</h3><ul>
+      <li>Temas mais genéricos ou de novidade, como trabalhar de qualquer lugar ou o editor Edits.</li>
+      <li>Vários não citam a Sala Secreta pelo nome, só “aula gratuita”.</li>
+    </ul></div>
+  </div>
+</div>
+</section>
+
+<section id="feed" class="slide">
+<div class="wrap">
+  <div class="section-label">O feed mudou</div>
+  <h2>A Sala Secreta passou a dividir o feed com o Workshop e a mentoria</h2>
+  <p class="lead">Até 25/10, quase todo pedido de comentário no feed era ESPIAR. A partir de 28/10 entram os posts com MAPEAMENTO, e em 09 e 10/11 os Reels com ESPECIALISTA tomam o feed.</p>
+  <div class="notes">
+    <div class="note-card"><h3>Pedidos de comentário visíveis no feed</h3><ul>
+      <li><b>05 a 25/10:</b> 18 com ESPIAR, 3 com ESPECIALISTA, nenhum com MAPEAMENTO.</li>
+      <li><b>26/10 a 08/11:</b> 8 com ESPIAR, 1 com ESPECIALISTA, 5 com MAPEAMENTO.</li>
+      <li><b>09 a 11/11:</b> 2 com ESPIAR, 10 com ESPECIALISTA, 1 com MAPEAMENTO.</li>
+    </ul></div>
+    <div class="note-card roxo"><h3>Sinais de que o perfil todo falou menos da Sala Secreta</h3><ul>
+      <li>O link da bio caiu pela metade: 82 → 41 cadastros por semana.</li>
+      <li>Cadastros pelo ESPIAR de quem já estava na base subiram de 1–4% para 9–11%. É um efeito pequeno perto dos outros.</li>
+    </ul></div>
+  </div>
+</div>
+</section>
+
+<section id="contagem" class="slide soft">
+<div class="wrap">
+  <div class="section-label">Contagem do Pedro × API</div>
+  <h2>A API do Instagram mostra menos posts com ESPIAR do que o Pedro contou</h2>
+  <p class="lead">De 02 a 08/11 o Pedro contou 16 posts com ESPIAR. A API devolve 3. Em outubro a diferença também aparece, menor.</p>
+  <div class="notes">
+    <div class="note-card"><h3>Por que pode acontecer</h3><ul>
+      <li>A API não lista <b>Reels de teste</b> (mostrados só para quem não segue), nem posts arquivados ou excluídos.</li>
+      <li>O próprio Pedro disse que alguns Reels de teste de outubro não puderam ser conferidos.</li>
+    </ul></div>
+    <div class="note-card roxo"><h3>O que isso muda na conclusão</h3><ul>
+      <li>Nada no essencial: mesmo com 16 posts, a semana de 02 a 08/11 foi a mais fraca.</li>
+      <li>O pico de 20 a 24/10 (até 127 cadastros por dia) não tem post visível que explique. É provável que tenha vindo de um Reels de teste.</li>
+      <li>Para fechar post a post, precisamos da lista do Pedro com os links.</li>
+    </ul></div>
+  </div>
+</div>
+</section>
+
+<section id="fazer" class="slide">
+<div class="wrap">
+  <div class="section-label">O que fazer</div>
+  <h2>Próximos passos</h2>
+  <ol class="acoes">
+    <li><div><b>Repetir o formato dos campeões</b><span>Um ou dois posts por semana no estilo “comandos secretos do GPT” e “seu PDF vira…”, sempre citando a Sala Secreta pelo nome.</span></div></li>
+    <li><div><b>Reservar espaço para a Sala Secreta nas semanas de lançamento do Workshop</b><span>Quando o feed enche de ESPECIALISTA, garantir pelo menos um post forte com ESPIAR.</span></div></li>
+    <li><div><b>Uma UTM por post no Unnichat</b><span>Exemplo: comentario-espiar-15out. Assim cada cadastro já chega dizendo de qual post veio, sem conferência manual.</span></div></li>
+    <li><div><b>Fechar a lista com o time do orgânico</b><span>Lista dos posts com link e a marcação de quais são Reels de teste, para cruzar post a post.</span></div></li>
+  </ol>
+</div>
+</section>
+
+<section id="fontes" class="slide soft">
+<div class="wrap">
+  <div class="section-label">Fontes</div>
+  <h2>De onde vêm os números</h2>
+  <div class="notes">
+    <div class="note-card"><h3>Cadastros</h3><p>Aba “Cadastros SS com UTM” (Unnichat). ESPIAR = utm_medium “unnichat-instagram” (comentário ou stories). Link da bio = utm_medium “ig-bio”. Cada linha é um cadastro feito no dia.</p></div>
+    <div class="note-card"><h3>Posts</h3><p>Instagram @anatex pela API do Meta: 81 posts de feed e Reels de 28/09 a 11/11/2026, com a palavra pedida na legenda, comentários e curtidas. Os comentários são o total do post e podem incluir respostas da própria conta.</p></div>
+    <div class="note-card"><h3>Levantamento do Pedro</h3><p>Contagem manual dos conteúdos com ESPIAR na legenda, enviada em 10/11/2026. Os números de outubro são mínimos confirmados.</p></div>
+  </div>
+</div>
+</section>
+
+<footer class="slide">
+  <div class="wrap">
+    <div class="brand-mini">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" style="width:22px;height:22px" aria-hidden="true"><polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon><polygon points="50,33 65,59 35,59"></polygon></svg>
+      <span><b>BM</b> Mídias · Sala Secreta · Marketex</span>
+    </div>
+    <div>Dados extraídos em 11/11/2026 · Unnichat e Instagram @anatex</div>
+  </div>
+</footer>
+
+<div class="navap" id="navap">
+  <button type="button" id="ap-ant" aria-label="Seção anterior">←</button>
+  <span id="ap-pos">1</span>
+  <button type="button" id="ap-prox" aria-label="Próxima seção">→</button>
+  <button type="button" id="ap-sair">Sair (Esc)</button>
+</div>
+
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide')).filter(function(s){return s.tagName!=='FOOTER';}), i=0;
+  function mostra(k){i=Math.max(0,Math.min(slides.length-1,k));slides.forEach(function(s,j){s.classList.toggle('atual',j===i);});
+    document.getElementById('ap-pos').textContent=(i+1)+' / '+slides.length;window.scrollTo(0,0);}
+  function entra(){document.body.classList.add('ap');mostra(0);
+    try{var p=document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();if(p&&p.catch)p.catch(function(){});}catch(e){}}
+  function sai(){var alvo=slides[i];document.body.classList.remove('ap');
+    try{if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(function(){});}catch(e){}
+    alvo.scrollIntoView({block:'start'});}
+
+  // sumário: rolagem suave e item ativo
+  var links=[].slice.call(document.querySelectorAll('#sumario a'));
+  var reduz=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function ativa(id){links.forEach(function(a){var on=a.getAttribute('data-alvo')===id;a.classList.toggle('ativo',on);
+    if(on&&window.innerWidth<1180&&a.scrollIntoView){try{a.scrollIntoView({block:'nearest',inline:'center'});}catch(e){}}});}
+  links.forEach(function(a){a.addEventListener('click',function(e){var alvo=document.getElementById(a.getAttribute('data-alvo'));
+    if(!alvo)return;e.preventDefault();alvo.scrollIntoView({behavior:reduz?'auto':'smooth',block:'start'});ativa(alvo.id);});});
+  if('IntersectionObserver' in window){
+    var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting)ativa(en.target.id);});},{rootMargin:'-35% 0px -60% 0px'});
+    links.forEach(function(a){var el=document.getElementById(a.getAttribute('data-alvo'));if(el)obs.observe(el);});
+  }
+  ativa('topo');
+  document.getElementById('btn-ap').onclick=entra;
+  document.getElementById('ap-sair').onclick=sai;
+  document.getElementById('ap-ant').onclick=function(){mostra(i-1);};
+  document.getElementById('ap-prox').onclick=function(){mostra(i+1);};
+  document.addEventListener('keydown',function(e){
+    if(!document.body.classList.contains('ap'))return;
+    if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();mostra(i+1);}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();mostra(i-1);}
+    else if(e.key==='Escape'){sai();}
+  });
+})();
+</script>
+
+</body>
+</html>
