@@ -52,7 +52,7 @@ svg#edges{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 .lq{--c:var(--q)} .lm{--c:var(--m)} .ln{--c:var(--n)} .la{--c:var(--a)} .lo{--c:var(--o)}
 .card .cost{background:#FFFBEB;color:#92400E;font-weight:700;font-size:12.5px;padding:7px 16px;border-bottom:1px solid #FDE68A}
 .far .fc{font-size:30px;font-weight:700;color:#B45309;margin-top:8px}
-.card.panel{cursor:default;border:2px solid #F59E0B}
+.card.panel{cursor:default;border:2px solid #F59E0B;z-index:5}
 .card.panel .hd .reach{font-size:26px}
 .pbody{padding:16px 18px 18px}
 .ptt{font-size:22px;font-weight:800;color:var(--txt)}
@@ -62,6 +62,33 @@ svg#edges{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 .pk small{display:block;font-size:10.5px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;color:var(--muted)}
 .pk b{display:block;font-size:24px;font-weight:800;color:var(--txt);margin:2px 0}
 .pk span{font-size:12px;color:#92400E;font-weight:600}
+.pcamps{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}
+.pcamp{position:relative;border:1.5px solid var(--line);border-radius:14px;padding:12px;background:#fff;cursor:help;outline:none}
+.pcamp:hover,.pcamp:focus-within{border-color:#F59E0B;box-shadow:0 8px 24px rgba(245,158,11,.18)}
+.pch{font-weight:800;font-size:15px;color:var(--txt);margin-bottom:8px}
+.pch small{font-weight:600;color:var(--muted);font-size:11px;margin-left:4px}
+.pcg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.pcg div{background:#FAF9FD;border-radius:9px;padding:6px 8px}
+.pcg div.hl{background:#F5F0FF}
+.pcg small{display:block;font-size:9.5px;font-weight:700;text-transform:uppercase;color:var(--muted)}
+.pcg b{display:block;font-size:17px;font-weight:800;color:var(--txt)}
+.pcg span{font-size:10.5px;color:#92400E;font-weight:600}
+.pcm{font-size:11px;color:var(--muted);margin-top:8px}
+.pcm u{color:var(--roxo);text-decoration:none;font-weight:600}
+.ppop{display:none;position:absolute;left:0;top:calc(100% + 6px);z-index:30;width:720px;max-height:440px;overflow:auto;background:#fff;border:1.5px solid #F59E0B;border-radius:14px;box-shadow:0 16px 44px rgba(31,26,46,.25);padding:12px 14px;cursor:default}
+.pcamp:nth-child(2) .ppop{left:auto;right:0}
+.pcamp:hover .ppop,.pcamp:focus-within .ppop{display:block}
+.ppop::before{content:'';position:absolute;left:0;right:0;top:-10px;height:10px}
+.ppt{font-weight:800;font-size:14px;margin-bottom:8px;color:var(--txt)}
+.ppop table{width:100%;border-collapse:collapse;font-size:11.5px}
+.ppop th{text-align:left;font-size:9.5px;text-transform:uppercase;color:var(--muted);padding:5px 4px;border-bottom:1px solid var(--line);position:sticky;top:-12px;background:#fff}
+.ppop td{padding:6px 4px;border-bottom:1px solid #F1EEF7;vertical-align:top}
+.ppop td:first-child{max-width:300px;word-break:break-word}
+.ppop a{color:var(--roxo);font-weight:600;text-decoration:none}
+.ppop a:hover{text-decoration:underline}
+.ppop tr.hit td{background:#FFFBEB}
+.pz{font-style:normal;font-size:9.5px;background:#FEE2E2;color:#B91C1C;border-radius:6px;padding:1px 5px;font-weight:700}
+.ppn{font-size:10.5px;color:var(--muted);margin-top:8px}
 .pk.pg{background:#F5F0FF;border-color:#DDD0FB}
 .ptab{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:8px}
 .ptab th{text-align:left;font-size:10.5px;text-transform:uppercase;color:var(--muted);padding:6px 5px;border-bottom:1px solid var(--line)}
@@ -261,6 +288,7 @@ const TR = { ate:'16/11 às 13h', invB:3628.40, imp:47472, cl:2798, lpv:1923, qq
   camp:{ '[59]':{nome:'[59] Amplo · Advantage+', invB:1804.87, imp:30670, cl:2465, lpv:1632, ini:94, cap:33, qual:17, ag:5, mnia:7, anp:7},
          '[60]':{nome:'[60] Quente · engajamento 90D', invB:1823.53, imp:16802, cl:333, lpv:291, ini:69, cap:50, qual:27, ag:14, mnia:16, anp:7} } };
 TR.inv = TR.invB*IMPOSTO; Object.values(TR.camp).forEach(c=>c.inv=c.invB*IMPOSTO);
+const CRIA = {"[59]": [{"c": "ADV004", "n": "ADV004_MPO_QUIZ_V1_VID_5 COISAS _0.41", "l": "https://drive.google.com/file/d/1M72lNoWpd0ybMLlfXBaDEtPrVe1BIVHL/view?usp=drivesdk", "f": "Vídeo", "inv": 1153.23, "lpv": 167, "ini": 37, "cap": 22, "q": 13, "ag": 4, "p": false}, {"c": "ADI004", "n": "ADI004_MPO_QUIZ_V1_IMG_A IA E O FUTURO DO SEU NEGOCIO", "l": "https://drive.google.com/file/d/1QhYvVTRtb4pAQskV296PA5VdHqY7VmIK/view?usp=drive_link", "f": "Imagem", "inv": 135.79, "lpv": 27, "ini": 7, "cap": 3, "q": 2, "ag": 0, "p": false}, {"c": "ADV001", "n": "ADV001_MPO_QUIZ_V1_VID_GANHAR MAIS SEM MAIS HORAS SEVERINO_1.01", "l": "https://drive.google.com/file/d/15zTRuqvTqEY6PYQvAWIGV66-2K5l52cX/view?usp=drive_link", "f": "Vídeo", "inv": 477.7, "lpv": 143, "ini": 12, "cap": 3, "q": 1, "ag": 0, "p": true}, {"c": "ADI003", "n": "ADI003_MPO_QUIZ_V1_IMG_FATURAR SEM TRABALHAR MAIS", "l": "https://drive.google.com/file/d/1YInG7wSKVnQ0YPQOyQhAQ1X2oV-7AXPn/view?usp=drive_link", "f": "Imagem", "inv": 34.33, "lpv": 176, "ini": 5, "cap": 1, "q": 1, "ag": 1, "p": false}, {"c": "ADV002", "n": "ADV002_MPO_QUIZ_V1_VID_VOCE JA GANHA BEM_0.55", "l": "https://drive.google.com/file/d/1gy0bVzr6ujmrxeOjh-61vL_a70uGL0k7/view?usp=drivesdk", "f": "Vídeo", "inv": 69.44, "lpv": 28, "ini": 3, "cap": 2, "q": 0, "ag": 0, "p": false}, {"c": "ADV007", "n": "ADV007_MPO_QUIZ_V1_VID_VOCE ACHA QUE A IA NAO MUDA NADA_0.58", "l": "https://drive.google.com/file/d/1ZnaMILgwM3ou46QQ1L-9KpBCypn6R2sM/view?usp=drivesdk", "f": "Vídeo", "inv": 62.66, "lpv": 670, "ini": 16, "cap": 0, "q": 0, "ag": 0, "p": false}, {"c": "ADI005", "n": "ADI005_MPO_QUIZ_V1_IMG_CRESCER SEM PERDER QUEM VOCE AMA", "l": "https://drive.google.com/file/d/1mxJ5wZlNA0yQeNvSA0iocuL-ccax0eO5/view?usp=drive_link", "f": "Imagem", "inv": 31.57, "lpv": 4, "ini": 1, "cap": 1, "q": 0, "ag": 0, "p": false}, {"c": "ADV006", "n": "ADV006_MPO_QUIZ_V1_VID_ESTAVA DEITADA _0.45", "l": "https://drive.google.com/file/d/1v0_J8lQ9kg3IJ0Rh8r5xfKDl1tMgl1bs/view?usp=drivesdk", "f": "Vídeo", "inv": 25.03, "lpv": 296, "ini": 5, "cap": 0, "q": 0, "ag": 0, "p": false}, {"c": "ADI001", "n": "ADI001_MPO_QUIZ_V1_IMG_HORAS DE VOLTA PRA VOCE", "l": "https://drive.google.com/file/d/1HdY38Ee6IAeBpEHCNfXSs2s6t3zVCxpB/view?usp=drive_link", "f": "Imagem", "inv": 22.16, "lpv": 11, "ini": 2, "cap": 1, "q": 0, "ag": 0, "p": false}, {"c": "ADV005", "n": "ADV005_MPO_QUIZ_V1_VID_FICO PENSANDO _0.41", "l": "https://drive.google.com/file/d/1NW4i9hENF8vkq_EorXUgbMr0BlHr2S7I/view?usp=drivesdk", "f": "Vídeo", "inv": 16.86, "lpv": 67, "ini": 4, "cap": 0, "q": 0, "ag": 0, "p": false}, {"c": "ADV003", "n": "ADV003_MPO_QUIZ_V1_VID_A IA NAO TE ROBATIZA_0.52", "l": "https://drive.google.com/file/d/11WTzAfa9j1ykfk8MOGjVZOABJcbzVlMk/view?usp=drivesdk", "f": "Vídeo", "inv": 12.53, "lpv": 36, "ini": 2, "cap": 0, "q": 0, "ag": 0, "p": false}, {"c": "ADI002", "n": "ADI002_MPO_QUIZ_V1_IMG_SEU NEGOCIO SEM DEPENDER DE VOCE", "l": "https://drive.google.com/file/d/1BqTyLqdqTlhrX6-_4ksJJQrLq9kId016/view?usp=drive_link", "f": "Imagem", "inv": 3.11, "lpv": 5, "ini": 0, "cap": 0, "q": 0, "ag": 0, "p": false}], "[60]": [{"c": "ADV004", "n": "ADV004_MPO_QUIZ_V1_VID_5 COISAS _0.41", "l": "https://drive.google.com/file/d/1M72lNoWpd0ybMLlfXBaDEtPrVe1BIVHL/view?usp=drivesdk", "f": "Vídeo", "inv": 1713.31, "lpv": 249, "ini": 59, "cap": 44, "q": 24, "ag": 13, "p": false}, {"c": "ADV002", "n": "ADV002_MPO_QUIZ_V1_VID_VOCE JA GANHA BEM_0.55", "l": "https://drive.google.com/file/d/1gy0bVzr6ujmrxeOjh-61vL_a70uGL0k7/view?usp=drivesdk", "f": "Vídeo", "inv": 49.44, "lpv": 8, "ini": 3, "cap": 2, "q": 2, "ag": 1, "p": false}, {"c": "ADV001", "n": "ADV001_MPO_QUIZ_V1_VID_GANHAR MAIS SEM MAIS HORAS SEVERINO_1.01", "l": "https://drive.google.com/file/d/15zTRuqvTqEY6PYQvAWIGV66-2K5l52cX/view?usp=drive_link", "f": "Vídeo", "inv": 101.58, "lpv": 12, "ini": 5, "cap": 3, "q": 1, "ag": 0, "p": false}, {"c": "ADI005", "n": "ADI005_MPO_QUIZ_V1_IMG_CRESCER SEM PERDER QUEM VOCE AMA", "l": "https://drive.google.com/file/d/1mxJ5wZlNA0yQeNvSA0iocuL-ccax0eO5/view?usp=drive_link", "f": "Imagem", "inv": 45.78, "lpv": 5, "ini": 0, "cap": 0, "q": 0, "ag": 0, "p": false}, {"c": "ADV006", "n": "ADV006_MPO_QUIZ_V1_VID_ESTAVA DEITADA _0.45", "l": "https://drive.google.com/file/d/1v0_J8lQ9kg3IJ0Rh8r5xfKDl1tMgl1bs/view?usp=drivesdk", "f": "Vídeo", "inv": 44.2, "lpv": 4, "ini": 0, "cap": 0, "q": 0, "ag": 0, "p": false}, {"c": "ADI004", "n": "ADI004_MPO_QUIZ_V1_IMG_A IA E O FUTURO DO SEU NEGOCIO", "l": "https://drive.google.com/file/d/1QhYvVTRtb4pAQskV296PA5VdHqY7VmIK/view?usp=drive_link", "f": "Imagem", "inv": 33.88, "lpv": 2, "ini": 2, "cap": 1, "q": 0, "ag": 0, "p": false}, {"c": "ADV007", "n": "ADV007_MPO_QUIZ_V1_VID_VOCE ACHA QUE A IA NAO MUDA NADA_0.58", "l": "https://drive.google.com/file/d/1ZnaMILgwM3ou46QQ1L-9KpBCypn6R2sM/view?usp=drivesdk", "f": "Vídeo", "inv": 28.9, "lpv": 3, "ini": 0, "cap": 0, "q": 0, "ag": 0, "p": false}, {"c": "ADI001", "n": "ADI001_MPO_QUIZ_V1_IMG_HORAS DE VOLTA PRA VOCE", "l": "https://drive.google.com/file/d/1HdY38Ee6IAeBpEHCNfXSs2s6t3zVCxpB/view?usp=drive_link", "f": "Imagem", "inv": 24.6, "lpv": 3, "ini": 0, "cap": 0, "q": 0, "ag": 0, "p": false}, {"c": "ADV005", "n": "ADV005_MPO_QUIZ_V1_VID_FICO PENSANDO _0.41", "l": "https://drive.google.com/file/d/1NW4i9hENF8vkq_EorXUgbMr0BlHr2S7I/view?usp=drivesdk", "f": "Vídeo", "inv": 11.31, "lpv": 1, "ini": 0, "cap": 0, "q": 0, "ag": 0, "p": false}, {"c": "ADV003", "n": "ADV003_MPO_QUIZ_V1_VID_A IA NAO TE ROBATIZA_0.52", "l": "https://drive.google.com/file/d/11WTzAfa9j1ykfk8MOGjVZOABJcbzVlMk/view?usp=drivesdk", "f": "Vídeo", "inv": 8.43, "lpv": 1, "ini": 0, "cap": 0, "q": 0, "ag": 0, "p": false}, {"c": "ADI003", "n": "ADI003_MPO_QUIZ_V1_IMG_FATURAR SEM TRABALHAR MAIS", "l": "https://drive.google.com/file/d/1YInG7wSKVnQ0YPQOyQhAQ1X2oV-7AXPn/view?usp=drive_link", "f": "Imagem", "inv": 3.62, "lpv": 0, "ini": 0, "cap": 0, "q": 0, "ag": 0, "p": false}, {"c": "ADI002", "n": "ADI002_MPO_QUIZ_V1_IMG_SEU NEGOCIO SEM DEPENDER DE VOCE", "l": "https://drive.google.com/file/d/1BqTyLqdqTlhrX6-_4ksJJQrLq9kId016/view?usp=drive_link", "f": "Imagem", "inv": 2.27, "lpv": 0, "ini": 0, "cap": 0, "q": 0, "ag": 0, "p": false}]};
 const brl = (v,d=2) => 'R$ ' + v.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
 const n0 = v => v.toLocaleString('pt-BR');
 /* ===================== DADOS DO FUNIL ===================== */
@@ -580,8 +608,27 @@ function panelHtml(n){
     ${k('MNIA · ANP',tot.mnia+' · '+tot.anp,'foram para as outras ofertas')}
     ${k('Visita → início',(tot.ini/TR.lpv*100).toFixed(1).replace('.',',')+'%','de cada 100 visitas (6% antes de 09/11, ~23% depois)')}
    </div>
-   <table class="ptab"><thead><tr><th>Campanha</th><th>Investido</th><th>Visitas</th><th>Começaram</th><th>Contato</th><th>Qualif.</th><th>R$/qualif.</th><th>Agendar</th><th>R$/agendar</th></tr></thead><tbody>${row(c60)}${row(c59)}</tbody></table>
+   <div class="pcamps">${campBlock('[60]','🔥','Público quente')}${campBlock('[59]','🌎','Advantage+ (amplo)')}</div>
    <div class="psub">Fontes: Meta Ads (ANEX 08) e planilha de leads do quiz, só pessoas que vieram das campanhas. O custo de cada tela no mapa é o investido ÷ pessoas que chegaram nela.</div>
+  </div>`;
+}
+function campBlock(id,ic,lbl){
+  const c=TR.camp[id], L=CRIA[id];
+  const rows=L.map(r=>`<tr class="${r.q?'hit':''}"><td><a href="${r.l}" target="_blank" rel="noopener">${r.n}</a>${r.p?' <em class="pz">pausado</em>':''}</td><td>${brl(r.inv,0)}</td><td>${r.ini}</td><td>${r.cap}</td><td><b>${r.q}</b></td><td>${r.q?brl(r.inv/r.q,0):'–'}</td><td>${r.ag}</td></tr>`).join('');
+  return `<div class="pcamp nopan" tabindex="0">
+    <div class="pch">${ic} ${lbl} <small>${id}</small></div>
+    <div class="pcg">
+      <div><small>Investido</small><b>${brl(c.inv,0)}</b></div>
+      <div><small>Visitas</small><b>${n0(c.lpv)}</b><span>${brl(c.inv/c.lpv)} cada</span></div>
+      <div><small>Começaram</small><b>${n0(c.ini)}</b><span>${(c.ini/c.lpv*100).toFixed(0)}% das visitas</span></div>
+      <div><small>Contato</small><b>${n0(c.cap)}</b><span>${brl(c.inv/c.cap,0)} cada</span></div>
+      <div class="hl"><small>Qualificados</small><b>${n0(c.qual)}</b><span>${brl(c.inv/c.qual,0)} cada</span></div>
+      <div class="hl"><small>Agendar</small><b>${n0(c.ag)}</b><span>${brl(c.inv/c.ag,0)} cada</span></div>
+    </div>
+    <div class="pcm">MNIA ${c.mnia} · ANP ${c.anp} · <u>passe o mouse para ver por criativo</u></div>
+    <div class="ppop nopan"><div class="ppt">${ic} ${lbl} · resultado por criativo</div>
+      <table><thead><tr><th>Criativo (abre no Drive)</th><th>Investido</th><th>Começaram</th><th>Contato</th><th>Qualif.</th><th>R$/qualif.</th><th>Agendar</th></tr></thead><tbody>${rows}</tbody></table>
+      <div class="ppn">Investido com imposto. Pessoas = leads da planilha que vieram desse anúncio (04 a ${TR.ate}).</div></div>
   </div>`;
 }
 function costLine(n){
@@ -678,11 +725,12 @@ function fly(ntx,nty,ns,dur=520){
   anim=requestAnimationFrame(step);
 }
 function zoomAt(f,cx,cy){const ns=Math.min(MAX,Math.max(MIN,s*f)); tx=cx-(cx-tx)*ns/s; ty=cy-(cy-ty)*ns/s; s=ns; apply();}
-vp.addEventListener('wheel',e=>{e.preventDefault(); cancelAnimationFrame(anim);
+vp.addEventListener('wheel',e=>{if(e.target.closest&&e.target.closest('.ppop'))return;e.preventDefault(); cancelAnimationFrame(anim);
   const f = e.ctrlKey? Math.exp(-e.deltaY*.01) : Math.exp(-e.deltaY*.0016);
   zoomAt(f,e.clientX,e.clientY)},{passive:false});
 const P=new Map(); let moved=0, downTarget=null, pinch=null;
 vp.addEventListener('pointerdown',e=>{
+  if(e.target.closest && e.target.closest('a,.ppop')) return;
   cancelAnimationFrame(anim); vp.setPointerCapture(e.pointerId);
   P.set(e.pointerId,{x:e.clientX,y:e.clientY});
   if(P.size===1){moved=0; downTarget=e.target; vp.classList.add('drag');}
