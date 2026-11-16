@@ -116,6 +116,77 @@ svg#edges{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 .leg{display:flex;align-items:center;gap:8px;margin:5px 0}
 .leg i{width:12px;height:12px;border-radius:4px;display:inline-block;flex:none}
 .info p{margin:8px 0 0;color:var(--muted);font-size:11.2px}
+/* ---------- vídeos · VTurb (no cartão) ---------- */
+.vt{border:1px solid var(--line);border-radius:12px;padding:10px 10px 8px;margin:8px 0;background:#FBFAFE}
+.vth{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:11.5px}
+.vth b{color:var(--txt);font-size:12px}
+.vth span{color:var(--muted)}
+.vt svg{display:block;width:100%;height:auto;margin:6px 0 4px}
+.vtk{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.vtk div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:5px 6px;text-align:center}
+.vtk b{display:block;font-size:15px;line-height:1.1}
+.vtk small{display:block;font-size:10px;color:var(--muted);line-height:1.25}
+.vtk .neg b{color:var(--bad)} .vtk .pos b{color:#15803D}
+.vtleg{font-size:10px;color:var(--muted);display:flex;gap:10px;margin-top:5px}
+.vtleg i{display:inline-block;width:14px;height:0;border-top:3px solid var(--c);vertical-align:middle;margin-right:4px}
+.vtleg i.b{border-top:2px dashed #9C94B5}
+.vtm{background:#F3EEFF;border-radius:10px;padding:9px 10px;margin:8px 0;font-size:12px;line-height:1.45}
+.vtm b{color:var(--roxo)}
+.vtm ul{margin:4px 0 0;padding-left:16px}
+.vtm li{margin:3px 0}
+.vtlink{display:block;text-align:center;background:var(--roxo);color:#fff;border-radius:9px;padding:8px;font-weight:600;font-size:12px;margin-top:8px;cursor:pointer}
+.far .fv{font-size:28px;margin-top:10px;font-weight:700;color:var(--txt)}
+.far .fv small{font-size:20px;color:var(--muted);font-weight:500}
+.toggle.alt{background:transparent;border:1px solid rgba(255,255,255,.35)}
+/* ---------- painel de vídeos ---------- */
+.vtp{position:fixed;inset:0;z-index:50;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.vtp[hidden]{display:none}
+.vtp-hero{background:var(--dark);color:#fff;
+  background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:28px 28px}
+.vtp .in{max-width:1080px;margin:0 auto;padding:22px 16px 30px}
+.vtp-hero .x{border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.06);color:#fff;font:600 12px Poppins;padding:7px 12px;border-radius:8px;cursor:pointer}
+.vtp-hero small{display:block;margin-top:18px;color:var(--roxo2);font-weight:600;font-size:12px;letter-spacing:.6px;text-transform:uppercase}
+.vtp-hero h1{margin:6px 0 8px;font-size:clamp(26px,5vw,40px);line-height:1.1;font-weight:800}
+.vtp-hero h1 span{color:var(--roxo2)}
+.vtp-hero p{margin:0;color:#CFC8E6;font-size:14px;line-height:1.6;max-width:760px}
+.vkp{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px}
+.vkp div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px}
+.vkp b{display:block;font-size:24px;font-weight:800}
+.vkp small{color:#B9B2D0;font-size:11.5px;line-height:1.35;display:block;text-transform:none;letter-spacing:0;margin-top:2px;font-weight:500}
+.vtp-body{max-width:1080px;margin:0 auto;padding:20px 16px 60px}
+.sec{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin:0 0 16px;box-shadow:0 4px 18px rgba(31,26,46,.05)}
+.sec h2{margin:0 0 4px;font-size:20px;font-weight:700}
+.sec h2 em{font-style:normal;color:var(--roxo)}
+.sec .lead{color:var(--muted);font-size:13px;margin:0 0 12px;line-height:1.55}
+.sec ul.pts{margin:6px 0 0;padding-left:18px;font-size:13.5px;line-height:1.6}
+.sec ul.pts li{margin:5px 0}
+.tg{display:inline-block;color:#fff;font-size:11px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;padding:3px 9px;border-radius:999px;margin-bottom:8px}
+.kr{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:12px 0}
+.kr div{background:#F7F5FC;border-radius:10px;padding:9px 10px}
+.kr b{display:block;font-size:18px;font-weight:700}
+.kr small{font-size:11px;color:var(--muted);line-height:1.3;display:block}
+.cw{display:grid;grid-template-columns:1.6fr 1fr;gap:16px;align-items:start}
+.cw svg{width:100%;height:auto;display:block}
+.tw{overflow-x:auto}
+table.vtt{width:100%;border-collapse:collapse;font-size:13px}
+table.vtt th{text-align:left;font-weight:600;color:var(--muted);font-size:11.5px;padding:7px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+table.vtt td{padding:8px;border-bottom:1px solid #F0ECF7;white-space:nowrap}
+table.vtt td.n,table.vtt th.n{text-align:right}
+.dif{font-weight:700;border-radius:6px;padding:2px 7px;display:inline-block}
+.dif.neg{color:var(--bad);background:#FEF2F2} .dif.pos{color:#15803D;background:#F0FDF4}
+.box{border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.55;margin-top:12px}
+.box.r{background:#F3EEFF} .box.r b{color:var(--roxo)}
+.box.l{background:#F7F5FC;color:var(--txt)}
+.box ul{margin:6px 0 0;padding-left:18px} .box li{margin:4px 0}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:2px 0 6px}
+.legend i{display:inline-block;width:18px;height:0;border-top:3px solid;vertical-align:middle;margin-right:5px}
+.legend i.b{border-top:2px dashed #9C94B5}
+.foot{color:var(--muted);font-size:11.5px;text-align:center;margin-top:24px;line-height:1.6}
+@media (max-width:820px){
+  .cw{grid-template-columns:1fr}
+  .kr{grid-template-columns:repeat(3,1fr)}
+  .vkp{grid-template-columns:repeat(2,1fr)}
+}
 @media (max-width:720px){
   .top{padding:8px 12px;gap:8px}
   .brand small{display:none}
@@ -127,9 +198,20 @@ svg#edges{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 </head>
 <body>
 <div class="top">
-  <div class="brand"><b>Mapa do <span>Quiz do Mapeamento</span></b><small>Funil completo · inLead · dados de 04 a 11/11/26</small></div>
+  <div class="brand"><b>Mapa do <span>Quiz do Mapeamento</span></b><small>Funil completo · inLead · dados de 04 a 11/11/26 · vídeos VTurb até 16/11</small></div>
   <div class="chips" id="chips"></div>
+  <button class="toggle alt" id="tgVt">▶ Vídeos (VTurb)</button>
   <button class="toggle" id="tgAll">Abrir todas as telas</button>
+</div>
+<div class="vtp" id="vtp" hidden>
+  <div class="vtp-hero"><div class="in">
+    <button class="x" id="vtpX">← Voltar ao mapa</button>
+    <small>VTurb · 04 a 16/11/26 · benchmark interno</small>
+    <h1>Vídeos do <span>Quiz do Mapeamento</span></h1>
+    <p>Retenção de cada vídeo do quiz comparada com a média das VSLs da Academia, que são os vídeos com mais dados na nossa conta VTurb. Linha cheia = o vídeo. Linha tracejada = benchmark.</p>
+    <div class="vkp" id="vkp"></div>
+  </div></div>
+  <div class="vtp-body" id="vtpBody"></div>
 </div>
 <div id="vp"><div id="world"><svg id="edges"></svg></div></div>
 <div class="ctl">
@@ -150,6 +232,7 @@ svg#edges{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
     <div class="leg"><span style="color:var(--bad);font-weight:700">−11</span>&nbsp;pessoas que saíram entre uma tela e outra</div>
     <p><b>Número no topo de cada tela</b>: pessoas que chegaram nela (inLead, 04 a 11/11; pode incluir alguns testes).<br>
     <b>Número em cada resposta</b>: quantas escolheram (planilha de leads, 04 a 11/11, sem testes).<br>
+    <b>Bloco ▶ VTurb</b> nas telas de vídeo: retenção de 04 a 16/11 (linha cheia) contra a média das VSLs da Academia (tracejada). Botão "Vídeos (VTurb)" no topo abre a análise completa.<br>
     Textos copiados do inLead em 11/11. Nenhum dado pessoal nesta página.</p>
   </div>
 </div>
@@ -226,11 +309,11 @@ const N = [
   ans:[['🤦','Eu até ganho bem, mas pra ganhar mais eu teria que trabalhar mais. E eu já estou no meu limite.',7],['🔥','Tudo depende de mim. Passo o dia inteiro apagando incêndio e resolvendo o mesmo de sempre.',8],['👨‍👩‍👧','Trabalho demais, e isso está me tirando do tempo com a minha família.',9],['⌛','Vejo a inteligência artificial avançando rápido e tenho medo de ficar pra trás.',2],['🤖','Quero crescer, mas tenho medo de virar uma profissional robotizada e perder o que meus clientes gostam em mim.',5]]},
  {id:'m3', lane:'m', x:XB+STEP*2, y:YM, tag:'Mapeamento · 3', ttl:'Vídeo 1', reach:24,
   q:'Se o seu trabalho tira tempo de quem você ama, é porque o seu negócio ainda trabalha contra você.',
-  video:['Vídeo (VSL 1)','player incorporado'], btn:['QUERO TER MAIS TEMPO PARA MINHA FAMÍLIA']},
+  vt:'m3', btn:['QUERO TER MAIS TEMPO PARA MINHA FAMÍLIA']},
  {id:'m4', lane:'m', x:XB+STEP*3, y:YM, tag:'Mapeamento · 4', ttl:'Vídeo 2', reach:22,
   q:'Por que eu criei o Mapeamento de Oportunidades Invisíveis',
   sub:'🔎 Mapeamento de Oportunidades',
-  video:['Vídeo (VSL 2)','player incorporado'],
+  vt:'m4',
   list:['Aqui embaixo tem um botão. Você completa a sua aplicação e escolhe o seu horário.','Vai ser um prazer olhar pro seu negócio com você. A gente se vê lá.'],
   btn:['QUERO SOLICITAR MEU MAPEAMENTO']},
  {id:'m5', lane:'m', x:XB+STEP*4, y:YM, tag:'Mapeamento · 5', ttl:'Como seguir', reach:19,
@@ -258,12 +341,12 @@ const N = [
  {id:'n3', lane:'n', x:XB+STEP*2, y:YN, tag:'MNIA · 3', ttl:'Vídeo 1', reach:10,
   q:'Se você já tentou usar Inteligência Artificial mais de uma vez e continua no mesmo lugar, o problema nunca foi você.',
   sub:'Aperta o play. São menos de 3 minutos. 👇',
-  video:['Vídeo (VSL 1)','player incorporado'],
+  vt:'n3',
   list:['Depoimento em vídeo: Mirian Nadalini, "faturou mais de 35k"'],
   btn:['QUERO TER TEMPO DE QUALIDADE']},
  {id:'n4', lane:'n', x:XB+STEP*3, y:YN, tag:'MNIA · 4', ttl:'Vídeo 2 + oferta', reach:4,
   q:'Como colocar a Inteligência Artificial pra trabalhar dentro do seu negócio, em oito etapas.',
-  video:['Vídeo (VSL 2)','player incorporado'], btn:['QUERO COLOCAR IA NO MEU NEGÓCIO|or'],
+  vt:'n4', btn:['QUERO COLOCAR IA NO MEU NEGÓCIO|or'],
   list:['✅ Seu Negócio no Modo de Inteligência Artificial','✅ ChatGPT que Trabalha por Você','✅ Claude: Seu Cérebro Digital','✅ Conteúdos Infinitos com Inteligência Artificial','✅ Produtos Digitais com IA','✅ Páginas e Aplicativos sem Código com Lovable','✅ Estratégia de Vendas de Produtos Digitais','✅ Agentes que Atendem por Você'],
   price:['De R$5.997','R$ 2.997 à vista','ou 12x de R$309,96'],
   note:'🔒 Garantia de 7 dias. Não gostou, devolvo 100%. · 📅 1 ano de acesso.',
@@ -301,7 +384,7 @@ const N = [
   btn:['QUERO ESSE CAMINHO PRA MIM']},
  {id:'a7', lane:'a', x:XB+STEP*6, y:YA, tag:'ANP · 7', ttl:'Oferta', reach:5,
   q:'O caminho completo, do zero até o seu primeiro cliente pagante',
-  video:['Vídeo da oferta','player incorporado'], btn:['👉 QUERO COMEÇAR AGORA|or'],
+  vt:'a7', btn:['👉 QUERO COMEÇAR AGORA|or'],
   list:['O que você recebe:','✅ A Jornada Completa em 5 etapas, das profissões básicas até consultora especialista em IA','✅ O Kit de Ferramentas: quais serviços oferecer e quanto cobrar','✅ O Ímã de Clientes: scripts prontos pra abordar e fechar','✅ Biblioteca com mais de 100 comandos prontos','✅ Treinamento de agentes de atendimento no WhatsApp'],
   price:['','R$ 897 à vista','ou 12x de R$92,77'],
   note:'🔒 Garantia de 7 dias. Não gostou, devolvo 100%.',
@@ -323,7 +406,119 @@ const LANES = [
   {t:'RAMO ANP', s:'ainda não tem negócio · oferta de R$897', x:XB, y:YA-330, c:'var(--a)'}
 ];
 const SPLITS = {m:['≥ R$5 mil/mês','34 pessoas'], n:['até R$5 mil/mês','12 pessoas'], a:['sem negócio','10 pessoas']};
-const CHIPS = [['Mapa inteiro','fit'],['Entrada','ad,q1,q2'],['Qualificação','q1,q10'],['Divisão','q9,q10,m1,n1,a1'],['Mapeamento','m1,m7','var(--m)'],['MNIA','n1,n5','var(--n)'],['ANP','a1,a8','var(--a)']];
+/* ===================== VÍDEOS · VTURB (04 a 16/11/26) ===================== */
+/* Benchmark interno: média simples das VSLs da Academia no VTurb (Lead A 142 plays · Lead B 126 · Lead C 241), retenção em % */
+const BENCH = [[0,100],[10,87.3],[20,78.5],[30,71.8],[40,68],[50,65],[60,63.2],[70,61.4],[80,60],[90,59],[100,58.7],[110,56.7],[120,55.2],[150,49.9],[180,47.3],[210,46.3],[240,41.9],[270,38.8],[300,37.7],[330,36.2]];
+const s5 = a => a.map((v,i)=>[i*5,v]);
+const VT = {
+ m3:{nome:'VSL 01 · Mapeamento', tela:'Ramo Mapeamento · tela 3', lane:'m', dur:147, plays:43, pessoas:31, seguiram:28, pr:'100%', eng:'36,8%',
+   pts:[...s5([100,73.8,59.5,52.4,45.2,42.9,40.5,38.1,38.1,38.1,38.1,38.1,38.1]),[70,35.7],[80,35.7],[90,33.3],[100,33.3],[110,31],[120,28.6],[130,28.6],[140,26.2],[147,26.2]],
+   btnTxt:'botão visível desde o início',
+   leitura:'Perde 40% das pessoas nos primeiros 10 segundos. Nas VSLs da Academia, a perda nesse trecho é de 13%. Depois de 35 s a curva quase não cai: quem passa do começo assiste até perto do fim.',
+   melhorar:['Refazer os 3 primeiros segundos: abrir direto com a dor da tela ("o trabalho tira tempo de quem você ama"), sem apresentação.','Legenda grande desde o primeiro quadro (muita gente assiste sem som).','O botão aparece junto com o vídeo e 28 de 31 pessoas seguem: o vídeo ficou opcional. Teste: o botão aparecer só aos 40 s (no inLead, "aparecer depois de").']},
+ m4:{nome:'VSL 02 · Mapeamento', tela:'Ramo Mapeamento · tela 4', lane:'m', dur:286, plays:31, pessoas:28, seguiram:24, pr:'96,8%', eng:'7,2%',
+   pts:[...s5([100,63.3,36.7,13.3,10,10,10,10,10,10,10,10,10]),[70,10],[80,10],[90,10],[100,6.7],[110,6.7],[120,3.3],[150,3.3],[180,3.3],[210,3.3],[240,3.3],[270,3.3],[286,3.3]],
+   btnTxt:'botão visível desde o início',
+   leitura:'É o vídeo que mais perde gente: 63% saem nos primeiros 10 s e 90% antes dos 20 s. Só 1 pessoa viu até o fim. Engajamento de 7%.',
+   melhorar:['Mesmo sem ninguém assistir, 24 de 28 pessoas seguem para o agendamento. Hoje o vídeo não ajuda nem atrapalha o avanço.','Opção 1: regravar com até 90 s, começando pelo que a pessoa ganha no Mapeamento (sessão de 45 min, plano de resgate de tempo).','Opção 2: testar a tela sem o vídeo, só com o texto e o botão.']},
+ n3:{nome:'VSL 01 · MNIA', tela:'Ramo MNIA · tela 3', lane:'n', dur:191, plays:22, pessoas:20, seguiram:6, pr:'100%', eng:'52,9%',
+   pts:[...s5([100,81.8,63.6,59.1,59.1,59.1,59.1,59.1,59.1,50,50,50,50]),[90,50],[120,50],[150,50],[180,50],[191,50]],
+   btnTxt:'botão visível desde o início',
+   leitura:'É o vídeo dos quizzes que mais segura depois do começo: a partir de 45 s ninguém mais sai e metade assiste até o fim (Academia no mesmo ponto: 47%). As perdas estão só nos primeiros 10 s (−36%) e por volta de 40 a 45 s.',
+   melhorar:['O problema está depois do vídeo: metade vê até o fim, mas só 6 de 20 pessoas clicam para ir à oferta.','Fechar o vídeo com uma chamada direta para o botão de baixo e usar no botão a mesma promessa do fim do vídeo (hoje o botão diz "QUERO TER TEMPO DE QUALIDADE").','Rever os 10 primeiros segundos, igual ao VSL 01 do Mapeamento.']},
+ n4:{nome:'VSL 02 · MNIA', tela:'Ramo MNIA · tela 4 (oferta)', lane:'n', dur:304, plays:19, pessoas:6, seguiram:null, pr:'100%', eng:'66,7%', btnAt:210,
+   pts:[...s5([100,94.7,94.7,89.5,89.5,89.5,89.5,84.2,84.2,84.2,84.2,78.9,78.9]),[70,78.9],[120,78.9],[150,73.7],[180,68.4],[210,68.4],[240,47.4],[270,36.8],[280,31.6],[295,26.3],[304,26.3]],
+   btnTxt:'botão, lista e preço aparecem aos 3:30',
+   leitura:'Fica acima da Academia do começo até perto dos 4 minutos: 79% em 1 min (Academia 63%) e 68% aos 3:30 (Academia 46%). A queda forte começa aos 3:30, exatamente quando o botão, a lista e o preço aparecem na tela. No fim fica abaixo (26% × 38%), o que é comum depois que o preço aparece.',
+   melhorar:['Amostra pequena: 6 pessoas e 19 plays (gente voltando ao vídeo, e talvez testes). Ler como sinal, não como certeza.','Não mexer no começo. Teste: antecipar botão e preço para 2:30, quando ainda há 70% assistindo.','Nenhuma venda ainda: com essa retenção, o próximo ponto a olhar é a oferta (R$ 2.997 para quem fatura até R$ 5 mil por mês).']},
+ a7:{nome:'VSL da oferta · ANP', tela:'Ramo ANP · tela 7 (oferta)', lane:'a', dur:149, plays:15, pessoas:7, seguiram:null, pr:'100%', eng:'20,4%',
+   pts:[...s5([100,85.7,78.6,57.1,42.9,42.9,35.7,35.7,28.6,21.4,14.3,14.3,14.3]),[70,7.1],[90,7.1],[120,7.1],[149,7.1]],
+   btnTxt:'botão visível desde o início',
+   leitura:'Cai de 79% para 43% entre 10 e 20 s e chega a 14% aos 50 s. Só 1 de 14 pessoas viu até o fim. Na Academia, aos 20 s ainda restam 79%.',
+   melhorar:['Assistir os trechos de 0:10 a 0:20 e de 0:40 a 0:50: é ali que o vídeo perde as pessoas.','Trazer para os primeiros 15 s a promessa da tela ("do zero até o primeiro cliente pagante") e o que a pessoa recebe.','Amostra pequena: 7 pessoas, 15 plays.']}
+};
+const VORD = ['m3','m4','n3','n4','a7'];
+function at(pts,t){ if(t>pts[pts.length-1][0]) return null;
+  for(let i=1;i<pts.length;i++){const [t0,v0]=pts[i-1],[t1,v1]=pts[i]; if(t<=t1) return t1===t0?v1:v0+(v1-v0)*(t-t0)/(t1-t0);} return pts[pts.length-1][1]; }
+const mmss = t => Math.floor(t/60)+':'+String(Math.round(t%60)).padStart(2,'0');
+const pc = v => v==null?'–':(Math.round(v)+'%');
+const fimPct = v => v.pts[v.pts.length-1][1];
+function vtRows(v){ const r=[]; [10,30,60,120,180].forEach(t=>{ if(t<v.dur-5) r.push([t<60?t+' s':mmss(t),t]); }); r.push(['fim ('+mmss(v.dur)+')',v.dur]); return r; }
+function vtChart(v,W,H,big){
+  const pad=big?{l:40,r:14,t:16,b:30}:{l:4,r:4,t:4,b:4};
+  const iw=W-pad.l-pad.r, ih=H-pad.t-pad.b, D=v.dur;
+  const X=t=>(pad.l+t/D*iw).toFixed(1), Y=r=>(pad.t+(100-r)/100*ih).toFixed(1);
+  const col=`var(--${v.lane})`; let g='';
+  [0,25,50,75,100].forEach(r=>{ g+=`<line x1="${pad.l}" x2="${W-pad.r}" y1="${Y(r)}" y2="${Y(r)}" style="stroke:#ECE8F4"/>`;
+    if(big) g+=`<text x="${pad.l-7}" y="${+Y(r)+4}" text-anchor="end" font-size="11" fill="#6B6480">${r}%</text>`; });
+  if(big){ const st=D<=160?30:60; for(let t=0;t<=D-st/3;t+=st) g+=`<text x="${X(t)}" y="${H-9}" text-anchor="middle" font-size="11" fill="#6B6480">${mmss(t)}</text>`;
+    g+=`<text x="${X(D)}" y="${H-9}" text-anchor="end" font-size="11" fill="#6B6480">${mmss(D)}</text>`; }
+  const bp=BENCH.filter(p=>p[0]<D).concat([[D,at(BENCH,D)]]).filter(p=>p[1]!=null);
+  const path=a=>a.map((p,i)=>(i?'L':'M')+X(p[0])+','+Y(p[1])).join(' ');
+  if(v.btnAt){ g+=`<line x1="${X(v.btnAt)}" x2="${X(v.btnAt)}" y1="${pad.t}" y2="${H-pad.b}" style="stroke:#F3532F;stroke-dasharray:4 4;stroke-width:1.5"/>`;
+    if(big) g+=`<text x="${+X(v.btnAt)-6}" y="${pad.t+12}" text-anchor="end" font-size="11" font-weight="600" fill="#F3532F">botão + preço aparecem</text>`; }
+  g+=`<path d="${path(v.pts)} L${X(D)},${Y(0)} L${X(0)},${Y(0)} Z" style="fill:${col};opacity:.1"/>`;
+  g+=`<path d="${path(bp)}" fill="none" style="stroke:#9C94B5;stroke-width:${big?2:1.6};stroke-dasharray:6 5"/>`;
+  g+=`<path d="${path(v.pts)}" fill="none" style="stroke:${col};stroke-width:${big?3:2.4};stroke-linejoin:round"/>`;
+  if(big) vtRows(v).forEach(([,t])=>{ const a=at(v.pts,t); g+=`<circle cx="${X(t)}" cy="${Y(a)}" r="4.5" style="fill:#fff;stroke:${col};stroke-width:2.5"/>`; });
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Curva de retenção de ${v.nome} comparada ao benchmark">${g}</svg>`;
+}
+function kpiCell(lbl,v,b){ const cls=b==null?'':(v>=b?'pos':'neg'); return `<div class="${cls}"><b>${pc(v)}</b><small>${lbl}${b!=null?`<br>Academia ${pc(b)}`:''}</small></div>`; }
+function vtCard(id){
+  const v=VT[id]; const f=fimPct(v);
+  return `<div class="vt" style="--c:var(--${v.lane})"><div class="vth"><b>▶ VTurb · ${v.nome}</b><span>${mmss(v.dur)} · ${v.plays} plays</span></div>
+    ${vtChart(v,308,86,false)}
+    <div class="vtk">${kpiCell('aos 10 s',at(v.pts,10),at(BENCH,10))}${kpiCell('em 1 min',at(v.pts,60),at(BENCH,60))}${kpiCell('no fim',f,null)}</div>
+    <div class="vtleg"><span><i></i>este vídeo</span><span><i class="b"></i>média Academia</span></div></div>`;
+}
+function vtDetail(id){
+  const v=VT[id];
+  return `<div class="vtm"><b>O que melhorar</b><ul>${v.melhorar.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="vtlink" data-vt="${id}">Ver análise completa do vídeo →</div>`;
+}
+function renderVtPanel(){
+  const tot=VORD.reduce((a,k)=>a+VT[k].plays,0);
+  const m10=VORD.reduce((a,k)=>a+at(VT[k].pts,10),0)/VORD.length;
+  document.getElementById('vkp').innerHTML=
+    `<div><b>${VORD.length}</b><small>vídeos do quiz no VTurb</small></div><div><b>${tot}</b><small>plays de 04 a 16/11</small></div>`+
+    `<div><b>${pc(m10)}</b><small>passam dos 10 s, em média<br>Academia: ${pc(at(BENCH,10))}</small></div><div><b>97–100%</b><small>dão play<br>Academia: 54% a 62%</small></div>`;
+  let h=`<div class="sec"><h2>Leitura <em>geral</em></h2><ul class="pts">
+    <li><b>O começo é o problema comum.</b> 4 dos 5 vídeos perdem de 21% a 63% das pessoas nos primeiros 10 segundos. Nas VSLs da Academia, a perda nesse trecho é de 13%.</li>
+    <li><b>Dar play não é problema:</b> 97% a 100% dão play, porque o vídeo toca dentro do quiz. Na Academia, de 54% a 62%.</li>
+    <li><b>Nos 2 vídeos do Mapeamento o botão aparece junto com o vídeo</b>, e quase todo mundo segue sem assistir. O VSL 02 do MNIA, que só mostra o botão aos 3:30, é também o que mais segura.</li>
+    <li><b>Ordem sugerida:</b> (1) começo do VSL 01 do Mapeamento, que é o vídeo com mais gente (31 pessoas); (2) decidir entre regravar ou tirar o VSL 02 do Mapeamento; (3) fim do VSL 01 do MNIA, onde metade assiste tudo e não clica.</li></ul></div>`;
+  h+=`<div class="sec"><h2>Os 5 vídeos <em>lado a lado</em></h2><p class="lead">Retenção em cada ponto. Entre parênteses, a diferença para a média da Academia no mesmo segundo.</p><div class="tw"><table class="vtt"><thead><tr><th>Vídeo</th><th class="n">Plays</th><th class="n">10 s</th><th class="n">30 s</th><th class="n">1 min</th><th class="n">Fim</th></tr></thead><tbody>`+
+    VORD.map(k=>{const v=VT[k]; const c=t=>{const a=at(v.pts,t),b=at(BENCH,t),d=a-b; return `<td class="n">${pc(a)} <span class="dif ${d>=0?'pos':'neg'}">${d>=0?'+':''}${Math.round(d)}</span></td>`;};
+      return `<tr><td><b style="color:var(--${v.lane})">●</b> ${v.nome}</td><td class="n">${v.plays}</td>${c(10)}${c(30)}${c(60)}${c(v.dur)}</tr>`;}).join('')+`</tbody></table></div></div>`;
+  VORD.forEach(k=>{ const v=VT[k];
+    h+=`<div class="sec" id="vt-${k}"><span class="tg" style="background:var(--${v.lane})">${v.tela}</span><h2>${v.nome}</h2>
+      <div class="kr"><div><b>${v.plays}</b><small>plays</small></div><div><b>${v.pessoas}</b><small>pessoas chegaram na tela (inLead)</small></div>
+      <div><b>${v.seguiram==null?'–':v.seguiram}</b><small>${v.seguiram==null?'tela final do ramo':'seguiram para a tela seguinte'}</small></div>
+      <div><b>${v.pr}</b><small>play rate</small></div><div><b>${v.eng}</b><small>engajamento (VTurb)</small></div><div><b>${mmss(v.dur)}</b><small>duração · ${v.btnTxt}</small></div></div>
+      <div class="cw"><div><div class="legend"><span><i style="border-color:var(--${v.lane})"></i>${v.nome}</span><span><i class="b"></i>média das VSLs da Academia</span></div>${vtChart(v,640,280,true)}</div>
+      <div class="tw"><table class="vtt"><thead><tr><th>Tempo</th><th class="n">Este vídeo</th><th class="n">Academia</th><th class="n">Diferença</th></tr></thead><tbody>${
+        vtRows(v).map(([l,t])=>{const a=at(v.pts,t),b=at(BENCH,t),d=a-b; return `<tr><td>${l}</td><td class="n"><b>${pc(a)}</b></td><td class="n">${pc(b)}</td><td class="n"><span class="dif ${d>=0?'pos':'neg'}">${d>=0?'+':''}${Math.round(d)} pts</span></td></tr>`;}).join('')
+      }</tbody></table></div></div>
+      <div class="box l"><b>O que a curva mostra:</b> ${v.leitura}</div>
+      <div class="box r"><b>O que melhorar</b><ul>${v.melhorar.map(x=>`<li>${x}</li>`).join('')}</ul></div></div>`; });
+  h+=`<div class="sec"><h2>Como foi feito o <em>benchmark</em></h2><ul class="pts">
+    <li>O painel de benchmarks do próprio VTurb é pago (plano Scale+) e não está liberado na conta. Por isso usamos um benchmark interno.</li>
+    <li>Benchmark = média das 3 VSLs da Academia no VTurb: Lead A (142 plays), Lead B (126) e Lead C (241), de 17/10 a 16/11. São os vídeos com mais dados da conta.</li>
+    <li>Essas VSLs têm de 33 a 37 minutos. Um vídeo curto, dentro de um quiz, deveria segurar <b>mais</b> que elas no começo, não menos. Por isso a média da Academia funciona como piso.</li>
+    <li>Plays do VTurb batem com as visualizações de cada tela no inLead (43 = 43, 31 = 31, 22 ≈ 23, 19 ≈ 20, 15 = 15). Os vídeos com menos de 20 pessoas devem ser lidos como sinal.</li>
+    <li>"Pessoas chegaram na tela" vem do inLead de 04 a 16/11; os outros números do mapa vão até 11/11.</li></ul></div>
+    <div class="foot">Brito Mídias · dados do VTurb e do inLead coletados em 16/11/26 · nenhum dado pessoal nesta página</div>`;
+  document.getElementById('vtpBody').innerHTML=h;
+}
+const vtp=document.getElementById('vtp');
+function openVt(id){ renderVtPanel(); vtp.hidden=false;
+  requestAnimationFrame(()=>{ const el=id&&document.getElementById('vt-'+id); vtp.scrollTop = el? el.offsetTop-12 : 0; });
+  if(location.hash!=='#videos') history.replaceState(null,'','#videos'); }
+function closeVt(){ vtp.hidden=true; if(location.hash) history.replaceState(null,'',location.pathname); }
+document.getElementById('tgVt').onclick=()=>openVt();
+document.getElementById('vtpX').onclick=closeVt;
+addEventListener('keydown',e=>{ if(e.key==='Escape' && !vtp.hidden) closeVt(); });
+
+const CHIPS = [['Mapa inteiro','fit'],['Entrada','ad,q1,q2'],['Qualificação','q1,q10'],['Divisão','q9,q10,m1,n1,a1'],['Mapeamento','m1,m7','var(--m)'],['MNIA','n1,n5','var(--n)'],['ANP','a1,a8','var(--a)'],['▶ Vídeos','vt','var(--roxo2)']];
 
 /* ===================== MONTAGEM ===================== */
 const world = document.getElementById('world'), vp = document.getElementById('vp'), svg = document.getElementById('edges');
@@ -338,7 +533,8 @@ function cardHtml(n){
       return `<div class="ans"><div class="bar" style="width:${pct}%"></div><div class="row"><span class="t">${a[0]?a[0]+' ':''}${a[1]}</span><b>${a[2]}<small>${pct}%</small></b></div>${a[3]?`<span class="route r-${a[3]}">${a[4]}</span>`:''}</div>`}).join(''); }
   if(n.fields) d += n.fields.map(f=>`<div class="field">✎ ${f}</div>`).join('');
   if(n.imgs) d += `<div class="imgs">${n.imgs.map(u=>`<img src="${u}" alt="Notícia do carrossel" loading="lazy">`).join('')}</div>`;
-  if(n.video) d += `<div class="video">▶ ${n.video[0]}<small>${n.video[1]}</small></div>`;
+  if(n.vt) d += vtDetail(n.vt);
+  else if(n.video) d += `<div class="video">▶ ${n.video[0]}<small>${n.video[1]}</small></div>`;
   if(n.list) d += `<ul class="list">${n.list.map(l=>`<li>${l}</li>`).join('')}</ul>`;
   if(n.price) d += `<div class="price">${n.price[0]?`<s>${n.price[0]}</s>`:''}<b>${n.price[1]}</b><small>${n.price[2]}</small></div>`;
   if(n.btn) d += n.btn.map(btnHtml).join('');
@@ -348,8 +544,8 @@ function cardHtml(n){
   const lbl = n.reachLbl || 'pessoas';
   return `<div class="hd"><span class="tag">${n.tag}</span><span class="reach">${n.reach.toLocaleString('pt-BR')}<small>${lbl}</small></span></div>
     <div class="ttl">${n.ttl}</div>
-    <div class="far"><div class="ft">${n.ttl}</div><div class="fn">${n.reach.toLocaleString('pt-BR')}<small>${lbl}</small></div>${n.alert?'<div class="fw">⚠️ atenção</div>':''}</div>
-    <div class="body"><div class="q">${n.q}</div>${n.sub?`<div class="sub">${n.sub}</div>`:''}
+    <div class="far"><div class="ft">${n.ttl}</div><div class="fn">${n.reach.toLocaleString('pt-BR')}<small>${lbl}</small></div>${n.vt?`<div class="fv">▶ ${pc(at(VT[n.vt].pts,10))} passam dos 10 s <small>(Academia ${pc(at(BENCH,10))})</small></div>`:''}${n.alert?'<div class="fw">⚠️ atenção</div>':''}</div>
+    <div class="body"><div class="q">${n.q}</div>${n.sub?`<div class="sub">${n.sub}</div>`:''}${n.vt?vtCard(n.vt):''}
       <div class="more">＋ ${cnt} · clique ou aproxime</div><div class="detail">${d}</div></div>
     ${n.alert?`<div class="alert">⚠️ ${n.alert}</div>`:''}`;
 }
@@ -438,7 +634,7 @@ function up(e){
   if(!P.has(e.pointerId)) return; P.delete(e.pointerId);
   if(P.size<2) pinch=null;
   if(P.size===0){vp.classList.remove('drag');
-    if(moved<6 && downTarget){const c=downTarget.closest('.card'); if(c) toggleCard(byId[c.dataset.id]);}
+    if(moved<6 && downTarget){const lk=downTarget.closest('[data-vt]'); if(lk) openVt(lk.dataset.vt); else {const c=downTarget.closest('.card'); if(c) toggleCard(byId[c.dataset.id]);}}
     downTarget=null;}
 }
 vp.addEventListener('pointerup',up); vp.addEventListener('pointercancel',up);
@@ -465,7 +661,7 @@ addEventListener('keydown',e=>{const v=viewRect();
 const chips=document.getElementById('chips');
 CHIPS.forEach(([t,ids,c])=>{const b=document.createElement('button');b.className='chip';
   b.innerHTML=(c?`<i style="background:${c}"></i>`:'')+t;
-  b.onclick=()=>{ if(ids==='fit') return fitTo(bounds());
+  b.onclick=()=>{ if(ids==='fit') return fitTo(bounds()); if(ids==='vt') return openVt();
     const arr=ids.split(','); let list=arr;
     if(arr.length===2 && arr[0][0]===arr[1][0] && arr[0]!=='q1'){ // faixa inteira
       const lane=byId[arr[0]].lane; list=N.filter(n=>n.y===byId[arr[0]].y && n.x>=byId[arr[0]].x).map(n=>n.id);}
@@ -502,6 +698,7 @@ addEventListener('resize',()=>{ if(!touched) fitTo(bounds(),40,false); else appl
 /* início: visão geral */
 (document.fonts?document.fonts.ready:Promise.resolve()).then(()=>fitTo(bounds(),40,false));
 fitTo(bounds(),40,false);
+if(location.hash==='#videos') openVt();
 </script>
 </body>
 </html>
