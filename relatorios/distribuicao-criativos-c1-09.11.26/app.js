@@ -1,19 +1,22 @@
 (() => {
   const ORIG = new Set(['CONJ01', 'CONJ02', 'CONJ03', 'CONJ04']);
-  const NOVOS = new Set(['CONJ TOP', 'CONJ14', 'CONJ13', 'CONJ15']);
+  const NOVOS = new Set(['CONJ TOP', 'CONJ14', 'CONJ13', 'CONJ15', 'CONJ16', 'CONJ17', 'CONJ18']);
   const grupo = (s) => ORIG.has(s) ? 'orig' : NOVOS.has(s) ? 'novo' : 'teste';
   const QUEDA = '2026-10-29';
   const FIMQ = '2026-11-05';
   const MUDA = '2026-11-06';
-  const POS = '2026-11-07';
-  const FIM = '2026-11-08';
+  const POS = '2026-11-09';
+  const FIM = '2026-11-15';
+  const PUB2 = '2026-11-12';
   const MOMENTOS = [
     { id: 'a', a: '2026-10-22', b: '2026-10-28' },
     { id: 'b', a: '2026-10-30', b: FIMQ },
     { id: 'c', a: POS, b: FIM },
+    { id: 'd', a: '2026-11-14', b: FIM },
   ];
+  const TABELA_M = MOMENTOS.slice(0, 3);
   const BASE = { preset: 'tudo', start: '2026-10-01', end: FIM, conj: 'todos', fmt: 'todos', metrica: 'cpf', corte: 2.5, minv: 10, busca: '', ord: 'cpf', dir: 'asc' };
-  const PRESETS = { tudo: ['2026-10-01', FIM], antes: ['2026-10-01', '2026-10-28'], depois: [QUEDA, FIMQ], mudou: [POS, FIM], d14: ['2026-10-26', FIM], d7: ['2026-11-02', FIM], inicio: ['2026-09-28', FIM] };
+  const PRESETS = { tudo: ['2026-10-01', FIM], antes: ['2026-10-01', '2026-10-28'], depois: [QUEDA, FIMQ], mudou: [POS, FIM], d14: ['2026-11-02', FIM], d7: ['2026-11-09', FIM], inicio: ['2026-09-28', FIM] };
   const P = () => ({ ...BASE, ...dash.params() });
   const num = (v, d = 0) => v == null || !isFinite(v) ? '—' : v.toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d });
   const brl = (v, d = 2) => v == null || !isFinite(v) ? '—' : 'R$ ' + num(v, d);
@@ -103,7 +106,7 @@
 
   dash.draw('f-conj', (sel) => {
     const c = dash.data('conjuntos');
-    const ops = [new Option('Todos', 'todos'), new Option('Originais (01 a 04)', 'orig'), new Option('Novos (TOP, 13, 14 e 15)', 'novos'), new Option('Testes (05 a 12)', 'teste')];
+    const ops = [new Option('Todos', 'todos'), new Option('Originais (01 a 04)', 'orig'), new Option('Novos (TOP e 13 a 18)', 'novos'), new Option('Testes (05 a 12)', 'teste')];
     if (c.status === 'ok') for (const x of c.data) ops.push(new Option(x.set, x.set));
     sel.replaceChildren(...ops);
     sel.value = P().conj;
@@ -202,19 +205,21 @@
     const d = dados();
     const pr = posDados();
     if (!d || !pr) return;
-    const M = MOMENTOS.map((mo) => momento(d, pr, mo));
+    const M = TABELA_M.map((mo) => momento(d, pr, mo));
     for (const [n, k, f, bom] of LINHAS_M) {
       const tr = el.insertRow();
       negrito(tr, n);
       M.forEach((x, i) => (i === 2 ? negrito : celula)(tr, f(x[k])));
-      const b = M[1][k];
       const c = M[2][k];
-      const td = tr.insertCell();
-      if (b == null || c == null || !b) { td.textContent = '—'; continue; }
-      const pp = k === 'vf' || k === 'st';
-      const v = pp ? c - b : 100 * (c - b) / b;
-      const txt = (v > 0 ? '+' : '') + num(v, 0) + (pp ? ' p.p.' : '%');
-      if (bom) pilula(td, txt, v * bom > 0 ? 'ok' : 'bad'); else td.textContent = txt;
+      for (const ref of [M[1], M[0]]) {
+        const b = ref[k];
+        const td = tr.insertCell();
+        if (b == null || c == null || !b) { td.textContent = '—'; continue; }
+        const pp = k === 'vf' || k === 'st';
+        const v = pp ? c - b : 100 * (c - b) / b;
+        const txt = (v > 0 ? '+' : '') + num(v, 0) + (pp ? ' p.p.' : '%');
+        if (bom) pilula(td, txt, Math.abs(v) < 3 ? 'neu' : v * bom > 0 ? 'ok' : 'bad'); else td.textContent = txt;
+      }
     }
   });
   dash.draw('tb-mset', (el) => {
@@ -485,14 +490,19 @@
       for (const [val, v] of d3.group(rs, (r) => r.val)) {
         const A = soma(v.filter((r) => r.d < QUEDA));
         const B = soma(v.filter((r) => r.d === QUEDA));
-        const C = soma(v.filter((r) => r.d > QUEDA));
-        lin.push({ val, A, B, C });
+        const C = soma(v.filter((r) => r.d > QUEDA && r.d < PUB2));
+        const D = soma(v.filter((r) => r.d >= PUB2));
+        lin.push({ val, A, B, C, D });
       }
     }
     for (const x of lin) {
       const tr = el.insertRow();
-      negrito(tr, x.val); celula(tr, brl(x.A.spend, 0)); negrito(tr, brl(x.A.cpf)); celula(tr, brl(x.B.spend, 0)); negrito(tr, brl(x.B.cpf)); celula(tr, brl(x.C.spend, 0)); negrito(tr, brl(x.C.cpf));
-      celula(tr, x.B.cpf && x.C.cpf ? (x.C.cpf > x.B.cpf ? '+' : '') + num(100 * (x.C.cpf - x.B.cpf) / x.B.cpf, 0) + '%' : '—');
+      negrito(tr, x.val);
+      for (const s of [x.A, x.B, x.C, x.D]) { celula(tr, brl(s.spend, 0)); negrito(tr, brl(s.cpf)); }
+      const td = tr.insertCell();
+      if (!(x.B.cpf && x.D.cpf)) { td.textContent = '—'; continue; }
+      const v = 100 * (x.D.cpf - x.B.cpf) / x.B.cpf;
+      pilula(td, (v > 0 ? '+' : '') + num(v, 0) + '%', v < 0 ? 'ok' : 'bad');
     }
   });
 

@@ -8,21 +8,21 @@
   <header class="bm-hero" id="topo">
     <div class="bm-brand"><svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias"><polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon><polygon points="50,33 65,59 35,59"></polygon><line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line><line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line><line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line><line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line><line x1="10" y1="27" x2="50" y2="33"></line></svg><span class="word"><b>BM</b><i></i><span>MÍDIAS</span></span></div><p class="bm-eyebrow">Distribuição · Marketex / Ana Tex</p>
     <h1>Diagnóstico C1 Ana Tex</h1>
-    <p class="bm-lead">O custo por seguidor foi de <b data-draw="h-a" data-source="anuncio_dia anuncios">—</b> na semana antes da queda, subiu para <b data-draw="h-b" data-source="anuncio_dia anuncios">—</b> de 30/10 a 05/11 e caiu para <b data-draw="h-c" data-source="anuncio_dia anuncios">—</b> em 07 e 08/11, depois das mudanças de 06/11. Os campeões perderam o Stories em 29/10; o CONJ14 e o CONJ TOP trouxeram o Stories de volta e os conjuntos de teste foram desligados.</p>
+    <p class="bm-lead">O custo por seguidor foi de <b data-draw="h-a" data-source="anuncio_dia anuncios">—</b> na semana antes da queda, subiu para <b data-draw="h-b" data-source="anuncio_dia anuncios">—</b> de 30/10 a 05/11 e voltou para <b data-draw="h-c" data-source="anuncio_dia anuncios">—</b> na semana de 09 a 15/11, o mesmo nível de outubro. Em 14 e 15/11 ficou em <b data-draw="h-d" data-source="anuncio_dia anuncios">—</b>, os dois dias mais baratos desde o início. Os seguidores por dia dobraram com o mesmo investimento, todos os conjuntos ativos ficaram abaixo de R$ 0,80 e o CONJ14 e o CONJ TOP mantêm o Stories perto de R$ 0,60.</p>
     <div class="bm-filters">
       <label class="bm-f"><span>Período</span>
         <select id="f-preset" aria-label="Período">
-          <option value="tudo">01/10 a 08/11</option>
+          <option value="tudo">01/10 a 15/11</option>
           <option value="antes">Antes da queda (até 28/10)</option>
           <option value="depois">Depois da queda (29/10 a 05/11)</option>
-          <option value="mudou">Depois das mudanças (07 e 08/11)</option>
+          <option value="mudou">Semana depois das mudanças (09 a 15/11)</option>
           <option value="d14">Últimos 14 dias</option>
           <option value="d7">Últimos 7 dias</option>
           <option value="inicio">Desde o início (28/09)</option>
           <option value="custom">Personalizado</option>
         </select></label>
-      <label class="bm-f"><span>De</span><input id="f-start" type="date" min="2026-09-28" max="2026-11-08" aria-label="De"></label>
-      <label class="bm-f"><span>Até</span><input id="f-end" type="date" min="2026-09-28" max="2026-11-08" aria-label="Até"></label>
+      <label class="bm-f"><span>De</span><input id="f-start" type="date" min="2026-09-28" max="2026-11-15" aria-label="De"></label>
+      <label class="bm-f"><span>Até</span><input id="f-end" type="date" min="2026-09-28" max="2026-11-15" aria-label="Até"></label>
       <label class="bm-f"><span>Conjunto</span><select id="f-conj" aria-label="Conjunto" data-draw="f-conj" data-source="conjuntos"></select></label>
       <label class="bm-f"><span>Formato</span>
         <select id="f-fmt" aria-label="Formato"><option value="todos">Todos</option><option value="Reel">Reels</option><option value="Carrossel">Carrosséis</option><option value="Imagem">Imagens</option></select></label>
@@ -41,21 +41,22 @@
   </nav>
 
   <section class="bm-sec" id="mudou">
-    <div class="bm-card" id="momentos"><h2>Custo por seguidor em três momentos</h2><p class="n">Períodos fixos, sem relação com os filtros. 29/10 e 06/11 ficaram de fora porque foram dias de transição. 07 e 08/11 caíram num fim de semana e os conjuntos novos ainda estão aprendendo.</p>
+    <div class="bm-card" id="momentos"><h2>Custo por seguidor antes e depois das mudanças</h2><p class="n">Períodos fixos, sem relação com os filtros. 29/10 e 06 a 08/11 ficaram de fora porque foram dias de transição e de aprendizado dos conjuntos novos.</p>
       <div class="bm-kpis">
         <div class="bm-kpi"><span class="l">Antes da queda · 22 a 28/10</span><b class="v" data-draw="m-cpf" data-p="a" data-source="anuncio_dia anuncios">—</b><span class="d">por seguidor</span></div>
         <div class="bm-kpi"><span class="l">Depois da queda · 30/10 a 05/11</span><b class="v" data-draw="m-cpf" data-p="b" data-source="anuncio_dia anuncios">—</b><span class="d">por seguidor</span></div>
-        <div class="bm-kpi hot"><span class="l">Depois das mudanças · 07 e 08/11</span><b class="v" data-draw="m-cpf" data-p="c" data-source="anuncio_dia anuncios">—</b><span class="d">por seguidor</span></div>
+        <div class="bm-kpi hot"><span class="l">Semana depois das mudanças · 09 a 15/11</span><b class="v" data-draw="m-cpf" data-p="c" data-source="anuncio_dia anuncios">—</b><span class="d">por seguidor</span></div>
+        <div class="bm-kpi"><span class="l">Últimos dois dias · 14 e 15/11</span><b class="v" data-draw="m-cpf" data-p="d" data-source="anuncio_dia anuncios">—</b><span class="d">por seguidor</span></div>
       </div>
-      <div class="bm-tw"><table class="bm-t"><thead><tr><th><span>Métrica</span></th><th><span>22 a 28/10</span></th><th><span>30/10 a 05/11</span></th><th><span>07 e 08/11</span></th><th><span>Mudança desde a queda</span></th></tr></thead><tbody data-draw="tb-m" data-source="anuncio_dia anuncios posicionamento_dia"></tbody></table></div></div>
-    <div class="bm-card" id="evolucao-mudou"><h2>Custo por seguidor por dia, desde 22/10</h2><p class="n">Faixa vermelha: depois da queda do Stories. Faixa verde: depois das mudanças de 06/11. Os conjuntos novos são o CONJ TOP e o CONJ14.</p>
+      <div class="bm-tw"><table class="bm-t"><thead><tr><th><span>Métrica</span></th><th><span>22 a 28/10</span></th><th><span>30/10 a 05/11</span></th><th><span>09 a 15/11</span></th><th><span>Contra 30/10 a 05/11</span></th><th><span>Contra 22 a 28/10</span></th></tr></thead><tbody data-draw="tb-m" data-source="anuncio_dia anuncios posicionamento_dia"></tbody></table></div></div>
+    <div class="bm-card" id="evolucao-mudou"><h2>Custo por seguidor por dia, desde 22/10</h2><p class="n">Faixa vermelha: depois da queda do Stories. Faixa verde: depois das mudanças de 06/11. Os conjuntos novos com gasto são o CONJ TOP e o CONJ14.</p>
       <div class="bm-chart tall" data-draw="c-mudou" data-source="anuncio_dia anuncios"></div>
       <div class="bm-legend"><span><i style="background:var(--bm-roxo)"></i>Total</span><span><i style="background:var(--bm-light)"></i>Originais (01 a 04)</span><span><i style="background:var(--bm-good)"></i>Novos (TOP e 14)</span><span><i style="background:var(--bm-bad)"></i>Testes (05 a 12)</span></div></div>
-    <div class="bm-card" id="conj-mudou"><h2>Conjuntos depois das mudanças</h2><p class="n">07 e 08/11, do menor para o maior custo por seguidor. O CONJ14 roda só no Stories e no Explorar do Instagram.</p>
+    <div class="bm-card" id="conj-mudou"><h2>Conjuntos na semana depois das mudanças</h2><p class="n">09 a 15/11, do menor para o maior custo por seguidor. Os quatro ativos ficaram abaixo de R$ 0,80. O CONJ14 roda só no Stories e no Explorar do Instagram.</p>
       <div class="bm-tw"><table class="bm-t"><thead><tr><th><span>Conjunto</span></th><th><span>Tipo</span></th><th><span>Orçamento</span></th><th><span>Gasto</span></th><th><span>% da verba</span></th><th><span>Seguidores</span></th><th><span>Custo/seg.</span></th><th><span>Visita→seg.</span></th><th><span>No Stories</span></th><th><span>Criativo principal</span></th></tr></thead><tbody data-draw="tb-mset" data-source="anuncio_dia anuncios conjuntos posicionamento_dia"></tbody></table></div></div>
-    <div class="bm-card" id="criativos-mudou"><h2>Criativos depois das mudanças</h2><p class="n">07 e 08/11, por conjunto, com pelo menos R$ 5 de gasto. O mesmo vídeo custa menos no Stories do CONJ14 do que no Feed e no Reels do CONJ01.</p>
+    <div class="bm-card" id="criativos-mudou"><h2>Criativos na semana depois das mudanças</h2><p class="n">09 a 15/11, por conjunto, com pelo menos R$ 5 de gasto. O POST157 segue como principal criativo: 927 seguidores no CONJ01 na semana, a R$ 0,68 cada.</p>
       <div class="bm-tw"><table class="bm-t"><thead><tr><th><span>POST</span></th><th><span>Instagram</span></th><th><span>Conteúdo</span></th><th><span>Conjunto</span></th><th><span>Gasto</span></th><th><span>Seguidores</span></th><th><span>Custo/seg.</span></th><th><span>Visita→seg.</span></th></tr></thead><tbody data-draw="tb-mads" data-source="anuncio_dia anuncios"></tbody></table></div></div>
-    <div class="bm-card" id="passos"><h2>Próximos passos</h2><p class="n">Propostas para decidir com o time. Nenhuma foi aplicada ainda.</p>
+    <div class="bm-card" id="passos"><h2>Próximos passos</h2><p class="n">Propostas para decidir com o time.</p>
       <div class="bm-ach" data-draw="passos" data-source="passos"></div></div>
   </section>
 
@@ -76,7 +77,7 @@
       <div class="bm-chart tall" data-draw="c-diario" data-source="anuncio_dia anuncios"></div>
       <div class="bm-legend"><span><i style="background:var(--bm-roxo)"></i>Total</span><span><i style="background:var(--bm-light)"></i>Conjuntos originais (01 a 04)</span><span><i style="background:var(--bm-good)"></i>Conjuntos novos (TOP e 14)</span><span><i style="background:var(--bm-bad)"></i>Conjuntos de teste (05 a 12)</span></div>
     </div>
-    <div class="bm-card" id="diagnostico"><h2>Onde está o problema</h2><p class="n">Leitura de 01/10 a 08/11, atualizada em 09/11. Não muda com os filtros.</p>
+    <div class="bm-card" id="diagnostico"><h2>O que os números mostram</h2><p class="n">Leitura de 01/10 a 15/11, atualizada em 16/11. Não muda com os filtros.</p>
       <div class="bm-ach" data-draw="achados" data-source="achados"></div></div>
     <div class="bm-grid">
       <div class="bm-card" id="concentracao"><h2>Para onde a verba foi</h2><p class="n">Parte do investimento do período em cada criativo. Clique na barra para abrir o post.</p><div class="bm-chart" data-draw="c-conc" data-source="anuncio_dia anuncios"></div></div>
@@ -104,20 +105,20 @@
 
   <section class="bm-sec" id="conjuntos" hidden>
     <div class="bm-card"><h2>Visita que vira seguidor, por conjunto</h2><p class="n">O custo da visita é parecido. A diferença está em quanto dessa visita segue o perfil. Roxo: originais. Verde: novos. Vermelho: testes.</p><div class="bm-chart" data-draw="c-vf" data-source="anuncio_dia anuncios conjuntos"></div></div>
-    <div class="bm-card"><h2>Comparativo de conjuntos</h2><p class="n">Respeita período e formato. Os conjuntos de teste usam outra meta por dentro, embora o Gerenciador mostre o mesmo nome. Os novos são cópias do CONJ01. O CONJ13 foi recriado em 09/11 e o CONJ15 criado no mesmo dia, os dois ainda desligados.</p>
+    <div class="bm-card"><h2>Comparativo de conjuntos</h2><p class="n">Respeita período e formato. Os conjuntos de teste usam outra meta por dentro, embora o Gerenciador mostre o mesmo nome. Os novos são cópias do CONJ01. CONJ15 a CONJ18 já têm seis criativos novos cada e estão desligados, prontos para entrar.</p>
       <div class="bm-tw"><table class="bm-t"><thead><tr><th><span>Conjunto</span></th><th><span>Tipo</span></th><th><span>Status</span></th><th><span>Orçamento</span></th><th><span>Meta interna</span></th><th><span>Gasto</span></th><th><span>Seguidores</span></th><th><span>Custo/seg.</span></th><th><span>Visita→seg.</span></th><th><span>Custo/visita</span></th><th><span>CPM</span></th><th><span>Criativo principal</span></th></tr></thead><tbody data-draw="tb-sets" data-source="anuncio_dia anuncios conjuntos"></tbody></table></div></div>
   </section>
 
   <section class="bm-sec" id="posicionamento" hidden>
-    <div class="bm-card"><h2>Participação na verba, por dia</h2><p class="n">Respeita o filtro de conjunto. A queda do Stories fica visível em 29/10, e a volta parcial a partir de 06/11, com o CONJ14 e o CONJ TOP.</p><div class="bm-chart tall" data-draw="c-pos" data-source="posicionamento_dia"></div>
+    <div class="bm-card"><h2>Participação na verba, por dia</h2><p class="n">Respeita o filtro de conjunto. A queda do Stories fica visível em 29/10, e a volta parcial a partir de 06/11, com o CONJ14 e o CONJ TOP. Na semana de 09 a 15/11 o Stories ficou com cerca de um quarto da verba.</p><div class="bm-chart tall" data-draw="c-pos" data-source="posicionamento_dia"></div>
       <div class="bm-legend"><span><i style="background:var(--bm-roxo)"></i>Stories IG</span><span><i style="background:var(--bm-light)"></i>Reels IG</span><span><i style="background:var(--bm-mid)"></i>Feed IG</span><span><i style="background:var(--color-border-line)"></i>Outros</span></div></div>
     <div class="bm-card"><h2>Resultado por posicionamento</h2><p class="n">Respeita período e conjunto.</p>
       <div class="bm-tw"><table class="bm-t"><thead><tr><th><span>Posicionamento</span></th><th><span>% da verba</span></th><th><span>Gasto</span></th><th><span>Seguidores</span></th><th><span>Custo/seg.</span></th><th><span>Custo/visita</span></th><th><span>Visita→seg.</span></th><th><span>CPM</span></th></tr></thead><tbody data-draw="tb-pos" data-source="posicionamento_dia"></tbody></table></div></div>
   </section>
 
   <section class="bm-sec" id="publico" hidden>
-    <div class="bm-card"><h2>Idade e gênero em três períodos</h2><p class="n">Toda a campanha, sem relação com os filtros. A semana de 29/10 vai até 04/11. A última coluna vai de 05 a 08/11 e inclui dois dias antes das mudanças. Variação compara a última coluna com a semana de 29/10.</p>
-      <div class="bm-tw"><table class="bm-t"><thead><tr><th><span>Corte</span></th><th><span>Gasto até 28/10</span></th><th><span>Custo/seg. até 28/10</span></th><th><span>Gasto semana de 29/10</span></th><th><span>Custo/seg. semana de 29/10</span></th><th><span>Gasto 05 a 08/11</span></th><th><span>Custo/seg. 05 a 08/11</span></th><th><span>Variação</span></th></tr></thead><tbody data-draw="tb-pub" data-source="publico_semana"></tbody></table></div></div>
+    <div class="bm-card"><h2>Idade e gênero em quatro períodos</h2><p class="n">Toda a campanha, sem relação com os filtros. A semana de 29/10 vai até 04/11. A semana de 05/11 vai até 11/11 e inclui o dia das mudanças. A última coluna vai de 12 a 15/11. Variação compara a última coluna com a semana de 29/10.</p>
+      <div class="bm-tw"><table class="bm-t"><thead><tr><th><span>Corte</span></th><th><span>Gasto até 28/10</span></th><th><span>Custo/seg. até 28/10</span></th><th><span>Gasto semana de 29/10</span></th><th><span>Custo/seg. semana de 29/10</span></th><th><span>Gasto semana de 05/11</span></th><th><span>Custo/seg. semana de 05/11</span></th><th><span>Gasto 12 a 15/11</span></th><th><span>Custo/seg. 12 a 15/11</span></th><th><span>Variação</span></th></tr></thead><tbody data-draw="tb-pub" data-source="publico_semana"></tbody></table></div></div>
   </section>
 
   <section class="bm-sec" id="top" hidden>
@@ -126,7 +127,7 @@
   </section>
 
   <details class="bm-foot" id="metodo"><summary>Como os números foram levantados</summary>
-    <p>Dados do Meta Ads, conta ANEX 05, campanha [01], por anúncio e por dia, de 28/09 a 08/11/2026, último dia completo antes da atualização de 09/11. Visita é a métrica de visitas ao perfil. Seguidor é a métrica de seguidores do Instagram. Conjuntos originais são CONJ01 a 04. Conjuntos novos são CONJ TOP e CONJ14, ligados em 06/11, e CONJ13 e CONJ15, criados em 09/11. Melhores, piores e pouco entregues seguem os cortes da aba Criativos. Temas por leitura dos títulos e legendas. Estes números são um retrato fixo e não se atualizam sozinhos.</p></details>
+    <p>Dados do Meta Ads, conta ANEX 05, campanha [01], por anúncio e por dia, de 28/09 a 15/11/2026, último dia completo antes da atualização de 16/11. Visita é a métrica de visitas ao perfil. Seguidor é a métrica de seguidores do Instagram. Conjuntos originais são CONJ01 a 04. Conjuntos novos são CONJ TOP e CONJ14, ligados em 06/11, e CONJ13 e CONJ15 a CONJ18, criados entre 09 e 16/11 e ainda desligados. Melhores, piores e pouco entregues seguem os cortes da aba Criativos. Temas por leitura dos títulos e legendas. Estes números são um retrato fixo e não se atualizam sozinhos.</p></details>
 </div>
 <div class="bm-footer">BM MÍDIAS · Distribuição de conteúdo · Marketex / Ana Tex · Fonte: Meta Ads (conta ANEX 05)</div>
 </div>
