@@ -6,17 +6,19 @@
   const FIMQ = '2026-11-05';
   const MUDA = '2026-11-06';
   const POS = '2026-11-09';
-  const FIM = '2026-11-15';
+  const FIMC = '2026-11-15';
+  const SEM = '2026-11-16';
+  const FIM = '2026-11-22';
   const PUB2 = '2026-11-12';
   const MOMENTOS = [
     { id: 'a', a: '2026-10-22', b: '2026-10-28' },
     { id: 'b', a: '2026-10-30', b: FIMQ },
-    { id: 'c', a: POS, b: FIM },
-    { id: 'd', a: '2026-11-14', b: FIM },
+    { id: 'c', a: POS, b: FIMC },
+    { id: 'd', a: SEM, b: FIM },
   ];
-  const TABELA_M = MOMENTOS.slice(0, 3);
+  const TABELA_M = MOMENTOS;
   const BASE = { preset: 'tudo', start: '2026-10-01', end: FIM, conj: 'todos', fmt: 'todos', metrica: 'cpf', corte: 2.5, minv: 10, busca: '', ord: 'cpf', dir: 'asc' };
-  const PRESETS = { tudo: ['2026-10-01', FIM], antes: ['2026-10-01', '2026-10-28'], depois: [QUEDA, FIMQ], mudou: [POS, FIM], d14: ['2026-11-02', FIM], d7: ['2026-11-09', FIM], inicio: ['2026-09-28', FIM] };
+  const PRESETS = { tudo: ['2026-10-01', FIM], antes: ['2026-10-01', '2026-10-28'], depois: [QUEDA, FIMQ], mudou: [POS, FIMC], d7: [SEM, FIM], verba: ['2026-11-18', FIM], d14: [POS, FIM], inicio: ['2026-09-28', FIM] };
   const P = () => ({ ...BASE, ...dash.params() });
   const num = (v, d = 0) => v == null || !isFinite(v) ? '—' : v.toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d });
   const brl = (v, d = 2) => v == null || !isFinite(v) ? '—' : 'R$ ' + num(v, d);
@@ -209,9 +211,9 @@
     for (const [n, k, f, bom] of LINHAS_M) {
       const tr = el.insertRow();
       negrito(tr, n);
-      M.forEach((x, i) => (i === 2 ? negrito : celula)(tr, f(x[k])));
-      const c = M[2][k];
-      for (const ref of [M[1], M[0]]) {
+      M.forEach((x, i) => (i === 3 ? negrito : celula)(tr, f(x[k])));
+      const c = M[3][k];
+      for (const ref of [M[2], M[0]]) {
         const b = ref[k];
         const td = tr.insertCell();
         if (b == null || c == null || !b) { td.textContent = '—'; continue; }
@@ -228,12 +230,12 @@
     const pr = posDados();
     const c = dash.data('conjuntos');
     if (!d || !pr || c.status !== 'ok') return;
-    const rs = d.rows.filter((r) => r.d >= POS && r.d <= FIM);
+    const rs = d.rows.filter((r) => r.d >= SEM && r.d <= FIM);
     const tot = d3.sum(rs, (r) => +r.spend) || 1;
     const info = new Map(c.data.map((x) => [x.set, x]));
     const l = [...d3.group(rs, (r) => r.set)].map(([set, v]) => {
       const s = soma(v);
-      const ps = pr.filter((r) => r.set === set && r.d >= POS && r.d <= FIM);
+      const ps = pr.filter((r) => r.set === set && r.d >= SEM && r.d <= FIM);
       const pt = d3.sum(ps, (r) => +r.spend);
       const st = d3.sum(ps.filter((r) => r.pos === 'Stories IG'), (r) => +r.spend);
       const t = d3.rollups(v, (q) => d3.sum(q, (r) => +r.spend), (r) => r.post).sort((a, b) => b[1] - a[1])[0];
@@ -252,7 +254,7 @@
     el.replaceChildren();
     const d = dados();
     if (!d) return;
-    const rs = d.rows.filter((r) => r.d >= POS && r.d <= FIM);
+    const rs = d.rows.filter((r) => r.d >= SEM && r.d <= FIM);
     const l = [...d3.group(rs, (r) => r.set + '|' + r.post)].map(([k, v]) => {
       const [set, post] = k.split('|');
       const m = d.meta.get(post) || {};
