@@ -1,0 +1,820 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Mapa do Quiz do Mapeamento · versão 1 (até 24/11)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --roxo:#7C3AED; --roxo2:#A78BFA; --dark:#0F0B1E; --dark2:#1A1430;
+  --bg:#F5F3FA; --dot:#D9D3EA; --card:#FFFFFF; --txt:#1F1A2E; --muted:#6B6480; --line:#E6E1F0;
+  --q:#7C3AED; --m:#059669; --n:#EA580C; --a:#DB2777; --o:#334155;
+  --warn:#B45309; --warnbg:#FEF3C7; --bad:#DC2626;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;font-family:Poppins,system-ui,sans-serif;color:var(--txt);background:var(--bg)}
+/* ---------- barra superior ---------- */
+.top{position:fixed;inset:0 0 auto 0;z-index:20;background:var(--dark);color:#fff;
+  background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:24px 24px;padding:10px 16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.brand{display:flex;flex-direction:column;min-width:0}
+.brand b{font-size:15px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+.brand b span{color:var(--roxo2)}
+.brand small{font-size:11px;color:#B9B2D0;white-space:nowrap}
+.chips{display:flex;gap:6px;overflow-x:auto;flex:1;min-width:0;scrollbar-width:none;padding:2px 0}
+.chips::-webkit-scrollbar{display:none}
+.chip{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;font:500 12px Poppins;
+  padding:6px 11px;border-radius:999px;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.chip:hover{background:rgba(255,255,255,.14)}
+.chip i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.toggle{border:0;background:var(--roxo);color:#fff;font:600 12px Poppins;padding:7px 12px;border-radius:8px;cursor:pointer;white-space:nowrap}
+/* ---------- área do mapa ---------- */
+#vp{position:fixed;inset:0;touch-action:none;cursor:grab;
+  background-color:var(--bg);background-image:radial-gradient(var(--dot) 1.2px,transparent 1.2px);background-size:26px 26px}
+#vp.drag{cursor:grabbing}
+#world{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+svg#edges{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
+/* rótulos de faixa (sempre visíveis) */
+.lane{position:absolute;font-weight:800;letter-spacing:-1px;line-height:1;white-space:nowrap;pointer-events:none}
+.lane span{display:block;font-size:44px;font-weight:600;letter-spacing:0;margin-top:14px;opacity:.75}
+/* ---------- cartões ---------- */
+.card{position:absolute;width:340px;background:var(--card);border-radius:16px;border:1px solid var(--line);
+  box-shadow:0 6px 24px rgba(31,26,46,.08);cursor:pointer;transition:box-shadow .2s, border-color .2s}
+.card:hover{box-shadow:0 10px 34px rgba(124,58,237,.18)}
+.card.open{border-color:var(--c);box-shadow:0 14px 44px rgba(31,26,46,.18)}
+.card .hd{height:56px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;border-radius:16px 16px 0 0;color:#fff;background:var(--c)}
+.card .hd .tag{color:#fff;font-weight:700;font-size:13px;letter-spacing:.3px;text-transform:uppercase}
+.card .hd .reach{color:#fff;font-weight:800;font-size:20px;line-height:1;text-align:right}
+.card .hd .reach small{display:block;font-size:10px;font-weight:500;opacity:.85}
+.lq{--c:var(--q)} .lm{--c:var(--m)} .ln{--c:var(--n)} .la{--c:var(--a)} .lo{--c:var(--o)}
+.card .cost{background:#FFFBEB;color:#92400E;font-weight:700;font-size:12.5px;padding:7px 16px;border-bottom:1px solid #FDE68A}
+.far .fc{font-size:30px;font-weight:700;color:#B45309;margin-top:8px}
+.card.panel{cursor:default;border:2px solid #F59E0B;z-index:5}
+.card.panel .hd .reach{font-size:26px}
+.pbody{padding:16px 18px 18px}
+.ptt{font-size:22px;font-weight:800;color:var(--txt)}
+.psub{font-size:12px;color:var(--muted);margin:4px 0 12px;line-height:1.45}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.pk{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#FAF9FD}
+.pk small{display:block;font-size:10.5px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;color:var(--muted)}
+.pk b{display:block;font-size:24px;font-weight:800;color:var(--txt);margin:2px 0}
+.pk span{font-size:12px;color:#92400E;font-weight:600}
+.pcamps{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}
+.pcamp{position:relative;border:1.5px solid var(--line);border-radius:14px;padding:12px;background:#fff;cursor:help;outline:none}
+.pcamp:hover,.pcamp:focus-within{border-color:#F59E0B;box-shadow:0 8px 24px rgba(245,158,11,.18)}
+.pch{font-weight:800;font-size:15px;color:var(--txt);margin-bottom:8px}
+.pch small{font-weight:600;color:var(--muted);font-size:11px;margin-left:4px}
+.pcg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.pcg div{background:#FAF9FD;border-radius:9px;padding:6px 8px}
+.pcg div.hl{background:#F5F0FF}
+.pcg small{display:block;font-size:9.5px;font-weight:700;text-transform:uppercase;color:var(--muted)}
+.pcg b{display:block;font-size:17px;font-weight:800;color:var(--txt)}
+.pcg span{font-size:10.5px;color:#92400E;font-weight:600}
+.pcm{font-size:11px;color:var(--muted);margin-top:8px}
+.pcm u{color:var(--roxo);text-decoration:none;font-weight:600}
+.ppop{display:none;position:absolute;left:0;top:calc(100% + 6px);z-index:30;width:720px;max-height:440px;overflow:auto;background:#fff;border:1.5px solid #F59E0B;border-radius:14px;box-shadow:0 16px 44px rgba(31,26,46,.25);padding:12px 14px;cursor:default}
+.pcamp:nth-child(2) .ppop{left:auto;right:0}
+.pcamp:hover .ppop,.pcamp:focus-within .ppop{display:block}
+.ppop::before{content:'';position:absolute;left:0;right:0;top:-10px;height:10px}
+.ppt{font-weight:800;font-size:14px;margin-bottom:8px;color:var(--txt)}
+.ppop table{width:100%;border-collapse:collapse;font-size:11.5px}
+.ppop th{text-align:left;font-size:9.5px;text-transform:uppercase;color:var(--muted);padding:5px 4px;border-bottom:1px solid var(--line);position:sticky;top:-12px;background:#fff}
+.ppop td{padding:6px 4px;border-bottom:1px solid #F1EEF7;vertical-align:top}
+.ppop td:first-child{max-width:300px;word-break:break-word}
+.ppop a{color:var(--roxo);font-weight:600;text-decoration:none}
+.ppop a:hover{text-decoration:underline}
+.ppop tr.hit td{background:#FFFBEB}
+.pz{font-style:normal;font-size:9.5px;background:#FEE2E2;color:#B91C1C;border-radius:6px;padding:1px 5px;font-weight:700}
+.ppn{font-size:10.5px;color:var(--muted);margin-top:8px}
+.pk.pg{background:#F5F0FF;border-color:#DDD0FB}
+.ptab{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:8px}
+.ptab th{text-align:left;font-size:10.5px;text-transform:uppercase;color:var(--muted);padding:6px 5px;border-bottom:1px solid var(--line)}
+.ptab td{padding:7px 5px;border-bottom:1px solid var(--line)}
+#world.z-far .card.panel .pbody{display:block}
+.card .ttl{padding:12px 16px 0;font-weight:700;font-size:17px;color:var(--txt)}
+.card .body{padding:6px 16px 16px;color:var(--txt)}
+.q{font-weight:600;font-size:14.5px;line-height:1.4;margin:4px 0 6px}
+.sub{font-size:12.5px;color:var(--muted);line-height:1.5;margin:4px 0}
+.more{font-size:11.5px;color:var(--roxo);font-weight:600;margin-top:8px}
+.detail{display:none}
+.card.open .detail,#world.z-near .detail{display:block}
+.card.open .more,#world.z-near .more{display:none}
+.ans{border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin:7px 0;font-size:12.5px;line-height:1.4;position:relative;overflow:hidden}
+.ans .bar{position:absolute;left:0;top:0;bottom:0;background:var(--c);opacity:.12}
+.ans .row{position:relative;display:flex;gap:8px;justify-content:space-between;align-items:flex-start}
+.ans .row b{font-size:13px;white-space:nowrap}
+.ans .row b small{font-weight:500;color:var(--muted);font-size:10.5px;margin-left:3px}
+.ans .t{color:var(--txt)}
+.route{position:relative;display:inline-block;margin-top:5px;font-size:10.5px;font-weight:700;color:#fff;padding:2px 8px;border-radius:999px}
+.r-m{background:var(--m)} .r-n{background:var(--n)} .r-a{background:var(--a)}
+.field{border:1px dashed #C9C2DA;border-radius:10px;padding:9px 10px;margin:7px 0;font-size:12px;color:var(--muted)}
+.btn{background:#02F102;color:#000;font-weight:700;font-size:11.5px;text-align:center;border-radius:10px;padding:10px;margin:9px 0 4px}
+.btn.or{background:#F3532F;color:#fff}
+.btn.wa{background:#25D366;color:#06301A}
+.list{font-size:12px;line-height:1.5;margin:6px 0;padding-left:0;list-style:none}
+.list li{margin:4px 0}
+.video{background:#1F1A2E;color:#fff;border-radius:10px;padding:14px;font-size:12px;text-align:center;margin:8px 0}
+.video small{display:block;color:#B9B2D0;margin-top:3px}
+.imgs{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin:8px 0}
+.imgs img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;border:1px solid var(--line)}
+.price{border:1px solid #F3532F;border-radius:10px;padding:10px;text-align:center;margin:8px 0}
+.price s{color:var(--muted);font-size:11px}
+.price b{display:block;font-size:22px;color:var(--txt)}
+.price small{font-size:11.5px;color:var(--muted)}
+.note{font-size:11.5px;color:var(--muted);background:#F7F5FC;border-radius:8px;padding:7px 9px;margin-top:8px;line-height:1.45}
+.alert{margin:0 12px 12px;background:var(--warnbg);color:#78350F;border-radius:10px;padding:9px 11px;font-size:12px;line-height:1.45}
+.alert b{color:var(--warn)}
+.far{display:none;padding:18px 16px 22px}
+.far .ft{font-size:44px;font-weight:800;line-height:1.05;color:var(--txt)}
+.far .fn{font-size:64px;font-weight:800;line-height:1;margin-top:10px;color:var(--c)}
+.far .fn small{font-size:26px;font-weight:600;color:var(--muted);margin-left:6px}
+.far .fw{font-size:30px;margin-top:10px;color:var(--warn);font-weight:700}
+#world.z-far .card .ttl,#world.z-far .card .body,#world.z-far .card .alert{display:none}
+#world.z-far .card .far{display:block}
+#world.z-far .card .hd{height:56px}
+/* queda entre telas */
+.drop{position:absolute;transform:translate(-50%,-50%);background:#fff;border:1px solid #FCA5A5;color:var(--bad);
+  font-weight:700;font-size:12px;padding:3px 9px;border-radius:999px;white-space:nowrap;pointer-events:none;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.drop.ok{border-color:#BBF7D0;color:#15803D}
+#world.z-far .drop{font-size:26px;padding:6px 16px;border-width:2px}
+.split{position:absolute;pointer-events:none;font-weight:700;font-size:13px;padding:6px 12px;border-radius:10px;color:#fff;white-space:nowrap;line-height:1.3}
+.split small{display:block;font-weight:500;font-size:11px;opacity:.9}
+#world.z-far .split{font-size:30px;padding:12px 20px}
+#world.z-far .split small{font-size:22px}
+/* ---------- controles ---------- */
+.ctl{position:fixed;left:16px;bottom:16px;z-index:20;display:flex;flex-direction:column;background:#fff;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.14);overflow:hidden}
+.ctl button{width:44px;height:44px;border:0;background:#fff;font:600 20px Poppins;color:var(--txt);cursor:pointer;border-bottom:1px solid var(--line)}
+.ctl button:last-child{border-bottom:0;font-size:16px}
+.ctl button:hover{background:#F3F0FA}
+.zl{position:fixed;left:72px;bottom:16px;z-index:20;background:rgba(15,11,30,.82);color:#fff;font-size:11.5px;padding:7px 11px;border-radius:9px;line-height:1.45;max-width:min(420px,calc(100vw - 260px))}
+.zl b{color:var(--roxo2)}
+#mini{position:fixed;right:16px;bottom:16px;z-index:20;background:#fff;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.14);cursor:pointer}
+.info{position:fixed;right:16px;top:74px;z-index:20;width:300px;background:#fff;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,.14);font-size:12px;line-height:1.5;color:var(--txt)}
+.info .ih{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;font-weight:700;cursor:pointer;border-bottom:1px solid var(--line)}
+.info .ib{padding:10px 14px 14px}
+.info.closed .ib{display:none}
+.info.closed .ih{border-bottom:0}
+.leg{display:flex;align-items:center;gap:8px;margin:5px 0}
+.leg i{width:12px;height:12px;border-radius:4px;display:inline-block;flex:none}
+.info p{margin:8px 0 0;color:var(--muted);font-size:11.2px}
+/* ---------- vídeos · VTurb (no cartão) ---------- */
+.vt{border:1px solid var(--line);border-radius:12px;padding:10px 10px 8px;margin:8px 0;background:#FBFAFE}
+.vth{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:11.5px}
+.vth b{color:var(--txt);font-size:12px}
+.vth span{color:var(--muted)}
+.vt svg{display:block;width:100%;height:auto;margin:6px 0 4px}
+.vtk{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.vtk div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:5px 6px;text-align:center}
+.vtk b{display:block;font-size:15px;line-height:1.1}
+.vtk small{display:block;font-size:10px;color:var(--muted);line-height:1.25}
+.vtk .neg b{color:var(--bad)} .vtk .pos b{color:#15803D}
+.vtleg{font-size:10px;color:var(--muted);display:flex;gap:10px;margin-top:5px}
+.vtleg i{display:inline-block;width:14px;height:0;border-top:3px solid var(--c);vertical-align:middle;margin-right:4px}
+.vtleg i.b{border-top:2px dashed #9C94B5}
+.vtm{background:#F3EEFF;border-radius:10px;padding:9px 10px;margin:8px 0;font-size:12px;line-height:1.45}
+.vtm b{color:var(--roxo)}
+.vtm ul{margin:4px 0 0;padding-left:16px}
+.vtm li{margin:3px 0}
+.vtlink{display:block;text-align:center;background:var(--roxo);color:#fff;border-radius:9px;padding:8px;font-weight:600;font-size:12px;margin-top:8px;cursor:pointer}
+.far .fv{font-size:28px;margin-top:10px;font-weight:700;color:var(--txt)}
+.far .fv small{font-size:20px;color:var(--muted);font-weight:500}
+.toggle.alt{background:transparent;border:1px solid rgba(255,255,255,.35)}
+/* ---------- painel de vídeos ---------- */
+.vtp{position:fixed;inset:0;z-index:50;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.vtp[hidden]{display:none}
+.vtp-hero{background:var(--dark);color:#fff;
+  background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:28px 28px}
+.vtp .in{max-width:1080px;margin:0 auto;padding:22px 16px 30px}
+.vtp-hero .x{border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.06);color:#fff;font:600 12px Poppins;padding:7px 12px;border-radius:8px;cursor:pointer}
+.vtp-hero small{display:block;margin-top:18px;color:var(--roxo2);font-weight:600;font-size:12px;letter-spacing:.6px;text-transform:uppercase}
+.vtp-hero h1{margin:6px 0 8px;font-size:clamp(26px,5vw,40px);line-height:1.1;font-weight:800}
+.vtp-hero h1 span{color:var(--roxo2)}
+.vtp-hero p{margin:0;color:#CFC8E6;font-size:14px;line-height:1.6;max-width:760px}
+.vkp{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px}
+.vkp div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px}
+.vkp b{display:block;font-size:24px;font-weight:800}
+.vkp small{color:#B9B2D0;font-size:11.5px;line-height:1.35;display:block;text-transform:none;letter-spacing:0;margin-top:2px;font-weight:500}
+.vtp-body{max-width:1080px;margin:0 auto;padding:20px 16px 60px}
+.sec{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin:0 0 16px;box-shadow:0 4px 18px rgba(31,26,46,.05)}
+.sec h2{margin:0 0 4px;font-size:20px;font-weight:700}
+.sec h2 em{font-style:normal;color:var(--roxo)}
+.sec .lead{color:var(--muted);font-size:13px;margin:0 0 12px;line-height:1.55}
+.sec ul.pts{margin:6px 0 0;padding-left:18px;font-size:13.5px;line-height:1.6}
+.sec ul.pts li{margin:5px 0}
+.tg{display:inline-block;color:#fff;font-size:11px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;padding:3px 9px;border-radius:999px;margin-bottom:8px}
+.kr{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:12px 0}
+.kr div{background:#F7F5FC;border-radius:10px;padding:9px 10px}
+.kr b{display:block;font-size:18px;font-weight:700}
+.kr small{font-size:11px;color:var(--muted);line-height:1.3;display:block}
+.cw{display:grid;grid-template-columns:1.6fr 1fr;gap:16px;align-items:start}
+.cw svg{width:100%;height:auto;display:block}
+.tw{overflow-x:auto}
+table.vtt{width:100%;border-collapse:collapse;font-size:13px}
+table.vtt th{text-align:left;font-weight:600;color:var(--muted);font-size:11.5px;padding:7px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+table.vtt td{padding:8px;border-bottom:1px solid #F0ECF7;white-space:nowrap}
+table.vtt td.n,table.vtt th.n{text-align:right}
+.dif{font-weight:700;border-radius:6px;padding:2px 7px;display:inline-block}
+.dif.neg{color:var(--bad);background:#FEF2F2} .dif.pos{color:#15803D;background:#F0FDF4}
+.box{border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.55;margin-top:12px}
+.box.r{background:#F3EEFF} .box.r b{color:var(--roxo)}
+.box.l{background:#F7F5FC;color:var(--txt)}
+.box ul{margin:6px 0 0;padding-left:18px} .box li{margin:4px 0}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:2px 0 6px}
+.legend i{display:inline-block;width:18px;height:0;border-top:3px solid;vertical-align:middle;margin-right:5px}
+.legend i.b{border-top:2px dashed #9C94B5}
+.foot{color:var(--muted);font-size:11.5px;text-align:center;margin-top:24px;line-height:1.6}
+@media (max-width:820px){
+  .cw{grid-template-columns:1fr}
+  .kr{grid-template-columns:repeat(3,1fr)}
+  .vkp{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:720px){
+  .top{padding:8px 12px;gap:8px}
+  .brand small{display:none}
+  .info{top:auto;bottom:16px;right:auto;left:72px;width:calc(100vw - 88px);max-width:320px}
+  .zl{display:none}
+  #mini{display:none}
+}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="brand"><b>Mapa do <span>Quiz do Mapeamento</span></b><small>📌 VERSÃO 1 · retrato congelado de 04/11 a 24/11/26, 17h29 · <a href="../" style="color:#fff;text-decoration:underline">abrir o mapa atual</a></small></div>
+  <div class="chips" id="chips"></div>
+  <button class="toggle alt" id="tgVt">▶ Vídeos (VTurb)</button>
+  <button class="toggle" id="tgAll">Abrir todas as telas</button>
+</div>
+<div class="vtp" id="vtp" hidden>
+  <div class="vtp-hero"><div class="in">
+    <button class="x" id="vtpX">← Voltar ao mapa</button>
+    <small>VTurb · 04 a 16/11/26 · benchmark de mercado</small>
+    <h1>Vídeos do <span>Quiz do Mapeamento</span></h1>
+    <p>Retenção de cada vídeo do quiz comparada com o benchmark de mercado para vídeo de vendas em tráfego pago. Linha cheia = o vídeo. Linha tracejada = benchmark. Faixa cinza = faixa normal de mercado.</p>
+    <div class="vkp" id="vkp"></div>
+  </div></div>
+  <div class="vtp-body" id="vtpBody"></div>
+</div>
+<div id="vp"><div id="world"><svg id="edges"></svg></div></div>
+<div class="ctl">
+  <button id="zin" title="Aproximar">+</button>
+  <button id="zout" title="Afastar">−</button>
+  <button id="zfit" title="Ver o mapa inteiro">⤢</button>
+</div>
+<div class="zl" id="zl"><b>Como usar:</b> arraste para mover · role a roda do mouse ou faça pinça para aproximar · clique numa tela para abrir as respostas · de perto, todas as respostas aparecem.</div>
+<canvas id="mini" width="240" height="120"></canvas>
+<div class="info" id="info">
+  <div class="ih" id="infoH"><span>Como ler o mapa</span><span id="infoX">–</span></div>
+  <div class="ib">
+    <div class="leg"><i style="background:var(--q)"></i>Qualificação · todo mundo passa</div>
+    <div class="leg"><i style="background:var(--m)"></i>Ramo Mapeamento · fatura R$5 mil ou mais</div>
+    <div class="leg"><i style="background:var(--n)"></i>Ramo MNIA · fatura até R$5 mil</div>
+    <div class="leg"><i style="background:var(--a)"></i>Ramo ANP · ainda não tem negócio</div>
+    <div class="leg"><i style="background:var(--warnbg);border:1px solid #F59E0B"></i>Ponto de atenção</div>
+    <div class="leg"><span style="color:var(--bad);font-weight:700">−11</span>&nbsp;pessoas que saíram entre uma tela e outra</div>
+    <p><b>Número no topo de cada tela</b>: pessoas das campanhas [59] e [60] que <b>concluíram</b> a tela, ou seja, responderam ou avançaram (planilha de leads, 04 a 24/11). Quem só viu a tela está no número da anterior. Embaixo, o <b>custo por pessoa</b>: investido com imposto ÷ esse número. Nas telas 5 a 7 do ANP o número é estimado pelo inLead (≈).<br>
+    <b>Número em cada resposta</b>: quantas escolheram (planilha de leads, 04 a 24/11, pessoas das campanhas [59] e [60]).<br>
+    <b>Bloco ▶ VTurb</b> nas telas de vídeo: retenção de 04 a 16/11 (linha cheia) contra o benchmark de mercado (tracejada). Botão "Vídeos (VTurb)" no topo abre a análise completa.<br>
+    Textos copiados do inLead em 11/11. Nenhum dado pessoal nesta página.</p>
+  </div>
+</div>
+
+<script>
+/* ===================== TRÁFEGO (Meta · 04 a 24/11/26, 17h30) ===================== */
+const IMPOSTO = 1.1383;
+const TR = { ate:'24/11 às 17h30', invB:6118.47, imp:69323, cl:3318, lpv:2371, qqMeta:73,
+  camp:{ '[59]':{nome:'[59] Amplo · Advantage+', invB:2325.27, imp:34196, cl:2557, lpv:1708, ini:112, cap:44, qual:21, ag:5, mnia:11, anp:10},
+         '[60]':{nome:'[60] Quente · engajamento 90D', invB:3793.20, imp:35127, cl:761, lpv:663, ini:156, cap:106, qual:52, ag:20, mnia:34, anp:20} } };
+TR.inv = TR.invB*IMPOSTO; Object.values(TR.camp).forEach(c=>c.inv=c.invB*IMPOSTO);
+const CRIA = {"[59]": [{"c": "ADV004", "n": "ADV004_MPO_QUIZ_V1_VID_5 COISAS _0.41", "l": "https://drive.google.com/file/d/1M72lNoWpd0ybMLlfXBaDEtPrVe1BIVHL/view?usp=drivesdk", "f": "Vídeo", "inv": 1746.6, "lpv": 240, "ini": 54, "cap": 32, "q": 17, "ag": 4, "p": false}, {"c": "ADI004", "n": "ADI004_MPO_QUIZ_V1_IMG_A IA E O FUTURO DO SEU NEGOCIO", "l": "https://drive.google.com/file/d/1QhYvVTRtb4pAQskV296PA5VdHqY7VmIK/view?usp=drive_link", "f": "Imagem", "inv": 137.83, "lpv": 30, "ini": 8, "cap": 4, "q": 2, "ag": 0, "p": false}, {"c": "ADI003", "n": "ADI003_MPO_QUIZ_V1_IMG_FATURAR SEM TRABALHAR MAIS", "l": "https://drive.google.com/file/d/1YInG7wSKVnQ0YPQOyQhAQ1X2oV-7AXPn/view?usp=drive_link", "f": "Imagem", "inv": 34.34, "lpv": 176, "ini": 5, "cap": 1, "q": 1, "ag": 1, "p": false}, {"c": "ADV001", "n": "ADV001_MPO_QUIZ_V1_VID_GANHAR MAIS SEM MAIS HORAS SEVERINO_1.01", "l": "https://drive.google.com/file/d/15zTRuqvTqEY6PYQvAWIGV66-2K5l52cX/view?usp=drive_link", "f": "Vídeo", "inv": 477.7, "lpv": 143, "ini": 12, "cap": 3, "q": 1, "ag": 0, "p": true}, {"c": "ADV002", "n": "ADV002_MPO_QUIZ_V1_VID_VOCE JA GANHA BEM_0.55", "l": "https://drive.google.com/file/d/1gy0bVzr6ujmrxeOjh-61vL_a70uGL0k7/view?usp=drivesdk", "f": "Vídeo", "inv": 70.23, "lpv": 28, "ini": 3, "cap": 2, "q": 0, "ag": 0, "p": false}, {"c": "ADV007", "n": "ADV007_MPO_QUIZ_V1_VID_VOCE ACHA QUE A IA NAO MUDA NADA_0.58", "l": "https://drive.google.com/file/d/1ZnaMILgwM3ou46QQ1L-9KpBCypn6R2sM/view?usp=drivesdk", "f": "Vídeo", "inv": 63.02, "lpv": 670, "ini": 16, "cap": 0, "q": 0, "ag": 0, "p": false}, {"c": "ADI005", "n": "ADI005_MPO_QUIZ_V1_IMG_CRESCER SEM PERDER QUEM VOCE AMA", "l": "https://drive.google.com/file/d/1mxJ5wZlNA0yQeNvSA0iocuL-ccax0eO5/view?usp=drive_link", "f": "Imagem", "inv": 32.62, "lpv": 4, "ini": 1, "cap": 1, "q": 0, "ag": 0, "p": false}, {"c": "ADI001", "n": "ADI001_MPO_QUIZ_V1_IMG_HORAS DE VOLTA PRA VOCE", "l": "https://drive.google.com/file/d/1HdY38Ee6IAeBpEHCNfXSs2s6t3zVCxpB/view?usp=drive_link", "f": "Imagem", "inv": 25.86, "lpv": 13, "ini": 2, "cap": 1, "q": 0, "ag": 0, "p": false}, {"c": "ADV006", "n": "ADV006_MPO_QUIZ_V1_VID_ESTAVA DEITADA _0.45", "l": "https://drive.google.com/file/d/1v0_J8lQ9kg3IJ0Rh8r5xfKDl1tMgl1bs/view?usp=drivesdk", "f": "Vídeo", "inv": 25.46, "lpv": 296, "ini": 5, "cap": 0, "q": 0, "ag": 0, "p": false}, {"c": "ADV005", "n": "ADV005_MPO_QUIZ_V1_VID_FICO PENSANDO _0.41", "l": "https://drive.google.com/file/d/1NW4i9hENF8vkq_EorXUgbMr0BlHr2S7I/view?usp=drivesdk", "f": "Vídeo", "inv": 17.09, "lpv": 67, "ini": 4, "cap": 0, "q": 0, "ag": 0, "p": false}, {"c": "ADV003", "n": "ADV003_MPO_QUIZ_V1_VID_A IA NAO TE ROBATIZA_0.52", "l": "https://drive.google.com/file/d/11WTzAfa9j1ykfk8MOGjVZOABJcbzVlMk/view?usp=drivesdk", "f": "Vídeo", "inv": 12.83, "lpv": 36, "ini": 2, "cap": 0, "q": 0, "ag": 0, "p": false}, {"c": "ADI002", "n": "ADI002_MPO_QUIZ_V1_IMG_SEU NEGOCIO SEM DEPENDER DE VOCE", "l": "https://drive.google.com/file/d/1BqTyLqdqTlhrX6-_4ksJJQrLq9kId016/view?usp=drive_link", "f": "Imagem", "inv": 3.28, "lpv": 5, "ini": 0, "cap": 0, "q": 0, "ag": 0, "p": false}], "[60]": [{"c": "ADV004", "n": "ADV004_MPO_QUIZ_V1_VID_5 COISAS _0.41", "l": "https://drive.google.com/file/d/1M72lNoWpd0ybMLlfXBaDEtPrVe1BIVHL/view?usp=drivesdk", "f": "Vídeo", "inv": 3509.79, "lpv": 540, "ini": 125, "cap": 87, "q": 45, "ag": 17, "p": false}, {"c": "ADV002", "n": "ADV002_MPO_QUIZ_V1_VID_VOCE JA GANHA BEM_0.55", "l": "https://drive.google.com/file/d/1gy0bVzr6ujmrxeOjh-61vL_a70uGL0k7/view?usp=drivesdk", "f": "Vídeo", "inv": 64.19, "lpv": 11, "ini": 4, "cap": 3, "q": 3, "ag": 1, "p": false}, {"c": "ADI004", "n": "ADI004_MPO_QUIZ_V1_IMG_A IA E O FUTURO DO SEU NEGOCIO", "l": "https://drive.google.com/file/d/1QhYvVTRtb4pAQskV296PA5VdHqY7VmIK/view?usp=drive_link", "f": "Imagem", "inv": 413.76, "lpv": 75, "ini": 19, "cap": 11, "q": 2, "ag": 1, "p": false}, {"c": "ADV001", "n": "ADV001_MPO_QUIZ_V1_VID_GANHAR MAIS SEM MAIS HORAS SEVERINO_1.01", "l": "https://drive.google.com/file/d/15zTRuqvTqEY6PYQvAWIGV66-2K5l52cX/view?usp=drive_link", "f": "Vídeo", "inv": 121.17, "lpv": 17, "ini": 7, "cap": 4, "q": 2, "ag": 1, "p": false}, {"c": "ADI005", "n": "ADI005_MPO_QUIZ_V1_IMG_CRESCER SEM PERDER QUEM VOCE AMA", "l": "https://drive.google.com/file/d/1mxJ5wZlNA0yQeNvSA0iocuL-ccax0eO5/view?usp=drive_link", "f": "Imagem", "inv": 53.73, "lpv": 5, "ini": 0, "cap": 0, "q": 0, "ag": 0, "p": false}, {"c": "ADV006", "n": "ADV006_MPO_QUIZ_V1_VID_ESTAVA DEITADA _0.45", "l": "https://drive.google.com/file/d/1v0_J8lQ9kg3IJ0Rh8r5xfKDl1tMgl1bs/view?usp=drivesdk", "f": "Vídeo", "inv": 49.13, "lpv": 4, "ini": 0, "cap": 0, "q": 0, "ag": 0, "p": false}, {"c": "ADV007", "n": "ADV007_MPO_QUIZ_V1_VID_VOCE ACHA QUE A IA NAO MUDA NADA_0.58", "l": "https://drive.google.com/file/d/1ZnaMILgwM3ou46QQ1L-9KpBCypn6R2sM/view?usp=drivesdk", "f": "Vídeo", "inv": 40.36, "lpv": 4, "ini": 1, "cap": 1, "q": 0, "ag": 0, "p": false}, {"c": "ADI001", "n": "ADI001_MPO_QUIZ_V1_IMG_HORAS DE VOLTA PRA VOCE", "l": "https://drive.google.com/file/d/1HdY38Ee6IAeBpEHCNfXSs2s6t3zVCxpB/view?usp=drive_link", "f": "Imagem", "inv": 27.65, "lpv": 5, "ini": 0, "cap": 0, "q": 0, "ag": 0, "p": false}, {"c": "ADV005", "n": "ADV005_MPO_QUIZ_V1_VID_FICO PENSANDO _0.41", "l": "https://drive.google.com/file/d/1NW4i9hENF8vkq_EorXUgbMr0BlHr2S7I/view?usp=drivesdk", "f": "Vídeo", "inv": 15.09, "lpv": 1, "ini": 0, "cap": 0, "q": 0, "ag": 0, "p": false}, {"c": "ADV003", "n": "ADV003_MPO_QUIZ_V1_VID_A IA NAO TE ROBATIZA_0.52", "l": "https://drive.google.com/file/d/11WTzAfa9j1ykfk8MOGjVZOABJcbzVlMk/view?usp=drivesdk", "f": "Vídeo", "inv": 14.27, "lpv": 1, "ini": 0, "cap": 0, "q": 0, "ag": 0, "p": false}, {"c": "ADI003", "n": "ADI003_MPO_QUIZ_V1_IMG_FATURAR SEM TRABALHAR MAIS", "l": "https://drive.google.com/file/d/1YInG7wSKVnQ0YPQOyQhAQ1X2oV-7AXPn/view?usp=drive_link", "f": "Imagem", "inv": 5.49, "lpv": 0, "ini": 0, "cap": 0, "q": 0, "ag": 0, "p": false}, {"c": "ADI002", "n": "ADI002_MPO_QUIZ_V1_IMG_SEU NEGOCIO SEM DEPENDER DE VOCE", "l": "https://drive.google.com/file/d/1BqTyLqdqTlhrX6-_4ksJJQrLq9kId016/view?usp=drive_link", "f": "Imagem", "inv": 3.16, "lpv": 0, "ini": 0, "cap": 0, "q": 0, "ag": 0, "p": false}]};
+const brl = (v,d=2) => 'R$ ' + v.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
+const n0 = v => v.toLocaleString('pt-BR');
+/* ===================== DADOS DO FUNIL ===================== */
+const STEP = 460, X0 = 0;
+const YQ = 0, YM = -1500, YN = 0, YA = 1500;
+const XB = X0 + STEP*10 + 640;     // início dos ramos
+const N = [
+ {id:'tr', lane:'o', panel:true, w:760, x:X0-STEP*2-60-420, y:YQ, tag:'Painel geral', ttl:'Tráfego pago · campanhas [59] e [60]', reach:0},
+ {id:'ad', lane:'o', x:X0-STEP-60, y:YQ, tag:'Origem', ttl:'Anúncio no Meta', reach:2371, reachLbl:'visitas',
+  q:'Campanhas [59] (amplo) e [60] (quente) levam para quizfn.lucrocomia.com.br',
+  sub:'Título do anúncio: "⏰ 15 a 25 horas da sua semana de volta" · Descrição: "Diagnóstico gratuito em menos de 2 minutos".',
+  list:['[59] amplo: 2.557 cliques (a maior parte antes do ajuste de posicionamentos de 09/11)','[60] quente: 761 cliques, quase todos no Instagram','Total: 2.371 visitas na tela 1 vindas das campanhas (Meta, 04 a 24/11)'],
+  alert:'<b>Trocado em 09/11:</b> o anúncio promete <b>tempo</b> e a primeira tela falava só de <b>dinheiro</b>. Agora a primeira tela junta os dois e repete o número do anúncio (15 a 25 horas).'},
+
+ {id:'q1', lane:'q', x:X0, y:YQ, tag:'Tela 1', ttl:'Entrada', reach:268,
+  q:'Fature mais e trabalhe menos: descubra as 15 a 25 horas que o seu negócio te toma toda semana. Em 2 minutos eu te mostro onde.',
+  sub:'São poucas perguntas. No fim você recebe o diagnóstico do seu momento e o caminho pra destravar a primeira oportunidade.',
+  btn:['COMEÇAR MEU DIAGNÓSTICO'], note:'Abaixo do botão, "Leva menos de 2 minutos." agora também é clicável e leva para a tela 2. <b>Nova versão desde 09/11, 18h40.</b> Antes: "Existe dinheiro parado dentro do seu negócio agora. Em 2 minutos eu te mostro onde."',
+  alert:'<b>Entrada da [60], comparação limpa:</b> 23% das visitas começavam o quiz antes da tela nova e 24% depois. A [59] foi de 5% para 22% com o ajuste de posicionamentos de 09/11.'},
+
+ {id:'q2', lane:'q', x:X0+STEP, y:YQ, tag:'Tela 2', ttl:'Uso de IA', reach:202,
+  q:'Como você usa Inteligência Artificial hoje?',
+  ans:[['','Quase não uso. Testei, achei genérico e larguei.',25],['','Uso o ChatGPT como se fosse um Google. Pergunto, copio, colo e reescrevo quase tudo.',81],['','Uso pra adiantar tarefa, mas tudo continua dependendo de mim.',47],['','Já uso bem em algumas partes, mas nada disso está organizado num sistema.',49]],
+  note:'Não pontua e não muda o caminho.',
+  alert:'<b>66 pessoas começam e não respondem</b> esta pergunta. Mais da metade veio da [59] antes de 09/11.'},
+
+ {id:'q3', lane:'q', x:X0+STEP*2, y:YQ, tag:'Tela 3', ttl:'Nome', reach:179,
+  q:'Como podemos te chamar?', fields:['Nome · "Digite seu nome..." (obrigatório)'], btn:['CONTINUAR'],
+  alert:'<b>23 pessoas saem aqui</b>, quando o quiz pede o nome.'},
+
+ {id:'q4', lane:'q', x:X0+STEP*3, y:YQ, tag:'Tela 4', ttl:'Faturamento', reach:176,
+  q:'Qual é o faturamento médio do seu negócio hoje?',
+  ans:[['','Ainda não tenho negócio',41,'a','1 ponto → ramo ANP'],['','Até R$5 mil por mês',50,'n','2 pontos → ramo MNIA'],['','De R$5 mil a R$10 mil por mês',34,'m','3 pontos → ramo Mapeamento'],['','De R$10 mil a R$20 mil por mês',20,'m','4 pontos → ramo Mapeamento'],['','Acima de R$20 mil por mês',31,'m','5 pontos → ramo Mapeamento']],
+  note:'<b>É a única pergunta que pontua.</b> É ela que decide para qual dos 3 ramos a pessoa vai na tela 10.'},
+
+ {id:'q5', lane:'q', x:X0+STEP*4, y:YQ, tag:'Tela 5', ttl:'Identificação', reach:173,
+  q:'Qual dessas frases mais parece com você hoje?',
+  ans:[['💰','Quero usar IA pra criar uma nova fonte de renda além do que eu já faço.',56],['⚙️','Já tenho o negócio rodando e quero colocar a IA pra trabalhar dentro dele.',62],['🚀','Quero transformar o que eu sei num negócio maior e menos dependente de mim.',55]],
+  note:'Não pontua e não muda o caminho.'},
+
+ {id:'q6', lane:'q', x:X0+STEP*5, y:YQ, tag:'Tela 6', ttl:'O que mudaria', reach:168,
+  q:'Se a Inteligência Artificial assumisse o operacional do seu negócio amanhã, o que mudaria primeiro?',
+  ans:[['⏰','Eu recuperaria de 15 a 25 horas por semana.',42],['🎯','Eu finalmente apareceria e viraria referência na minha área.',36],['📦','Eu criaria produtos e novas fontes de receita com o que eu já sei.',44],['👥','Eu atenderia muito mais gente sem precisar estar em tudo.',46]],
+  note:'Não pontua e não muda o caminho.'},
+
+ {id:'q7', lane:'q', x:X0+STEP*6, y:YQ, tag:'Tela 7', ttl:'Último passo', reach:168,
+  q:'🏅 VOCÊ CHEGOU AO ÚLTIMO PASSO',
+  sub:'As suas respostas mostraram onde está a maior oportunidade do seu negócio. Falta uma pergunta pra eu te mostrar o caminho certo.',
+  btn:['Continuar']},
+
+ {id:'q8', lane:'q', x:X0+STEP*7, y:YQ, tag:'Tela 8', ttl:'Investimento', reach:165,
+  q:'Se o caminho certo aparecer aqui, quanto você conseguiria investir para aprender soluções de Inteligência Artificial agora para o seu negócio?',
+  ans:[['','Agora não consigo investir nada',83],['','Até R$300 por mês',76],['','Até R$1.000 por mês',5],['','Acima de R$1.000 por mês',1]],
+  alert:'<b>Não filtra ninguém:</b> quem responde "não consigo investir nada" segue igual. Só 6 de 165 pessoas marcaram mais de R$300.'},
+
+ {id:'q9', lane:'q', x:X0+STEP*8, y:YQ, tag:'Tela 9', ttl:'Contato', reach:150,
+  q:'Pra onde eu envio o seu diagnóstico?', fields:['E-mail (obrigatório)','WhatsApp com DDD (obrigatório)'], btn:['CONTINUAR'],
+  note:'Aqui o lead é gravado na planilha e no n8n, vai para o Unnichat e dispara o evento QuizQualificado para o Meta.'},
+
+ {id:'q10', lane:'q', x:X0+STEP*9, y:YQ, tag:'Tela 10', ttl:'Análise (divisão)', reach:148,
+  q:'🔎 Estamos analisando suas respostas...',
+  list:['⚙️ Cruzando o seu momento com as oportunidades do seu negócio…','✓ Analisando o seu uso atual de IA','✓ Identificando onde está o dinheiro parado','✓ Montando a sua rota'],
+  note:'Barra de carregamento de 5 segundos. Depois, o quiz manda cada pessoa para um ramo, <b>só pelo faturamento da tela 4</b>.',
+  alert:'O texto volta a falar de <b>dinheiro parado</b>.'},
+
+ /* ----- Ramo Mapeamento ----- */
+ {id:'m1', lane:'m', x:XB, y:YM, tag:'Mapeamento · 1', ttl:'Tipo de negócio', reach:73,
+  q:'Qual das opções abaixo mais condiz com o seu negócio hoje?',
+  ans:[['','Mentora ou expert',1],['','Infoprodutora',1],['','Prestadora de serviços digitais',4],['','Empresária',42],['','Profissional liberal',25]]},
+ {id:'m2', lane:'m', x:XB+STEP, y:YM, tag:'Mapeamento · 2', ttl:'Momento', reach:69,
+  q:'Qual das opções mais caracteriza o seu momento, hoje?',
+  ans:[['🤦','Eu até ganho bem, mas pra ganhar mais eu teria que trabalhar mais. E eu já estou no meu limite.',15],['🔥','Tudo depende de mim. Passo o dia inteiro apagando incêndio e resolvendo o mesmo de sempre.',27],['👨‍👩‍👧','Trabalho demais, e isso está me tirando do tempo com a minha família.',14],['⌛','Vejo a inteligência artificial avançando rápido e tenho medo de ficar pra trás.',5],['🤖','Quero crescer, mas tenho medo de virar uma profissional robotizada e perder o que meus clientes gostam em mim.',8]]},
+ {id:'m3', lane:'m', x:XB+STEP*2, y:YM, tag:'Mapeamento · 3', ttl:'Vídeo 1', reach:49,
+  q:'Se o seu trabalho tira tempo de quem você ama, é porque o seu negócio ainda trabalha contra você.',
+  vt:'m3', btn:['QUERO TER MAIS TEMPO PARA MINHA FAMÍLIA']},
+ {id:'m4', lane:'m', x:XB+STEP*3, y:YM, tag:'Mapeamento · 4', ttl:'Vídeo 2', reach:39,
+  q:'Por que eu criei o Mapeamento de Oportunidades Invisíveis',
+  sub:'🔎 Mapeamento de Oportunidades',
+  vt:'m4',
+  list:['Aqui embaixo tem um botão. Você completa a sua aplicação e escolhe o seu horário.','Vai ser um prazer olhar pro seu negócio com você. A gente se vê lá.'],
+  btn:['QUERO SOLICITAR MEU MAPEAMENTO']},
+ {id:'m5', lane:'m', x:XB+STEP*4, y:YM, tag:'Mapeamento · 5', ttl:'Como seguir', reach:34,
+  q:'Com tudo isso que você viu, como você deseja seguir de agora em diante?',
+  ans:[['📅','Quero agendar meu Mapeamento e ter meu negócio analisado.',16],['❔','Quero tirar dúvidas antes de agendar meu Mapeamento',18]],
+  btn:['CONTINUAR'], note:'As duas respostas levam para a mesma tela final.'},
+ {id:'m6', lane:'m', x:XB+STEP*5, y:YM, tag:'Mapeamento · 6', ttl:'Final', reach:25,
+  q:'⚠️ FALTA SÓ UM ÚLTIMO PASSO PARA O SEU MAPEAMENTO!',
+  sub:'O Mapeamento é gratuito, mas não é liberado pra todo mundo. Mas pelas suas respostas, o seu <b>perfil foi aprovado para a vaga</b>.',
+  list:['Ao clicar no botão abaixo, você fala direto com o nosso time no WhatsApp e escolhe o seu horário. A partir de agora, já é seu:','📘 Uma sessão individual de 45 minutos com uma especialista de verdade','⏰ Um plano de resgate de tempo, com o que dá pra tirar das suas mãos ainda essa semana','💬 Contato direto com o nosso time estratégico','⚡ Prioridade na agenda, porque o seu perfil já passou pela análise'],
+  btn:['👉 QUERO AGENDAR MEU MAPEAMENTO|wa'], note:'Rodapé: "Agenda limitada. As vagas de cada semana acabam antes de sexta."',
+  alert:'<b>Todo mundo vê "perfil aprovado"</b>, inclusive quem disse que não consegue investir nada.'},
+ {id:'m7', lane:'o', x:XB+STEP*6, y:YM, tag:'Destino', ttl:'WhatsApp do time', reach:25, reachLbl:'clicaram',
+  q:'Abre o WhatsApp (19) 3167-1024 com a mensagem pronta:',
+  sub:'"Olá. Fiz meu quiz de diagnóstico e quero agendar meu mapeamento."',
+  note:'25 qualificados das campanhas clicaram em agendar (planilha de leads, 04 a 24/11). O agendamento em si acontece no WhatsApp.'},
+
+ /* ----- Ramo MNIA ----- */
+ {id:'n1', lane:'n', x:XB, y:YN, tag:'MNIA · 1', ttl:'Onde trava', reach:45,
+  q:'Onde o seu negócio mais trava hoje?',
+  ans:[['💬','No atendimento. Respondo tudo eu, o dia inteiro.',14],['🤦','No conteúdo. Travo pra postar e fico semanas sem aparecer.',11],['💸','Nas vendas. Não tenho processo, depende de mim conversar com cada pessoa.',10],['📦','Nos produtos. Tenho ideia de produto digital parada há meses.',3],['🤷','Na dependência. Pra colocar qualquer coisa no ar eu preciso de alguém.',7]]},
+ {id:'n2', lane:'n', x:XB+STEP, y:YN, tag:'MNIA · 2', ttl:'Tentativas com IA', reach:43,
+  q:'E o que aconteceu quando você tentou usar Inteligência Artificial sozinha?',
+  ans:[['🙁','Comprei curso, assisti e não apliquei nada.',13],['😰','Testei ferramenta solta e nunca virou resultado.',12],['🤔','Uso o ChatGPT, mas só pra coisa pequena.',15],['😔','Nunca tentei de verdade. Sempre fica pra depois.',3]]},
+ {id:'n3', lane:'n', x:XB+STEP*2, y:YN, tag:'MNIA · 3', ttl:'Vídeo 1', reach:37,
+  q:'Se você já tentou usar Inteligência Artificial mais de uma vez e continua no mesmo lugar, o problema nunca foi você.',
+  sub:'Aperta o play. São menos de 3 minutos. 👇',
+  vt:'n3',
+  list:['Depoimento em vídeo: Mirian Nadalini, "faturou mais de 35k"'],
+  btn:['QUERO TER TEMPO DE QUALIDADE']},
+ {id:'n4', lane:'n', x:XB+STEP*3, y:YN, tag:'MNIA · 4', ttl:'Vídeo 2 + oferta', reach:10,
+  q:'Como colocar a Inteligência Artificial pra trabalhar dentro do seu negócio, em oito etapas.',
+  vt:'n4', btn:['QUERO COLOCAR IA NO MEU NEGÓCIO|or'],
+  list:['✅ Seu Negócio no Modo de Inteligência Artificial','✅ ChatGPT que Trabalha por Você','✅ Claude: Seu Cérebro Digital','✅ Conteúdos Infinitos com Inteligência Artificial','✅ Produtos Digitais com IA','✅ Páginas e Aplicativos sem Código com Lovable','✅ Estratégia de Vendas de Produtos Digitais','✅ Agentes que Atendem por Você'],
+  price:['De R$5.997','R$ 2.997 à vista','ou 12x de R$309,96'],
+  note:'🔒 Garantia de 7 dias. Não gostou, devolvo 100%. · 📅 1 ano de acesso.',
+  btn2:['QUERO APLICAR IA NO MEU NEGÓCIO|or'],
+  alert:'<b>Maior queda do ramo:</b> 37 passaram do vídeo 1 e só 10 concluíram a tela da oferta.'},
+ {id:'n5', lane:'o', x:XB+STEP*4, y:YN, tag:'Destino', ttl:'Página do MNIA', reach:0, reachLbl:'vendas',
+  q:'lp.lucrocomia.com.br/meunegociocomia/page',
+  sub:'Produto "Meu Negócio com Inteligência Artificial".',
+  note:'Nenhum lead do quiz comprou até 23/11 (cruzamento com a Hotmart por e-mail e telefone).'},
+
+ /* ----- Ramo ANP ----- */
+ {id:'a1', lane:'a', x:XB, y:YA, tag:'ANP · 1', ttl:'Renda nova', reach:30,
+  q:'Se você tivesse uma renda nova de R$3.000 a R$8.000 por mês, o que mudaria primeiro na sua vida?',
+  ans:[['🙎','Eu não dependeria mais de ninguém pra nada.',6],['🏠','Eu trabalharia de casa, no meu horário.',12],['😀','Eu teria uma profissão que me deixa orgulhosa de dizer o nome.',3],['🙋','Eu voltaria a me sentir capaz.',9]]},
+ {id:'a2', lane:'a', x:XB+STEP, y:YA, tag:'ANP · 2', ttl:'Notícias', reach:29,
+  q:'Enquanto você tenta encontrar uma direção, o mercado está pagando por uma habilidade que você pode aprender em semanas.',
+  imgs:['https://media.inlead.cloud/uploads/17472/2026-09-18/am80u-funil-quiz-anp-noticia-1.png','https://media.inlead.cloud/uploads/17472/2026-09-18/g6koJ-funil-quiz-anp-noticia-2.png','https://media.inlead.cloud/uploads/17472/2026-09-18/RpsF1-funil-quiz-anp-noticia-3.png','https://media.inlead.cloud/uploads/17472/2026-09-18/vNqnh-funil-quiz-anp-noticia-4.png'],
+  list:['Carrossel com 4 notícias (passa sozinho a cada 3 s)','Não são habilidades que exigem faculdade. Nem experiência anterior. Nem talento pra tecnologia.','Exige aprender uma coisa que quase ninguém aprendeu ainda.'],
+  btn:['QUERO VER SE EU CONSIGO FAZER ISSO']},
+ {id:'a3', lane:'a', x:XB+STEP*2, y:YA, tag:'ANP · 3', ttl:'Serviço', reach:28,
+  q:'Qual desses serviços você mais se imagina entregando?',
+  ans:[['📱','Criar o conteúdo de redes sociais de pequenos negócios usando IA',10],['🤖','Montar robôs de atendimento no WhatsApp pra quem não dá conta de responder',3],['🖼️','Produzir imagens, materiais e identidade visual com IA',4],['📟','Criar páginas e sites sem escrever uma linha de código',1],['🗂️','Organizar e automatizar a rotina de quem vive apagando incêndio',10]]},
+ {id:'a4', lane:'a', x:XB+STEP*3, y:YA, tag:'ANP · 4', ttl:'Reforço', reach:28,
+  q:'VOCÊ ESTÁ MAIS PERTO DO QUE IMAGINA 🏅',
+  sub:'Isso que você acabou de escolher é um serviço real, que gente real está pagando muito bem pra receber. E é ensinável do zero.',
+  btn:['CONTINUAR']},
+ {id:'a5', lane:'a', x:XB+STEP*4, y:YA, tag:'ANP · 5', ttl:'O que precisa', reach:28, est:true,
+  q:'Pra viver disso, você não precisa de muita coisa',
+  list:['Você NÃO precisa:','🚫 Voltar pra faculdade','🚫 Saber programar','🚫 Ter experiência anterior','🚫 Ser "boa com tecnologia"','🚫 Aparecer na internet se não quiser','Você precisa de três coisas: saber o que oferecer, saber quanto cobrar e saber onde encontrar quem paga.'],
+  btn:['QUERO VER QUEM JÁ ESTÁ FAZENDO']},
+ {id:'a6', lane:'a', x:XB+STEP*5, y:YA, tag:'ANP · 6', ttl:'Depoimentos', reach:27, est:true,
+  q:'Elas estavam exatamente onde você está agora.',
+  video:['3 vídeos de depoimento','Cassiana (programa de liderança) · Daiane Garcia (combo de robôs) · Fabiana Freire (vendeu um aplicativo por 15K)'],
+  list:['Nenhuma delas tinha formação em tecnologia.','Nenhuma delas começou sabendo o que ia vender.','O que elas fizeram de diferente foi parar de tentar descobrir sozinhas.'],
+  btn:['QUERO ESSE CAMINHO PRA MIM']},
+ {id:'a7', lane:'a', x:XB+STEP*6, y:YA, tag:'ANP · 7', ttl:'Oferta', reach:13, est:true,
+  q:'O caminho completo, do zero até o seu primeiro cliente pagante',
+  vt:'a7', btn:['👉 QUERO COMEÇAR AGORA|or'],
+  list:['O que você recebe:','✅ A Jornada Completa em 5 etapas, das profissões básicas até consultora especialista em IA','✅ O Kit de Ferramentas: quais serviços oferecer e quanto cobrar','✅ O Ímã de Clientes: scripts prontos pra abordar e fechar','✅ Biblioteca com mais de 100 comandos prontos','✅ Treinamento de agentes de atendimento no WhatsApp'],
+  price:['','R$ 897 à vista','ou 12x de R$92,77'],
+  note:'🔒 Garantia de 7 dias. Não gostou, devolvo 100%.',
+  alert:'Cerca de 27 passaram dos depoimentos e só 13 concluíram a oferta (estimativa pelo inLead).'},
+ {id:'a8', lane:'o', x:XB+STEP*7, y:YA, tag:'Destino', ttl:'Checkout Hotmart', reach:0, reachLbl:'vendas',
+  q:'pay.hotmart.com · Academia de Novas Profissões com IA',
+  sub:'Oferta 9gqtddp9 (R$ 897).',
+  note:'Nenhum lead do quiz comprou até 23/11. Nenhuma das vendas desse produto no período bate com lead do quiz por e-mail ou telefone.'}
+];
+const E = [['ad','q1'],['q1','q2'],['q2','q3'],['q3','q4'],['q4','q5'],['q5','q6'],['q6','q7'],['q7','q8'],['q8','q9'],['q9','q10'],
+  ['q10','m1','m'],['q10','n1','n'],['q10','a1','a'],
+  ['m1','m2'],['m2','m3'],['m3','m4'],['m4','m5'],['m5','m6'],['m6','m7'],
+  ['n1','n2'],['n2','n3'],['n3','n4'],['n4','n5'],
+  ['a1','a2'],['a2','a3'],['a3','a4'],['a4','a5'],['a5','a6'],['a6','a7'],['a7','a8']];
+const LANES = [
+  {t:'QUALIFICAÇÃO', s:'10 telas · todo mundo passa por aqui', x:X0-STEP-60, y:YQ-330, c:'var(--q)'},
+  {t:'RAMO MAPEAMENTO', s:'faturamento a partir de R$5 mil/mês · vai para o WhatsApp agendar', x:XB, y:YM-330, c:'var(--m)'},
+  {t:'RAMO MNIA', s:'faturamento até R$5 mil/mês · oferta de R$2.997', x:XB, y:YN-330, c:'var(--n)'},
+  {t:'RAMO ANP', s:'ainda não tem negócio · oferta de R$897', x:XB, y:YA-330, c:'var(--a)'}
+];
+const SPLITS = {m:['≥ R$5 mil/mês','73 pessoas'], n:['até R$5 mil/mês','45 pessoas'], a:['sem negócio','30 pessoas']};
+/* ===================== VÍDEOS · VTURB (04 a 16/11/26) ===================== */
+/* Benchmark de mercado (VSLStats, tráfego pago): 65% a 80% aos 30 s = faixa normal · 80%+ = melhores · abaixo de 55% = gancho quebrado.
+   Curva saudável: perde 15–25% nos primeiros 30 s e depois cai 1 a 2 pontos por minuto. Linha de referência: 75% aos 30 s, −1,5 pt/min. */
+const B30 = 75, BLO = 65, BHI = 80, BSLOPE = 1.5/60;
+const bAt = (t,base=B30) => t<=30 ? 100-(100-base)*t/30 : base-BSLOPE*(t-30);
+const bPts = (D,base=B30) => { const a=[[0,100],[30,bAt(30,base)]]; for(let t=60;t<D;t+=30) a.push([t,bAt(t,base)]); a.push([D,bAt(D,base)]); return a; };
+const s5 = a => a.map((v,i)=>[i*5,v]);
+const VT = {
+ m3:{nome:'VSL 01 · Mapeamento', tela:'Ramo Mapeamento · tela 3', lane:'m', dur:147, plays:43, pessoas:31, seguiram:28, pr:'100%', eng:'36,8%',
+   pts:[...s5([100,73.8,59.5,52.4,45.2,42.9,40.5,38.1,38.1,38.1,38.1,38.1,38.1]),[70,35.7],[80,35.7],[90,33.3],[100,33.3],[110,31],[120,28.6],[130,28.6],[140,26.2],[147,26.2]],
+   btnTxt:'botão visível desde o início',
+   leitura:'Perde 40% das pessoas nos primeiros 10 segundos e chega aos 30 s com 41%. A faixa normal de mercado é de 65% a 80% aos 30 s, e abaixo de 55% é considerado gancho quebrado. Depois de 35 s a curva quase não cai. Quem clica no botão e segue também conta como saída do vídeo.',
+   melhorar:['Refazer os 3 primeiros segundos: abrir direto com a dor da tela ("o trabalho tira tempo de quem você ama"), sem apresentação.','Legenda grande desde o primeiro quadro (muita gente assiste sem som).','O botão aparece junto com o vídeo e 28 de 31 pessoas seguem: o vídeo ficou opcional. Teste: o botão aparecer só aos 40 s (no inLead, "aparecer depois de").']},
+ m4:{nome:'VSL 02 · Mapeamento', tela:'Ramo Mapeamento · tela 4', lane:'m', dur:286, plays:31, pessoas:28, seguiram:24, pr:'96,8%', eng:'7,2%',
+   pts:[...s5([100,63.3,36.7,13.3,10,10,10,10,10,10,10,10,10]),[70,10],[80,10],[90,10],[100,6.7],[110,6.7],[120,3.3],[150,3.3],[180,3.3],[210,3.3],[240,3.3],[270,3.3],[286,3.3]],
+   btnTxt:'botão visível desde o início',
+   leitura:'É o vídeo que mais perde gente: 63% saem nos primeiros 10 s e só 10% continuam aos 30 s (faixa normal: 65% a 80%). Só 1 pessoa viu até o fim. Engajamento de 7%. Quem clica no botão e segue também conta como saída do vídeo.',
+   melhorar:['Mesmo sem ninguém assistir, 24 de 28 pessoas seguem para o agendamento. Hoje o vídeo não ajuda nem atrapalha o avanço.','Opção 1: regravar com até 90 s, começando pelo que a pessoa ganha no Mapeamento (sessão de 45 min, plano de resgate de tempo).','Opção 2: testar a tela sem o vídeo, só com o texto e o botão.']},
+ n3:{nome:'VSL 01 · MNIA', tela:'Ramo MNIA · tela 3', lane:'n', dur:191, plays:22, pessoas:20, seguiram:6, pr:'100%', eng:'52,9%',
+   pts:[...s5([100,81.8,63.6,59.1,59.1,59.1,59.1,59.1,59.1,50,50,50,50]),[90,50],[120,50],[150,50],[180,50],[191,50]],
+   btnTxt:'botão visível desde o início',
+   leitura:'Chega aos 30 s com 59%, um pouco abaixo da faixa normal (65% a 80%). Depois disso é o vídeo dos quizzes que mais segura: a partir de 45 s ninguém mais sai e metade assiste até o fim.',
+   melhorar:['O problema está depois do vídeo: metade vê até o fim, mas só 6 de 20 pessoas clicam para ir à oferta.','Fechar o vídeo com uma chamada direta para o botão de baixo e usar no botão a mesma promessa do fim do vídeo (hoje o botão diz "QUERO TER TEMPO DE QUALIDADE").','Rever os 10 primeiros segundos, onde saem 36%.']},
+ n4:{nome:'VSL 02 · MNIA', tela:'Ramo MNIA · tela 4 (oferta)', lane:'n', dur:304, plays:19, pessoas:6, seguiram:null, pr:'100%', eng:'66,7%', btnAt:210,
+   pts:[...s5([100,94.7,94.7,89.5,89.5,89.5,89.5,84.2,84.2,84.2,84.2,78.9,78.9]),[70,78.9],[120,78.9],[150,73.7],[180,68.4],[210,68.4],[240,47.4],[270,36.8],[280,31.6],[295,26.3],[304,26.3]],
+   btnTxt:'botão, lista e preço aparecem aos 3:30',
+   leitura:'90% aos 30 s, no nível dos melhores vídeos de mercado (80% ou mais), e 68% aos 3:30. A queda forte começa aos 3:30, exatamente quando o botão, a lista e o preço aparecem na tela, o que é comum depois que o preço aparece.',
+   melhorar:['Amostra pequena: 6 pessoas e 19 plays (gente voltando ao vídeo, e talvez testes). Ler como sinal, não como certeza.','Não mexer no começo. Teste: antecipar botão e preço para 2:30, quando ainda há 70% assistindo.','Nenhuma venda ainda: com essa retenção, o próximo ponto a olhar é a oferta (R$ 2.997 para quem fatura até R$ 5 mil por mês).']},
+ a7:{nome:'VSL da oferta · ANP', tela:'Ramo ANP · tela 7 (oferta)', lane:'a', dur:149, plays:15, pessoas:7, seguiram:null, pr:'100%', eng:'20,4%',
+   pts:[...s5([100,85.7,78.6,57.1,42.9,42.9,35.7,35.7,28.6,21.4,14.3,14.3,14.3]),[70,7.1],[90,7.1],[120,7.1],[149,7.1]],
+   btnTxt:'botão visível desde o início',
+   leitura:'Cai de 79% para 43% entre 10 e 20 s e chega aos 30 s com 36% (faixa normal: 65% a 80%). Aos 50 s restam 14%, e só 1 de 14 pessoas viu até o fim.',
+   melhorar:['Assistir os trechos de 0:10 a 0:20 e de 0:40 a 0:50: é ali que o vídeo perde as pessoas.','Trazer para os primeiros 15 s a promessa da tela ("do zero até o primeiro cliente pagante") e o que a pessoa recebe.','Amostra pequena: 7 pessoas, 15 plays.']}
+};
+const VORD = ['m3','m4','n3','n4','a7'];
+function at(pts,t){ if(t>pts[pts.length-1][0]) return null;
+  for(let i=1;i<pts.length;i++){const [t0,v0]=pts[i-1],[t1,v1]=pts[i]; if(t<=t1) return t1===t0?v1:v0+(v1-v0)*(t-t0)/(t1-t0);} return pts[pts.length-1][1]; }
+const mmss = t => Math.floor(t/60)+':'+String(Math.round(t%60)).padStart(2,'0');
+const pc = v => v==null?'–':(Math.round(v)+'%');
+const fimPct = v => v.pts[v.pts.length-1][1];
+const faixa = v => v>=BHI?['melhores','pos']:v>=BLO?['normal','pos']:v>=55?['abaixo do normal','neg']:['gancho quebrado','neg'];
+function vtRows(v){ const r=[]; [30,60,120,180].forEach(t=>{ if(t<v.dur-5) r.push([t<60?t+' s':mmss(t),t]); }); r.push(['fim ('+mmss(v.dur)+')',v.dur]); return r; }
+function vtChart(v,W,H,big){
+  const pad=big?{l:40,r:14,t:16,b:30}:{l:4,r:4,t:4,b:4};
+  const iw=W-pad.l-pad.r, ih=H-pad.t-pad.b, D=v.dur;
+  const X=t=>(pad.l+t/D*iw).toFixed(1), Y=r=>(pad.t+(100-Math.max(0,r))/100*ih).toFixed(1);
+  const col=`var(--${v.lane})`; let g='';
+  [0,25,50,75,100].forEach(r=>{ g+=`<line x1="${pad.l}" x2="${W-pad.r}" y1="${Y(r)}" y2="${Y(r)}" style="stroke:#ECE8F4"/>`;
+    if(big) g+=`<text x="${pad.l-7}" y="${+Y(r)+4}" text-anchor="end" font-size="11" fill="#6B6480">${r}%</text>`; });
+  if(big){ const st=D<=160?30:60; for(let t=0;t<=D-st/3;t+=st) g+=`<text x="${X(t)}" y="${H-9}" text-anchor="middle" font-size="11" fill="#6B6480">${mmss(t)}</text>`;
+    g+=`<text x="${X(D)}" y="${H-9}" text-anchor="end" font-size="11" fill="#6B6480">${mmss(D)}</text>`; }
+  const path=a=>a.map((p,i)=>(i?'L':'M')+X(p[0])+','+Y(p[1])).join(' ');
+  const hi=bPts(D,BHI), lo=bPts(D,BLO);
+  g+=`<path d="${path(hi)} ${lo.slice().reverse().map(p=>'L'+X(p[0])+','+Y(p[1])).join(' ')} Z" style="fill:#9C94B5;opacity:.13"/>`;
+  if(big) g+=`<text x="${X(Math.min(D*.98,D-4))}" y="${+Y(bAt(D,BHI))-5}" text-anchor="end" font-size="10.5" fill="#857CA3">faixa normal de mercado</text>`;
+  if(v.btnAt){ g+=`<line x1="${X(v.btnAt)}" x2="${X(v.btnAt)}" y1="${pad.t}" y2="${H-pad.b}" style="stroke:#F3532F;stroke-dasharray:4 4;stroke-width:1.5"/>`;
+    if(big) g+=`<text x="${+X(v.btnAt)-6}" y="${pad.t+12}" text-anchor="end" font-size="11" font-weight="600" fill="#F3532F">botão + preço aparecem</text>`; }
+  g+=`<path d="${path(v.pts)} L${X(D)},${Y(0)} L${X(0)},${Y(0)} Z" style="fill:${col};opacity:.1"/>`;
+  g+=`<path d="${path(bPts(D))}" fill="none" style="stroke:#857CA3;stroke-width:${big?2:1.6};stroke-dasharray:6 5"/>`;
+  g+=`<path d="${path(v.pts)}" fill="none" style="stroke:${col};stroke-width:${big?3:2.4};stroke-linejoin:round"/>`;
+  if(big) vtRows(v).forEach(([,t])=>{ const a=at(v.pts,t); g+=`<circle cx="${X(t)}" cy="${Y(a)}" r="4.5" style="fill:#fff;stroke:${col};stroke-width:2.5"/>`; });
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Curva de retenção de ${v.nome} comparada ao benchmark de mercado">${g}</svg>`;
+}
+function kpiCell(lbl,v,b){ const cls=b==null?'':(v>=b?'pos':'neg'); return `<div class="${cls}"><b>${pc(v)}</b><small>${lbl}${b!=null?`<br>benchmark ${pc(b)}`:''}</small></div>`; }
+function vtCard(id){
+  const v=VT[id]; const f=fimPct(v);
+  return `<div class="vt" style="--c:var(--${v.lane})"><div class="vth"><b>▶ VTurb · ${v.nome}</b><span>${mmss(v.dur)} · ${v.plays} plays</span></div>
+    ${vtChart(v,308,86,false)}
+    <div class="vtk">${kpiCell('aos 30 s',at(v.pts,30),bAt(30))}${kpiCell('em 1 min',at(v.pts,60),bAt(60))}${kpiCell('no fim',f,null)}</div>
+    <div class="vtleg"><span><i></i>este vídeo</span><span><i class="b"></i>benchmark de mercado</span></div></div>`;
+}
+function vtDetail(id){
+  const v=VT[id];
+  return `<div class="vtm"><b>O que melhorar</b><ul>${v.melhorar.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="vtlink" data-vt="${id}">Ver análise completa do vídeo →</div>`;
+}
+function renderVtPanel(){
+  const tot=VORD.reduce((a,k)=>a+VT[k].plays,0);
+  const m30=VORD.reduce((a,k)=>a+at(VT[k].pts,30),0)/VORD.length;
+  const abaixo=VORD.filter(k=>at(VT[k].pts,30)<55).length;
+  document.getElementById('vkp').innerHTML=
+    `<div><b>${VORD.length}</b><small>vídeos do quiz no VTurb</small></div><div><b>${tot}</b><small>plays de 04 a 16/11</small></div>`+
+    `<div><b>${pc(m30)}</b><small>seguem assistindo aos 30 s, em média<br>benchmark: ${BLO}% a ${BHI}%</small></div><div><b>${abaixo} de ${VORD.length}</b><small>vídeos abaixo de 55% aos 30 s<br>(gancho quebrado)</small></div>`;
+  let h=`<div class="sec"><h2>Leitura <em>geral</em></h2><ul class="pts">
+    <li><b>O começo é o problema comum.</b> 3 dos 5 vídeos chegam aos 30 s com menos de 55% das pessoas, faixa que a referência de mercado chama de gancho quebrado. O normal é de 65% a 80%.</li>
+    <li><b>Um vídeo está no nível dos melhores:</b> o VSL 02 do MNIA segura 90% aos 30 s (os melhores do mercado ficam acima de 80%).</li>
+    <li><b>Dar play não é problema:</b> 97% a 100% dão play, porque o vídeo toca dentro do quiz.</li>
+    <li><b>Nos 2 vídeos do Mapeamento o botão aparece junto com o vídeo</b>, e quase todo mundo segue sem assistir. O VSL 02 do MNIA, que só mostra o botão aos 3:30, é também o que mais segura.</li>
+    <li><b>Ordem sugerida:</b> (1) começo do VSL 01 do Mapeamento, que é o vídeo com mais gente (31 pessoas); (2) decidir entre regravar ou tirar o VSL 02 do Mapeamento; (3) fim do VSL 01 do MNIA, onde metade assiste tudo e não clica.</li></ul></div>`;
+  h+=`<div class="sec"><h2>Os 5 vídeos <em>lado a lado</em></h2><p class="lead">Retenção em cada ponto. Ao lado, a diferença para a linha de referência do benchmark (75% aos 30 s, depois −1,5 ponto por minuto). Aos 10 s não há benchmark publicado.</p><div class="tw"><table class="vtt"><thead><tr><th>Vídeo</th><th class="n">Plays</th><th class="n">10 s</th><th class="n">30 s</th><th>Faixa aos 30 s</th><th class="n">1 min</th><th class="n">Fim</th></tr></thead><tbody>`+
+    VORD.map(k=>{const v=VT[k]; const c=t=>{const a=at(v.pts,t),b=bAt(t),d=a-b; return `<td class="n">${pc(a)} <span class="dif ${d>=0?'pos':'neg'}">${d>=0?'+':''}${Math.round(d)}</span></td>`;};
+      const fx=faixa(at(v.pts,30));
+      return `<tr><td><b style="color:var(--${v.lane})">●</b> ${v.nome}</td><td class="n">${v.plays}</td><td class="n">${pc(at(v.pts,10))}</td>${c(30)}<td><span class="dif ${fx[1]}">${fx[0]}</span></td>${c(60)}${c(v.dur)}</tr>`;}).join('')+`</tbody></table></div></div>`;
+  VORD.forEach(k=>{ const v=VT[k];
+    h+=`<div class="sec" id="vt-${k}"><span class="tg" style="background:var(--${v.lane})">${v.tela}</span><h2>${v.nome}</h2>
+      <div class="kr"><div><b>${v.plays}</b><small>plays</small></div><div><b>${v.pessoas}</b><small>pessoas chegaram na tela (inLead)</small></div>
+      <div><b>${v.seguiram==null?'–':v.seguiram}</b><small>${v.seguiram==null?'tela final do ramo':'seguiram para a tela seguinte'}</small></div>
+      <div><b>${v.pr}</b><small>play rate</small></div><div><b>${v.eng}</b><small>engajamento (VTurb)</small></div><div><b>${mmss(v.dur)}</b><small>duração · ${v.btnTxt}</small></div></div>
+      <div class="cw"><div><div class="legend"><span><i style="border-color:var(--${v.lane})"></i>${v.nome}</span><span><i class="b"></i>benchmark de mercado</span><span><i style="border-top:8px solid #9C94B5;opacity:.3"></i>faixa normal (65% a 80% aos 30 s)</span></div>${vtChart(v,640,280,true)}</div>
+      <div class="tw"><table class="vtt"><thead><tr><th>Tempo</th><th class="n">Este vídeo</th><th class="n">Benchmark</th><th class="n">Diferença</th></tr></thead><tbody>${
+        vtRows(v).map(([l,t])=>{const a=at(v.pts,t),b=bAt(t),d=a-b; return `<tr><td>${l}</td><td class="n"><b>${pc(a)}</b></td><td class="n">${pc(b)}</td><td class="n"><span class="dif ${d>=0?'pos':'neg'}">${d>=0?'+':''}${Math.round(d)} pts</span></td></tr>`;}).join('')
+      }</tbody></table></div></div>
+      <div class="box l"><b>O que a curva mostra:</b> ${v.leitura}</div>
+      <div class="box r"><b>O que melhorar</b><ul>${v.melhorar.map(x=>`<li>${x}</li>`).join('')}</ul></div></div>`; });
+  h+=`<div class="sec"><h2>De onde vem o <em>benchmark</em></h2><ul class="pts">
+    <li>Não existe benchmark público de retenção de vídeo para o nosso público (infoproduto no Brasil). O painel de benchmarks do VTurb, que compara por nicho, é pago (plano Scale+) e não está liberado na conta.</li>
+    <li>Usamos a referência publicada pela VSLStats (plataforma de análise de VSL) para tráfego pago: <b>65% a 80% aos 30 s é o normal</b>, acima de 80% são os melhores e <b>abaixo de 55% é gancho quebrado</b>. Depois dos 30 s, uma curva saudável cai de 1 a 2 pontos por minuto.</li>
+    <li>A linha tracejada usa o meio dessa referência: 75% aos 30 s e −1,5 ponto por minuto. Entre 0 e 30 s ela é uma reta, porque a fonte não dá o número dos 10 s.</li>
+    <li>A referência foi medida em VSLs longas (30 a 45 min) do mercado em inglês. Vídeo curto dentro de um quiz deveria segurar <b>mais</b> no começo, não menos. Para conferir: as VSLs longas da nossa própria conta VTurb ficam em 72% aos 30 s, dentro da faixa.</li>
+    <li>Plays do VTurb batem com as visualizações de cada tela no inLead (43 = 43, 31 = 31, 22 ≈ 23, 19 ≈ 20, 15 = 15). Vídeos com menos de 20 pessoas devem ser lidos como sinal.</li>
+    <li>"Pessoas chegaram na tela" vem do inLead de 04 a 16/11; as outras telas do mapa vão até 24/11.</li></ul></div>
+    <div class="foot">Brito Mídias · dados do VTurb e do inLead coletados em 16/11/26 · benchmark: <a href="https://vslstats.com/blog/vsl-metrics-that-matter" target="_blank" rel="noopener" style="color:inherit">VSLStats</a> · nenhum dado pessoal nesta página</div>`;
+  document.getElementById('vtpBody').innerHTML=h;
+}
+const vtp=document.getElementById('vtp');
+function openVt(id){ renderVtPanel(); vtp.hidden=false;
+  requestAnimationFrame(()=>{ const el=id&&document.getElementById('vt-'+id); vtp.scrollTop = el? el.offsetTop-12 : 0; });
+  if(location.hash!=='#videos') history.replaceState(null,'','#videos'); }
+function closeVt(){ vtp.hidden=true; if(location.hash) history.replaceState(null,'',location.pathname); }
+document.getElementById('tgVt').onclick=()=>openVt();
+document.getElementById('vtpX').onclick=closeVt;
+addEventListener('keydown',e=>{ if(e.key==='Escape' && !vtp.hidden) closeVt(); });
+
+const CHIPS = [['Mapa inteiro','fit'],['💰 Painel geral','tr','#F59E0B'],['Entrada','ad,q1,q2'],['Qualificação','q1,q10'],['Divisão','q9,q10,m1,n1,a1'],['Mapeamento','m1,m7','var(--m)'],['MNIA','n1,n5','var(--n)'],['ANP','a1,a8','var(--a)'],['▶ Vídeos','vt','var(--roxo2)']];
+
+/* ===================== MONTAGEM ===================== */
+const world = document.getElementById('world'), vp = document.getElementById('vp'), svg = document.getElementById('edges');
+const byId = {};
+const esc = s => s;
+function btnHtml(b){const [t,k]=b.split('|');return `<div class="btn ${k||''}">${t}</div>`}
+function panelHtml(n){
+  const c59=TR.camp['[59]'], c60=TR.camp['[60]'];
+  const tot={ini:c59.ini+c60.ini,cap:c59.cap+c60.cap,qual:c59.qual+c60.qual,ag:c59.ag+c60.ag,mnia:c59.mnia+c60.mnia,anp:c59.anp+c60.anp};
+  const k=(l,v,h,cls='')=>`<div class="pk ${cls}"><small>${l}</small><b>${v}</b>${h?`<span>${h}</span>`:''}</div>`;
+  const row=c=>`<tr><td>${c.nome}</td><td>${brl(c.inv,0)}</td><td>${n0(c.lpv)}</td><td>${n0(c.ini)}</td><td>${n0(c.cap)}</td><td><b>${n0(c.qual)}</b></td><td><b>${brl(c.inv/c.qual,0)}</b></td><td>${n0(c.ag)}</td><td>${brl(c.inv/c.ag,0)}</td></tr>`;
+  return `<div class="hd"><span class="tag">${n.tag}</span><span class="reach">${brl(TR.inv,0)}<small>investidos c/ imposto</small></span></div>
+  <div class="pbody">
+   <div class="ptt">${n.ttl}</div><div class="psub">04/11 a ${TR.ate} · custos com imposto (bruto ${brl(TR.invB,0)}) · <b>17/11, 14h40:</b> orçamento da [59] caiu de R$ 150 para R$ 50/dia e o da [60] subiu de R$ 150 para R$ 250/dia.</div>
+   <div class="pgrid">
+    ${k('Impressões',n0(TR.imp),'CPM '+brl(TR.inv/TR.imp*1000))}
+    ${k('Cliques no link',n0(TR.cl),'CPC '+brl(TR.inv/TR.cl))}
+    ${k('Visitas ao quiz',n0(TR.lpv),brl(TR.inv/TR.lpv)+' por visita')}
+    ${k('Começaram o quiz',n0(tot.ini),brl(TR.inv/tot.ini)+' por pessoa')}
+    ${k('Deixaram contato',n0(tot.cap),brl(TR.inv/tot.cap)+' por pessoa')}
+    ${k('Qualificados',n0(tot.qual),brl(TR.inv/tot.qual)+' por pessoa','pg')}
+    ${k('Clicaram em agendar',n0(tot.ag),brl(TR.inv/tot.ag)+' por pessoa','pg')}
+    ${k('MNIA · ANP',tot.mnia+' · '+tot.anp,'foram para as outras ofertas')}
+    ${k('Visita → início',(tot.ini/TR.lpv*100).toFixed(1).replace('.',',')+'%','desde 10/11: 23% somando as duas')}
+   </div>
+   <div class="pcamps">${campBlock('[60]','🔥','Público quente')}${campBlock('[59]','🌎','Advantage+ (amplo)')}</div>
+   <div class="psub">Fontes: Meta Ads (ANEX 08) e planilha de leads do quiz, só pessoas que vieram das campanhas. O custo de cada tela no mapa é o investido ÷ pessoas que chegaram nela.</div>
+  </div>`;
+}
+function campBlock(id,ic,lbl){
+  const c=TR.camp[id], L=CRIA[id];
+  const rows=L.map(r=>`<tr class="${r.q?'hit':''}"><td><a href="${r.l}" target="_blank" rel="noopener">${r.n}</a>${r.p?' <em class="pz">pausado</em>':''}</td><td>${brl(r.inv,0)}</td><td>${r.ini}</td><td>${r.cap}</td><td><b>${r.q}</b></td><td>${r.q?brl(r.inv/r.q,0):'–'}</td><td>${r.ag}</td></tr>`).join('');
+  return `<div class="pcamp nopan" tabindex="0">
+    <div class="pch">${ic} ${lbl} <small>${id}</small></div>
+    <div class="pcg">
+      <div><small>Investido</small><b>${brl(c.inv,0)}</b></div>
+      <div><small>Visitas</small><b>${n0(c.lpv)}</b><span>${brl(c.inv/c.lpv)} cada</span></div>
+      <div><small>Começaram</small><b>${n0(c.ini)}</b><span>${(c.ini/c.lpv*100).toFixed(0)}% das visitas</span></div>
+      <div><small>Contato</small><b>${n0(c.cap)}</b><span>${brl(c.inv/c.cap,0)} cada</span></div>
+      <div class="hl"><small>Qualificados</small><b>${n0(c.qual)}</b><span>${brl(c.inv/c.qual,0)} cada</span></div>
+      <div class="hl"><small>Agendar</small><b>${n0(c.ag)}</b><span>${brl(c.inv/c.ag,0)} cada</span></div>
+    </div>
+    <div class="pcm">MNIA ${c.mnia} · ANP ${c.anp} · <u>passe o mouse para ver por criativo</u></div>
+    <div class="ppop nopan"><div class="ppt">${ic} ${lbl} · resultado por criativo</div>
+      <table><thead><tr><th>Criativo (abre no Drive)</th><th>Investido</th><th>Começaram</th><th>Contato</th><th>Qualif.</th><th>R$/qualif.</th><th>Agendar</th></tr></thead><tbody>${rows}</tbody></table>
+      <div class="ppn">Investido com imposto. Pessoas = leads da planilha que vieram desse anúncio (04 a ${TR.ate}).</div></div>
+  </div>`;
+}
+function costLine(n){
+  if(n.panel || !n.reach) return '';
+  const v=TR.inv/n.reach;
+  const t = n.id==='ad' ? 'por visita' : (n.id==='m7' ? 'por clique' : 'por pessoa');
+  return `${n.est?'≈ ':''}${brl(v)} ${t}`;
+}
+function cardHtml(n){
+  if(n.panel) return panelHtml(n);
+  const tot = (n.ans||[]).reduce((a,x)=>a+x[2],0);
+  let d = '';
+  if(n.ans){ d += n.ans.map(a=>{
+      const pct = tot? Math.round(a[2]/tot*100):0;
+      return `<div class="ans"><div class="bar" style="width:${pct}%"></div><div class="row"><span class="t">${a[0]?a[0]+' ':''}${a[1]}</span><b>${a[2]}<small>${pct}%</small></b></div>${a[3]?`<span class="route r-${a[3]}">${a[4]}</span>`:''}</div>`}).join(''); }
+  if(n.fields) d += n.fields.map(f=>`<div class="field">✎ ${f}</div>`).join('');
+  if(n.imgs) d += `<div class="imgs">${n.imgs.map(u=>`<img src="${u}" alt="Notícia do carrossel" loading="lazy">`).join('')}</div>`;
+  if(n.vt) d += vtDetail(n.vt);
+  else if(n.video) d += `<div class="video">▶ ${n.video[0]}<small>${n.video[1]}</small></div>`;
+  if(n.list) d += `<ul class="list">${n.list.map(l=>`<li>${l}</li>`).join('')}</ul>`;
+  if(n.price) d += `<div class="price">${n.price[0]?`<s>${n.price[0]}</s>`:''}<b>${n.price[1]}</b><small>${n.price[2]}</small></div>`;
+  if(n.btn) d += n.btn.map(btnHtml).join('');
+  if(n.btn2) d += n.btn2.map(btnHtml).join('');
+  if(n.note) d += `<div class="note">${n.note}</div>`;
+  const cnt = n.ans? `${n.ans.length} respostas` : 'detalhes da tela';
+  const lbl = n.reachLbl || 'pessoas';
+  const cl = costLine(n);
+  return `<div class="hd"><span class="tag">${n.tag}</span><span class="reach">${n.est?'≈':''}${n.reach.toLocaleString('pt-BR')}<small>${lbl}</small></span></div>
+    ${cl?`<div class="cost">💰 ${cl}</div>`:''}
+    <div class="ttl">${n.ttl}</div>
+    <div class="far"><div class="ft">${n.ttl}</div><div class="fn">${n.est?'≈':''}${n.reach.toLocaleString('pt-BR')}<small>${lbl}</small></div>${cl?`<div class="fc">${cl}</div>`:''}${n.vt?`<div class="fv">▶ ${pc(at(VT[n.vt].pts,30))} seguem aos 30 s <small>(benchmark ${BLO}–${BHI}%)</small></div>`:''}${n.alert?'<div class="fw">⚠️ atenção</div>':''}</div>
+    <div class="body"><div class="q">${n.q}</div>${n.sub?`<div class="sub">${n.sub}</div>`:''}${n.vt?vtCard(n.vt):''}
+      <div class="more">＋ ${cnt} · clique ou aproxime</div><div class="detail">${d}</div></div>
+    ${n.alert?`<div class="alert">⚠️ ${n.alert}</div>`:''}`;
+}
+LANES.forEach(l=>{const el=document.createElement('div');el.className='lane';el.style.cssText=`left:${l.x}px;top:${l.y}px;color:${l.c};font-size:120px`;el.innerHTML=`${l.t}<span>${l.s}</span>`;world.appendChild(el)});
+N.forEach(n=>{
+  const el=document.createElement('div');
+  el.className=`card l${n.lane}${n.panel?' panel':''}`; if(n.w) el.style.width=n.w+'px'; el.style.left=n.x+'px'; el.style.top=n.y+'px'; el.dataset.id=n.id;
+  el.innerHTML=cardHtml(n); world.appendChild(el); n.el=el; byId[n.id]=n;
+});
+const ANCH = 28, W = 340;
+function drawEdges(){
+  let p='';
+  world.querySelectorAll('.drop,.split').forEach(e=>e.remove());
+  E.forEach(([a,b,br])=>{
+    const A=byId[a],B=byId[b];
+    const x1=A.x+W, y1=A.y+ANCH, x2=B.x, y2=B.y+ANCH;
+    const col = br? `var(--${br})` : (B.lane==='o'? 'var(--o)' : `var(--${B.lane})`);
+    const dx=Math.max(80,(x2-x1)*.5);
+    p+=`<path d="M${x1},${y1} C${x1+dx},${y1} ${x2-dx},${y2} ${x2},${y2}" fill="none" stroke="${col}" stroke-width="${br?6:4}" stroke-linecap="round" opacity=".55"/>`;
+    p+=`<circle cx="${x2}" cy="${y2}" r="7" fill="${col}"/>`;
+    if(br){
+      const s=document.createElement('div'); s.className='split'; s.style.background=col;
+      s.style.left=(x1+ (x2-x1)*.62)+'px'; s.style.top=(y1+(y2-y1)*.62-26)+'px';
+      s.innerHTML=`${SPLITS[br][0]}<small>${SPLITS[br][1]}</small>`; world.appendChild(s);
+    } else if(A.lane!=='o' && B.lane!=='o' && A.reach>B.reach){
+      const d=document.createElement('div'); d.className='drop';
+      d.style.left=((x1+x2)/2)+'px'; d.style.top=((y1+y2)/2 - 22)+'px';
+      d.textContent=`−${A.reach-B.reach}`; world.appendChild(d);
+    }
+  });
+  svg.innerHTML=p;
+}
+drawEdges();
+
+/* ===================== ZOOM E MOVIMENTO ===================== */
+let s=1, tx=0, ty=0, anim=null;
+const MIN=.03, MAX=2.2;
+function apply(){
+  world.style.transform=`translate(${tx}px,${ty}px) scale(${s})`;
+  world.classList.toggle('z-far', s<.33);
+  world.classList.toggle('z-near', s>=.85);
+  drawMini();
+}
+function bounds(ids){
+  let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+  const list = ids? ids.map(i=>byId[i]) : N;
+  list.forEach(n=>{const h=n.el.offsetHeight; x0=Math.min(x0,n.x); y0=Math.min(y0,n.y-(ids?0:340)); x1=Math.max(x1,n.x+(n.w||W)); y1=Math.max(y1,n.y+h);});
+  return {x0,y0,x1,y1};
+}
+function viewRect(){const top=document.querySelector('.top').offsetHeight;return {x:0,y:top,w:innerWidth,h:innerHeight-top}}
+function fitTo(b,pad=60,animate=true){
+  const v=viewRect();
+  const ns=Math.min(MAX,Math.max(MIN,Math.min((v.w-pad*2)/(b.x1-b.x0),(v.h-pad*2)/(b.y1-b.y0))));
+  const ntx=v.x+v.w/2-(b.x0+b.x1)/2*ns, nty=v.y+v.h/2-(b.y0+b.y1)/2*ns;
+  animate? fly(ntx,nty,ns) : (tx=ntx,ty=nty,s=ns,apply());
+}
+function fly(ntx,nty,ns,dur=520){
+  cancelAnimationFrame(anim);
+  const sx=tx,sy=ty,ss=s,t0=performance.now();
+  const step=t=>{let k=Math.min(1,(t-t0)/dur);k=1-Math.pow(1-k,3);
+    tx=sx+(ntx-sx)*k; ty=sy+(nty-sy)*k; s=ss+(ns-ss)*k; apply(); if(k<1) anim=requestAnimationFrame(step)};
+  anim=requestAnimationFrame(step);
+}
+function zoomAt(f,cx,cy){const ns=Math.min(MAX,Math.max(MIN,s*f)); tx=cx-(cx-tx)*ns/s; ty=cy-(cy-ty)*ns/s; s=ns; apply();}
+vp.addEventListener('wheel',e=>{if(e.target.closest&&e.target.closest('.ppop'))return;e.preventDefault(); cancelAnimationFrame(anim);
+  const f = e.ctrlKey? Math.exp(-e.deltaY*.01) : Math.exp(-e.deltaY*.0016);
+  zoomAt(f,e.clientX,e.clientY)},{passive:false});
+const P=new Map(); let moved=0, downTarget=null, pinch=null;
+vp.addEventListener('pointerdown',e=>{
+  if(e.target.closest && e.target.closest('a,.ppop')) return;
+  cancelAnimationFrame(anim); vp.setPointerCapture(e.pointerId);
+  P.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(P.size===1){moved=0; downTarget=e.target; vp.classList.add('drag');}
+  if(P.size===2){const [a,b]=[...P.values()]; pinch={d:Math.hypot(a.x-b.x,a.y-b.y)}; moved=99;}
+});
+vp.addEventListener('pointermove',e=>{
+  if(!P.has(e.pointerId)) return;
+  const prev=P.get(e.pointerId), cur={x:e.clientX,y:e.clientY}; P.set(e.pointerId,cur);
+  if(P.size===1){tx+=cur.x-prev.x; ty+=cur.y-prev.y; moved+=Math.abs(cur.x-prev.x)+Math.abs(cur.y-prev.y); apply();}
+  else if(P.size===2 && pinch){const [a,b]=[...P.values()]; const d=Math.hypot(a.x-b.x,a.y-b.y);
+    const mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
+    if(!pinch.m) pinch.m={x:mx,y:my};
+    tx+=mx-pinch.m.x; ty+=my-pinch.m.y; pinch.m={x:mx,y:my};
+    zoomAt(d/pinch.d,mx,my); pinch.d=d;}
+});
+function up(e){
+  if(!P.has(e.pointerId)) return; P.delete(e.pointerId);
+  if(P.size<2) pinch=null;
+  if(P.size===0){vp.classList.remove('drag');
+    if(moved<6 && downTarget){const lk=downTarget.closest('[data-vt]'); if(lk) openVt(lk.dataset.vt); else {const c=downTarget.closest('.card'); if(c) toggleCard(byId[c.dataset.id]);}}
+    downTarget=null;}
+}
+vp.addEventListener('pointerup',up); vp.addEventListener('pointercancel',up);
+function toggleCard(n){
+  const open=!n.el.classList.contains('open');
+  n.el.classList.toggle('open',open);
+  if(open){ requestAnimationFrame(()=>{
+    const v=viewRect(), h=n.el.offsetHeight;
+    const ns=Math.max(s, Math.min(1.1,(v.h-80)/h));
+    const ntx=v.x+v.w/2-(n.x+W/2)*ns, nty=v.y+40-n.y*ns;
+    fly(ntx,nty,ns);
+  }); } else drawMini();
+}
+document.getElementById('zin').onclick=()=>{const v=viewRect();cancelAnimationFrame(anim);zoomAt(1.35,v.x+v.w/2,v.y+v.h/2)};
+document.getElementById('zout').onclick=()=>{const v=viewRect();cancelAnimationFrame(anim);zoomAt(1/1.35,v.x+v.w/2,v.y+v.h/2)};
+document.getElementById('zfit').onclick=()=>fitTo(bounds());
+addEventListener('keydown',e=>{const v=viewRect();
+  if(e.key==='+'||e.key==='=') zoomAt(1.25,v.x+v.w/2,v.y+v.h/2);
+  else if(e.key==='-') zoomAt(.8,v.x+v.w/2,v.y+v.h/2);
+  else if(e.key==='0') fitTo(bounds());
+  else if(e.key.startsWith('Arrow')){const d=80; if(e.key==='ArrowLeft')tx+=d; if(e.key==='ArrowRight')tx-=d; if(e.key==='ArrowUp')ty+=d; if(e.key==='ArrowDown')ty-=d; apply();}
+});
+/* atalhos */
+const chips=document.getElementById('chips');
+CHIPS.forEach(([t,ids,c])=>{const b=document.createElement('button');b.className='chip';
+  b.innerHTML=(c?`<i style="background:${c}"></i>`:'')+t;
+  b.onclick=()=>{ if(ids==='fit') return fitTo(bounds()); if(ids==='vt') return openVt();
+    const arr=ids.split(','); let list=arr;
+    if(arr.length===2 && arr[0][0]===arr[1][0] && arr[0]!=='q1'){ // faixa inteira
+      const lane=byId[arr[0]].lane; list=N.filter(n=>n.y===byId[arr[0]].y && n.x>=byId[arr[0]].x).map(n=>n.id);}
+    if(ids==='q1,q10') list=N.filter(n=>n.lane==='q').map(n=>n.id);
+    fitTo(bounds(list),50);};
+  chips.appendChild(b)});
+let allOpen=false;
+document.getElementById('tgAll').onclick=e=>{allOpen=!allOpen;N.forEach(n=>n.el.classList.toggle('open',allOpen));
+  e.target.textContent=allOpen?'Fechar todas as telas':'Abrir todas as telas'; drawMini();};
+const info=document.getElementById('info');
+document.getElementById('infoH').onclick=()=>{info.classList.toggle('closed');document.getElementById('infoX').textContent=info.classList.contains('closed')?'+':'–'};
+if(innerWidth<720) {info.classList.add('closed');document.getElementById('infoX').textContent='+';}
+/* minimapa */
+const mini=document.getElementById('mini'), mc=mini.getContext('2d'); let mb=null, mk=1, mo={x:0,y:0};
+function drawMini(){
+  if(getComputedStyle(mini).display==='none') return;
+  mb=bounds(); const pw=mini.width, ph=mini.height, pad=8;
+  mk=Math.min((pw-pad*2)/(mb.x1-mb.x0),(ph-pad*2)/(mb.y1-mb.y0));
+  mo={x:pad+((pw-pad*2)-(mb.x1-mb.x0)*mk)/2 - mb.x0*mk, y:pad+((ph-pad*2)-(mb.y1-mb.y0)*mk)/2 - mb.y0*mk};
+  mc.clearRect(0,0,pw,ph);
+  const css=getComputedStyle(document.documentElement);
+  N.forEach(n=>{mc.fillStyle=css.getPropertyValue(n.lane==='o'?'--o':'--'+n.lane).trim();
+    mc.fillRect(mo.x+n.x*mk, mo.y+n.y*mk, Math.max(2,(n.w||W)*mk), Math.max(2,n.el.offsetHeight*mk));});
+  const v=viewRect();
+  const wx=(v.x-tx)/s, wy=(v.y-ty)/s, ww=v.w/s, wh=v.h/s;
+  mc.strokeStyle='#7C3AED'; mc.lineWidth=2; mc.strokeRect(mo.x+wx*mk, mo.y+wy*mk, ww*mk, wh*mk);
+}
+mini.addEventListener('pointerdown',e=>{e.stopPropagation(); const r=mini.getBoundingClientRect();
+  const wx=(e.clientX-r.left-mo.x)/mk, wy=(e.clientY-r.top-mo.y)/mk; const v=viewRect();
+  fly(v.x+v.w/2-wx*s, v.y+v.h/2-wy*s, s, 380);});
+let touched=false;
+['pointerdown','wheel','keydown'].forEach(ev=>addEventListener(ev,()=>touched=true,{capture:true,passive:true}));
+addEventListener('resize',()=>{ if(!touched) fitTo(bounds(),40,false); else apply(); });
+/* início: visão geral */
+(document.fonts?document.fonts.ready:Promise.resolve()).then(()=>fitTo(bounds(),40,false));
+fitTo(bounds(),40,false);
+if(location.hash==='#videos') openVt();
+</script>
+</body>
+</html>
