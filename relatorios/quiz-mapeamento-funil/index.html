@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Funil do Quiz do Mapeamento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--roxo:#7C3AED;--roxo2:#A78BFA;--dark:#0F0B1E;--bg:#F5F3FA;--card:#fff;--txt:#1F1A2E;--muted:#625B78;--line:#E6E1F0;
+ --q:#7C3AED;--m:#059669;--n:#EA580C;--a:#DB2777;--bad:#B91C1C;--old:#6B6480}
+*{box-sizing:border-box}
+body{margin:0;font-family:Poppins,system-ui,sans-serif;color:var(--txt);background:var(--bg);font-size:14px;line-height:1.4}
+.wrap{max-width:1840px;margin:0 auto;padding:0 28px}
+.hero{background:var(--dark);color:#fff;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:24px 24px;padding:26px 0 22px}
+.hero h1{margin:0;font-size:30px;line-height:1.15;font-weight:800;letter-spacing:-.5px}.hero h1 span{color:var(--roxo2)}
+.hero p{margin:6px 0 0;color:#C9C3DC;font-size:14px}
+.bar{position:sticky;top:0;z-index:20;background:rgba(245,243,250,.96);border-bottom:1px solid var(--line);padding:12px 0}
+.bar .wrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.seg{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:12px;padding:4px;gap:4px}
+.seg button{border:0;background:transparent;font:600 15px Poppins;color:var(--txt);padding:10px 20px;border-radius:9px;cursor:pointer}
+.seg button:hover{background:#F1ECFB}.seg button[aria-pressed=true]{background:var(--roxo);color:#fff}
+.seg button:focus-visible{outline:3px solid var(--roxo2);outline-offset:1px}
+.tot{display:flex;gap:26px;margin-left:auto;flex-wrap:wrap}.tot div{display:flex;flex-direction:column}.tot b{font-size:18px;font-weight:700;line-height:1.15}.tot small{color:var(--muted);font-size:12px}
+section{padding:26px 0 6px}
+h2{margin:0 0 4px;font-size:22px;font-weight:700;letter-spacing:-.3px}
+.lead{margin:0 0 16px;color:var(--muted);font-size:14px;max-width:110ch}
+/* funil */
+.fbox{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 20px 20px;overflow-x:auto}
+.fin{min-width:1180px}
+.fl{display:grid;grid-template-columns:repeat(8,1fr)}
+.fl .st{padding:0 10px;text-align:center}
+.st .nm{font-weight:600;font-size:14px;min-height:40px;display:flex;align-items:flex-end;justify-content:center;line-height:1.25}
+.st .v{font-size:30px;font-weight:800;letter-spacing:-.8px;line-height:1.1;margin-top:10px}
+.st .c{font-weight:600;font-size:14px;margin-top:2px}.st .c small{color:var(--muted);font-weight:400;font-size:12px}
+.st .p{white-space:nowrap;margin-top:8px;font-size:13px;color:var(--muted)}.st .p b{color:var(--txt);font-weight:700}
+svg.fs{display:block;width:100%;height:210px;margin:8px 0 0;overflow:visible}
+.note{margin:14px 0 0;padding:10px 14px;background:#F8F6FD;border-left:3px solid var(--roxo2);border-radius:0 10px 10px 0;font-size:13px;color:#3E3657}
+.note:empty{display:none}
+/* respostas */
+.qs{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.qc{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 14px 16px;display:flex;flex-direction:column}
+.qh{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.qh .k{font-size:12px;font-weight:600;color:var(--q)}
+.qh .k b{display:block;font-size:16px;color:var(--txt);font-weight:700;line-height:1.2}
+.qh .r{text-align:right;font-size:24px;font-weight:800;line-height:1;letter-spacing:-.5px}.qh .r small{display:block;font-size:12px;font-weight:500;color:var(--muted);letter-spacing:0;margin-top:3px}
+.mt{display:flex;gap:6px 12px;flex-wrap:wrap;margin:8px 0 10px;font-size:12.5px;color:var(--muted)}.mt .d{color:var(--bad);font-weight:600}
+.qq{font-weight:500;font-size:13.5px;margin:0 0 10px;line-height:1.35}
+.an{margin-top:8px}.an .tx{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;line-height:1.3}
+.an .tx b{white-space:nowrap;font-weight:700}.an .tx b small{font-weight:500;color:var(--muted)}
+.an .bg{height:6px;background:#EFEBF7;border-radius:4px;margin-top:4px;overflow:hidden}.an .bg i{display:block;height:100%;border-radius:4px;background:var(--c,var(--q))}
+.rt{display:inline-block;font-size:11px;font-weight:600;padding:1px 7px;border-radius:99px;color:#fff;margin-left:4px;white-space:nowrap}
+.qh+.qq{margin-top:10px}
+.trw{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:16px;margin-bottom:14px}
+.trk{display:grid;grid-template-columns:repeat(10,1fr);min-width:1180px}
+.tc{padding:14px 10px 12px 14px;border-left:1px solid var(--line);position:relative}.tc:first-child{border-left:0}
+.tc:not(:first-child)::before{content:'';position:absolute;left:-6px;top:26px;width:10px;height:10px;background:#fff;border-top:2px solid var(--roxo2);border-right:2px solid var(--roxo2);transform:rotate(45deg)}
+.tc .k{font-size:12px;font-weight:600;color:var(--q)}.tc .k b{display:block;font-size:14px;color:var(--txt);font-weight:700;line-height:1.2;min-height:34px}
+.tc .n{font-size:26px;font-weight:800;letter-spacing:-.6px;line-height:1.1}.tc .m{font-size:12px;color:var(--muted);margin-top:2px}
+.tc .d{font-size:12px;color:var(--muted);margin-top:6px}.tc.mx{background:#FEF2F2}.tc.mx .d{color:var(--bad);font-weight:700}
+/* bifurcação */
+.fork{margin-top:4px}
+.node{width:max-content;max-width:100%;margin:0 auto;background:var(--dark);color:#fff;border-radius:14px;padding:12px 26px;text-align:center;font-weight:600;font-size:14px}.node b{display:block;font-size:28px;font-weight:800;line-height:1.05}
+svg.cn{display:block;width:100%;height:74px}
+.br{display:grid;grid-template-columns:2.1fr 1fr 1fr;gap:18px;align-items:start}
+.col{border-radius:18px;background:#fff;border:1px solid var(--line);border-top:5px solid var(--c);padding:14px}
+.ch{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:12px}
+.ch h3{margin:0;font-size:18px;font-weight:700;line-height:1.2}.ch p{margin:2px 0 0;color:var(--muted);font-size:12.5px}
+.ch .r{text-align:right;font-size:28px;font-weight:800;line-height:1;white-space:nowrap}.ch .r small{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:4px}
+.sp{border:1px solid var(--line);border-left:4px solid var(--c);border-radius:12px;padding:10px 12px;background:#fff}
+.sp+.arr,.two+.arr{}
+.arr{text-align:center;font-size:12.5px;color:var(--muted);padding:5px 0}.arr b{color:var(--bad);font-weight:600}
+.sp .a{display:flex;justify-content:space-between;gap:10px;align-items:baseline}.sp .a b{font-size:14px;font-weight:700}.sp .a .n{font-size:20px;font-weight:800;white-space:nowrap}
+.sp .m{font-size:12.5px;color:var(--muted);margin-top:1px}.sp .q{font-size:12.5px;margin:6px 0 2px;line-height:1.35}
+.sp.end{background:var(--c);border-color:var(--c);color:#fff}.sp.end .m{color:rgba(255,255,255,.92)}
+.mm{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ver{border-radius:14px;padding:12px;background:#F7F6FA;--c:var(--old)}.ver.now{background:#ECFDF5;--c:var(--m)}
+.vh{display:flex;justify-content:space-between;gap:8px;margin-bottom:10px;align-items:flex-start}.vh b{font-size:15px;font-weight:700;display:block;line-height:1.2}.vh small{color:var(--muted);font-size:12px}
+.vh .n{font-size:22px;font-weight:800;text-align:right;line-height:1;white-space:nowrap}.vh .n small{display:block;font-weight:500;margin-top:3px}
+details{margin:22px 0 0}summary{cursor:pointer;font-weight:600}
+.tw{overflow-x:auto}table{border-collapse:collapse;margin-top:10px;background:#fff;border-radius:12px;width:100%;min-width:760px}
+th,td{padding:8px 12px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}th:first-child,td:first-child{text-align:left}th{font-size:12px;color:var(--muted);font-weight:600}
+.foot{color:var(--muted);font-size:12.5px;padding:22px 0 40px}.foot a{color:var(--roxo)}
+@media(max-width:1250px){.qs{grid-template-columns:repeat(3,1fr)}.br{grid-template-columns:1fr}svg.cn{display:none}.node{margin-bottom:16px}}
+@media(max-width:760px){.wrap{padding:0 16px}.qs{grid-template-columns:1fr}.mm,.two{grid-template-columns:1fr}.seg{width:100%}.seg button{flex:1;padding:10px 6px;font-size:13px}.tot{margin-left:0;gap:16px}.hero h1{font-size:24px}.bar{position:static}.st .v{font-size:26px}}
+</style>
+</head>
+<body>
+<div class="hero"><div class="wrap"><h1>Funil do <span>Quiz do Mapeamento</span></h1><p>Do anúncio ao clique em agendar · 04/11 a 25/11 às 13h45 · custos com imposto</p></div></div>
+<div class="bar"><div class="wrap"><div class="seg" role="group" aria-label="Público">
+<button data-a="todos">Todos</button><button data-a="quente">🔥 Público quente</button><button data-a="frio">🌎 Público frio</button></div>
+<div class="tot" id="tot"></div></div></div>
+<main class="wrap">
+<section><h2>Do anúncio ao agendamento</h2><p class="lead">Cada etapa mostra quantas pessoas chegaram, quanto custou cada uma, quantos passaram da etapa anterior e quanto isso representa de quem chegou na página.</p>
+<div class="fbox"><div class="fin"><div class="fl" id="ft"></div><svg class="fs" id="fs" viewBox="0 0 1600 210" preserveAspectRatio="none" aria-hidden="true"></svg><div class="fl" id="fl"></div></div></div>
+<p class="note" id="nt"></p></section>
+<section><h2>Respostas, tela por tela</h2><p class="lead">As 10 telas na ordem, com quem respondeu ou avançou em cada uma e quem saiu no caminho. Embaixo, o que as pessoas responderam nas 5 perguntas de escolha.</p><div class="trw"><div class="trk" id="tr"></div></div><div class="qs" id="qs"></div></section>
+<section class="fork"><h2>Para onde cada pessoa vai</h2><p class="lead">Só o faturamento decide o caminho. As porcentagens de cada caminho são sobre quem entrou nele.</p>
+<div class="node" id="node"></div><svg class="cn" id="cn" viewBox="0 0 1000 74" preserveAspectRatio="none" aria-hidden="true"></svg><div class="br" id="br"></div></section>
+<details><summary>Ver o funil em tabela (todos, quente e frio lado a lado)</summary><div class="tw"><table id="tb"></table></div></details>
+<div class="foot">Brito Mídias · público quente = campanha [60], engajamento de 90 dias · público frio = campanha [59], Advantage+ · anúncio, cliques e página: Meta Ads (ANEX 08) · a partir de "começaram": planilha de leads do quiz, só pessoas vindas dessas campanhas · o agendamento em si acontece no WhatsApp · "chegaram à tela final" = passaram do vídeo (versão nova) ou da tela "como seguir" (versão antiga) · a altura do desenho é ilustrativa, os números são os reais · nenhum dado pessoal nesta página · <a href="../quiz-mapeamento-mapa/">mapa detalhado</a> · <a href="../quiz-mapeamento/">relatório</a></div>
+</main>
+<script>
+const D={"todos": {"inv": 7252.54, "invO": 6964.65, "invN": 287.89, "imp": 71910, "cl": 3377, "lpv": 2423, "q": [277, 209, 186, 183, 180, 175, 175, 171, 155, 153], "qual": 76, "mnia": 46, "anp": 31, "m1": 76, "m2": 72, "old": {"qual": 73, "v1": 49, "v2": 39, "sg": 34, "ag": 25}, "new": {"qual": 3, "v": 0, "ag": 0}, "fim": 34, "ag": 25, "n": [46, 44, 38, 10], "a": [31, 30, 29, 29], "aof": 1, "ini10": 180, "lpv10": 787, "ans": {"q2": [27, 83, 47, 52], "q4": [43, 51, 36, 21, 32], "q5": [58, 66, 56], "q6": [44, 37, 47, 47], "q8": [85, 80, 5, 1], "m1": [1, 1, 4, 44, 26], "m2": [15, 27, 15, 5, 10], "f3": [16, 18], "n1": [14, 11, 11, 3, 7], "n2": [14, 12, 15, 3], "a1": [7, 12, 3, 9], "a3": [11, 3, 4, 1, 10]}}, "quente": {"inv": 4557.49, "invO": 4317.8, "invN": 239.69, "imp": 37365, "cl": 810, "lpv": 707, "q": [165, 142, 132, 130, 128, 124, 124, 120, 111, 111], "qual": 55, "mnia": 35, "anp": 21, "m1": 55, "m2": 53, "old": {"qual": 52, "v1": 39, "v2": 30, "sg": 27, "ag": 20}, "new": {"qual": 3, "v": 0, "ag": 0}, "fim": 27, "ag": 20, "n": [35, 34, 30, 8], "a": [21, 20, 19, 19], "aof": 1, "ini10": 136, "lpv10": 582, "ans": {"q2": [12, 56, 33, 41], "q4": [28, 38, 27, 14, 23], "q5": [39, 52, 37], "q6": [32, 26, 37, 29], "q8": [61, 56, 3, 0], "m1": [1, 1, 1, 33, 19], "m2": [13, 21, 8, 3, 8], "f3": [12, 15], "n1": [10, 8, 10, 2, 5], "n2": [11, 9, 12, 2], "a1": [5, 6, 3, 7], "a3": [8, 0, 2, 1, 8]}}, "frio": {"inv": 2695.05, "invO": 2646.85, "invN": 48.2, "imp": 34545, "cl": 2567, "lpv": 1716, "q": [112, 67, 54, 53, 52, 51, 51, 51, 44, 42], "qual": 21, "mnia": 11, "anp": 10, "m1": 21, "m2": 19, "old": {"qual": 21, "v1": 10, "v2": 9, "sg": 7, "ag": 5}, "new": {"qual": 0, "v": 0, "ag": 0}, "fim": 7, "ag": 5, "n": [11, 10, 8, 2], "a": [10, 10, 10, 10], "aof": 0, "ini10": 44, "lpv10": 205, "ans": {"q2": [15, 27, 14, 11], "q4": [15, 13, 9, 7, 9], "q5": [19, 14, 19], "q6": [12, 11, 10, 18], "q8": [24, 24, 2, 1], "m1": [0, 0, 3, 11, 7], "m2": [2, 6, 7, 2, 2], "f3": [4, 3], "n1": [4, 3, 1, 1, 2], "n2": [3, 3, 3, 1], "a1": [2, 6, 0, 2], "a3": [3, 3, 2, 0, 2]}}}, T={"q1": {"t": "Entrada", "q": "Fature mais e trabalhe menos: descubra as 15 a 25 horas que o seu negócio te toma toda semana. Em 2 minutos eu te mostro onde.", "a": []}, "q2": {"t": "Uso de IA", "q": "Como você usa Inteligência Artificial hoje?", "a": [["", "Quase não uso. Testei, achei genérico e larguei.", ""], ["", "Uso o ChatGPT como se fosse um Google. Pergunto, copio, colo e reescrevo quase tudo.", ""], ["", "Uso pra adiantar tarefa, mas tudo continua dependendo de mim.", ""], ["", "Já uso bem em algumas partes, mas nada disso está organizado num sistema.", ""]]}, "q3": {"t": "Nome", "q": "Como podemos te chamar?", "a": []}, "q4": {"t": "Faturamento", "q": "Qual é o faturamento médio do seu negócio hoje?", "a": [["", "Ainda não tenho negócio", "a"], ["", "Até R$5 mil por mês", "n"], ["", "De R$5 mil a R$10 mil por mês", "m"], ["", "De R$10 mil a R$20 mil por mês", "m"], ["", "Acima de R$20 mil por mês", "m"]]}, "q5": {"t": "Identificação", "q": "Qual dessas frases mais parece com você hoje?", "a": [["💰", "Quero usar IA pra criar uma nova fonte de renda além do que eu já faço.", ""], ["⚙️", "Já tenho o negócio rodando e quero colocar a IA pra trabalhar dentro dele.", ""], ["🚀", "Quero transformar o que eu sei num negócio maior e menos dependente de mim.", ""]]}, "q6": {"t": "O que mudaria", "q": "Se a Inteligência Artificial assumisse o operacional do seu negócio amanhã, o que mudaria primeiro?", "a": [["⏰", "Eu recuperaria de 15 a 25 horas por semana.", ""], ["🎯", "Eu finalmente apareceria e viraria referência na minha área.", ""], ["📦", "Eu criaria produtos e novas fontes de receita com o que eu já sei.", ""], ["👥", "Eu atenderia muito mais gente sem precisar estar em tudo.", ""]]}, "q7": {"t": "Último passo", "q": "🏅 VOCÊ CHEGOU AO ÚLTIMO PASSO", "a": []}, "q8": {"t": "Investimento", "q": "Se o caminho certo aparecer aqui, quanto você conseguiria investir para aprender soluções de Inteligência Artificial agora para o seu negócio?", "a": [["", "Agora não consigo investir nada", ""], ["", "Até R$300 por mês", ""], ["", "Até R$1.000 por mês", ""], ["", "Acima de R$1.000 por mês", ""]]}, "q9": {"t": "Contato", "q": "Pra onde eu envio o seu diagnóstico?", "a": []}, "q10": {"t": "Análise (divisão)", "q": "🔎 Estamos analisando suas respostas...", "a": []}, "m1": {"t": "Tipo de negócio", "q": "Qual das opções abaixo mais condiz com o seu negócio hoje?", "a": [["", "Mentora ou expert", ""], ["", "Infoprodutora", ""], ["", "Prestadora de serviços digitais", ""], ["", "Empresária", ""], ["", "Profissional liberal", ""]]}, "m2": {"t": "Momento", "q": "Qual das opções mais caracteriza o seu momento, hoje?", "a": [["🤦", "Eu até ganho bem, mas pra ganhar mais eu teria que trabalhar mais. E eu já estou no meu limite.", ""], ["🔥", "Tudo depende de mim. Passo o dia inteiro apagando incêndio e resolvendo o mesmo de sempre.", ""], ["👨‍👩‍👧", "Trabalho demais, e isso está me tirando do tempo com a minha família.", ""], ["⌛", "Vejo a inteligência artificial avançando rápido e tenho medo de ficar pra trás.", ""], ["🤖", "Quero crescer, mas tenho medo de virar uma profissional robotizada e perder o que meus clientes gostam em mim.", ""]]}, "f1": {"t": "Vídeo 1 (2:27)", "q": "Se o seu trabalho tira tempo de quem você ama, é porque o seu negócio ainda trabalha contra você.", "a": []}, "f2": {"t": "Vídeo 2 (4:46)", "q": "Por que eu criei o Mapeamento de Oportunidades Invisíveis", "a": []}, "f3": {"t": "Como seguir", "q": "Com tudo isso que você viu, como você deseja seguir de agora em diante?", "a": [["📅", "Quero agendar meu Mapeamento e ter meu negócio analisado.", ""], ["❔", "Quero tirar dúvidas antes de agendar meu Mapeamento", ""]]}, "f4": {"t": "Final", "q": "⚠️ FALTA SÓ UM ÚLTIMO PASSO PARA O SEU MAPEAMENTO!", "a": []}, "m3": {"t": "Vídeo único (7:16)", "q": "Se tudo no seu negócio depende de você, ele só cresce até onde você aguenta.", "a": []}, "m6": {"t": "Final", "q": "⚠️ FALTA SÓ UM ÚLTIMO PASSO PARA O SEU MAPEAMENTO!", "a": []}, "n1": {"t": "Onde trava", "q": "Onde o seu negócio mais trava hoje?", "a": [["💬", "No atendimento. Respondo tudo eu, o dia inteiro.", ""], ["🤦", "No conteúdo. Travo pra postar e fico semanas sem aparecer.", ""], ["💸", "Nas vendas. Não tenho processo, depende de mim conversar com cada pessoa.", ""], ["📦", "Nos produtos. Tenho ideia de produto digital parada há meses.", ""], ["🤷", "Na dependência. Pra colocar qualquer coisa no ar eu preciso de alguém.", ""]]}, "n2": {"t": "Tentativas com IA", "q": "E o que aconteceu quando você tentou usar Inteligência Artificial sozinha?", "a": [["🙁", "Comprei curso, assisti e não apliquei nada.", ""], ["😰", "Testei ferramenta solta e nunca virou resultado.", ""], ["🤔", "Uso o ChatGPT, mas só pra coisa pequena.", ""], ["😔", "Nunca tentei de verdade. Sempre fica pra depois.", ""]]}, "n3": {"t": "Vídeo 1", "q": "Se você já tentou usar Inteligência Artificial mais de uma vez e continua no mesmo lugar, o problema nunca foi você.", "a": []}, "n4": {"t": "Vídeo 2 + oferta", "q": "Como colocar a Inteligência Artificial pra trabalhar dentro do seu negócio, em oito etapas.", "a": []}, "a1": {"t": "Renda nova", "q": "Se você tivesse uma renda nova de R$3.000 a R$8.000 por mês, o que mudaria primeiro na sua vida?", "a": [["🙎", "Eu não dependeria mais de ninguém pra nada.", ""], ["🏠", "Eu trabalharia de casa, no meu horário.", ""], ["😀", "Eu teria uma profissão que me deixa orgulhosa de dizer o nome.", ""], ["🙋", "Eu voltaria a me sentir capaz.", ""]]}, "a2": {"t": "Notícias", "q": "Enquanto você tenta encontrar uma direção, o mercado está pagando por uma habilidade que você pode aprender em semanas.", "a": []}, "a3": {"t": "Serviço", "q": "Qual desses serviços você mais se imagina entregando?", "a": [["📱", "Criar o conteúdo de redes sociais de pequenos negócios usando IA", ""], ["🤖", "Montar robôs de atendimento no WhatsApp pra quem não dá conta de responder", ""], ["🖼️", "Produzir imagens, materiais e identidade visual com IA", ""], ["📟", "Criar páginas e sites sem escrever uma linha de código", ""], ["🗂️", "Organizar e automatizar a rotina de quem vive apagando incêndio", ""]]}, "a4": {"t": "Reforço", "q": "VOCÊ ESTÁ MAIS PERTO DO QUE IMAGINA 🏅", "a": []}, "a7": {"t": "Oferta", "q": "O caminho completo, do zero até o seu primeiro cliente pagante", "a": []}};
+const n0=v=>v.toLocaleString('pt-BR'), $=id=>document.getElementById(id);
+const brl=(v,d)=>{d=d==null?(v<10?2:0):d;return 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d})};
+const pc=(a,b)=>{if(!b)return '–';const x=a/b*100;return (x>0&&x<10?x.toFixed(1).replace('.',','):Math.round(x))+'%'};
+const cst=(i,q)=>q?brl(i/q):'–';
+const pes=n=>n===1?'pessoa':'pessoas';
+function stages(d){return [
+ {k:'Anúncio apareceu',v:d.imp,c:brl(d.inv/d.imp*1000,2),u:'por mil vezes'},
+ {k:'Clicaram no anúncio',v:d.cl,u:'por clique'},
+ {k:'Chegaram na página',v:d.lpv,u:'por visita'},
+ {k:'Começaram o quiz',v:d.q[0],u:'por pessoa'},
+ {k:'Deixaram contato',v:d.q[8],u:'por pessoa'},
+ {k:'Qualificados (Mapeamento)',v:d.qual,u:'por pessoa'},
+ {k:'Chegaram à tela final',v:d.fim,u:'por pessoa'},
+ {k:'Clicaram em agendar',v:d.ag,u:'por pessoa'}].map(s=>({...s,c:s.c||cst(d.inv,s.v)}));}
+const COLS=['#B9A0F2','#AB8CF0','#9C77EE','#8D60EC','#7C3AED','#059669','#059669','#059669'];
+function funil(d){
+ const S=stages(d), max=S[0].v, h=v=>Math.max(16,200*Math.pow(v/max,.24)), w=200, g=3;
+ $('ft').innerHTML=S.map(s=>`<div class="st"><div class="nm">${s.k}</div></div>`).join('');
+ let p='';S.forEach((s,i)=>{const a=h(s.v),b=i<7?h(S[i+1].v):a*.86,x0=i*w+(i?g/2:0),x1=(i+1)*w-g/2,m=105;
+  p+=`<path d="M${x0},${m-a/2} L${x1},${m-b/2} L${x1},${m+b/2} L${x0},${m+a/2} Z" fill="${COLS[i]}"><title>${s.k}: ${n0(s.v)}</title></path>`;});
+ $('fs').innerHTML=p;
+ $('fl').innerHTML=S.map((s,i)=>`<div class="st"><div class="v">${n0(s.v)}</div><div class="c">${s.c} <small>${s.u}</small></div>
+  <div class="p">${i?`<b>${pc(s.v,S[i-1].v)}</b> da anterior`:'&nbsp;'}</div><div class="p">${i>2?`<b>${pc(s.v,d.lpv)}</b> dos visitantes`:'&nbsp;'}</div></div>`).join('');
+}
+function ansHtml(k,A,c){const a=A[k]||[],t=a.reduce((x,y)=>x+y,0);
+ return T[k].a.map((o,i)=>{const br={m:['var(--m)','Mapeamento'],n:['var(--n)','MNIA'],a:['var(--a)','ANP']}[o[2]];
+  return `<div class="an"><div class="tx"><span>${o[0]?o[0]+' ':''}${o[1]}${br?`<span class="rt" style="background:${br[0]}">${br[1]}</span>`:''}</span><b>${a[i]} <small>${pc(a[i],t)}</small></b></div><div class="bg"><i style="width:${t?a[i]/t*100:0}%;background:${br?br[0]:(c||'var(--q)')}"></i></div></div>`}).join('');}
+function telas(d){
+ const P=d.q.map((v,i)=>({v,s:T['q'+(i+1)],dr:i?d.q[i-1]-v:0,pv:i?d.q[i-1]:0})), mx=Math.max(...P.map(x=>x.dr));
+ $('tr').innerHTML=P.map((x,i)=>`<div class="tc${x.dr&&x.dr===mx?' mx':''}"><div class="k">Tela ${i+1}<b>${x.s.t}</b></div><div class="n">${n0(x.v)}</div><div class="m">${cst(d.inv,x.v)} cada<br>${pc(x.v,d.q[0])} de quem começou</div><div class="d">${i?(x.dr>0?`▼ saíram ${x.dr} (${pc(x.dr,x.pv)})`:'ninguém saiu'):'&nbsp;'}</div></div>`).join('');
+ $('qs').innerHTML=P.map((x,i)=>x.s.a.length?`<article class="qc"><div class="qh"><div class="k">Tela ${i+1}<b>${x.s.t}</b></div><div class="r">${n0(x.v)}<small>respostas</small></div></div><p class="qq">${x.s.q}</p>${ansHtml('q'+(i+1),d.ans)}</article>`:'').join('');
+}
+const step=(t,v,base,inv,o={})=>`<div class="sp ${o.end?'end':''}"><div class="a"><b>${t}</b><span class="n">${v==null?'–':n0(v)}</span></div><div class="m">${v==null?'':`${pc(v,base)} do caminho${v?` · ${cst(inv,v)} cada`:''}`}${o.x?` · ${o.x}`:''}</div>${o.q?`<div class="q">${o.q}</div>`:''}${o.a||''}</div>`;
+const arr=(a,b)=>`<div class="arr">↓ ${a-b>0?`<b>saíram ${a-b} (${pc(a-b,a)})</b>`:(a||b?'ninguém saiu':'')}</div>`;
+function ramos(d){
+ const tt=d.qual+d.mnia+d.anp, o=d.old, w=d.new, A=d.ans;
+ $('node').innerHTML=`<b>${n0(tt)}</b>pessoas entraram em um dos 3 caminhos`;
+ const W=$('br').clientWidth||1000, cs=[...Array(3)];
+ const g=18/W*1000, f=(1000-2*g)/4.1, c1=f*2.1/2, c2=f*2.1+g+f/2, c3=1000-f/2;
+ $('cn').innerHTML=[[c1,'var(--m)'],[c2,'var(--n)'],[c3,'var(--a)']].map(([x,c])=>`<path d="M500,0 C500,44 ${x},26 ${x},74" fill="none" stroke="${c}" stroke-width="4" vector-effect="non-scaling-stroke"/>`).join('');
+ const head=(h,p,v)=>`<div class="ch"><div><h3>${h}</h3><p>${p}</p></div><div class="r">${n0(v)}<small>${pc(v,tt)} · ${cst(d.inv,v)} cada</small></div></div>`;
+ const mapa=`<div class="col" style="--c:var(--m)">${head('Mapeamento','Fatura R$ 5 mil por mês ou mais · é o público qualificado',d.qual)}
+ <div class="mm">${step('1 · '+T.m1.t,d.m1,d.qual,d.inv,{q:T.m1.q,a:ansHtml('m1',A,'var(--m)')})}${step('2 · '+T.m2.t,d.m2,d.qual,d.inv,{x:d.m1-d.m2>0?`saíram ${d.m1-d.m2}`:'',q:T.m2.q,a:ansHtml('m2',A,'var(--m)')})}</div>
+ <div class="arr">↓ daqui o caminho mudou em 24/11, 17h29</div>
+ <div class="two"><div class="ver"><div class="vh"><div><b>Antes</b><small>04/11 a 24/11, 17h29 · dois vídeos</small></div><div class="n">${n0(o.qual)}<small>qualificados</small></div></div>
+ ${step('3 · Vídeo 1 (2:27)',o.v1,o.qual,d.invO,{q:T.f1.q})}${arr(o.v1,o.v2)}${step('4 · Vídeo 2 (4:46)',o.v2,o.qual,d.invO,{q:T.f2.q})}${arr(o.v2,o.sg)}${step('5 · Como seguir',o.sg,o.qual,d.invO,{q:T.f3.q,a:ansHtml('f3',A,'var(--old)')})}${arr(o.sg,o.ag)}${step('Clicaram em agendar',o.ag,o.qual,d.invO,{end:1})}</div>
+ <div class="ver now"><div class="vh"><div><b>Agora</b><small>desde 24/11, 17h29 · um vídeo só</small></div><div class="n">${n0(w.qual)}<small>${w.qual===1?'qualificado':'qualificados'}</small></div></div>
+ ${step('3 · Vídeo único (7:16)',w.v,w.qual,d.invN,{x:'botão aos 7:07',q:T.m3.q})}${arr(w.v,w.ag)}${step('Clicaram em agendar',w.ag,w.qual,d.invN,{end:1})}
+ <div class="arr" style="text-align:left;padding-top:10px">${w.qual<25?`Ainda são ${w.qual} qualificados. Dá para ler com uns 25.`:''}</div></div></div></div>`;
+ const n=d.n, mn=`<div class="col" style="--c:var(--n)">${head('MNIA','Fatura até R$ 5 mil por mês · oferta de R$ 2.997',d.mnia)}
+ ${step('1 · '+T.n1.t,n[0],d.mnia,d.inv,{q:T.n1.q,a:ansHtml('n1',A,'var(--n)')})}${arr(n[0],n[1])}${step('2 · '+T.n2.t,n[1],d.mnia,d.inv,{q:T.n2.q,a:ansHtml('n2',A,'var(--n)')})}${arr(n[1],n[2])}${step('3 · Vídeo 1',n[2],d.mnia,d.inv,{q:T.n3.q})}${arr(n[2],n[3])}${step('Clicaram na oferta',n[3],d.mnia,d.inv,{end:1,q:'Vendas na Hotmart até 23/11: 0'})}</div>`;
+ const a=d.a, an=`<div class="col" style="--c:var(--a)">${head('ANP','Ainda não tem negócio · oferta de R$ 897',d.anp)}
+ ${step('1 · '+T.a1.t,a[0],d.anp,d.inv,{q:T.a1.q,a:ansHtml('a1',A,'var(--a)')})}${arr(a[0],a[1])}${step('2 · '+T.a2.t,a[1],d.anp,d.inv)}${arr(a[1],a[2])}${step('3 · '+T.a3.t,a[2],d.anp,d.inv,{q:T.a3.q,a:ansHtml('a3',A,'var(--a)')})}${arr(a[2],a[3])}${step('4 · '+T.a4.t,a[3],d.anp,d.inv)}
+ <div class="arr">↓ telas 5 e 6 (o que precisa e depoimentos) não são registradas por pessoa</div>${step('Clicaram na oferta',d.aof,d.anp,d.inv,{end:1,q:'Vendas na Hotmart até 23/11: 0'})}</div>`;
+ $('br').innerHTML=mapa+mn+an;
+}
+function show(a,push){
+ const d=D[a]; document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.a===a));
+ $('tot').innerHTML=[['Investido',brl(d.inv,0)],['Custo por qualificado',cst(d.inv,d.qual)],['Custo por agendar',cst(d.inv,d.ag)]].map(x=>`<div><b>${x[1]}</b><small>${x[0]}</small></div>`).join('');
+ funil(d);telas(d);ramos(d);
+ $('nt').textContent=a==='quente'?'':`Atenção à passagem "página → começaram": até 09/11 o público frio trouxe muita visita que não começava o quiz, e isso foi ajustado. De 10/11 para cá, ${n0(d.lpv10)} visitas viraram ${n0(d.ini10)} pessoas que começaram (${pc(d.ini10,d.lpv10)}).`;
+ if(push)history.replaceState(null,'','#'+a);
+}
+document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>show(b.dataset.a,true));
+$('tb').innerHTML=`<thead><tr><th>Etapa</th>${['Todos','Público quente','Público frio'].map(x=>`<th>${x}</th><th>Custo</th><th>Da anterior</th>`).join('')}</tr></thead><tbody>`+stages(D.todos).map((s,i)=>`<tr><td>${s.k}</td>${['todos','quente','frio'].map(a=>{const S=stages(D[a]);return `<td><b>${n0(S[i].v)}</b></td><td>${S[i].c}</td><td>${i?pc(S[i].v,S[i-1].v):'–'}</td>`}).join('')}</tr>`).join('')+'</tbody>';
+const ini=location.hash.slice(1); show(D[ini]?ini:'todos');
+addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(D[h])show(h)});
+</script>
+</body>
+</html>
