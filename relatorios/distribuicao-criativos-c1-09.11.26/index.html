@@ -9,22 +9,21 @@
     <div class="bm-brand"><svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias"><polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon><polygon points="50,33 65,59 35,59"></polygon><line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line><line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line><line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line><line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line><line x1="10" y1="27" x2="50" y2="33"></line></svg><span class="word"><b>BM</b><i></i><span>MÍDIAS</span></span></div>
     <p class="bm-eyebrow">Distribuição · Marketex / Ana Tex</p>
     <h1>Diagnóstico C1 Ana Tex</h1>
-    <p class="bm-lead">O custo por seguidor foi de <b data-draw="h-a" data-source="anuncio_dia anuncios">—</b> na semana antes da queda, subiu para <b data-draw="h-b" data-source="anuncio_dia anuncios">—</b> de 30/10 a 05/11, voltou para <b data-draw="h-c" data-source="anuncio_dia anuncios">—</b> de 09 a 15/11 e caiu para <b data-draw="h-d" data-source="anuncio_dia anuncios">—</b> de 16 a 22/11, a melhor semana da série. Em 17/11 a verba foi reduzida para R$ 100 por dia e o custo não subiu. A queda vem do Feed e do Reels, onde desde 14/11 o Meta registra mais seguidores do que visitas, então o número precisa ser conferido com o crescimento real do perfil. O Stories segue estável, perto de R$ 0,60.</p>
+    <p class="bm-lead">O custo por seguidor foi de <b data-draw="h-a" data-source="anuncio_dia anuncios">—</b> na semana antes da queda, subiu para <b data-draw="h-b" data-source="anuncio_dia anuncios">—</b> de 30/10 a 05/11, voltou para <b data-draw="h-c" data-source="anuncio_dia anuncios">—</b> de 09 a 15/11 e está em <b data-draw="h-d" data-source="anuncio_dia anuncios">—</b> de 18 a 24/11. Desde 14/11 o Meta registra mais seguidores por anúncio em mais de uma conta, o que indica que parte dessa queda é medição: o Stories, que não mudou, segue perto de R$ 0,58. No perfil inteiro, a distribuição trouxe 17% dos seguidores novos de novembro e o orgânico 77%.</p>
     <div class="bm-filters">
       <label class="bm-f"><span>Período</span>
         <select id="f-preset" aria-label="Período">
-          <option value="tudo">01/10 a 22/11</option>
+          <option value="tudo">01/10 a 24/11</option>
           <option value="antes">Antes da queda (até 28/10)</option>
           <option value="depois">Depois da queda (29/10 a 05/11)</option>
           <option value="mudou">Semana depois das mudanças (09 a 15/11)</option>
-          <option value="verba">Depois da redução de verba (18 a 22/11)</option>
           <option value="d14">Últimos 14 dias</option>
-          <option value="d7">Últimos 7 dias</option>
+          <option value="d7">Últimos 7 dias (18 a 24/11)</option>
           <option value="inicio">Desde o início (28/09)</option>
           <option value="custom">Personalizado</option>
         </select></label>
-      <label class="bm-f"><span>De</span><input id="f-start" type="date" min="2026-09-28" max="2026-11-22" aria-label="De"></label>
-      <label class="bm-f"><span>Até</span><input id="f-end" type="date" min="2026-09-28" max="2026-11-22" aria-label="Até"></label>
+      <label class="bm-f"><span>De</span><input id="f-start" type="date" min="2026-09-28" max="2026-11-24" aria-label="De"></label>
+      <label class="bm-f"><span>Até</span><input id="f-end" type="date" min="2026-09-28" max="2026-11-24" aria-label="Até"></label>
       <label class="bm-f"><span>Conjunto</span><select id="f-conj" aria-label="Conjunto" data-draw="f-conj" data-source="conjuntos"></select></label>
       <label class="bm-f"><span>Formato</span>
         <select id="f-fmt" aria-label="Formato"><option value="todos">Todos</option><option value="Reel">Reels</option><option value="Carrossel">Carrosséis</option><option value="Imagem">Imagens</option></select></label>
@@ -34,6 +33,7 @@
 
   <nav class="bm-tabs" aria-label="Seções">
     <button class="bm-tab" type="button" data-tab="mudou" aria-selected="true">O que mudou</button>
+    <button class="bm-tab" type="button" data-tab="perfil" aria-selected="false">Anúncio x orgânico</button>
     <button class="bm-tab" type="button" data-tab="resumo" aria-selected="false">Resumo</button>
     <button class="bm-tab" type="button" data-tab="criativos" aria-selected="false">Criativos</button>
     <button class="bm-tab" type="button" data-tab="conjuntos" aria-selected="false">Conjuntos</button>
@@ -43,23 +43,40 @@
   </nav>
 
   <section class="bm-sec" id="mudou">
-    <div class="bm-card" id="momentos"><h2>Custo por seguidor antes e depois das mudanças</h2><p class="n">Períodos fixos, sem relação com os filtros. As variações comparam a semana de 16 a 22/11. Visita que vira seguidor acima de 100% quer dizer mais seguidores do que visitas. 29/10 e 06 a 08/11 ficaram de fora porque foram dias de transição e de aprendizado dos conjuntos novos.</p>
+    <div class="bm-card" id="momentos"><h2>Custo por seguidor antes e depois das mudanças</h2><p class="n">Períodos fixos, sem relação com os filtros. As variações comparam a semana de 18 a 24/11. Visita que vira seguidor acima de 100% quer dizer mais seguidores do que visitas. 29/10, 06 a 08/11 e 16 e 17/11 ficaram de fora porque foram dias de transição: queda, conjuntos novos e redução de verba.</p>
       <div class="bm-kpis">
         <div class="bm-kpi"><span class="l">Antes da queda · 22 a 28/10</span><b class="v" data-draw="m-cpf" data-p="a" data-source="anuncio_dia anuncios">—</b><span class="d">por seguidor</span></div>
         <div class="bm-kpi"><span class="l">Depois da queda · 30/10 a 05/11</span><b class="v" data-draw="m-cpf" data-p="b" data-source="anuncio_dia anuncios">—</b><span class="d">por seguidor</span></div>
         <div class="bm-kpi"><span class="l">Semana depois das mudanças · 09 a 15/11</span><b class="v" data-draw="m-cpf" data-p="c" data-source="anuncio_dia anuncios">—</b><span class="d">por seguidor</span></div>
-        <div class="bm-kpi hot"><span class="l">Última semana · 16 a 22/11</span><b class="v" data-draw="m-cpf" data-p="d" data-source="anuncio_dia anuncios">—</b><span class="d">por seguidor</span></div>
+        <div class="bm-kpi hot"><span class="l">Últimos 7 dias · 18 a 24/11</span><b class="v" data-draw="m-cpf" data-p="d" data-source="anuncio_dia anuncios">—</b><span class="d">por seguidor</span></div>
       </div>
-      <div class="bm-tw"><table class="bm-t"><thead><tr><th><span>Métrica</span></th><th><span>22 a 28/10</span></th><th><span>30/10 a 05/11</span></th><th><span>09 a 15/11</span></th><th><span>16 a 22/11</span></th><th><span>Contra 09 a 15/11</span></th><th><span>Contra 22 a 28/10</span></th></tr></thead><tbody data-draw="tb-m" data-source="anuncio_dia anuncios posicionamento_dia"></tbody></table></div></div>
+      <div class="bm-tw"><table class="bm-t"><thead><tr><th><span>Métrica</span></th><th><span>22 a 28/10</span></th><th><span>30/10 a 05/11</span></th><th><span>09 a 15/11</span></th><th><span>18 a 24/11</span></th><th><span>Contra 09 a 15/11</span></th><th><span>Contra 22 a 28/10</span></th></tr></thead><tbody data-draw="tb-m" data-source="anuncio_dia anuncios posicionamento_dia"></tbody></table></div></div>
     <div class="bm-card" id="evolucao-mudou"><h2>Custo por seguidor por dia, desde 22/10</h2><p class="n">Faixa vermelha: depois da queda do Stories. Faixa verde: depois das mudanças de 06/11. Os conjuntos novos com gasto são o CONJ TOP, pausado em 17/11, e o CONJ14.</p>
       <div class="bm-chart tall" data-draw="c-mudou" data-source="anuncio_dia anuncios"></div>
       <div class="bm-legend"><span><i style="background:var(--bm-roxo)"></i>Total</span><span><i style="background:var(--bm-light)"></i>Originais (01 a 04)</span><span><i style="background:var(--bm-good)"></i>Novos (TOP e 14)</span><span><i style="background:var(--bm-bad)"></i>Testes (05 a 12)</span></div></div>
-    <div class="bm-card" id="conj-mudou"><h2>Conjuntos na última semana</h2><p class="n">16 a 22/11, do menor para o maior custo por seguidor. O CONJ TOP rodou só até 17/11. O CONJ14 roda só no Stories e no Explorar do Instagram. O orçamento é o atual, depois da redução de 17/11.</p>
+    <div class="bm-card" id="conj-mudou"><h2>Conjuntos nos últimos 7 dias</h2><p class="n">18 a 24/11, do menor para o maior custo por seguidor. O CONJ14 roda só no Stories e no Explorar do Instagram. O orçamento é o de 25/11. O CONJ18 ficou ligado cerca de meia hora em 24/11.</p>
       <div class="bm-tw"><table class="bm-t"><thead><tr><th><span>Conjunto</span></th><th><span>Tipo</span></th><th><span>Orçamento</span></th><th><span>Gasto</span></th><th><span>% da verba</span></th><th><span>Seguidores</span></th><th><span>Custo/seg.</span></th><th><span>Visita→seg.</span></th><th><span>No Stories</span></th><th><span>Criativo principal</span></th></tr></thead><tbody data-draw="tb-mset" data-source="anuncio_dia anuncios conjuntos posicionamento_dia"></tbody></table></div></div>
-    <div class="bm-card" id="criativos-mudou"><h2>Criativos na última semana</h2><p class="n">16 a 22/11, por conjunto, com pelo menos R$ 5 de gasto. O POST157 segue como principal criativo: 1.089 seguidores no CONJ01 na semana, a R$ 0,32 cada.</p>
+    <div class="bm-card" id="criativos-mudou"><h2>Criativos nos últimos 7 dias</h2><p class="n">18 a 24/11, por conjunto, com pelo menos R$ 5 de gasto. O POST157 segue como principal criativo: 846 seguidores no CONJ01, a R$ 0,32 cada.</p>
       <div class="bm-tw"><table class="bm-t"><thead><tr><th><span>POST</span></th><th><span>Instagram</span></th><th><span>Conteúdo</span></th><th><span>Conjunto</span></th><th><span>Gasto</span></th><th><span>Seguidores</span></th><th><span>Custo/seg.</span></th><th><span>Visita→seg.</span></th></tr></thead><tbody data-draw="tb-mads" data-source="anuncio_dia anuncios"></tbody></table></div></div>
     <div class="bm-card" id="passos"><h2>Próximos passos</h2><p class="n">Propostas para decidir com o time.</p>
       <div class="bm-ach" data-draw="passos" data-source="passos"></div></div>
+  </section>
+
+  <section class="bm-sec" id="perfil" hidden>
+    <div class="bm-kpis">
+      <div class="bm-kpi hot"><span class="l">Seguidores novos no perfil</span><b class="v" data-draw="pf" data-k="total" data-source="perfil_dia">—</b><span class="d" data-draw="pfp" data-k="total" data-source="perfil_dia"></span></div>
+      <div class="bm-kpi"><span class="l">Da distribuição</span><b class="v" data-draw="pf" data-k="dist" data-source="perfil_dia">—</b><span class="d" data-draw="pfp" data-k="dist" data-source="perfil_dia"></span></div>
+      <div class="bm-kpi"><span class="l">Das outras campanhas</span><b class="v" data-draw="pf" data-k="outras" data-source="perfil_dia">—</b><span class="d" data-draw="pfp" data-k="outras" data-source="perfil_dia"></span></div>
+      <div class="bm-kpi"><span class="l">Do orgânico</span><b class="v" data-draw="pf" data-k="organico" data-source="perfil_dia">—</b><span class="d" data-draw="pfp" data-k="organico" data-source="perfil_dia"></span></div>
+    </div>
+    <div class="bm-card" id="perfil-dia"><h2>Seguidores novos por dia: anúncio e orgânico</h2><p class="n">Respeita o período, a partir de 01/10. O total vem do Meta Business Suite do @anatex. Distribuição é a conta ANEX 05 inteira (C1, C2 e C3). Outras campanhas somam LS, Sala Secreta, Aplicação e perpétuos. Orgânico é o total menos os anúncios.</p>
+      <div class="bm-chart tall" data-draw="c-perfil" data-source="perfil_dia"></div>
+      <div class="bm-legend"><span><i style="background:var(--bm-good)"></i>Orgânico</span><span><i style="background:var(--bm-mid)"></i>Outras campanhas</span><span><i style="background:var(--bm-roxo)"></i>Distribuição</span></div></div>
+    <div class="bm-card" id="perfil-periodo"><h2>Quem entrou e quem saiu</h2><p class="n">Períodos fixos. "Deixaram de seguir" é o número do Business Suite para o período e não se divide entre anúncio e orgânico. Em 24/11 o perfil tinha 794.372 seguidores.</p>
+      <div class="bm-tw"><table class="bm-t"><thead><tr><th><span>Período</span></th><th><span>Novos</span></th><th><span>Distribuição</span></th><th><span>Outras campanhas</span></th><th><span>Orgânico</span></th><th><span>Orgânico por dia</span></th><th><span>Deixaram de seguir</span></th><th><span>Saldo</span></th></tr></thead><tbody data-draw="tb-perfil" data-source="perfil_periodo"></tbody></table></div></div>
+    <div class="bm-card" id="perfil-pico"><h2>Os Reels do pico de 12 a 14/11</h2><p class="n">Os cinco Reels de novembro com maior alcance, em números do Business Suite. Todos saíram entre 10 e 14/11. Em 13/11 a Ana explicou no perfil que publica Reels Teste feitos com clone, que só chegam a quem ainda não segue. O painel não mostra quantos seguidores cada um trouxe.</p>
+      <div class="bm-tw"><table class="bm-t"><thead><tr><th><span>Data</span></th><th><span>Reel</span></th><th><span>Alcance</span></th><th><span>Curtidas</span></th><th><span>Compartilhamentos</span></th></tr></thead><tbody data-draw="tb-pico" data-source="reels_pico"></tbody></table></div></div>
+    <div class="bm-card" id="perfil-cuidado"><h2>Como ler esta separação</h2><p class="n">O orgânico é uma conta de diferença, não um número que o Instagram entrega pronto. Desde 14/11 o Meta registra mais seguidores por anúncio em mais de uma conta, então a parte dos anúncios antes e depois dessa data não se compara direto. O dia do Business Suite segue o horário do Pacífico, quatro a cinco horas atrás de Brasília, por isso a divisão de um dia isolado é aproximada e a da semana é mais firme. A conta ANEX 09 não está acessível e ficou de fora. A ANEX 14, da empresa AnaMarthaTex, também ficou de fora: teve 20 seguidores no mês.</p></div>
   </section>
 
   <section class="bm-sec" id="resumo" hidden>
@@ -79,7 +96,7 @@
       <div class="bm-chart tall" data-draw="c-diario" data-source="anuncio_dia anuncios"></div>
       <div class="bm-legend"><span><i style="background:var(--bm-roxo)"></i>Total</span><span><i style="background:var(--bm-light)"></i>Conjuntos originais (01 a 04)</span><span><i style="background:var(--bm-good)"></i>Conjuntos novos (TOP e 14)</span><span><i style="background:var(--bm-bad)"></i>Conjuntos de teste (05 a 12)</span></div>
     </div>
-    <div class="bm-card" id="diagnostico"><h2>O que os números mostram</h2><p class="n">Leitura de 01/10 a 22/11, atualizada em 23/11. Não muda com os filtros.</p>
+    <div class="bm-card" id="diagnostico"><h2>O que os números mostram</h2><p class="n">Leitura de 01/10 a 24/11, atualizada em 25/11. Não muda com os filtros.</p>
       <div class="bm-ach" data-draw="achados" data-source="achados"></div></div>
     <div class="bm-grid">
       <div class="bm-card" id="concentracao"><h2>Para onde a verba foi</h2><p class="n">Parte do investimento do período em cada criativo. Clique na barra para abrir o post.</p><div class="bm-chart" data-draw="c-conc" data-source="anuncio_dia anuncios"></div></div>
@@ -107,20 +124,20 @@
 
   <section class="bm-sec" id="conjuntos" hidden>
     <div class="bm-card"><h2>Visita que vira seguidor, por conjunto</h2><p class="n">O custo da visita é parecido. A diferença está em quanto dessa visita segue o perfil. Roxo: originais. Verde: novos. Vermelho: testes.</p><div class="bm-chart" data-draw="c-vf" data-source="anuncio_dia anuncios conjuntos"></div></div>
-    <div class="bm-card"><h2>Comparativo de conjuntos</h2><p class="n">Respeita período e formato. Os conjuntos de teste usam outra meta por dentro, embora o Gerenciador mostre o mesmo nome. Os novos são cópias do CONJ01. CONJ15 a CONJ18 já têm seis criativos novos cada e estão desligados, prontos para entrar.</p>
+    <div class="bm-card"><h2>Comparativo de conjuntos</h2><p class="n">Respeita período e formato. Os conjuntos de teste usam outra meta por dentro, embora o Gerenciador mostre o mesmo nome. Os novos são cópias do CONJ01. CONJ15 a CONJ19 têm criativos novos e estão desligados, prontos para entrar.</p>
       <div class="bm-tw"><table class="bm-t"><thead><tr><th><span>Conjunto</span></th><th><span>Tipo</span></th><th><span>Status</span></th><th><span>Orçamento</span></th><th><span>Meta interna</span></th><th><span>Gasto</span></th><th><span>Seguidores</span></th><th><span>Custo/seg.</span></th><th><span>Visita→seg.</span></th><th><span>Custo/visita</span></th><th><span>CPM</span></th><th><span>Criativo principal</span></th></tr></thead><tbody data-draw="tb-sets" data-source="anuncio_dia anuncios conjuntos"></tbody></table></div></div>
   </section>
 
   <section class="bm-sec" id="posicionamento" hidden>
-    <div class="bm-card"><h2>Participação na verba, por dia</h2><p class="n">Respeita o filtro de conjunto. A queda do Stories fica visível em 29/10, e a volta parcial a partir de 06/11, com o CONJ14 e o CONJ TOP. De 16 a 22/11 o Stories ficou com 29% da verba.</p><div class="bm-chart tall" data-draw="c-pos" data-source="posicionamento_dia"></div>
+    <div class="bm-card"><h2>Participação na verba, por dia</h2><p class="n">Respeita o filtro de conjunto. A queda do Stories fica visível em 29/10, e a volta parcial a partir de 06/11, com o CONJ14 e o CONJ TOP. De 18 a 24/11 o Stories ficou com 29% da verba.</p><div class="bm-chart tall" data-draw="c-pos" data-source="posicionamento_dia"></div>
       <div class="bm-legend"><span><i style="background:var(--bm-roxo)"></i>Stories IG</span><span><i style="background:var(--bm-light)"></i>Reels IG</span><span><i style="background:var(--bm-mid)"></i>Feed IG</span><span><i style="background:var(--color-border-line)"></i>Outros</span></div></div>
     <div class="bm-card"><h2>Resultado por posicionamento</h2><p class="n">Respeita período e conjunto.</p>
       <div class="bm-tw"><table class="bm-t"><thead><tr><th><span>Posicionamento</span></th><th><span>% da verba</span></th><th><span>Gasto</span></th><th><span>Seguidores</span></th><th><span>Custo/seg.</span></th><th><span>Custo/visita</span></th><th><span>Visita→seg.</span></th><th><span>CPM</span></th></tr></thead><tbody data-draw="tb-pos" data-source="posicionamento_dia"></tbody></table></div></div>
   </section>
 
   <section class="bm-sec" id="publico" hidden>
-    <div class="bm-card"><h2>Idade e gênero em quatro períodos</h2><p class="n">Toda a campanha, sem relação com os filtros. A semana de 29/10 vai até 04/11. A semana de 05/11 vai até 11/11 e inclui o dia das mudanças. A última coluna vai de 12 a 22/11, com 11 dias. Variação compara a última coluna com a semana de 29/10.</p>
-      <div class="bm-tw"><table class="bm-t"><thead><tr><th><span>Corte</span></th><th><span>Gasto até 28/10</span></th><th><span>Custo/seg. até 28/10</span></th><th><span>Gasto semana de 29/10</span></th><th><span>Custo/seg. semana de 29/10</span></th><th><span>Gasto semana de 05/11</span></th><th><span>Custo/seg. semana de 05/11</span></th><th><span>Gasto 12 a 22/11</span></th><th><span>Custo/seg. 12 a 22/11</span></th><th><span>Variação</span></th></tr></thead><tbody data-draw="tb-pub" data-source="publico_semana"></tbody></table></div></div>
+    <div class="bm-card"><h2>Idade e gênero em quatro períodos</h2><p class="n">Toda a campanha, sem relação com os filtros. A semana de 29/10 vai até 04/11. A semana de 05/11 vai até 11/11 e inclui o dia das mudanças. A última coluna vai de 12 a 24/11, com 13 dias. Variação compara a última coluna com a semana de 29/10.</p>
+      <div class="bm-tw"><table class="bm-t"><thead><tr><th><span>Corte</span></th><th><span>Gasto até 28/10</span></th><th><span>Custo/seg. até 28/10</span></th><th><span>Gasto semana de 29/10</span></th><th><span>Custo/seg. semana de 29/10</span></th><th><span>Gasto semana de 05/11</span></th><th><span>Custo/seg. semana de 05/11</span></th><th><span>Gasto 12 a 24/11</span></th><th><span>Custo/seg. 12 a 24/11</span></th><th><span>Variação</span></th></tr></thead><tbody data-draw="tb-pub" data-source="publico_semana"></tbody></table></div></div>
   </section>
 
   <section class="bm-sec" id="top" hidden>
@@ -129,7 +146,7 @@
   </section>
 
   <details class="bm-foot" id="metodo"><summary>Como os números foram levantados</summary>
-    <p>Dados do Meta Ads, conta ANEX 05, campanha [01], por anúncio e por dia, de 28/09 a 22/11/2026, último dia completo antes da atualização de 23/11. Visita é a métrica de visitas ao perfil. Seguidor é a métrica de seguidores do Instagram. Conjuntos originais são CONJ01 a 04. Conjuntos novos são CONJ TOP, pausado em 17/11, e CONJ14, ligados em 06/11, e CONJ13 e CONJ15 a CONJ18, criados entre 09 e 16/11 e ainda desligados. Melhores, piores e pouco entregues seguem os cortes da aba Criativos. Temas por leitura dos títulos e legendas. Estes números são um retrato fixo e não se atualizam sozinhos.</p></details>
+    <p>Dados do Meta Ads, conta ANEX 05, campanha [01], por anúncio e por dia, de 28/09 a 24/11/2026, último dia completo antes da atualização de 25/11. Visita é a métrica de visitas ao perfil. Seguidor é a métrica de seguidores do Instagram. Conjuntos originais são CONJ01 a 04. Conjuntos novos são CONJ TOP, pausado em 17/11, e CONJ14, ligados em 06/11, e CONJ13 e CONJ15 a CONJ19, criados entre 09 e 24/11 e ainda desligados. O total de seguidores do perfil vem do Meta Business Suite, de 01/10 a 24/11. Melhores, piores e pouco entregues seguem os cortes da aba Criativos. Temas por leitura dos títulos e legendas. Estes números são um retrato fixo e não se atualizam sozinhos.</p></details>
 </div>
 <div class="bm-footer">BM MÍDIAS · Distribuição de conteúdo · Marketex / Ana Tex · Fonte: Meta Ads (conta ANEX 05)</div>
 </div>

@@ -1,14 +1,14 @@
 (() => {
   const ORIG = new Set(['CONJ01', 'CONJ02', 'CONJ03', 'CONJ04']);
-  const NOVOS = new Set(['CONJ TOP', 'CONJ14', 'CONJ13', 'CONJ15', 'CONJ16', 'CONJ17', 'CONJ18']);
+  const NOVOS = new Set(['CONJ TOP', 'CONJ14', 'CONJ13', 'CONJ15', 'CONJ16', 'CONJ17', 'CONJ18', 'CONJ19']);
   const grupo = (s) => ORIG.has(s) ? 'orig' : NOVOS.has(s) ? 'novo' : 'teste';
   const QUEDA = '2026-10-29';
   const FIMQ = '2026-11-05';
   const MUDA = '2026-11-06';
   const POS = '2026-11-09';
   const FIMC = '2026-11-15';
-  const SEM = '2026-11-16';
-  const FIM = '2026-11-22';
+  const SEM = '2026-11-18';
+  const FIM = '2026-11-24';
   const PUB2 = '2026-11-12';
   const MOMENTOS = [
     { id: 'a', a: '2026-10-22', b: '2026-10-28' },
@@ -18,7 +18,7 @@
   ];
   const TABELA_M = MOMENTOS;
   const BASE = { preset: 'tudo', start: '2026-10-01', end: FIM, conj: 'todos', fmt: 'todos', metrica: 'cpf', corte: 2.5, minv: 10, busca: '', ord: 'cpf', dir: 'asc' };
-  const PRESETS = { tudo: ['2026-10-01', FIM], antes: ['2026-10-01', '2026-10-28'], depois: [QUEDA, FIMQ], mudou: [POS, FIMC], d7: [SEM, FIM], verba: ['2026-11-18', FIM], d14: [POS, FIM], inicio: ['2026-09-28', FIM] };
+  const PRESETS = { tudo: ['2026-10-01', FIM], antes: ['2026-10-01', '2026-10-28'], depois: [QUEDA, FIMQ], mudou: [POS, FIMC], d7: [SEM, FIM], d14: ['2026-11-11', FIM], inicio: ['2026-09-28', FIM] };
   const P = () => ({ ...BASE, ...dash.params() });
   const num = (v, d = 0) => v == null || !isFinite(v) ? '—' : v.toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d });
   const brl = (v, d = 2) => v == null || !isFinite(v) ? '—' : 'R$ ' + num(v, d);
@@ -108,7 +108,7 @@
 
   dash.draw('f-conj', (sel) => {
     const c = dash.data('conjuntos');
-    const ops = [new Option('Todos', 'todos'), new Option('Originais (01 a 04)', 'orig'), new Option('Novos (TOP e 13 a 18)', 'novos'), new Option('Testes (05 a 12)', 'teste')];
+    const ops = [new Option('Todos', 'todos'), new Option('Originais (01 a 04)', 'orig'), new Option('Novos (TOP e 13 a 19)', 'novos'), new Option('Testes (05 a 12)', 'teste')];
     if (c.status === 'ok') for (const x of c.data) ops.push(new Option(x.set, x.set));
     sel.replaceChildren(...ops);
     sel.value = P().conj;
@@ -523,6 +523,69 @@
       celula(tr, brl(x?.spend)); celula(tr, x ? num(x.fol) : '—'); negrito(tr, brl(x?.cpf));
       celula(tr, brl(z?.spend)); negrito(tr, z ? (z.cpf == null ? 'sem seguidor' : brl(z.cpf)) : '—'); celula(tr, k.obs || '', 'w');
     }
+  });
+
+  const perfil = () => { const a = dash.data('perfil_dia'); return a.status === 'ok' ? a.data : null; };
+  const PK = ['total', 'dist', 'outras', 'organico'];
+  const somaPerfil = (rs) => { const s = Object.fromEntries(PK.map((k) => [k, d3.sum(rs, (r) => +r[k])])); s.n = rs.length; return s; };
+  const noPeriodo = (r) => { const p = P(); return r.d >= p.start && r.d <= p.end; };
+  dash.draw('pf', (el) => { const a = perfil(); if (!a) return vazio(el); const rs = a.filter(noPeriodo); el.textContent = rs.length ? num(somaPerfil(rs)[el.dataset.k]) : '—'; });
+  dash.draw('pfp', (el) => {
+    const a = perfil();
+    if (!a) return vazio(el, '');
+    const rs = a.filter(noPeriodo);
+    if (!rs.length) return vazio(el, '');
+    const s = somaPerfil(rs);
+    const k = el.dataset.k;
+    el.textContent = (k === 'total' ? '' : pct(100 * s[k] / s.total, 0) + ' do total, ') + num(s[k] / s.n) + ' por dia';
+  });
+  const CPF = [['organico', 'Orgânico', 'var(--bm-good)'], ['outras', 'Outras campanhas', 'var(--bm-mid)'], ['dist', 'Distribuição', 'var(--bm-roxo)']];
+  dash.draw('c-perfil', (el) => {
+    el.replaceChildren();
+    const a = perfil();
+    if (!a) return vazio(el);
+    const rows = a.filter(noPeriodo);
+    if (!rows.length) return vazio(el, 'Os seguidores do perfil começam em 01/10. Escolha um período a partir dessa data.');
+    const W = Math.max(320, el.clientWidth); const H = 320;
+    const m = { l: 48, r: 8, t: 10, b: 26 };
+    const x = d3.scaleBand(rows.map((r) => r.d), [m.l, W - m.r]).padding(.14);
+    const y = d3.scaleLinear([0, d3.max(rows, (r) => +r.total) * 1.05], [H - m.b, m.t]).nice();
+    const g = svg(el, W, H).attr('aria-label', 'Seguidores novos por dia, separados em distribuição, outras campanhas e orgânico');
+    for (const t of y.ticks(5)) {
+      g.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(t)).attr('y2', y(t)).attr('stroke', 'var(--cds-chart-grid, var(--color-border-line))');
+      g.append('text').attr('x', m.l - 6).attr('y', y(t) + 4).attr('text-anchor', 'end').text(num(t));
+    }
+    const t = tip(el);
+    const passo = Math.ceil(rows.length / Math.max(4, Math.floor(W / 70)));
+    rows.forEach((r, i) => {
+      let acc = 0;
+      for (const [k, , cor] of [...CPF].reverse()) {
+        const v = Math.max(0, +r[k]);
+        g.append('rect').attr('x', x(r.d)).attr('width', x.bandwidth()).attr('y', y(acc + v)).attr('height', y(acc) - y(acc + v)).attr('fill', cor);
+        acc += v;
+      }
+      if (i % passo === 0) g.append('text').attr('x', x(r.d) + x.bandwidth() / 2).attr('y', H - 8).attr('text-anchor', 'middle').text(dt(r.d));
+      g.append('rect').attr('x', x(r.d)).attr('width', x.step()).attr('y', m.t).attr('height', H - m.b - m.t).attr('fill', 'transparent')
+        .on('mousemove', (ev) => { const [px, py] = d3.pointer(ev, el); mostra(t, el, px, py, [dt(r.d) + ': ' + num(+r.total) + ' seguidores', ...CPF.map(([k, n]) => n + ': ' + num(+r[k]) + ' (' + pct(100 * r[k] / r.total, 0) + ')')]); })
+        .on('mouseleave', () => { t.hidden = true; });
+    });
+  });
+  dash.draw('tb-perfil', (el) => {
+    el.replaceChildren();
+    const a = dash.data('perfil_periodo');
+    if (a.status !== 'ok') return;
+    for (const r of [...a.data].sort((p, q) => p.ordem - q.ordem)) {
+      const tr = el.insertRow();
+      negrito(tr, r.periodo); negrito(tr, num(+r.total));
+      for (const k of ['dist', 'outras', 'organico']) celula(tr, num(+r[k]) + ' (' + pct(100 * r[k] / r.total, 0) + ')');
+      celula(tr, num(r.organico / r.dias)); celula(tr, num(+r.saiu)); negrito(tr, '+' + num(+r.saldo));
+    }
+  });
+  dash.draw('tb-pico', (el) => {
+    el.replaceChildren();
+    const a = dash.data('reels_pico');
+    if (a.status !== 'ok') return;
+    for (const r of [...a.data].sort((p, q) => p.ordem - q.ordem)) { const tr = el.insertRow(); celula(tr, r.data); celula(tr, r.reel, 'w'); negrito(tr, num(+r.alcance)); celula(tr, num(+r.curtidas)); celula(tr, num(+r.compart)); }
   });
 
   const Q = (s) => [...document.querySelectorAll(s)];
