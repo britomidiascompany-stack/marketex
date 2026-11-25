@@ -585,7 +585,7 @@
     el.replaceChildren();
     const a = dash.data('reels_pico');
     if (a.status !== 'ok') return;
-    for (const r of [...a.data].sort((p, q) => p.ordem - q.ordem)) { const tr = el.insertRow(); celula(tr, r.data); celula(tr, r.reel, 'w'); negrito(tr, num(+r.alcance)); celula(tr, num(+r.curtidas)); celula(tr, num(+r.compart)); }
+    for (const r of [...a.data].sort((p, q) => p.ordem - q.ordem)) { const tr = el.insertRow(); celula(tr, r.data); linkCel(tr, seguro(r.link), 'Ver Reel ↗'); celula(tr, r.reel, 'w'); negrito(tr, r.seguidores); celula(tr, num(+r.alcance)); celula(tr, num(+r.curtidas)); celula(tr, num(+r.compart)); }
   });
 
   const Q = (s) => [...document.querySelectorAll(s)];
