@@ -1,1 +1,462 @@
-<!DOCTYPE html><title>Mapa de CTAs Ana Tex</title>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa de CTAs Ana Tex · Brito Mídias</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
+<style>
+  /* Layout: topo escuro Brito Mídias, depois resumo -> evolução -> cruzamentos -> leituras -> tabela completa */
+  :root{
+    color-scheme:light;
+    --roxo:#7C3AED; --roxo-dark:#5B21B6; --roxo-deep:#3B0F73; --roxo-light:#A78BFA; --roxo-xlight:#EDE9FE;
+    --preto:#0A0A0A; --ink:#141018; --cinza:#5B5566; --linha:#E7E3EE; --bg:#FFFFFF; --bg-soft:#FAF9FC;
+    /* cores das categorias de CTA */
+    --c-sst:#7C3AED; --c-ls:#3B0F73; --c-apl:#DB2777; --c-seg:#0D9488; --c-sem:#9A93A8; --c-opo:#D97706; --c-per:#2563EB; --c-off:#D8D3E0;
+    /* formatos */
+    --f-vid:#141018; --f-car:#8B7FA3; --f-img:#D6CFE3;
+    --fonte:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+  body{font-family:var(--fonte);font-weight:300;background:var(--bg);color:var(--ink);line-height:1.55;font-size:15px}
+  a{color:var(--roxo-dark);text-decoration:none} a:hover{text-decoration:underline}
+  a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--roxo);outline-offset:2px}
+
+  .hero{background:radial-gradient(1100px 500px at 78% -10%,rgba(124,58,237,.55),transparent 60%),linear-gradient(150deg,#0A0A0A 0%,#17111F 45%,#3B0F73 100%);color:#fff;padding-block:28px 32px;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(ellipse at 50% 30%,black 40%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse at 50% 30%,black 40%,transparent 80%);pointer-events:none}
+  .wrap{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));position:relative;z-index:1}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+  .brand svg{width:36px;height:36px;flex:none}
+  .brand .word{display:flex;align-items:center;gap:10px;color:#fff}
+  .brand .word b{font-weight:800;font-size:17px}
+  .brand .word .bar{width:2px;height:24px;background:rgba(255,255,255,.55)}
+  .brand .word span{font-size:15px;letter-spacing:.22em}
+  .eyebrow{color:var(--roxo-light);font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
+  .hero h1{font-size:clamp(24px,4vw,32px);font-weight:800;letter-spacing:-.02em;margin:0 0 6px;line-height:1.12;text-wrap:balance}
+  .hero .sub{font-size:13.5px;color:rgba(255,255,255,.7);max-width:760px;margin:0}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .hero-meta span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:100px;padding:6px 14px;font-size:12px;font-weight:500}
+
+  section{padding-block:34px} section.soft{background:var(--bg-soft)}
+  .section-label{display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--roxo);margin-bottom:8px}
+  .section-label::before{content:"";width:34px;height:2px;background:var(--roxo);border-radius:2px}
+  h2{font-size:22px;font-weight:700;letter-spacing:-.01em;margin:0 0 4px;text-wrap:balance}
+  h3{font-size:15px;font-weight:700;margin:0 0 4px}
+  .lead{color:var(--cinza);font-size:13.5px;margin:0 0 18px;max-width:820px}
+  .hint{font-size:12px;color:var(--cinza)}
+
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+  @media (max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:460px){.kpis{grid-template-columns:1fr}}
+  .kpi{border:1px solid var(--linha);border-radius:16px;padding:18px 20px;background:#fff;min-width:0}
+  .kpi.destaque{border-color:transparent;color:#fff;background:linear-gradient(135deg,var(--roxo-dark) 0%,var(--roxo) 70%,var(--roxo-light) 150%)}
+  .kpi small{color:var(--roxo);font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:6px}
+  .kpi.destaque small{color:#fff;opacity:.9}
+  .kpi b{font-size:30px;font-weight:700;display:block;line-height:1.1;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+  .kpi .hint{display:block;margin-top:6px}
+  .kpi.destaque .hint{color:#fff;opacity:.85}
+
+  .card{border:1px solid var(--linha);border-radius:16px;background:#fff;padding:18px 20px;min-width:0}
+  .barra{display:flex;height:16px;border-radius:100px;overflow:hidden;background:var(--roxo-xlight);margin:10px 0 6px}
+  .barra i{display:block;height:100%;min-width:2px}
+  .barra i + i{border-left:2px solid #fff}
+
+  .table-wrap{overflow-x:auto;border:1px solid var(--linha);border-radius:16px;background:#fff}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  thead th{background:var(--bg-soft);color:var(--cinza);font-weight:600;text-transform:uppercase;font-size:10.5px;letter-spacing:.1em;padding:12px 14px;text-align:left;border-bottom:1px solid var(--linha);white-space:nowrap}
+  tbody td{padding:11px 14px;border-bottom:1px solid var(--linha);font-weight:400;vertical-align:top}
+  tbody tr:last-child td{border-bottom:none}
+  .num{text-align:right!important;font-variant-numeric:tabular-nums;white-space:nowrap}
+  #resumo-tab{min-width:760px}
+  #resumo-tab td{vertical-align:middle}
+  #resumo-tab .nome b{font-weight:600;display:block}
+  #resumo-tab .nome span{font-size:12px;color:var(--cinza)}
+  .dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:8px;flex:none}
+  .trilho{height:10px;border-radius:100px;background:var(--roxo-xlight);min-width:140px;overflow:hidden}
+  .trilho i{display:block;height:100%;border-radius:100px}
+  .palavra{display:inline-block;font-weight:600;font-size:11.5px;letter-spacing:.06em;background:var(--roxo-xlight);color:var(--roxo-dark);border-radius:8px;padding:2px 8px;margin:1px 4px 1px 0;white-space:nowrap}
+
+  .duas{display:grid;grid-template-columns:1.6fr 1fr;gap:18px;align-items:stretch}
+  .duas.iguais{grid-template-columns:1fr 1fr}
+  @media (max-width:900px){.duas,.duas.iguais{grid-template-columns:1fr}}
+
+  .legenda{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--cinza);margin:10px 0 0}
+  .legenda span{display:inline-flex;align-items:center}
+
+  /* colunas semanais */
+  .semanas{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:8px;align-items:end;height:230px;margin-top:14px;border-bottom:1px solid var(--linha);padding-bottom:0}
+  .sem{display:flex;flex-direction:column;justify-content:flex-end;height:100%;min-width:0}
+  .sem .tot{font-size:12px;font-weight:600;text-align:center;font-variant-numeric:tabular-nums;margin-bottom:4px}
+  .sem .pilha{display:flex;flex-direction:column-reverse;border-radius:8px 8px 0 0;overflow:hidden}
+  .sem .pilha i{display:block;min-height:3px}
+  .sem .pilha i + i{border-bottom:2px solid #fff}
+  .sem-rot{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:8px;margin-top:6px}
+  .sem-rot span{font-size:11px;color:var(--cinza);text-align:center;font-variant-numeric:tabular-nums}
+
+  .mes{margin-top:14px}
+  .mes .top{display:flex;justify-content:space-between;align-items:baseline;font-size:13px}
+  .mes .top b{font-weight:600}
+  .mes ul{list-style:none;margin:6px 0 0;padding:0;font-size:12.5px;color:var(--cinza)}
+  .mes li{display:flex;justify-content:space-between;gap:8px;padding:2px 0}
+  .mes li b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+
+  /* cruzamentos */
+  .cruz{display:grid;grid-template-columns:minmax(120px,1.1fr) 2fr auto;gap:8px 12px;align-items:center;margin-top:12px;font-size:12.5px}
+  .cruz .rot{font-weight:500;min-width:0}
+  .cruz .val{color:var(--cinza);font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
+  .cruz .barra{margin:0;height:14px}
+
+  .leituras{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media (max-width:900px){.leituras{grid-template-columns:1fr}}
+  .leitura{border:1px solid var(--linha);border-radius:16px;background:#fff;padding:18px 20px;min-width:0}
+  .leitura b.n{display:block;font-size:26px;font-weight:700;color:var(--roxo-dark);line-height:1.1;font-variant-numeric:tabular-nums;margin-bottom:6px}
+  .leitura h3{margin-bottom:6px}
+  .leitura p{margin:0;font-size:13px;color:var(--cinza)}
+
+  /* filtros */
+  .filtros{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:flex-end;margin-bottom:12px}
+  .filtros .grupo{display:flex;flex-direction:column;gap:5px;min-width:0}
+  .filtros label{font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--roxo)}
+  .filtros select,.filtros input{font-family:inherit;font-size:13px;font-weight:400;color:var(--ink);background:#fff;border:1px solid var(--linha);border-radius:10px;padding:8px 12px;max-width:100%}
+  .filtros input{width:220px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .chip{font-family:inherit;background:#fff;border:1px solid var(--linha);color:var(--ink);padding:7px 14px;border-radius:100px;font-size:12px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center}
+  .chip b{font-weight:600;margin-left:6px;color:var(--cinza);font-variant-numeric:tabular-nums}
+  .chip:hover{border-color:var(--roxo-light)}
+  .chip.on{background:linear-gradient(90deg,var(--roxo),var(--roxo-dark));border-color:transparent;color:#fff}
+  .chip.on b{color:#fff}
+  .chip.on .dot{outline:2px solid #fff}
+  .contagem{font-size:12.5px;color:var(--cinza);margin:0 0 10px}
+  .contagem b{color:var(--ink);font-weight:600}
+  #posts{min-width:900px}
+  #posts th,#posts td{padding-left:10px;padding-right:10px}
+  #posts td.pub{min-width:210px}
+  #posts td.pub a{font-weight:500}
+  #posts td.pub a::after{content:" ↗";font-size:11px;color:var(--roxo-light)}
+  #posts td.pub small{display:block;color:var(--cinza);font-size:11.5px}
+  #posts td.txt{min-width:150px;color:var(--cinza)}
+  .pill{display:inline-flex;align-items:center;font-size:11px;font-weight:600;letter-spacing:.04em;border:1px solid var(--linha);border-radius:100px;padding:3px 10px;white-space:nowrap;background:#fff}
+  .tag{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.06em;padding:2px 8px;border-radius:100px;border:1px solid var(--linha);color:var(--cinza);white-space:nowrap}
+  .tag.sim{border-color:var(--roxo-light);color:var(--roxo-dark);background:var(--roxo-xlight)}
+  .tag.video{border-color:var(--c-opo);color:#92400E;background:#FEF3C7}
+  .vazio{padding:22px;color:var(--cinza);font-size:13px;text-align:center}
+
+  .notas{margin:0;padding-left:18px;color:var(--cinza);font-size:13px;max-width:860px}
+  .notas li{margin-bottom:4px}
+  .notas b{color:var(--ink);font-weight:600}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.62);padding-block:22px;text-align:center;font-size:12px}
+  footer b{color:#fff;font-weight:500}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="brand">
+      <svg viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-label="BM Mídias">
+        <polygon points="50,4 90,27 90,73 50,96 10,73 10,27"></polygon>
+        <polygon points="50,33 65,59 35,59"></polygon>
+        <line x1="50" y1="4" x2="50" y2="33"></line><line x1="90" y1="73" x2="65" y2="59"></line>
+        <line x1="10" y1="73" x2="35" y2="59"></line><line x1="90" y1="27" x2="50" y2="33"></line>
+        <line x1="90" y1="27" x2="65" y2="59"></line><line x1="50" y1="96" x2="65" y2="59"></line>
+        <line x1="50" y1="96" x2="35" y2="59"></line><line x1="10" y1="27" x2="35" y2="59"></line>
+        <line x1="10" y1="27" x2="50" y2="33"></line>
+      </svg>
+      <span class="word"><b>BM</b><i class="bar"></i><span>MÍDIAS</span></span>
+    </div>
+    <div class="eyebrow">Marketex · Ana Tex · Conteúdo orgânico</div>
+    <h1>Mapa de CTAs do Instagram @anatex</h1>
+    <p class="sub">Qual chamada para ação cada publicação de outubro e novembro de 2026 usou, lida na legenda e, quando ela não trazia, na tela do vídeo.</p>
+    <div class="hero-meta">
+      <span>01/10 a 25/11/2026</span>
+      <span id="m-total"></span>
+      <span>Levantado em 26/11/2026</span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="section-label">Resumo</div>
+    <h2>Quantas vezes cada CTA foi usado</h2>
+    <p class="lead">Cada publicação foi classificada pelo CTA principal, com os mesmos rótulos da coluna de CTA da Lista de Conteúdos.</p>
+    <div class="kpis" id="kpis"></div>
+    <div class="card" style="margin-bottom:18px">
+      <h3>Divisão das publicações lidas por CTA</h3>
+      <div class="barra" id="barra-geral" role="img" aria-label="Participação de cada CTA no total de publicações lidas"></div>
+      <div class="legenda" id="leg-geral"></div>
+    </div>
+    <div class="table-wrap">
+      <table id="resumo-tab">
+        <thead><tr><th>CTA</th><th>Palavra ou ação pedida</th><th class="num">Out</th><th class="num">Nov</th><th class="num">Total</th><th class="num">% das lidas</th><th>Volume</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="soft">
+  <div class="wrap">
+    <div class="section-label">Evolução</div>
+    <h2>Como o mix de CTAs mudou ao longo das semanas</h2>
+    <p class="lead">Publicações por semana (segunda a domingo), empilhadas por CTA. A primeira semana começa em 01/10 e a última vai até 25/11.</p>
+    <div class="duas">
+      <div class="card">
+        <h3>Publicações por semana</h3>
+        <div class="semanas" id="semanas" role="img" aria-label="Publicações por semana empilhadas por CTA"></div>
+        <div class="sem-rot" id="sem-rot"></div>
+        <div class="legenda" id="leg-sem"></div>
+      </div>
+      <div class="card">
+        <h3>Outubro e novembro lado a lado</h3>
+        <div id="meses"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-label">Cruzamentos</div>
+    <h2>Onde cada CTA aparece</h2>
+    <p class="lead">Por formato da publicação e por situação na distribuição paga (coluna Status da Lista de Conteúdos em 26/11).</p>
+    <div class="duas iguais">
+      <div class="card">
+        <h3>CTA por formato</h3>
+        <div class="cruz" id="cruz-formato"></div>
+        <div class="legenda">
+          <span><i class="dot" style="background:var(--f-vid)"></i>Vídeo</span>
+          <span><i class="dot" style="background:var(--f-car)"></i>Carrossel</span>
+          <span><i class="dot" style="background:var(--f-img)"></i>Imagem</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>CTA por impulsionamento</h3>
+        <div class="cruz" id="cruz-rodou"></div>
+        <div class="legenda">
+          <span><i class="dot" style="background:var(--roxo)"></i>Rodou em anúncio</span>
+          <span><i class="dot" style="background:var(--c-off)"></i>Não rodou</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="soft">
+  <div class="wrap">
+    <div class="section-label">Leituras</div>
+    <h2>Pontos para a gente discutir</h2>
+    <p class="lead">O que os números mostram, para servir de ponto de partida na conversa.</p>
+    <div class="leituras" id="leituras"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-label">Publicações</div>
+    <h2>Todas as publicações, com link e CTA</h2>
+    <p class="lead">Clique em um CTA para filtrar. O nome da publicação abre o post no Instagram.</p>
+    <div class="chips" id="chips"></div>
+    <div class="filtros">
+      <div class="grupo"><label for="f-mes">Mês</label>
+        <select id="f-mes"><option value="">Outubro e novembro</option><option value="10">Outubro</option><option value="11">Novembro</option></select></div>
+      <div class="grupo"><label for="f-tipo">Formato</label>
+        <select id="f-tipo"><option value="">Todos</option><option value="VIDEO">Vídeo</option><option value="CARROSSEL">Carrossel</option><option value="IMAGEM">Imagem</option></select></div>
+      <div class="grupo"><label for="f-rodou">Impulsionamento</label>
+        <select id="f-rodou"><option value="">Todos</option><option value="R">Rodou</option><option value="N">Não rodou</option></select></div>
+      <div class="grupo"><label for="f-busca">Buscar</label>
+        <input id="f-busca" type="search" placeholder="Post, gancho ou texto do CTA"></div>
+    </div>
+    <p class="contagem" id="contagem"></p>
+    <div class="table-wrap">
+      <table id="posts">
+        <thead><tr><th>Data</th><th>Publicação</th><th>Formato</th><th>CTA</th><th>Texto do CTA</th><th>Onde está</th><th>Frente</th><th>Anúncio</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <div class="vazio" id="vazio" hidden>Nenhuma publicação com esses filtros.</div>
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <div class="wrap">
+    <div class="section-label">Pendências</div>
+    <h2>O que ficou para fechar com o time</h2>
+    <ul class="notas">
+      <li><b>8 links fora do ar:</b> três de outubro (19 e 23/10) e cinco de 09 e 10/11 (POST243, 246, 249, 250 e 251). O CTA deles não foi conferido.</li>
+      <li><b>Um reel fora da lista:</b> o de 16/10 (parte 22 de "Coisas que o ChatGPT faz", CTA Sala Secreta) não está na Lista de Conteúdos.</li>
+      <li><b>Numeração duplicada:</b> os códigos POST205 a POST212 aparecem em duas linhas da planilha.</li>
+      <li><b>OPORTUNIDADE sem categoria:</b> a palavra apareceu uma única vez (POST228, 02/11) e está como CTA LS na planilha.</li>
+      <li><b>Planilha corrigida em 26/11:</b> 14 linhas da coluna de CTA foram preenchidas ou corrigidas (POST166, 167, 169, 178, 187, 189, 190, 191, 197, 200, 201, 204, 224 e 229).</li>
+    </ul>
+  </div>
+</section>
+<section class="soft">
+  <div class="wrap">
+    <div class="section-label">Como foi feito</div>
+    <h2>Método e limites</h2>
+    <ul class="notas">
+      <li>Base: os links de outubro e novembro da aba <b>Lista de Conteúdos</b>, mais um reel do perfil que não estava na lista (16/10).</li>
+      <li>O CTA foi lido na <b>legenda</b> de cada publicação. Nos vídeos sem palavra-chave na legenda, foi conferido o <b>texto na tela</b> no final do vídeo; o áudio não foi ouvido.</li>
+      <li>Nos carrosséis foi lida só a legenda, não os cards.</li>
+      <li><b>8 links</b> da lista estão fora do ar no Instagram e ficaram sem CTA conferido.</li>
+      <li>Quando a publicação pede comentário com palavra-chave e também "salva" ou "me segue", ela conta pelo CTA da palavra-chave.</li>
+      <li>"Rodou" é o Status da Lista de Conteúdos em 26/11/2026: a publicação aparece em algum anúncio de C1, C2 ou C3.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><b>BM | MÍDIAS</b> · Mapa de CTAs · Marketex / Ana Tex · outubro e novembro de 2026</div>
+</footer>
+
+<script>
+const DATA = [{"p":"POST166","d":"2026-10-01","t":"CARROSSEL","l":"https://www.instagram.com/p/Dd-aYyBjGT_/","c":"SEGUIR","x":"Segue @anatex + compartilha com alguém","o":"Legenda","f":"C1","r":"R","h":"Eu já criei o meu. O nome dele é Severino","n":""},{"p":"POST167","d":"2026-10-01","t":"IMAGEM","l":"https://www.instagram.com/p/Dd93hmYmf41/","c":"SEM CTA","x":"Salva esse post","o":"Legenda","f":"C1","r":"R","h":"Tem coisa que você ainda faz no braço","n":"Só engajamento"},{"p":"POST168","d":"2026-10-01","t":"VIDEO","l":"https://www.instagram.com/reel/Dd-B-ilpuED/","c":"LS","x":"Comenta ESPECIALISTA","o":"Legenda","f":"C1","r":"R","h":"Seu cliente não deveria procurar em 100 grupos de WhatsApp","n":""},{"p":"POST169","d":"2026-10-01","t":"VIDEO","l":"https://www.instagram.com/reel/Dd-AcOgJ3b6/","c":"LS","x":"Comenta ESPECIALISTA (workshop)","o":"Legenda","f":"C1","r":"R","h":"Eu falo. O ChatGPT transforma a ideia em vídeo","n":""},{"p":"POST197","d":"2026-10-01","t":"VIDEO","l":"https://www.instagram.com/reel/Dd8-5Tlxg5J/","c":"LS","x":"Comente aqui ESPECIALISTA (informações no direct)","o":"Vídeo (tela)","f":"C1","r":"R","h":"Como iniciar a produção do seu produto digital","n":"Legenda só diz \"veja até o final\""},{"p":"POST170","d":"2026-10-02","t":"CARROSSEL","l":"https://www.instagram.com/p/Dd_8YK1lIOA/","c":"SST","x":"Comenta ESPIAR","o":"Legenda","f":"C1","r":"R","h":"O ChatGPT não serve só pra escrever legenda","n":""},{"p":"POST171","d":"2026-10-02","t":"CARROSSEL","l":"https://www.instagram.com/p/DeCAouEmbHd/","c":"SST","x":"Comente ESPIAR","o":"Legenda","f":"C1","r":"R","h":"A gente não precisa de mais horas no dia","n":""},{"p":"POST172","d":"2026-10-02","t":"VIDEO","l":"https://www.instagram.com/reel/DeASbJtBEAn/","c":"LS","x":"Comenta ESPECIALISTA","o":"Legenda","f":"C1","r":"R","h":"Uma foto do seu produto pode virar três imagens","n":""},{"p":"POST173","d":"2026-10-03","t":"VIDEO","l":"https://www.instagram.com/reel/DeDZC1AMfrC/","c":"LS","x":"Comenta ESPECIALISTA (workshop)","o":"Legenda","f":"C1","r":"R","h":"Esse rabisco no seu caderno pode virar um material","n":""},{"p":"POST174","d":"2026-10-04","t":"VIDEO","l":"https://www.instagram.com/reel/DeElnXnxI9Y/","c":"SEGUIR","x":"Me segue @anatex","o":"Legenda + vídeo","f":"C1","r":"R","h":"Seu rabisco pode virar uma imagem que ajuda o cliente","n":""},{"p":"POST175","d":"2026-10-04","t":"VIDEO","l":"https://www.instagram.com/reel/DeFZmYgvtEm/","c":"SEGUIR","x":"Salva + me segue @anatex","o":"Legenda + vídeo","f":"C1","r":"R","h":"Tem uma norma pra estudar? Olha como o ChatGPT ajuda","n":""},{"p":"POST176","d":"2026-10-05","t":"VIDEO","l":"https://www.instagram.com/reel/DeHEt_RxwNB/","c":"SEGUIR","x":"Segue @anatex","o":"Legenda + vídeo","f":"C1","r":"R","h":"Seu cliente entende o que está incluído no seu serviço?","n":""},{"p":"POST177","d":"2026-10-05","t":"VIDEO","l":"https://www.instagram.com/reel/DeHKUL7xvJx/","c":"SEGUIR","x":"Salva + segue @anatex","o":"Legenda + vídeo","f":"C1","r":"R","h":"Seu livro pode virar muito mais do que um resumo","n":""},{"p":"POST178","d":"2026-10-06","t":"IMAGEM","l":"https://www.instagram.com/p/DeJtoA2Rk1s/","c":"SEGUIR","x":"Me segue @anatex","o":"Legenda","f":"C1","r":"R","h":"Você usa o ChatGPT todos os dias e ainda faz tudo na mão","n":""},{"p":"POST179","d":"2026-10-06","t":"CARROSSEL","l":"https://www.instagram.com/p/DeJyAWake_7/","c":"SST","x":"Comenta ESPIAR","o":"Legenda","f":"C1","r":"R","h":"Você não precisa criar mais um método do zero","n":""},{"p":"POST180","d":"2026-10-06","t":"VIDEO","l":"https://www.instagram.com/reel/DeKJeqIuARO/","c":"SST","x":"Comente ESPIAR","o":"Legenda","f":"C1","r":"R","h":"Você já conhece os comandos secretos do GPT?","n":""},{"p":"POST181","d":"2026-10-06","t":"CARROSSEL","l":"https://www.instagram.com/p/DeMSESTGWnB/","c":"SST","x":"Comenta ESPIAR (grupo VIP)","o":"Legenda","f":"C1","r":"R","h":"O ChatGPT não sabe quem você é. Até você contar","n":""},{"p":"POST182","d":"2026-10-07","t":"VIDEO","l":"https://www.instagram.com/reel/DeMM0D0xkhB/","c":"APLICACAO","x":"Comenta MAPEAMENTO pra falar com a minha equipe","o":"Vídeo (tela)","f":"C1","r":"R","h":"Conhecimento é poder! Quando você domina a IA","n":"Legenda só diz \"vem entender como posso te ajudar\""},{"p":"POST183","d":"2026-10-08","t":"CARROSSEL","l":"https://www.instagram.com/p/DePwWsPmRqq/","c":"SST","x":"Comenta ESPIAR (grupo VIP)","o":"Legenda","f":"C2","r":"R","h":"Você não precisa de uma ideia nova","n":""},{"p":"POST184","d":"2026-10-09","t":"CARROSSEL","l":"https://www.instagram.com/p/DeRmzKFkQwH/","c":"SST","x":"Salva + comenta ESPIAR","o":"Legenda","f":"C1","r":"R","h":"Se o ChatGPT te devolve respostas genéricas","n":""},{"p":"POST185","d":"2026-10-09","t":"CARROSSEL","l":"https://www.instagram.com/p/DeUJCCfmaoW/","c":"SST","x":"Comenta ESPIAR (grupo VIP)","o":"Legenda","f":"C2","r":"R","h":"Mensagem recente no grupo da mentoria","n":""},{"p":"POST186","d":"2026-10-10","t":"VIDEO","l":"https://www.instagram.com/reel/DeTmdAniTe9/","c":"SST","x":"Comenta ESPIAR + segue @anatex","o":"Legenda","f":"C0","r":"N","h":"Seu perfeccionismo pode estar deixando o negócio no rascunho","n":""},{"p":"POST187","d":"2026-10-11","t":"VIDEO","l":"https://www.instagram.com/reel/DeWn67LxYqn/","c":"SST","x":"Comenta ESPIAR + segue @anatex","o":"Legenda","f":"C0","r":"N","h":"Tem gente que passa a vida enxugando o chão","n":""},{"p":"POST188","d":"2026-10-11","t":"CARROSSEL","l":"https://www.instagram.com/p/DeXChIJFEk-/","c":"SEM CTA","x":"Salva + me conta aqui","o":"Legenda","f":"C1","r":"R","h":"Domingo não é dia de ficar remoendo a segunda-feira","n":"Só engajamento"},{"p":"POST189","d":"2026-10-11","t":"VIDEO","l":"https://www.instagram.com/reel/DeXlPG5yAlD/","c":"LS","x":"Comenta ESPECIALISTA","o":"Legenda","f":"C0","r":"N","h":"O primeiro passo no digital sempre foi o mais difícil","n":""},{"p":"POST190","d":"2026-10-12","t":"VIDEO","l":"https://www.instagram.com/reel/DeY_a6EC4-h/","c":"SST","x":"Comente ESPIAR","o":"Legenda","f":"C0","r":"N","h":"Quer ter resultado no digital, mas tem desculpa pra tudo","n":""},{"p":"POST191","d":"2026-10-12","t":"VIDEO","l":"https://www.instagram.com/reel/DeZjsbZCl6w/","c":"SST","x":"Comente ESPIAR","o":"Legenda","f":"C0","r":"N","h":"Você pode estar se esforçando muito no digital","n":""},{"p":"POST192","d":"2026-10-12","t":"IMAGEM","l":"https://www.instagram.com/p/DeZw-WxJYAI/","c":"SEM CTA","x":"Salva esse post","o":"Legenda","f":"C1","r":"R","h":"Você ainda está usando o ChatGPT sozinho?","n":"Só engajamento"},{"p":"POST193","d":"2026-10-12","t":"CARROSSEL","l":"https://www.instagram.com/p/Debwhm4GQnQ/","c":"SST","x":"Comenta ESPIAR","o":"Legenda","f":"C1","r":"R","h":"E se o que você sabe de olhos fechados virasse negócio","n":""},{"p":"POST194","d":"2026-10-12","t":"CARROSSEL","l":"https://www.instagram.com/p/DeecQ-ImdhC/","c":"SST","x":"Salva + comenta ESPIAR","o":"Legenda","f":"C1","r":"R","h":"Seu PDF não precisa ficar parado na pasta de downloads","n":""},{"p":"POST195","d":"2026-10-13","t":"VIDEO","l":"https://www.instagram.com/reel/Dec-rgKO_UG/","c":"SST","x":"Comente ESPIAR","o":"Legenda","f":"C1","r":"R","h":"Parte 2 do vídeo de códigos secretos","n":""},{"p":"POST198","d":"2026-10-13","t":"VIDEO","l":"https://www.instagram.com/reel/DebUpXBAoKD/","c":"SST","x":"Salva + comenta ESPIAR + segue @anatex","o":"Legenda","f":"C1","r":"N","h":"Seus anos de experiência têm valor","n":""},{"p":"POST196","d":"2026-10-14","t":"CARROSSEL","l":"https://www.instagram.com/p/DeeuoTplBGO/","c":"APLICACAO","x":"Comenta MENTORIA para ser minha mentorada","o":"Legenda","f":"C2","r":"N","h":"Esse post foi feito no celular, numa fila","n":"Única vez com a palavra MENTORIA"},{"p":"POST200","d":"2026-10-16","t":"VIDEO","l":"https://www.instagram.com/reel/DekiFfYtFuw/","c":"PERFIL/STORIES","x":"Entra no meu perfil + veja os stories","o":"Legenda","f":"C0","r":"N","h":"Trabalhar no digital me abriu portas","n":"Não pede para seguir"},{"p":"sem código","d":"2026-10-16","t":"VIDEO","l":"https://www.instagram.com/reel/DekLyR6hw05/","c":"SST","x":"Salva + comenta ESPIAR","o":"Legenda","f":"-","r":"-","h":"O que pode estar travando seu crescimento profissional (parte 22)","n":"Post do perfil que falta na Lista de Conteúdos"},{"p":"POST201","d":"2026-10-17","t":"CARROSSEL","l":"https://www.instagram.com/p/DemDzn0DMa1/","c":"SST","x":"Salva + comenta ESPIAR","o":"Legenda","f":"C1","r":"R","h":"Atender bem não precisa significar estar disponível o dia inteiro","n":""},{"p":"POST202","d":"2026-10-18","t":"CARROSSEL","l":"https://www.instagram.com/p/Depw8ePDvx3/","c":"SEM CTA","x":"Comenta o número + salva","o":"Legenda","f":"C1","r":"R","h":"A maioria usa o ChatGPT na ponta do iceberg","n":"Só engajamento"},{"p":"POST203","d":"2026-10-18","t":"VIDEO","l":"https://www.instagram.com/reel/Den12yttZV0/","c":"LS","x":"Comenta ESPECIALISTA (workshop)","o":"Legenda","f":"C1","r":"R","h":"O ChatGPT calcula quanto eu deveria cobrar","n":""},{"p":"POST204","d":"2026-10-18","t":"VIDEO","l":"https://www.instagram.com/reel/DeoxHhxx63G/","c":"SEGUIR","x":"Já segue @anatex + salva","o":"Legenda","f":"C1","r":"R","h":"Uma foto do produto em 3 ideias de anúncio","n":"Vídeo só diz \"leia a legenda\""},{"p":"POST205","d":"2026-10-19","t":"VIDEO","l":"https://www.instagram.com/reel/DetCzpohmQl/","c":"SST","x":"Salva + comente ESPIAR","o":"Legenda","f":"C1","r":"N","h":"Você pode já ter contado ao ChatGPT o que ele precisa","n":""},{"p":"POST211","d":"2026-10-19","t":"VIDEO","l":"https://www.instagram.com/reel/Der_SoshGC8/","c":"FORA DO AR","x":"(link fora do ar)","o":"","f":"C1","r":"N","h":"Você ainda abre a tela em branco para escrever os posts","n":"Página não disponível"},{"p":"POST212","d":"2026-10-19","t":"VIDEO","l":"https://www.instagram.com/reel/DesH7lhMc0O/","c":"LS","x":"Comente ESPECIALISTA (workshop) + siga @anatex","o":"Legenda","f":"C1","r":"R","h":"Seu conhecimento pode virar um método","n":"Mesmo link em duas linhas"},{"p":"POST206","d":"2026-10-20","t":"VIDEO","l":"https://www.instagram.com/reel/DetyHo_zvH6/","c":"SST","x":"Comente ESPIAR","o":"Legenda","f":"C1","r":"R","h":"Mais uma parte dos códigos secretos do GPT","n":"Mesmo link em duas linhas"},{"p":"POST207","d":"2026-10-20","t":"VIDEO","l":"https://www.instagram.com/reel/DeuvZXotXiI/","c":"SST","x":"Comenta ESPIAR","o":"Legenda","f":"C1","r":"N","h":"Tô editando meus vídeos com o Dots","n":""},{"p":"POST208","d":"2026-10-20","t":"CARROSSEL","l":"https://www.instagram.com/p/Deu5WCeGX7x/","c":"SST","x":"Comenta ESPIAR","o":"Legenda","f":"C1","r":"R","h":"E se criar conteúdo deixasse de ser um peso","n":"Mesmo link em duas linhas"},{"p":"POST209","d":"2026-10-21","t":"IMAGEM","l":"https://www.instagram.com/p/DexmoHDu-ls/","c":"SST","x":"Comenta ESPIAR + salva","o":"Legenda","f":"C1","r":"R","h":"Se você acha que o Claude serve só pra escrever texto","n":"Mesmo link em duas linhas"},{"p":"POST210","d":"2026-10-22","t":"CARROSSEL","l":"https://www.instagram.com/p/DezM2hrDFdv/","c":"SST","x":"Salva + comenta ESPIAR","o":"Legenda","f":"C3","r":"R","h":"Uma calculadora que o cliente preenche sozinho","n":""},{"p":"POST213","d":"2026-10-22","t":"VIDEO","l":"https://www.instagram.com/reel/Dezo8syvavv/","c":"SST","x":"Salva + comenta ESPIAR","o":"Legenda","f":"C1","r":"N","h":"Uma habilidade que você trata como \"nada demais\"","n":""},{"p":"POST211","d":"2026-10-23","t":"VIDEO","l":"https://www.instagram.com/reel/De1bpqbx6Lc/","c":"FORA DO AR","x":"(link fora do ar)","o":"","f":"C1","r":"N","h":"Comenta especialista te mando o link","n":"Página não disponível"},{"p":"POST212","d":"2026-10-23","t":"VIDEO","l":"https://www.instagram.com/reel/De1blRJxWMC/","c":"FORA DO AR","x":"(link fora do ar)","o":"","f":"C1","r":"N","h":"Quer trabalhar on-line? Comenta Especialista","n":"Página não disponível"},{"p":"POST214","d":"2026-10-24","t":"CARROSSEL","l":"https://www.instagram.com/p/De4FTLhDI26/","c":"SST","x":"Salva + manda para quem... + comenta ESPIAR","o":"Legenda","f":"C1","r":"N","h":"Escreva isso para ter isso","n":""},{"p":"POST215","d":"2026-10-25","t":"VIDEO","l":"https://www.instagram.com/reel/De782ltOSOI/","c":"SST","x":"Comente ESPIAR","o":"Legenda","f":"C1","r":"N","h":"Quer entender como funciona na prática e de graça","n":""},{"p":"POST216","d":"2026-10-26","t":"CARROSSEL","l":"https://www.instagram.com/p/De9jjZ2ESu_/","c":"SEM CTA","x":"Comenta o número + marca aquela amiga","o":"Legenda","f":"C1","r":"N","h":"Se você nunca pediu \"só uma ideiazinha\"","n":"Só engajamento"},{"p":"POST217","d":"2026-10-27","t":"CARROSSEL","l":"https://www.instagram.com/p/DfAWKSnFFVI/","c":"SST","x":"Comenta ESPIAR","o":"Legenda","f":"C1","r":"N","h":"Como conseguir mais seguidores no Instagram usando IA","n":""},{"p":"POST218","d":"2026-10-28","t":"CARROSSEL","l":"https://www.instagram.com/p/DfDGazeGZAQ/","c":"APLICACAO","x":"Comenta MAPEAMENTO","o":"Legenda","f":"C3","r":"N","h":"\"Mas o que acontece dentro da Paraíso Digital?\"","n":""},{"p":"POST219","d":"2026-10-29","t":"CARROSSEL","l":"https://www.instagram.com/p/DfGKGFNjorF/","c":"APLICACAO","x":"Comenta MAPEAMENTO","o":"Legenda","f":"C3","r":"R","h":"R$ 60 mil em mentoria antes de a mentoria estar pronta","n":""},{"p":"POST223","d":"2026-10-29","t":"VIDEO","l":"https://www.instagram.com/reel/DfFevO5umGv/","c":"LS","x":"Já me segue + comente ESPECIALISTA (workshop)","o":"Legenda","f":"C1","r":"R","h":"Já me segue para mais estratégias de negócios digitais","n":""},{"p":"POST224","d":"2026-10-29","t":"VIDEO","l":"https://www.instagram.com/reel/DfFhi2xuBGO/","c":"LS","x":"Comente ESPECIALISTA (link do workshop no direct) + siga","o":"Vídeo (tela)","f":"C1","r":"R","h":"Estratégias para automatizar seu negócio com IA","n":"Legenda só pede para seguir"},{"p":"POST220","d":"2026-10-30","t":"VIDEO","l":"https://www.instagram.com/reel/DfIgqoJOzpb/","c":"SST","x":"Comente ESPIAR","o":"Legenda","f":"C1","r":"N","h":"Quem acompanha meus stories sabe que o trabalho não parou","n":""},{"p":"POST221","d":"2026-10-31","t":"CARROSSEL","l":"https://www.instagram.com/p/DfLTDnrmYW5/","c":"APLICACAO","x":"Comenta MAPEAMENTO","o":"Legenda","f":"C3","r":"N","h":"Uma semana, 3 eventos e só um deles faturou","n":""},{"p":"POST222","d":"2026-11-01","t":"IMAGEM","l":"https://www.instagram.com/p/DfNzt4ZvJfH/","c":"SEM CTA","x":"Salva esse post","o":"Legenda","f":"C1","r":"R","h":"Você ainda perde horas descobrindo como editar seus vídeos","n":"Só engajamento"},{"p":"POST225","d":"2026-11-01","t":"VIDEO","l":"https://www.instagram.com/reel/DfNIe_LN_XM/","c":"SST","x":"Salva + comenta ESPIAR","o":"Legenda","f":"C1","r":"R","h":"2027 não vai ser um ano fácil","n":""},{"p":"POST226","d":"2026-11-01","t":"VIDEO","l":"https://www.instagram.com/reel/DfNJgmYttqU/","c":"SST","x":"Salva + comenta ESPIAR","o":"Legenda","f":"C1","r":"R","h":"Tudo o que você aprendeu na marra pra gerir seu negócio","n":""},{"p":"POST227","d":"2026-11-01","t":"VIDEO","l":"https://www.instagram.com/reel/DfNKG-UOnW4/","c":"SST","x":"Salva + comenta ESPIAR","o":"Legenda","f":"C1","r":"N","h":"\"Me ajuda rapidinho? Você é tão boa nisso!\"","n":""},{"p":"POST228","d":"2026-11-02","t":"VIDEO","l":"https://www.instagram.com/reel/DfQYxsiJ0Y6/","c":"OPORTUNIDADE","x":"Comente OPORTUNIDADE (workshop ou aulas gratuitas)","o":"Legenda","f":"C1","r":"N","h":"Criar um negócio digital nunca esteve tão próximo","n":"Palavra diferente das demais"},{"p":"POST229","d":"2026-11-03","t":"VIDEO","l":"https://www.instagram.com/reel/DfRvS8Zhb7V/","c":"LS","x":"Comente ESPECIALISTA (link no direct) + me segue","o":"Vídeo (tela)","f":"C1","r":"N","h":"Tudo isso pode mudar o seu negócio","n":"Legenda só pede para seguir"},{"p":"POST230","d":"2026-11-03","t":"CARROSSEL","l":"https://www.instagram.com/p/DfSflr5o4Cs/","c":"SST","x":"Comenta ESPIAR","o":"Legenda","f":"C2","r":"N","h":"Trabalhando de qualquer lugar do mundo com IA","n":""},{"p":"POST231","d":"2026-11-04","t":"CARROSSEL","l":"https://www.instagram.com/p/DfViIlkGZJZ/","c":"SEGUIR","x":"Me conta nos comentários + salva + me segue","o":"Legenda","f":"C1","r":"N","h":"Outubro foi um mês cheio de novidade em IA","n":""},{"p":"POST232","d":"2026-11-05","t":"IMAGEM","l":"https://www.instagram.com/p/DfXAGIbhGRJ/","c":"SEGUIR","x":"Salva + me segue","o":"Legenda","f":"C1","r":"N","h":"Quantas dessas você ainda faz no braço?","n":""},{"p":"POST233","d":"2026-11-06","t":"IMAGEM","l":"https://www.instagram.com/p/DfZyiJPgjb_/","c":"SST","x":"Comente ESPIAR","o":"Legenda","f":"C1","r":"N","h":"Você ainda usa o ChatGPT só para fazer perguntas?","n":""},{"p":"POST234","d":"2026-11-06","t":"CARROSSEL","l":"https://www.instagram.com/p/DfayrnuDnwP/","c":"APLICACAO","x":"Comenta MAPEAMENTO","o":"Legenda","f":"C3","r":"R","h":"Toda semana chega print assim no grupo da mentoria","n":""},{"p":"POST235","d":"2026-11-07","t":"VIDEO","l":"https://www.instagram.com/reel/DfdEV2KpoUx/","c":"SST","x":"Comenta ESPIAR","o":"Legenda","f":"C1","r":"N","h":"Olha esses efeitos feitos com inteligência artificial","n":""},{"p":"POST236","d":"2026-11-08","t":"VIDEO","l":"https://www.instagram.com/reel/DfejReKO5qY/","c":"SST","x":"Comenta ESPIAR + salva","o":"Legenda","f":"C1","r":"N","h":"O ChatGPT agora faz sua foto se mexer","n":""},{"p":"POST237","d":"2026-11-08","t":"CARROSSEL","l":"https://www.instagram.com/p/DffjAiCITVY/","c":"APLICACAO","x":"Comenta MAPEAMENTO","o":"Legenda","f":"C2","r":"R","h":"\"IA não é pra mim.\" Eu ouço essa frase toda semana","n":""},{"p":"POST238","d":"2026-11-09","t":"CARROSSEL","l":"https://www.instagram.com/p/DfijwEfDsAS/","c":"APLICACAO","x":"Comenta MAPEAMENTO","o":"Legenda","f":"C3","r":"R","h":"\"Mas o que acontece dentro da Paraíso Digital?\"","n":""},{"p":"POST242","d":"2026-11-09","t":"VIDEO","l":"https://www.instagram.com/reel/DfibLYMBrEW/","c":"LS","x":"Comenta ESPECIALISTA + já segue @anatex","o":"Legenda","f":"C1","r":"N","h":"Coisas que o ChatGPT faz e você não sabia, parte 48","n":""},{"p":"POST243","d":"2026-11-09","t":"VIDEO","l":"https://www.instagram.com/reel/Dfib1Y0BdFo/","c":"FORA DO AR","x":"(link fora do ar)","o":"","f":"C1","r":"N","h":"Coisas que o ChatGPT faz e você não sabia, parte 49","n":"Página não disponível"},{"p":"POST239","d":"2026-11-10","t":"CARROSSEL","l":"https://www.instagram.com/p/DflDrB4meHj/","c":"SST","x":"Me conta aqui embaixo + comente ESPIAR","o":"Legenda","f":"C1","r":"N","h":"Eu disse que podia provar","n":""},{"p":"POST244","d":"2026-11-10","t":"VIDEO","l":"https://www.instagram.com/reel/Dfj1Jhqtlw5/","c":"LS","x":"Salva + comenta ESPECIALISTA + já segue","o":"Legenda","f":"C2","r":"R","h":"2027 chega com mudança de imposto","n":""},{"p":"POST245","d":"2026-11-10","t":"VIDEO","l":"https://www.instagram.com/reel/Dfj7wmsPx8u/","c":"LS","x":"Salva + comenta ESPECIALISTA + já segue","o":"Legenda","f":"C2","r":"R","h":"Sabe aquela ferramenta que resolve a sua rotina?","n":""},{"p":"POST246","d":"2026-11-10","t":"VIDEO","l":"https://www.instagram.com/reel/DfkPBJZh1LW/","c":"FORA DO AR","x":"(link fora do ar)","o":"","f":"C1","r":"N","h":"Seu cliente pergunta no WhatsApp \"em que etapa está?\"","n":"Página não disponível"},{"p":"POST247","d":"2026-11-10","t":"VIDEO","l":"https://www.instagram.com/reel/DfkSIuhM1m3/","c":"LS","x":"Salva + comenta ESPECIALISTA + já segue","o":"Legenda","f":"C1","r":"N","h":"Aquilo que você faz com tanta facilidade","n":""},{"p":"POST248","d":"2026-11-10","t":"VIDEO","l":"https://www.instagram.com/reel/DfkZB8ZvXrE/","c":"LS","x":"Salva + comenta ESPECIALISTA + já segue","o":"Legenda","f":"C1","r":"N","h":"Se o cliente pede desconto, não enxergou a diferença","n":""},{"p":"POST249","d":"2026-11-10","t":"VIDEO","l":"https://www.instagram.com/reel/Dfkbw43uShH/","c":"FORA DO AR","x":"(link fora do ar)","o":"","f":"C1","r":"N","h":"Você já tem um passo a passo. Só nunca colocou no papel","n":"Página não disponível"},{"p":"POST250","d":"2026-11-10","t":"VIDEO","l":"https://www.instagram.com/reel/DfkdBclssWd/","c":"FORA DO AR","x":"(link fora do ar)","o":"","f":"C1","r":"N","h":"Quem cobra por hora tem teto","n":"Página não disponível"},{"p":"POST251","d":"2026-11-10","t":"VIDEO","l":"https://www.instagram.com/reel/DfkdsZyOvJX/","c":"FORA DO AR","x":"(link fora do ar)","o":"","f":"C1","r":"N","h":"Um mês inteiro de conteúdo que atrai cliente","n":"Página não disponível"},{"p":"POST240","d":"2026-11-11","t":"IMAGEM","l":"https://www.instagram.com/p/DfmYPrdDoX-/","c":"SST","x":"Comente ESPIAR + salva","o":"Legenda","f":"C1","r":"N","h":"Você ainda está fazendo tudo manualmente","n":""},{"p":"POST241","d":"2026-11-11","t":"IMAGEM","l":"https://www.instagram.com/p/DfnOAGmusMv/","c":"LS","x":"Comenta ESPECIALISTA (workshop)","o":"Legenda","f":"C1","r":"N","h":"Seu ChatGPT trabalha ou só conversa?","n":""},{"p":"POST252","d":"2026-11-11","t":"VIDEO","l":"https://www.instagram.com/reel/DfnRlUSOEB7/","c":"LS","x":"Comenta ESPECIALISTA + manda pra quem é da saúde + salva + segue","o":"Legenda","f":"C1","r":"N","h":"Especial pra área da saúde","n":""},{"p":"POST253","d":"2026-11-11","t":"VIDEO","l":"https://www.instagram.com/reel/DfngnO5hHwj/","c":"LS","x":"Comenta ESPECIALISTA","o":"Legenda","f":"C1","r":"N","h":"Na parte 70, quatro formas de usar o ChatGPT","n":""},{"p":"POST265","d":"2026-11-11","t":"VIDEO","l":"https://www.instagram.com/reel/DfnphUdMqcK/","c":"LS","x":"Comenta ESPECIALISTA + salva + já segue","o":"Legenda","f":"C2","r":"R","h":"Você sabe muito, mas o seu Instagram não mostra isso","n":""},{"p":"POST254","d":"2026-11-12","t":"VIDEO","l":"https://www.instagram.com/reel/DfpNR6luxqN/","c":"LS","x":"Comenta ESPECIALISTA + já segue","o":"Legenda","f":"C1","r":"N","h":"Sabe aquelas pessoas que já confiam em você?","n":""},{"p":"POST255","d":"2026-11-12","t":"VIDEO","l":"https://www.instagram.com/reel/Dfpyp1hyPr2/","c":"SST","x":"Me conta aqui + comenta ESPIAR + salva + segue","o":"Legenda","f":"C1","r":"N","h":"O que você aprendeu pode virar uma profissão sem nome","n":""},{"p":"POST256","d":"2026-11-12","t":"CARROSSEL","l":"https://www.instagram.com/p/DfqPGF-pQvH/","c":"APLICACAO","x":"Comenta MAPEAMENTO","o":"Legenda","f":"C3","r":"N","h":"Na Paraíso Digital, a aluna recebe uma equipe de robôs","n":""},{"p":"POST257","d":"2026-11-13","t":"VIDEO","l":"https://www.instagram.com/reel/Dfr0Y-jPUym/","c":"SST","x":"Salva + comenta ESPIAR + já segue","o":"Legenda","f":"C1","r":"N","h":"O ChatGPT mostra o cliente que pagaria mais","n":""},{"p":"POST258","d":"2026-11-13","t":"VIDEO","l":"https://www.instagram.com/reel/DfsaXeHBNZY/","c":"LS","x":"Comenta ESPECIALISTA + já segue","o":"Legenda","f":"C1","r":"N","h":"Passa o dia conversando com o ChatGPT e faz tudo sozinha","n":""},{"p":"POST259","d":"2026-11-13","t":"CARROSSEL","l":"https://www.instagram.com/p/DfstXM-o9cE/","c":"APLICACAO","x":"Salva + comenta MAPEAMENTO","o":"Legenda","f":"C1","r":"N","h":"Um vídeo gravado. Seis passos. 500 a 1.000 seguidores por dia","n":""},{"p":"POST275","d":"2026-11-13","t":"VIDEO","l":"https://www.instagram.com/reel/Dfry-F6h7n2/","c":"SST","x":"Salva + comenta ESPIAR + já segue","o":"Legenda","f":"C1","r":"N","h":"Em que assunto você poderia virar referência em um ano","n":""},{"p":"POST260","d":"2026-11-14","t":"VIDEO","l":"https://www.instagram.com/reel/Dft3MkTvB-k/","c":"SST","x":"Me segue + comenta ESPIAR","o":"Legenda","f":"C1","r":"N","h":"Uma coisa que você faz tão rápido que nem cobra","n":""},{"p":"POST261","d":"2026-11-14","t":"VIDEO","l":"https://www.instagram.com/reel/DfvJLMkNLdA/","c":"SST","x":"Salva + manda pra uma amiga + comenta ESPIAR","o":"Legenda","f":"C1","r":"N","h":"Tem gente que cobra pelo que sabe. E quem dá de graça","n":""},{"p":"POST262","d":"2026-11-14","t":"CARROSSEL","l":"https://www.instagram.com/p/DfvRVa2o62y/","c":"SEM CTA","x":"Me conta aqui + manda pra aquela amiga","o":"Legenda","f":"C1","r":"N","h":"Você não precisa dominar a IA pra começar a usar","n":"Só engajamento"},{"p":"POST263","d":"2026-11-14","t":"VIDEO","l":"https://www.instagram.com/reel/Dfvkt21BokM/","c":"LS","x":"Salva + me segue + comenta ESPECIALISTA (workshop)","o":"Legenda","f":"C1","r":"N","h":"Você olha o caso e já sabe o que a pessoa fez de errado","n":""},{"p":"POST276","d":"2026-11-14","t":"VIDEO","l":"https://www.instagram.com/reel/Dfvimcnh5aJ/","c":"SST","x":"Comenta ESPIAR + já segue","o":"Legenda","f":"C1","r":"N","h":"O ChatGPT faz a tarefa inteira","n":""},{"p":"POST264","d":"2026-11-15","t":"IMAGEM","l":"https://www.instagram.com/p/Dfx3OhDPF9k/","c":"SST","x":"Comente ESPIAR (promete exemplos de prompts) + salve","o":"Legenda","f":"C1","r":"R","h":"Suas imagens no GPT ainda não saem como você imaginou?","n":"Palavra ESPIAR mas a promessa é prompts e não a aula"},{"p":"POST266","d":"2026-11-16","t":"CARROSSEL","l":"https://www.instagram.com/p/Df0Pmdpo7Y1/","c":"APLICACAO","x":"Salva + comenta MAPEAMENTO","o":"Legenda","f":"C2","r":"N","h":"Antes de uma call de venda, eu faço um ensaio com a IA","n":""},{"p":"POST267","d":"2026-11-17","t":"VIDEO","l":"https://www.instagram.com/reel/Df1w5Y3sjwn/","c":"SST","x":"Comenta ESPIAR + já segue","o":"Legenda","f":"C1","r":"N","h":"Um padrão que se repete e trava o seu crescimento","n":""},{"p":"POST268","d":"2026-11-17","t":"CARROSSEL","l":"https://www.instagram.com/p/Df3II04o7qQ/","c":"APLICACAO","x":"Comenta MAPEAMENTO","o":"Legenda","f":"C2","r":"N","h":"Aumentou o preço da mentoria em 50% e cortou os encontros","n":""},{"p":"POST269","d":"2026-11-19","t":"CARROSSEL","l":"https://www.instagram.com/p/Df7G_4uJQms/","c":"APLICACAO","x":"Comenta MAPEAMENTO","o":"Legenda","f":"C2","r":"R","h":"2 workshops. 6 vendas de mentoria. No primeiro lançamento","n":""},{"p":"POST270","d":"2026-11-19","t":"CARROSSEL","l":"https://www.instagram.com/p/Df7-nNjJVSN/","c":"APLICACAO","x":"Comenta MAPEAMENTO","o":"Legenda","f":"C2","r":"R","h":"O mapeamento não é pra todo mundo. E tudo bem","n":"Cita a Sala Secreta para quem está começando"},{"p":"POST277","d":"2026-11-19","t":"VIDEO","l":"https://www.instagram.com/reel/Df6tB0QOAjl/","c":"LS","x":"Salva + comenta ESPECIALISTA + já segue","o":"Legenda","f":"C1","r":"N","h":"Você ainda manda proposta em textão no WhatsApp?","n":""},{"p":"POST271","d":"2026-11-20","t":"VIDEO","l":"https://www.instagram.com/reel/Df-v3zQM1Is/","c":"SST","x":"Comente ESPIAR","o":"Legenda","f":"C1","r":"N","h":"Vários tipos de imagem com o GPT usando uma foto","n":""},{"p":"POST272","d":"2026-11-21","t":"VIDEO","l":"https://www.instagram.com/reel/DgBR_G2B4Ov/","c":"SST","x":"Comentar ESPIAR","o":"Legenda","f":"C1","r":"N","h":"Você já testou edição de vídeos com IA?","n":""},{"p":"POST273","d":"2026-11-22","t":"CARROSSEL","l":"https://www.instagram.com/p/DgDzoloIyE-/","c":"APLICACAO","x":"Comente MAPEAMENTO","o":"Legenda","f":"C1","r":"N","h":"Você ainda usa a IA só para fazer perguntas?","n":""},{"p":"POST274","d":"2026-11-23","t":"CARROSSEL","l":"https://www.instagram.com/p/DgGZ5X5o0Cl/","c":"SST","x":"Salva + comenta ESPIAR","o":"Legenda","f":"C1","r":"N","h":"Um talento que você usa todo dia e vale dinheiro","n":""},{"p":"POST278","d":"2026-11-24","t":"CARROSSEL","l":"https://www.instagram.com/p/DgIHt58JZIe/","c":"SST","x":"Salva + comenta ESPIAR","o":"Legenda","f":"C1","r":"N","h":"Nem todo vídeo que você vê aqui eu gravei","n":""},{"p":"POST279","d":"2026-11-25","t":"VIDEO","l":"https://www.instagram.com/reel/DgKk9trhi-C/","c":"APLICACAO","x":"Escreva aqui MAPEAMENTO","o":"Legenda","f":"C2","r":"N","h":"Viviane automatizou seu escritório","n":""},{"p":"POST280","d":"2026-11-25","t":"CARROSSEL","l":"https://www.instagram.com/p/DgK1nhKJSah/","c":"APLICACAO","x":"Comente MAPEAMENTO","o":"Legenda","f":"C1","r":"N","h":"A IA não precisa tomar o seu lugar","n":""},{"p":"POST281","d":"2026-11-25","t":"CARROSSEL","l":"https://www.instagram.com/p/DgLjbFEJXUv/","c":"APLICACAO","x":"Comenta MAPEAMENTO","o":"Legenda","f":"C3","r":"N","h":"Por mais de 20 anos, a Paula entregou de graça o que sabia","n":""},{"p":"POST282","d":"2026-11-25","t":"VIDEO","l":"https://www.instagram.com/reel/DgL10e-BWdN/","c":"SST","x":"Comenta ESPIAR + já segue","o":"Legenda","f":"C1","r":"N","h":"Você paga vários aplicativos e não usa nem a metade?","n":""}];
+
+const CATS = [
+  {k:'SST', nome:'Sala Secreta', rotulo:'CTA SST', cor:'var(--c-sst)', palavras:['ESPIAR'], acao:'Comentar para receber o link da aula gratuita de quarta, 10h30'},
+  {k:'LS', nome:'Workshop Especialista com IA', rotulo:'CTA LS', cor:'var(--c-ls)', palavras:['ESPECIALISTA'], acao:'Comentar para receber o link do workshop no direct'},
+  {k:'APLICACAO', nome:'Mentoria Paraíso Digital', rotulo:'CTA APLICACAO', cor:'var(--c-apl)', palavras:['MAPEAMENTO','MENTORIA'], acao:'Comentar para falar com a equipe (MENTORIA apareceu 1 vez, em 14/10)'},
+  {k:'SEGUIR', nome:'Seguir o perfil', rotulo:'CTA SEGUIR', cor:'var(--c-seg)', palavras:[], acao:'"Me segue @anatex", sem palavra-chave'},
+  {k:'SEM CTA', nome:'Só engajamento', rotulo:'SEM CTA', cor:'var(--c-sem)', palavras:[], acao:'Salvar, comentar um número, marcar ou mandar para uma amiga'},
+  {k:'OPORTUNIDADE', nome:'Oportunidade', rotulo:'CTA LS na planilha', cor:'var(--c-opo)', palavras:['OPORTUNIDADE'], acao:'Comentar para receber link do workshop ou das aulas gratuitas'},
+  {k:'PERFIL/STORIES', nome:'Perfil e stories', rotulo:'CTA PERFIL/STORIES', cor:'var(--c-per)', palavras:[], acao:'"Entra no meu perfil e veja os stories"'},
+  {k:'FORA DO AR', nome:'Link fora do ar', rotulo:'não conferido', cor:'var(--c-off)', palavras:[], acao:'Página não disponível no Instagram'}
+];
+const CAT = Object.fromEntries(CATS.map(c=>[c.k,c]));
+const TIPOS = {VIDEO:'Vídeo', CARROSSEL:'Carrossel', IMAGEM:'Imagem'};
+const esc = s => String(s).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const pct = (a,b) => b ? Math.round(a/b*100) + '%' : '0%';
+const conta = (arr, fn) => arr.reduce((m,x)=>{const k=fn(x); m[k]=(m[k]||0)+1; return m;}, {});
+const dataBR = iso => iso.slice(8,10)+'/'+iso.slice(5,7);
+const $ = id => document.getElementById(id);
+
+const lidas = DATA.filter(x => x.c !== 'FORA DO AR');
+const porCat = conta(DATA, x => x.c);
+const conv = lidas.filter(x => ['SST','LS','APLICACAO','OPORTUNIDADE'].includes(x.c));
+const soVideo = DATA.filter(x => x.o === 'Vídeo (tela)');
+const dot = cor => '<i class="dot" style="background:'+cor+'"></i>';
+
+/* ---------- topo e KPIs ---------- */
+$('m-total').textContent = DATA.length + ' publicações mapeadas';
+$('kpis').innerHTML = [
+  ['destaque','Publicações mapeadas', DATA.length, lidas.length + ' lidas · ' + (porCat['FORA DO AR']||0) + ' com link fora do ar'],
+  ['','Pedem comentário com palavra-chave', conv.length, pct(conv.length, lidas.length) + ' das publicações lidas'],
+  ['','CTA mais usado', 'ESPIAR', porCat.SST + ' publicações · ' + pct(porCat.SST, lidas.length) + ' das lidas'],
+  ['','CTA só dentro do vídeo', soVideo.length, 'A legenda não traz a palavra-chave']
+].map(k => '<div class="kpi '+k[0]+'"><small>'+k[1]+'</small><b>'+k[2]+'</b><span class="hint">'+k[3]+'</span></div>').join('');
+
+/* ---------- barra geral + tabela resumo ---------- */
+const catsLidas = CATS.filter(c => c.k !== 'FORA DO AR' && porCat[c.k]);
+$('barra-geral').innerHTML = catsLidas.map(c => '<i style="width:'+(porCat[c.k]/lidas.length*100)+'%;background:'+c.cor+'" title="'+esc(c.nome)+': '+porCat[c.k]+'"></i>').join('');
+$('leg-geral').innerHTML = catsLidas.map(c => '<span>'+dot(c.cor)+esc(c.nome)+' · '+porCat[c.k]+' ('+pct(porCat[c.k], lidas.length)+')</span>').join('');
+
+const maxCat = Math.max(...CATS.map(c => porCat[c.k]||0));
+document.querySelector('#resumo-tab tbody').innerHTML = CATS.filter(c => porCat[c.k]).map(c => {
+  const out = DATA.filter(x => x.c===c.k && x.d.slice(5,7)==='10').length;
+  const nov = DATA.filter(x => x.c===c.k && x.d.slice(5,7)==='11').length;
+  const pal = c.palavras.map(p => '<span class="palavra">'+p+'</span>').join('');
+  return '<tr><td class="nome"><b>'+dot(c.cor)+esc(c.nome)+'</b><span>'+esc(c.rotulo)+'</span></td>'
+    + '<td>'+pal+'<span class="hint">'+esc(c.acao)+'</span></td>'
+    + '<td class="num">'+out+'</td><td class="num">'+nov+'</td><td class="num"><b style="font-weight:600">'+porCat[c.k]+'</b></td>'
+    + '<td class="num">'+(c.k==='FORA DO AR' ? '–' : pct(porCat[c.k], lidas.length))+'</td>'
+    + '<td><div class="trilho"><i style="width:'+(porCat[c.k]/maxCat*100)+'%;background:'+c.cor+'"></i></div></td></tr>';
+}).join('');
+
+/* ---------- semanas ---------- */
+const segunda = iso => { const d = new Date(iso+'T12:00:00'); const dia = (d.getDay()+6)%7; d.setDate(d.getDate()-dia); return d.toISOString().slice(0,10); };
+const semanas = [...new Set(DATA.map(x => segunda(x.d)))].sort();
+const porSem = semanas.map(s => ({s, itens: DATA.filter(x => segunda(x.d)===s)}));
+const maxSem = Math.max(...porSem.map(w => w.itens.length));
+$('semanas').innerHTML = porSem.map(w => {
+  const c = conta(w.itens, x => x.c);
+  const segs = CATS.filter(k => c[k.k]).map(k => '<i style="height:'+(c[k.k]/maxSem*180)+'px;background:'+k.cor+'" title="'+esc(k.nome)+': '+c[k.k]+'"></i>').join('');
+  return '<div class="sem"><div class="tot">'+w.itens.length+'</div><div class="pilha">'+segs+'</div></div>';
+}).join('');
+$('sem-rot').innerHTML = porSem.map((w,i) => '<span>'+(i===0 ? '01/10' : dataBR(w.s))+'</span>').join('');
+$('leg-sem').innerHTML = CATS.filter(c => porCat[c.k]).map(c => '<span>'+dot(c.cor)+esc(c.nome)+'</span>').join('');
+
+/* ---------- meses ---------- */
+$('meses').innerHTML = [['10','Outubro'],['11','Novembro']].map(([m,nome]) => {
+  const it = DATA.filter(x => x.d.slice(5,7)===m && x.c!=='FORA DO AR');
+  const c = conta(it, x => x.c);
+  const cats = CATS.filter(k => c[k.k]);
+  return '<div class="mes"><div class="top"><b>'+nome+'</b><span class="hint">'+it.length+' publicações lidas</span></div>'
+    + '<div class="barra">'+cats.map(k => '<i style="width:'+(c[k.k]/it.length*100)+'%;background:'+k.cor+'" title="'+esc(k.nome)+': '+c[k.k]+'"></i>').join('')+'</div>'
+    + '<ul>'+cats.map(k => '<li><span>'+dot(k.cor)+esc(k.nome)+'</span><b>'+c[k.k]+' · '+pct(c[k.k], it.length)+'</b></li>').join('')+'</ul></div>';
+}).join('');
+
+/* ---------- cruzamentos ---------- */
+const principais = CATS.filter(c => ['SST','LS','APLICACAO','SEGUIR','SEM CTA'].includes(c.k));
+$('cruz-formato').innerHTML = principais.map(c => {
+  const it = DATA.filter(x => x.c===c.k); const t = conta(it, x => x.t);
+  const cores = {VIDEO:'var(--f-vid)', CARROSSEL:'var(--f-car)', IMAGEM:'var(--f-img)'};
+  const bar = Object.keys(TIPOS).filter(k => t[k]).map(k => '<i style="width:'+(t[k]/it.length*100)+'%;background:'+cores[k]+'" title="'+TIPOS[k]+': '+t[k]+'"></i>').join('');
+  const txt = Object.keys(TIPOS).filter(k => t[k]).map(k => t[k]+' '+TIPOS[k].toLowerCase()).join(' · ');
+  return '<div class="rot">'+dot(c.cor)+esc(c.nome)+'</div><div class="barra">'+bar+'</div><div class="val">'+txt+'</div>';
+}).join('');
+$('cruz-rodou').innerHTML = principais.map(c => {
+  const it = DATA.filter(x => x.c===c.k && x.r!=='-'); const r = it.filter(x => x.r==='R').length;
+  return '<div class="rot">'+dot(c.cor)+esc(c.nome)+'</div>'
+    + '<div class="barra"><i style="width:'+(r/it.length*100)+'%;background:var(--roxo)"></i><i style="width:'+((it.length-r)/it.length*100)+'%;background:var(--c-off)"></i></div>'
+    + '<div class="val">'+r+' de '+it.length+' · '+pct(r, it.length)+'</div>';
+}).join('');
+
+/* ---------- leituras ---------- */
+const n = (k, f) => DATA.filter(x => x.c===k && (!f || f(x))).length;
+const mes = m => x => x.d.slice(5,7)===m;
+const c1 = DATA.filter(x => x.f==='C1' && x.c!=='FORA DO AR');
+const semPico = porSem.reduce((a,b) => b.itens.length > a.itens.length ? b : a);
+const picoLS = semPico.itens.filter(x => x.c==='LS').length, picoOff = semPico.itens.filter(x => x.c==='FORA DO AR').length;
+const comSalvar = conv.filter(x => /salv/i.test(x.x)).length, comSeguir = conv.filter(x => /segu|siga/i.test(x.x)).length;
+$('leituras').innerHTML = [
+  [pct(porCat.SST, lidas.length), 'ESPIAR é quase metade de tudo',
+    'A Sala Secreta foi o CTA de '+porCat.SST+' publicações ('+n('SST',mes('10'))+' em outubro, '+n('SST',mes('11'))+' em novembro). É o CTA padrão do perfil, em vídeo, carrossel e imagem.'],
+  [n('APLICACAO',mes('10'))+' → '+n('APLICACAO',mes('11')), 'MAPEAMENTO cresceu em novembro',
+    'O CTA da mentoria passou de '+n('APLICACAO',mes('10'))+' publicações em outubro para '+n('APLICACAO',mes('11'))+' em novembro, e '+n('APLICACAO',x=>x.t==='CARROSSEL')+' das '+porCat.APLICACAO+' são carrosséis de prova social e depoimento.'],
+  [picoLS+' em 1 semana', 'ESPECIALISTA veio em bloco',
+    n('LS',x=>x.t==='VIDEO')+' das '+porCat.LS+' publicações do workshop são vídeos. Só a semana de '+dataBR(semPico.s)+' teve '+picoLS+' delas, além de '+picoOff+' links daquela semana que hoje estão fora do ar.'],
+  [n('SEGUIR',x=>x.f==='C1')+' de '+c1.length, 'Em C1, poucas pedem para seguir',
+    'Das '+c1.length+' publicações lidas marcadas como C1 (frente de seguidores), '+n('SEGUIR',x=>x.f==='C1')+' têm "me segue" como CTA principal. '+c1.filter(x=>x.c==='SST').length+' pedem ESPIAR e '+c1.filter(x=>x.c==='LS').length+' pedem ESPECIALISTA.'],
+  [soVideo.length+' vídeos', 'CTA que só aparece na tela',
+    'Em '+soVideo.length+' vídeos a palavra-chave está só no vídeo e a legenda diz outra coisa ou nada ('+soVideo.filter(x=>x.c==='LS').length+' ESPECIALISTA e '+soVideo.filter(x=>x.c==='APLICACAO').length+' MAPEAMENTO). Quem lê só a legenda classifica errado.'],
+  [comSalvar+' e '+comSeguir, 'Dois ou três pedidos no mesmo post',
+    'Das '+conv.length+' publicações com palavra-chave, '+comSalvar+' também pedem para salvar e '+comSeguir+' também pedem para seguir. Vale discutir se o segundo pedido divide a atenção.']
+].map(l => '<div class="leitura"><b class="n">'+l[0]+'</b><h3>'+l[1]+'</h3><p>'+l[2]+'</p></div>').join('');
+
+/* ---------- tabela completa ---------- */
+let filtroCat = '';
+function desenhaChips(){
+  $('chips').innerHTML = '<button class="chip'+(filtroCat===''?' on':'')+'" data-k="" type="button">Todos<b>'+DATA.length+'</b></button>'
+    + CATS.filter(c => porCat[c.k]).map(c => '<button class="chip'+(filtroCat===c.k?' on':'')+'" data-k="'+esc(c.k)+'" type="button">'+dot(c.cor)+esc(c.nome)+'<b>'+porCat[c.k]+'</b></button>').join('');
+}
+function desenhaTabela(){
+  const m = $('f-mes').value, t = $('f-tipo').value, r = $('f-rodou').value, q = $('f-busca').value.trim().toLowerCase();
+  const it = DATA.filter(x => (!filtroCat || x.c===filtroCat) && (!m || x.d.slice(5,7)===m) && (!t || x.t===t) && (!r || x.r===r)
+    && (!q || (x.p+' '+x.h+' '+x.x+' '+x.c).toLowerCase().includes(q)));
+  document.querySelector('#posts tbody').innerHTML = it.map(x => {
+    const c = CAT[x.c];
+    const onde = x.o === 'Vídeo (tela)' ? '<span class="tag video">Só no vídeo</span>' : x.o ? '<span class="tag">'+esc(x.o)+'</span>' : '–';
+    const rod = x.r==='R' ? '<span class="tag sim">Rodou</span>' : x.r==='N' ? '<span class="tag">Não rodou</span>' : '<span class="tag">Fora da lista</span>';
+    return '<tr><td class="num" style="text-align:left!important">'+dataBR(x.d)+'</td>'
+      + '<td class="pub"><a href="'+esc(x.l)+'" target="_blank" rel="noopener">'+esc(x.h)+'</a><small>'+esc(x.p)+(x.n ? ' · '+esc(x.n) : '')+'</small></td>'
+      + '<td>'+TIPOS[x.t]+'</td>'
+      + '<td><span class="pill">'+dot(c.cor)+esc(c.nome)+'</span></td>'
+      + '<td class="txt">'+esc(x.x)+'</td><td>'+onde+'</td><td>'+(x.f==='-' ? '–' : esc(x.f))+'</td><td>'+rod+'</td></tr>';
+  }).join('');
+  $('vazio').hidden = it.length > 0;
+  $('contagem').innerHTML = 'Mostrando <b>'+it.length+'</b> de '+DATA.length+' publicações';
+}
+$('chips').addEventListener('click', e => { const b = e.target.closest('.chip'); if(!b) return; filtroCat = b.dataset.k; desenhaChips(); desenhaTabela(); });
+['f-mes','f-tipo','f-rodou'].forEach(id => $(id).addEventListener('change', desenhaTabela));
+$('f-busca').addEventListener('input', desenhaTabela);
+desenhaChips(); desenhaTabela();
+</script>
+
+</body>
+</html>
