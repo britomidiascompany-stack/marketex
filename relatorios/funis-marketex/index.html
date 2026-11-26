@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Funis da Marketex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--roxo:#7C3AED;--roxo2:#A78BFA;--roxo3:#EDE9FE;--dark:#0F0B1E;--bg:#F5F3FA;--card:#fff;--txt:#1F1A2E;--muted:#5F5876;--line:#E6E1F0;
+ --m:#059669;--n:#EA580C;--a:#DB2777;--ok:#15803D;--okb:#DCFCE7;--wa:#B45309;--wab:#FEF3C7;--no:#B91C1C;--nob:#FEE2E2;--qu:#1D4ED8;--qub:#DBEAFE}
+*{box-sizing:border-box}
+body{margin:0;font-family:Poppins,system-ui,sans-serif;color:var(--txt);background:var(--bg);font-size:14px;line-height:1.5}
+a{color:var(--roxo)}
+.wrap{max-width:1280px;margin:0 auto;padding:0 24px}
+.hero{background:var(--dark);color:#fff;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:24px 24px;padding:32px 0 26px}
+.hero small{color:var(--roxo2);font-weight:600;letter-spacing:.6px;text-transform:uppercase;font-size:12px}
+.hero h1{margin:6px 0 0;font-size:32px;line-height:1.15;font-weight:800;letter-spacing:-.5px}.hero h1 span{color:var(--roxo2)}
+.hero p{margin:8px 0 0;color:#CEC8E0;max-width:80ch}
+.tabs{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 0}
+.tabs .wrap{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tabs button{border:1px solid var(--line);background:#fff;font:600 14px Poppins;color:var(--txt);padding:9px 16px;border-radius:10px;cursor:pointer}
+.tabs button[aria-pressed=true]{background:var(--roxo);border-color:var(--roxo);color:#fff}
+.tabs button small{font-weight:500;opacity:.75;margin-left:6px}
+.tabs .leg{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap;font-size:12px}
+section{padding:26px 0 4px}
+h2{margin:0 0 4px;font-size:22px;font-weight:700;letter-spacing:-.3px}
+.lead{margin:0 0 16px;color:var(--muted);max-width:95ch}
+.st{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:2px 9px;border-radius:99px;white-space:nowrap}
+.st.ok{background:var(--okb);color:var(--ok)}.st.wa{background:var(--wab);color:var(--wa)}.st.no{background:var(--nob);color:var(--no)}.st.qu{background:var(--qub);color:var(--qu)}
+/* trilho de etapas */
+.rail{display:flex;gap:0;overflow-x:auto;padding:4px 2px 10px}
+.rs{flex:1 0 108px;position:relative;text-align:center;padding:0 6px}
+.rs .b{width:38px;height:38px;border-radius:50%;margin:0 auto 6px;display:grid;place-items:center;color:#fff;font-weight:800;background:var(--c,var(--roxo));position:relative;z-index:1}
+.rs:not(:last-child)::after{content:'';position:absolute;top:19px;left:calc(50% + 19px);right:calc(-50% + 19px);height:3px;background:var(--line)}
+.rs .t{font-weight:600;font-size:13px;line-height:1.25}.rs .w{font-size:12px;color:var(--muted)}
+/* etapas detalhadas */
+.stage{display:grid;grid-template-columns:54px 1fr 1fr;gap:0 18px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:12px;border-left:5px solid var(--c,var(--roxo))}
+.stage .num{width:40px;height:40px;border-radius:12px;background:var(--c,var(--roxo));color:#fff;font-weight:800;display:grid;place-items:center;font-size:16px}
+.stage h3{margin:0;font-size:17px;font-weight:700;line-height:1.3}
+.stage .what{margin:4px 0 0;color:var(--txt)}
+.stage ul{margin:8px 0 0;padding-left:18px}.stage li{margin:2px 0}
+.trk{background:#FAF9FD;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.trk .h{font-size:11.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.trk .row{display:flex;gap:8px;align-items:flex-start;padding:5px 0;border-top:1px solid var(--line)}.trk .row:first-of-type{border-top:0}
+.trk .tool{font-weight:700;min-width:118px}.trk .row span.d{flex:1}
+.trk .row .st{margin-left:auto}
+.branch{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:2px 0 12px}
+.bcol{background:#fff;border:1px solid var(--line);border-top:5px solid var(--c);border-radius:16px;padding:14px}
+.bcol h3{margin:0 0 2px;font-size:17px}.bcol .who{color:var(--muted);font-size:12.5px;margin-bottom:8px}
+.bcol ol{margin:0;padding-left:18px}.bcol li{margin:3px 0}
+.fork{text-align:center;color:var(--muted);font-size:13px;margin:4px 0 10px}
+/* fluxo dos dados */
+.flow{display:grid;grid-template-columns:1fr 60px 1fr 60px 1fr;gap:10px;align-items:stretch}
+.fc{display:flex;flex-direction:column;gap:10px}
+.fc .ttl{font-size:11.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)}
+.box{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.box b{display:block;font-size:14px}.box span{font-size:12.5px;color:var(--muted)}
+.arrow{display:flex;align-items:center;justify-content:center;color:var(--roxo2);font-size:26px;font-weight:700}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:12px;color:var(--muted);font-weight:600;background:#FAF9FD}
+tr:last-child td{border-bottom:0}
+.tw{overflow-x:auto}
+.gaps{counter-reset:g;list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gaps li{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px 12px 50px;position:relative}
+.gaps li::before{counter-increment:g;content:counter(g);position:absolute;left:14px;top:12px;width:26px;height:26px;border-radius:8px;background:var(--wab);color:var(--wa);font-weight:800;display:grid;place-items:center;font-size:13px}
+.gaps b{display:block}.gaps span{color:var(--muted);font-size:13px}
+.empty{background:#fff;border:1px dashed var(--roxo2);border-radius:16px;padding:22px;color:var(--muted)}
+.foot{color:var(--muted);font-size:12.5px;padding:26px 0 40px}
+@media(max-width:900px){.stage{grid-template-columns:44px 1fr}.stage .trk{grid-column:2;margin-top:10px}.branch,.gaps{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg);height:30px}.tabs .leg{margin-left:0}}
+@media(max-width:560px){.wrap{padding:0 16px}.hero h1{font-size:25px}.tabs{position:static}.trk .tool{min-width:90px}}
+</style>
+</head>
+<body>
+<div class="hero"><div class="wrap"><small>Brito Mídias · Marketex</small><h1>Funis da <span>Marketex</span></h1>
+<p>Cada funil em etapas: o que acontece com a pessoa e onde medimos cada passo. Serve de base para os relatórios e para combinar com o time o que ainda falta registrar.</p></div></div>
+<div class="tabs"><div class="wrap" id="tabs"></div></div>
+<main class="wrap" id="main"></main>
+<div class="wrap foot">Brito Mídias · documento vivo, atualizado conforme cada funil é revisado · nenhum dado pessoal nesta página</div>
+<script>
+/* Situação: ok = funciona · wa = parcial · qu = a confirmar · no = não existe */
+const ST={ok:'✓ funciona',wa:'! parcial',qu:'? confirmar',no:'✕ não existe'};
+const FUNIS=[
+{id:'mapeamento', nome:'Quiz do Mapeamento', status:'mapeado em 26/11/26',
+ resumo:'Anúncio leva para um quiz no inLead. Pelo faturamento, a pessoa vai para um de 3 caminhos: Mapeamento (agendar com o comercial no WhatsApp), MNIA (oferta de R$ 2.997) ou ANP (oferta de R$ 897).',
+ trilho:[['Anúncio','Meta Ads'],['Página do quiz','inLead'],['Quiz (10 telas)','inLead'],['Divisão','faturamento'],['Vídeo e tela final','VTurb · inLead'],['Clica em agendar','WhatsApp'],['Atendimento','Unnichat'],['Qualificação','time comercial'],['Call','time comercial'],['Venda','mentoria']],
+ etapas:[
+  {t:'Anúncio',o:'Campanhas [59] público frio (Advantage+) e [60] público quente (engajamento de 90 dias), conta ANEX 08. O link leva as UTMs: origem MTADS-MPD-MAPEAMENTO-QUIZZ, campanha, conjunto e anúncio.',
+   m:['Gasto, impressões, cliques e visitas à página','Conversão "LEAD QUALIFICADO | QUIZ MAPEAMENTO" (otimização da campanha)'],
+   k:[['Meta Ads','Gerenciador de anúncios, por campanha e anúncio','ok'],['Relatórios','puxam direto do Meta na hora de atualizar; não há aba do Meta na planilha','wa']]},
+  {t:'Página do quiz',o:'quizfn.lucrocomia.com.br, funil 144226 no inLead. Primeira tela com a promessa e o botão "Começar meu diagnóstico".',
+   m:['Visitas e quantos começam o quiz'],
+   k:[['inLead','visitas e início do quiz','ok'],['Pixel Meta','PageView e ViewContent, pelo Google Tag Manager com servidor próprio','ok']]},
+  {t:'Quiz (10 telas)',o:'Uso de IA, nome, faturamento, frase, o que mudaria, investimento e, na tela 9, e-mail e WhatsApp.',
+   m:['Quem passou de cada tela','Respostas de cada pessoa','Contato (e-mail e WhatsApp)'],
+   k:[['inLead','cada tela e cada resposta','ok'],['Pixel Meta','evento Lead quando deixa o contato','ok'],['n8n → planilha','o inLead avisa o n8n a cada tela; a cada 5 minutos o n8n grava 1 linha por pessoa na aba "QUIZ | LEADS (inLead)"','ok']]},
+  {t:'Divisão pelo faturamento',o:'Só o faturamento decide: até R$ 5 mil vai para o MNIA, sem negócio vai para o ANP, R$ 5 mil ou mais vai para o Mapeamento.',
+   m:['Quantos vão para cada caminho'],
+   k:[['Pixel Meta','evento QuizQualificado quando entra no caminho do Mapeamento','ok'],['Planilha','coluna "Ramo" na aba de leads','ok']]},
+  {t:'Mapeamento: vídeo e tela final',o:'Duas perguntas, um vídeo de 7:16 (botão aparece aos 7:07) e a tela "Falta só um último passo". Versão nova desde 24/11, 17h29.',
+   m:['Quem chega ao vídeo e quem passa dele','Quanto do vídeo as pessoas assistem'],
+   k:[['inLead','telas e cliques','ok'],['VTurb','retenção do vídeo; consulta manual no painel do VTurb','wa']]},
+  {t:'Clica em agendar',o:'O botão abre o WhatsApp (19) 3167-1024 com a mensagem "Fiz meu quiz de diagnóstico e quero agendar meu mapeamento".',
+   m:['Quem clicou em agendar'],
+   k:[['Pixel Meta','evento Schedule','ok'],['Planilha','coluna "Clicou em agendar"','ok'],['n8n → Unnichat','manda nome, contato, respostas e UTMs para o Unnichat no clique','ok'],['WhatsApp','a mensagem não leva código do lead, então a conversa não se liga sozinha ao anúncio','no']]},
+  {t:'Atendimento no WhatsApp',o:'O Unnichat recebe o contato com as respostas e as UTMs. O lead aparece na aba "Tráfego e Orgânico" da planilha do Mapeamento, com as UTMs do anúncio.',
+   m:['Quem chegou ao comercial'],
+   k:[['Unnichat','recebe o lead do n8n','ok'],['Unnichat → planilha','os leads do quiz aparecem na aba "Tráfego e Orgânico" só com as UTMs; quem grava e quando ainda precisa ser confirmado','qu']]},
+  {t:'Qualificação comercial',o:'O time comercial classifica e atualiza o status de cada lead na aba "Tráfego e Orgânico".',
+   m:['Classificação: Para qualificar → Qualificada ou Desqualificada','Status: Em atendimento → Follow-up → Call agendada → Call realizada ou No-show → Em negociação → Ganho ou Perdido'],
+   k:[['Planilha','aba "Tráfego e Orgânico", preenchida pelo comercial','ok'],['Data do status','a aba não guarda quando o status mudou','no'],['Cruzamento','aba "QUIZ | LEADS + STATUS" junta quiz e comercial por telefone ou e-mail','ok']]},
+  {t:'Call',o:'Call de mapeamento com o comercial.',
+   m:['Calls agendadas, realizadas e no-show'],
+   k:[['Controle Gerencial Comercial','aba "Calls Agendadas"; só tem o nome da pessoa, não dá para ligar ao lead do quiz','wa'],['Planilha','status "Call agendada" e "Call realizada" na aba "Tráfego e Orgânico"','ok']]},
+  {t:'Venda',o:'Venda da mentoria pelo time comercial.',
+   m:['Vendas e valor por origem'],
+   k:[['Controle Gerencial Comercial','aba "Vendas" com produto, valor e funil; só tem o nome da pessoa','wa'],['Planilha','status "Negócio ganho" na aba "Tráfego e Orgânico"','ok']]}
+ ],
+ ramos:[
+  {n:'Mapeamento',c:'var(--m)',w:'fatura R$ 5 mil por mês ou mais',p:['2 perguntas (negócio e momento)','Vídeo único de 7:16','Tela final e clique em agendar','WhatsApp, comercial, call e venda (etapas 6 a 10 acima)']},
+  {n:'MNIA · Meu Negócio com IA',c:'var(--n)',w:'fatura até R$ 5 mil por mês',p:['2 perguntas','Vídeo 1 e vídeo 2 com a oferta de R$ 2.997','Página lp.lucrocomia.com.br/meunegociocomia','Checkout Hotmart → venda gravada na planilha do LS (aba "HOTMART | VENDAS MARKETEX - COMPLETA")']},
+  {n:'ANP · Academia de Novas Profissões',c:'var(--a)',w:'ainda não tem negócio',p:['7 telas (perguntas, notícias, depoimentos)','Oferta de R$ 897 com vídeo','Checkout Hotmart → venda gravada na mesma aba da planilha do LS']}
+ ],
+ fluxo:{fontes:[['Meta Ads','gasto, cliques, visitas, conversões'],['inLead','telas, respostas, contato'],['Pixel Meta + GTM','eventos para a otimização do Meta'],['VTurb','retenção dos vídeos'],['Unnichat','conversa no WhatsApp'],['Time comercial','status, calls, vendas'],['Hotmart','vendas do MNIA e do ANP']],
+  meio:[['n8n','recebe o inLead a cada tela; grava na planilha e manda ao Unnichat'],['Planilha do Mapeamento','abas QUIZ | LEADS, Tráfego e Orgânico, LEADS + STATUS'],['Planilha do LS','aba HOTMART | VENDAS MARKETEX - COMPLETA'],['Controle Gerencial Comercial','Calls Agendadas e Vendas']],
+  fim:[['Relatório do quiz','números do Meta e da planilha'],['Mapa do funil','cada tela, respostas, antes × agora'],['Funil para apresentar','etapas, benchmark, semana a semana'],['Lista do comercial','próximo passo de cada lead']]},
+ tabela:[
+  ['Meta Ads','gasto, impressões, cliques, visitas, conversões','relatórios (puxados direto)','na hora de atualizar','wa'],
+  ['Pixel Meta (GTM web + servidor)','PageView, ViewContent, Lead, QuizQualificado, Schedule','Meta (otimização e conversão)','automático','ok'],
+  ['inLead','cada tela, respostas, contato, UTMs','n8n → aba "QUIZ | LEADS (inLead)"','automático, a cada 5 min','ok'],
+  ['n8n','clique em agendar com respostas e UTMs','Unnichat','automático, no clique','ok'],
+  ['Unnichat','lead que chegou ao WhatsApp','aba "Tráfego e Orgânico"','a confirmar','qu'],
+  ['Time comercial','classificação e status','aba "Tráfego e Orgânico"','manual','ok'],
+  ['Time comercial','calls e vendas','Controle Gerencial Comercial','manual, só com nome','wa'],
+  ['Hotmart','vendas do MNIA e do ANP','planilha do LS, aba COMPLETA','automático','ok'],
+  ['VTurb','retenção dos vídeos','painel do VTurb','consulta manual','wa'],
+  ['Planilha do Mapeamento','tudo acima cruzado por pessoa','aba "QUIZ | LEADS + STATUS" e relatórios','fórmulas, automático','ok']],
+ gaps:[
+  ['Quem grava o lead do Unnichat na planilha','Confirmar com o Richardison se é o Unnichat e em que momento (no clique ou na primeira resposta).'],
+  ['Data da mudança de status','Sem a data, não dá para medir quanto tempo o lead fica parado em cada etapa. Uma coluna "Atualizado em" resolve.'],
+  ['Calls e vendas sem e-mail ou telefone','O Controle Gerencial só tem o nome. Com telefone ou e-mail, a venda se liga ao anúncio que trouxe a pessoa.'],
+  ['Mensagem do WhatsApp sem código do lead','Pôr o código do lead (ou o nome) na mensagem pronta liga a conversa ao quiz sem depender do telefone.'],
+  ['Dados do Meta fora da planilha','Hoje os relatórios puxam do Meta na hora. Se o time quiser ver na planilha, dá para criar uma aba diária automática.'],
+  ['Retenção do vídeo manual','O VTurb não tem conexão automática; a leitura é feita no painel quando atualizamos o relatório.'],
+  ['Acesso à planilha','A planilha do Mapeamento abre para quem tem o link e tem e-mail e telefone. Restringir o acesso, ajustando antes os relatórios que leem por esse link.']],
+ links:[['Relatório do quiz','../quiz-mapeamento/'],['Mapa do funil (tela a tela)','../quiz-mapeamento-mapa/'],['Funil para apresentar','../quiz-mapeamento-funil/']]},
+{id:'workshop', nome:'Quiz do Especialista com IA', status:'a mapear', resumo:'Quiz do inLead (funil 144264) que vende o ingresso do Workshop (LS). Os leads ficam na planilha unificada do LS, aba "INLEAD | LEADS".'},
+{id:'academia', nome:'Quiz da Academia das Profissões', status:'a mapear', resumo:'Quiz do inLead (funil 144890), cuidado pelo Hebert, que vende a Academia direto. Os leads vão para a planilha "[ANP][QUIZZ] Planilha Unificada Geral".'},
+{id:'sala', nome:'Sala Secreta', status:'a mapear', resumo:'Aula gratuita semanal. É a maior origem de leads na aba "Tráfego e Orgânico" do comercial.'}
+];
+const $=s=>document.querySelector(s), esc=s=>String(s);
+const pill=k=>`<span class="st ${k}">${ST[k]}</span>`;
+function render(f){
+ if(!f.etapas){$('#main').innerHTML=`<section><h2>${f.nome}</h2><p class="lead">${f.resumo}</p><div class="empty">Este funil ainda não foi mapeado. Para preencher, leve este documento para o chat do funil e siga o mesmo formato do Quiz do Mapeamento: etapas, o que acontece, onde medimos e o que falta definir.</div></section>`;return}
+ const C=['#7C3AED','#7C3AED','#7C3AED','#7C3AED','var(--m)','var(--m)','var(--m)','var(--m)','var(--m)','var(--m)'];
+ let h=`<section><h2>${f.nome}</h2><p class="lead">${f.resumo}</p>
+ <div class="rail">${f.trilho.map((x,i)=>`<div class="rs" style="--c:${C[i]||'var(--roxo)'}"><div class="b">${i+1}</div><div class="t">${x[0]}</div><div class="w">${x[1]}</div></div>`).join('')}</div></section>
+ <section><h2>Etapa por etapa</h2><p class="lead">À esquerda, o que acontece com a pessoa. À direita, onde cada coisa é registrada e se isso já funciona.</p>`;
+ f.etapas.forEach((e,i)=>{ if(i===4) h+=`<div class="fork">↓ na etapa 4 o quiz divide as pessoas em 3 caminhos ↓</div><div class="branch">${f.ramos.map(r=>`<div class="bcol" style="--c:${r.c}"><h3>${r.n}</h3><div class="who">${r.w}</div><ol>${r.p.map(x=>`<li>${x}</li>`).join('')}</ol></div>`).join('')}</div><div class="fork">↓ daqui para baixo, só o caminho do Mapeamento ↓</div>`;
+  h+=`<div class="stage" style="--c:${C[i]}"><div class="num">${i+1}</div><div><h3>${e.t}</h3><p class="what">${e.o}</p><ul>${e.m.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+  <div class="trk"><div class="h">Onde medimos</div>${e.k.map(k=>`<div class="row"><span class="tool">${k[0]}</span><span class="d">${k[1]}</span>${pill(k[2])}</div>`).join('')}</div></div>`});
+ h+=`</section><section><h2>Para onde vão os dados</h2><p class="lead">De onde cada informação nasce, onde fica guardada e onde aparece.</p>
+ <div class="flow"><div class="fc"><div class="ttl">Onde nasce</div>${f.fluxo.fontes.map(b=>`<div class="box"><b>${b[0]}</b><span>${b[1]}</span></div>`).join('')}</div><div class="arrow">→</div>
+ <div class="fc"><div class="ttl">Onde fica guardado</div>${f.fluxo.meio.map(b=>`<div class="box"><b>${b[0]}</b><span>${b[1]}</span></div>`).join('')}</div><div class="arrow">→</div>
+ <div class="fc"><div class="ttl">Onde aparece</div>${f.fluxo.fim.map(b=>`<div class="box"><b>${b[0]}</b><span>${b[1]}</span></div>`).join('')}</div></div>
+ <div class="tw" style="margin-top:16px"><table><thead><tr><th>Ferramenta</th><th>O que registra</th><th>Para onde vai</th><th>Como</th><th>Situação</th></tr></thead><tbody>${f.tabela.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${pill(r[4])}</td></tr>`).join('')}</tbody></table></div></section>
+ <section><h2>O que falta definir</h2><p class="lead">Pontos em que o dado se perde ou depende de alguém. Cada um tem uma sugestão.</p><ol class="gaps">${f.gaps.map(g=>`<li><b>${g[0]}</b><span>${g[1]}</span></li>`).join('')}</ol></section>
+ <section><h2>Relatórios deste funil</h2><p class="lead">${f.links.map(l=>`<a href="${l[1]}">${l[0]}</a>`).join(' · ')}</p></section>`;
+ $('#main').innerHTML=h;
+}
+function show(id,push){const f=FUNIS.find(x=>x.id===id)||FUNIS[0];document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.id===f.id));render(f);if(push)history.replaceState(null,'','#'+f.id)}
+$('#tabs').innerHTML=FUNIS.map(f=>`<button data-id="${f.id}">${f.nome}<small>${f.status}</small></button>`).join('')+`<span class="leg">${Object.keys(ST).map(pill).join('')}</span>`;
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>show(b.dataset.id,true));
+addEventListener('hashchange',()=>show(location.hash.slice(1)));show(location.hash.slice(1));
+</script>
+</body>
+</html>
